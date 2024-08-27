@@ -1,3 +1,13 @@
+# Notes (Debug)
+
+- For devbox install node, pnpm, and turbo (globally)
+- Make sure this is present in zshrc (otherwise pnpm will yell at you)
+
+```sh
+export PATH="/Users/hameldesai/pnpm:$PATH"
+export PNPM_HOME="/Users/hameldesai/pnpm"
+```
+
 # Turborepo Docker starter
 
 This is an official Docker starter Turborepo.
