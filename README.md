@@ -8,6 +8,12 @@ export PATH="/Users/hameldesai/pnpm:$PATH"
 export PNPM_HOME="/Users/hameldesai/pnpm"
 ```
 
+```sh
+npx turbo dev
+```
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/204c5809-6e4b-41cf-8efc-ce3442a53921/deploy-status)](https://app.netlify.com/sites/melodic-dasik-b79dcf/deploys)
+
 # Turborepo Docker starter
 
 This is an official Docker starter Turborepo.

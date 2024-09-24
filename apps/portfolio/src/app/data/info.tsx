@@ -8,7 +8,7 @@ export const DATA = {
   description:
     "Full time Engineer 🖥️, Mortgage Broker 🏠, Husband, and Dog Dad",
   avatarUrl: "/me.png",
-  summary: `I'm a **Software Engineer** based in New Jersey with over **6 years of experience**, currently at [Axio](https://axio.com).
+  summary: `I'm a **Software Engineer** based in New Jersey, currently at [Axio](https://axio.com).
 
   I've worked across a range of companies, from startups to medium/large corporations, and enjoy solving complex problems while continuously improving my skills. I'm passionate about delivering high-quality software and exploring new challenges.
 
