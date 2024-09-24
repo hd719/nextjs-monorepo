@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/app/lib/utils";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 
 interface AnimateProps {
@@ -14,7 +14,8 @@ interface AnimateProps {
   delay?: number;
   yOffset?: number;
 }
-const Animate = ({
+
+export const Animate = ({
   children,
   className,
   variant,
@@ -41,5 +42,3 @@ const Animate = ({
     </AnimatePresence>
   );
 };
-
-export default Animate;
