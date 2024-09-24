@@ -111,12 +111,12 @@ export const DATA = {
 
         navbar: true,
       },
-      email: {
-        name: "Send Email",
-        url: "hamel@hey.com",
-        icon: Icons.email,
-        navbar: true,
-      },
+      // email: {
+      //   name: "Send Email",
+      //   url: "hamel@hey.com",
+      //   icon: Icons.email,
+      //   navbar: true,
+      // },
     },
   },
 } as const;
