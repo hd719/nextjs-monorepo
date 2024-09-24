@@ -18,7 +18,7 @@ export const DATA = {
 
   ### Things I've done:
   I worked with a team of **5 engineers** to bring to life Axio's new client-facing web application, built on **NextJS (v14)**. \n
-  The project followed a **monorepo** approach with **PNPM**, **TypeScript**, and **TurboRepo**, ensuring scalability and streamlined development.
+  The project followed a **monorepo** approach with **PNPM**, **TypeScript**, and **TurboRepo** and after great effort my team and I migrated all of our TS/React/GQL applications under this monorepo, ensuring all applications were using the same TS version, ESlint, and Prettier configurations. This helped us maintaining a consistent codebase and allowed us to share code between applications and easy to onboard new developers.
 
   To support the project, I provisioned the entire infrastructure using **Terraform** on both **Google Cloud Platform** and **AWS**, fully embracing an **Infrastructure as Code (IaC)** approach. By modularizing resources like **VPCs**, **databases**, and **compute instances**, we made it easy to spin up new environments—such as **QA**, **Dev**, and **Staging** - for smoke testing new features and running isolated tests. This modular setup allowed us to quickly replicate environments, accelerating feature development and ensuring reliable deployment processes.
 
