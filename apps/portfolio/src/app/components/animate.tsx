@@ -26,6 +26,7 @@ export const Animate = ({
     hidden: { y: yOffset, opacity: 0, filter: "blur(8px)" },
     visible: { y: -yOffset, opacity: 1, filter: "blur(0px)" },
   };
+  // eslint-disable-next-line no-unused-vars
   const combinedVariants = variant || defaultVariants;
 
   return (

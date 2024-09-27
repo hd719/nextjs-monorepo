@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen max-w-2xl mx-auto bg-gradient-to-b from-white to-vanilla font-sans antialiased text-default",
+          "mx-auto min-h-screen max-w-2xl bg-gradient-to-b from-white to-vanilla font-sans text-default antialiased",
           process.env.NEXT_PUBLIC_DEBUG && "border-2 border-red-600",
           inter.variable
         )}
