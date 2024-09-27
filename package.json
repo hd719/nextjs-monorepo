@@ -8,11 +8,12 @@
     "dev": "turbo run dev",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo run lint",
-    "test": "turbo run test"
+    "test": "turbo run test",
+    "clean_mods": "rimraf node_modules */**/node_modules"
   },
-  "dependencies": {},
   "devDependencies": {
     "prettier": "^3.2.5",
+    "rimraf": "^6.0.1",
     "turbo": "^2.1.0"
   },
   "engines": {
