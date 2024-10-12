@@ -33,10 +33,11 @@
 - [x] Add Suppabase
 - [x] Add Auth
 - [x] Add Database
+- [x] File uploads
 - [] Add Docker File
 - [] Components
 - [] Add CRUD functionality
-- [] Domain Name
+- [x] Domain Name
 - [] VPS
 - [] Terraform
 - [] CI/CD
