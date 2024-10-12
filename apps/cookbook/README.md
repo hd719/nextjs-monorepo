@@ -47,3 +47,28 @@
 - [] Firewall (ufw)
 - [] Monitoring
 - [Load Balancer] (traefik also as a reverse proxy)
+
+
+Explaination of this onSubmit={form.handleSubmit(() => formRef.current?.submit())} in react-hook-form
+
+Explanation of the Code
+form.handleSubmit():
+
+form.handleSubmit is a method provided by react-hook-form that helps handle the form submission event.
+It takes a callback function as its argument, which will be executed if the form data passes validation successfully.
+If validation fails, form.handleSubmit will prevent the form from submitting and display error messages based on the validation schema.
+The Callback Function: () => formRef.current?.submit():
+
+This anonymous function is the callback that will run when the form validation passes.
+It attempts to submit the form using the native HTML form submission mechanism by calling formRef.current?.submit().
+formRef is a useRef hook pointing to the HTML form element. This reference allows direct access to the form's native submit method.
+The ?. (optional chaining) ensures that formRef.current is not null or undefined before calling the submit() method, which prevents runtime errors if the reference is not set.
+What Happens During Submission?
+When the user clicks the "Submit" button, the onSubmit event is triggered.
+form.handleSubmit first runs the validation against the form fields using the schema defined in react-hook-form and Zod.
+If the validation passes, the callback function (() => formRef.current?.submit()) is executed.
+This callback uses the submit() method on the form element itself to submit the form natively.
+Why Use formRef.current?.submit()?
+Normally, when working with react-hook-form, you don't need to use the native submit() method, as react-hook-form takes care of form submission and validation logic internally. However, there might be specific scenarios where you want to trigger a native form submission or handle submission in a more traditional way, such as:
+
+Server-side form submission: You might want to handle the form submission using a server-side action, which is triggered by a native form submission. Legacy Code Integration: If you're working with code that requires a traditional form submission, using the native submit() method might be necessary.

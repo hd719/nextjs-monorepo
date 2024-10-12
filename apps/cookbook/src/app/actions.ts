@@ -5,14 +5,17 @@ import { encodedRedirect } from "@/app/utils/utils";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-export const signUpAction = async (formData: FormData) => {
+export const signUpAction = async (
+  prevState: { message: string },
+  formData: FormData
+) => {
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
   const supabase = createClient();
   const origin = headers().get("origin");
 
   if (!email || !password) {
-    return { error: "Email and password are required" };
+    return { message: "Server Side error: Email password are required" };
   }
 
   const { error } = await supabase.auth.signUp({
@@ -25,13 +28,12 @@ export const signUpAction = async (formData: FormData) => {
 
   if (error) {
     console.error(error.code + " " + error.message);
-    return encodedRedirect("error", "/sign-up", error.message);
+    // encodedRedirect("error", "/sign-up", error.message);
+    return { message: `Error: ${error.message}` };
   } else {
-    return encodedRedirect(
-      "success",
-      "/sign-up",
-      "Thanks for signing up! Please check your email for a verification link."
-    );
+    return {
+      message: `Thanks ${email} for signing up! Please check your email for a verification link.`,
+    };
   }
 };
 
