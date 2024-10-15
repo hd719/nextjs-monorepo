@@ -8,7 +8,7 @@ import Link from "next/link";
 import HomeImage from "../../public/images/main.jpeg";
 
 export default async function Index() {
-  return (
+    return (
     <>
       <section>
         <div className="relative flex h-[650px] min-w-[200px] items-center overflow-hidden rounded-xl">

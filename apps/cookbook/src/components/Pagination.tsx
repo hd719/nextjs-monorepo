@@ -4,12 +4,14 @@ interface IPagination {
   recipesPerPage: number;
   totalRecipes: number;
   paginate: (number: number) => void;
+  currentPage: number;
 }
 
 export const Pagination: FC<IPagination> = ({
   recipesPerPage,
   totalRecipes,
   paginate,
+  currentPage,
 }) => {
   const pageNumbers = [];
 

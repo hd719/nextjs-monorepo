@@ -5,8 +5,6 @@ import { encodedRedirect } from "@/app/utils/utils";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-import { recipes } from "../../data/MockData";
-
 export const signUpAction = async (
   prevState: { message: string },
   formData: FormData
@@ -143,13 +141,6 @@ export const signOutAction = async () => {
   await supabase.auth.signOut();
   return redirect("/sign-in");
 };
-
-export async function getRecipesAction() {
-  // Simulating an asynchronous operation with Supabase or other DB queries
-  await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulates a delay of 10 seconds
-
-  return recipes; // Make sure `recipes` is defined correctly as an array
-}
 
 export async function addRecipeAction() {}
 
