@@ -1,9 +1,27 @@
+import React, { Suspense } from "react";
+
 import { createClient } from "@/app/utils/supabase/server";
+import RecipeSkeletonLoader from "@/components/RecipeSkeletonLoader";
 
 import { recipes as mockRecipes, Recipe } from "../../../data/MockData";
 import FeedClient from "./FeedClient";
 
 export default async function FeedServer(): Promise<JSX.Element> {
+  return (
+    <div>
+      <StaticFeed />
+      <Suspense fallback={<RecipeSkeletonLoader />}>
+        <DynamicFeed />
+      </Suspense>
+    </div>
+  );
+}
+
+function StaticFeed(): JSX.Element {
+  return <h3 className="mt-6 text-5xl font-bold">Find your favorite recipe</h3>;
+}
+
+async function DynamicFeed(): Promise<JSX.Element> {
   const {
     data: { user },
   } = await createClient().auth.getUser();

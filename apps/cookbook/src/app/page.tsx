@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
 
 import Feed from "@/components/Feed";
-import RecipeSkeletonLoader from "@/components/RecipeSkeletonLoader";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -35,10 +34,7 @@ export default async function Index() {
             </Link>
           </div>
         </div>
-        <h3 className="mt-6 text-5xl font-bold">Find your favorite recipe</h3>
-        {/* <Suspense fallback={<RecipeSkeletonLoader />}>
-          <Feed />
-        </Suspense> */}
+        <Feed />
       </section>
     </>
   );
