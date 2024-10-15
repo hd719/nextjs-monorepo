@@ -52,8 +52,8 @@ export const SignUpForm = () => {
           return formRef.current?.submit();
         })}
         className={cn(
-          "flex w-full flex-col space-y-3 border-2",
-          process.env.NEXT_PUBLIC_DEBUG && "border-2 border-orange-600"
+          "flex w-full flex-col space-y-3"
+          // process.env.NEXT_PUBLIC_DEBUG && "border-2 border-orange-600"
         )}
       >
         <div className="gap-2">
@@ -64,7 +64,7 @@ export const SignUpForm = () => {
               <FormItem className="mb-3 w-full">
                 <FormLabel>First Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Your first name." {...field} />
+                  <Input placeholder="Your first name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -114,7 +114,12 @@ export const SignUpForm = () => {
             )}
           />
         </div>
-        <Button type="submit">Submit</Button>
+        <Button
+          type="submit"
+          className="rounded-m w-full text-white transition duration-300 marker:py-2 hover:bg-blue-600"
+        >
+          Submit
+        </Button>
       </form>
       {state.message ? (
         <Alert variant="destructive" className="mt-2">

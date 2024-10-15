@@ -31,7 +31,9 @@ export default function NavClient({ userEmail }: NavClientProps): JSX.Element {
               <Button variant="outline">Upload New Recipe</Button>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Button variant="outline">Add New Recipe</Button>
+              <Button variant="outline">
+                <Link href="/protected/add-recipe">Add New Recipe</Link>
+              </Button>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <form action={signOutAction}>
@@ -49,7 +51,7 @@ export default function NavClient({ userEmail }: NavClientProps): JSX.Element {
           Upload New Recipe
         </Button>
         <Button type="submit" variant="outline">
-          Add New Recipe
+          <Link href="/protected/add-recipe">Add New Recipe</Link>
         </Button>
         <form action={signOutAction}>
           <Button type="submit" variant="outline">

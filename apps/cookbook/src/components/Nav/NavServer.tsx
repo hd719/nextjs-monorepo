@@ -38,18 +38,19 @@ function StaticNav() {
 }
 
 async function DynamicNav() {
-  // const {
-  //   data: { user },
-  // } = await createClient().auth.getUser();
+  const {
+    data: { user },
+  } = await createClient().auth.getUser();
 
-  async function getUser() {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    return {
-      email: "hameldesai93@gmail.com",
-    };
-  }
+  // Simulating a slow network request
+  // async function getUser() {
+  //   await new Promise((resolve) => setTimeout(resolve, 3000));
+  //   return {
+  //     email: "hameldesai93@gmail.com",
+  //   };
+  // }
 
-  const user = await getUser();
+  // const user = await getUser();
 
   return (
     <div className="flex items-center gap-5 font-semibold">

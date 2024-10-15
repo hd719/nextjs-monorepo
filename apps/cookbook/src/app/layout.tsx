@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-
 import { cn } from "@/app/utils/utils";
 import Nav from "@/components/Nav";
 import { ThemeSwitcher } from "@/components/theme-switcher";
@@ -45,7 +43,6 @@ export default function RootLayout({
               )}
             >
               <Nav />
-
               <div
                 className={cn(
                   "flex max-w-5xl flex-col gap-20",

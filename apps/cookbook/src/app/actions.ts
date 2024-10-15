@@ -2,8 +2,10 @@
 
 import { createClient } from "@/app/utils/supabase/server";
 import { encodedRedirect } from "@/app/utils/utils";
+import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { z } from "zod";
 
 export const signUpAction = async (
   prevState: { message: string },
@@ -142,7 +144,75 @@ export const signOutAction = async () => {
   return redirect("/sign-in");
 };
 
-export async function addRecipeAction() {}
+interface AddRecipeFormState {
+  errors: {
+    title?: string[];
+    content?: string[];
+    _form?: string[];
+  };
+}
+
+const AddRecipeSchema = z.object({
+  title: z.string().min(2),
+  ingredients: z.string().optional(),
+  directions: z.string().optional(),
+  extraNotes: z.string().optional(),
+  nutritionalValue: z.string().optional(),
+});
+
+export async function addRecipeAction(
+  formState: AddRecipeFormState,
+  formData: FormData
+): Promise<AddRecipeFormState> {
+  // Check for auth using supabase server
+  const {
+    data: { user },
+  } = await createClient().auth.getUser();
+
+  if (!user) {
+    return {
+      errors: {
+        _form: ["You must be signed in to add a recipe"],
+      },
+    };
+  }
+
+  const result = AddRecipeSchema.safeParse({
+    title: formData.get("title") as string,
+    ingredients: formData.get("ingredients") as string,
+    directions: formData.get("directions") as string,
+    extraNotes: formData.get("extraNotes") as string,
+    nutritionalValue: formData.get("nutritionalValue") as string,
+  });
+
+  console.log("formData", formData);
+  console.log("result", result);
+  if (result.error) {
+    console.log("result.data", result.error.flatten().fieldErrors);
+  }
+
+  if (!result.success) {
+    return {
+      errors: result.error.flatten().fieldErrors,
+    };
+  }
+
+  try {
+    // Send to server
+    // recipe = await createRecipe(result.data);
+    console.log("Recipe data", result.data);
+    console.log("Recipe added");
+  } catch (error: unknown) {
+    console.error("Error creating recipe", error);
+    return {
+      errors: {
+        _form: ["Error adding recipe"],
+      },
+    };
+  }
+
+  // redirect(`/recipes/${recipe.id}`);
+}
 
 export async function updateRecipe() {}
 

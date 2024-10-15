@@ -51,8 +51,8 @@ export const SignInForm = () => {
           return formRef.current?.submit();
         })}
         className={cn(
-          "flex w-full flex-col space-y-5 border-2",
-          process.env.NEXT_PUBLIC_DEBUG && "border-2 border-orange-600"
+          "flex w-full flex-col space-y-5"
+          // process.env.NEXT_PUBLIC_DEBUG && "border-2 border-orange-600"
         )}
       >
         <div className="gap-2">
@@ -95,7 +95,12 @@ export const SignInForm = () => {
             </Link>
           </div>
         </div>
-        <Button type="submit">Submit</Button>
+        <Button
+          type="submit"
+          className="rounded-m w-full text-white transition duration-300 marker:py-2 hover:bg-blue-600"
+        >
+          Submit Recipe
+        </Button>
       </form>
       {state.message ? (
         <Alert variant="destructive" className="mt-2">

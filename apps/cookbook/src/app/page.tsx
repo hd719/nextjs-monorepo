@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 
 import Feed from "@/components/Feed";
 import Image from "next/image";
