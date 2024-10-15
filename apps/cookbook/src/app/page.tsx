@@ -8,7 +8,7 @@ import Link from "next/link";
 import HomeImage from "../../public/images/main.jpeg";
 
 export default async function Index() {
-    return (
+  return (
     <>
       <section>
         <div className="relative flex h-[650px] min-w-[200px] items-center overflow-hidden rounded-xl">
@@ -36,9 +36,9 @@ export default async function Index() {
           </div>
         </div>
         <h3 className="mt-6 text-5xl font-bold">Find your favorite recipe</h3>
-        <Suspense fallback={<RecipeSkeletonLoader />}>
+        {/* <Suspense fallback={<RecipeSkeletonLoader />}>
           <Feed />
-        </Suspense>
+        </Suspense> */}
       </section>
     </>
   );
