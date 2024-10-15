@@ -1,5 +1,7 @@
-import React from "react";
+import React, { Suspense } from "react";
 
+import Feed from "@/components/Feed";
+import RecipeSkeletonLoader from "@/components/RecipeSkeletonLoader";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,7 +15,7 @@ export default async function Index() {
           <Image
             src={HomeImage}
             alt="Photo of food"
-            className="absolute object-cover object-center"
+            className="absolute h-[650px] object-cover object-center"
           />
           <div className="relative flex h-full flex-col justify-center bg-slate-900 bg-opacity-30 p-5 text-white md:p-16">
             <h1 className="font-inter text-3xl font-extrabold md:text-6xl">
@@ -21,19 +23,22 @@ export default async function Index() {
               <br />
               <span>Discovering the Art of Cooking</span>
             </h1>
-            <p className="font-inter mt-5 min-w-[200px] text-sm md:text-xl">
+            <p className="mt-5 min-w-[200px] font-inter text-sm md:text-xl">
               Welcome! I'm Payal, and I love to cook. I'm excited to share my
               recipes with you.
             </p>
             <Link
               href={"#recipe-list"}
-              className="font-inter mt-4 w-fit rounded-xl bg-white p-4 text-2xl font-semibold text-black transition-all hover:bg-black hover:text-white disabled:bg-gray-500"
+              className="mt-4 w-fit rounded-xl bg-white p-4 font-inter text-2xl font-semibold text-black transition-all hover:bg-black hover:text-white disabled:bg-gray-500"
             >
               Explore my collection of recipes
             </Link>
           </div>
         </div>
-        {/* <Feed /> */}
+        <h3 className="mt-6 text-5xl font-bold">Find your favorite recipe</h3>
+        <Suspense fallback={<RecipeSkeletonLoader />}>
+          <Feed />
+        </Suspense>
       </section>
     </>
   );

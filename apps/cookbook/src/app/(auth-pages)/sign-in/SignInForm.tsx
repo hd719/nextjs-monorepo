@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 
-import { signUpAction } from "@/app/actions";
+import { signInAction } from "@/app/actions";
 import { cn } from "@/app/utils/utils";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -17,26 +17,25 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle } from "lucide-react";
+import Link from "next/link";
 import { useFormState } from "react-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { SmtpMessage } from "../smtp-message";
-import { schema } from "./SignUpFormSchema";
+import { schema } from "./SignInFormSchema";
 
 type OurSchema = z.infer<typeof schema>;
 
-export const SignUpForm = () => {
+export const SignInForm = () => {
   const form = useForm<OurSchema>({
     resolver: zodResolver(schema),
     defaultValues: {
-      first: "",
-      last: "",
       email: "",
       password: "",
     },
   });
-  const [state, formAction] = useFormState(signUpAction, {
+  const [state, formAction] = useFormState(signInAction, {
     message: "",
   });
 
@@ -52,37 +51,11 @@ export const SignUpForm = () => {
           return formRef.current?.submit();
         })}
         className={cn(
-          "flex w-full flex-col space-y-3 border-2",
+          "flex w-full flex-col space-y-5 border-2",
           process.env.NEXT_PUBLIC_DEBUG && "border-2 border-orange-600"
         )}
       >
         <div className="gap-2">
-          <FormField
-            control={form.control}
-            name="first"
-            render={({ field }) => (
-              <FormItem className="mb-3 w-full">
-                <FormLabel>First Name</FormLabel>
-                <FormControl>
-                  <Input placeholder="Your first name." {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="last"
-            render={({ field }) => (
-              <FormItem className="mb-3 w-full">
-                <FormLabel>Last Name</FormLabel>
-                <FormControl>
-                  <Input placeholder="Your last name." {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           <FormField
             control={form.control}
             name="email"
@@ -100,7 +73,7 @@ export const SignUpForm = () => {
             control={form.control}
             name="password"
             render={({ field }) => (
-              <FormItem className="w-full">
+              <FormItem className="mb-3 w-full">
                 <FormLabel>Password</FormLabel>
                 <FormControl>
                   <Input
@@ -113,6 +86,14 @@ export const SignUpForm = () => {
               </FormItem>
             )}
           />
+          <div className="flex items-center justify-between">
+            <Link
+              className="text-xs text-foreground underline"
+              href="/forgot-password"
+            >
+              Forgot Password?
+            </Link>
+          </div>
         </div>
         <Button type="submit">Submit</Button>
       </form>

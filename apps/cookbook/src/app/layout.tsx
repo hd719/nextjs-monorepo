@@ -1,4 +1,4 @@
-import { cn } from "@/app/utils/cn";
+import { cn } from "@/app/utils/utils";
 import HeaderAuth from "@/components/header-auth";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { GeistSans } from "geist/font/sans";
@@ -71,7 +71,7 @@ export default function RootLayout({
               <div
                 className={cn(
                   "flex max-w-5xl flex-col gap-20",
-                  process.env.NEXT_PUBLIC_DEBUG && "border-2 border-cyan-600"
+                  process.env.NEXT_PUBLIC_DEBUG && "border-4 border-purple-600"
                 )}
               >
                 {children}
@@ -79,7 +79,7 @@ export default function RootLayout({
             </div>
             <footer
               className={cn(
-                "mx-auto flex w-full max-w-5xl max-w-[1300px] items-center justify-center border-t text-center text-xs",
+                "mx-auto flex w-full max-w-[1300px] items-center justify-center border-t text-center text-xs",
                 process.env.NEXT_PUBLIC_DEBUG && "border-2 border-cyan-600"
               )}
             >

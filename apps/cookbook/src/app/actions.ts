@@ -5,6 +5,8 @@ import { encodedRedirect } from "@/app/utils/utils";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
+import { recipes } from "../../data/MockData";
+
 export const signUpAction = async (
   prevState: { message: string },
   formData: FormData
@@ -18,29 +20,40 @@ export const signUpAction = async (
     return { message: "Server Side error: Email password are required" };
   }
 
-  const { error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      emailRedirectTo: `${origin}/auth/callback`,
-    },
-  });
+  // const { error } = await supabase.auth.signUp({
+  //   email,
+  //   password,
+  //   options: {
+  //     emailRedirectTo: `${origin}/auth/callback`,
+  //   },
+  // });
 
-  if (error) {
-    console.error(error.code + " " + error.message);
-    // encodedRedirect("error", "/sign-up", error.message);
-    return { message: `Error: ${error.message}` };
-  } else {
-    return {
-      message: `Thanks ${email} for signing up! Please check your email for a verification link.`,
-    };
-  }
+  // if (error) {
+  //   console.error(error.code + " " + error.message);
+  //   // encodedRedirect("error", "/sign-up", error.message);
+  //   return { message: `Error: ${error.message}` };
+  // } else {
+  //   return {
+  //     message: `Thanks ${email} for signing up! Please check your email for a verification link.`,
+  //   };
+  // }
+
+  return {
+    message: `Thanks ${email} for signing up! Please check your email for a verification link.`,
+  };
 };
 
-export const signInAction = async (formData: FormData) => {
+export const signInAction = async (
+  prevState: { message: string },
+  formData: FormData
+) => {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
   const supabase = createClient();
+
+  if (!email || !password) {
+    return { message: "Server Side error: Email password are required" };
+  }
 
   const { error } = await supabase.auth.signInWithPassword({
     email,
@@ -48,7 +61,7 @@ export const signInAction = async (formData: FormData) => {
   });
 
   if (error) {
-    return encodedRedirect("error", "/sign-in", error.message);
+    return { message: `Error: ${error.message}` };
   }
 
   return redirect("/protected");
@@ -130,3 +143,16 @@ export const signOutAction = async () => {
   await supabase.auth.signOut();
   return redirect("/sign-in");
 };
+
+export async function getRecipesAction() {
+  // Simulating an asynchronous operation with Supabase or other DB queries
+  await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulates a delay of 10 seconds
+
+  return recipes; // Make sure `recipes` is defined correctly as an array
+}
+
+export async function addRecipeAction() {}
+
+export async function updateRecipe() {}
+
+export async function deleteTodoAction() {}
