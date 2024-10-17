@@ -11,7 +11,7 @@ import { useFormState } from "react-dom";
 
 interface RecipeFormProps {}
 
-const RecipeForm = (): JSX.Element => {
+const UploadRecipeForm = (): JSX.Element => {
   const [formState, action] = useFormState(addRecipeAction, {
     errors: {},
   });
@@ -53,7 +53,7 @@ const RecipeForm = (): JSX.Element => {
 
   return (
     <Card className="mx-auto min-w-[400px] rounded-lg p-6 shadow-lg sm:min-w-[600px]">
-      <h2 className="mb-4 text-2xl font-bold">Add a New Recipe</h2>
+      <h2 className="mb-4 text-2xl font-bold">Upload Recipe</h2>
       <form action={action} onSubmit={handleSubmit} className="space-y-4">
         <Input
           type="text"
@@ -62,20 +62,6 @@ const RecipeForm = (): JSX.Element => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
-          className="w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-        <Textarea
-          name="ingredients"
-          placeholder="Ingredients (one per line)"
-          value={ingredients}
-          onChange={(e) => setIngredients(e.target.value)}
-          className="w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-        <Textarea
-          name="directions"
-          placeholder="Directions"
-          value={directions}
-          onChange={(e) => setDirections(e.target.value)}
           className="w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <Textarea
@@ -106,19 +92,8 @@ const RecipeForm = (): JSX.Element => {
         ) : null}
         {displayError}
       </form>
-      <h3 className="mt-6 text-xl font-semibold">Ingredients List:</h3>
-      <ul className="list-disc pl-5">
-        {ingredients
-          .split("\n")
-          .filter(Boolean)
-          .map((ingredient, index) => (
-            <li key={index} className="text-gray-700">
-              {ingredient}
-            </li>
-          ))}
-      </ul>
     </Card>
   );
 };
 
-export default RecipeForm;
+export default UploadRecipeForm;

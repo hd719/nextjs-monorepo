@@ -147,6 +147,10 @@ export const signOutAction = async () => {
 interface AddRecipeFormState {
   errors: {
     title?: string[];
+    ingredients?: string[];
+    directions?: string[];
+    extraNotes?: string[];
+    nutritionalValue?: string[];
     content?: string[];
     _form?: string[];
   };
@@ -185,8 +189,6 @@ export async function addRecipeAction(
     nutritionalValue: formData.get("nutritionalValue") as string,
   });
 
-  console.log("formData", formData);
-  console.log("result", result);
   if (result.error) {
     console.log("result.data", result.error.flatten().fieldErrors);
   }
@@ -202,6 +204,9 @@ export async function addRecipeAction(
     // recipe = await createRecipe(result.data);
     console.log("Recipe data", result.data);
     console.log("Recipe added");
+    return {
+      errors: {},
+    };
   } catch (error: unknown) {
     console.error("Error creating recipe", error);
     return {

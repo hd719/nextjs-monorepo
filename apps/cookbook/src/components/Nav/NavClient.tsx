@@ -28,7 +28,9 @@ export default function NavClient({ userEmail }: NavClientProps): JSX.Element {
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem>
-              <Button variant="outline">Upload New Recipe</Button>
+              <Button variant="outline">
+                <Link href="/protected/upload-recipe">Upload Recipe</Link>
+              </Button>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Button variant="outline">
@@ -47,8 +49,8 @@ export default function NavClient({ userEmail }: NavClientProps): JSX.Element {
       </div>
       <div className="hidden items-center gap-4 md:flex">
         Hey, {userEmail}!
-        <Button type="submit" variant="outline">
-          Upload New Recipe
+        <Button variant="outline">
+          <Link href="/protected/upload-recipe">Upload Recipe</Link>
         </Button>
         <Button type="submit" variant="outline">
           <Link href="/protected/add-recipe">Add New Recipe</Link>
