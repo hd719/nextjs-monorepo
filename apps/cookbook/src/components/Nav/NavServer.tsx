@@ -38,9 +38,10 @@ function StaticNav() {
 }
 
 async function DynamicNav() {
+  const supabase = await createClient();
   const {
     data: { user },
-  } = await createClient().auth.getUser();
+  } = await supabase.auth.getUser();
 
   // Simulating a slow network request
   // async function getUser() {
