@@ -11,14 +11,24 @@ services:
       - 3000:3000
     networks:
       - app_network
-  api:
-    container_name: api
+  portfolio:
+    container_name: portfolio
     build:
       context: .
-      dockerfile: ./apps/api/Dockerfile
+      dockerfile: ./Dockerfile.portfolio
     restart: always
     ports:
-      - 3001:3001
+      - 3001:3000
+    networks:
+      - app_network
+  cookbook:
+    container_name: cookbook
+    build:
+      context: .
+      dockerfile: ./Dockerfile.cookbook
+    restart: always
+    ports:
+      - 3002:3000
     networks:
       - app_network
 

@@ -6,7 +6,7 @@ RUN apk add --no-cache libc6-compat
 RUN apk update
 RUN corepack enable && corepack prepare pnpm@9 --activate
 ENV PNPM_HOME=/usr/local/bin
-RUN pnpm add turbo@2.1.0 --global
+RUN pnpm add turbo@2.5.4 --global
 WORKDIR /app
 COPY . .
 RUN turbo prune --scope=portfolio --docker
@@ -18,7 +18,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 RUN corepack enable && corepack prepare pnpm@latest --activate
 ENV PNPM_HOME=/usr/local/bin
-RUN pnpm add turbo@2.1.0 --global
+RUN pnpm add turbo@2.5.4 --global
 
 # First install the dependencies (as they change less often)
 # COPY --from=builder /app/out/json/ .
