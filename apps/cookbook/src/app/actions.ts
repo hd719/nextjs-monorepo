@@ -13,8 +13,9 @@ export const signUpAction = async (
 ) => {
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
-  const supabase = createClient();
-  const origin = headers().get("origin");
+  const supabase = await createClient();
+  const headersList = await headers();
+  const origin = headersList.get("origin");
 
   if (!email || !password) {
     return { message: "Server Side error: Email password are required" };
@@ -49,7 +50,7 @@ export const signInAction = async (
 ) => {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
-  const supabase = createClient();
+  const supabase = await createClient();
 
   if (!email || !password) {
     return { message: "Server Side error: Email password are required" };
@@ -69,8 +70,9 @@ export const signInAction = async (
 
 export const forgotPasswordAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
-  const supabase = createClient();
-  const origin = headers().get("origin");
+  const supabase = await createClient();
+  const headersList = await headers();
+  const origin = headersList.get("origin");
   const callbackUrl = formData.get("callbackUrl")?.toString();
 
   if (!email) {
@@ -102,7 +104,7 @@ export const forgotPasswordAction = async (formData: FormData) => {
 };
 
 export const resetPasswordAction = async (formData: FormData) => {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const password = formData.get("password") as string;
   const confirmPassword = formData.get("confirmPassword") as string;
@@ -139,7 +141,7 @@ export const resetPasswordAction = async (formData: FormData) => {
 };
 
 export const signOutAction = async () => {
-  const supabase = createClient();
+  const supabase = await createClient();
   await supabase.auth.signOut();
   return redirect("/sign-in");
 };
@@ -169,9 +171,10 @@ export async function addRecipeAction(
   formData: FormData
 ): Promise<AddRecipeFormState> {
   // Check for auth using supabase server
+  const supabase = await createClient();
   const {
     data: { user },
-  } = await createClient().auth.getUser();
+  } = await supabase.auth.getUser();
 
   if (!user) {
     return {

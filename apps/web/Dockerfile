@@ -9,7 +9,9 @@ RUN apk update
 RUN apk add --no-cache libc6-compat
 # Set working directory
 WORKDIR /app
-RUN yarn global add turbo
+RUN corepack enable && corepack prepare pnpm@9 --activate
+ENV PNPM_HOME=/usr/local/bin
+RUN pnpm add turbo@2.5.4 --global
 COPY . .
 RUN turbo prune web --docker
 
@@ -18,10 +20,14 @@ FROM base AS installer
 RUN apk update
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
+RUN corepack enable && corepack prepare pnpm@latest --activate
+ENV PNPM_HOME=/usr/local/bin
+RUN pnpm add turbo@2.5.4 --global
 
 # First install the dependencies (as they change less often)
 COPY --from=builder /app/out/json/ .
-RUN yarn install
+COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
+RUN pnpm install
 
 # Build the project
 COPY --from=builder /app/out/full/ .
@@ -33,7 +39,7 @@ COPY --from=builder /app/out/full/ .
 # ARG TURBO_TOKEN
 # ENV TURBO_TOKEN=$TURBO_TOKEN
 
-RUN yarn turbo build --filter=web...
+RUN pnpm turbo build --filter=web...
 
 FROM base AS runner
 WORKDIR /app

@@ -22,9 +22,10 @@ function StaticFeed(): JSX.Element {
 }
 
 async function DynamicFeed(): Promise<JSX.Element> {
+  const supabase = await createClient();
   const {
     data: { user },
-  } = await createClient().auth.getUser();
+  } = await supabase.auth.getUser();
 
   async function getRecipes() {
     // Simulating an asynchronous operation with Supabase or other DB queries
