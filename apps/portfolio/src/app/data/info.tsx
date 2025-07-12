@@ -8,26 +8,41 @@ export const DATA = {
   description:
     "Full time Engineer 🖥️, Mortgage Broker 🏠, Husband, and Dog Dad",
   avatarUrl: "/me.png",
-  summary: `I'm a **Software Engineer** based in New Jersey, currently at [Axio](https://axio.com).
+  summary: `I'm a **Senior FullStack Software Engineer** based in New Jersey, currently at [Blaze AI](https://www.blaze.ai).
 
   I've worked across a range of companies, from startups to medium/large corporations, and enjoy solving complex problems while continuously improving my skills. I'm passionate about delivering high-quality software and exploring new challenges.
 
-  ### Axio:
+  ### Blaze AI:
 
-  At **Axio**, we empower clients to assess cyber risks using our **Cyber Risk Quantification (CRQ)** methods, built on frameworks like **C2M2 v2.1**, **CIS Controls**, and **NIST CSF**. Our platform, **Axio360**, serves as a decision-making engine for comprehensive cyber risk management, offering cybersecurity assessments, risk quantification, risk transfer, and cyber insurance analysis.
+  At **[Blaze AI](https://www.blaze.ai/)**, we are building an agentic virtual marketer capable of autonomously creating, scheduling, and publishing content across platforms like **Instagram**, **Facebook**, **LinkedIn**, **TikTok**, **YouTube**, **X (formerly Twitter)**, **Mailchimp**, **Shopify**, and **WordPress**. Our goal is to help creators and businesses scale their reach with minimal manual effort powered by smart automation, deep integrations, and intelligent brand understanding. Blaze can generate a complete **Brand Kit** from a user's website—extracting logos, colors, and tone—to create a tailored **Brand Profile** that drives consistent, on-brand content across every platform.
 
   ### Things I've done:
-  I worked with a team of **5 engineers** to bring to life Axio's new client-facing web application, built on **NextJS (v14)**. \n
-  The project followed a **monorepo** approach with **PNPM**, **TypeScript**, and **TurboRepo** and after great effort my team and I migrated all of our TS/React/GQL applications under this monorepo, ensuring all applications were using the same TS version, ESlint, and Prettier configurations. This helped us maintaining a consistent codebase and allowed us to share code between applications and easy to onboard new developers.
 
-  To support the project, I provisioned the entire infrastructure using **Terraform** on both **Google Cloud Platform** and **AWS**, fully embracing an **Infrastructure as Code (IaC)** approach. By modularizing AWS and GCP resources like **VPCs**, **databases**, **iam**, **kubernetes engine**, **service accounts** and other necessary components. I made it easy to spin up new environments—such as **QA**, **Dev**, and **Staging** - for smoke testing new features and running isolated tests. This modular setup allowed us to quickly replicate environments, accelerating feature development and ensuring reliable deployment processes.
+  I led engineering efforts across integrations and DevOps to enable Blaze’s AI to act as a fully autonomous marketer. I implemented secure and scalable **OAuth flows** in **React** (Redux + TanStack Query) and built robust **Ruby on Rails** services to support publishing actions like uploading YouTube Shorts, posting media-rich tweets, sending Mailchimp campaigns, and publishing blog posts. These systems allowed users to connect their accounts once and let Blaze handle the rest.
 
-  Additionally, I used **Terraform** to automatically create **virtual machine instances** that served as build agents for **CI/CD pipelines** on **Azure DevOps**. These agents spun up **Docker environments**, allowing us to run **Cypress tests** against our codebase in isolated containers. This ensured that each new build was thoroughly tested, with no previous features breaking in the process. With **Datadog** integrated into the pipeline, we monitored the infrastructure in real-time, identifying bottlenecks and improving system reliability across our **Kubernetes clusters**. The combination of **CI/CD automation** and **Terraform-based infrastructure** significantly streamlined the deployment workflow, enabling faster iteration cycles and more reliable feature releases.
+  Improved reliability across external APIs, I introduced **Sidekiq job workflows** backed by **Redis queues**, with custom retry logic and platform-specific **rate limiting**. This significantly reduced job failures and improved success rates across all supported platforms, making the system more dependable and resilient.
+
+  On the infrastructure side, I provisioned a dedicated **QA environment** using **Terraform** and **AWS**, enabling engineers to test features in isolated environments without conflicts. I also containerized our full stack using **Docker** and created a production-like **docker-compose** setup, drastically improving local development and onboarding time.
+
+  Beyond feature work, I collaborated with the design and mobile teams to ship mobile-optimized user flows for users without access to the iOS app-enhancing accessibility across devices. I continue to focus on developer experience, CI efficiency, and infrastructure scalability to ensure Blaze can grow without sacrificing speed or quality.
 
   ### Outside of tech:
   - I enjoy working out, golfing, and hanging out with friends
-  - At the moment building a cookbook application for my wife here is the repo: [Cookbook](https://www.github.com/hd719) - which is a **WIP**`,
+  - At the moment building a cookbook application for my wife here is the repo: [Cookbook](https://www.github.com/hd719) - which is a **WIP**
+  - Currently pursuing a **Master of Engineering** in Software Engineering / Engineering Management at **Stevens Institute of Technology**`,
+
   work: [
+    {
+      company: "Blaze AI",
+      badges: [],
+      href: "https://www.blaze.ai",
+      location: "Remote",
+      title: "Senior FullStack Software Engineer",
+      logoUrl: "/blaze.png",
+      start: "March 2025",
+      end: "",
+      description: "",
+    },
     {
       company: "Axio",
       badges: [],
@@ -36,8 +51,9 @@ export const DATA = {
       title: "Software Engineer",
       logoUrl: "/axio.svg",
       start: "October 2022",
-      end: "",
-      description: "",
+      end: "March 2025",
+      description:
+        "At Axio, I contributed to our Axio360 CRQ platform, helping clients assess cyber risk using frameworks like C2M2 v2.1, CIS Controls, and NIST CSF. I helped build a new client-facing web app with Next.js, TypeScript, and TurboRepo in a unified monorepo, improving code consistency and onboarding. On the infrastructure side, I provisioned modular AWS/GCP environments with Terraform and automated CI/CD pipelines in Azure DevOps using Docker-based agents and Datadog for real-time monitoring—enabling faster, more reliable deployments across our Kubernetes clusters.",
     },
     {
       company: "Rightway Healthcare",
@@ -90,12 +106,22 @@ export const DATA = {
   ],
   education: [
     {
+      school: "Stevens Institute of Technology",
+      href: "https://www.stevens.edu/",
+      degree: "Master of Engineering",
+      focus: "Software Engineering and Engineering Management",
+      logoUrl: "/stevens.jpeg",
+      start: "January 2025",
+      end: "June 2026",
+    },
+    {
       school: "Rutgers University - Newark",
       href: "https://www.newark.rutgers.edu/",
       degree: "Bachelors of Arts",
+      focus: "Information Technology and Computer Science",
       logoUrl: "/rutgers.jpg",
-      start: "2011",
-      end: "2015",
+      start: "September 2011",
+      end: "May 2015",
     },
   ],
   contact: {

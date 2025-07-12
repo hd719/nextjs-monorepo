@@ -1,11 +1,10 @@
 import { Animate } from "@/app/components/animate";
-import Link from "next/link";
-import * as Avatar from "@radix-ui/react-avatar";
-import Markdown from "react-markdown";
-import { DATA } from "@/app/data/info";
 import { ResumeCard } from "@/app/components/ResumeCard";
-
+import { DATA } from "@/app/data/info";
 import { cn } from "@/app/lib/utils";
+import * as Avatar from "@radix-ui/react-avatar";
+import Link from "next/link";
+import Markdown from "react-markdown";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -16,7 +15,7 @@ export default function Page() {
   return (
     <main
       className={cn(
-        "flex flex-col m-5 p-2.5 min-h-[100dvh]",
+        "m-5 flex min-h-[100dvh] flex-col p-2.5",
         process.env.NEXT_PUBLIC_DEBUG && "border-2 border-blue-600"
       )}
     >
@@ -28,7 +27,7 @@ export default function Page() {
           )}
         >
           <div className="flex">
-            <div className="flex flex-col flex-1">
+            <div className="flex flex-1 flex-col">
               <Animate
                 delay={BLUR_FADE_DELAY}
                 className={cn(
@@ -66,7 +65,7 @@ export default function Page() {
                   alt={initials}
                 />
                 <Avatar.Fallback
-                  className="flex h-full w-full items-center justify-center rounded-full bg-muted"
+                  className="bg-muted flex h-full w-full items-center justify-center rounded-full"
                   delayMs={600}
                 >
                   {initials}
@@ -87,7 +86,7 @@ export default function Page() {
             <h2 className="text-xl font-bold">About</h2>
           </Animate>
           <Animate delay={BLUR_FADE_DELAY * 4}>
-            <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground">
+            <Markdown className="text-muted-foreground prose max-w-full text-pretty font-sans text-sm">
               {DATA.summary}
             </Markdown>
           </Animate>
@@ -96,7 +95,7 @@ export default function Page() {
       <section id="work">
         <div
           className={cn(
-            "flex min-h-0 flex-col gap-y-3 mt-5 ",
+            "mt-5 flex min-h-0 flex-col gap-y-3",
             process.env.NEXT_PUBLIC_DEBUG && "border-2 border-orange-600"
           )}
         >
@@ -123,7 +122,7 @@ export default function Page() {
       <section id="education">
         <div
           className={cn(
-            "flex min-h-0 flex-col gap-y-3 mt-5",
+            "mt-5 flex min-h-0 flex-col gap-y-3",
             process.env.NEXT_PUBLIC_DEBUG && "border-2 border-orange-600"
           )}
         >
@@ -143,6 +142,7 @@ export default function Page() {
                 title={education.school}
                 subtitle={education.degree}
                 period={`${education.start} - ${education.end}`}
+                focus={education.focus}
               />
             </Animate>
           ))}
@@ -151,22 +151,31 @@ export default function Page() {
       <section id="contact">
         <div
           className={cn(
-            "flex min-h-0 flex-col gap-y-3 mt-5",
+            "mt-5 flex min-h-0 flex-col gap-y-3",
             process.env.NEXT_PUBLIC_DEBUG && "border-2 border-orange-600"
           )}
         >
-          <div className="space-y-3">
+          <div className="space-y-2">
             <Animate delay={BLUR_FADE_DELAY * 9}>
               <h2 className="text-xl font-bold">Contact</h2>
             </Animate>
-            <p className="mx-auto text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              <Animate delay={BLUR_FADE_DELAY * 11}>
+            <p className="text-muted-foreground mx-auto flex flex-col md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              <Animate delay={BLUR_FADE_DELAY * 11} className="text-sm">
                 Shoot me an email at{" "}
                 <Link
                   href={`mailto:${DATA.contact.email}`}
                   className="text-blue-500 hover:underline"
                 >
-                  hamel@hey.com
+                  hameldesai0@gmail.com
+                </Link>
+              </Animate>
+              <Animate delay={BLUR_FADE_DELAY * 11} className="text-sm">
+                Message me on LinkedIn{" "}
+                <Link
+                  href={`https://www.linkedin.com/in/hamel-desai-650232122/`}
+                  className="text-blue-500 hover:underline"
+                >
+                  hameldesai
                 </Link>
               </Animate>
             </p>
