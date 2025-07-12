@@ -5,8 +5,7 @@ export const DATA = {
   initials: "HD",
   url: "https://hameldesai.com",
   location: "NJ",
-  description:
-    "Full time Engineer 🖥️, Mortgage Broker 🏠, Husband, and Dog Dad",
+  description: "Full time Engineer, Husband, and Dog Dad",
   avatarUrl: "/me.png",
   summary: `I'm a **Senior FullStack Software Engineer** based in New Jersey, currently at [Blaze AI](https://www.blaze.ai).
 
@@ -14,7 +13,7 @@ export const DATA = {
 
   ### Blaze AI:
 
-  At **[Blaze AI](https://www.blaze.ai/)**, we are building an agentic virtual marketer capable of autonomously creating, scheduling, and publishing content across platforms like **Instagram**, **Facebook**, **LinkedIn**, **TikTok**, **YouTube**, **X (formerly Twitter)**, **Mailchimp**, **Shopify**, and **WordPress**. Our goal is to help creators and businesses scale their reach with minimal manual effort powered by smart automation, deep integrations, and intelligent brand understanding. Blaze can generate a complete **Brand Kit** from a user's website—extracting logos, colors, and tone—to create a tailored **Brand Profile** that drives consistent, on-brand content across every platform.
+  At **[Blaze AI](https://www.blaze.ai/)**, we are building an agentic virtual marketer capable of autonomously creating, scheduling, and publishing content across platforms like **Instagram**, **Facebook**, **LinkedIn**, **TikTok**, **YouTube**, **X (formerly Twitter)**, **Mailchimp**, **Shopify**, and **WordPress**. Our goal is to help creators and businesses scale their reach with minimal manual effort powered by smart automation, deep integrations, and intelligent brand understanding. Blaze can generate a complete **Brand Kit** from a user's website-extracting logos, colors, and tone-to create a tailored **Brand Profile** that drives consistent, on-brand content across every platform.
 
   ### Things I've done:
 
@@ -27,9 +26,9 @@ export const DATA = {
   Beyond feature work, I collaborated with the design and mobile teams to ship mobile-optimized user flows for users without access to the iOS app-enhancing accessibility across devices. I continue to focus on developer experience, CI efficiency, and infrastructure scalability to ensure Blaze can grow without sacrificing speed or quality.
 
   ### Outside of tech:
-  - I enjoy working out, golfing, and hanging out with friends
-  - At the moment building a cookbook application for my wife here is the repo: [Cookbook](https://www.github.com/hd719) - which is a **WIP**
-  - Currently pursuing a **Master of Engineering** in Software Engineering / Engineering Management at **Stevens Institute of Technology**`,
+  - Currently pursuing a **Master of Engineering** in Software Engineering / Engineering Management at **Stevens Institute of Technology**
+  - I enjoy working out, golfing, hanging out with friends
+  - At the moment building a cookbook application for my wife here is the repo: [Cookbook](https://github.com/hd719/nextjs-monorepo/blob/main/apps/cookbook/README.md) - **WIP**`,
 
   work: [
     {

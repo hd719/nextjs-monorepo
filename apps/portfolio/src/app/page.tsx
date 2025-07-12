@@ -169,15 +169,6 @@ export default function Page() {
                   hameldesai0@gmail.com
                 </Link>
               </Animate>
-              <Animate delay={BLUR_FADE_DELAY * 11} className="text-sm">
-                Message me on LinkedIn{" "}
-                <Link
-                  href={`https://www.linkedin.com/in/hamel-desai-650232122/`}
-                  className="text-blue-500 hover:underline"
-                >
-                  hameldesai
-                </Link>
-              </Animate>
             </p>
           </div>
           <div className="flex flex-col">
