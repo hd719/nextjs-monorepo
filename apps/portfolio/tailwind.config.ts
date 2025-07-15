@@ -17,9 +17,11 @@ const config: Config = {
       colors: {
         white: "#FFFFFF",
         vanilla: "#fbf7e5",
-      },
-      textColor: {
         default: "#323232", // default font color
+        // Add blue color that's used
+        blue: {
+          500: "#3b82f6", // for text-blue-500
+        },
       },
     },
   },

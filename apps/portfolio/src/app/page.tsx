@@ -86,9 +86,11 @@ export default function Page() {
             <h2 className="text-xl font-bold">About</h2>
           </Animate>
           <Animate delay={BLUR_FADE_DELAY * 4}>
-            <Markdown className="text-muted-foreground prose max-w-full text-pretty font-sans text-sm">
-              {DATA.summary}
-            </Markdown>
+            <div className="text-muted-foreground prose max-w-full text-pretty font-sans text-sm">
+              <Markdown>
+                {DATA.summary}
+              </Markdown>
+            </div>
           </Animate>
         </div>
       </section>
