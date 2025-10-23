@@ -1,18 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useActionState, useState } from "react";
 
 import { addRecipeAction } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useFormState } from "react-dom";
 
 // interface RecipeFormProps {} // TODO: Define props when needed
 
 const UploadRecipeForm = (): React.JSX.Element => {
-  const [formState, action] = useFormState(addRecipeAction, {
+  const [formState, action] = useActionState(addRecipeAction, {
     errors: {},
   });
 
