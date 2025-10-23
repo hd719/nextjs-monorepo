@@ -5,7 +5,7 @@ import { cn } from "@/app/utils/utils";
 import NavClient from "@/components/Nav/NavClient";
 import Link from "next/link";
 
-export default function NavServer(): JSX.Element {
+export default function NavServer(): React.JSX.Element {
   return (
     <nav
       className={cn(

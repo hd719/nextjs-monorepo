@@ -9,19 +9,19 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "^15.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "next": "^15.4.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "@repo/ui": "workspace:*"
   },
   "devDependencies": {
-    "@next/eslint-plugin-next": "^15.0.0",
-    "@types/node": "^20.11.24",
-    "@types/react": "^18.2.61",
-    "@types/react-dom": "^18.2.19",
-    "eslint": "^8.57.0",
+    "@next/eslint-plugin-next": "^15.4.1",
+    "@types/node": "^24.0.13",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "eslint": "^9.31.0",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "typescript": "^5.3.3"
+    "typescript": "^5.8.3"
   }
 }

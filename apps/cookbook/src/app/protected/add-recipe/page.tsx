@@ -11,7 +11,7 @@ import { useFormState } from "react-dom";
 
 interface RecipeFormProps {}
 
-const RecipeForm = (): JSX.Element => {
+const RecipeForm = (): React.JSX.Element => {
   const [formState, action] = useFormState(addRecipeAction, {
     errors: {},
   });
