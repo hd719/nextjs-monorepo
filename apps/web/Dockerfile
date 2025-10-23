@@ -1,4 +1,4 @@
-FROM node:20-alpine AS base
+FROM node:22-alpine AS base
 
 # This Dockerfile is copy-pasted into our main docs at /docs/handbook/deploying-with-docker.
 # Make sure you update both files!
@@ -11,7 +11,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 RUN corepack enable && corepack prepare pnpm@9 --activate
 ENV PNPM_HOME=/usr/local/bin
-RUN pnpm add turbo@2.5.4 --global
+RUN pnpm add turbo@2.5.8 --global
 COPY . .
 RUN turbo prune web --docker
 
@@ -22,7 +22,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 RUN corepack enable && corepack prepare pnpm@latest --activate
 ENV PNPM_HOME=/usr/local/bin
-RUN pnpm add turbo@2.5.4 --global
+RUN pnpm add turbo@2.5.8 --global
 
 # First install the dependencies (as they change less often)
 COPY --from=builder /app/out/json/ .

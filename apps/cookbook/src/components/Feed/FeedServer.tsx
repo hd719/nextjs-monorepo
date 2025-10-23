@@ -6,7 +6,7 @@ import RecipeSkeletonLoader from "@/components/RecipeSkeletonLoader";
 import { recipes as mockRecipes, Recipe } from "../../../data/MockData";
 import FeedClient from "./FeedClient";
 
-export default async function FeedServer(): Promise<JSX.Element> {
+export default async function FeedServer(): Promise<React.JSX.Element> {
   return (
     <div>
       <StaticFeed />
@@ -17,14 +17,14 @@ export default async function FeedServer(): Promise<JSX.Element> {
   );
 }
 
-function StaticFeed(): JSX.Element {
+function StaticFeed(): React.JSX.Element {
   return <h3 className="mt-6 text-5xl font-bold">Find your favorite recipe</h3>;
 }
 
-async function DynamicFeed(): Promise<JSX.Element> {
+async function DynamicFeed(): Promise<React.JSX.Element> {
   const supabase = await createClient();
   const {
-    data: { user },
+    data: { user: _user },
   } = await supabase.auth.getUser();
 
   async function getRecipes() {

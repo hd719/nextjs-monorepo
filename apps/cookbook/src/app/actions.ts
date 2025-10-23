@@ -2,7 +2,7 @@
 
 import { createClient } from "@/app/utils/supabase/server";
 import { encodedRedirect } from "@/app/utils/utils";
-import { revalidatePath } from "next/cache";
+// import { revalidatePath } from "next/cache"; // TODO: Use when implementing revalidation
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
@@ -13,9 +13,10 @@ export const signUpAction = async (
 ) => {
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
-  const supabase = await createClient();
-  const headersList = await headers();
-  const origin = headersList.get("origin");
+  // TODO: Uncomment when implementing actual signup
+  // const supabase = await createClient();
+  // const headersList = await headers();
+  // const origin = headersList.get("origin");
 
   if (!email || !password) {
     return { message: "Server Side error: Email password are required" };

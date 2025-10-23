@@ -15,7 +15,9 @@ type FeedClientProps = {
   recipes: Recipe[];
 };
 
-export default function FeedClient({ recipes }: FeedClientProps): JSX.Element {
+export default function FeedClient({
+  recipes,
+}: FeedClientProps): React.JSX.Element {
   const [user, setUser] = useState<User | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
 

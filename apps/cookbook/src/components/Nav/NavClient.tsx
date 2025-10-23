@@ -15,7 +15,9 @@ type NavClientProps = {
   userEmail: string;
 };
 
-export default function NavClient({ userEmail }: NavClientProps): JSX.Element {
+export default function NavClient({
+  userEmail,
+}: NavClientProps): React.JSX.Element {
   return userEmail ? (
     <div className="flex items-center gap-4">
       <div className="flex items-center md:hidden">

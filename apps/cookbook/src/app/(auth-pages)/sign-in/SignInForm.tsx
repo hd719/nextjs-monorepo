@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useActionState, useRef } from "react";
 
 import { signInAction } from "@/app/actions";
 import { cn } from "@/app/utils/utils";
@@ -18,7 +18,6 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle } from "lucide-react";
 import Link from "next/link";
-import { useFormState } from "react-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -35,7 +34,7 @@ export const SignInForm = () => {
       password: "",
     },
   });
-  const [state, formAction] = useFormState(signInAction, {
+  const [state, formAction] = useActionState(signInAction, {
     message: "",
   });
 
