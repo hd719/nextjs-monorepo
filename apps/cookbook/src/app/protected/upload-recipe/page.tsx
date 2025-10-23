@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useFormState } from "react-dom";
 
-interface RecipeFormProps {}
+// interface RecipeFormProps {} // TODO: Define props when needed
 
 const UploadRecipeForm = (): React.JSX.Element => {
   const [formState, action] = useFormState(addRecipeAction, {
@@ -17,12 +17,12 @@ const UploadRecipeForm = (): React.JSX.Element => {
   });
 
   const [title, setTitle] = useState("");
-  const [ingredients, setIngredients] = useState("");
-  const [directions, setDirections] = useState("");
+  const [_ingredients, setIngredients] = useState("");
+  const [_directions, setDirections] = useState("");
   const [notes, setNotes] = useState("");
   const [nutritionalValue, setNutritionalValue] = useState("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (_e: React.FormEvent<HTMLFormElement>) => {
     if (formState?.errors?._form) {
       return;
     }

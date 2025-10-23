@@ -1,14 +1,10 @@
-import { Message } from "@/components/form-message";
+// import { Message } from "@/components/form-message"; // TODO: Use for form messages
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
 
 import { SignInForm } from "./SignInForm";
 
-export default async function SignIn({
-  searchParams,
-}: {
-  searchParams: Promise<Message> | undefined;
-}) {
+export default async function SignIn() {
   return (
     <Card className="mx-auto min-w-[400px] rounded-lg p-6 shadow-lg sm:min-w-[600px]">
       <h2 className="mb-4 text-2xl font-bold">Sign In</h2>

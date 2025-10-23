@@ -24,7 +24,7 @@ function StaticFeed(): React.JSX.Element {
 async function DynamicFeed(): Promise<React.JSX.Element> {
   const supabase = await createClient();
   const {
-    data: { user },
+    data: { user: _user },
   } = await supabase.auth.getUser();
 
   async function getRecipes() {
