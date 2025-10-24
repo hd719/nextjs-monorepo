@@ -29,16 +29,6 @@ export default function NavClient({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem>
-              <Button variant="outline">
-                <Link href="/protected/upload-recipe">Upload Recipe</Link>
-              </Button>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Button variant="outline">
-                <Link href="/protected/add-recipe">Add New Recipe</Link>
-              </Button>
-            </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <form action={signOutAction}>
                 <Button variant="outline" type="submit">
@@ -51,12 +41,6 @@ export default function NavClient({
       </div>
       <div className="hidden items-center gap-4 md:flex">
         Hey, {userEmail}!
-        <Button variant="outline">
-          <Link href="/protected/upload-recipe">Upload Recipe</Link>
-        </Button>
-        <Button type="submit" variant="outline">
-          <Link href="/protected/add-recipe">Add New Recipe</Link>
-        </Button>
         <form action={signOutAction}>
           <Button type="submit" variant="outline">
             Sign out

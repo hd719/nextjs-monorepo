@@ -7,12 +7,17 @@ import {
   getRecipeById,
   updateRecipe as updateRecipeDb,
 } from "@/lib/recipes";
+import { generateUniqueSlug } from "@/lib/slug";
 import {
   CreateRecipeSchema,
   PublishRecipeSchema,
   UpdateRecipeSchema,
 } from "@/schemas/recipe";
-import { CreateRecipeInput, UpdateRecipeInput } from "@/types/recipe";
+import {
+  CreateRecipeInput,
+  RecipeFormInput,
+  UpdateRecipeInput,
+} from "@/types/recipe";
 import { revalidatePath } from "next/cache";
 
 export interface RecipeActionResult<T = any> {
@@ -23,7 +28,7 @@ export interface RecipeActionResult<T = any> {
 }
 
 export async function createRecipeAction(
-  input: CreateRecipeInput
+  input: RecipeFormInput
 ): Promise<RecipeActionResult> {
   try {
     const supabase = await createClient();
@@ -39,7 +44,22 @@ export async function createRecipeAction(
       };
     }
 
-    const validationResult = CreateRecipeSchema.safeParse(input);
+    // Generate unique slug from title
+    const slugResult = await generateUniqueSlug(input.title);
+    if (slugResult.error) {
+      return {
+        success: false,
+        error: slugResult.error,
+      };
+    }
+
+    // Create the full recipe input with generated slug
+    const recipeInput: CreateRecipeInput = {
+      ...input,
+      slug: slugResult.slug,
+    };
+
+    const validationResult = CreateRecipeSchema.safeParse(recipeInput);
     if (!validationResult.success) {
       return {
         success: false,
@@ -79,7 +99,7 @@ export async function createRecipeAction(
 
 export async function updateRecipeAction(
   id: string,
-  input: UpdateRecipeInput
+  input: RecipeFormInput
 ): Promise<RecipeActionResult> {
   try {
     const supabase = await createClient();
@@ -95,7 +115,13 @@ export async function updateRecipeAction(
       };
     }
 
-    const validationResult = UpdateRecipeSchema.safeParse(input);
+    // Create the full update input with id
+    const updateInput: UpdateRecipeInput = {
+      id,
+      ...input,
+    };
+
+    const validationResult = UpdateRecipeSchema.safeParse(updateInput);
     if (!validationResult.success) {
       return {
         success: false,

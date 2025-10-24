@@ -88,17 +88,41 @@ export interface RecipeListItem {
 }
 
 // Recipe form data (for React Hook Form)
+// Form data for React Hook Form (client-side validation)
 export interface RecipeFormData {
   title: string;
-  description: string;
-  ingredients: string; // Textarea input as string, parsed later
-  steps: string; // Textarea input as string, parsed later
-  category: string;
-  cuisine: string;
-  servings: string; // Form inputs are strings
-  prep_minutes: string;
-  cook_minutes: string;
-  images: string; // Comma-separated URLs as string
+  description?: string;
+  category?: string;
+  cuisine?: string;
+  servings?: number;
+  prep_minutes?: number;
+  cook_minutes?: number;
+  ingredients: string[];
+  steps: string[];
+  images: string[];
+}
+
+// Server action form state
+export interface RecipeFormState {
+  success: boolean;
+  error?: string;
+  data?: Recipe;
+  validationErrors?: Array<{ field: string; message: string }>;
+}
+
+// Simplified input for form submissions (server actions will handle slug generation)
+export interface RecipeFormInput {
+  title: string;
+  description?: string;
+  category?: string;
+  cuisine?: string;
+  servings?: number;
+  prep_minutes?: number;
+  cook_minutes?: number;
+  ingredients: string[];
+  steps: string[];
+  images: string[];
+  is_published: boolean;
 }
 
 // Recipe status for admin UI

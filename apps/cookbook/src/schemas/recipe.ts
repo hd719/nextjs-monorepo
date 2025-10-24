@@ -72,7 +72,7 @@ export const PositiveIntSchema = z
   .number()
   .int("Must be a whole number")
   .positive("Must be greater than 0")
-  .max(999, "Value too large")
+  .max(999, "Must be less than 1000")
   .optional();
 
 // Create Recipe Schema - for new recipe creation
@@ -145,6 +145,41 @@ export const RecipeFormSchema = z.object({
       message: "Cook time must be a positive number",
     }),
   images: z.string().optional(), // Comma-separated URLs
+});
+
+// Array-based form schema for React Hook Form with dynamic arrays
+export const RecipeFormArraySchema = z.object({
+  title: TitleSchema,
+  description: z
+    .string()
+    .max(500, "Description must be less than 500 characters")
+    .optional(),
+  category: z.string().optional(),
+  cuisine: z.string().optional(),
+  servings: z
+    .number()
+    .min(1, "Servings must be at least 1")
+    .max(999, "Must be less than 1000")
+    .optional(),
+  prep_minutes: z
+    .number()
+    .min(0, "Prep time cannot be negative")
+    .max(999, "Must be less than 1000")
+    .optional(),
+  cook_minutes: z
+    .number()
+    .min(0, "Cook time cannot be negative")
+    .max(999, "Must be less than 1000")
+    .optional(),
+  ingredients: z
+    .array(z.string().min(1, "Ingredient cannot be empty"))
+    .min(1, "At least one ingredient is required")
+    .max(50, "Too many ingredients"),
+  steps: z
+    .array(z.string().min(1, "Step cannot be empty"))
+    .min(1, "At least one cooking step is required")
+    .max(20, "Too many steps"),
+  images: z.array(z.string()).default([]),
 });
 
 // Publish Recipe Schema - ensures recipe is complete before publishing

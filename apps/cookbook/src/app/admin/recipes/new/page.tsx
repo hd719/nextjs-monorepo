@@ -1,23 +1,9 @@
-"use client";
-
 import { RecipeForm } from "@/components/RecipeForm";
 import { Button } from "@/components/ui/button";
-import { Recipe } from "@/types/recipe";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 export default function NewRecipePage() {
-  const router = useRouter();
-
-  const handleSuccess = (recipe: Recipe) => {
-    router.push(`/admin/recipes/${recipe.id}/edit`);
-  };
-
-  const handleCancel = () => {
-    router.push("/admin/recipes");
-  };
-
   return (
     <div className="space-y-6">
       {/* Back Navigation */}
@@ -40,7 +26,7 @@ export default function NewRecipePage() {
       </div>
 
       {/* Recipe Form */}
-      <RecipeForm onSuccess={handleSuccess} onCancel={handleCancel} />
+      <RecipeForm />
     </div>
   );
 }
