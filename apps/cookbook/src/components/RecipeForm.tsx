@@ -164,7 +164,7 @@ export function RecipeForm({ recipe, onSuccess, onCancel }: RecipeFormProps) {
   };
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6">
+    <div className="mx-auto space-y-6">
       <Form {...form}>
         <form className="space-y-6">
           {/* Basic Recipe Information */}
@@ -354,6 +354,11 @@ export function RecipeForm({ recipe, onSuccess, onCancel }: RecipeFormProps) {
               </Button>
             </div>
             <div className="space-y-3">
+              {ingredientFields.length === 0 && (
+                <p className="text-sm text-gray-500">
+                  No ingredients added yet. Click "Add Ingredient" to add.
+                </p>
+              )}
               {ingredientFields.map((field, index) => (
                 <div key={field.id} className="flex gap-2">
                   <FormField
@@ -401,6 +406,11 @@ export function RecipeForm({ recipe, onSuccess, onCancel }: RecipeFormProps) {
               </Button>
             </div>
             <div className="space-y-3">
+              {stepFields.length === 0 && (
+                <p className="text-sm text-gray-500">
+                  No steps added yet. Click "Add Steps" to add.
+                </p>
+              )}
               {stepFields.map((field, index) => (
                 <div key={field.id} className="flex gap-2">
                   <div className="flex h-10 w-8 items-center justify-center rounded-md bg-gray-100 text-sm font-medium">
@@ -454,7 +464,7 @@ export function RecipeForm({ recipe, onSuccess, onCancel }: RecipeFormProps) {
             <div className="space-y-3">
               {imageFields.length === 0 && (
                 <p className="text-sm text-gray-500">
-                  No images added yet. Click "Add Image URL" to add image links.
+                  No images added yet. Click "Add Image URL" to add.
                 </p>
               )}
               {imageFields.map((field, index) => (

@@ -102,19 +102,21 @@ export default function AdminRecipesPage() {
   return (
     <div className="space-y-6">
       {/* Page Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">All Recipes</h1>
-          <p className="mt-2 text-gray-600">
-            Manage your recipes, publish drafts, and organize your content
-          </p>
+      <div className="border-b border-gray-200 pb-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">All Recipes</h1>
+            <p className="mt-2 text-gray-600">
+              Manage your recipes, publish drafts, and organize your content
+            </p>
+          </div>
+          <Link href="/admin/recipes/new">
+            <Button>
+              <span className="mr-2">➕</span>
+              Create Recipe
+            </Button>
+          </Link>
         </div>
-        <Link href="/admin/recipes/new">
-          <Button>
-            <span className="mr-2">➕</span>
-            Create Recipe
-          </Button>
-        </Link>
       </div>
 
       {/* Filters and Search */}
