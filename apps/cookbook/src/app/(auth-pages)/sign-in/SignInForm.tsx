@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useRef } from "react";
+import { useActionState, useTransition } from "react";
 
 import { signInAction } from "@/app/actions";
 import { cn } from "@/app/utils/utils";
@@ -24,91 +24,117 @@ import { z } from "zod";
 import { SmtpMessage } from "../smtp-message";
 import { schema } from "./SignInFormSchema";
 
-type OurSchema = z.infer<typeof schema>;
+type SignInFormData = z.infer<typeof schema>;
 
 export const SignInForm = () => {
-  const form = useForm<OurSchema>({
+  // React Hook Form setup with Zod validation
+  // This handles client-side validation and form state management
+  const form = useForm<SignInFormData>({
     resolver: zodResolver(schema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
+
   const [state, formAction] = useActionState(signInAction, {
     message: "",
+    type: "error" as const,
   });
 
-  const formRef = useRef<HTMLFormElement>(null);
+  // React transition for non-blocking UI updates
+  // This provides loading states and keeps the UI responsive during submission
+  const [isPending, startTransition] = useTransition();
+
+  /**
+   * Handle form submission with hybrid approach:
+   * 1. React Hook Form validates the data client-side first
+   * 2. If validation passes, we manually create Web API FormData for the server action
+   * 3. startTransition makes the server call non-blocking for better UX
+   * 4. FormData is a browser built-in that creates key-value pairs representing form fields and their values. It's designed for sending form data to servers.
+   */
+  const onSubmit = (validatedData: SignInFormData) => {
+    startTransition(() => {
+      // Convert React Hook Form data to Web API FormData for server action
+      const serverFormData = new FormData();
+      serverFormData.append("email", validatedData.email);
+      serverFormData.append("password", validatedData.password);
+
+      // Call the server action with the Web API FormData
+      formAction(serverFormData);
+    });
+  };
 
   return (
-    <Form {...form}>
-      <form
-        ref={formRef}
-        action={formAction}
-        onSubmit={form.handleSubmit(() => {
-          event?.preventDefault();
-          return formRef.current?.submit();
-        })}
-        className={cn(
-          "flex w-full flex-col space-y-5"
-          // process.env.NEXT_PUBLIC_DEBUG && "border-2 border-orange-600"
-        )}
-      >
-        <div className="gap-2">
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem className="mb-3 w-full">
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input placeholder="Your email address" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem className="mb-3 w-full">
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input
-                    type="password"
-                    placeholder="Your password"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div className="flex items-center justify-between">
-            <Link
-              className="text-xs text-foreground underline"
-              href="/forgot-password"
-            >
-              Forgot Password?
-            </Link>
-          </div>
-        </div>
-        <Button
-          type="submit"
-          className="rounded-m w-full text-white transition duration-300 marker:py-2 hover:bg-blue-600"
+    <div className="relative">
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className={cn(
+            "flex w-full flex-col space-y-5"
+            // process.env.NEXT_PUBLIC_DEBUG && "border-2 border-orange-600"
+          )}
         >
-          Submit Recipe
-        </Button>
-      </form>
-      {state.message ? (
-        <Alert variant="destructive" className="mt-2">
-          <AlertCircle className="h-4 w-4" />
-          <AlertTitle>Error</AlertTitle>
-          <AlertDescription>{state.message}</AlertDescription>
-        </Alert>
-      ) : null}
-      <SmtpMessage />
-    </Form>
+          <div className="gap-2">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem className="mb-3 w-full">
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Your email address" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem className="mb-3 w-full">
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      placeholder="Your password"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="flex items-center justify-between">
+              <Link
+                className="text-xs text-foreground underline"
+                href="/forgot-password"
+              >
+                Forgot Password?
+              </Link>
+            </div>
+          </div>
+          <Button
+            type="submit"
+            disabled={isPending}
+            className="rounded-m w-full text-white transition duration-300 marker:py-2 hover:bg-blue-600"
+          >
+            {isPending ? "Signing In..." : "Sign In"}
+          </Button>
+        </form>
+        {/* Fixed height container to prevent layout shift */}
+        <div className="mt-2 flex h-16 items-start">
+          {state.message ? (
+            <Alert variant="destructive" className="w-full">
+              <AlertCircle className="h-4 w-4" />
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>{state.message}</AlertDescription>
+            </Alert>
+          ) : null}
+        </div>
+        <SmtpMessage />
+      </Form>
+    </div>
   );
 };
