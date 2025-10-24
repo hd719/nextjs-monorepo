@@ -6,6 +6,9 @@ import Link from "next/link";
 
 import HomeImage from "../../public/images/main.jpeg";
 
+// Revalidate home page every 5 minutes to show fresh recipes
+export const revalidate = 300;
+
 export default async function Index() {
   return (
     <>
@@ -16,7 +19,7 @@ export default async function Index() {
             alt="Photo of food"
             className="absolute h-[650px] object-cover object-center"
           />
-          <div className="relative flex h-full flex-col justify-center bg-slate-900 bg-opacity-30 p-5 text-white md:p-16">
+          <div className="relative flex h-full w-full flex-col justify-center bg-slate-900 bg-opacity-30 p-5 text-white md:p-16">
             <h1 className="font-inter text-3xl font-extrabold md:text-6xl">
               Payal's Recipes
               <br />

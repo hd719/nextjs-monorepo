@@ -1,7 +1,7 @@
 import { Recipe } from "@/types/recipe";
 
 export type StatusFilter = "all" | "published" | "draft";
-export type SortBy = "title" | "updated_at" | "created_at";
+export type SortBy = "title" | "updated_at" | "created_at" | "published_at";
 export type SortOrder = "asc" | "desc";
 
 export interface RecipeFilters {
@@ -20,8 +20,10 @@ export function filterAndSortRecipes(
   return recipes
     .filter((recipe) => {
       const matchesSearch =
-        recipe.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        recipe.description?.toLowerCase().includes(searchTerm.toLowerCase());
+        (recipe.title || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (recipe.description || "")
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
 
       const matchesStatus =
         statusFilter === "all" ||
@@ -46,6 +48,10 @@ export function filterAndSortRecipes(
         case "created_at":
           aValue = new Date(a.created_at).getTime();
           bValue = new Date(b.created_at).getTime();
+          break;
+        case "published_at":
+          aValue = a.published_at ? new Date(a.published_at).getTime() : 0;
+          bValue = b.published_at ? new Date(b.published_at).getTime() : 0;
           break;
         default:
           return 0;

@@ -1,8 +1,10 @@
 import React, { Suspense } from "react";
 
+import { createClient } from "@/app/utils/supabase/server";
 import RecipeSkeletonLoader from "@/components/RecipeSkeletonLoader";
 import { getPublishedRecipes } from "@/lib/recipes";
 import { Recipe } from "@/types/recipe";
+import { User } from "@supabase/supabase-js";
 
 import FeedClient from "./FeedClient";
 
@@ -10,7 +12,13 @@ export default async function FeedServer(): Promise<React.JSX.Element> {
   return (
     <div>
       <StaticFeed />
-      <Suspense fallback={<RecipeSkeletonLoader />}>
+      <Suspense
+        fallback={
+          <div className="w-full">
+            <RecipeSkeletonLoader />
+          </div>
+        }
+      >
         <DynamicFeed />
       </Suspense>
     </div>
@@ -22,6 +30,12 @@ function StaticFeed(): React.JSX.Element {
 }
 
 async function DynamicFeed(): Promise<React.JSX.Element> {
+  // Fetch user data on server
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   // Fetch published recipes from database
   const result = await getPublishedRecipes({
     page: 1,
@@ -62,7 +76,7 @@ async function DynamicFeed(): Promise<React.JSX.Element> {
 
   return (
     <>
-      <FeedClient recipes={recipes} />
+      <FeedClient recipes={recipes} user={user} />
     </>
   );
 }

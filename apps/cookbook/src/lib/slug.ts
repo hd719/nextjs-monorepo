@@ -3,6 +3,11 @@ import slugifyPackage from "slugify";
 import { isSlugAvailable } from "./recipes";
 
 export function slugify(text: string): string {
+  // Handle null, undefined, or empty strings
+  if (!text || typeof text !== "string") {
+    return "";
+  }
+
   return slugifyPackage(text, {
     lower: true, // Convert to lowercase
     strict: true, // Remove special characters
@@ -15,6 +20,14 @@ export async function generateUniqueSlug(
   excludeRecipeId?: string
 ): Promise<{ slug: string; error: string | null }> {
   try {
+    // Validate input
+    if (!title || typeof title !== "string" || title.trim().length === 0) {
+      return {
+        slug: "",
+        error: "Title is required to generate slug",
+      };
+    }
+
     // Generate base slug from title
     const baseSlug = slugify(title);
 

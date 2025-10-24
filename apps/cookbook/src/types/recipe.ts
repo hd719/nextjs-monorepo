@@ -232,6 +232,3 @@ export const DEFAULT_RECIPE_VALUES = {
   cook_minutes: undefined,
   is_published: false,
 } satisfies Partial<CreateRecipeInput>;
-
-// Export legacy Recipe type for backward compatibility
-export type { Recipe as LegacyRecipe } from "../../data/MockData";

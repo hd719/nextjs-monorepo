@@ -1,9 +1,9 @@
 import { createClient } from "@/app/utils/supabase/server";
 import { getAdminRecipes } from "@/lib/recipes";
 
-import AdminRecipesClient from "./AdminRecipesClient";
+import DraftsRecipesClient from "./DraftsRecipesClient";
 
-export default async function AdminRecipesPage() {
+export default async function DraftsRecipesPage() {
   const supabase = await createClient();
   const {
     data: { user },
@@ -20,11 +20,12 @@ export default async function AdminRecipesPage() {
   const result = await getAdminRecipes(user.id, {
     page: 1,
     limit: 100,
+    status: "draft",
     sort_by: "updated_at",
     sort_order: "desc",
   });
 
-  const recipes = result.data || [];
+  const draftRecipes = result.data || [];
 
-  return <AdminRecipesClient initialRecipes={recipes} />;
+  return <DraftsRecipesClient initialRecipes={draftRecipes} />;
 }

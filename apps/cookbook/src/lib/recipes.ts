@@ -309,6 +309,99 @@ export async function getRecipeById(
 }
 
 /**
+ * Get full recipe data for admin pages
+ * Returns complete Recipe objects with all fields
+ */
+export async function getAdminRecipes(
+  userId: string,
+  params: Partial<RecipeQueryParams> = {}
+): Promise<PaginatedResult<Recipe>> {
+  try {
+    const supabase = await createClient();
+    const {
+      page = 1,
+      limit = 10,
+      category,
+      cuisine,
+      search,
+      status = "all",
+      sort_by = "updated_at",
+      sort_order = "desc",
+    } = params;
+
+    const offset = (page - 1) * limit;
+
+    // Build query for user's recipes with all fields
+    let query = supabase
+      .from("recipes")
+      .select("*", { count: "exact" })
+      .eq("owner_id", userId)
+      .range(offset, offset + limit - 1)
+      .order(sort_by, { ascending: sort_order === "asc" });
+
+    // Filter by status
+    if (status === "published") {
+      query = query.eq("is_published", true);
+    } else if (status === "draft") {
+      query = query.eq("is_published", false);
+    }
+
+    // Add other filters
+    if (category) {
+      query = query.eq("category", category);
+    }
+
+    if (cuisine) {
+      query = query.eq("cuisine", cuisine);
+    }
+
+    if (search) {
+      query = query.or(`title.ilike.%${search}%,description.ilike.%${search}%`);
+    }
+
+    const { data, error, count } = await query;
+
+    if (error) {
+      return {
+        data: null,
+        error: {
+          message: error.message,
+          code: error.code,
+          details: error.details,
+        },
+        count: null,
+        page,
+        limit,
+        totalPages: null,
+      };
+    }
+
+    const totalPages = count ? Math.ceil(count / limit) : null;
+
+    return {
+      data: data as Recipe[],
+      error: null,
+      count,
+      page,
+      limit,
+      totalPages,
+    };
+  } catch (error) {
+    return {
+      data: null,
+      error: {
+        message: "Failed to fetch admin recipes",
+        details: error instanceof Error ? error.message : String(error),
+      },
+      count: null,
+      page: params.page || 1,
+      limit: params.limit || 10,
+      totalPages: null,
+    };
+  }
+}
+
+/**
  * Create a new recipe
  * Automatically sets owner_id and generates timestamps
  */

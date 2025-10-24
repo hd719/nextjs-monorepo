@@ -90,8 +90,14 @@ export function RecipeActions({ recipe, recipeId }: RecipeActionsProps) {
         if (result.success) {
           toast.success(
             `Recipe ${actionText} successfully!`,
-            `"${optimisticRecipe.title}" is now ${actionText}.`
+            `"${optimisticRecipe.title}" is now ${actionText}.`,
+            3000
           );
+
+          // Redirect to published recipes page after publishing
+          if (action === "publish") {
+            router.push("/admin/recipes/published");
+          }
         } else {
           // Revert optimistic update on error
           updateOptimisticRecipe({

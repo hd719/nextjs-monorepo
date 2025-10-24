@@ -6,9 +6,10 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Menu } from "lucide-react";
+import { BookOpen, Menu, PlusCircle, Settings } from "lucide-react";
 import Link from "next/link";
 
 type NavClientProps = {
@@ -20,6 +21,7 @@ export default function NavClient({
 }: NavClientProps): React.JSX.Element {
   return userEmail ? (
     <div className="flex items-center gap-4">
+      {/* Mobile Navigation */}
       <div className="flex items-center md:hidden">
         <span className="mr-3">Hey, {userEmail}!</span>
         <DropdownMenu>
@@ -28,10 +30,33 @@ export default function NavClient({
               <Menu />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent>
+          <DropdownMenuContent align="end" className="w-56">
             <DropdownMenuItem asChild>
-              <form action={signOutAction}>
-                <Button variant="outline" type="submit">
+              <Link href="/admin" className="flex items-center">
+                <Settings className="mr-2 h-4 w-4" />
+                Admin Dashboard
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/admin/recipes/new" className="flex items-center">
+                <PlusCircle className="mr-2 h-4 w-4" />
+                Create Recipe
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/admin/recipes" className="flex items-center">
+                <BookOpen className="mr-2 h-4 w-4" />
+                Manage Recipes
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem asChild>
+              <form action={signOutAction} className="w-full">
+                <Button
+                  variant="ghost"
+                  type="submit"
+                  className="w-full justify-start p-0"
+                >
                   Sign out
                 </Button>
               </form>
@@ -39,10 +64,24 @@ export default function NavClient({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+
+      {/* Desktop Navigation */}
       <div className="hidden items-center gap-4 md:flex">
-        Hey, {userEmail}!
-        <form action={signOutAction}>
-          <Button type="submit" variant="outline">
+        <Link
+          href="/admin"
+          className="hover:text-primary-600 text-sm font-medium transition-colors"
+        >
+          Admin
+        </Link>
+        <Link
+          href="/admin/recipes/new"
+          className="hover:text-primary-600 text-sm font-medium transition-colors"
+        >
+          Create Recipe
+        </Link>
+        <span className="text-sm">Hey, {userEmail}!</span>
+        <form action={signOutAction} className="inline">
+          <Button type="submit" variant="outline" size="sm">
             Sign out
           </Button>
         </form>

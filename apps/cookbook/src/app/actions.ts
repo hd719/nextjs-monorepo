@@ -89,7 +89,7 @@ export const signInAction = async (
     };
   }
 
-  return redirect("/protected");
+  return redirect("/admin");
 };
 
 export const forgotPasswordAction = async (formData: FormData) => {

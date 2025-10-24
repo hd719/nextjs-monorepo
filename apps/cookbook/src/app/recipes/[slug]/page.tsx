@@ -1,5 +1,9 @@
 import { createClient } from "@/app/utils/supabase/server";
 import { getRecipeBySlug } from "@/lib/recipes";
+import {
+  generateRecipeMetadata,
+  generateRecipeStructuredData,
+} from "@/lib/seo";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -11,6 +15,8 @@ interface RecipePageProps {
   };
 }
 
+export const revalidate = 60;
+
 export async function generateMetadata({
   params,
 }: RecipePageProps): Promise<Metadata> {
@@ -18,31 +24,29 @@ export async function generateMetadata({
 
   if (result.error || !result.data) {
     return {
-      title: "Recipe Not Found",
-      description: "The requested recipe could not be found.",
+      title: "Recipe Not Found - Payal's Cookbook",
+      description:
+        "The requested recipe could not be found. Browse our collection of delicious recipes instead.",
+      robots: {
+        index: false,
+        follow: false,
+      },
     };
   }
 
   const recipe = result.data;
 
-  return {
-    title: `${recipe.title} - Payal's Cookbook`,
-    description: recipe.description || `Learn how to make ${recipe.title}`,
-    keywords: [
-      recipe.title,
-      recipe.category,
-      recipe.cuisine,
-      "recipe",
-      "cooking",
-      "Payal",
-    ].filter(Boolean) as string[],
-    openGraph: {
-      title: recipe.title,
-      description: recipe.description || `Learn how to make ${recipe.title}`,
-      images: recipe.images?.[0] ? [recipe.images[0]] : [],
-      type: "article",
-    },
-  };
+  // Get recipe owner's name for metadata
+  const supabase = await createClient();
+  const { data: userData } = await supabase
+    .from("profiles")
+    .select("full_name, email")
+    .eq("id", recipe.owner_id)
+    .single();
+
+  const authorName = userData?.full_name || userData?.email || "Chef";
+
+  return generateRecipeMetadata(recipe, authorName);
 }
 
 export default async function RecipePage({ params }: RecipePageProps) {
@@ -63,36 +67,10 @@ export default async function RecipePage({ params }: RecipePageProps) {
     .eq("id", recipe.owner_id)
     .single();
 
-  const authorName = userData?.full_name || userData?.email || "Chef";
+  const authorName = userData?.full_name || userData?.email || "Payal";
 
-  // Generate JSON-LD structured data for SEO
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Recipe",
-    name: recipe.title,
-    description: recipe.description,
-    image: recipe.images?.[0] || "",
-    author: {
-      "@type": "Person",
-      name: authorName,
-    },
-    datePublished: recipe.published_at || recipe.created_at,
-    recipeCategory: recipe.category,
-    recipeCuisine: recipe.cuisine,
-    recipeYield: recipe.servings ? `${recipe.servings} servings` : undefined,
-    prepTime: recipe.prep_minutes ? `PT${recipe.prep_minutes}M` : undefined,
-    cookTime: recipe.cook_minutes ? `PT${recipe.cook_minutes}M` : undefined,
-    totalTime:
-      recipe.prep_minutes && recipe.cook_minutes
-        ? `PT${recipe.prep_minutes + recipe.cook_minutes}M`
-        : undefined,
-    recipeIngredient: recipe.ingredients || [],
-    recipeInstructions: recipe.steps?.map((step, index) => ({
-      "@type": "HowToStep",
-      position: index + 1,
-      text: step,
-    })),
-  };
+  // Generate comprehensive JSON-LD structured data for SEO
+  const structuredData = generateRecipeStructuredData(recipe, authorName);
 
   return (
     <>

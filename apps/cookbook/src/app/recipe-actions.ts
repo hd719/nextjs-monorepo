@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/app/utils/supabase/server";
+import { revalidateRecipePages } from "@/lib/cache";
 import {
   createRecipe,
   deleteRecipe as deleteRecipeDb,
@@ -18,7 +19,6 @@ import {
   RecipeFormInput,
   UpdateRecipeInput,
 } from "@/types/recipe";
-import { revalidatePath } from "next/cache";
 
 export interface RecipeActionResult<T = any> {
   success: boolean;
@@ -80,9 +80,8 @@ export async function createRecipeAction(
       };
     }
 
-    // Revalidate relevant paths
-    revalidatePath("/admin/recipes");
-    revalidatePath("/");
+    // Revalidate relevant paths using our cache utility
+    revalidateRecipePages(result.data?.slug);
 
     return {
       success: true,
@@ -142,10 +141,8 @@ export async function updateRecipeAction(
       };
     }
 
-    // Revalidate relevant paths
-    revalidatePath("/admin/recipes");
-    revalidatePath(`/admin/recipes/${id}`);
-    revalidatePath("/");
+    // Revalidate relevant paths using our cache utility
+    revalidateRecipePages(result.data?.slug);
 
     return {
       success: true,
@@ -224,10 +221,8 @@ export async function publishRecipeAction(
       };
     }
 
-    // Revalidate relevant paths
-    revalidatePath("/admin/recipes");
-    revalidatePath(`/admin/recipes/${id}`);
-    revalidatePath("/");
+    // Revalidate relevant paths using our cache utility
+    revalidateRecipePages(updateResult.data?.slug);
 
     return {
       success: true,
@@ -296,10 +291,8 @@ export async function unpublishRecipeAction(
       };
     }
 
-    // Revalidate relevant paths
-    revalidatePath("/admin/recipes");
-    revalidatePath(`/admin/recipes/${id}`);
-    revalidatePath("/");
+    // Revalidate relevant paths using our cache utility
+    revalidateRecipePages(updateResult.data?.slug);
 
     return {
       success: true,
@@ -342,9 +335,8 @@ export async function deleteRecipeAction(
       };
     }
 
-    // Revalidate relevant paths
-    revalidatePath("/admin/recipes");
-    revalidatePath("/");
+    // Revalidate relevant paths using our cache utility
+    revalidateRecipePages();
 
     return {
       success: true,
@@ -394,9 +386,8 @@ export async function bulkPublishRecipesAction(
       };
     }
 
-    // Revalidate relevant paths
-    revalidatePath("/admin/recipes");
-    revalidatePath("/");
+    // Revalidate relevant paths using our cache utility
+    revalidateRecipePages();
 
     return {
       success: true,
@@ -446,9 +437,8 @@ export async function bulkDeleteRecipesAction(
       };
     }
 
-    // Revalidate relevant paths
-    revalidatePath("/admin/recipes");
-    revalidatePath("/");
+    // Revalidate relevant paths using our cache utility
+    revalidateRecipePages();
 
     return {
       success: true,

@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-import { createClient } from "@/app/utils/supabase/client";
 import { Pagination } from "@/components/Pagination";
 import { Recipe } from "@/types/recipe";
 import { User } from "@supabase/supabase-js";
@@ -13,28 +12,18 @@ import PancakeImage from "../../../public/images/pancake.jpeg";
 
 type FeedClientProps = {
   recipes: Recipe[];
+  user: User | null;
 };
 
 export default function FeedClient({
   recipes,
+  user,
 }: FeedClientProps): React.JSX.Element {
-  const [user, setUser] = useState<User | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
 
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const {
-        data: { user },
-      } = await createClient().auth.getUser();
-      setUser(user);
-    };
-
-    fetchUser();
-  }, []);
 
   const RECIPES_PER_PAGE = 6;
 
@@ -44,7 +33,7 @@ export default function FeedClient({
       className="mx-auto flex w-full max-w-7xl flex-col items-center justify-center gap-2"
     >
       <div className="md:grid-rows-3; mt-6 grid w-full items-center gap-6 py-4 md:grid-cols-2 xl:grid-cols-3 xl:grid-rows-2">
-        {recipes.map((recipe: Recipe) => (
+        {recipes.map((recipe: Recipe, index: number) => (
           <div
             key={recipe.id}
             className="h-fit max-w-[370px] flex-1 rounded-lg border border-gray-300 bg-white/20 bg-clip-padding p-6 backdrop-blur-lg backdrop-filter"
@@ -58,6 +47,8 @@ export default function FeedClient({
                 className="object-cover"
                 placeholder="blur"
                 blurDataURL="https://placehold.co/330x300/png?text=Picture"
+                priority={index < 3}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>
             <div className="mt-4">
