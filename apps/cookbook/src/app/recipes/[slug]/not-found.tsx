@@ -2,11 +2,11 @@ import Link from "next/link";
 
 export default function RecipeNotFound() {
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
       <div className="max-w-md text-center">
         <div className="mb-8">
-          <h1 className="text-6xl font-bold text-gray-300 mb-4">404</h1>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          <h1 className="mb-4 text-6xl font-bold text-gray-300">404</h1>
+          <h2 className="mb-2 text-2xl font-bold text-gray-900">
             Recipe Not Found
           </h2>
           <p className="text-gray-600">
@@ -18,13 +18,13 @@ export default function RecipeNotFound() {
         <div className="space-y-4">
           <Link
             href="/"
-            className="inline-block w-full rounded-md bg-blue-600 px-4 py-2 text-white font-medium hover:bg-blue-700 transition-colors"
+            className="inline-block w-full rounded-md bg-blue-600 px-4 py-2 font-medium text-white transition-colors hover:bg-blue-700"
           >
             Browse All Recipes
           </Link>
           <Link
             href="/"
-            className="inline-block w-full rounded-md border border-gray-300 px-4 py-2 text-gray-700 font-medium hover:bg-gray-50 transition-colors"
+            className="inline-block w-full rounded-md border border-gray-300 px-4 py-2 font-medium text-gray-700 transition-colors hover:bg-gray-50"
           >
             Back to Home
           </Link>

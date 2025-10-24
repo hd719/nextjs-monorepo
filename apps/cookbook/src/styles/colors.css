@@ -1,0 +1,251 @@
+/* Cookbook - Soft Pastel Color Palette */
+
+:root {
+  /* Primary Brand Colors - Soft Pastels */
+  --primary-50: #fef7f0; /* Very light peach */
+  --primary-100: #fdeee0; /* Light peach */
+  --primary-200: #fbd5b8; /* Soft peach */
+  --primary-300: #f8b890; /* Medium peach */
+  --primary-400: #f59e72; /* Warm peach */
+  --primary-500: #f2845c; /* Main brand color */
+  --primary-600: #e06b47; /* Deeper peach */
+  --primary-700: #c55a3a; /* Rich peach */
+  --primary-800: #a04a2f; /* Dark peach */
+  --primary-900: #7d3a25; /* Very dark peach */
+
+  /* Secondary Colors - Soft Greens */
+  --secondary-50: #f0f9f4; /* Very light mint */
+  --secondary-100: #dcf2e4; /* Light mint */
+  --secondary-200: #b8e5c8; /* Soft mint */
+  --secondary-300: #8dd5a7; /* Medium mint */
+  --secondary-400: #65c486; /* Fresh mint */
+  --secondary-500: #4ade80; /* Main secondary */
+  --secondary-600: #22c55e; /* Deeper mint */
+  --secondary-700: #16a34a; /* Rich green */
+  --secondary-800: #15803d; /* Dark green */
+  --secondary-900: #14532d; /* Very dark green */
+
+  /* Accent Colors - Soft Blues */
+  --accent-50: #f0f8ff; /* Very light sky */
+  --accent-100: #e0f0fe; /* Light sky */
+  --accent-200: #bae0fd; /* Soft sky */
+  --accent-300: #7cc8f8; /* Medium sky */
+  --accent-400: #38bdf8; /* Fresh sky */
+  --accent-500: #0ea5e9; /* Main accent */
+  --accent-600: #0284c7; /* Deeper sky */
+  --accent-700: #0369a1; /* Rich blue */
+  --accent-800: #075985; /* Dark blue */
+  --accent-900: #0c4a6e; /* Very dark blue */
+
+  /* Warning Colors - Soft Yellows */
+  --warning-50: #fffbeb; /* Very light cream */
+  --warning-100: #fef3c7; /* Light cream */
+  --warning-200: #fde68a; /* Soft yellow */
+  --warning-300: #fcd34d; /* Medium yellow */
+  --warning-400: #fbbf24; /* Warm yellow */
+  --warning-500: #f59e0b; /* Main warning */
+  --warning-600: #d97706; /* Deeper yellow */
+  --warning-700: #b45309; /* Rich amber */
+  --warning-800: #92400e; /* Dark amber */
+  --warning-900: #78350f; /* Very dark amber */
+
+  /* Error Colors - Soft Reds */
+  --error-50: #fef2f2; /* Very light rose */
+  --error-100: #fee2e2; /* Light rose */
+  --error-200: #fecaca; /* Soft rose */
+  --error-300: #fca5a5; /* Medium rose */
+  --error-400: #f87171; /* Warm rose */
+  --error-500: #ef4444; /* Main error */
+  --error-600: #dc2626; /* Deeper red */
+  --error-700: #b91c1c; /* Rich red */
+  --error-800: #991b1b; /* Dark red */
+  --error-900: #7f1d1d; /* Very dark red */
+
+  /* Neutral Colors - Warm Grays */
+  --neutral-50: #fafaf9; /* Very light warm gray */
+  --neutral-100: #f5f5f4; /* Light warm gray */
+  --neutral-200: #e7e5e4; /* Soft warm gray */
+  --neutral-300: #d6d3d1; /* Medium warm gray */
+  --neutral-400: #a8a29e; /* Warm gray */
+  --neutral-500: #78716c; /* Main neutral */
+  --neutral-600: #57534e; /* Deeper gray */
+  --neutral-700: #44403c; /* Rich gray */
+  --neutral-800: #292524; /* Dark gray */
+  --neutral-900: #1c1917; /* Very dark gray */
+
+  /* Background Gradients */
+  --bg-gradient-light: linear-gradient(
+    135deg,
+    var(--primary-50) 0%,
+    var(--neutral-50) 50%,
+    var(--secondary-50) 100%
+  );
+  --bg-gradient-warm: linear-gradient(
+    135deg,
+    var(--primary-100) 0%,
+    var(--warning-50) 100%
+  );
+  --bg-gradient-cool: linear-gradient(
+    135deg,
+    var(--accent-50) 0%,
+    var(--secondary-50) 100%
+  );
+
+  /* Card Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl:
+    0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* Border Radius */
+  --radius-sm: 0.375rem; /* 6px */
+  --radius-md: 0.5rem; /* 8px */
+  --radius-lg: 0.75rem; /* 12px */
+  --radius-xl: 1rem; /* 16px */
+  --radius-2xl: 1.5rem; /* 24px */
+
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+}
+
+/* Utility Classes */
+.bg-primary {
+  background-color: var(--primary-500);
+}
+.bg-primary-light {
+  background-color: var(--primary-100);
+}
+.bg-primary-soft {
+  background-color: var(--primary-50);
+}
+
+.bg-secondary {
+  background-color: var(--secondary-500);
+}
+.bg-secondary-light {
+  background-color: var(--secondary-100);
+}
+.bg-secondary-soft {
+  background-color: var(--secondary-50);
+}
+
+.bg-accent {
+  background-color: var(--accent-500);
+}
+.bg-accent-light {
+  background-color: var(--accent-100);
+}
+.bg-accent-soft {
+  background-color: var(--accent-50);
+}
+
+.text-primary {
+  color: var(--primary-600);
+}
+.text-secondary {
+  color: var(--secondary-600);
+}
+.text-accent {
+  color: var(--accent-600);
+}
+.text-neutral {
+  color: var(--neutral-600);
+}
+
+.border-primary {
+  border-color: var(--primary-200);
+}
+.border-secondary {
+  border-color: var(--secondary-200);
+}
+.border-accent {
+  border-color: var(--accent-200);
+}
+
+.gradient-primary {
+  background: linear-gradient(
+    135deg,
+    var(--primary-400) 0%,
+    var(--primary-600) 100%
+  );
+}
+
+.gradient-secondary {
+  background: linear-gradient(
+    135deg,
+    var(--secondary-400) 0%,
+    var(--secondary-600) 100%
+  );
+}
+
+.gradient-accent {
+  background: linear-gradient(
+    135deg,
+    var(--accent-400) 0%,
+    var(--accent-600) 100%
+  );
+}
+
+/* Component Styles */
+.card {
+  background: white;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--primary-100);
+  transition: all var(--transition-normal);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--gradient-secondary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.input-field {
+  border: 2px solid var(--primary-200);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  background: white;
+  transition: all var(--transition-fast);
+}
+
+.input-field:focus {
+  border-color: var(--primary-400);
+  box-shadow: 0 0 0 3px var(--primary-100);
+  outline: none;
+}
