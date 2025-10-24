@@ -1,4 +1,5 @@
 import { createClient } from "@/app/utils/supabase/server";
+import { DB_ERROR_CODES, ERROR_MESSAGES, HTTP_STATUS } from "@/lib/constants";
 import {
   createRecipe,
   getPublishedRecipes,
@@ -40,7 +41,7 @@ export async function GET(request: NextRequest) {
           error: "Invalid query parameters",
           details: formatZodError(queryResult.error),
         },
-        { status: 400 }
+        { status: HTTP_STATUS.BAD_REQUEST }
       );
     }
 
@@ -63,7 +64,7 @@ export async function GET(request: NextRequest) {
             error: "Failed to fetch recipes",
             details: result.error.message,
           },
-          { status: 500 }
+          { status: HTTP_STATUS.INTERNAL_SERVER_ERROR }
         );
       }
 
@@ -87,7 +88,7 @@ export async function GET(request: NextRequest) {
           error: "Failed to fetch user recipes",
           details: result.error.message,
         },
-        { status: 500 }
+        { status: HTTP_STATUS.INTERNAL_SERVER_ERROR }
       );
     }
 
@@ -104,10 +105,10 @@ export async function GET(request: NextRequest) {
     console.error("GET /api/recipes error:", error);
     return NextResponse.json(
       {
-        error: "Internal server error",
+        error: ERROR_MESSAGES.INTERNAL_SERVER_ERROR,
         details: error instanceof Error ? error.message : "Unknown error",
       },
-      { status: 500 }
+      { status: HTTP_STATUS.INTERNAL_SERVER_ERROR }
     );
   }
 }
@@ -128,8 +129,8 @@ export async function POST(request: NextRequest) {
 
     if (authError || !user) {
       return NextResponse.json(
-        { error: "Authentication required" },
-        { status: 401 }
+        { error: ERROR_MESSAGES.AUTHENTICATION_REQUIRED },
+        { status: HTTP_STATUS.UNAUTHORIZED }
       );
     }
 
@@ -139,8 +140,8 @@ export async function POST(request: NextRequest) {
       body = await request.json();
     } catch (parseError) {
       return NextResponse.json(
-        { error: "Invalid JSON in request body" },
-        { status: 400 }
+        { error: ERROR_MESSAGES.INVALID_JSON },
+        { status: HTTP_STATUS.BAD_REQUEST }
       );
     }
 
@@ -150,10 +151,10 @@ export async function POST(request: NextRequest) {
     if (!validationResult.success) {
       return NextResponse.json(
         {
-          error: "Invalid recipe data",
+          error: ERROR_MESSAGES.INVALID_RECIPE_DATA,
           details: formatZodError(validationResult.error),
         },
-        { status: 400 }
+        { status: HTTP_STATUS.BAD_REQUEST }
       );
     }
 
@@ -171,7 +172,7 @@ export async function POST(request: NextRequest) {
             error: "Failed to generate slug",
             details: slugResult.error,
           },
-          { status: 500 }
+          { status: HTTP_STATUS.INTERNAL_SERVER_ERROR }
         );
       }
 
@@ -189,23 +190,23 @@ export async function POST(request: NextRequest) {
 
     if (createResult.error) {
       // Handle specific database errors
-      if (createResult.error.code === "23505") {
+      if (createResult.error.code === DB_ERROR_CODES.UNIQUE_VIOLATION) {
         // Unique constraint violation (likely slug)
         return NextResponse.json(
           {
-            error: "Recipe with this slug already exists",
+            error: ERROR_MESSAGES.DUPLICATE_SLUG,
             details: "Please choose a different title or slug",
           },
-          { status: 409 }
+          { status: HTTP_STATUS.CONFLICT }
         );
       }
 
       return NextResponse.json(
         {
-          error: "Failed to create recipe",
+          error: ERROR_MESSAGES.FAILED_TO_CREATE,
           details: createResult.error.message,
         },
-        { status: 500 }
+        { status: HTTP_STATUS.INTERNAL_SERVER_ERROR }
       );
     }
 
@@ -215,16 +216,16 @@ export async function POST(request: NextRequest) {
         data: createResult.data,
         message: "Recipe created successfully",
       },
-      { status: 201 }
+      { status: HTTP_STATUS.CREATED }
     );
   } catch (error) {
     console.error("POST /api/recipes error:", error);
     return NextResponse.json(
       {
-        error: "Internal server error",
+        error: ERROR_MESSAGES.INTERNAL_SERVER_ERROR,
         details: error instanceof Error ? error.message : "Unknown error",
       },
-      { status: 500 }
+      { status: HTTP_STATUS.INTERNAL_SERVER_ERROR }
     );
   }
 }
