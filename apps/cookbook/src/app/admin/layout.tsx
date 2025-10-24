@@ -1,6 +1,8 @@
 import { createClient } from "@/app/utils/supabase/server";
 import { redirect } from "next/navigation";
 
+import { AdminLayoutClient } from "./admin-layout-client";
+
 export default async function AdminLayout({
   children,
 }: {
@@ -17,15 +19,12 @@ export default async function AdminLayout({
     redirect("/sign-in");
   }
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <header className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
-          <p className="text-gray-600">Welcome, {user.email}</p>
-        </header>
-        <main>{children}</main>
-      </div>
-    </div>
-  );
+  // Extract user info for client components
+  const userInfo = {
+    id: user.id,
+    email: user.email || "Unknown",
+    name: user.user_metadata?.name || user.email?.split("@")[0] || "Admin",
+  };
+
+  return <AdminLayoutClient user={userInfo}>{children}</AdminLayoutClient>;
 }
