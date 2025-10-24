@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import our custom color palette */
+@import "../styles/colors.css";
+
 @layer base {
   :root {
     --background: 0 0% 100%;

@@ -1,7 +1,11 @@
 import { updateSession } from "@/app/utils/supabase/middleware";
-import { type NextRequest } from "next/server";
+import { type NextRequest, type NextResponse } from "next/server";
 
-export async function middleware(request: NextRequest) {
+/**
+ * Middleware function that handles authentication and route protection
+ * Protects /admin routes while allowing public access to other routes
+ */
+export async function middleware(request: NextRequest): Promise<NextResponse> {
   return await updateSession(request);
 }
 

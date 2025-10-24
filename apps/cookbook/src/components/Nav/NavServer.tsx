@@ -13,26 +13,20 @@ export default function NavServer(): React.JSX.Element {
         process.env.NEXT_PUBLIC_DEBUG && "border-2 border-green-600"
       )}
     >
-      <StaticNav />
-      <Suspense fallback={<div>Loading user...</div>}>
-        <DynamicNav />
-      </Suspense>
+      <div className="flex w-full items-center justify-between text-sm">
+        <StaticNav />
+        <Suspense fallback={<div>Loading user...</div>}>
+          <DynamicNav />
+        </Suspense>
+      </div>
     </nav>
   );
 }
 
 function StaticNav() {
   return (
-    <div
-      className={cn(
-        "flex w-full max-w-5xl items-center justify-between text-sm",
-        process.env.NEXT_PUBLIC_DEBUG && "border-2 border-orange-600"
-      )}
-    >
-      <div className="flex items-center gap-5 font-semibold">
-        <Link href={"/"}>Payal's Cookbook</Link>
-        <div className="flex items-center gap-2"></div>
-      </div>
+    <div className="flex items-center gap-5 font-semibold">
+      <Link href={"/"}>Payal's Cookbook</Link>
     </div>
   );
 }
@@ -43,19 +37,5 @@ async function DynamicNav() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Simulating a slow network request
-  // async function getUser() {
-  //   await new Promise((resolve) => setTimeout(resolve, 3000));
-  //   return {
-  //     email: "hameldesai93@gmail.com",
-  //   };
-  // }
-
-  // const user = await getUser();
-
-  return (
-    <div className="flex items-center gap-5 font-semibold">
-      <NavClient userEmail={user?.email as string} />
-    </div>
-  );
+  return <NavClient userEmail={user?.email as string} />;
 }
