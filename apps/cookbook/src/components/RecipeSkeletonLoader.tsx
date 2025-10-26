@@ -8,10 +8,8 @@ const RecipeSkeletonLoader = () => {
           {[...Array(6)].map((_, index) => (
             <div
               key={index}
-              className="h-fit max-w-[370px] flex-1 rounded-lg border border-appGray-300 bg-appGray-100/50 bg-clip-padding p-6 backdrop-blur-lg backdrop-filter"
-              style={{
-                animationDelay: `${index * 100}ms`,
-              }}
+              className="h-fit max-w-[370px] flex-1 animate-pulse rounded-lg border border-appGray-300 bg-appGray-100/50 bg-clip-padding p-6 backdrop-blur-lg backdrop-filter"
+              style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Image Skeleton */}
               <div className="relative flex h-[300px] max-w-[330px] items-center overflow-hidden rounded-lg">
@@ -50,9 +48,7 @@ const RecipeSkeletonLoader = () => {
 
 export default RecipeSkeletonLoader;
 
-// Notes: whats going on here...
-
-// We have our outer container
+// Skeleton loader structure with responsive grid layout
 // div className="grid grid-cols-1 gap-6 py-4 md:grid-cols-2 xl:grid-cols-3">
 // grid: This class enables CSS Grid layout.
 // grid-cols-1: Sets the default number of columns to 1 (for small screens).

@@ -56,16 +56,12 @@ const RecipeSearch: React.FC<RecipeSearchProps> = ({
             "flex w-full items-center rounded-lg border bg-white px-4 transition-colors duration-300 focus-within:border-appAccent",
             {
               "border-[#DEDEDE]": isStatic,
-              "border-transparent": !isStatic,
+              "border-transparent drop-shadow-[0_0_8px_rgba(10,34,19,0.25)]":
+                !isStatic,
               "lg:px-6": size === "lg",
               "opacity-75": isPending, // React 19: Show loading state
             }
           )}
-          style={{
-            filter: !isStatic
-              ? "drop-shadow(0px 0px 8px rgba(10, 34, 19, 0.25))"
-              : "",
-          }}
         >
           <SearchIcon
             className={classNames("h-5 w-5 text-appGray-400", {

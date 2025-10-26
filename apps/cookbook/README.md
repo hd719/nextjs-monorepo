@@ -2,19 +2,21 @@
 
 ## Description
 
-- This is a simple cookbook application that allows my wife to store her recipes
-- All of her recipes are stored in a mdx file
-- There is an auth section where she can login/logout and when she logs in she can add/edit/delete her recipes
+- This is a full-featured cookbook application that allows users to create, manage, and share recipes
+- Recipes are stored in a Supabase PostgreSQL database with full CRUD functionality
+- Features authentication, admin dashboard, public recipe viewing, and responsive design
 
 ## Tech Stack
 
-- Next.js (with React, Typescript, and Tailwind CSS)
-  - Using server actions
-- MDX for the recipes
-  - `@next/mdx` plugin for Next.js
-- Shadcn component library (might switch this over to something else but for now it works, Pigment is another option)
-- Supabase for authentication and database (postgres)
-  - Was using NextAuth.js, Prisma, and Suppabase but I decided to use Suppabase for everything - might switch to Auth.js and Prisma later
+- **Next.js 15** with React 19, TypeScript, and Tailwind CSS
+  - Server Actions for form handling
+  - App Router with dynamic routing
+- **Supabase** for authentication and PostgreSQL database
+  - Row Level Security (RLS) policies
+  - Real-time subscriptions
+- **Shadcn/ui** component library with Radix UI primitives
+- **React Hook Form** with Zod validation
+- **Optimistic UI updates** for better UX
 
 ## Environment Variables
 
@@ -30,14 +32,14 @@
 ### Checklist
 
 - [x] Create the app
-- [x] Add Suppabase
-- [x] Add Auth
-- [x] Add Database
-- [x] File uploads
-- [] Add Docker File
-- [] Components
-- [] Add CRUD functionality
-- [x] Domain Name
+- [x] Add Supabase
+- [x] Add Auth (Sign up/in, Password reset)
+- [x] Add Database (PostgreSQL with RLS)
+- [x] Recipe image URLs support
+- [x] Add Docker File (Dockerfile.cookbook)
+- [x] Components (Complete UI component library)
+- [x] Add CRUD functionality (Create, Read, Update, Delete recipes)
+- [] Domain Name
 - [] VPS
 - [] Terraform
 - [] CI/CD

@@ -564,7 +564,7 @@ export function RecipeForm({
               </div>
             </div>
 
-            {/* Images Section (Stub Implementation) */}
+            {/* Images Section */}
             <div className="rounded-lg border border-appGray-300 bg-white p-6 transition-colors duration-300">
               <div className="mb-6 flex items-center justify-between">
                 <h3 className="text-xl font-semibold tracking-[-0.41px] text-appGray-700">
@@ -658,7 +658,7 @@ export function RecipeForm({
                     onClick={form.handleSubmit(
                       (data) => handleSubmit(data, true),
                       (errors) => {
-                        console.log("Publish validation errors:", errors);
+                        // Log validation errors for debugging
                         // Force form to show validation errors
                         Object.keys(errors).forEach((key) => {
                           form.setError(

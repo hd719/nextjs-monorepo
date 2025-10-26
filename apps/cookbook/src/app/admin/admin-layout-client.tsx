@@ -60,7 +60,7 @@ export function AdminLayoutClient({ user, children }: AdminLayoutClientProps) {
       >
         {/* Sidebar header */}
         <div className="flex h-16 items-center justify-between border-b border-gray-200 px-6">
-          <h1 className="text-xl font-bold text-gray-900">Recipe Admin</h1>
+          <h1 className="text-xl font-bold text-gray-900">Admin</h1>
           <button
             type="button"
             className="text-gray-400 hover:text-gray-600 lg:hidden"

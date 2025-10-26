@@ -87,12 +87,7 @@ const AnimatedSearch: React.FC<AnimatedSearchProps> = ({
 
       {/* Expanded State - Transform Nav Bar into Search */}
       {isExpanded && (
-        <div
-          className="fixed inset-x-0 top-0 z-[60] bg-appAccent shadow-lg transition-all duration-300 ease-in-out animate-in fade-in slide-in-from-top-2"
-          style={{
-            height: "var(--header-height, 64px)",
-          }}
-        >
+        <div className="fixed inset-x-0 top-0 z-[60] h-16 bg-appAccent shadow-lg transition-all duration-300 ease-in-out animate-in fade-in slide-in-from-top-2">
           <div className="container mx-auto h-full">
             <div className="flex h-full items-center px-4">
               {/* Search Form - replaces entire nav content */}

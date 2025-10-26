@@ -100,7 +100,7 @@ export default function PublishedRecipesClient({
 
   return (
     <div className="min-h-screen">
-      <div className="mx-auto max-w-7xl space-y-6 px-4 py-8">
+      <div className="mx-auto max-w-7xl space-y-6">
         {/* Page Header */}
         <div className="border-b border-primary-200 pb-6">
           <div className="flex items-center justify-between">

@@ -40,35 +40,37 @@ export default async function EditRecipePage({ params }: EditRecipePageProps) {
 
   return (
     <div className="min-h-screen bg-gradient-light">
-      <div className="mx-auto max-w-4xl space-y-6 px-4 py-8">
-        {/* Back Navigation */}
-        <div className="flex items-center">
-          <Link href="/admin/recipes">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="pl-0 text-primary-600 hover:text-primary-700"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Recipes
-            </Button>
-          </Link>
-        </div>
-
-        {/* Page Header with Actions */}
+      <div className="mx-auto max-w-7xl space-y-6 px-4">
+        {/* Page Header with Back Navigation and Actions */}
         <div className="border-b border-primary-200 pb-6">
           <div className="flex items-center justify-between">
+            {/* Page Title */}
             <div>
               <h1 className="text-3xl font-bold text-neutral-900">
                 Edit Recipe: {recipe.title}
               </h1>
-              <p className="mt-2 text-neutral-600">
-                Make changes to your recipe. Updates are saved automatically.
-              </p>
             </div>
 
-            {/* Action Buttons - Client Component */}
-            <RecipeActions recipe={recipe} recipeId={id} />
+            {/* Back Navigation and Action Buttons */}
+            <div className="flex items-center space-x-4">
+              <RecipeActions recipe={recipe} recipeId={id} />
+              <Link href="/admin/recipes">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="pr-0 text-primary-600 hover:text-primary-700"
+                >
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  <span className="hidden sm:inline">Back to Recipes</span>
+                </Button>
+              </Link>
+            </div>
+          </div>
+
+          <div className="mt-4">
+            <p className="text-neutral-600">
+              Make changes to your recipe. Updates are saved automatically.
+            </p>
           </div>
 
           {/* Recipe Status Badge */}
