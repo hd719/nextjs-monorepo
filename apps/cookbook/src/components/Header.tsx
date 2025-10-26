@@ -4,15 +4,18 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { signOutAction } from "@/app/actions";
 import { MenuIcon, XIcon } from "@/components/icons";
+import RecipeSearch from "@/components/RecipeSearch";
 import { Button } from "@/components/ui/button";
+import { Recipe } from "@/types/recipe";
 import classNames from "classnames";
 import Link from "next/link";
 
 interface HeaderProps {
   userEmail?: string;
+  recipes?: Recipe[];
 }
 
-const Header: React.FC<HeaderProps> = ({ userEmail }) => {
+const Header: React.FC<HeaderProps> = ({ userEmail, recipes = [] }) => {
   const navItemsDOM = useRef<HTMLDivElement | null>(null);
   const [showMobileNav, setShowMobileNav] = useState(false);
 
@@ -76,6 +79,16 @@ const Header: React.FC<HeaderProps> = ({ userEmail }) => {
 
             {/* Desktop Navigation */}
             <div className="hidden items-center gap-6 md:flex">
+              {/* Search Bar - Desktop */}
+              <div className="w-64">
+                <RecipeSearch
+                  recipes={recipes}
+                  size="regular"
+                  static={true}
+                  className="w-full"
+                />
+              </div>
+
               {userEmail ? (
                 <>
                   <Link
@@ -117,12 +130,22 @@ const Header: React.FC<HeaderProps> = ({ userEmail }) => {
               className={classNames(
                 "flex flex-col items-center gap-6 md:hidden",
                 {
-                  "max-md:absolute max-md:-bottom-16 max-md:right-0 max-md:min-w-[200px] max-md:translate-y-full max-md:rounded max-md:bg-white max-md:px-4 max-md:py-6 max-md:shadow-lg":
+                  "max-md:absolute max-md:-bottom-16 max-md:right-0 max-md:min-w-[280px] max-md:translate-y-full max-md:rounded max-md:bg-white max-md:px-4 max-md:py-6 max-md:shadow-lg":
                     showMobileNav,
                 },
                 { "max-md:hidden": !showMobileNav }
               )}
             >
+              {/* Search Bar - Mobile */}
+              <div className="w-full">
+                <RecipeSearch
+                  recipes={recipes}
+                  size="regular"
+                  static={true}
+                  className="w-full"
+                />
+              </div>
+
               <Link
                 href="/recipes"
                 className="text-sm font-medium leading-none tracking-[-0.41px] text-appAccent transition-colors duration-300 hover:text-appAccent/70"

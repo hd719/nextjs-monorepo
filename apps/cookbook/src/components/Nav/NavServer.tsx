@@ -2,6 +2,7 @@ import { Suspense } from "react";
 
 import { createClient } from "@/app/utils/supabase/server";
 import Header from "@/components/Header";
+import { getPublishedRecipes } from "@/lib/recipes";
 
 export default function NavServer(): React.JSX.Element {
   return (
@@ -17,5 +18,15 @@ async function DynamicNav() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  return <Header userEmail={user?.email || undefined} />;
+  // Fetch recipes for search functionality
+  const result = await getPublishedRecipes({
+    page: 1,
+    limit: 50, // Get recipes for search
+    sort_by: "published_at",
+    sort_order: "desc",
+  });
+
+  const recipes = result.data || [];
+
+  return <Header userEmail={user?.email || undefined} recipes={recipes} />;
 }
