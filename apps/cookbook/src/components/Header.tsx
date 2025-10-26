@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { signOutAction } from "@/app/actions";
+import AnimatedSearch from "@/components/AnimatedSearch";
 import { MenuIcon, XIcon } from "@/components/icons";
 import RecipeSearch from "@/components/RecipeSearch";
 import { Button } from "@/components/ui/button";
@@ -18,6 +19,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ userEmail, recipes = [] }) => {
   const navItemsDOM = useRef<HTMLDivElement | null>(null);
   const [showMobileNav, setShowMobileNav] = useState(false);
+  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
 
   useEffect(() => {
     const handleMobileNavClickOutside = (event: MouseEvent) => {
@@ -39,8 +41,23 @@ const Header: React.FC<HeaderProps> = ({ userEmail, recipes = [] }) => {
     };
   }, [showMobileNav]);
 
+  // Handle search expansion change
+  const handleSearchExpandChange = (expanded: boolean) => {
+    // Don't hide nav elements immediately - let the search overlay cover them naturally
+    // Only set the state for other purposes (like closing mobile nav)
+    setIsSearchExpanded(expanded);
+
+    // Close mobile nav when search expands
+    if (expanded && showMobileNav) {
+      setShowMobileNav(false);
+    }
+  };
+
   return (
-    <header className="relative z-50 w-full bg-appAccent">
+    <header
+      className="relative z-50 w-full bg-appAccent"
+      style={{ "--header-height": "64px" } as React.CSSProperties}
+    >
       <nav className="w-full">
         <div className="container mx-auto">
           <div className="relative flex items-center justify-between py-[13px] max-md:justify-center md:py-4">
@@ -64,43 +81,50 @@ const Header: React.FC<HeaderProps> = ({ userEmail, recipes = [] }) => {
               </Link>
             </div>
 
-            {/* Mobile menu button */}
-            <button
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-white/70 transition-all duration-300 hover:bg-white hover:shadow-md max-md:absolute max-md:-bottom-[54px] max-md:right-0 md:hidden"
-              aria-label="Toggle mobile nav"
-              onClick={() => setShowMobileNav((prev) => !prev)}
-            >
-              <div className="relative h-[18px] w-[18px]">
-                <XIcon
-                  className={classNames(
-                    "absolute inset-0 h-[18px] w-[18px] text-appAccent transition-all duration-300",
-                    showMobileNav
-                      ? "rotate-0 opacity-100"
-                      : "rotate-90 opacity-0"
-                  )}
-                />
-                <MenuIcon
-                  className={classNames(
-                    "absolute inset-0 h-[18px] w-[18px] transition-all duration-300",
-                    showMobileNav
-                      ? "-rotate-90 opacity-0"
-                      : "rotate-0 opacity-100"
-                  )}
-                />
-              </div>
-            </button>
+            {/* Mobile controls */}
+            <div className="flex items-center gap-2 max-md:absolute max-md:-bottom-[54px] max-md:right-0 md:hidden">
+              {/* Mobile Animated Search */}
+              <AnimatedSearch
+                recipes={recipes}
+                onExpandChange={handleSearchExpandChange}
+                className="flex-shrink-0"
+              />
+
+              {/* Mobile menu button */}
+              <button
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-white/70 transition-all duration-300 hover:bg-white hover:shadow-md"
+                aria-label="Toggle mobile nav"
+                onClick={() => setShowMobileNav((prev) => !prev)}
+              >
+                <div className="relative h-[18px] w-[18px]">
+                  <XIcon
+                    className={classNames(
+                      "absolute inset-0 h-[18px] w-[18px] text-appAccent transition-all duration-300",
+                      showMobileNav
+                        ? "rotate-0 opacity-100"
+                        : "rotate-90 opacity-0"
+                    )}
+                  />
+                  <MenuIcon
+                    className={classNames(
+                      "absolute inset-0 h-[18px] w-[18px] transition-all duration-300",
+                      showMobileNav
+                        ? "-rotate-90 opacity-0"
+                        : "rotate-0 opacity-100"
+                    )}
+                  />
+                </div>
+              </button>
+            </div>
 
             {/* Desktop Navigation */}
             <div className="hidden items-center gap-4 md:flex md:flex-1 md:justify-end lg:gap-6">
-              {/* Search Bar - Desktop */}
-              <div className="w-48 lg:w-64">
-                <RecipeSearch
-                  recipes={recipes}
-                  size="regular"
-                  static={true}
-                  className="w-full"
-                />
-              </div>
+              {/* Animated Search - Desktop */}
+              <AnimatedSearch
+                recipes={recipes}
+                onExpandChange={handleSearchExpandChange}
+                className="flex-shrink-0"
+              />
 
               {userEmail ? (
                 <>
