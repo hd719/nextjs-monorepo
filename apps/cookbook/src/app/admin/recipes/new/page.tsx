@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function NewRecipePage() {
   return (
-    <div className="bg-gradient-light min-h-screen">
+    <div className="min-h-screen">
       <div className="mx-auto max-w-4xl space-y-6 px-4 py-8">
         {/* Back Navigation */}
         <div className="flex items-center">
@@ -13,7 +13,7 @@ export default function NewRecipePage() {
             <Button
               variant="ghost"
               size="sm"
-              className="text-primary-600 hover:text-primary-700 pl-0"
+              className="pl-0 text-primary-600 hover:text-primary-700"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Recipes
@@ -22,7 +22,7 @@ export default function NewRecipePage() {
         </div>
 
         {/* Page Header */}
-        <div className="border-primary-200 border-b pb-6">
+        <div className="border-b border-primary-200 pb-6">
           <h1 className="text-3xl font-bold text-neutral-900">
             Create New Recipe
           </h1>

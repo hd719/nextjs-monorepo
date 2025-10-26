@@ -48,6 +48,7 @@
 - [] Monitoring
 - [Load Balancer] (traefik also as a reverse proxy)
 
+Design Template: https://thebcms.com/blog/announcing-nextjs-recipes-starter
 
 Explaination of this onSubmit={form.handleSubmit(() => formRef.current?.submit())} in react-hook-form
 

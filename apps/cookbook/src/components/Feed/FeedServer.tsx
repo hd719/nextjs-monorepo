@@ -26,7 +26,15 @@ export default async function FeedServer(): Promise<React.JSX.Element> {
 }
 
 function StaticFeed(): React.JSX.Element {
-  return <h3 className="mt-6 text-5xl font-bold">Find your favorite recipe</h3>;
+  return (
+    <section className="py-8">
+      <div className="container">
+        <h2 className="font-semibold leading-none tracking-[-0.41px] text-appGray-700 lg:text-2xl xl:text-4xl">
+          Find your favorite recipe
+        </h2>
+      </div>
+    </section>
+  );
 }
 
 async function DynamicFeed(): Promise<React.JSX.Element> {

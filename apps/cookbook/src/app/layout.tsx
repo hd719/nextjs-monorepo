@@ -1,4 +1,4 @@
-import { cn } from "@/app/utils/utils";
+import Footer from "@/components/Footer";
 import { LayoutWrapper } from "@/components/layout-wrapper";
 import Nav from "@/components/Nav";
 import { ThemeSwitcher } from "@/components/theme-switcher";
@@ -17,30 +17,25 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={GeistSans.className} suppressHydrationWarning>
-      <body className="bg-background text-foreground">
+      <body className="overflow-x-hidden bg-background bg-white text-foreground">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <main
-            className={cn(
-              "flex min-h-screen flex-col items-center",
-              process.env.NEXT_PUBLIC_DEBUG && "border-2 border-red-600"
+          <div className="flex min-h-screen flex-col overflow-hidden">
+            <LayoutWrapper nav={<Nav />}>
+              <main className="flex flex-1 flex-col">{children}</main>
+            </LayoutWrapper>
+            <Footer />
+            {/* Theme Switcher - Hidden in production, visible in debug mode */}
+            {process.env.NEXT_PUBLIC_DEBUG && (
+              <div className="fixed bottom-4 right-4 z-50">
+                <ThemeSwitcher />
+              </div>
             )}
-          >
-            <LayoutWrapper nav={<Nav />}>{children}</LayoutWrapper>
-            <footer
-              className={cn(
-                "mx-auto flex w-full max-w-[1300px] items-center justify-center border-t text-center text-xs",
-                process.env.NEXT_PUBLIC_DEBUG && "border-2 border-cyan-600"
-              )}
-            >
-              <p>Footer</p>
-              <ThemeSwitcher />
-            </footer>
-          </main>
+          </div>
         </ThemeProvider>
       </body>
     </html>

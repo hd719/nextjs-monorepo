@@ -10,9 +10,9 @@ import { redirect } from "next/navigation";
 import { RecipeActions } from "./RecipeActions";
 
 interface EditRecipePageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 async function fetchRecipeData(recipeId: string): Promise<Recipe> {
@@ -35,10 +35,11 @@ async function fetchRecipeData(recipeId: string): Promise<Recipe> {
 }
 
 export default async function EditRecipePage({ params }: EditRecipePageProps) {
-  const recipe = await fetchRecipeData(params.id);
+  const { id } = await params;
+  const recipe = await fetchRecipeData(id);
 
   return (
-    <div className="bg-gradient-light min-h-screen">
+    <div className="min-h-screen bg-gradient-light">
       <div className="mx-auto max-w-4xl space-y-6 px-4 py-8">
         {/* Back Navigation */}
         <div className="flex items-center">
@@ -46,7 +47,7 @@ export default async function EditRecipePage({ params }: EditRecipePageProps) {
             <Button
               variant="ghost"
               size="sm"
-              className="text-primary-600 hover:text-primary-700 pl-0"
+              className="pl-0 text-primary-600 hover:text-primary-700"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Recipes
@@ -55,7 +56,7 @@ export default async function EditRecipePage({ params }: EditRecipePageProps) {
         </div>
 
         {/* Page Header with Actions */}
-        <div className="border-primary-200 border-b pb-6">
+        <div className="border-b border-primary-200 pb-6">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold text-neutral-900">
@@ -67,7 +68,7 @@ export default async function EditRecipePage({ params }: EditRecipePageProps) {
             </div>
 
             {/* Action Buttons - Client Component */}
-            <RecipeActions recipe={recipe} recipeId={params.id} />
+            <RecipeActions recipe={recipe} recipeId={id} />
           </div>
 
           {/* Recipe Status Badge */}
@@ -75,8 +76,8 @@ export default async function EditRecipePage({ params }: EditRecipePageProps) {
             <div
               className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${
                 recipe.is_published
-                  ? "bg-secondary-100 text-secondary-800 border-secondary-300 border"
-                  : "bg-warning-100 text-warning-800 border-warning-300 border"
+                  ? "border border-secondary-300 bg-secondary-100 text-secondary-800"
+                  : "border border-warning-300 bg-warning-100 text-warning-800"
               }`}
             >
               {recipe.is_published ? "Published" : "Draft"}

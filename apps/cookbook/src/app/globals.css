@@ -70,3 +70,72 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Fade transitions for react-transition-group (from recipes app) */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* Additional transition states for react-transition-group */
+.fade-entering {
+  opacity: 0;
+}
+.fade-entered {
+  opacity: 1;
+}
+.fade-exiting {
+  opacity: 1;
+}
+.fade-exited {
+  opacity: 0;
+}
+
+/* Shimmer animation for skeleton loaders */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* Animated Search Transitions */
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutToTop {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+.animate-slide-in-top {
+  animation: slideInFromTop 0.3s ease-out forwards;
+}
+
+.animate-slide-out-top {
+  animation: slideOutToTop 0.3s ease-in forwards;
+}

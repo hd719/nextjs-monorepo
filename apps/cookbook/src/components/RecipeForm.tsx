@@ -3,9 +3,7 @@
 import { useEffect, useTransition } from "react";
 
 import { createRecipeAction, updateRecipeAction } from "@/app/recipe-actions";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -21,9 +19,9 @@ import { RecipeFormArraySchema } from "@/schemas/recipe";
 import { Recipe, RECIPE_CATEGORIES, RECIPE_CUISINES } from "@/types/recipe";
 import { getIngredientsAsStrings } from "@/utils/recipe-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AlertCircle, Plus, X } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Control, FieldValues, useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 
 type RecipeFormData = z.infer<typeof RecipeFormArraySchema>;
@@ -206,12 +204,14 @@ export function RecipeForm({
       {/* Toast Notifications */}
       <ToastContainer toasts={toasts} onRemove={removeToast} />
 
-      <div className="mx-auto space-y-6">
+      <div className="mx-auto space-y-8">
         <Form {...form}>
-          <form className="space-y-6">
+          <form className="space-y-8">
             {/* Basic Recipe Information */}
-            <Card className="p-6">
-              <h3 className="mb-4 text-lg font-semibold">Basic Information</h3>
+            <div className="rounded-lg border border-appGray-300 bg-white p-6 transition-colors duration-300">
+              <h3 className="mb-6 text-xl font-semibold tracking-[-0.41px] text-appGray-700">
+                Basic Information
+              </h3>
               <div className="space-y-4">
                 {/* Title Field */}
                 <FormField
@@ -219,11 +219,19 @@ export function RecipeForm({
                   name="title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Recipe Title *</FormLabel>
+                      <FormLabel className="text-sm font-medium tracking-[-0.41px] text-appGray-700">
+                        Recipe Title *
+                      </FormLabel>
                       <FormControl>
-                        <Input placeholder="Enter recipe title..." {...field} />
+                        <div className="overflow-hidden rounded-lg border transition-colors duration-300 focus-within:border-appAccent">
+                          <Input
+                            placeholder="Enter recipe title..."
+                            className="border-0 bg-transparent text-sm font-medium tracking-[-0.41px] text-appGray-700 placeholder:text-appGray-400 focus-visible:ring-0 focus-visible:ring-offset-0"
+                            {...field}
+                          />
+                        </div>
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className="text-xs font-medium text-appWarning" />
                     </FormItem>
                   )}
                 />
@@ -234,15 +242,20 @@ export function RecipeForm({
                   name="description"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Description</FormLabel>
+                      <FormLabel className="text-sm font-medium tracking-[-0.41px] text-appGray-700">
+                        Description
+                      </FormLabel>
                       <FormControl>
-                        <Textarea
-                          placeholder="Brief description of your recipe..."
-                          rows={3}
-                          {...field}
-                        />
+                        <div className="overflow-hidden rounded-lg border transition-colors duration-300 focus-within:border-appAccent">
+                          <Textarea
+                            placeholder="Brief description of your recipe..."
+                            rows={3}
+                            className="resize-none border-0 bg-transparent text-sm font-medium tracking-[-0.41px] text-appGray-700 placeholder:text-appGray-400 focus-visible:ring-0 focus-visible:ring-offset-0"
+                            {...field}
+                          />
+                        </div>
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className="text-xs font-medium text-appWarning" />
                     </FormItem>
                   )}
                 />
@@ -254,21 +267,27 @@ export function RecipeForm({
                     name="category"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Category</FormLabel>
+                        <FormLabel className="text-sm font-medium tracking-[-0.41px] text-appGray-700">
+                          Category
+                        </FormLabel>
                         <FormControl>
-                          <select
-                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                            {...field}
-                          >
-                            <option value="">Select category...</option>
-                            {RECIPE_CATEGORIES.map((category) => (
-                              <option key={category} value={category}>
-                                {category}
+                          <div className="overflow-hidden rounded-lg border transition-colors duration-300 focus-within:border-appAccent">
+                            <select
+                              className="flex h-10 w-full border-0 bg-transparent px-3 py-2 text-sm font-medium tracking-[-0.41px] text-appGray-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                              {...field}
+                            >
+                              <option value="" className="text-appGray-400">
+                                Select category...
                               </option>
-                            ))}
-                          </select>
+                              {RECIPE_CATEGORIES.map((category) => (
+                                <option key={category} value={category}>
+                                  {category}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-xs font-medium text-appWarning" />
                       </FormItem>
                     )}
                   />
@@ -278,21 +297,27 @@ export function RecipeForm({
                     name="cuisine"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Cuisine</FormLabel>
+                        <FormLabel className="text-sm font-medium tracking-[-0.41px] text-appGray-700">
+                          Cuisine
+                        </FormLabel>
                         <FormControl>
-                          <select
-                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                            {...field}
-                          >
-                            <option value="">Select cuisine...</option>
-                            {RECIPE_CUISINES.map((cuisine) => (
-                              <option key={cuisine} value={cuisine}>
-                                {cuisine}
+                          <div className="overflow-hidden rounded-lg border transition-colors duration-300 focus-within:border-appAccent">
+                            <select
+                              className="flex h-10 w-full border-0 bg-transparent px-3 py-2 text-sm font-medium tracking-[-0.41px] text-appGray-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                              {...field}
+                            >
+                              <option value="" className="text-appGray-400">
+                                Select cuisine...
                               </option>
-                            ))}
-                          </select>
+                              {RECIPE_CUISINES.map((cuisine) => (
+                                <option key={cuisine} value={cuisine}>
+                                  {cuisine}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-xs font-medium text-appWarning" />
                       </FormItem>
                     )}
                   />
@@ -305,24 +330,29 @@ export function RecipeForm({
                     name="servings"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Servings</FormLabel>
+                        <FormLabel className="text-sm font-medium tracking-[-0.41px] text-appGray-700">
+                          Servings
+                        </FormLabel>
                         <FormControl>
-                          <Input
-                            type="number"
-                            min="1"
-                            max="999"
-                            placeholder="4"
-                            {...field}
-                            onChange={(e) =>
-                              field.onChange(
-                                e.target.value
-                                  ? Number(e.target.value)
-                                  : undefined
-                              )
-                            }
-                          />
+                          <div className="overflow-hidden rounded-lg border transition-colors duration-300 focus-within:border-appAccent">
+                            <Input
+                              type="number"
+                              min="1"
+                              max="999"
+                              placeholder="4"
+                              className="border-0 bg-transparent text-sm font-medium tracking-[-0.41px] text-appGray-700 placeholder:text-appGray-400 focus-visible:ring-0 focus-visible:ring-offset-0"
+                              {...field}
+                              onChange={(e) =>
+                                field.onChange(
+                                  e.target.value
+                                    ? Number(e.target.value)
+                                    : undefined
+                                )
+                              }
+                            />
+                          </div>
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-xs font-medium text-appWarning" />
                       </FormItem>
                     )}
                   />
@@ -332,24 +362,29 @@ export function RecipeForm({
                     name="prep_minutes"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Prep Time (minutes)</FormLabel>
+                        <FormLabel className="text-sm font-medium tracking-[-0.41px] text-appGray-700">
+                          Prep Time (minutes)
+                        </FormLabel>
                         <FormControl>
-                          <Input
-                            type="number"
-                            min="0"
-                            max="999"
-                            placeholder="15"
-                            {...field}
-                            onChange={(e) =>
-                              field.onChange(
-                                e.target.value
-                                  ? Number(e.target.value)
-                                  : undefined
-                              )
-                            }
-                          />
+                          <div className="overflow-hidden rounded-lg border transition-colors duration-300 focus-within:border-appAccent">
+                            <Input
+                              type="number"
+                              min="0"
+                              max="999"
+                              placeholder="15"
+                              className="border-0 bg-transparent text-sm font-medium tracking-[-0.41px] text-appGray-700 placeholder:text-appGray-400 focus-visible:ring-0 focus-visible:ring-offset-0"
+                              {...field}
+                              onChange={(e) =>
+                                field.onChange(
+                                  e.target.value
+                                    ? Number(e.target.value)
+                                    : undefined
+                                )
+                              }
+                            />
+                          </div>
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-xs font-medium text-appWarning" />
                       </FormItem>
                     )}
                   />
@@ -359,35 +394,42 @@ export function RecipeForm({
                     name="cook_minutes"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Cook Time (minutes)</FormLabel>
+                        <FormLabel className="text-sm font-medium tracking-[-0.41px] text-appGray-700">
+                          Cook Time (minutes)
+                        </FormLabel>
                         <FormControl>
-                          <Input
-                            type="number"
-                            min="0"
-                            max="999"
-                            placeholder="30"
-                            {...field}
-                            onChange={(e) =>
-                              field.onChange(
-                                e.target.value
-                                  ? Number(e.target.value)
-                                  : undefined
-                              )
-                            }
-                          />
+                          <div className="overflow-hidden rounded-lg border transition-colors duration-300 focus-within:border-appAccent">
+                            <Input
+                              type="number"
+                              min="0"
+                              max="999"
+                              placeholder="30"
+                              className="border-0 bg-transparent text-sm font-medium tracking-[-0.41px] text-appGray-700 placeholder:text-appGray-400 focus-visible:ring-0 focus-visible:ring-offset-0"
+                              {...field}
+                              onChange={(e) =>
+                                field.onChange(
+                                  e.target.value
+                                    ? Number(e.target.value)
+                                    : undefined
+                                )
+                              }
+                            />
+                          </div>
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-xs font-medium text-appWarning" />
                       </FormItem>
                     )}
                   />
                 </div>
               </div>
-            </Card>
+            </div>
 
             {/* Ingredients Section */}
-            <Card className="p-6">
-              <div className="mb-4 flex items-center justify-between">
-                <h3 className="text-lg font-semibold">Ingredients *</h3>
+            <div className="rounded-lg border border-appGray-300 bg-white p-6 transition-colors duration-300">
+              <div className="mb-6 flex items-center justify-between">
+                <h3 className="text-xl font-semibold tracking-[-0.41px] text-appGray-700">
+                  Ingredients *
+                </h3>
                 <Button
                   type="button"
                   variant="outline"
@@ -412,12 +454,15 @@ export function RecipeForm({
                       render={({ field }) => (
                         <FormItem className="flex-1">
                           <FormControl>
-                            <Input
-                              placeholder={`Ingredient ${index + 1}...`}
-                              {...field}
-                            />
+                            <div className="overflow-hidden rounded-lg border transition-colors duration-300 focus-within:border-appAccent">
+                              <Input
+                                placeholder={`Ingredient ${index + 1}...`}
+                                className="border-0 bg-transparent text-sm font-medium tracking-[-0.41px] text-appGray-700 placeholder:text-appGray-400 focus-visible:ring-0 focus-visible:ring-offset-0"
+                                {...field}
+                              />
+                            </div>
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="text-xs font-medium text-appWarning" />
                         </FormItem>
                       )}
                     />
@@ -435,22 +480,24 @@ export function RecipeForm({
                 ))}
                 {/* Array-level validation message for ingredients */}
                 {form.formState.errors.ingredients?.root && (
-                  <p className="text-sm font-medium text-destructive">
+                  <p className="text-xs font-medium text-appWarning">
                     {form.formState.errors.ingredients.root.message}
                   </p>
                 )}
                 {form.formState.errors.ingredients?.message && (
-                  <p className="text-sm font-medium text-destructive">
+                  <p className="text-xs font-medium text-appWarning">
                     {form.formState.errors.ingredients.message}
                   </p>
                 )}
               </div>
-            </Card>
+            </div>
 
             {/* Steps Section */}
-            <Card className="p-6">
-              <div className="mb-4 flex items-center justify-between">
-                <h3 className="text-lg font-semibold">Cooking Steps *</h3>
+            <div className="rounded-lg border border-appGray-300 bg-white p-6 transition-colors duration-300">
+              <div className="mb-6 flex items-center justify-between">
+                <h3 className="text-xl font-semibold tracking-[-0.41px] text-appGray-700">
+                  Cooking Steps *
+                </h3>
                 <Button
                   type="button"
                   variant="outline"
@@ -469,7 +516,7 @@ export function RecipeForm({
                 )}
                 {stepFields.map((field, index) => (
                   <div key={field.id} className="flex gap-2">
-                    <div className="flex h-10 w-8 items-center justify-center rounded-md bg-gray-100 text-sm font-medium">
+                    <div className="flex h-10 w-8 items-center justify-center rounded-md bg-appGray-200 text-sm font-medium text-appAccent">
                       {index + 1}
                     </div>
                     <FormField
@@ -478,13 +525,16 @@ export function RecipeForm({
                       render={({ field }) => (
                         <FormItem className="flex-1">
                           <FormControl>
-                            <Textarea
-                              placeholder={`Step ${index + 1} instructions...`}
-                              rows={2}
-                              {...field}
-                            />
+                            <div className="overflow-hidden rounded-lg border transition-colors duration-300 focus-within:border-appAccent">
+                              <Textarea
+                                placeholder={`Step ${index + 1} instructions...`}
+                                rows={2}
+                                className="resize-none border-0 bg-transparent text-sm font-medium tracking-[-0.41px] text-appGray-700 placeholder:text-appGray-400 focus-visible:ring-0 focus-visible:ring-offset-0"
+                                {...field}
+                              />
+                            </div>
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="text-xs font-medium text-appWarning" />
                         </FormItem>
                       )}
                     />
@@ -502,22 +552,24 @@ export function RecipeForm({
                 ))}
                 {/* Array-level validation message for steps */}
                 {form.formState.errors.steps?.root && (
-                  <p className="text-sm font-medium text-destructive">
+                  <p className="text-xs font-medium text-appWarning">
                     {form.formState.errors.steps.root.message}
                   </p>
                 )}
                 {form.formState.errors.steps?.message && (
-                  <p className="text-sm font-medium text-destructive">
+                  <p className="text-xs font-medium text-appWarning">
                     {form.formState.errors.steps.message}
                   </p>
                 )}
               </div>
-            </Card>
+            </div>
 
             {/* Images Section (Stub Implementation) */}
-            <Card className="p-6">
-              <div className="mb-4 flex items-center justify-between">
-                <h3 className="text-lg font-semibold">Images</h3>
+            <div className="rounded-lg border border-appGray-300 bg-white p-6 transition-colors duration-300">
+              <div className="mb-6 flex items-center justify-between">
+                <h3 className="text-xl font-semibold tracking-[-0.41px] text-appGray-700">
+                  Images
+                </h3>
                 <Button
                   type="button"
                   variant="outline"
@@ -542,13 +594,16 @@ export function RecipeForm({
                       render={({ field }) => (
                         <FormItem className="flex-1">
                           <FormControl>
-                            <Input
-                              type="url"
-                              placeholder="https://example.com/image.jpg"
-                              {...field}
-                            />
+                            <div className="overflow-hidden rounded-lg border transition-colors duration-300 focus-within:border-appAccent">
+                              <Input
+                                type="url"
+                                placeholder="https://example.com/image.jpg"
+                                className="border-0 bg-transparent text-sm font-medium tracking-[-0.41px] text-appGray-700 placeholder:text-appGray-400 focus-visible:ring-0 focus-visible:ring-offset-0"
+                                {...field}
+                              />
+                            </div>
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="text-xs font-medium text-appWarning" />
                         </FormItem>
                       )}
                     />
@@ -564,20 +619,20 @@ export function RecipeForm({
                 ))}
                 {/* Array-level validation message for images */}
                 {form.formState.errors.images?.root && (
-                  <p className="text-sm font-medium text-destructive">
+                  <p className="text-xs font-medium text-appWarning">
                     {form.formState.errors.images.root.message}
                   </p>
                 )}
                 {form.formState.errors.images?.message && (
-                  <p className="text-sm font-medium text-destructive">
+                  <p className="text-xs font-medium text-appWarning">
                     {form.formState.errors.images.message}
                   </p>
                 )}
               </div>
-            </Card>
+            </div>
 
             {/* Form Actions */}
-            <Card className="p-6">
+            <div className="rounded-lg border border-appGray-300 bg-white p-6 transition-colors duration-300">
               <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
                 <div className="flex gap-2">
                   <Button
@@ -633,7 +688,7 @@ export function RecipeForm({
                   </Button>
                 )}
               </div>
-            </Card>
+            </div>
           </form>
         </Form>
       </div>

@@ -18,11 +18,11 @@ export default function AdminError({
   }, [error]);
 
   return (
-    <div className="bg-gradient-light min-h-screen">
+    <div className="min-h-screen">
       <div className="mx-auto max-w-4xl space-y-6 px-4 py-8">
         <Card className="p-8 text-center">
           <div className="mb-6">
-            <div className="bg-error-100 mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full">
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-error-100">
               <span className="text-2xl">⚠️</span>
             </div>
             <h1 className="mb-2 text-2xl font-bold text-neutral-900">
@@ -35,15 +35,15 @@ export default function AdminError({
           </div>
 
           <div className="space-y-4">
-            <div className="bg-error-50 rounded-lg p-4 text-left">
-              <h3 className="text-error-900 mb-2 font-medium">
+            <div className="rounded-lg bg-error-50 p-4 text-left">
+              <h3 className="mb-2 font-medium text-error-900">
                 Error Details:
               </h3>
-              <p className="text-error-700 font-mono text-sm">
+              <p className="font-mono text-sm text-error-700">
                 {error.message || "Unknown error occurred"}
               </p>
               {error.digest && (
-                <p className="text-error-600 mt-1 font-mono text-xs">
+                <p className="mt-1 font-mono text-xs text-error-600">
                   Error ID: {error.digest}
                 </p>
               )}

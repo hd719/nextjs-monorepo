@@ -2,31 +2,49 @@ import React from "react";
 
 const RecipeSkeletonLoader = () => {
   return (
-    <div className="grid grid-cols-1 gap-6 py-4 md:grid-cols-2 xl:grid-cols-3">
-      {[...Array(6)].map((_, index) => (
-        <div
-          key={index}
-          className="flex animate-pulse flex-col rounded-lg border border-gray-300 bg-white/20 p-6 backdrop-blur-lg backdrop-filter"
-        >
-          <div className="h-[300px] rounded-lg bg-gray-200"></div>
-          <div className="mt-4">
-            <div className="h-8 rounded bg-gray-200"></div>
-            <div className="mb-4 mt-2 h-5 w-3/4 rounded bg-gray-200"></div>
-            <div className="mt-2 h-5 w-1/2 rounded bg-gray-200"></div>
-          </div>
-          <div className="mt-4 flex items-center justify-start gap-3">
-            <div className="flex flex-col">
-              <div className="h-6 w-2/3 rounded bg-gray-200"></div>
-              <div className="mt-1 h-4 w-1/3 rounded bg-gray-200"></div>
+    <section id="recipe-list">
+      <div className="container">
+        <div className="mb-8 grid grid-cols-2 gap-x-5 gap-y-8 lg:mb-16 lg:grid-cols-3 xl:gap-x-12 xl:gap-y-16">
+          {[...Array(6)].map((_, index) => (
+            <div
+              key={index}
+              className="h-fit max-w-[370px] flex-1 rounded-lg border border-appGray-300 bg-appGray-100/50 bg-clip-padding p-6 backdrop-blur-lg backdrop-filter"
+              style={{
+                animationDelay: `${index * 100}ms`,
+              }}
+            >
+              {/* Image Skeleton */}
+              <div className="relative flex h-[300px] max-w-[330px] items-center overflow-hidden rounded-lg">
+                <div className="animate-shimmer h-full w-full animate-pulse bg-gradient-to-r from-appGray-200 via-appGray-100 to-appGray-200 bg-[length:200%_100%]"></div>
+              </div>
+
+              {/* Content Skeleton */}
+              <div className="mt-4">
+                <div className="animate-shimmer h-8 animate-pulse rounded bg-gradient-to-r from-appGray-200 via-appGray-100 to-appGray-200 bg-[length:200%_100%]"></div>
+                <div className="animate-shimmer mt-2 h-5 w-3/4 animate-pulse rounded bg-gradient-to-r from-appGray-200 via-appGray-100 to-appGray-200 bg-[length:200%_100%]"></div>
+                <div className="mt-2 flex gap-2">
+                  <div className="animate-shimmer h-6 w-16 animate-pulse rounded-full bg-gradient-to-r from-appGray-200 via-appGray-100 to-appGray-200 bg-[length:200%_100%]"></div>
+                  <div className="animate-shimmer h-6 w-20 animate-pulse rounded-full bg-gradient-to-r from-appGray-200 via-appGray-100 to-appGray-200 bg-[length:200%_100%]"></div>
+                </div>
+              </div>
+
+              {/* Button Skeleton */}
+              <div className="mt-4">
+                <div className="animate-shimmer h-10 w-full animate-pulse rounded-lg bg-gradient-to-r from-appGray-200 via-appGray-100 to-appGray-200 bg-[length:200%_100%]"></div>
+              </div>
+
+              {/* Author Skeleton */}
+              <div className="mt-4 flex flex-1 items-center justify-start gap-3">
+                <div className="flex flex-col">
+                  <div className="animate-shimmer h-5 w-16 animate-pulse rounded bg-gradient-to-r from-appGray-200 via-appGray-100 to-appGray-200 bg-[length:200%_100%]"></div>
+                  <div className="animate-shimmer mt-1 h-4 w-20 animate-pulse rounded bg-gradient-to-r from-appGray-200 via-appGray-100 to-appGray-200 bg-[length:200%_100%]"></div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="flex-center mt-5 gap-4 border-t border-gray-100 pt-3">
-            <div className="h-4 w-1/3 rounded bg-gray-200"></div>
-            <div className="h-4 w-1/3 rounded bg-gray-200"></div>
-          </div>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    </section>
   );
 };
 
