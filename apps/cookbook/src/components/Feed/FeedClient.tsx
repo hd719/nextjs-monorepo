@@ -4,6 +4,7 @@ import React, { useState } from "react";
 
 import { Pagination } from "@/components/Pagination";
 import { Recipe } from "@/types/recipe";
+import { calculatePaginationSlice } from "@/utils/pagination";
 import { User } from "@supabase/supabase-js";
 import Image from "next/image";
 import Link from "next/link";
@@ -27,11 +28,18 @@ export default function FeedClient({
 
   const RECIPES_PER_PAGE = 6;
 
+  // Calculate pagination using utility function
+  const { startIndex, endIndex } = calculatePaginationSlice(
+    currentPage,
+    RECIPES_PER_PAGE
+  );
+  const currentRecipes = recipes.slice(startIndex, endIndex);
+
   return (
     <section id="recipe-list">
       <div className="container">
         <div className="mb-8 grid grid-cols-2 gap-x-5 gap-y-8 lg:mb-16 lg:grid-cols-3 xl:gap-x-12 xl:gap-y-16">
-          {recipes.map((recipe: Recipe, index: number) => (
+          {currentRecipes.map((recipe: Recipe, index: number) => (
             <div
               key={recipe.id}
               className="h-fit max-w-[370px] flex-1 rounded-lg border border-appGray-300 bg-appGray-100/50 bg-clip-padding p-6 backdrop-blur-lg backdrop-filter"
@@ -116,6 +124,7 @@ export default function FeedClient({
             totalRecipes={recipes.length}
             paginate={paginate}
             currentPage={currentPage}
+            className="mt-6 lg:mt-10 xl:mt-[72px]"
           />
         </div>
       </div>
