@@ -16,7 +16,7 @@ export function LayoutWrapper({ children, nav }: LayoutWrapperProps) {
     return (
       <div
         className={cn(
-          "flex w-full max-w-[1300px] flex-1 flex-col",
+          "flex w-full flex-1 flex-col",
           process.env.NEXT_PUBLIC_DEBUG && "border-2 border-blue-600"
         )}
       >
@@ -29,7 +29,7 @@ export function LayoutWrapper({ children, nav }: LayoutWrapperProps) {
   return (
     <div
       className={cn(
-        "flex w-full max-w-[1300px] flex-1 flex-col items-center gap-20",
+        "flex w-full flex-1 flex-col items-center",
         process.env.NEXT_PUBLIC_DEBUG && "border-2 border-blue-600"
       )}
     >
