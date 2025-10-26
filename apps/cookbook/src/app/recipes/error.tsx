@@ -19,7 +19,7 @@ export default function RecipesError({
   }, [error]);
 
   return (
-    <div className="mx-auto max-w-7xl space-y-6 px-4">
+    <div className="mx-auto max-w-7xl space-y-6">
       <Card className="p-8 text-center">
         <div className="mb-6">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-error-100">

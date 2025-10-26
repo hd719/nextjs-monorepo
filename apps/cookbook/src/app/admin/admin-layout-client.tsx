@@ -185,7 +185,7 @@ export function AdminLayoutClient({ user, children }: AdminLayoutClientProps) {
         </div>
 
         {/* Page content */}
-        <main className="p-4 sm:p-6 lg:px-8 lg:py-6">{children}</main>
+        <main className="p-4 sm:p-6 lg:py-6">{children}</main>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import { createClient } from "@/app/utils/supabase/server";
+import { AdminPageHeader } from "@/components/AdminPageHeader";
 import { RecipeForm } from "@/components/RecipeForm";
 import { Button } from "@/components/ui/button";
 import { getRecipeById } from "@/lib/recipes";
@@ -40,57 +41,36 @@ export default async function EditRecipePage({ params }: EditRecipePageProps) {
 
   return (
     <div className="min-h-screen bg-gradient-light">
-      <div className="mx-auto max-w-7xl space-y-6 px-4">
-        {/* Page Header with Back Navigation and Actions */}
-        <div className="border-b border-primary-200 pb-6">
-          <div className="flex items-center justify-between">
-            {/* Page Title */}
-            <div>
-              <h1 className="text-3xl font-bold text-neutral-900">
-                Edit Recipe: {recipe.title}
-              </h1>
-            </div>
+      <div className="mx-auto max-w-7xl space-y-6">
+        <AdminPageHeader
+          title={`Edit Recipe: ${recipe.title}`}
+          description="Make changes to your recipe. Updates are saved automatically."
+        >
+          <RecipeActions recipe={recipe} recipeId={id} />
+          <Link href="/admin/recipes">
+            <Button className="bg-appAccent px-3 text-white hover:bg-appAccent/90 sm:px-4">
+              <ArrowLeft className="h-4 w-4" />
+              <span className="hidden sm:ml-2 sm:inline">Back to Recipes</span>
+            </Button>
+          </Link>
+        </AdminPageHeader>
 
-            {/* Back Navigation and Action Buttons */}
-            <div className="flex items-center space-x-4">
-              <RecipeActions recipe={recipe} recipeId={id} />
-              <Link href="/admin/recipes">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="pr-0 text-primary-600 hover:text-primary-700"
-                >
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  <span className="hidden sm:inline">Back to Recipes</span>
-                </Button>
-              </Link>
-            </div>
+        {/* Recipe Status Badge */}
+        <div className="flex items-center space-x-4">
+          <div
+            className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${
+              recipe.is_published
+                ? "border border-secondary-300 bg-secondary-100 text-secondary-800"
+                : "border border-warning-300 bg-warning-100 text-warning-800"
+            }`}
+          >
+            {recipe.is_published ? "Published" : "Draft"}
           </div>
-
-          <div className="mt-4">
-            <p className="text-neutral-600">
-              Make changes to your recipe. Updates are saved automatically.
-            </p>
-          </div>
-
-          {/* Recipe Status Badge */}
-          <div className="mt-4 flex items-center space-x-4">
-            <div
-              className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${
-                recipe.is_published
-                  ? "border border-secondary-300 bg-secondary-100 text-secondary-800"
-                  : "border border-warning-300 bg-warning-100 text-warning-800"
-              }`}
-            >
-              {recipe.is_published ? "Published" : "Draft"}
-            </div>
-            {recipe.published_at && (
-              <span className="text-sm text-neutral-600">
-                Published on{" "}
-                {new Date(recipe.published_at).toLocaleDateString()}
-              </span>
-            )}
-          </div>
+          {recipe.published_at && (
+            <span className="text-sm text-neutral-600">
+              Published on {new Date(recipe.published_at).toLocaleDateString()}
+            </span>
+          )}
         </div>
 
         {/* Recipe Form - Client Component */}

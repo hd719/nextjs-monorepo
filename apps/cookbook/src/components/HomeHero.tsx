@@ -19,7 +19,7 @@ const HomeHero: React.FC = () => {
               Payal's Recipes
             </h1>
             <p className="mb-6 text-xs font-medium leading-none text-white md:text-sm lg:mb-10 lg:text-xl lg:leading-none">
-              Discovering the Art of Cooking
+              From My Kitchen to Yours - Easy, Healthy, Balanced Meals
             </p>
             <Button asChild variant="default">
               <Link href="#recipe-list">
