@@ -99,10 +99,10 @@ export default function DraftsRecipesClient({
   };
 
   return (
-    <div className="bg-gradient-light min-h-screen">
+    <div className="min-h-screen">
       <div className="mx-auto max-w-7xl space-y-6 px-4 py-8">
         {/* Page Header */}
-        <div className="border-primary-200 border-b pb-6">
+        <div className="border-b border-primary-200 pb-6">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold text-neutral-900">
@@ -169,8 +169,8 @@ export default function DraftsRecipesClient({
 
           {/* Bulk Actions */}
           {selectedRecipes.size > 0 && (
-            <div className="bg-accent-50 border-accent-200 mt-4 flex items-center gap-4 rounded-lg border p-4">
-              <span className="text-accent-900 text-sm font-medium">
+            <div className="mt-4 flex items-center gap-4 rounded-lg border border-accent-200 bg-accent-50 p-4">
+              <span className="text-sm font-medium text-accent-900">
                 {selectedRecipes.size} recipe
                 {selectedRecipes.size !== 1 ? "s" : ""} selected
               </span>
@@ -203,7 +203,7 @@ export default function DraftsRecipesClient({
         <Card>
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="border-primary-200 bg-primary-50 border-b">
+              <thead className="border-b border-primary-200 bg-primary-50">
                 <tr>
                   <th className="w-12 px-6 py-3 text-left">
                     <Checkbox
@@ -228,7 +228,7 @@ export default function DraftsRecipesClient({
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-primary-200 divide-y bg-white">
+              <tbody className="divide-y divide-primary-200 bg-white">
                 {paginatedRecipes.map((recipe) => (
                   <tr key={recipe.id} className="hover:bg-primary-50">
                     <td className="px-6 py-4">
@@ -249,7 +249,7 @@ export default function DraftsRecipesClient({
                           <div className="mt-1">
                             <Badge
                               variant="outline"
-                              className="border-secondary-300 text-secondary-700 text-xs"
+                              className="border-secondary-300 text-xs text-secondary-700"
                             >
                               {recipe.category}
                             </Badge>
@@ -258,7 +258,7 @@ export default function DraftsRecipesClient({
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <Badge className="bg-warning-100 text-warning-800 border-warning-300">
+                      <Badge className="border-warning-300 bg-warning-100 text-warning-800">
                         Draft
                       </Badge>
                     </td>
@@ -305,7 +305,7 @@ export default function DraftsRecipesClient({
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="border-primary-200 flex items-center justify-between border-t px-6 py-4">
+            <div className="flex items-center justify-between border-t border-primary-200 px-6 py-4">
               <div className="text-sm text-neutral-600">
                 Showing {(currentPage - 1) * itemsPerPage + 1} to{" "}
                 {Math.min(currentPage * itemsPerPage, filteredRecipes.length)}{" "}

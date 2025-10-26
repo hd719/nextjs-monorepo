@@ -22,13 +22,13 @@ export default function RecipeClient({
 
   return (
     <>
-      <div className="bg-gradient-light min-h-screen">
+      <div className="min-h-screen">
         {/* Header Navigation */}
-        <div className="border-primary-100 sticky top-0 z-10 border-b bg-white/80 backdrop-blur-sm">
+        <div className="sticky top-0 z-10 border-b border-primary-100 bg-white/80 backdrop-blur-sm">
           <div className="mx-auto max-w-6xl px-4 py-4">
             <Link
               href="/"
-              className="text-primary-600 hover:text-primary-700 inline-flex items-center gap-2 font-medium transition-colors"
+              className="inline-flex items-center gap-2 font-medium text-primary-600 transition-colors hover:text-primary-700"
             >
               ← Back to Recipes
             </Link>
@@ -43,12 +43,12 @@ export default function RecipeClient({
             <div className="card p-8">
               <div className="mb-6 flex flex-wrap gap-3">
                 {recipe.category && (
-                  <span className="bg-gradient-accent inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold text-white shadow-sm">
+                  <span className="inline-flex items-center rounded-full bg-gradient-accent px-4 py-2 text-sm font-semibold text-white shadow-sm">
                     {recipe.category}
                   </span>
                 )}
                 {recipe.cuisine && (
-                  <span className="bg-gradient-secondary inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold text-white shadow-sm">
+                  <span className="inline-flex items-center rounded-full bg-gradient-secondary px-4 py-2 text-sm font-semibold text-white shadow-sm">
                     {recipe.cuisine}
                   </span>
                 )}
@@ -67,16 +67,16 @@ export default function RecipeClient({
               {/* Recipe Meta Info Cards */}
               <div className="mb-6 grid grid-cols-2 gap-4">
                 {recipe.prep_minutes && (
-                  <div className="border-primary-200 from-primary-50 to-primary-100 rounded-xl border bg-gradient-to-br p-4">
+                  <div className="rounded-xl border border-primary-200 bg-gradient-to-br from-primary-50 to-primary-100 p-4">
                     <div className="flex items-center gap-3">
-                      <div className="bg-primary-500 rounded-lg p-2">
+                      <div className="rounded-lg bg-primary-500 p-2">
                         <Clock className="h-5 w-5 text-white" />
                       </div>
                       <div>
-                        <p className="text-primary-700 text-sm font-medium">
+                        <p className="text-sm font-medium text-primary-700">
                           Prep Time
                         </p>
-                        <p className="text-primary-900 text-lg font-bold">
+                        <p className="text-lg font-bold text-primary-900">
                           {recipe.prep_minutes} min
                         </p>
                       </div>
@@ -84,16 +84,16 @@ export default function RecipeClient({
                   </div>
                 )}
                 {recipe.cook_minutes && (
-                  <div className="border-error-200 from-error-50 to-error-100 rounded-xl border bg-gradient-to-br p-4">
+                  <div className="rounded-xl border border-error-200 bg-gradient-to-br from-error-50 to-error-100 p-4">
                     <div className="flex items-center gap-3">
-                      <div className="bg-error-500 rounded-lg p-2">
+                      <div className="rounded-lg bg-error-500 p-2">
                         <ChefHat className="h-5 w-5 text-white" />
                       </div>
                       <div>
-                        <p className="text-error-700 text-sm font-medium">
+                        <p className="text-sm font-medium text-error-700">
                           Cook Time
                         </p>
-                        <p className="text-error-900 text-lg font-bold">
+                        <p className="text-lg font-bold text-error-900">
                           {recipe.cook_minutes} min
                         </p>
                       </div>
@@ -277,7 +277,7 @@ export default function RecipeClient({
                       }}
                     >
                       <div className="flex-shrink-0">
-                        <div className="bg-gradient-accent flex h-10 w-10 items-center justify-center rounded-full shadow-lg">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-accent shadow-lg">
                           <span className="text-lg font-bold text-neutral-900">
                             {index + 1}
                           </span>

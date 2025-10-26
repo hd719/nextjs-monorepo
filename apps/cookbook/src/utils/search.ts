@@ -1,15 +1,18 @@
-import { Recipe } from '@/types/recipe';
+import { Recipe } from "@/types/recipe";
 
 /**
  * Filter recipes based on search query
  */
-export function filterRecipes(recipes: Recipe[], searchQuery: string): Recipe[] {
+export function filterRecipes(
+  recipes: Recipe[],
+  searchQuery: string
+): Recipe[] {
   if (!searchQuery.trim()) return [];
-  
+
   const query = searchQuery.toLowerCase();
-  
+
   return recipes.filter((recipe) => {
-    const searchText = `${recipe.title} ${recipe.description || ''} ${recipe.category || ''} ${recipe.cuisine || ''}`;
+    const searchText = `${recipe.title} ${recipe.description || ""} ${recipe.category || ""} ${recipe.cuisine || ""}`;
     return searchText.toLowerCase().includes(query);
   });
 }
@@ -21,14 +24,14 @@ export function generateAutocompleteSuggestion(
   filteredRecipes: Recipe[],
   searchValue: string
 ): string {
-  if (!searchValue.trim() || filteredRecipes.length === 0) return '';
-  
+  if (!searchValue.trim() || filteredRecipes.length === 0) return "";
+
   const suggestions: string[] = [];
   const query = searchValue.toLowerCase();
 
   for (const recipe of filteredRecipes) {
-    const words = recipe.title.split(' ');
-    
+    const words = recipe.title.split(" ");
+
     if (words.some((word) => word.toLowerCase().startsWith(query))) {
       suggestions.push(recipe.title.toLowerCase());
     }
@@ -37,10 +40,10 @@ export function generateAutocompleteSuggestion(
   if (suggestions[0]) {
     const suggestion = suggestions[0];
     const searchIndex = suggestion.indexOf(query);
-    return searchIndex >= 0 ? suggestion.slice(searchIndex) : '';
+    return searchIndex >= 0 ? suggestion.slice(searchIndex) : "";
   }
 
-  return '';
+  return "";
 }
 
 /**
@@ -51,7 +54,7 @@ export function completeSearchValue(
   suggestion: string
 ): string {
   if (!suggestion) return currentValue;
-  
+
   return `${currentValue}${suggestion.slice(currentValue.length)}`;
 }
 
@@ -63,7 +66,7 @@ export function debounce<T extends (...args: any[]) => any>(
   wait: number
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout;
-  
+
   return (...args: Parameters<T>) => {
     clearTimeout(timeout);
     timeout = setTimeout(() => func(...args), wait);
@@ -76,6 +79,6 @@ export function debounce<T extends (...args: any[]) => any>(
 export function scrollToElement(elementId: string): void {
   const element = document.getElementById(elementId);
   if (element) {
-    element.scrollIntoView({ behavior: 'smooth' });
+    element.scrollIntoView({ behavior: "smooth" });
   }
 }

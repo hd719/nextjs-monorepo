@@ -18,7 +18,6 @@ async function DynamicNav() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Fetch recipes for search functionality
   const result = await getPublishedRecipes({
     page: 1,
     limit: 50, // Get recipes for search
