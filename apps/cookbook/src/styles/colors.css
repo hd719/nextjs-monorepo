@@ -1,0 +1,54 @@
+/* Optimized Color Palette - Only Used Colors */
+
+:root {
+  /* Only keep colors that are actually used in recipe detail pages */
+  --primary-100: #fdeee0;
+  --primary-200: #fbd5b8;
+  --primary-400: #f59e72;
+  --secondary-400: #65c486;
+  --secondary-600: #22c55e;
+  --accent-400: #38bdf8;
+  --neutral-200: #e7e5e4;
+
+  /* Card Shadows - Used by .card class */
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* Border Radius - Used by .card class */
+  --radius-xl: 1rem;
+
+  /* Transitions - Used by .card class */
+  --transition-normal: 250ms ease-in-out;
+}
+
+/* Only keep gradients that are actually used */
+.gradient-secondary {
+  background: linear-gradient(
+    135deg,
+    var(--secondary-400) 0%,
+    var(--secondary-600) 100%
+  );
+}
+
+.gradient-accent {
+  background: linear-gradient(
+    135deg,
+    var(--accent-400) 0%,
+    var(--accent-600) 100%
+  );
+}
+
+/* Component Styles */
+.card {
+  background: white;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--primary-100);
+  transition: all var(--transition-normal);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}

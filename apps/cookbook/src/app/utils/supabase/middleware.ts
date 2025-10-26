@@ -1,7 +1,13 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-export const updateSession = async (request: NextRequest) => {
+/**
+ * Update session and handle route protection
+ * Protects /admin routes and allows public access to other routes
+ */
+export const updateSession = async (
+  request: NextRequest
+): Promise<NextResponse> => {
   // This `try/catch` block is only here for the interactive tutorial.
   // Feel free to remove once you have Supabase connected.
   try {
@@ -37,16 +43,19 @@ export const updateSession = async (request: NextRequest) => {
 
     // This will refresh session if expired - required for Server Components
     // https://supabase.com/docs/guides/auth/server-side/nextjs
-    const user = await supabase.auth.getUser();
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
 
-    // protected routes
-    if (request.nextUrl.pathname.startsWith("/protected") && user.error) {
-      return NextResponse.redirect(new URL("/sign-in", request.url));
+    // Protect /admin routes - require authentication
+    if (request.nextUrl.pathname.startsWith("/admin")) {
+      if (authError || !user) {
+        return NextResponse.redirect(new URL("/sign-in", request.url));
+      }
     }
 
-    if (request.nextUrl.pathname === "/" && !user.error) {
-      return NextResponse.redirect(new URL("/protected", request.url));
-    }
+    // Allow public access to all other routes (including home page)
 
     return response;
   } catch (_e) {

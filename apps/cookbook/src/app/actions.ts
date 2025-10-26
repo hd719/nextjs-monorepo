@@ -8,45 +8,62 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 
 export const signUpAction = async (
-  prevState: { message: string },
+  prevState: { message: string; type?: "success" | "error" },
   formData: FormData
-) => {
+): Promise<{ message: string; type: "success" | "error" }> => {
+  const first = formData.get("first")?.toString();
+  const last = formData.get("last")?.toString();
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
-  // TODO: Uncomment when implementing actual signup
-  // const supabase = await createClient();
-  // const headersList = await headers();
-  // const origin = headersList.get("origin");
+
+  const supabase = await createClient();
+  const headersList = await headers();
+  const origin = headersList.get("origin");
 
   if (!email || !password) {
-    return { message: "Server Side error: Email password are required" };
+    return {
+      message: "Server Side error: Email and password are required",
+      type: "error" as const,
+    };
   }
 
-  // const { error } = await supabase.auth.signUp({
-  //   email,
-  //   password,
-  //   options: {
-  //     emailRedirectTo: `${origin}/auth/callback`,
-  //   },
-  // });
+  if (!first || !last) {
+    return {
+      message: "Server Side error: First and last name are required",
+      type: "error" as const,
+    };
+  }
 
-  // if (error) {
-  //   console.error(error.code + " " + error.message);
-  //   // encodedRedirect("error", "/sign-up", error.message);
-  //   return { message: `Error: ${error.message}` };
-  // } else {
-  //   return {
-  //     message: `Thanks ${email} for signing up! Please check your email for a verification link.`,
-  //   };
-  // }
+  // Attempt to sign up the user with Supabase
+  const { error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      emailRedirectTo: `${origin}/auth/callback`,
+      data: {
+        first_name: first,
+        last_name: last,
+        full_name: `${first} ${last}`,
+      },
+    },
+  });
+
+  if (error) {
+    console.error("Signup error:", error.code, error.message);
+    return {
+      message: `Error: ${error.message}`,
+      type: "error" as const,
+    };
+  }
 
   return {
-    message: `Thanks ${email} for signing up! Please check your email for a verification link.`,
+    message: `Thanks ${first} ${last} (${email}) for signing up! Please check your email for a verification link.`,
+    type: "success" as const,
   };
 };
 
 export const signInAction = async (
-  prevState: { message: string },
+  prevState: { message: string; type?: "success" | "error" },
   formData: FormData
 ) => {
   const email = formData.get("email") as string;
@@ -54,7 +71,10 @@ export const signInAction = async (
   const supabase = await createClient();
 
   if (!email || !password) {
-    return { message: "Server Side error: Email password are required" };
+    return {
+      message: "Server Side error: Email and password are required",
+      type: "error" as const,
+    };
   }
 
   const { error } = await supabase.auth.signInWithPassword({
@@ -63,10 +83,13 @@ export const signInAction = async (
   });
 
   if (error) {
-    return { message: `Error: ${error.message}` };
+    return {
+      message: `Error: ${error.message}`,
+      type: "error" as const,
+    };
   }
 
-  return redirect("/protected");
+  return redirect("/admin");
 };
 
 export const forgotPasswordAction = async (formData: FormData) => {

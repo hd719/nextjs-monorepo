@@ -3,19 +3,38 @@ import type { Config } from "tailwindcss";
 const config = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  safelist: [
+    // Dynamic classes that might be purged but are needed
+    "fade-entering",
+    "fade-entered",
+    "fade-exiting",
+    "fade-exited",
+    "animate-shimmer",
+    // Recipe detail page classes
+    "card",
+    "gradient-secondary",
+    "gradient-accent",
   ],
   prefix: "",
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: {
+        DEFAULT: "1rem",
+        lg: "2rem",
+      },
       screens: {
-        "2xl": "1400px",
-        xsm: "400px", // Custom breakpoint
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1360px",
+        xsm: "400px", // Custom breakpoint (keeping existing)
       },
     },
     extend: {
@@ -24,6 +43,7 @@ const config = {
         noto: ["Noto", "sans-serif"],
       },
       colors: {
+        // Shadcn/ui required colors (keep minimal set)
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -57,6 +77,22 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Main recipes app color system (actively used)
+        appAccent: {
+          100: "#9FA8A3",
+          DEFAULT: "#0A2213",
+        },
+        appGray: {
+          100: "#F9F7F5",
+          200: "#E6E9E7",
+          300: "#D6D6D6",
+          400: "#757182",
+          500: "#686473",
+          600: "#4A4752",
+          700: "#37353D",
+          800: "#121212",
+        },
+        appWarning: "#FC5E5E",
       },
       borderRadius: {
         lg: "var(--radius)",
