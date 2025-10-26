@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import Link from "next/link";
 
 export default function RecipesError({
   error,
@@ -18,10 +19,10 @@ export default function RecipesError({
   }, [error]);
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6 px-4 py-8">
+    <div className="mx-auto max-w-7xl space-y-6">
       <Card className="p-8 text-center">
         <div className="mb-6">
-          <div className="bg-error-100 mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-error-100">
             <span className="text-2xl">🍳</span>
           </div>
           <h1 className="mb-2 text-2xl font-bold text-neutral-900">
@@ -34,13 +35,13 @@ export default function RecipesError({
         </div>
 
         <div className="space-y-4">
-          <div className="bg-error-50 rounded-lg p-4 text-left">
-            <h3 className="text-error-900 mb-2 font-medium">What happened:</h3>
-            <p className="text-error-700 font-mono text-sm">
+          <div className="rounded-lg bg-error-50 p-4 text-left">
+            <h3 className="mb-2 font-medium text-error-900">What happened:</h3>
+            <p className="font-mono text-sm text-error-700">
               {error.message || "Unable to load recipe data"}
             </p>
             {error.digest && (
-              <p className="text-error-600 mt-1 font-mono text-xs">
+              <p className="mt-1 font-mono text-xs text-error-600">
                 Error ID: {error.digest}
               </p>
             )}
@@ -51,7 +52,7 @@ export default function RecipesError({
               Try Loading Again
             </Button>
             <Button variant="outline" asChild>
-              <a href="/">Browse All Recipes</a>
+              <Link href="/">Browse All Recipes</Link>
             </Button>
           </div>
         </div>

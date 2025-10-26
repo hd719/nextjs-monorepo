@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 
+import { AdminPageHeader } from "@/components/AdminPageHeader";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -107,26 +108,18 @@ export default function AdminRecipesClient({
 
   return (
     <div className="min-h-screen">
-      <div className="mx-auto max-w-7xl space-y-6 px-4 py-8">
-        {/* Page Header */}
-        <div className="border-b border-primary-200 pb-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-neutral-900">
-                All Recipes
-              </h1>
-              <p className="mt-2 text-neutral-600">
-                Manage your recipes, publish drafts, and organize your content
-              </p>
-            </div>
-            <Link href="/admin/recipes/new">
-              <Button className="btn-primary">
-                <span className="mr-2">➕</span>
-                Create Recipe
-              </Button>
-            </Link>
-          </div>
-        </div>
+      <div className="mx-auto max-w-7xl space-y-6">
+        <AdminPageHeader
+          title="All Recipes"
+          description="Manage your recipes, publish drafts, and organize your content"
+        >
+          <Link href="/admin/recipes/new">
+            <Button className="bg-appAccent px-3 text-white hover:bg-appAccent/90 sm:px-4">
+              <span className="text-lg">➕</span>
+              <span className="hidden sm:ml-2 sm:inline">Create Recipe</span>
+            </Button>
+          </Link>
+        </AdminPageHeader>
 
         {/* Filters and Search */}
         <Card className="p-6">

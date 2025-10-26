@@ -8,7 +8,6 @@ interface ContactInfo {
 }
 
 async function getContactInfo(): Promise<ContactInfo> {
-  // Get contact information from environment variables with fallbacks
   const phone =
     process.env.CONTACT_PHONE ||
     process.env.NEXT_PUBLIC_CONTACT_PHONE ||
@@ -18,15 +17,14 @@ async function getContactInfo(): Promise<ContactInfo> {
     process.env.NEXT_PUBLIC_CONTACT_EMAIL ||
     "hello@payalscookbook.com";
 
-  // Log warning if using fallback values (only in development)
   if (process.env.NODE_ENV === "development") {
     if (!process.env.CONTACT_PHONE && !process.env.NEXT_PUBLIC_CONTACT_PHONE) {
-      console.warn(
+      console.error(
         "CONTACT_PHONE not set in environment variables. Using fallback value."
       );
     }
     if (!process.env.CONTACT_EMAIL && !process.env.NEXT_PUBLIC_CONTACT_EMAIL) {
-      console.warn(
+      console.error(
         "CONTACT_EMAIL not set in environment variables. Using fallback value."
       );
     }

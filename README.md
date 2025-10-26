@@ -21,24 +21,24 @@ A modern **monorepo** containing multiple Next.js applications built with the la
 graph TB
     subgraph "Monorepo Structure"
         subgraph "Applications"
-            A1[🍳 Cookbook App<br/>Recipe Management]
-            A2[💼 Portfolio App<br/>Personal Website]
-            A3[🌐 Web App<br/>Demo/Starter]
-            A4[⚡ TanStack Start<br/>Modern Framework]
+            A1["Cookbook App - Recipe Management"]
+            A2["Portfolio App - Personal Website"]
+            A3["Web App - Demo/Starter"]
+            A4["TanStack Start - Modern Framework"]
         end
 
         subgraph "Shared Packages"
-            P1[@repo/ui<br/>Components]
-            P2[@repo/eslint-config<br/>Linting Rules]
-            P3[@repo/typescript-config<br/>TS Configs]
-            P4[@repo/logger<br/>Utilities]
-            P5[@repo/jest-presets<br/>Testing]
+            P1["@repo/ui - Components"]
+            P2["@repo/eslint-config - Linting Rules"]
+            P3["@repo/typescript-config - TS Configs"]
+            P4["@repo/logger - Utilities"]
+            P5["@repo/jest-presets - Testing"]
         end
 
         subgraph "Tools & Infrastructure"
-            T1[Turbo 2.5.8<br/>Build System]
-            T2[pnpm Workspaces<br/>Package Manager]
-            T3[Docker<br/>Containerization]
+            T1["Turbo 2.5.8 - Build System"]
+            T2["pnpm Workspaces - Package Manager"]
+            T3["Docker - Containerization"]
         end
     end
 
@@ -68,7 +68,7 @@ graph TB
 
 ## Applications Deep Dive
 
-### 🍳 **Cookbook App** - Recipe Management Platform
+### **Cookbook App** - Recipe Management Platform
 
 > *A personal project built for my wife to manage and store her favorite recipes*
 
@@ -85,12 +85,12 @@ graph TB
 - **Themes**: next-themes for dark/light mode
 
 **Key Features**:
-- ✅ **Authentication**: Supabase Auth with sign-up/sign-in
-- ✅ **Recipe Storage**: MDX-based recipe format
-- ✅ **File Uploads**: Image handling for recipes
-- 🚧 **CRUD Operations**: Add, edit, delete recipes *(In Progress)*
-- 🚧 **Search & Filter**: Recipe discovery *(Planned)*
-- 🚧 **Categories**: Recipe organization *(Planned)*
+- **Authentication**: Supabase Auth with sign-up/sign-in
+- **Recipe Storage**: MDX-based recipe format
+- **File Uploads**: Image handling for recipes
+- **CRUD Operations**: Add, edit, delete recipes *(In Progress)*
+- **Search & Filter**: Recipe discovery *(Planned)*
+- **Categories**: Recipe organization *(Planned)*
 
 **Development Status**: Active Development
 
@@ -112,14 +112,14 @@ graph TB
 - **UI Components**: Radix UI + Custom components
 
 **Key Features**:
-- ✅ **Responsive Design**: Mobile-first approach
-- ✅ **Work Experience**: Detailed career timeline
-- ✅ **Project Showcase**: Featured projects and repositories
-- ✅ **Smooth Animations**: Framer Motion interactions
-- ✅ **Modern Typography**: Beautiful text rendering
-- ✅ **Performance Optimized**: Static generation for speed
+- **Responsive Design**: Mobile-first approach
+- **Work Experience**: Detailed career timeline
+- **Project Showcase**: Featured projects and repositories
+- **Smooth Animations**: Framer Motion interactions
+- **Modern Typography**: Beautiful text rendering
+- **Performance Optimized**: Static generation for speed
 
-**Development Status**: ✅ Production Ready
+**Development Status**: Production Ready
 
 ---
 
@@ -127,7 +127,7 @@ graph TB
 
 ---
 
-## 📦 Shared Packages
+## Shared Packages
 
 ### **@repo/ui** - Shared Component Library
 Reusable React components used across all applications.
@@ -411,50 +411,50 @@ docker-compose down
 
 ---
 
-## 🗺️ Roadmap & Future Plans
+## Roadmap & Future Plans
 
-### **🍳 Cookbook App Roadmap**
+### **Cookbook App Roadmap**
 
 #### **Phase 1: Core CRUD** *(Current)*
-- ✅ Authentication system
-- ✅ Basic recipe structure
-- 🚧 Recipe creation and editing
-- 🚧 Recipe deletion and management
-- 🚧 Image upload for recipes
+- Authentication system
+- Basic recipe structure
+- Recipe creation and editing *(In Progress)*
+- Recipe deletion and management *(In Progress)*
+- Image upload for recipes *(In Progress)*
 
 #### **Phase 2: Enhanced Features**
-- 📋 Recipe categories and tags
-- 📋 Search and filtering
-- 📋 Recipe sharing functionality
-- 📋 Favorite recipes
-- 📋 Recipe ratings and reviews
+- Recipe categories and tags *(Planned)*
+- Search and filtering *(Planned)*
+- Recipe sharing functionality *(Planned)*
+- Favorite recipes *(Planned)*
+- Recipe ratings and reviews *(Planned)*
 
 #### **Phase 3: Advanced Features**
-- 📋 Meal planning
-- 📋 Shopping list generation
-- 📋 Nutritional information
-- 📋 Recipe scaling (serving size adjustment)
-- 📋 Print-friendly recipe format
+- Meal planning *(Planned)*
+- Shopping list generation *(Planned)*
+- Nutritional information *(Planned)*
+- Recipe scaling (serving size adjustment) *(Planned)*
+- Print-friendly recipe format *(Planned)*
 
-### **🏗️ Infrastructure & DevOps**
+### **Infrastructure & DevOps**
 
 #### **Deployment & Infrastructure**
-- 📋 **Terraform**: Infrastructure as Code
-- 📋 **CI/CD Pipeline**: Automated deployments
-- 📋 **Monitoring**: Application and infrastructure monitoring
-- 📋 **Logging**: Centralized log management
+- **Terraform**: Infrastructure as Code *(Planned)*
+- **CI/CD Pipeline**: Automated deployments *(Planned)*
+- **Monitoring**: Application and infrastructure monitoring *(Planned)*
+- **Logging**: Centralized log management *(Planned)*
 
 #### **Security & Performance**
-- 📋 **TLS/HTTPS**: SSL certificate management
-- 📋 **SSH Hardening**: Secure server access
-- 📋 **Tailscale VPN**: Private network access
-- 📋 **Performance Monitoring**: Core Web Vitals tracking
+- **TLS/HTTPS**: SSL certificate management *(Planned)*
+- **SSH Hardening**: Secure server access *(Planned)*
+- **Tailscale VPN**: Private network access *(Planned)*
+- **Performance Monitoring**: Core Web Vitals tracking *(Planned)*
 
 #### **Domain & Hosting**
-- ✅ **Domain Management**: Porkbun DNS
-- 📋 **VPS Deployment**: Hostinger/Hetzner setup
-- 📋 **Load Balancer**: Traefik reverse proxy
-- 📋 **Backup Strategy**: Automated backups
+- **Domain Management**: Porkbun DNS
+- **VPS Deployment**: Hostinger/Hetzner setup *(Planned)*
+- **Load Balancer**: Traefik reverse proxy *(Planned)*
+- **Backup Strategy**: Automated backups *(Planned)*
 
 ---
 

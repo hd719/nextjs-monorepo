@@ -225,7 +225,7 @@ export async function getUserRecipes(
     }
 
     // Transform data to include computed fields
-    const transformedData = data?.map((recipe: any) => ({
+    const transformedData = data?.map((recipe) => ({
       id: recipe.id,
       title: recipe.title,
       slug: recipe.slug,
@@ -480,7 +480,7 @@ export async function updateRecipe(
     }
 
     // Handle publish/unpublish logic
-    const updateData: any = { ...updates };
+    const updateData = { ...updates };
 
     if (updates.is_published !== undefined) {
       if (updates.is_published && !existingRecipe.is_published) {

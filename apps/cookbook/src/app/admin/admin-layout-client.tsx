@@ -38,26 +38,6 @@ export function AdminLayoutClient({ user, children }: AdminLayoutClientProps) {
     { name: "Create Recipe", href: "/admin/recipes/new", icon: "➕" },
   ];
 
-  // Generate breadcrumbs from pathname
-  const generateBreadcrumbs = () => {
-    const segments = pathname.split("/").filter(Boolean);
-    const breadcrumbs = [{ name: "Admin", href: "/admin" }];
-
-    let currentPath = "";
-    segments.slice(1).forEach((segment) => {
-      currentPath += `/${segment}`;
-      const name = segment.charAt(0).toUpperCase() + segment.slice(1);
-      breadcrumbs.push({
-        name: name.replace("-", " "),
-        href: `/admin${currentPath}`,
-      });
-    });
-
-    return breadcrumbs;
-  };
-
-  const breadcrumbs = generateBreadcrumbs();
-
   const handleSignOut = async () => {
     await signOutAction();
   };
@@ -80,7 +60,7 @@ export function AdminLayoutClient({ user, children }: AdminLayoutClientProps) {
       >
         {/* Sidebar header */}
         <div className="flex h-16 items-center justify-between border-b border-gray-200 px-6">
-          <h1 className="text-xl font-bold text-gray-900">Recipe Admin</h1>
+          <h1 className="text-xl font-bold text-gray-900">Admin</h1>
           <button
             type="button"
             className="text-gray-400 hover:text-gray-600 lg:hidden"
@@ -205,7 +185,7 @@ export function AdminLayoutClient({ user, children }: AdminLayoutClientProps) {
         </div>
 
         {/* Page content */}
-        <main className="p-4 sm:p-6 lg:px-8 lg:py-6">{children}</main>
+        <main className="p-4 sm:p-6 lg:py-6">{children}</main>
       </div>
     </div>
   );

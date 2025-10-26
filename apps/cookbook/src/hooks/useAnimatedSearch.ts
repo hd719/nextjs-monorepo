@@ -22,7 +22,6 @@ interface UseAnimatedSearchReturn {
  */
 export const useAnimatedSearch = ({
   onExpandChange,
-  animationDuration = 300,
 }: UseAnimatedSearchOptions = {}): UseAnimatedSearchReturn => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);

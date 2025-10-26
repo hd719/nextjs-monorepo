@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import Link from "next/link";
 
 export default function AdminError({
   error,
@@ -19,7 +20,7 @@ export default function AdminError({
 
   return (
     <div className="min-h-screen">
-      <div className="mx-auto max-w-4xl space-y-6 px-4 py-8">
+      <div className="mx-auto max-w-7xl space-y-6">
         <Card className="p-8 text-center">
           <div className="mb-6">
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-error-100">
@@ -54,10 +55,10 @@ export default function AdminError({
                 Try Again
               </Button>
               <Button variant="outline" asChild>
-                <a href="/admin">Back to Admin Dashboard</a>
+                <Link href="/admin">Back to Admin Dashboard</Link>
               </Button>
               <Button variant="outline" asChild>
-                <a href="/">Go to Home</a>
+                <Link href="/">Go to Home</Link>
               </Button>
             </div>
           </div>

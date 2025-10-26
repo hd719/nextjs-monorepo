@@ -4,7 +4,7 @@ import { useActionState, useTransition } from "react";
 
 import { signInAction } from "@/app/actions";
 import { cn } from "@/app/utils/utils";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { FormMessage as ServerFormMessage } from "@/components/form-message";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AlertCircle } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -125,13 +124,9 @@ export const SignInForm = () => {
         </form>
         {/* Fixed height container to prevent layout shift */}
         <div className="mt-2 flex h-16 items-start">
-          {state.message ? (
-            <Alert variant="destructive" className="w-full">
-              <AlertCircle className="h-4 w-4" />
-              <AlertTitle>Error</AlertTitle>
-              <AlertDescription>{state.message}</AlertDescription>
-            </Alert>
-          ) : null}
+          {state.message && (
+            <ServerFormMessage message={{ error: state.message }} />
+          )}
         </div>
         <SmtpMessage />
       </Form>

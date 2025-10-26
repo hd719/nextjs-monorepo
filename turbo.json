@@ -11,7 +11,15 @@
         ".vinxi/**"
       ],
       "dependsOn": ["^build"],
-      "env": ["NEXT_PUBLIC_API_HOST", "NEXT_PUBLIC_DEBUG"]
+      "env": [
+        "NEXT_PUBLIC_API_HOST",
+        "NEXT_PUBLIC_DEBUG",
+        "CONTACT_PHONE",
+        "CONTACT_EMAIL",
+        "NEXT_PUBLIC_CONTACT_PHONE",
+        "NEXT_PUBLIC_CONTACT_EMAIL",
+        "NODE_ENV"
+      ]
     },
     "test": {
       "outputs": ["coverage/**"],

@@ -1,3 +1,4 @@
+import { AdminPageHeader } from "@/components/AdminPageHeader";
 import { RecipeForm } from "@/components/RecipeForm";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -6,31 +7,18 @@ import Link from "next/link";
 export default function NewRecipePage() {
   return (
     <div className="min-h-screen">
-      <div className="mx-auto max-w-4xl space-y-6 px-4 py-8">
-        {/* Back Navigation */}
-        <div className="flex items-center">
+      <div className="mx-auto max-w-7xl space-y-6">
+        <AdminPageHeader
+          title="Create New Recipe"
+          description="Add a new recipe to your cookbook. You can save as draft or publish immediately."
+        >
           <Link href="/admin/recipes">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="pl-0 text-primary-600 hover:text-primary-700"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Recipes
+            <Button className="bg-appAccent px-3 text-white hover:bg-appAccent/90 sm:px-4">
+              <ArrowLeft className="h-4 w-4" />
+              <span className="hidden sm:ml-2 sm:inline">Back to Recipes</span>
             </Button>
           </Link>
-        </div>
-
-        {/* Page Header */}
-        <div className="border-b border-primary-200 pb-6">
-          <h1 className="text-3xl font-bold text-neutral-900">
-            Create New Recipe
-          </h1>
-          <p className="mt-2 text-neutral-600">
-            Add a new recipe to your cookbook. You can save as draft or publish
-            immediately.
-          </p>
-        </div>
+        </AdminPageHeader>
 
         {/* Recipe Form */}
         <RecipeForm />
