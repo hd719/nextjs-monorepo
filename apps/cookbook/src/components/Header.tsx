@@ -45,10 +45,10 @@ const Header: React.FC<HeaderProps> = ({ userEmail, recipes = [] }) => {
         <div className="container mx-auto">
           <div className="relative flex items-center justify-between py-[13px] max-md:justify-center md:py-4">
             {/* Logo and Brand */}
-            <div className="flex items-center">
+            <div className="flex flex-shrink-0 items-center">
               <Link
                 href="/"
-                className="flex max-md:absolute max-md:-bottom-[50px] max-md:left-0 md:mr-8"
+                className="flex max-md:absolute max-md:-bottom-[50px] max-md:left-0 md:mr-6"
                 aria-label="Home page"
               >
                 <div className="text-lg font-semibold text-white md:text-xl">
@@ -66,21 +66,34 @@ const Header: React.FC<HeaderProps> = ({ userEmail, recipes = [] }) => {
 
             {/* Mobile menu button */}
             <button
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-white/70 max-md:absolute max-md:-bottom-[54px] max-md:right-0 md:hidden"
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-white/70 transition-all duration-300 hover:bg-white hover:shadow-md max-md:absolute max-md:-bottom-[54px] max-md:right-0 md:hidden"
               aria-label="Toggle mobile nav"
               onClick={() => setShowMobileNav((prev) => !prev)}
             >
-              {showMobileNav ? (
-                <XIcon className="flex h-[18px] w-[18px] text-appAccent" />
-              ) : (
-                <MenuIcon className="flex h-[18px] w-[18px]" />
-              )}
+              <div className="relative h-[18px] w-[18px]">
+                <XIcon
+                  className={classNames(
+                    "absolute inset-0 h-[18px] w-[18px] text-appAccent transition-all duration-300",
+                    showMobileNav
+                      ? "rotate-0 opacity-100"
+                      : "rotate-90 opacity-0"
+                  )}
+                />
+                <MenuIcon
+                  className={classNames(
+                    "absolute inset-0 h-[18px] w-[18px] transition-all duration-300",
+                    showMobileNav
+                      ? "-rotate-90 opacity-0"
+                      : "rotate-0 opacity-100"
+                  )}
+                />
+              </div>
             </button>
 
             {/* Desktop Navigation */}
-            <div className="hidden items-center gap-6 md:flex">
+            <div className="hidden items-center gap-4 md:flex md:flex-1 md:justify-end lg:gap-6">
               {/* Search Bar - Desktop */}
-              <div className="w-64">
+              <div className="w-48 lg:w-64">
                 <RecipeSearch
                   recipes={recipes}
                   size="regular"
@@ -93,17 +106,17 @@ const Header: React.FC<HeaderProps> = ({ userEmail, recipes = [] }) => {
                 <>
                   <Link
                     href="/admin"
-                    className="text-sm font-medium leading-none tracking-[-0.41px] text-appAccent-100 transition-colors duration-300 hover:text-white focus-visible:text-white"
+                    className="text-sm font-medium leading-none tracking-[-0.41px] text-appAccent-100 transition-colors duration-300 hover:text-white focus-visible:text-white max-md:hidden"
                   >
                     Admin
                   </Link>
                   <Link
                     href="/admin/recipes/new"
-                    className="text-sm font-medium leading-none tracking-[-0.41px] text-appAccent-100 transition-colors duration-300 hover:text-white focus-visible:text-white"
+                    className="text-sm font-medium leading-none tracking-[-0.41px] text-appAccent-100 transition-colors duration-300 hover:text-white focus-visible:text-white max-md:hidden"
                   >
                     Create Recipe
                   </Link>
-                  <span className="text-sm text-appAccent-100">
+                  <span className="text-sm text-appAccent-100 max-md:hidden">
                     Hey, {userEmail}!
                   </span>
                   <form action={signOutAction} className="inline">
@@ -114,90 +127,11 @@ const Header: React.FC<HeaderProps> = ({ userEmail, recipes = [] }) => {
                 </>
               ) : (
                 <>
-                  <Button asChild size="sm" variant="secondary">
-                    <Link href="/sign-in">Sign in</Link>
-                  </Button>
-                  <Button asChild size="sm" variant="default">
-                    <Link href="/sign-up">Sign up</Link>
-                  </Button>
-                </>
-              )}
-            </div>
-
-            {/* Mobile Navigation Menu */}
-            <div
-              ref={navItemsDOM}
-              className={classNames(
-                "flex flex-col items-center gap-6 md:hidden",
-                {
-                  "max-md:absolute max-md:-bottom-16 max-md:right-0 max-md:min-w-[280px] max-md:translate-y-full max-md:rounded max-md:bg-white max-md:px-4 max-md:py-6 max-md:shadow-lg":
-                    showMobileNav,
-                },
-                { "max-md:hidden": !showMobileNav }
-              )}
-            >
-              {/* Search Bar - Mobile */}
-              <div className="w-full">
-                <RecipeSearch
-                  recipes={recipes}
-                  size="regular"
-                  static={true}
-                  className="w-full"
-                />
-              </div>
-
-              <Link
-                href="/recipes"
-                className="text-sm font-medium leading-none tracking-[-0.41px] text-appAccent transition-colors duration-300 hover:text-appAccent/70"
-                onClick={() => setShowMobileNav(false)}
-              >
-                Browse Recipes
-              </Link>
-
-              {userEmail ? (
-                <>
-                  <Link
-                    href="/admin"
-                    className="text-sm font-medium leading-none tracking-[-0.41px] text-appAccent transition-colors duration-300 hover:text-appAccent/70"
-                    onClick={() => setShowMobileNav(false)}
-                  >
-                    Admin Dashboard
-                  </Link>
-                  <Link
-                    href="/admin/recipes/new"
-                    className="text-sm font-medium leading-none tracking-[-0.41px] text-appAccent transition-colors duration-300 hover:text-appAccent/70"
-                    onClick={() => setShowMobileNav(false)}
-                  >
-                    Create Recipe
-                  </Link>
-                  <Link
-                    href="/admin/recipes"
-                    className="text-sm font-medium leading-none tracking-[-0.41px] text-appAccent transition-colors duration-300 hover:text-appAccent/70"
-                    onClick={() => setShowMobileNav(false)}
-                  >
-                    Manage Recipes
-                  </Link>
-                  <div className="text-xs text-appAccent/70">
-                    Hey, {userEmail}!
-                  </div>
-                  <form action={signOutAction} className="w-full">
-                    <Button
-                      type="submit"
-                      variant="outline"
-                      size="sm"
-                      className="w-full"
-                    >
-                      Sign out
-                    </Button>
-                  </form>
-                </>
-              ) : (
-                <>
                   <Button
                     asChild
                     size="sm"
-                    variant="outline"
-                    className="w-full"
+                    variant="secondary"
+                    className="flex-shrink-0"
                   >
                     <Link href="/sign-in">Sign in</Link>
                   </Button>
@@ -205,13 +139,98 @@ const Header: React.FC<HeaderProps> = ({ userEmail, recipes = [] }) => {
                     asChild
                     size="sm"
                     variant="default"
-                    className="w-full"
+                    className="flex-shrink-0"
                   >
                     <Link href="/sign-up">Sign up</Link>
                   </Button>
                 </>
               )}
             </div>
+
+            {/* Mobile Navigation Menu */}
+            {/* Mobile Navigation Menu - Only render when needed */}
+            {showMobileNav && (
+              <div
+                ref={navItemsDOM}
+                className="absolute -bottom-16 right-0 flex min-w-[280px] translate-y-full flex-col items-center gap-6 rounded bg-white px-4 py-6 shadow-lg transition-all duration-300 ease-in-out animate-in fade-in slide-in-from-top-2 md:hidden"
+              >
+                {/* Search Bar - Mobile */}
+                <div className="w-full">
+                  <RecipeSearch
+                    recipes={recipes}
+                    size="regular"
+                    static={true}
+                    className="w-full"
+                  />
+                </div>
+
+                <Link
+                  href="/recipes"
+                  className="text-sm font-medium leading-none tracking-[-0.41px] text-appAccent transition-colors duration-300 hover:text-appAccent/70"
+                  onClick={() => setShowMobileNav(false)}
+                >
+                  Browse Recipes
+                </Link>
+
+                {userEmail ? (
+                  <>
+                    <Link
+                      href="/admin"
+                      className="text-sm font-medium leading-none tracking-[-0.41px] text-appAccent transition-colors duration-300 hover:text-appAccent/70"
+                      onClick={() => setShowMobileNav(false)}
+                    >
+                      Admin Dashboard
+                    </Link>
+                    <Link
+                      href="/admin/recipes/new"
+                      className="text-sm font-medium leading-none tracking-[-0.41px] text-appAccent transition-colors duration-300 hover:text-appAccent/70"
+                      onClick={() => setShowMobileNav(false)}
+                    >
+                      Create Recipe
+                    </Link>
+                    <Link
+                      href="/admin/recipes"
+                      className="text-sm font-medium leading-none tracking-[-0.41px] text-appAccent transition-colors duration-300 hover:text-appAccent/70"
+                      onClick={() => setShowMobileNav(false)}
+                    >
+                      Manage Recipes
+                    </Link>
+                    <div className="text-xs text-appAccent/70">
+                      Hey, {userEmail}!
+                    </div>
+                    <form action={signOutAction} className="w-full">
+                      <Button
+                        type="submit"
+                        variant="outline"
+                        size="sm"
+                        className="w-full"
+                      >
+                        Sign out
+                      </Button>
+                    </form>
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      asChild
+                      size="sm"
+                      variant="outline"
+                      className="w-full"
+                    >
+                      <Link href="/sign-in">Sign in</Link>
+                    </Button>
+                    <Button
+                      asChild
+                      size="sm"
+                      variant="default"
+                      className="w-full"
+                    >
+                      <Link href="/sign-up">Sign up</Link>
+                    </Button>
+                  </>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </nav>

@@ -78,7 +78,7 @@ const Footer: React.FC<FooterProps> = ({ className = "" }) => {
                     <Link
                       key={itemIndex}
                       href={item.link}
-                      className="flex text-sm font-medium leading-none tracking-[-0.41px] text-appAccent transition-colors duration-300 hover:underline focus-visible:underline lg:text-[17px] lg:leading-none"
+                      className="flex text-sm font-medium leading-none tracking-[-0.41px] text-appAccent transition-all duration-300 hover:translate-x-1 hover:underline focus-visible:translate-x-1 focus-visible:underline lg:text-[17px] lg:leading-none"
                     >
                       {item.text}
                     </Link>

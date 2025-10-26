@@ -42,7 +42,7 @@ export default function FeedClient({
           {currentRecipes.map((recipe: Recipe, index: number) => (
             <div
               key={recipe.id}
-              className="h-fit max-w-[370px] flex-1 rounded-lg border border-appGray-300 bg-appGray-100/50 bg-clip-padding p-6 backdrop-blur-lg backdrop-filter"
+              className="group h-fit max-w-[370px] flex-1 rounded-lg border border-appGray-300 bg-appGray-100/50 bg-clip-padding p-6 backdrop-blur-lg backdrop-filter transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-appAccent/10"
               data-cy={`test-recipe-card-${recipe.title}`}
             >
               <div className="relative flex h-[300px] max-w-[330px] items-center overflow-hidden rounded-lg">
@@ -50,7 +50,7 @@ export default function FeedClient({
                   alt={`Photo of ${recipe.title}`}
                   src={recipe.images?.[0] || PancakeImage}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-300 group-hover:scale-110"
                   placeholder="blur"
                   blurDataURL="https://placehold.co/330x300/png?text=Picture"
                   priority={index < 3}
@@ -83,7 +83,7 @@ export default function FeedClient({
               <div className="mt-4">
                 <Link href={`/recipes/${recipe.slug}`}>
                   <button
-                    className="w-full rounded-lg border border-transparent bg-appAccent px-4 py-2 text-sm font-medium text-appGray-200 transition-colors hover:border-appAccent hover:bg-appGray-200 hover:text-appAccent"
+                    className="w-full rounded-lg border border-transparent bg-appAccent px-4 py-2 text-sm font-medium text-appGray-200 transition-all duration-300 hover:border-appAccent hover:bg-appGray-200 hover:text-appAccent hover:shadow-md hover:shadow-appAccent/20 focus:ring-2 focus:ring-appAccent/50 focus:ring-offset-2"
                     data-cy={`go-to-recipe-btn-${recipe.title}`}
                   >
                     View Recipe

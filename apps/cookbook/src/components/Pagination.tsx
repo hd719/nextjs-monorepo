@@ -53,7 +53,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   return (
     <div
       className={classNames(
-        "flex items-center justify-center gap-x-2 lg:gap-x-4",
+        "flex items-center justify-center gap-x-2 lg:gap-x-4 animate-in fade-in duration-500",
         className
       )}
     >
