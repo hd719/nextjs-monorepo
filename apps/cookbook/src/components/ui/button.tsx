@@ -9,7 +9,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-appAccent text-appGray-200 hover:bg-appGray-200 hover:text-appAccent border border-transparent hover:border-appAccent",
+        default:
+          "bg-appAccent text-appGray-200 hover:bg-appGray-200 hover:text-appAccent border border-transparent hover:border-appAccent",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
