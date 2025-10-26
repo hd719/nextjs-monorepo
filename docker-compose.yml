@@ -31,6 +31,16 @@ services:
       - 3002:3000
     networks:
       - app_network
+  tanstack:
+    container_name: tanstack
+    build:
+      context: .
+      dockerfile: ./Dockerfile.tanstack
+    restart: always
+    ports:
+      - 3003:3003
+    networks:
+      - app_network
 
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname

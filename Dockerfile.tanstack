@@ -1,0 +1,67 @@
+FROM node:22-alpine AS base
+
+## Core dependency builder (pruned)
+FROM base AS builder
+RUN apk add --no-cache libc6-compat
+RUN apk update
+RUN corepack enable && corepack prepare pnpm@9 --activate
+ENV PNPM_HOME=/usr/local/bin
+RUN pnpm add turbo@2.5.8 --global
+WORKDIR /app
+COPY . .
+RUN turbo prune --scope=tanstack-demo --docker
+
+# Add lockfile and package.json's of isolated subworkspace
+FROM base AS installer
+RUN apk update
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+RUN corepack enable && corepack prepare pnpm@latest --activate
+ENV PNPM_HOME=/usr/local/bin
+RUN pnpm add turbo@2.5.8 --global
+
+# First install the dependencies (as they change less often)
+COPY --from=builder /app/out/json/ .
+COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
+RUN pnpm install
+
+# Build the project
+COPY --from=builder /app/out/full/ .
+
+# Uncomment and use build args to enable remote caching
+# ARG TURBO_TEAM
+# ENV TURBO_TEAM=$TURBO_TEAM
+
+# ARG TURBO_TOKEN
+# ENV TURBO_TOKEN=$TURBO_TOKEN
+WORKDIR /app
+RUN turbo build --filter=tanstack-demo...
+
+FROM base AS runner
+WORKDIR /app
+
+# Don't run production as root
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 vite
+
+# Setup pnpm before switching users
+RUN corepack enable && corepack prepare pnpm@latest --activate
+ENV PNPM_HOME=/usr/local/bin
+
+# Copy the built application
+COPY --from=installer --chown=vite:nodejs /app/apps/tanstack-demo/dist ./dist
+COPY --from=installer --chown=vite:nodejs /app/apps/tanstack-demo/public ./public
+
+# Switch to non-root user
+USER vite
+
+EXPOSE 3003
+
+# Serve the built static files using a simple HTTP server
+# Install a lightweight HTTP server
+USER root
+RUN pnpm add -g serve
+USER vite
+
+# Serve the built application
+CMD ["serve", "-s", "dist", "-l", "3003"]

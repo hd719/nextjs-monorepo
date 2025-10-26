@@ -6,7 +6,7 @@
 [![Turbo](https://img.shields.io/badge/Turbo-2.5.8-red?logo=turborepo)](https://turbo.build/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](https://www.docker.com/)
 
-A modern **monorepo** containing multiple Next.js applications built with the latest **React 19** and **Next.js 15** stack. 
+A modern **monorepo** containing multiple Next.js applications built with the latest **React 19** and **Next.js 15** stack.
 
 ## Live Demos
 
@@ -24,6 +24,7 @@ graph TB
             A1[🍳 Cookbook App<br/>Recipe Management]
             A2[💼 Portfolio App<br/>Personal Website]
             A3[🌐 Web App<br/>Demo/Starter]
+            A4[⚡ TanStack Start<br/>Modern Framework]
         end
 
         subgraph "Shared Packages"
@@ -48,10 +49,14 @@ graph TB
     A2 --> P2
     A2 --> P3
     A3 --> P1
+    A4 --> P1
+    A4 --> P2
+    A4 --> P3
 
     T1 --> A1
     T1 --> A2
     T1 --> A3
+    T1 --> A4
     T2 --> P1
     T2 --> P2
     T2 --> P3
@@ -115,6 +120,10 @@ graph TB
 - ✅ **Performance Optimized**: Static generation for speed
 
 **Development Status**: ✅ Production Ready
+
+---
+
+### **TanStack Start App** - Modern Full-Stack Framework
 
 ---
 
@@ -295,11 +304,17 @@ pnpm dev
 
 #### **Run Individual Applications**:
 ```bash
-# Cookbook app (http://localhost:3000)
+# Cookbook app (http://localhost:3002)
 pnpm dev --filter=cookbook
 
 # Portfolio app (http://localhost:3001)
 pnpm dev --filter=portfolio
+
+# Web app (http://localhost:3000)
+pnpm dev --filter=web
+
+# TanStack Start app (http://localhost:3003)
+pnpm dev --filter=tanstack-demo
 ```
 
 #### **Build Applications**:
@@ -370,6 +385,7 @@ pnpm add @repo/ui --filter=portfolio
 docker build -f apps/web/Dockerfile -t nextjs-web:latest .
 docker build -f Dockerfile.cookbook -t nextjs-cookbook:latest .
 docker build -f Dockerfile.portfolio -t nextjs-portfolio:latest .
+docker build -f Dockerfile.tanstack -t tanstack-start:latest .
 ```
 
 #### **Run with Docker Compose**:
@@ -389,8 +405,9 @@ docker-compose down
 
 **Port Mapping**:
 - **Web App**: http://localhost:3000
-- **Portfolio**: http://localhost:3001
+- **Portfolio**: http://localhost:3001  
 - **Cookbook**: http://localhost:3002
+- **TanStack Start**: http://localhost:3003
 
 ---
 
