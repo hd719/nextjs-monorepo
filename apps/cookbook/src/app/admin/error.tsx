@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import Link from "next/link";
 
 export default function AdminError({
   error,
@@ -54,10 +55,10 @@ export default function AdminError({
                 Try Again
               </Button>
               <Button variant="outline" asChild>
-                <a href="/admin">Back to Admin Dashboard</a>
+                <Link href="/admin">Back to Admin Dashboard</Link>
               </Button>
               <Button variant="outline" asChild>
-                <a href="/">Go to Home</a>
+                <Link href="/">Go to Home</Link>
               </Button>
             </div>
           </div>

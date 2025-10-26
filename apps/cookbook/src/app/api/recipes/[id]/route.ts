@@ -97,7 +97,7 @@ export async function PATCH(
     let body;
     try {
       body = await request.json();
-    } catch (parseError) {
+    } catch {
       return NextResponse.json(
         { error: ERROR_MESSAGES.INVALID_JSON },
         { status: HTTP_STATUS.BAD_REQUEST }
@@ -121,7 +121,8 @@ export async function PATCH(
     }
 
     const updateData = validationResult.data;
-    const { id: _, ...updates } = updateData; // Remove id from updates
+    // Remove id from updates object (we use route param id instead)
+    const { id: _, ...updates } = updateData;
 
     // Handle slug updates if title changed
     if (updates.title && updates.slug) {

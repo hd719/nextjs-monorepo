@@ -3,8 +3,6 @@ import React, { Suspense } from "react";
 import { createClient } from "@/app/utils/supabase/server";
 import RecipeSkeletonLoader from "@/components/RecipeSkeletonLoader";
 import { getPublishedRecipes } from "@/lib/recipes";
-import { Recipe } from "@/types/recipe";
-import { User } from "@supabase/supabase-js";
 
 import FeedClient from "./FeedClient";
 

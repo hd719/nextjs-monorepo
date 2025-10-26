@@ -38,26 +38,6 @@ export function AdminLayoutClient({ user, children }: AdminLayoutClientProps) {
     { name: "Create Recipe", href: "/admin/recipes/new", icon: "➕" },
   ];
 
-  // Generate breadcrumbs from pathname
-  const generateBreadcrumbs = () => {
-    const segments = pathname.split("/").filter(Boolean);
-    const breadcrumbs = [{ name: "Admin", href: "/admin" }];
-
-    let currentPath = "";
-    segments.slice(1).forEach((segment) => {
-      currentPath += `/${segment}`;
-      const name = segment.charAt(0).toUpperCase() + segment.slice(1);
-      breadcrumbs.push({
-        name: name.replace("-", " "),
-        href: `/admin${currentPath}`,
-      });
-    });
-
-    return breadcrumbs;
-  };
-
-  const breadcrumbs = generateBreadcrumbs();
-
   const handleSignOut = async () => {
     await signOutAction();
   };

@@ -18,7 +18,7 @@ interface ToastProps extends Toast {
 }
 
 export function ToastComponent({
-  id,
+  id: toastId,
   title,
   description,
   type,
@@ -30,15 +30,15 @@ export function ToastComponent({
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(false);
-      setTimeout(() => onRemove(id), 300);
+      setTimeout(() => onRemove(toastId), 300);
     }, duration);
 
     return () => clearTimeout(timer);
-  }, [id, duration, onRemove]);
+  }, [toastId, duration, onRemove]);
 
   const handleClose = () => {
     setIsVisible(false);
-    setTimeout(() => onRemove(id), 300);
+    setTimeout(() => onRemove(toastId), 300);
   };
 
   const getIcon = () => {

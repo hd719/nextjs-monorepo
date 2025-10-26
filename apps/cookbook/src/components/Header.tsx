@@ -19,7 +19,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ userEmail, recipes = [] }) => {
   const navItemsDOM = useRef<HTMLDivElement | null>(null);
   const [showMobileNav, setShowMobileNav] = useState(false);
-  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
+  const [, setIsSearchExpanded] = useState(false);
 
   useEffect(() => {
     const handleMobileNavClickOutside = (event: MouseEvent) => {

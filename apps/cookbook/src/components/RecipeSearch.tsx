@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
 
 import { SearchIcon } from "@/components/icons";
 import { useRecipeSearch } from "@/hooks/useRecipeSearch";

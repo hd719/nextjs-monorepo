@@ -38,7 +38,7 @@ export function parseIngredientString(
   const [first, second, ...rest] = parts;
 
   // Check if first part looks like a number or fraction
-  if (/^[\d\/\.\s]+$/.test(first)) {
+  if (/^[\d/.\\s]+$/.test(first)) {
     if (second && rest.length > 0) {
       return {
         amount: first,

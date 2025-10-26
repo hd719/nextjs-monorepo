@@ -65,7 +65,8 @@ export function RecipeActions({ recipe, recipeId }: RecipeActionsProps) {
             result.error || "An unexpected error occurred. Please try again."
           );
         }
-      } catch (error) {
+      } catch (e) {
+        console.error("Error message", e);
         toast.error(
           "Delete failed",
           "An unexpected error occurred while deleting the recipe."
@@ -108,7 +109,7 @@ export function RecipeActions({ recipe, recipeId }: RecipeActionsProps) {
             result.error || "An unexpected error occurred. Please try again."
           );
         }
-      } catch (error) {
+      } catch {
         // Revert optimistic update on error
         updateOptimisticRecipe({
           type: optimisticRecipe.is_published ? "publish" : "unpublish",
