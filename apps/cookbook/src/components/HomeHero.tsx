@@ -15,16 +15,13 @@ const HomeHero: React.FC = () => {
           <div className="relative z-10 flex flex-col items-center text-center lg:items-start lg:text-left">
             <h1 className="mb-3 text-xl font-medium leading-[1.2] text-white md:text-3xl lg:mb-6 lg:text-7xl lg:leading-[1.1]">
               Payal's Recipes
-              <br />
-              <span className="block">Discovering the Art of Cooking</span>
             </h1>
             <p className="mb-6 text-xs font-medium leading-none text-white md:text-sm lg:mb-10 lg:text-xl lg:leading-none">
-              Welcome! I'm Payal, and I love to cook. I'm excited to share my
-              recipes with you.
+              Discovering the Art of Cooking
             </p>
-            <Button asChild variant="secondary" size="lg">
+            <Button asChild variant="default">
               <Link href="#recipe-list">
-                <span className="mr-2">Explore my collection of recipes</span>
+                <span className="mr-2">Browse recipes</span>
                 <ArrowRightIcon className="h-[14px] w-[14px] lg:h-5 lg:w-5" />
               </Link>
             </Button>
