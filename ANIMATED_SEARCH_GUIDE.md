@@ -44,16 +44,16 @@ src/
 ```typescript
 const expandSearch = useCallback(() => {
   if (isExpanded || isAnimating) return;
-  
+
   setIsAnimating(true);
   setIsExpanded(true);
   onExpandChange?.(true);
-  
+
   // Focus input after DOM update
   setTimeout(() => {
     inputRef.current?.focus();
   }, 100);
-  
+
   // Complete animation
   setTimeout(() => {
     setIsAnimating(false);
@@ -141,7 +141,7 @@ const [isSearchExpanded, setIsSearchExpanded] = useState(false);
 
 const handleSearchExpandChange = (expanded: boolean) => {
   setIsSearchExpanded(expanded);
-  
+
   // Close mobile nav when search expands
   if (expanded && showMobileNav) {
     setShowMobileNav(false);
