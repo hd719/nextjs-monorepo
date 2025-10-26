@@ -81,6 +81,7 @@ const RecipeSearch: React.FC<RecipeSearchProps> = ({
               name="search"
               value={currentSearchValue}
               placeholder="Search recipes"
+              aria-label="Search for recipes"
               className={classNames(
                 "w-full bg-transparent px-1.5 py-3 text-sm font-medium leading-none tracking-[-0.41px] text-appGray-700 placeholder:text-appGray-400 focus:outline-none",
                 {
