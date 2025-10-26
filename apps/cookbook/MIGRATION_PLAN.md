@@ -7,7 +7,7 @@ Migration from current design to recipes app aesthetic while maintaining Supabas
 ### **Goal**
 Transform the cookbook application to use the vibrant, modern design from the recipes app while preserving all existing functionality including:
 - Supabase authentication and database
-- Admin interface and CRUD operations  
+- Admin interface and CRUD operations
 - User management and recipe publishing
 - All existing backend logic
 
@@ -67,9 +67,9 @@ Transform the cookbook application to use the vibrant, modern design from the re
 ### **PHASE 1: FOUNDATION & DESIGN SYSTEM**
 
 #### **TICKET CB-001: Setup Design System Foundation**
-**Story Points:** 5  
-**Priority:** Highest  
-**Type:** Foundation  
+**Story Points:** 5
+**Priority:** Highest
+**Type:** Foundation
 **Estimated Time:** 1 day
 
 **Description:** Establish the visual foundation by setting up the recipes app color system and design tokens in Tailwind.
@@ -85,7 +85,7 @@ Transform the cookbook application to use the vibrant, modern design from the re
     },
     appGray: {
       100: '#F9F7F5',
-      200: '#E6E9E7', 
+      200: '#E6E9E7',
       300: '#D6D6D6',
       400: '#757182',
       500: '#686473',
@@ -109,9 +109,9 @@ Transform the cookbook application to use the vibrant, modern design from the re
 ---
 
 #### **TICKET CB-002: Create SVG Icon System**
-**Story Points:** 3  
-**Priority:** High  
-**Type:** Assets  
+**Story Points:** 3
+**Priority:** High
+**Type:** Assets
 **Estimated Time:** 0.5 days
 
 **Description:** Port all SVG icons from recipes app and create icon system.
@@ -120,7 +120,7 @@ Transform the cookbook application to use the vibrant, modern design from the re
 - [ ] Create `/src/assets/icons/` directory structure
 - [ ] Port all SVG icons from recipes app:
   - `arrow-right.svg`
-  - `search.svg` 
+  - `search.svg`
   - `download.svg`
   - `email.svg`
   - `phone.svg`
@@ -140,9 +140,9 @@ Transform the cookbook application to use the vibrant, modern design from the re
 ---
 
 #### **TICKET CB-003: Create Custom Button Component**
-**Story Points:** 3  
-**Priority:** High  
-**Type:** Component  
+**Story Points:** 3
+**Priority:** High
+**Type:** Component
 **Estimated Time:** 0.5 days
 
 **Description:** Replace shadcn button with recipes-style button component using Tailwind.
@@ -169,9 +169,9 @@ Transform the cookbook application to use the vibrant, modern design from the re
 ### **PHASE 2: LAYOUT & NAVIGATION**
 
 #### **TICKET CB-004: Redesign Header/Navigation**
-**Story Points:** 8  
-**Priority:** High  
-**Type:** Component  
+**Story Points:** 8
+**Priority:** High
+**Type:** Component
 **Estimated Time:** 1.5 days
 
 **Description:** Complete redesign of header to match recipes app aesthetic with mobile navigation.
@@ -197,9 +197,9 @@ Transform the cookbook application to use the vibrant, modern design from the re
 ---
 
 #### **TICKET CB-005: Create Hero Section Component**
-**Story Points:** 8  
-**Priority:** Medium  
-**Type:** Component  
+**Story Points:** 8
+**Priority:** Medium
+**Type:** Component
 **Estimated Time:** 1.5 days
 
 **Description:** Create stunning hero section similar to recipes app for homepage.
@@ -225,9 +225,9 @@ Transform the cookbook application to use the vibrant, modern design from the re
 ---
 
 #### **TICKET CB-006: Update Layout Wrapper**
-**Story Points:** 5  
-**Priority:** Medium  
-**Type:** Component  
+**Story Points:** 5
+**Priority:** Medium
+**Type:** Component
 **Estimated Time:** 1 day
 
 **Description:** Update layout wrapper to match recipes app structure and spacing.
@@ -243,7 +243,7 @@ Transform the cookbook application to use the vibrant, modern design from the re
     },
     screens: {
       sm: '640px',
-      md: '768px', 
+      md: '768px',
       lg: '1024px',
       xl: '1280px',
       '2xl': '1360px',
@@ -266,9 +266,9 @@ Transform the cookbook application to use the vibrant, modern design from the re
 ### **PHASE 3: RECIPE COMPONENTS**
 
 #### **TICKET CB-007: Redesign Recipe Cards**
-**Story Points:** 8  
-**Priority:** High  
-**Type:** Component  
+**Story Points:** 8
+**Priority:** High
+**Type:** Component
 **Estimated Time:** 1.5 days
 
 **Description:** Replace current recipe cards with beautiful recipes app design using Tailwind.
@@ -297,9 +297,9 @@ Transform the cookbook application to use the vibrant, modern design from the re
 ---
 
 #### **TICKET CB-008: Create Advanced Search Component**
-**Story Points:** 8  
-**Priority:** Medium  
-**Type:** Component  
+**Story Points:** 8
+**Priority:** Medium
+**Type:** Component
 **Estimated Time:** 1.5 days
 
 **Description:** Implement recipes-style search with autocomplete and transitions using Tailwind.
@@ -327,9 +327,9 @@ Transform the cookbook application to use the vibrant, modern design from the re
 ---
 
 #### **TICKET CB-009: Update Recipe Form Styling**
-**Story Points:** 5  
-**Priority:** Medium  
-**Type:** Component  
+**Story Points:** 5
+**Priority:** Medium
+**Type:** Component
 **Estimated Time:** 1 day
 
 **Description:** Restyle existing recipe form to match recipes app aesthetic using Tailwind.
@@ -357,9 +357,9 @@ Transform the cookbook application to use the vibrant, modern design from the re
 ### **PHASE 4: ADVANCED FEATURES**
 
 #### **TICKET CB-010: Create About Us Section**
-**Story Points:** 5  
-**Priority:** Low  
-**Type:** Component  
+**Story Points:** 5
+**Priority:** Low
+**Type:** Component
 **Estimated Time:** 1 day
 
 **Description:** Add About Us section component similar to recipes app using Tailwind.
@@ -384,9 +384,9 @@ Transform the cookbook application to use the vibrant, modern design from the re
 ---
 
 #### **TICKET CB-011: Create Contact/Let's Talk Section**
-**Story Points:** 6  
-**Priority:** Low  
-**Type:** Component  
+**Story Points:** 6
+**Priority:** Low
+**Type:** Component
 **Estimated Time:** 1 day
 
 **Description:** Add contact form section with recipes styling using Tailwind.
@@ -412,9 +412,9 @@ Transform the cookbook application to use the vibrant, modern design from the re
 ---
 
 #### **TICKET CB-012: Add Recipe Pagination**
-**Story Points:** 4  
-**Priority:** Medium  
-**Type:** Component  
+**Story Points:** 4
+**Priority:** Medium
+**Type:** Component
 **Estimated Time:** 0.5 days
 
 **Description:** Implement recipes-style pagination for recipe lists using Tailwind.
@@ -437,9 +437,9 @@ Transform the cookbook application to use the vibrant, modern design from the re
 ---
 
 #### **TICKET CB-013: Create Footer Component**
-**Story Points:** 4  
-**Priority:** Low  
-**Type:** Component  
+**Story Points:** 4
+**Priority:** Low
+**Type:** Component
 **Estimated Time:** 0.5 days
 
 **Description:** Add footer component matching recipes app design using Tailwind.
@@ -463,9 +463,9 @@ Transform the cookbook application to use the vibrant, modern design from the re
 ### **PHASE 5: POLISH & OPTIMIZATION**
 
 #### **TICKET CB-014: Add Animations & Transitions**
-**Story Points:** 5  
-**Priority:** Low  
-**Type:** Enhancement  
+**Story Points:** 5
+**Priority:** Low
+**Type:** Enhancement
 **Estimated Time:** 1 day
 
 **Description:** Add smooth animations and transitions throughout the app using Tailwind and react-transition-group.
@@ -489,9 +489,9 @@ Transform the cookbook application to use the vibrant, modern design from the re
 ---
 
 #### **TICKET CB-015: Mobile Optimization**
-**Story Points:** 6  
-**Priority:** Medium  
-**Type:** Enhancement  
+**Story Points:** 6
+**Priority:** Medium
+**Type:** Enhancement
 **Estimated Time:** 1 day
 
 **Description:** Ensure all components are fully responsive and mobile-optimized.
@@ -514,9 +514,9 @@ Transform the cookbook application to use the vibrant, modern design from the re
 ---
 
 #### **TICKET CB-016: Performance & SEO Optimization**
-**Story Points:** 4  
-**Priority:** Medium  
-**Type:** Enhancement  
+**Story Points:** 4
+**Priority:** Medium
+**Type:** Enhancement
 **Estimated Time:** 0.5 days
 
 **Description:** Optimize the app for performance and SEO after design migration.
@@ -544,7 +544,7 @@ Transform the cookbook application to use the vibrant, modern design from the re
 
 1. **Phase 1: Foundation** (3-4 days)
    - CB-001: Design System Foundation
-   - CB-002: SVG Icon System  
+   - CB-002: SVG Icon System
    - CB-003: Custom Button Component
 
 2. **Phase 2: Layout** (4-5 days)
@@ -621,7 +621,7 @@ module.exports = {
         appGray: {
           100: '#F9F7F5',
           200: '#E6E9E7',
-          300: '#D6D6D6', 
+          300: '#D6D6D6',
           400: '#757182',
           500: '#686473',
           600: '#4A4752',
@@ -639,7 +639,7 @@ module.exports = {
         screens: {
           sm: '640px',
           md: '768px',
-          lg: '1024px', 
+          lg: '1024px',
           xl: '1280px',
           '2xl': '1360px',
         },
