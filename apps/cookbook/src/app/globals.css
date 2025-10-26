@@ -70,3 +70,27 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Fade transitions for react-transition-group (from recipes app) */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* Additional transition states for react-transition-group */
+.fade-entering {
+  opacity: 0;
+}
+.fade-entered {
+  opacity: 1;
+}
+.fade-exiting {
+  opacity: 1;
+}
+.fade-exited {
+  opacity: 0;
+}

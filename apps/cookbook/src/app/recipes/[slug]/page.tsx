@@ -10,9 +10,9 @@ import { notFound } from "next/navigation";
 import RecipeClient from "./RecipeClient";
 
 interface RecipePageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export const revalidate = 60;
@@ -20,7 +20,8 @@ export const revalidate = 60;
 export async function generateMetadata({
   params,
 }: RecipePageProps): Promise<Metadata> {
-  const result = await getRecipeBySlug(params.slug);
+  const { slug } = await params;
+  const result = await getRecipeBySlug(slug);
 
   if (result.error || !result.data) {
     return {
@@ -50,7 +51,8 @@ export async function generateMetadata({
 }
 
 export default async function RecipePage({ params }: RecipePageProps) {
-  const result = await getRecipeBySlug(params.slug);
+  const { slug } = await params;
+  const result = await getRecipeBySlug(slug);
 
   // Handle recipe not found
   if (result.error || !result.data) {
