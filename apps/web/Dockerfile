@@ -1,4 +1,5 @@
-FROM node:22-alpine AS base
+# Use Bun's official image as base
+FROM oven/bun:1.3.3-alpine AS base
 
 # This Dockerfile is copy-pasted into our main docs at /docs/handbook/deploying-with-docker.
 # Make sure you update both files!
@@ -9,9 +10,8 @@ RUN apk update
 RUN apk add --no-cache libc6-compat
 # Set working directory
 WORKDIR /app
-RUN corepack enable && corepack prepare pnpm@9 --activate
-ENV PNPM_HOME=/usr/local/bin
-RUN pnpm add turbo@2.5.8 --global
+# Install turbo globally using Bun
+RUN bun add turbo@2.5.8 --global
 COPY . .
 RUN turbo prune web --docker
 
@@ -20,14 +20,15 @@ FROM base AS installer
 RUN apk update
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-RUN corepack enable && corepack prepare pnpm@latest --activate
-ENV PNPM_HOME=/usr/local/bin
-RUN pnpm add turbo@2.5.8 --global
+# Install turbo globally using Bun
+RUN bun add turbo@2.5.8 --global
 
 # First install the dependencies (as they change less often)
 COPY --from=builder /app/out/json/ .
-COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
-RUN pnpm install
+# Copy workspace config and lockfile from root
+COPY --from=builder /app/pnpm-workspace.yaml ./pnpm-workspace.yaml
+COPY --from=builder /app/bun.lock ./bun.lock
+RUN bun install
 
 # Build the project
 COPY --from=builder /app/out/full/ .
@@ -39,7 +40,7 @@ COPY --from=builder /app/out/full/ .
 # ARG TURBO_TOKEN
 # ENV TURBO_TOKEN=$TURBO_TOKEN
 
-RUN pnpm turbo build --filter=web...
+RUN bun run turbo build --filter=web...
 
 FROM base AS runner
 WORKDIR /app
