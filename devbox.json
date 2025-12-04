@@ -1,16 +1,16 @@
 {
   "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.12.0/.schema/devbox.schema.json",
-  "packages": [
-    "bun@latest"
-  ],
+  "packages": ["bun@latest"],
+  "env": {
+    "GIT_SSH_COMMAND": "ssh -o LogLevel=ERROR"
+  },
   "shell": {
     "init_hook": [
-      "echo 'Welcome to devbox!' > /dev/null"
+      "echo 'Welcome to devbox!' > /dev/null",
+      "unset DEVELOPER_DIR"
     ],
     "scripts": {
-      "test": [
-        "echo \"Error: no test specified\" && exit 1"
-      ]
+      "test": ["echo \"Error: no test specified\" && exit 1"]
     }
   }
 }

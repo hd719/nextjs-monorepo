@@ -52,54 +52,6 @@
     "github:NixOS/nixpkgs/nixpkgs-unstable": {
       "last_modified": "2025-12-03T20:43:00Z",
       "resolved": "github:NixOS/nixpkgs/ebc94f855ef25347c314258c10393a92794e7ab9?lastModified=1764794580"
-    },
-    "pnpm@latest": {
-      "last_modified": "2024-08-14T11:41:26Z",
-      "resolved": "github:NixOS/nixpkgs/0cb2fd7c59fed0cd82ef858cbcbdb552b9a33465#pnpm",
-      "source": "devbox-search",
-      "version": "9.7.0",
-      "systems": {
-        "aarch64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/7yqhmcg3ndbfs607vc1mcqx6c1ghdiw3-pnpm-9.7.0",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/7yqhmcg3ndbfs607vc1mcqx6c1ghdiw3-pnpm-9.7.0"
-        },
-        "aarch64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/inswgrwgmykgdcc61din1v80y0xcqz04-pnpm-9.7.0",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/inswgrwgmykgdcc61din1v80y0xcqz04-pnpm-9.7.0"
-        },
-        "x86_64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/jz0ki1kj6qhf147bxdvh4cv9n73riflx-pnpm-9.7.0",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/jz0ki1kj6qhf147bxdvh4cv9n73riflx-pnpm-9.7.0"
-        },
-        "x86_64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/rq6s344bdlg0i6p99w6y8b58crgvdnhs-pnpm-9.7.0",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/rq6s344bdlg0i6p99w6y8b58crgvdnhs-pnpm-9.7.0"
-        }
-      }
     }
   }
 }
