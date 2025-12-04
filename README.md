@@ -3,10 +3,11 @@
 [![Next.js](https://img.shields.io/badge/Next.js-15.4.1-black?logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19.2.0-blue?logo=react)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![Bun](https://img.shields.io/badge/Bun-1.3.3-black?logo=bun)](https://bun.sh/)
 [![Turbo](https://img.shields.io/badge/Turbo-2.5.8-red?logo=turborepo)](https://turbo.build/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](https://www.docker.com/)
 
-A modern **monorepo** containing multiple Next.js applications built with the latest **React 19** and **Next.js 15** stack.
+A modern **monorepo** containing multiple Next.js applications built with the latest **React 19**, **Next.js 15**, and **Bun** runtime.
 
 ## Live Demos
 
@@ -37,7 +38,7 @@ graph TB
 
         subgraph "Tools & Infrastructure"
             T1["Turbo 2.5.8 - Build System"]
-            T2["pnpm Workspaces - Package Manager"]
+            T2["Bun 1.3.3 - Runtime & Package Manager"]
             T3["Docker - Containerization"]
         end
     end
@@ -267,8 +268,7 @@ Jest configurations and presets for testing setup.
 
 ### **Prerequisites**
 
-- **Node.js**: 22.x or later (LTS recommended)
-- **pnpm**: Latest version for workspace management
+- **Bun**: 1.3.3 or later (replaces Node.js and package managers)
 - **Docker**: For containerized development (optional)
 - **Git**: For version control
 
@@ -280,12 +280,21 @@ Jest configurations and presets for testing setup.
    cd nextjs-monorepo
    ```
 
-2. **Install dependencies**:
+2. **Install Bun** (if not already installed):
    ```bash
-   pnpm install
+   # macOS/Linux
+   curl -fsSL https://bun.sh/install | bash
+   
+   # Windows
+   powershell -c "irm bun.sh/install.ps1 | iex"
    ```
 
-3. **Set up environment variables**:
+3. **Install dependencies**:
+   ```bash
+   bun install
+   ```
+
+4. **Set up environment variables**:
    ```bash
    # Copy environment template for cookbook app
    cp apps/cookbook/.env.example apps/cookbook/.env.local
@@ -299,31 +308,31 @@ Jest configurations and presets for testing setup.
 
 #### **Run All Applications**:
 ```bash
-pnpm dev
+bun run dev
 ```
 
 #### **Run Individual Applications**:
 ```bash
 # Cookbook app (http://localhost:3002)
-pnpm dev --filter=cookbook
+bun run dev --filter=cookbook
 
 # Portfolio app (http://localhost:3001)
-pnpm dev --filter=portfolio
+bun run dev --filter=portfolio
 
 # Web app (http://localhost:3000)
-pnpm dev --filter=web
+bun run dev --filter=web
 
 # TanStack Start app (http://localhost:3003)
-pnpm dev --filter=tanstack-demo
+bun run dev --filter=tanstack-demo
 ```
 
 #### **Build Applications**:
 ```bash
 # Build all apps
-pnpm build
+bun run build
 
 # Build specific app
-pnpm build --filter=cookbook
+bun run build --filter=cookbook
 ```
 
 ### **Environment Variables Setup**
@@ -350,43 +359,51 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 #### **Turbo Scripts**:
 ```bash
 # Development
-pnpm dev                    # Run all apps in development
-pnpm dev --filter=cookbook  # Run specific app
+bun run dev                    # Run all apps in development
+bun run dev --filter=cookbook  # Run specific app
 
 # Building
-pnpm build                  # Build all apps
-pnpm build --filter=web     # Build specific app
+bun run build                  # Build all apps
+bun run build --filter=web     # Build specific app
 
 # Linting
-pnpm lint                   # Lint all packages
-pnpm lint --filter=portfolio # Lint specific app
+bun run lint                   # Lint all packages
+bun run lint --filter=portfolio # Lint specific app
 
 # Cleaning
-pnpm clean                  # Clean all build artifacts
+bun run clean                  # Clean all build artifacts
 ```
 
 #### **Package Management**:
 ```bash
 # Add dependency to specific app
-pnpm add react-query --filter=cookbook
+bun add react-query --filter=cookbook
 
 # Add dependency to workspace root
-pnpm add -w turbo
+bun add -w turbo
 
 # Add shared package to app
-pnpm add @repo/ui --filter=portfolio
+bun add @repo/ui --filter=portfolio
+
+# Remove dependency
+bun remove package-name --filter=cookbook
 ```
 
 ### **Docker Development**
 
 #### **Build Docker Images**:
 ```bash
-# Build all images
+# Build all images with docker-compose
+docker-compose build
+
+# Or build individual images
 docker build -f apps/web/Dockerfile -t nextjs-web:latest .
 docker build -f Dockerfile.cookbook -t nextjs-cookbook:latest .
 docker build -f Dockerfile.portfolio -t nextjs-portfolio:latest .
 docker build -f Dockerfile.tanstack -t tanstack-start:latest .
 ```
+
+> **Note**: All Docker images now use Bun as the runtime and package manager for faster builds and smaller image sizes.
 
 #### **Run with Docker Compose**:
 ```bash
@@ -456,23 +473,6 @@ docker-compose down
 - **Load Balancer**: Traefik reverse proxy *(Planned)*
 - **Backup Strategy**: Automated backups *(Planned)*
 
----
-
-### **Build Performance**
-- **Full Build Time**: ~18 seconds (all apps)
-- **Individual App Build**: ~6-8 seconds
-- **Development Start**: ~2-3 seconds
-- **Hot Reload**: <1 second
-
-### **Bundle Sizes** *(Production)*
-- **Cookbook App**: ~157KB (First Load JS)
-- **Portfolio App**: ~153KB (First Load JS)
-- **Web App**: ~100KB (First Load JS)
-
-### **Docker Images**
-- **nextjs-cookbook**: 340MB
-- **nextjs-portfolio**: 338MB
-- **nextjs-web**: 332MB
 
 ---
 
