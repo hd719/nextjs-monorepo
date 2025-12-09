@@ -68,26 +68,26 @@ This application demonstrates TanStack Start capabilities and provides a direct 
 #### **Run TanStack Start App:**
 ```bash
 # From monorepo root
-pnpm dev --filter=tanstack-demo
+pnpm dev --filter=healthmetrics
 
 # Or from app directory
-cd apps/tanstack-demo
+cd apps/healthmetrics
 pnpm dev
 ```
 
 #### **Build for Production:**
 ```bash
 # From monorepo root
-pnpm build --filter=tanstack-demo
+pnpm build --filter=healthmetrics
 
 # Or from app directory
-cd apps/tanstack-demo
+cd apps/healthmetrics
 pnpm build
 ```
 
 #### **Preview Production Build:**
 ```bash
-cd apps/tanstack-demo
+cd apps/healthmetrics
 pnpm serve
 ```
 
@@ -100,7 +100,7 @@ pnpm serve
 ## **Project Structure**
 
 ```
-apps/tanstack-demo/
+apps/healthmetrics/
 ├── package.json           # Dependencies and scripts
 ├── vite.config.ts         # Vite configuration
 ├── tsconfig.json          # TypeScript configuration
@@ -355,7 +355,7 @@ docker-compose up -d
 ## **Next Steps**
 
 ### **Immediate Actions:**
-1. **Run the App**: `pnpm dev --filter=tanstack-demo`
+1. **Run the App**: `pnpm dev --filter=healthmetrics`
 2. **Explore Demo Routes**: Visit each demo page
 3. **Read the Code**: Understand the implementation patterns
 4. **Compare Performance**: Notice the development speed difference

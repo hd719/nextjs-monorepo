@@ -322,8 +322,8 @@ bun run dev --filter=portfolio
 # Web app (http://localhost:3000)
 bun run dev --filter=web
 
-# TanStack Start app (http://localhost:3003)
-bun run dev --filter=tanstack-demo
+# HealthMetrics app (http://localhost:3003)
+bun run dev --filter=healthmetrics
 ```
 
 #### **Build Applications**:
