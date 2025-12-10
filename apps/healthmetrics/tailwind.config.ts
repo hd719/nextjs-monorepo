@@ -21,6 +21,14 @@ const config = {
         xl: "1280px",
         "2xl": "1536px",
       },
+      // Container max widths per breakpoint
+      maxWidth: {
+        DEFAULT: "100%", // Mobile: Full width with padding
+        md: "768px", // Tablet
+        lg: "1024px",
+        xl: "1280px", // Desktop (matching cookbook)
+        "2xl": "1536px", // Wide
+      },
     },
     extend: {
       colors: {
@@ -60,9 +68,13 @@ const config = {
         },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        sm: "2px", // Small elements, badges
+        md: "4px", // Buttons, inputs
+        lg: "8px", // Cards, containers
+        xl: "12px", // Large cards, modals
+        "2xl": "16px", // Hero sections, special containers
+        // Also support CSS variable for dynamic theming
+        DEFAULT: "var(--radius)", // Default: 0.5rem (8px)
       },
       keyframes: {
         "accordion-down": {
