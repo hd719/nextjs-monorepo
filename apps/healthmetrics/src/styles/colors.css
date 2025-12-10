@@ -51,6 +51,9 @@
   --destructive: #ef4444;
   --destructive-foreground: #fafafa;
 
+  /* Warning/Amber (for approaching limits) */
+  --warning: #f59e0b;
+
   /* Border & Input */
   --border: #e5e5e5;
   --input: #e5e5e5;
@@ -102,6 +105,9 @@
   /* Destructive */
   --destructive: #b91c1c;
   --destructive-foreground: #fafafa;
+
+  /* Warning/Amber (for approaching limits) */
+  --warning: #f59e0b;
 
   /* Border & Input */
   --border: #1e293b;

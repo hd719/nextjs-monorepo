@@ -50,6 +50,7 @@ const config = {
           DEFAULT: "var(--destructive)",
           foreground: "var(--destructive-foreground)",
         },
+        warning: "var(--warning)",
         muted: {
           DEFAULT: "var(--muted)",
           foreground: "var(--muted-foreground)",
