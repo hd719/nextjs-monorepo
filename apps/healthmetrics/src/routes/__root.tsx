@@ -2,10 +2,18 @@ import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { ThemeProvider } from "@/components/theme-provider";
+import { fetchUser } from "@/server/auth";
 
 import appCss from "../styles.css?url";
 
 export const Route = createRootRoute({
+  beforeLoad: async () => {
+    const user = await fetchUser();
+    return {
+      user,
+    };
+  },
+
   head: () => ({
     meta: [
       {

@@ -9,9 +9,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useTheme } from "@/components/theme-provider";
+import { authClient } from "@/lib/auth-client";
+import { useNavigate } from "@tanstack/react-router";
 
 export function ProfileMenu() {
   const { theme, setTheme } = useTheme();
+  const navigate = useNavigate();
 
   // Helper to determine if we're in dark mode (for showing correct icon)
   const getIsDarkMode = () => {
@@ -29,6 +32,15 @@ export function ProfileMenu() {
   const handleToggleTheme = () => {
     // Toggle between light and dark
     setTheme(isDarkMode ? "light" : "dark");
+  };
+
+  const handleLogout = async () => {
+    try {
+      await authClient.signOut();
+      navigate({ to: "/" });
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
 
   return (
@@ -86,6 +98,7 @@ export function ProfileMenu() {
           className={isDarkMode ? "bg-slate-700" : "bg-slate-200"}
         />
         <DropdownMenuItem
+          onClick={handleLogout}
           className={`cursor-pointer hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${isDarkMode ? "text-white" : "text-slate-900"}`}
         >
           <LogOut className="mr-2 h-4 w-4" />
