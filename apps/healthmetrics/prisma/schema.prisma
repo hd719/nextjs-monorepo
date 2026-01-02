@@ -1,0 +1,549 @@
+// Prisma Schema for HealthMetrics
+// Migrated from Supabase to Prisma Postgres
+// Database: Prisma Postgres
+// ORM: Prisma
+
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider   = "prisma-client"
+  output     = "./generated"
+  engineType = "binary"
+}
+
+// ============================================================================
+// ENUMS
+// ============================================================================
+
+enum Gender {
+  male
+  female
+  other
+}
+
+enum ActivityLevel {
+  sedentary
+  lightly_active
+  moderately_active
+  very_active
+  extremely_active
+}
+
+enum GoalType {
+  lose_weight
+  maintain_weight
+  gain_weight
+  build_muscle
+}
+
+enum Units {
+  metric
+  imperial
+}
+
+enum FoodSource {
+  usda
+  edamam
+  open_food_facts
+  user
+  cookbook
+}
+
+enum ExerciseCategory {
+  cardio
+  strength
+  flexibility
+  sports
+  other
+}
+
+enum ExerciseDifficulty {
+  beginner
+  intermediate
+  advanced
+}
+
+enum ExerciseSource {
+  usda
+  user
+  verified
+}
+
+enum MealType {
+  breakfast
+  lunch
+  dinner
+  snack
+  other
+}
+
+enum FriendshipStatus {
+  pending
+  accepted
+  blocked
+}
+
+enum ChallengeType {
+  weight_loss
+  steps
+  workouts
+  nutrition
+  custom
+}
+
+enum UserGoalType {
+  weight_loss
+  weight_gain
+  muscle_gain
+  endurance
+  strength
+  nutrition
+}
+
+// ============================================================================
+// BETTER-AUTH MODELS
+// ============================================================================
+
+// Better-auth user table - handles authentication
+
+model BetterAuthUser {
+  id            String   @id
+  email         String   @unique
+  emailVerified Boolean  @default(false) @map("email_verified")
+  name          String?
+  image         String?
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  // Relations (named to match Better-Auth expectations - all lowercase)
+  betterauthsessions BetterAuthSession[] @relation("betterauthsessions")
+  betterauthaccounts BetterAuthAccount[] @relation("betterauthaccounts")
+  userProfile        User?
+
+  @@map("user")
+}
+
+// Better-auth session table
+
+model BetterAuthSession {
+  id        String   @id
+  userId    String   @map("user_id")
+  expiresAt DateTime @map("expires_at")
+  token     String   @unique
+  ipAddress String?  @map("ip_address")
+  userAgent String?  @map("user_agent")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations (relation name must match what BetterAuthUser expects)
+  user BetterAuthUser @relation("betterauthsessions", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("session")
+}
+
+// Better-auth account table (for OAuth providers)
+
+model BetterAuthAccount {
+  id           String    @id
+  userId       String    @map("user_id")
+  accountId    String    @map("account_id")
+  providerId   String    @map("provider_id")
+  accessToken  String?   @map("access_token")
+  refreshToken String?   @map("refresh_token")
+  idToken      String?   @map("id_token")
+  expiresAt    DateTime? @map("expires_at")
+  password     String?
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  // Relations
+  user BetterAuthUser @relation("betterauthaccounts", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("account")
+}
+
+// Better-auth verification table (for email verification tokens)
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime @map("expires_at")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  @@map("verification")
+}
+
+// ============================================================================
+// APPLICATION MODELS
+// ============================================================================
+
+// User profile table - extends better-auth user with fitness-specific data
+
+model User {
+  id                String         @id
+  displayName       String?        @map("display_name")
+  avatarUrl         String?        @map("avatar_url")
+  dateOfBirth       DateTime?      @map("date_of_birth") @db.Date
+  gender            Gender?
+  heightCm          Decimal?       @map("height_cm") @db.Decimal(5, 2)
+  activityLevel     ActivityLevel? @map("activity_level")
+  goalType          GoalType?      @map("goal_type")
+  targetWeightKg    Decimal?       @map("target_weight_kg") @db.Decimal(5, 2)
+  dailyCalorieGoal  Int?           @map("daily_calorie_goal")
+  dailyProteinGoalG Int?           @map("daily_protein_goal_g")
+  dailyCarbGoalG    Int?           @map("daily_carb_goal_g")
+  dailyFatGoalG     Int?           @map("daily_fat_goal_g")
+  unitsPreference   Units          @default(metric) @map("units_preference")
+  timezone          String         @default("UTC")
+  isAdmin           Boolean        @default(false) @map("is_admin")
+  createdAt         DateTime       @default(now()) @map("created_at")
+  updatedAt         DateTime       @updatedAt @map("updated_at")
+
+  // Relations
+  authUser                BetterAuthUser?        @relation(fields: [id], references: [id], onDelete: Cascade)
+  createdFoodItems        FoodItem[]             @relation("CreatedFoodItems")
+  createdExercises        Exercise[]             @relation("CreatedExercises")
+  diaryEntries            DiaryEntry[]
+  workoutLogs             WorkoutLog[]
+  weightEntries           WeightEntry[]
+  mealPlanTemplates       MealPlanTemplate[]
+  mealPlans               MealPlan[]
+  goals                   Goal[]
+  sentFriendships         Friendship[]           @relation("SentFriendships")
+  receivedFriendships     Friendship[]           @relation("ReceivedFriendships")
+  requestedFriendships    Friendship[]           @relation("RequestedByUser")
+  createdChallenges       Challenge[]
+  challengeParticipations ChallengeParticipant[]
+
+  @@map("users")
+}
+
+// Food items database - shared nutrition database
+
+model FoodItem {
+  id              String     @id @default(uuid())
+  name            String
+  brand           String?
+  barcode         String?    @unique
+  servingSizeG    Decimal    @map("serving_size_g") @db.Decimal(10, 2)
+  servingSizeUnit String?    @map("serving_size_unit")
+  caloriesPer100g Decimal    @map("calories_per_100g") @db.Decimal(10, 2)
+  proteinG        Decimal    @map("protein_g") @db.Decimal(10, 2)
+  carbsG          Decimal    @map("carbs_g") @db.Decimal(10, 2)
+  fatG            Decimal    @map("fat_g") @db.Decimal(10, 2)
+  fiberG          Decimal?   @map("fiber_g") @db.Decimal(10, 2)
+  sugarG          Decimal?   @map("sugar_g") @db.Decimal(10, 2)
+  sodiumMg        Decimal?   @map("sodium_mg") @db.Decimal(10, 2)
+  source          FoodSource
+  sourceId        String?    @map("source_id")
+  verified        Boolean    @default(false)
+  createdBy       String?    @map("created_by")
+  createdAt       DateTime   @default(now()) @map("created_at")
+  updatedAt       DateTime   @updatedAt @map("updated_at")
+
+  // Relations
+  creator      User?        @relation("CreatedFoodItems", fields: [createdBy], references: [id], onDelete: SetNull)
+  diaryEntries DiaryEntry[]
+  mealPlans    MealPlan[]
+
+  @@index([name])
+  @@index([barcode])
+  @@index([source])
+  @@index([verified])
+  @@index([createdBy])
+  @@map("food_items")
+}
+
+// Exercise database - shared exercise database with MET values
+
+model Exercise {
+  id           String              @id @default(uuid())
+  name         String
+  category     ExerciseCategory
+  muscleGroups String[]            @map("muscle_groups")
+  metValue     Decimal             @map("met_value") @db.Decimal(5, 2)
+  description  String?
+  instructions String[]
+  equipment    String[]
+  difficulty   ExerciseDifficulty?
+  source       ExerciseSource      @default(user)
+  verified     Boolean             @default(false)
+  createdBy    String?             @map("created_by")
+  createdAt    DateTime            @default(now()) @map("created_at")
+  updatedAt    DateTime            @updatedAt @map("updated_at")
+
+  // Relations
+  creator     User?        @relation("CreatedExercises", fields: [createdBy], references: [id], onDelete: SetNull)
+  workoutLogs WorkoutLog[]
+
+  @@index([name])
+  @@index([category])
+  @@index([verified])
+  @@index([createdBy])
+  @@map("exercises")
+}
+
+// Diary entries - daily food consumption tracking
+
+model DiaryEntry {
+  id         String   @id @default(uuid())
+  userId     String   @map("user_id")
+  date       DateTime @db.Date
+  foodItemId String   @map("food_item_id")
+  mealType   MealType @map("meal_type")
+  quantityG  Decimal  @map("quantity_g") @db.Decimal(10, 2)
+  servings   Decimal  @default(1.0) @db.Decimal(5, 2)
+  notes      String?
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  foodItem FoodItem @relation(fields: [foodItemId], references: [id], onDelete: Restrict)
+
+  @@index([userId])
+  @@index([date])
+  @@index([foodItemId])
+  @@index([userId, date])
+  @@map("diary_entries")
+}
+
+// Workout logs - exercise/workout history tracking
+
+model WorkoutLog {
+  id              String   @id @default(uuid())
+  userId          String   @map("user_id")
+  exerciseId      String   @map("exercise_id")
+  date            DateTime @db.Date
+  durationMinutes Int      @map("duration_minutes")
+  caloriesBurned  Int?     @map("calories_burned")
+  sets            Int?
+  reps            Int?
+  weightKg        Decimal? @map("weight_kg") @db.Decimal(6, 2)
+  distanceKm      Decimal? @map("distance_km") @db.Decimal(8, 2)
+  notes           String?
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exercise Exercise @relation(fields: [exerciseId], references: [id], onDelete: Restrict)
+
+  @@index([userId])
+  @@index([date])
+  @@index([exerciseId])
+  @@index([userId, date])
+  @@map("workout_logs")
+}
+
+// Weight entries - track weight and body measurements
+
+model WeightEntry {
+  id                String   @id @default(uuid())
+  userId            String   @map("user_id")
+  date              DateTime @db.Date
+  weightKg          Decimal? @map("weight_kg") @db.Decimal(5, 2)
+  bodyFatPercentage Decimal? @map("body_fat_percentage") @db.Decimal(5, 2)
+  muscleMassKg      Decimal? @map("muscle_mass_kg") @db.Decimal(5, 2)
+  waistCm           Decimal? @map("waist_cm") @db.Decimal(5, 2)
+  hipsCm            Decimal? @map("hips_cm") @db.Decimal(5, 2)
+  chestCm           Decimal? @map("chest_cm") @db.Decimal(5, 2)
+  thighCm           Decimal? @map("thigh_cm") @db.Decimal(5, 2)
+  bicepCm           Decimal? @map("bicep_cm") @db.Decimal(5, 2)
+  photoUrl          String?  @map("photo_url")
+  notes             String?
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([date])
+  @@index([userId, date])
+  @@map("weight_entries")
+}
+
+// Recipe cache - cached nutrition data from cookbook app
+
+model RecipeCache {
+  id                   String   @id @default(uuid())
+  recipeId             String   @unique @map("recipe_id")
+  recipeSlug           String   @map("recipe_slug")
+  servings             Int
+  totalCalories        Decimal  @map("total_calories") @db.Decimal(10, 2)
+  caloriesPerServing   Decimal  @map("calories_per_serving") @db.Decimal(10, 2)
+  proteinG             Decimal  @map("protein_g") @db.Decimal(10, 2)
+  carbsG               Decimal  @map("carbs_g") @db.Decimal(10, 2)
+  fatG                 Decimal  @map("fat_g") @db.Decimal(10, 2)
+  fiberG               Decimal? @map("fiber_g") @db.Decimal(10, 2)
+  sugarG               Decimal? @map("sugar_g") @db.Decimal(10, 2)
+  sodiumMg             Decimal? @map("sodium_mg") @db.Decimal(10, 2)
+  ingredientsBreakdown Json?    @map("ingredients_breakdown")
+  lastSyncedAt         DateTime @default(now()) @map("last_synced_at")
+  createdAt            DateTime @default(now()) @map("created_at")
+  updatedAt            DateTime @updatedAt @map("updated_at")
+
+  @@index([recipeId])
+  @@index([recipeSlug])
+  @@map("recipe_cache")
+}
+
+// Meal plan templates - reusable meal plan templates
+
+model MealPlanTemplate {
+  id            String   @id @default(uuid())
+  userId        String   @map("user_id")
+  name          String
+  description   String?
+  isPublic      Boolean  @default(false) @map("is_public")
+  meals         Json
+  totalCalories Decimal? @map("total_calories") @db.Decimal(10, 2)
+  totalProteinG Decimal? @map("total_protein_g") @db.Decimal(10, 2)
+  totalCarbsG   Decimal? @map("total_carbs_g") @db.Decimal(10, 2)
+  totalFatG     Decimal? @map("total_fat_g") @db.Decimal(10, 2)
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([isPublic])
+  @@map("meal_plan_templates")
+}
+
+// Meal plans - weekly meal planning
+
+model MealPlan {
+  id            String   @id @default(uuid())
+  userId        String   @map("user_id")
+  weekStartDate DateTime @map("week_start_date") @db.Date
+  dayOfWeek     Int      @map("day_of_week")
+  mealType      MealType @map("meal_type")
+  foodItemId    String?  @map("food_item_id")
+  recipeId      String?  @map("recipe_id")
+  quantityG     Decimal  @map("quantity_g") @db.Decimal(10, 2)
+  servings      Decimal  @default(1.0) @db.Decimal(5, 2)
+  notes         String?
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  foodItem FoodItem? @relation(fields: [foodItemId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([weekStartDate])
+  @@index([foodItemId])
+  @@index([userId, weekStartDate])
+  @@map("meal_plans")
+}
+
+// Goals - user fitness and nutrition goals
+
+model Goal {
+  id           String       @id @default(uuid())
+  userId       String       @map("user_id")
+  goalType     UserGoalType @map("goal_type")
+  title        String
+  targetValue  Decimal?     @map("target_value") @db.Decimal(10, 2)
+  targetUnit   String?      @map("target_unit")
+  startDate    DateTime     @map("start_date") @db.Date
+  targetDate   DateTime?    @map("target_date") @db.Date
+  currentValue Decimal?     @map("current_value") @db.Decimal(10, 2)
+  isActive     Boolean      @default(true) @map("is_active")
+  isCompleted  Boolean      @default(false) @map("is_completed")
+  completedAt  DateTime?    @map("completed_at")
+  notes        String?
+  createdAt    DateTime     @default(now()) @map("created_at")
+  updatedAt    DateTime     @updatedAt @map("updated_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([isActive])
+  @@index([isCompleted])
+  @@index([userId, isActive])
+  @@map("goals")
+}
+
+// Friendships - user friend relationships
+
+model Friendship {
+  id          String           @id @default(uuid())
+  userId      String           @map("user_id")
+  friendId    String           @map("friend_id")
+  status      FriendshipStatus
+  requestedBy String           @map("requested_by")
+  createdAt   DateTime         @default(now()) @map("created_at")
+  updatedAt   DateTime         @updatedAt @map("updated_at")
+
+  // Relations
+  user            User @relation("SentFriendships", fields: [userId], references: [id], onDelete: Cascade)
+  friend          User @relation("ReceivedFriendships", fields: [friendId], references: [id], onDelete: Cascade)
+  requestedByUser User @relation("RequestedByUser", fields: [requestedBy], references: [id], onDelete: Cascade)
+
+  @@unique([userId, friendId])
+  @@index([userId])
+  @@index([friendId])
+  @@index([status])
+  @@index([requestedBy])
+  @@map("friends")
+}
+
+// Challenges - community fitness challenges
+
+model Challenge {
+  id              String        @id @default(uuid())
+  createdBy       String        @map("created_by")
+  title           String
+  description     String?
+  challengeType   ChallengeType @map("challenge_type")
+  startDate       DateTime      @map("start_date") @db.Date
+  endDate         DateTime      @map("end_date") @db.Date
+  targetValue     Decimal?      @map("target_value") @db.Decimal(10, 2)
+  targetUnit      String?       @map("target_unit")
+  isPublic        Boolean       @default(false) @map("is_public")
+  maxParticipants Int?          @map("max_participants")
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  // Relations
+  creator      User                   @relation(fields: [createdBy], references: [id], onDelete: Cascade)
+  participants ChallengeParticipant[]
+
+  @@index([createdBy])
+  @@index([isPublic])
+  @@index([startDate])
+  @@index([endDate])
+  @@map("challenges")
+}
+
+// Challenge participants - tracks challenge participation
+
+model ChallengeParticipant {
+  id           String   @id @default(uuid())
+  challengeId  String   @map("challenge_id")
+  userId       String   @map("user_id")
+  currentValue Decimal? @map("current_value") @db.Decimal(10, 2)
+  rank         Int?
+  joinedAt     DateTime @default(now()) @map("joined_at")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  challenge Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([challengeId, userId])
+  @@index([challengeId])
+  @@index([userId])
+  @@map("challenge_participants")
+}

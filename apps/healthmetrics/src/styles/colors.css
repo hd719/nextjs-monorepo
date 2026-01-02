@@ -1,0 +1,123 @@
+/**
+ * Centralized Color System
+ *
+ * This is the single source of truth for all colors in the application.
+ * To change the entire app's color scheme, modify the hex values below.
+ *
+ * Format: --variable-name: #hexcolor;
+ *
+ * All colors use hex format for easy manipulation and dark mode support.
+ * Colors are organized by semantic purpose (primary, secondary, accent, etc.)
+ *
+ * Balanced Neutral Palette:
+ * - Primary: Deep slate/gray (#0F172A, #1E293B)
+ * - Accent: Vibrant green (#22C55E) for fitness theme
+ */
+
+:root {
+  /* ============================================
+     SEMANTIC COLOR MAPPINGS (Light Mode)
+     ============================================ */
+
+  /* Background & Foreground */
+  --background: #ffffff;
+  --foreground: #0f172a;
+
+  /* Card */
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+
+  /* Popover */
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+
+  /* Primary (Deep Slate/Gray - Balanced Neutral) */
+  --primary: #0f172a;
+  --primary-foreground: #fafafa;
+
+  /* Secondary */
+  --secondary: #f5f5f5;
+  --secondary-foreground: #0f172a;
+
+  /* Muted */
+  --muted: #f5f5f5;
+  --muted-foreground: #737373;
+
+  /* Accent (Vibrant Green - Fitness Theme) */
+  --accent: #22c55e;
+  --accent-foreground: #fafafa;
+
+  /* Destructive */
+  --destructive: #ef4444;
+  --destructive-foreground: #fafafa;
+
+  /* Warning/Amber (for approaching limits) */
+  --warning: #f59e0b;
+
+  /* Border & Input */
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: #0f172a;
+
+  /* Border Radius */
+  --radius: 0.5rem;
+
+  /* Chart Colors */
+  --chart-1: #f97316;
+  --chart-2: #0891b2;
+  --chart-3: #1e40af;
+  --chart-4: #fbbf24;
+  --chart-5: #f59e0b;
+}
+
+/* ============================================
+   DARK MODE OVERRIDES
+   ============================================ */
+.dark {
+  /* Background & Foreground */
+  --background: #020617;
+  --foreground: #fafafa;
+
+  /* Card */
+  --card: #020617;
+  --card-foreground: #fafafa;
+
+  /* Popover */
+  --popover: #020617;
+  --popover-foreground: #fafafa;
+
+  /* Primary */
+  --primary: #fafafa;
+  --primary-foreground: #0f172a;
+
+  /* Secondary */
+  --secondary: #1e293b;
+  --secondary-foreground: #fafafa;
+
+  /* Muted */
+  --muted: #1e293b;
+  --muted-foreground: #a3a3a3;
+
+  /* Accent (Vibrant Green - Fitness Theme) */
+  --accent: #16a34a;
+  --accent-foreground: #fafafa;
+
+  /* Destructive */
+  --destructive: #b91c1c;
+  --destructive-foreground: #fafafa;
+
+  /* Warning/Amber (for approaching limits) */
+  --warning: #f59e0b;
+
+  /* Border & Input */
+  --border: #1e293b;
+  --input: #1e293b;
+  --ring: #cbd5e1;
+
+  /* Chart Colors (Dark Mode) */
+  --chart-1: #3b82f6;
+  --chart-2: #10b981;
+  --chart-3: #f59e0b;
+  --chart-4: #8b5cf6;
+  --chart-5: #ec4899;
+}
