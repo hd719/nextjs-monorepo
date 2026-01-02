@@ -230,7 +230,7 @@ export type BetterAuthAccountWhereInput = {
   password?: Prisma.StringNullableFilter<"BetterAuthAccount"> | string | null
   createdAt?: Prisma.DateTimeFilter<"BetterAuthAccount"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"BetterAuthAccount"> | Date | string
-  user?: Prisma.XOR<Prisma.BetterAuthUserScalarRelationFilter, Prisma.BetterAuthUserWhereInput>
+  betterauthuser?: Prisma.XOR<Prisma.BetterAuthUserScalarRelationFilter, Prisma.BetterAuthUserWhereInput>
 }
 
 export type BetterAuthAccountOrderByWithRelationInput = {
@@ -245,7 +245,7 @@ export type BetterAuthAccountOrderByWithRelationInput = {
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  user?: Prisma.BetterAuthUserOrderByWithRelationInput
+  betterauthuser?: Prisma.BetterAuthUserOrderByWithRelationInput
 }
 
 export type BetterAuthAccountWhereUniqueInput = Prisma.AtLeast<{
@@ -263,7 +263,7 @@ export type BetterAuthAccountWhereUniqueInput = Prisma.AtLeast<{
   password?: Prisma.StringNullableFilter<"BetterAuthAccount"> | string | null
   createdAt?: Prisma.DateTimeFilter<"BetterAuthAccount"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"BetterAuthAccount"> | Date | string
-  user?: Prisma.XOR<Prisma.BetterAuthUserScalarRelationFilter, Prisma.BetterAuthUserWhereInput>
+  betterauthuser?: Prisma.XOR<Prisma.BetterAuthUserScalarRelationFilter, Prisma.BetterAuthUserWhereInput>
 }, "id">
 
 export type BetterAuthAccountOrderByWithAggregationInput = {
@@ -311,7 +311,7 @@ export type BetterAuthAccountCreateInput = {
   password?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.BetterAuthUserCreateNestedOneWithoutBetterauthaccountsInput
+  betterauthuser: Prisma.BetterAuthUserCreateNestedOneWithoutBetterauthaccountsInput
 }
 
 export type BetterAuthAccountUncheckedCreateInput = {
@@ -339,7 +339,7 @@ export type BetterAuthAccountUpdateInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.BetterAuthUserUpdateOneRequiredWithoutBetterauthaccountsNestedInput
+  betterauthuser?: Prisma.BetterAuthUserUpdateOneRequiredWithoutBetterauthaccountsNestedInput
 }
 
 export type BetterAuthAccountUncheckedUpdateInput = {
@@ -449,45 +449,45 @@ export type BetterAuthAccountMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type BetterAuthAccountCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.BetterAuthAccountCreateWithoutUserInput, Prisma.BetterAuthAccountUncheckedCreateWithoutUserInput> | Prisma.BetterAuthAccountCreateWithoutUserInput[] | Prisma.BetterAuthAccountUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.BetterAuthAccountCreateOrConnectWithoutUserInput | Prisma.BetterAuthAccountCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.BetterAuthAccountCreateManyUserInputEnvelope
+export type BetterAuthAccountCreateNestedManyWithoutBetterauthuserInput = {
+  create?: Prisma.XOR<Prisma.BetterAuthAccountCreateWithoutBetterauthuserInput, Prisma.BetterAuthAccountUncheckedCreateWithoutBetterauthuserInput> | Prisma.BetterAuthAccountCreateWithoutBetterauthuserInput[] | Prisma.BetterAuthAccountUncheckedCreateWithoutBetterauthuserInput[]
+  connectOrCreate?: Prisma.BetterAuthAccountCreateOrConnectWithoutBetterauthuserInput | Prisma.BetterAuthAccountCreateOrConnectWithoutBetterauthuserInput[]
+  createMany?: Prisma.BetterAuthAccountCreateManyBetterauthuserInputEnvelope
   connect?: Prisma.BetterAuthAccountWhereUniqueInput | Prisma.BetterAuthAccountWhereUniqueInput[]
 }
 
-export type BetterAuthAccountUncheckedCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.BetterAuthAccountCreateWithoutUserInput, Prisma.BetterAuthAccountUncheckedCreateWithoutUserInput> | Prisma.BetterAuthAccountCreateWithoutUserInput[] | Prisma.BetterAuthAccountUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.BetterAuthAccountCreateOrConnectWithoutUserInput | Prisma.BetterAuthAccountCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.BetterAuthAccountCreateManyUserInputEnvelope
+export type BetterAuthAccountUncheckedCreateNestedManyWithoutBetterauthuserInput = {
+  create?: Prisma.XOR<Prisma.BetterAuthAccountCreateWithoutBetterauthuserInput, Prisma.BetterAuthAccountUncheckedCreateWithoutBetterauthuserInput> | Prisma.BetterAuthAccountCreateWithoutBetterauthuserInput[] | Prisma.BetterAuthAccountUncheckedCreateWithoutBetterauthuserInput[]
+  connectOrCreate?: Prisma.BetterAuthAccountCreateOrConnectWithoutBetterauthuserInput | Prisma.BetterAuthAccountCreateOrConnectWithoutBetterauthuserInput[]
+  createMany?: Prisma.BetterAuthAccountCreateManyBetterauthuserInputEnvelope
   connect?: Prisma.BetterAuthAccountWhereUniqueInput | Prisma.BetterAuthAccountWhereUniqueInput[]
 }
 
-export type BetterAuthAccountUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.BetterAuthAccountCreateWithoutUserInput, Prisma.BetterAuthAccountUncheckedCreateWithoutUserInput> | Prisma.BetterAuthAccountCreateWithoutUserInput[] | Prisma.BetterAuthAccountUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.BetterAuthAccountCreateOrConnectWithoutUserInput | Prisma.BetterAuthAccountCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.BetterAuthAccountUpsertWithWhereUniqueWithoutUserInput | Prisma.BetterAuthAccountUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.BetterAuthAccountCreateManyUserInputEnvelope
+export type BetterAuthAccountUpdateManyWithoutBetterauthuserNestedInput = {
+  create?: Prisma.XOR<Prisma.BetterAuthAccountCreateWithoutBetterauthuserInput, Prisma.BetterAuthAccountUncheckedCreateWithoutBetterauthuserInput> | Prisma.BetterAuthAccountCreateWithoutBetterauthuserInput[] | Prisma.BetterAuthAccountUncheckedCreateWithoutBetterauthuserInput[]
+  connectOrCreate?: Prisma.BetterAuthAccountCreateOrConnectWithoutBetterauthuserInput | Prisma.BetterAuthAccountCreateOrConnectWithoutBetterauthuserInput[]
+  upsert?: Prisma.BetterAuthAccountUpsertWithWhereUniqueWithoutBetterauthuserInput | Prisma.BetterAuthAccountUpsertWithWhereUniqueWithoutBetterauthuserInput[]
+  createMany?: Prisma.BetterAuthAccountCreateManyBetterauthuserInputEnvelope
   set?: Prisma.BetterAuthAccountWhereUniqueInput | Prisma.BetterAuthAccountWhereUniqueInput[]
   disconnect?: Prisma.BetterAuthAccountWhereUniqueInput | Prisma.BetterAuthAccountWhereUniqueInput[]
   delete?: Prisma.BetterAuthAccountWhereUniqueInput | Prisma.BetterAuthAccountWhereUniqueInput[]
   connect?: Prisma.BetterAuthAccountWhereUniqueInput | Prisma.BetterAuthAccountWhereUniqueInput[]
-  update?: Prisma.BetterAuthAccountUpdateWithWhereUniqueWithoutUserInput | Prisma.BetterAuthAccountUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.BetterAuthAccountUpdateManyWithWhereWithoutUserInput | Prisma.BetterAuthAccountUpdateManyWithWhereWithoutUserInput[]
+  update?: Prisma.BetterAuthAccountUpdateWithWhereUniqueWithoutBetterauthuserInput | Prisma.BetterAuthAccountUpdateWithWhereUniqueWithoutBetterauthuserInput[]
+  updateMany?: Prisma.BetterAuthAccountUpdateManyWithWhereWithoutBetterauthuserInput | Prisma.BetterAuthAccountUpdateManyWithWhereWithoutBetterauthuserInput[]
   deleteMany?: Prisma.BetterAuthAccountScalarWhereInput | Prisma.BetterAuthAccountScalarWhereInput[]
 }
 
-export type BetterAuthAccountUncheckedUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.BetterAuthAccountCreateWithoutUserInput, Prisma.BetterAuthAccountUncheckedCreateWithoutUserInput> | Prisma.BetterAuthAccountCreateWithoutUserInput[] | Prisma.BetterAuthAccountUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.BetterAuthAccountCreateOrConnectWithoutUserInput | Prisma.BetterAuthAccountCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.BetterAuthAccountUpsertWithWhereUniqueWithoutUserInput | Prisma.BetterAuthAccountUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.BetterAuthAccountCreateManyUserInputEnvelope
+export type BetterAuthAccountUncheckedUpdateManyWithoutBetterauthuserNestedInput = {
+  create?: Prisma.XOR<Prisma.BetterAuthAccountCreateWithoutBetterauthuserInput, Prisma.BetterAuthAccountUncheckedCreateWithoutBetterauthuserInput> | Prisma.BetterAuthAccountCreateWithoutBetterauthuserInput[] | Prisma.BetterAuthAccountUncheckedCreateWithoutBetterauthuserInput[]
+  connectOrCreate?: Prisma.BetterAuthAccountCreateOrConnectWithoutBetterauthuserInput | Prisma.BetterAuthAccountCreateOrConnectWithoutBetterauthuserInput[]
+  upsert?: Prisma.BetterAuthAccountUpsertWithWhereUniqueWithoutBetterauthuserInput | Prisma.BetterAuthAccountUpsertWithWhereUniqueWithoutBetterauthuserInput[]
+  createMany?: Prisma.BetterAuthAccountCreateManyBetterauthuserInputEnvelope
   set?: Prisma.BetterAuthAccountWhereUniqueInput | Prisma.BetterAuthAccountWhereUniqueInput[]
   disconnect?: Prisma.BetterAuthAccountWhereUniqueInput | Prisma.BetterAuthAccountWhereUniqueInput[]
   delete?: Prisma.BetterAuthAccountWhereUniqueInput | Prisma.BetterAuthAccountWhereUniqueInput[]
   connect?: Prisma.BetterAuthAccountWhereUniqueInput | Prisma.BetterAuthAccountWhereUniqueInput[]
-  update?: Prisma.BetterAuthAccountUpdateWithWhereUniqueWithoutUserInput | Prisma.BetterAuthAccountUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.BetterAuthAccountUpdateManyWithWhereWithoutUserInput | Prisma.BetterAuthAccountUpdateManyWithWhereWithoutUserInput[]
+  update?: Prisma.BetterAuthAccountUpdateWithWhereUniqueWithoutBetterauthuserInput | Prisma.BetterAuthAccountUpdateWithWhereUniqueWithoutBetterauthuserInput[]
+  updateMany?: Prisma.BetterAuthAccountUpdateManyWithWhereWithoutBetterauthuserInput | Prisma.BetterAuthAccountUpdateManyWithWhereWithoutBetterauthuserInput[]
   deleteMany?: Prisma.BetterAuthAccountScalarWhereInput | Prisma.BetterAuthAccountScalarWhereInput[]
 }
 
@@ -495,7 +495,7 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
 
-export type BetterAuthAccountCreateWithoutUserInput = {
+export type BetterAuthAccountCreateWithoutBetterauthuserInput = {
   id: string
   accountId: string
   providerId: string
@@ -508,7 +508,7 @@ export type BetterAuthAccountCreateWithoutUserInput = {
   updatedAt?: Date | string
 }
 
-export type BetterAuthAccountUncheckedCreateWithoutUserInput = {
+export type BetterAuthAccountUncheckedCreateWithoutBetterauthuserInput = {
   id: string
   accountId: string
   providerId: string
@@ -521,30 +521,30 @@ export type BetterAuthAccountUncheckedCreateWithoutUserInput = {
   updatedAt?: Date | string
 }
 
-export type BetterAuthAccountCreateOrConnectWithoutUserInput = {
+export type BetterAuthAccountCreateOrConnectWithoutBetterauthuserInput = {
   where: Prisma.BetterAuthAccountWhereUniqueInput
-  create: Prisma.XOR<Prisma.BetterAuthAccountCreateWithoutUserInput, Prisma.BetterAuthAccountUncheckedCreateWithoutUserInput>
+  create: Prisma.XOR<Prisma.BetterAuthAccountCreateWithoutBetterauthuserInput, Prisma.BetterAuthAccountUncheckedCreateWithoutBetterauthuserInput>
 }
 
-export type BetterAuthAccountCreateManyUserInputEnvelope = {
-  data: Prisma.BetterAuthAccountCreateManyUserInput | Prisma.BetterAuthAccountCreateManyUserInput[]
+export type BetterAuthAccountCreateManyBetterauthuserInputEnvelope = {
+  data: Prisma.BetterAuthAccountCreateManyBetterauthuserInput | Prisma.BetterAuthAccountCreateManyBetterauthuserInput[]
   skipDuplicates?: boolean
 }
 
-export type BetterAuthAccountUpsertWithWhereUniqueWithoutUserInput = {
+export type BetterAuthAccountUpsertWithWhereUniqueWithoutBetterauthuserInput = {
   where: Prisma.BetterAuthAccountWhereUniqueInput
-  update: Prisma.XOR<Prisma.BetterAuthAccountUpdateWithoutUserInput, Prisma.BetterAuthAccountUncheckedUpdateWithoutUserInput>
-  create: Prisma.XOR<Prisma.BetterAuthAccountCreateWithoutUserInput, Prisma.BetterAuthAccountUncheckedCreateWithoutUserInput>
+  update: Prisma.XOR<Prisma.BetterAuthAccountUpdateWithoutBetterauthuserInput, Prisma.BetterAuthAccountUncheckedUpdateWithoutBetterauthuserInput>
+  create: Prisma.XOR<Prisma.BetterAuthAccountCreateWithoutBetterauthuserInput, Prisma.BetterAuthAccountUncheckedCreateWithoutBetterauthuserInput>
 }
 
-export type BetterAuthAccountUpdateWithWhereUniqueWithoutUserInput = {
+export type BetterAuthAccountUpdateWithWhereUniqueWithoutBetterauthuserInput = {
   where: Prisma.BetterAuthAccountWhereUniqueInput
-  data: Prisma.XOR<Prisma.BetterAuthAccountUpdateWithoutUserInput, Prisma.BetterAuthAccountUncheckedUpdateWithoutUserInput>
+  data: Prisma.XOR<Prisma.BetterAuthAccountUpdateWithoutBetterauthuserInput, Prisma.BetterAuthAccountUncheckedUpdateWithoutBetterauthuserInput>
 }
 
-export type BetterAuthAccountUpdateManyWithWhereWithoutUserInput = {
+export type BetterAuthAccountUpdateManyWithWhereWithoutBetterauthuserInput = {
   where: Prisma.BetterAuthAccountScalarWhereInput
-  data: Prisma.XOR<Prisma.BetterAuthAccountUpdateManyMutationInput, Prisma.BetterAuthAccountUncheckedUpdateManyWithoutUserInput>
+  data: Prisma.XOR<Prisma.BetterAuthAccountUpdateManyMutationInput, Prisma.BetterAuthAccountUncheckedUpdateManyWithoutBetterauthuserInput>
 }
 
 export type BetterAuthAccountScalarWhereInput = {
@@ -564,7 +564,7 @@ export type BetterAuthAccountScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"BetterAuthAccount"> | Date | string
 }
 
-export type BetterAuthAccountCreateManyUserInput = {
+export type BetterAuthAccountCreateManyBetterauthuserInput = {
   id: string
   accountId: string
   providerId: string
@@ -577,7 +577,7 @@ export type BetterAuthAccountCreateManyUserInput = {
   updatedAt?: Date | string
 }
 
-export type BetterAuthAccountUpdateWithoutUserInput = {
+export type BetterAuthAccountUpdateWithoutBetterauthuserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   accountId?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -590,7 +590,7 @@ export type BetterAuthAccountUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type BetterAuthAccountUncheckedUpdateWithoutUserInput = {
+export type BetterAuthAccountUncheckedUpdateWithoutBetterauthuserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   accountId?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -603,7 +603,7 @@ export type BetterAuthAccountUncheckedUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type BetterAuthAccountUncheckedUpdateManyWithoutUserInput = {
+export type BetterAuthAccountUncheckedUpdateManyWithoutBetterauthuserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   accountId?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -630,7 +630,7 @@ export type BetterAuthAccountSelect<ExtArgs extends runtime.Types.Extensions.Int
   password?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.BetterAuthUserDefaultArgs<ExtArgs>
+  betterauthuser?: boolean | Prisma.BetterAuthUserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["betterAuthAccount"]>
 
 export type BetterAuthAccountSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -645,7 +645,7 @@ export type BetterAuthAccountSelectCreateManyAndReturn<ExtArgs extends runtime.T
   password?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.BetterAuthUserDefaultArgs<ExtArgs>
+  betterauthuser?: boolean | Prisma.BetterAuthUserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["betterAuthAccount"]>
 
 export type BetterAuthAccountSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -660,7 +660,7 @@ export type BetterAuthAccountSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   password?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.BetterAuthUserDefaultArgs<ExtArgs>
+  betterauthuser?: boolean | Prisma.BetterAuthUserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["betterAuthAccount"]>
 
 export type BetterAuthAccountSelectScalar = {
@@ -679,19 +679,19 @@ export type BetterAuthAccountSelectScalar = {
 
 export type BetterAuthAccountOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "accountId" | "providerId" | "accessToken" | "refreshToken" | "idToken" | "expiresAt" | "password" | "createdAt" | "updatedAt", ExtArgs["result"]["betterAuthAccount"]>
 export type BetterAuthAccountInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.BetterAuthUserDefaultArgs<ExtArgs>
+  betterauthuser?: boolean | Prisma.BetterAuthUserDefaultArgs<ExtArgs>
 }
 export type BetterAuthAccountIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.BetterAuthUserDefaultArgs<ExtArgs>
+  betterauthuser?: boolean | Prisma.BetterAuthUserDefaultArgs<ExtArgs>
 }
 export type BetterAuthAccountIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.BetterAuthUserDefaultArgs<ExtArgs>
+  betterauthuser?: boolean | Prisma.BetterAuthUserDefaultArgs<ExtArgs>
 }
 
 export type $BetterAuthAccountPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "BetterAuthAccount"
   objects: {
-    user: Prisma.$BetterAuthUserPayload<ExtArgs>
+    betterauthuser: Prisma.$BetterAuthUserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1099,7 +1099,7 @@ readonly fields: BetterAuthAccountFieldRefs;
  */
 export interface Prisma__BetterAuthAccountClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.BetterAuthUserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BetterAuthUserDefaultArgs<ExtArgs>>): Prisma.Prisma__BetterAuthUserClient<runtime.Types.Result.GetResult<Prisma.$BetterAuthUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  betterauthuser<T extends Prisma.BetterAuthUserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BetterAuthUserDefaultArgs<ExtArgs>>): Prisma.Prisma__BetterAuthUserClient<runtime.Types.Result.GetResult<Prisma.$BetterAuthUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

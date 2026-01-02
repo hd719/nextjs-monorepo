@@ -137,8 +137,8 @@ model BetterAuthSession {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  // Relations (relation name must match what BetterAuthUser expects)
-  user BetterAuthUser @relation("betterauthsessions", fields: [userId], references: [id], onDelete: Cascade)
+  // Relations (field name must match better-auth adapter join key)
+  betterauthuser BetterAuthUser @relation("betterauthsessions", fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("session")
 }
@@ -158,8 +158,8 @@ model BetterAuthAccount {
   createdAt    DateTime  @default(now()) @map("created_at")
   updatedAt    DateTime  @updatedAt @map("updated_at")
 
-  // Relations
-  user BetterAuthUser @relation("betterauthaccounts", fields: [userId], references: [id], onDelete: Cascade)
+  // Relations (field name must match better-auth adapter join key)
+  betterauthuser BetterAuthUser @relation("betterauthaccounts", fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@map("account")

@@ -266,8 +266,8 @@ export type BetterAuthUserCreateInput = {
   image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  betterauthsessions?: Prisma.BetterAuthSessionCreateNestedManyWithoutUserInput
-  betterauthaccounts?: Prisma.BetterAuthAccountCreateNestedManyWithoutUserInput
+  betterauthsessions?: Prisma.BetterAuthSessionCreateNestedManyWithoutBetterauthuserInput
+  betterauthaccounts?: Prisma.BetterAuthAccountCreateNestedManyWithoutBetterauthuserInput
   userProfile?: Prisma.UserCreateNestedOneWithoutAuthUserInput
 }
 
@@ -279,8 +279,8 @@ export type BetterAuthUserUncheckedCreateInput = {
   image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  betterauthsessions?: Prisma.BetterAuthSessionUncheckedCreateNestedManyWithoutUserInput
-  betterauthaccounts?: Prisma.BetterAuthAccountUncheckedCreateNestedManyWithoutUserInput
+  betterauthsessions?: Prisma.BetterAuthSessionUncheckedCreateNestedManyWithoutBetterauthuserInput
+  betterauthaccounts?: Prisma.BetterAuthAccountUncheckedCreateNestedManyWithoutBetterauthuserInput
   userProfile?: Prisma.UserUncheckedCreateNestedOneWithoutAuthUserInput
 }
 
@@ -292,8 +292,8 @@ export type BetterAuthUserUpdateInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  betterauthsessions?: Prisma.BetterAuthSessionUpdateManyWithoutUserNestedInput
-  betterauthaccounts?: Prisma.BetterAuthAccountUpdateManyWithoutUserNestedInput
+  betterauthsessions?: Prisma.BetterAuthSessionUpdateManyWithoutBetterauthuserNestedInput
+  betterauthaccounts?: Prisma.BetterAuthAccountUpdateManyWithoutBetterauthuserNestedInput
   userProfile?: Prisma.UserUpdateOneWithoutAuthUserNestedInput
 }
 
@@ -305,8 +305,8 @@ export type BetterAuthUserUncheckedUpdateInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  betterauthsessions?: Prisma.BetterAuthSessionUncheckedUpdateManyWithoutUserNestedInput
-  betterauthaccounts?: Prisma.BetterAuthAccountUncheckedUpdateManyWithoutUserNestedInput
+  betterauthsessions?: Prisma.BetterAuthSessionUncheckedUpdateManyWithoutBetterauthuserNestedInput
+  betterauthaccounts?: Prisma.BetterAuthAccountUncheckedUpdateManyWithoutBetterauthuserNestedInput
   userProfile?: Prisma.UserUncheckedUpdateOneWithoutAuthUserNestedInput
 }
 
@@ -448,7 +448,7 @@ export type BetterAuthUserCreateWithoutBetterauthsessionsInput = {
   image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  betterauthaccounts?: Prisma.BetterAuthAccountCreateNestedManyWithoutUserInput
+  betterauthaccounts?: Prisma.BetterAuthAccountCreateNestedManyWithoutBetterauthuserInput
   userProfile?: Prisma.UserCreateNestedOneWithoutAuthUserInput
 }
 
@@ -460,7 +460,7 @@ export type BetterAuthUserUncheckedCreateWithoutBetterauthsessionsInput = {
   image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  betterauthaccounts?: Prisma.BetterAuthAccountUncheckedCreateNestedManyWithoutUserInput
+  betterauthaccounts?: Prisma.BetterAuthAccountUncheckedCreateNestedManyWithoutBetterauthuserInput
   userProfile?: Prisma.UserUncheckedCreateNestedOneWithoutAuthUserInput
 }
 
@@ -488,7 +488,7 @@ export type BetterAuthUserUpdateWithoutBetterauthsessionsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  betterauthaccounts?: Prisma.BetterAuthAccountUpdateManyWithoutUserNestedInput
+  betterauthaccounts?: Prisma.BetterAuthAccountUpdateManyWithoutBetterauthuserNestedInput
   userProfile?: Prisma.UserUpdateOneWithoutAuthUserNestedInput
 }
 
@@ -500,7 +500,7 @@ export type BetterAuthUserUncheckedUpdateWithoutBetterauthsessionsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  betterauthaccounts?: Prisma.BetterAuthAccountUncheckedUpdateManyWithoutUserNestedInput
+  betterauthaccounts?: Prisma.BetterAuthAccountUncheckedUpdateManyWithoutBetterauthuserNestedInput
   userProfile?: Prisma.UserUncheckedUpdateOneWithoutAuthUserNestedInput
 }
 
@@ -512,7 +512,7 @@ export type BetterAuthUserCreateWithoutBetterauthaccountsInput = {
   image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  betterauthsessions?: Prisma.BetterAuthSessionCreateNestedManyWithoutUserInput
+  betterauthsessions?: Prisma.BetterAuthSessionCreateNestedManyWithoutBetterauthuserInput
   userProfile?: Prisma.UserCreateNestedOneWithoutAuthUserInput
 }
 
@@ -524,7 +524,7 @@ export type BetterAuthUserUncheckedCreateWithoutBetterauthaccountsInput = {
   image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  betterauthsessions?: Prisma.BetterAuthSessionUncheckedCreateNestedManyWithoutUserInput
+  betterauthsessions?: Prisma.BetterAuthSessionUncheckedCreateNestedManyWithoutBetterauthuserInput
   userProfile?: Prisma.UserUncheckedCreateNestedOneWithoutAuthUserInput
 }
 
@@ -552,7 +552,7 @@ export type BetterAuthUserUpdateWithoutBetterauthaccountsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  betterauthsessions?: Prisma.BetterAuthSessionUpdateManyWithoutUserNestedInput
+  betterauthsessions?: Prisma.BetterAuthSessionUpdateManyWithoutBetterauthuserNestedInput
   userProfile?: Prisma.UserUpdateOneWithoutAuthUserNestedInput
 }
 
@@ -564,7 +564,7 @@ export type BetterAuthUserUncheckedUpdateWithoutBetterauthaccountsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  betterauthsessions?: Prisma.BetterAuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  betterauthsessions?: Prisma.BetterAuthSessionUncheckedUpdateManyWithoutBetterauthuserNestedInput
   userProfile?: Prisma.UserUncheckedUpdateOneWithoutAuthUserNestedInput
 }
 
@@ -576,8 +576,8 @@ export type BetterAuthUserCreateWithoutUserProfileInput = {
   image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  betterauthsessions?: Prisma.BetterAuthSessionCreateNestedManyWithoutUserInput
-  betterauthaccounts?: Prisma.BetterAuthAccountCreateNestedManyWithoutUserInput
+  betterauthsessions?: Prisma.BetterAuthSessionCreateNestedManyWithoutBetterauthuserInput
+  betterauthaccounts?: Prisma.BetterAuthAccountCreateNestedManyWithoutBetterauthuserInput
 }
 
 export type BetterAuthUserUncheckedCreateWithoutUserProfileInput = {
@@ -588,8 +588,8 @@ export type BetterAuthUserUncheckedCreateWithoutUserProfileInput = {
   image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  betterauthsessions?: Prisma.BetterAuthSessionUncheckedCreateNestedManyWithoutUserInput
-  betterauthaccounts?: Prisma.BetterAuthAccountUncheckedCreateNestedManyWithoutUserInput
+  betterauthsessions?: Prisma.BetterAuthSessionUncheckedCreateNestedManyWithoutBetterauthuserInput
+  betterauthaccounts?: Prisma.BetterAuthAccountUncheckedCreateNestedManyWithoutBetterauthuserInput
 }
 
 export type BetterAuthUserCreateOrConnectWithoutUserProfileInput = {
@@ -616,8 +616,8 @@ export type BetterAuthUserUpdateWithoutUserProfileInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  betterauthsessions?: Prisma.BetterAuthSessionUpdateManyWithoutUserNestedInput
-  betterauthaccounts?: Prisma.BetterAuthAccountUpdateManyWithoutUserNestedInput
+  betterauthsessions?: Prisma.BetterAuthSessionUpdateManyWithoutBetterauthuserNestedInput
+  betterauthaccounts?: Prisma.BetterAuthAccountUpdateManyWithoutBetterauthuserNestedInput
 }
 
 export type BetterAuthUserUncheckedUpdateWithoutUserProfileInput = {
@@ -628,8 +628,8 @@ export type BetterAuthUserUncheckedUpdateWithoutUserProfileInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  betterauthsessions?: Prisma.BetterAuthSessionUncheckedUpdateManyWithoutUserNestedInput
-  betterauthaccounts?: Prisma.BetterAuthAccountUncheckedUpdateManyWithoutUserNestedInput
+  betterauthsessions?: Prisma.BetterAuthSessionUncheckedUpdateManyWithoutBetterauthuserNestedInput
+  betterauthaccounts?: Prisma.BetterAuthAccountUncheckedUpdateManyWithoutBetterauthuserNestedInput
 }
 
 
