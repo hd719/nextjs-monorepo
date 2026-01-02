@@ -1,0 +1,43 @@
+@import "tailwindcss" reference;
+
+/**
+ * WaterGlass Component Styles
+ *
+ * Individual water glass button for tracking hydration
+ */
+
+/* ==========================================================================
+   Glass Button
+   ========================================================================== */
+
+.glassButton {
+  @apply flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-300;
+}
+
+.glassButton:hover {
+  background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.glassButton:active {
+  @apply scale-95;
+}
+
+.glassButtonFilled {
+  color: var(--accent);
+}
+
+.glassButtonEmpty {
+  color: var(--muted-foreground);
+}
+
+/* ==========================================================================
+   Glass Icon
+   ========================================================================== */
+
+.glassIcon {
+  @apply w-8 h-8 transition-all duration-300;
+}
+
+.glassIconFilled {
+  fill: color-mix(in srgb, var(--accent) 20%, transparent);
+}

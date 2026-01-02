@@ -1,0 +1,71 @@
+@import "tailwindcss" reference;
+
+/**
+ * WaterTracker Component Styles
+ * 
+ * Tracks daily water intake with interactive glasses
+ */
+
+/* ==========================================================================
+   Section Container
+   ========================================================================== */
+
+.section {
+  @apply space-y-4;
+}
+
+.heading {
+  @apply text-2xl font-bold;
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.header {
+  @apply flex items-center justify-between;
+}
+
+.title {
+  @apply text-lg flex items-center gap-2;
+}
+
+.titleIcon {
+  @apply w-5 h-5;
+  color: var(--accent);
+}
+
+.stats {
+  @apply text-sm font-medium;
+}
+
+.statsCurrent {
+  @apply text-2xl font-bold;
+  color: var(--accent);
+}
+
+.statsGoal {
+  color: var(--muted-foreground);
+}
+
+/* ==========================================================================
+   Content
+   ========================================================================== */
+
+.glassGrid {
+  @apply grid grid-cols-4 gap-2 mb-4;
+}
+
+.progress {
+  @apply text-center;
+}
+
+.progressText {
+  @apply text-sm;
+  color: var(--muted-foreground);
+}
+
+.progressSuccess {
+  @apply font-medium;
+  color: var(--accent);
+}

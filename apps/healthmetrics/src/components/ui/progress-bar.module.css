@@ -1,0 +1,61 @@
+@import "tailwindcss" reference;
+
+/**
+ * ProgressBar Component Styles
+ * 
+ * Color-coded progress bar with label and percentage display
+ */
+
+/* ==========================================================================
+   Container
+   ========================================================================== */
+
+.container {
+  @apply space-y-2;
+}
+
+/* ==========================================================================
+   Label Row
+   ========================================================================== */
+
+.labelRow {
+  @apply flex items-center justify-between text-sm;
+}
+
+.label {
+  color: var(--muted-foreground);
+}
+
+.percentage {
+  @apply font-medium;
+}
+
+/* ==========================================================================
+   Progress Track
+   ========================================================================== */
+
+.track {
+  @apply h-2 w-full rounded-full overflow-hidden;
+  background-color: var(--secondary);
+}
+
+/* ==========================================================================
+   Progress Bar Fill
+   ========================================================================== */
+
+.fill {
+  @apply h-full transition-all duration-500 ease-out rounded-full;
+}
+
+/* Color variants based on progress */
+.fillOnTrack {
+  background-color: var(--accent);
+}
+
+.fillWarning {
+  background-color: var(--warning);
+}
+
+.fillOverLimit {
+  background-color: var(--destructive);
+}

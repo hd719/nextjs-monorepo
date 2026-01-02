@@ -1,0 +1,23 @@
+@import "tailwindcss" reference;
+
+/**
+ * TodaysDiary Component Styles
+ * 
+ * Shows today's meal entries
+ */
+
+/* ==========================================================================
+   Section Container
+   ========================================================================== */
+
+.section {
+  @apply space-y-4;
+}
+
+.heading {
+  @apply text-2xl font-bold;
+}
+
+.mealsList {
+  @apply space-y-4;
+}

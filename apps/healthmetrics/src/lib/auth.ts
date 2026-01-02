@@ -44,6 +44,26 @@ export const auth = betterAuth({
         `✅ Password for user ${user.email} has been reset successfully.`
       );
     },
+    // Create User profile automatically after signup
+    afterSignUp: async ({ user }) => {
+      try {
+        // Create User profile linked to BetterAuthUser
+        await prisma.user.create({
+          data: {
+            id: user.id, // Same id as BetterAuthUser for 1:1 relationship
+            timezone: "UTC",
+            unitsPreference: "metric",
+          },
+        });
+        console.log(`Created User profile for ${user.email}`);
+      } catch (error) {
+        console.error(
+          `Failed to create User profile for ${user.email}:`,
+          error
+        );
+        // Don't throw - we don't want to block signup if profile creation fails
+      }
+    },
   },
   // Email verification (console logging for dev)
   emailVerification: {

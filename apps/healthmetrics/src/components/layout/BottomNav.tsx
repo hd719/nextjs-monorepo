@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Home, Book, Dumbbell, TrendingUp, User } from "lucide-react";
+import styles from "./BottomNav.module.css";
 
 interface NavItem {
   icon: React.ComponentType<{ className?: string }>;
@@ -17,8 +18,8 @@ const navItems: NavItem[] = [
 
 export function BottomNav() {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 lg:hidden bg-card border-t border-border z-50">
-      <div className="flex items-center justify-around h-16">
+    <nav className={styles.nav}>
+      <div className={styles.container}>
         {navItems.map((item) => {
           const Icon = item.icon;
 
@@ -26,14 +27,13 @@ export function BottomNav() {
             <Link
               key={item.href}
               to={item.href}
-              className="flex flex-col items-center justify-center flex-1 h-full transition-colors hover:bg-accent/10 text-muted-foreground"
+              className={styles.navLink}
               activeProps={{
-                className:
-                  "flex flex-col items-center justify-center flex-1 h-full transition-colors text-accent",
+                className: styles.navLinkActive,
               }}
             >
-              <Icon className="w-6 h-6" />
-              <span className="text-xs font-medium mt-1">{item.label}</span>
+              <Icon className={styles.icon} />
+              <span className={styles.label}>{item.label}</span>
             </Link>
           );
         })}

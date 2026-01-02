@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Home, Book, Dumbbell, TrendingUp, User } from "lucide-react";
+import styles from "./Sidebar.module.css";
 
 interface NavItem {
   icon: React.ComponentType<{ className?: string }>;
@@ -17,16 +18,16 @@ const navItems: NavItem[] = [
 
 export function Sidebar() {
   return (
-    <aside className="hidden lg:flex lg:flex-col lg:w-60 lg:fixed lg:left-0 lg:top-0 lg:h-screen lg:border-r lg:border-border lg:bg-card">
+    <aside className={styles.sidebar}>
       {/* Logo */}
-      <div className="flex items-center h-16 px-6 border-b border-border">
-        <h1 className="text-xl font-bold text-foreground">
-          <span className="text-accent">Health</span>Metrics
+      <div className={styles.logo}>
+        <h1 className={styles.logoText}>
+          <span className={styles.logoAccent}>Health</span>Metrics
         </h1>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-4 py-6 space-y-2">
+      <nav className={styles.nav}>
         {navItems.map((item) => {
           const Icon = item.icon;
 
@@ -34,14 +35,13 @@ export function Sidebar() {
             <Link
               key={item.href}
               to={item.href}
-              className="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground text-muted-foreground"
+              className={styles.navLink}
               activeProps={{
-                className:
-                  "flex items-center gap-3 px-4 py-3 rounded-lg transition-colors bg-accent text-accent-foreground",
+                className: styles.navLinkActive,
               }}
             >
-              <Icon className="w-5 h-5" />
-              <span className="font-medium">{item.label}</span>
+              <Icon className={styles.icon} />
+              <span className={styles.label}>{item.label}</span>
             </Link>
           );
         })}

@@ -1,0 +1,53 @@
+@import "tailwindcss" reference;
+
+/**
+ * FoodItem Component Styles
+ * 
+ * Individual food item in a meal
+ */
+
+/* ==========================================================================
+   Item Container
+   ========================================================================== */
+
+.item {
+  @apply flex items-center justify-between py-2 rounded-md px-2 -mx-2 transition-colors;
+}
+
+.item:hover {
+  background-color: color-mix(in srgb, var(--accent) 5%, transparent);
+}
+
+/* ==========================================================================
+   Content
+   ========================================================================== */
+
+.content {
+  @apply flex-1;
+}
+
+.details {
+  @apply flex items-baseline gap-2;
+}
+
+.name {
+  @apply text-sm;
+}
+
+.quantity {
+  @apply text-xs;
+  color: var(--muted-foreground);
+}
+
+/* ==========================================================================
+   Calories
+   ========================================================================== */
+
+.calories {
+  @apply text-sm font-medium;
+}
+
+.caloriesUnit {
+  @apply text-xs;
+  color: var(--muted-foreground);
+}

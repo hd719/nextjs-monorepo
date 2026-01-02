@@ -1,0 +1,42 @@
+@import "tailwindcss" reference;
+
+/**
+ * EmptyState Component Styles
+ *
+ * Reusable empty state component for displaying when no data is available
+ */
+
+/* ==========================================================================
+   Container
+   ========================================================================== */
+
+.container {
+  @apply flex flex-col items-center justify-center py-12 px-4 text-center;
+}
+
+/* ==========================================================================
+   Icon Container
+   ========================================================================== */
+
+.iconContainer {
+  @apply w-16 h-16 rounded-full flex items-center justify-center mb-4;
+  background-color: var(--muted);
+}
+
+.icon {
+  @apply w-8 h-8;
+  color: var(--muted-foreground);
+}
+
+/* ==========================================================================
+   Content
+   ========================================================================== */
+
+.title {
+  @apply text-lg font-semibold mb-2;
+}
+
+.description {
+  @apply text-sm mb-6 max-w-sm;
+  color: var(--muted-foreground);
+}

@@ -1,5 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import styles from "./AuthFormField.module.css";
 
 interface AuthFormFieldProps {
   name: string;
@@ -25,7 +26,7 @@ export function AuthFormField({
   autoComplete,
 }: AuthFormFieldProps) {
   return (
-    <div className="space-y-2">
+    <div className={styles.fieldContainer}>
       <Label htmlFor={name}>{label}</Label>
       <Input
         id={name}
@@ -40,7 +41,7 @@ export function AuthFormField({
         aria-describedby={error ? `${name}-error` : undefined}
       />
       {error && (
-        <p id={`${name}-error`} className="text-sm text-destructive">
+        <p id={`${name}-error`} className={styles.errorMessage}>
           {error}
         </p>
       )}

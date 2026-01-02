@@ -1,0 +1,88 @@
+@import "tailwindcss" reference;
+
+/**
+ * Header Component Styles
+ * 
+ * Main app header with search, notifications, and profile menu
+ */
+
+/* ==========================================================================
+   Header Container
+   ========================================================================== */
+
+.header {
+  @apply sticky top-0 z-40 border-b backdrop-blur;
+  border-color: var(--border);
+  background-color: color-mix(in srgb, var(--background) 95%, transparent);
+}
+
+@supports (backdrop-filter: blur(0)) {
+  .header {
+    background-color: color-mix(in srgb, var(--background) 60%, transparent);
+  }
+}
+
+.container {
+  @apply flex items-center h-16 px-4 lg:px-6;
+}
+
+/* ==========================================================================
+   Mobile Logo
+   ========================================================================== */
+
+.mobileLogo {
+  @apply flex lg:hidden items-center flex-1;
+}
+
+.logoText {
+  @apply text-lg font-bold;
+  color: var(--foreground);
+}
+
+/* ==========================================================================
+   Search Bar
+   ========================================================================== */
+
+.searchContainer {
+  @apply hidden lg:flex flex-1 items-center gap-2;
+}
+
+.searchWrapper {
+  @apply relative w-full max-w-md;
+}
+
+.searchIcon {
+  @apply absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4;
+  color: var(--muted-foreground);
+}
+
+.searchInput {
+  @apply w-full h-10 pl-10 pr-4 rounded-md border text-sm;
+  border-color: var(--input);
+  background-color: var(--background);
+}
+
+.searchInput::placeholder {
+  color: var(--muted-foreground);
+}
+
+.searchInput:focus {
+  @apply outline-none ring-2 ring-offset-2;
+  --tw-ring-color: var(--ring);
+}
+
+/* ==========================================================================
+   Actions
+   ========================================================================== */
+
+.actions {
+  @apply flex items-center gap-2;
+}
+
+.mobileSearchButton {
+  @apply lg:hidden;
+}
+
+.icon {
+  @apply w-5 h-5;
+}

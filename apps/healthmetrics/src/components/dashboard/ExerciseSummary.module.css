@@ -1,0 +1,96 @@
+@import "tailwindcss" reference;
+
+/**
+ * ExerciseSummary Component Styles
+ * 
+ * Shows today's exercise statistics
+ */
+
+/* ==========================================================================
+   Section Container
+   ========================================================================== */
+
+.section {
+  @apply space-y-4;
+}
+
+.heading {
+  @apply text-2xl font-bold;
+}
+
+.title {
+  @apply text-lg;
+}
+
+/* ==========================================================================
+   Grid Layout
+   ========================================================================== */
+
+.grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+}
+
+/* ==========================================================================
+   Stat Item
+   ========================================================================== */
+
+.statItem {
+  @apply flex flex-col items-center text-center;
+}
+
+.iconContainer {
+  @apply w-12 h-12 rounded-full flex items-center justify-center mb-3;
+  background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.iconContainerDestructive {
+  @apply w-12 h-12 rounded-full flex items-center justify-center mb-3;
+  background-color: color-mix(in srgb, var(--destructive) 10%, transparent);
+}
+
+.iconContainerPrimary {
+  @apply w-12 h-12 rounded-full flex items-center justify-center mb-3;
+  background-color: color-mix(in srgb, var(--primary) 10%, transparent);
+}
+
+.icon {
+  @apply w-6 h-6;
+  color: var(--accent);
+}
+
+.iconDestructive {
+  color: var(--destructive);
+}
+
+.iconPrimary {
+  color: var(--primary);
+}
+
+.value {
+  @apply text-2xl font-bold;
+}
+
+.label {
+  @apply text-sm;
+  color: var(--muted-foreground);
+}
+
+/* ==========================================================================
+   Loading State
+   ========================================================================== */
+
+.loadingGrid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+}
+
+.loadingItem {
+  @apply space-y-2;
+}
+
+/* ==========================================================================
+   Empty State
+   ========================================================================== */
+
+.emptyCardContent {
+  @apply p-0;
+}
