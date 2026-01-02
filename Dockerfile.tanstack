@@ -45,8 +45,8 @@ WORKDIR /app
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 vite
 
-# Copy the built application (TanStack Start outputs to .output)
-COPY --from=installer --chown=vite:nodejs /app/apps/healthmetrics/.output ./.output
+# Copy the built application (TanStack Start outputs to dist)
+COPY --from=installer --chown=vite:nodejs /app/apps/healthmetrics/dist ./dist
 COPY --from=installer --chown=vite:nodejs /app/apps/healthmetrics/package.json ./package.json
 
 # Switch to non-root user
@@ -54,5 +54,5 @@ USER vite
 
 EXPOSE 3003
 
-# Run the Nitro server (TanStack Start production server)
-CMD ["bun", "run", ".output/server/index.mjs"]
+# Run the TanStack Start production server using vite preview
+CMD ["bun", "run", "serve"]
