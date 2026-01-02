@@ -13,6 +13,7 @@ A modern **monorepo** containing multiple Next.js applications built with the la
 
 - **Portfolio**: [hameldesai.com](https://hameldesai.com) *(Production Ready)*
 - **Cookbook**: *Coming Soon* *(Active Development)*
+- **HealthMetrics**: *Coming Soon* *(Active Development)*
 
 ---
 
@@ -25,7 +26,7 @@ graph TB
             A1["Cookbook App - Recipe Management"]
             A2["Portfolio App - Personal Website"]
             A3["Web App - Demo/Starter"]
-            A4["TanStack Start - Modern Framework"]
+            A4["HealthMetrics - Fitness & Nutrition"]
         end
 
         subgraph "Shared Packages"
@@ -97,6 +98,98 @@ graph TB
 
 ---
 
+### **HealthMetrics App** - Fitness & Nutrition Platform
+
+> *A comprehensive fitness and nutrition tracking platform built to learn TanStack Start*
+
+**Purpose**: Full-featured fitness tracking application with nutrition logging, exercise tracking, weight management, and social features. Built as a learning project to master TanStack Start (modern full-stack React framework) while creating a MyFitnessPal-style platform.
+
+**Tech Stack**:
+- **Framework**: TanStack Start 1.143.11 (Full-Stack React)
+- **Frontend**: React 19.2.1 with Server Components
+- **Routing**: TanStack React Router (File-based)
+- **Build Tool**: Vite 7.1.7
+- **Database**: Prisma 7.2.0 with PostgreSQL (Prisma Postgres)
+- **Authentication**: Better Auth 1.4.10 (NOT NextAuth)
+- **UI Library**: Radix UI components
+- **Forms**: TanStack React Form + Zod validation
+- **Styling**: Tailwind CSS 4.0.6
+- **Icons**: Lucide React
+- **Testing**: Vitest + React Testing Library
+- **Themes**: Theme provider with dark/light mode
+
+**Key Features**:
+- **Authentication System**:
+  - Email/password with Better Auth
+  - Email verification flow
+  - Password reset functionality
+  - Session management with cookies
+  - Protected routes with TanStack Router
+  - Server-side authentication checks
+
+- **Nutrition Tracking**:
+  - Daily food diary with meal categorization
+  - Barcode scanning integration *(Planned)*
+  - Custom food creation
+  - Recipe nutrition analysis *(Planned)*
+  - Macro/micro nutrient tracking
+  - Calorie counting and goals
+
+- **Exercise & Fitness**:
+  - Workout logging and history
+  - Exercise database (cardio, strength, sports)
+  - Calorie burn calculations
+  - Activity level tracking
+  - Custom exercise creation
+
+- **Health Metrics**:
+  - Weight tracking with trends
+  - Body measurements
+  - Progress photos *(Planned)*
+  - Goal setting and milestones
+  - Water intake tracking
+
+- **Dashboard & Analytics**:
+  - Daily nutrition summary
+  - Exercise overview
+  - Recent activity feed
+  - Quick actions for logging
+  - Progress visualization
+
+- **Social Features** *(Planned)*:
+  - Friend connections
+  - Progress sharing
+  - Community challenges
+  - Motivation and support
+
+**Architecture Highlights**:
+- **File-Based Routing**: TanStack Router with nested layouts (`__root.tsx`, protected routes)
+- **Server Functions**: Type-safe server operations with `createServerFn()`
+- **Database Schema**: Comprehensive Prisma schema with:
+  - Better Auth tables (user, session, account, verification)
+  - App tables (users, food_items, diary_entries, exercises, weight_entries)
+  - Social tables (friends, challenges)
+  - Meal planning tables
+- **Authentication Flow**:
+  - Server-side session checks via `getRequestHeaders()`
+  - Cookie-based sessions with Better Auth
+  - Route protection with `beforeLoad` middleware
+  - Separate auth and app user tables (clean separation of concerns)
+
+**Learning Objectives**:
+- Master TanStack Start's full-stack capabilities
+- File-based routing with dynamic parameters
+- Server functions and middleware patterns
+- Advanced caching strategies
+- Form handling with server actions
+- Real-time features *(Future)*
+- Performance optimization
+- Error boundaries and loading states
+
+**Development Status**: Active Development
+
+---
+
 ### **Portfolio App** - Personal Website
 
 > *Professional portfolio showcasing my work experience and projects*
@@ -124,7 +217,7 @@ graph TB
 
 ---
 
-### **TanStack Start App** - Modern Full-Stack Framework
+
 
 ---
 
@@ -189,6 +282,47 @@ Jest configurations and presets for testing setup.
 - **Path Mapping**: Absolute imports with @ aliases
 - **Incremental Compilation**: Faster builds with project references
 
+#### **TanStack Start 1.143.11** - Full-Stack React Framework (HealthMetrics)
+- **File-Based Routing**: Automatic route generation from file structure
+- **Server Functions**: Type-safe server operations with `createServerFn()`
+- **React Router Integration**: Built on TanStack React Router
+- **SSR & Streaming**: Server-side rendering with streaming support
+- **Middleware System**: Route-level and global middleware
+- **Vite-Powered**: Fast development with Vite 7.1.7
+- **Developer Tools**: Built-in devtools for routing and debugging
+- **Type Safety**: Full TypeScript support throughout stack
+
+### **Authentication & Backend**
+
+#### **Better Auth 1.4.10** - Modern Authentication Framework (HealthMetrics)
+- **Framework Agnostic**: Works with any framework (TanStack Start integration)
+- **Email/Password**: Built-in email and password authentication
+- **Email Verification**: Customizable email verification flow
+- **Session Management**: Cookie-based sessions with caching
+- **Password Reset**: Built-in password reset functionality
+- **Database Adapters**: Prisma adapter for PostgreSQL
+- **Type Safety**: Full TypeScript support
+- **Security**: Automatic password hashing, CSRF protection
+- **NOT NextAuth**: Completely different package with modern architecture
+
+**Key Differences from NextAuth**:
+- Better TypeScript integration
+- Framework-agnostic design
+- Simpler API surface
+- Better Prisma integration
+- Modern cookie handling
+- Plugin system for extensions
+
+#### **Prisma 7.2.0** - Next-Generation ORM (HealthMetrics)
+- **Type-Safe Queries**: Auto-generated TypeScript types
+- **Migrations**: Version-controlled database migrations
+- **Multiple Databases**: PostgreSQL support with adapters
+- **Prisma Postgres**: Managed PostgreSQL service option
+- **Driver Adapters**: `@prisma/adapter-pg` for PostgreSQL
+- **Schema Management**: Declarative schema with relations
+- **Studio**: Visual database browser
+- **Breaking Changes**: New config system with `prisma.config.ts`
+
 ### **UI & Styling Libraries**
 
 #### **Tailwind CSS** - Utility-First Styling
@@ -228,27 +362,36 @@ Jest configurations and presets for testing setup.
 
 ### **Form Handling & Validation**
 
-#### **React Hook Form** - Client-Side Form Management
+#### **React Hook Form** - Client-Side Form Management (Cookbook)
 - **Performance**: Minimal re-renders with uncontrolled components
 - **Validation**: Built-in validation rules
 - **TypeScript**: Full type safety for form data
 - **Developer Experience**: Simple API with powerful features
 
+#### **TanStack React Form 1.0.0** - Advanced Form Management (HealthMetrics)
+- **Framework Agnostic**: Works with any React framework
+- **Type Safety**: Full TypeScript support with type inference
+- **Validation**: Built-in Zod adapter (`@tanstack/zod-form-adapter`)
+- **Field Arrays**: Complex nested form structures
+- **Performance**: Granular re-renders at field level
+- **Server Actions**: Integration with TanStack Start server functions
+
 #### **Zod** - Schema Validation
 - **Type-Safe**: TypeScript-first schema validation
 - **Runtime Safety**: Validates data at runtime
-- **Form Integration**: Perfect integration with React Hook Form
+- **Form Integration**: Works with both React Hook Form and TanStack Form
 - **Error Messages**: Detailed validation error messages
+- **Composable**: Reusable validation schemas
 
-#### **useActionState** - Server Actions (React 19)
+#### **useActionState** - Server Actions (React 19, Cookbook)
 - **Server Integration**: Direct connection to Next.js Server Actions
 - **Loading States**: Automatic pending state management
 - **Error Handling**: Built-in error state management
 - **Progressive Enhancement**: Works without JavaScript
 
-### **Backend & Database**
+### **Backend & Database Technologies**
 
-#### **Supabase** - Backend-as-a-Service
+#### **Supabase** - Backend-as-a-Service (Cookbook)
 - **PostgreSQL**: Powerful relational database
 - **Authentication**: Built-in user management and auth
 - **Real-time**: Live data synchronization
@@ -256,11 +399,19 @@ Jest configurations and presets for testing setup.
 - **Storage**: File upload and management
 - **Edge Functions**: Serverless functions at the edge
 
-#### **Server Actions** - Next.js Server-Side Logic
-- **Type Safety**: Full TypeScript support
-- **Direct Database Access**: No API routes needed
-- **Form Integration**: Works seamlessly with forms
-- **Caching**: Automatic caching and revalidation
+#### **Prisma + PostgreSQL** - ORM + Database (HealthMetrics)
+- **Type-Safe Database Client**: Auto-generated from schema
+- **Migrations**: Version-controlled schema changes
+- **Prisma Studio**: Visual database browser
+- **Connection Pooling**: Efficient database connections
+- **Better Auth Integration**: Prisma adapter for auth tables
+
+#### **Server Actions & Functions**
+- **Next.js Server Actions** (Cookbook): Type-safe server-side logic
+- **TanStack Start Server Functions** (HealthMetrics): `createServerFn()` for type-safe operations
+- **Direct Database Access**: No separate API layer needed
+- **Form Integration**: Seamless form submission handling
+- **Middleware Support**: Authentication and validation middleware
 
 ---
 
@@ -350,6 +501,29 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 3. Go to Settings > API
 4. Copy URL and anon key
 
+#### **HealthMetrics App** (Prisma + Better Auth):
+Create `apps/healthmetrics/.env.development.local`:
+```env
+# Database (Prisma Postgres)
+DATABASE_URL=your_postgresql_connection_string
+
+# Better Auth Configuration
+BETTER_AUTH_URL=http://localhost:3003
+APP_URL=http://localhost:3003
+BETTER_AUTH_SECRET=your_secret_key_here
+
+# API Keys (for nutrition data - optional)
+USDA_API_KEY=your_usda_key
+EDAMAM_APP_ID=your_edamam_id
+EDAMAM_APP_KEY=your_edamam_key
+```
+
+**Getting Started**:
+1. Set up PostgreSQL database (Prisma Postgres or local)
+2. Generate secret: `openssl rand -base64 32`
+3. Use 1Password CLI for secrets: `op run --env-file="./.env.development.local" -- bun prisma migrate dev`
+4. Generate Prisma Client: `op run --env-file="./.env.development.local" -- bun prisma generate`
+
 ---
 
 ## Development Workflow
@@ -400,7 +574,7 @@ docker-compose build
 docker build -f apps/web/Dockerfile -t nextjs-web:latest .
 docker build -f Dockerfile.cookbook -t nextjs-cookbook:latest .
 docker build -f Dockerfile.portfolio -t nextjs-portfolio:latest .
-docker build -f Dockerfile.tanstack -t tanstack-start:latest .
+docker build -f Dockerfile.tanstack -t healthmetrics:latest .
 ```
 
 > **Note**: All Docker images now use Bun as the runtime and package manager for faster builds and smaller image sizes.
@@ -424,7 +598,7 @@ docker-compose down
 - **Web App**: http://localhost:3000
 - **Portfolio**: http://localhost:3001  
 - **Cookbook**: http://localhost:3002
-- **TanStack Start**: http://localhost:3003
+- **HealthMetrics**: http://localhost:3003
 
 ---
 
@@ -453,6 +627,58 @@ docker-compose down
 - Recipe scaling (serving size adjustment) *(Planned)*
 - Print-friendly recipe format *(Planned)*
 
+### **HealthMetrics App Roadmap**
+
+#### **Phase 1: Core Features & Authentication** *(Current)*
+- ✅ Better Auth integration with email/password
+- ✅ Email verification flow
+- ✅ Protected routes with TanStack Router
+- ✅ User dashboard with daily summary
+- ✅ Basic food diary structure
+- ✅ Exercise tracking UI
+- ✅ Water intake tracking
+- ✅ Prisma schema with comprehensive models
+- Password reset functionality *(In Progress)*
+- Profile management *(In Progress)*
+
+#### **Phase 2: Nutrition Tracking**
+- Food database integration (USDA API) *(Planned)*
+- Meal logging with search *(Planned)*
+- Barcode scanning *(Planned)*
+- Custom food creation *(Planned)*
+- Macro/micro nutrient tracking *(Planned)*
+- Daily calorie goals *(Planned)*
+- Nutrition analytics and trends *(Planned)*
+
+#### **Phase 3: Exercise & Fitness**
+- Exercise database setup *(Planned)*
+- Workout logging *(Planned)*
+- Calorie burn calculations *(Planned)*
+- Activity level tracking *(Planned)*
+- Exercise history and analytics *(Planned)*
+- Custom exercise creation *(Planned)*
+
+#### **Phase 4: Advanced Features**
+- Weight tracking with graphs *(Planned)*
+- Body measurements *(Planned)*
+- Progress photos *(Planned)*
+- Goal setting and milestones *(Planned)*
+- Meal planning integration *(Planned)*
+- Shopping list generation *(Planned)*
+
+#### **Phase 5: Social & Community**
+- Friend connections *(Planned)*
+- Progress sharing *(Planned)*
+- Community challenges *(Planned)*
+- Activity feeds *(Planned)*
+- Real-time features with Supabase *(Planned)*
+
+#### **Phase 6: Cookbook Integration**
+- Recipe nutrition API endpoints *(Planned)*
+- One-click meal logging *(Planned)*
+- Recipe sync and favorites *(Planned)*
+- Cross-app authentication *(Planned)*
+
 ### **Infrastructure & DevOps**
 
 #### **Deployment & Infrastructure**
@@ -473,6 +699,48 @@ docker-compose down
 - **Load Balancer**: Traefik reverse proxy *(Planned)*
 - **Backup Strategy**: Automated backups *(Planned)*
 
+---
+
+## Key Technologies Comparison
+
+### **Authentication Approaches**
+
+| Feature | Cookbook (Next.js) | HealthMetrics (TanStack Start) |
+|---------|-------------------|--------------------------------|
+| **Auth Library** | Supabase Auth | Better Auth 1.4.10 |
+| **Session Management** | JWT + Cookies | Cookie-based sessions |
+| **Email Verification** | Built-in | Custom implementation |
+| **Database** | Supabase PostgreSQL | Prisma + PostgreSQL |
+| **Social Login** | Supported | Configurable |
+| **Type Safety** | Good | Excellent |
+
+### **Framework Comparison**
+
+| Aspect | Cookbook (Next.js 15) | HealthMetrics (TanStack Start) |
+|--------|----------------------|--------------------------------|
+| **Routing** | App Router (file-based) | TanStack Router (file-based) |
+| **Data Fetching** | Server Actions | Server Functions (`createServerFn()`) |
+| **Forms** | React Hook Form + useActionState | TanStack Form + Server Functions |
+| **State Management** | React 19 hooks | React 19 hooks + TanStack Router |
+| **Middleware** | Next.js middleware | TanStack Router middleware |
+| **Build Tool** | Next.js/Turbopack | Vite 7 |
+| **Learning Curve** | Moderate | Steeper (newer framework) |
+| **Flexibility** | High | Very High |
+
+### **Why Two Apps?**
+
+1. **Cookbook (Next.js)**:
+   - Industry-standard framework
+   - Production-ready patterns
+   - Rich ecosystem
+   - Easy deployment (Vercel)
+
+2. **HealthMetrics (TanStack Start)**:
+   - Learning cutting-edge technology
+   - More granular control
+   - Better TypeScript integration
+   - Framework-agnostic patterns
+   - Future-focused architecture
 
 ---
 
