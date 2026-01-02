@@ -1,0 +1,83 @@
+@import "tailwindcss" reference;
+
+/**
+ * QuickActions Component Styles
+ * 
+ * Quick action buttons for common tasks
+ */
+
+/* ==========================================================================
+   Section Container
+   ========================================================================== */
+
+.section {
+  @apply space-y-4;
+}
+
+.heading {
+  @apply text-2xl font-bold;
+}
+
+.grid {
+  @apply grid grid-cols-1 sm:grid-cols-3 gap-4;
+}
+
+/* ==========================================================================
+   Action Card
+   ========================================================================== */
+
+.actionCard {
+  @apply transition-shadow cursor-pointer;
+}
+
+.actionCard:hover {
+  box-shadow:
+    var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000),
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.actionButton {
+  @apply w-full h-full p-6 flex flex-col items-center gap-3;
+}
+
+.actionButton:hover {
+  background-color: color-mix(in srgb, var(--accent) 5%, transparent);
+}
+
+/* ==========================================================================
+   Icon Container
+   ========================================================================== */
+
+.iconContainer {
+  @apply w-12 h-12 rounded-full flex items-center justify-center transition-colors;
+  background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+/* When card is hovered, change icon container opacity */
+.actionCard:hover .iconContainer {
+  background-color: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.icon {
+  @apply w-6 h-6;
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   Text Content
+   ========================================================================== */
+
+.content {
+  @apply text-center space-y-1;
+}
+
+.label {
+  @apply font-semibold;
+}
+
+.description {
+  @apply text-xs;
+  color: var(--muted-foreground);
+}

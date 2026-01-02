@@ -9,6 +9,7 @@ import { AuthFormField } from "@/components/forms/AuthFormField";
 import { signupSchema, type SignupFormData } from "@/lib/validation";
 import { AUTH_ERRORS } from "@/constants/errors";
 import { getErrorMessage } from "@/utils/auth-helpers";
+import styles from "@/components/forms/AuthCard.module.css";
 
 export const Route = createFileRoute("/signup/")({
   component: SignupPage,
@@ -100,7 +101,7 @@ function SignupPage() {
         title="Create Account"
         description="Enter your details to get started"
       >
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className={styles.formContainer}>
           {successMessage && (
             <div className="p-3 rounded-md bg-accent/10 border border-accent/20">
               <p className="text-sm text-accent">{successMessage}</p>
@@ -166,16 +167,13 @@ function SignupPage() {
             )}
           </Button>
 
-          <div className="text-center text-sm">
-            <span className="text-muted-foreground">
-              Already have an account?{" "}
-            </span>
-            <Link
-              to="/login"
-              className="text-accent hover:underline font-medium"
-            >
-              Log in
-            </Link>
+          <div className={styles.linkSection}>
+            <div>
+              <span className={styles.linkText}>Already have an account? </span>
+              <Link to="/login" className={styles.link}>
+                Log in
+              </Link>
+            </div>
           </div>
         </form>
       </AuthCard>

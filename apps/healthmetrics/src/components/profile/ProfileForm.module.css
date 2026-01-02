@@ -1,0 +1,182 @@
+@import "tailwindcss" reference;
+
+/**
+ * ProfileForm Component Styles
+ * 
+ * This module contains all styling for the ProfileForm component.
+ * Uses Tailwind's @apply directive for consistent design tokens.
+ */
+
+/* ==========================================================================
+   Form Container
+   ========================================================================== */
+
+.form {
+  @apply space-y-6;
+}
+
+/* ==========================================================================
+   Messages
+   ========================================================================== */
+
+.successMessage {
+  @apply p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-md;
+}
+
+.successText {
+  @apply text-sm text-green-800 dark:text-green-200;
+}
+
+.errorMessage {
+  @apply p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md;
+}
+
+.errorText {
+  @apply text-sm text-red-800 dark:text-red-200;
+}
+
+/* ==========================================================================
+   Avatar Section
+   ========================================================================== */
+
+.avatarContainer {
+  @apply flex flex-col items-center gap-4;
+}
+
+.avatarPreview {
+  @apply w-32 h-32 rounded-full overflow-hidden flex items-center justify-center;
+  background-color: var(--muted);
+  border: 3px solid;
+  border-color: var(--border);
+}
+
+.avatarImage {
+  @apply w-full h-full object-cover;
+}
+
+.avatarPlaceholder {
+  @apply w-16 h-16;
+  color: var(--muted-foreground);
+}
+
+.avatarActions {
+  @apply flex flex-col items-center gap-2 text-center;
+}
+
+.avatarLabel {
+  @apply inline-flex items-center gap-2 px-4 py-2 rounded-md cursor-pointer transition-colors;
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.avatarLabel:hover {
+  background-color: color-mix(in srgb, var(--accent) 90%, black);
+}
+
+.uploadIcon {
+  @apply w-4 h-4;
+}
+
+.avatarInput {
+  @apply hidden;
+}
+
+.avatarHelp {
+  @apply text-xs;
+  color: var(--muted-foreground);
+}
+
+/* ==========================================================================
+   Form Sections
+   ========================================================================== */
+
+.formSection {
+  @apply p-6;
+}
+
+.sectionHeading {
+  @apply text-xl font-semibold mb-4;
+}
+
+.sectionDescription {
+  @apply text-sm mb-4;
+  color: var(--muted-foreground);
+}
+
+.fieldGrid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+}
+
+/* Email field spans full width */
+.emailField {
+  @apply md:col-span-2;
+}
+
+.readOnlyInput {
+  @apply opacity-60 cursor-not-allowed;
+  background-color: var(--muted);
+}
+
+.helperText {
+  @apply text-xs mt-1;
+  color: var(--muted-foreground);
+}
+
+/* ==========================================================================
+   Select Inputs
+   ========================================================================== */
+
+.selectInput {
+  @apply flex h-10 w-full rounded-md border px-3 py-2 text-sm;
+  border-color: var(--input);
+  background-color: var(--background);
+  --tw-ring-offset-color: var(--background);
+}
+
+.selectInput:focus-visible {
+  @apply outline-none ring-2 ring-offset-2;
+  --tw-ring-color: var(--ring);
+}
+
+/* ==========================================================================
+   Height Display
+   ========================================================================== */
+
+.heightDisplay {
+  @apply text-xs mt-1;
+  color: var(--muted-foreground);
+}
+
+/* ==========================================================================
+   Macro Breakdown Section
+   ========================================================================== */
+
+.macroContainer {
+  @apply mt-4 p-4 rounded-md;
+  background-color: var(--muted);
+}
+
+.macroTitle {
+  @apply text-sm font-medium mb-2;
+}
+
+.macroList {
+  @apply text-xs space-y-1;
+  color: var(--muted-foreground);
+}
+
+/* ==========================================================================
+   Submit Section
+   ========================================================================== */
+
+.submitContainer {
+  @apply flex justify-end;
+}
+
+/* ==========================================================================
+   Button Icon Spacing
+   ========================================================================== */
+
+.buttonIcon {
+  @apply w-4 h-4 mr-2;
+}

@@ -6,7 +6,9 @@
     "dev": "vite dev --port 3003",
     "build": "vite build",
     "serve": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "prisma:seed": "bun prisma/seed.ts",
+    "prisma:backfill-users": "bun prisma/backfill-user-profiles.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.2.0",
@@ -45,6 +47,7 @@
     "@vitejs/plugin-react": "^5.0.4",
     "jsdom": "^27.0.0",
     "tailwindcss-animate": "^1.0.7",
+    "tsx": "^4.19.2",
     "typescript": "^5.7.2",
     "vite": "^7.1.7",
     "vitest": "^3.0.5",

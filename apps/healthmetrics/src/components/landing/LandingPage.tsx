@@ -8,21 +8,22 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import styles from "./LandingPage.module.css";
 
 export function LandingPage() {
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <header className="border-b">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
-                <Activity className="w-6 h-6 text-accent" />
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <div className={styles.headerContent}>
+          <div className={styles.headerInner}>
+            <Link to="/" className={styles.logoLink}>
+              <div className={styles.logoIcon}>
+                <Activity className={styles.logoIconSvg} />
               </div>
-              <span className="text-xl font-bold">HealthMetrics</span>
+              <span className={styles.logoText}>HealthMetrics</span>
             </Link>
 
-            <div className="flex items-center gap-3">
+            <div className={styles.headerActions}>
               <ThemeToggle />
               <Button variant="ghost" asChild>
                 <Link to="/login">Log In</Link>
@@ -35,19 +36,19 @@ export function LandingPage() {
         </div>
       </header>
 
-      <main className="flex-1">
-        <section className="container mx-auto px-4 py-20 lg:py-32">
-          <div className="max-w-3xl mx-auto text-center space-y-8">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
+      <main className={styles.main}>
+        <section className={styles.heroSection}>
+          <div className={styles.heroContent}>
+            <h1 className={styles.heroTitle}>
               Track Your Health.
               <br />
-              <span className="text-accent">Reach Your Goals.</span>
+              <span className={styles.heroAccent}>Reach Your Goals.</span>
             </h1>
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className={styles.heroDescription}>
               Monitor your nutrition, log workouts, and track progress with
               simple, powerful tools.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className={styles.heroActions}>
               <Button size="lg" asChild>
                 <Link to="/signup">Get Started Free</Link>
               </Button>
@@ -58,21 +59,21 @@ export function LandingPage() {
           </div>
         </section>
 
-        <section className="border-t bg-muted/30">
-          <div className="container mx-auto px-4 py-20">
-            <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">
+        <section className={styles.featuresSection}>
+          <div className={styles.featuresSectionContent}>
+            <div className={styles.featuresSectionInner}>
+              <h2 className={styles.featuresTitle}>
                 Everything you need in one place
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className={styles.featuresGrid}>
                 <Card>
-                  <CardHeader className="text-center space-y-4">
-                    <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mx-auto">
-                      <Apple className="w-6 h-6 text-accent" />
+                  <CardHeader className={styles.featureCardHeader}>
+                    <div className={styles.featureIcon}>
+                      <Apple className={styles.featureIconSvg} />
                     </div>
                     <div>
                       <CardTitle>Nutrition</CardTitle>
-                      <CardDescription className="mt-2">
+                      <CardDescription className={styles.featureDescription}>
                         Track meals and monitor your daily calorie and macro
                         intake
                       </CardDescription>
@@ -81,13 +82,13 @@ export function LandingPage() {
                 </Card>
 
                 <Card>
-                  <CardHeader className="text-center space-y-4">
-                    <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mx-auto">
-                      <Dumbbell className="w-6 h-6 text-accent" />
+                  <CardHeader className={styles.featureCardHeader}>
+                    <div className={styles.featureIcon}>
+                      <Dumbbell className={styles.featureIconSvg} />
                     </div>
                     <div>
                       <CardTitle>Exercise</CardTitle>
-                      <CardDescription className="mt-2">
+                      <CardDescription className={styles.featureDescription}>
                         Log workouts and track your activity levels over time
                       </CardDescription>
                     </div>
@@ -95,13 +96,13 @@ export function LandingPage() {
                 </Card>
 
                 <Card>
-                  <CardHeader className="text-center space-y-4">
-                    <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mx-auto">
-                      <TrendingUp className="w-6 h-6 text-accent" />
+                  <CardHeader className={styles.featureCardHeader}>
+                    <div className={styles.featureIcon}>
+                      <TrendingUp className={styles.featureIconSvg} />
                     </div>
                     <div>
                       <CardTitle>Progress</CardTitle>
-                      <CardDescription className="mt-2">
+                      <CardDescription className={styles.featureDescription}>
                         Visualize your journey with charts and insights
                       </CardDescription>
                     </div>
@@ -112,13 +113,11 @@ export function LandingPage() {
           </div>
         </section>
 
-        <section className="border-t">
-          <div className="container mx-auto px-4 py-20">
-            <div className="max-w-3xl mx-auto text-center space-y-8">
-              <h2 className="text-3xl sm:text-4xl font-bold">
-                Ready to get started?
-              </h2>
-              <p className="text-lg text-muted-foreground">
+        <section className={styles.ctaSection}>
+          <div className={styles.ctaSectionContent}>
+            <div className={styles.ctaContent}>
+              <h2 className={styles.ctaTitle}>Ready to get started?</h2>
+              <p className={styles.ctaDescription}>
                 Join thousands of users tracking their health journey.
               </p>
               <Button size="lg" asChild>
@@ -129,24 +128,24 @@ export function LandingPage() {
         </section>
       </main>
 
-      <footer className="border-t">
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <Activity className="w-4 h-4" />
+      <footer className={styles.footer}>
+        <div className={styles.footerContent}>
+          <div className={styles.footerInner}>
+            <div className={styles.footerBranding}>
+              <Activity className={styles.footerIcon} />
               <span>© 2025 HealthMetrics</span>
             </div>
-            <div className="flex gap-6">
-              <a href="#" className="hover:text-foreground transition-colors">
+            <div className={styles.footerLinks}>
+              <a href="#" className={styles.footerLink}>
                 About
               </a>
-              <a href="#" className="hover:text-foreground transition-colors">
+              <a href="#" className={styles.footerLink}>
                 Privacy
               </a>
-              <a href="#" className="hover:text-foreground transition-colors">
+              <a href="#" className={styles.footerLink}>
                 Terms
               </a>
-              <a href="#" className="hover:text-foreground transition-colors">
+              <a href="#" className={styles.footerLink}>
                 Support
               </a>
             </div>

@@ -1,0 +1,77 @@
+@import "tailwindcss" reference;
+
+/**
+ * MealCard Component Styles
+ * 
+ * Card displaying a meal with food items
+ */
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.header {
+  @apply pb-3;
+}
+
+.headerContent {
+  @apply flex items-center justify-between;
+}
+
+.headerLeft {
+  @apply flex items-center gap-2;
+}
+
+.icon {
+  @apply w-5 h-5;
+  color: var(--accent);
+}
+
+.title {
+  @apply text-lg font-semibold;
+}
+
+.totalCalories {
+  @apply text-sm font-medium;
+}
+
+.caloriesUnit {
+  color: var(--muted-foreground);
+}
+
+/* ==========================================================================
+   Content
+   ========================================================================== */
+
+.content {
+  @apply space-y-2;
+}
+
+.foodList {
+  @apply space-y-1;
+}
+
+/* ==========================================================================
+   Add Button
+   ========================================================================== */
+
+.addButton {
+  @apply w-full justify-start;
+  color: var(--muted-foreground);
+}
+
+.addButton:hover {
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   Loading State
+   ========================================================================== */
+
+.loadingContent {
+  @apply space-y-2;
+}
+
+.loadingFoodList {
+  @apply space-y-2;
+}

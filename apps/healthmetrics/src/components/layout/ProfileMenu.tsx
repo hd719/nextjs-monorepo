@@ -11,6 +11,8 @@ import {
 import { useTheme } from "@/components/theme-provider";
 import { authClient } from "@/lib/auth-client";
 import { useNavigate } from "@tanstack/react-router";
+import { cn } from "@/lib/utils";
+import styles from "./ProfileMenu.module.css";
 
 export function ProfileMenu() {
   const { theme, setTheme } = useTheme();
@@ -34,6 +36,10 @@ export function ProfileMenu() {
     setTheme(isDarkMode ? "light" : "dark");
   };
 
+  const handleProfileClick = () => {
+    navigate({ to: "/profile" });
+  };
+
   const handleLogout = async () => {
     try {
       await authClient.signOut();
@@ -47,61 +53,74 @@ export function ProfileMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" aria-label="Profile menu">
-          <User className="w-5 h-5" />
+          <User className={styles.menuIcon} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className={`w-56 shadow-lg ${
-          isDarkMode
-            ? "bg-[#020617] text-white border-slate-700"
-            : "bg-white text-slate-900 border-slate-200"
-        }`}
+        className={cn(
+          styles.menuContent,
+          isDarkMode ? styles.menuContentDark : styles.menuContentLight
+        )}
       >
         <DropdownMenuLabel
-          className={isDarkMode ? "text-white" : "text-slate-900"}
+          className={isDarkMode ? styles.menuLabelDark : styles.menuLabelLight}
         >
           My Account
         </DropdownMenuLabel>
         <DropdownMenuSeparator
-          className={isDarkMode ? "bg-slate-700" : "bg-slate-200"}
+          className={isDarkMode ? styles.separatorDark : styles.separatorLight}
         />
         <DropdownMenuItem
-          className={`cursor-pointer hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${isDarkMode ? "text-white" : "text-slate-900"}`}
+          onClick={handleProfileClick}
+          className={cn(
+            styles.menuItem,
+            isDarkMode ? styles.menuItemDark : styles.menuItemLight
+          )}
         >
-          <User className="mr-2 h-4 w-4" />
+          <User className={styles.itemIcon} />
           <span>Profile</span>
         </DropdownMenuItem>
         <DropdownMenuItem
-          className={`cursor-pointer hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${isDarkMode ? "text-white" : "text-slate-900"}`}
+          onClick={handleProfileClick}
+          className={cn(
+            styles.menuItem,
+            isDarkMode ? styles.menuItemDark : styles.menuItemLight
+          )}
         >
-          <Settings className="mr-2 h-4 w-4" />
+          <Settings className={styles.itemIcon} />
           <span>Settings</span>
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={handleToggleTheme}
-          className={`cursor-pointer hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${isDarkMode ? "text-white" : "text-slate-900"}`}
+          className={cn(
+            styles.menuItem,
+            isDarkMode ? styles.menuItemDark : styles.menuItemLight
+          )}
         >
           {isDarkMode ? (
             <>
-              <Sun className="mr-2 h-4 w-4" />
+              <Sun className={styles.itemIcon} />
               <span>Light Mode</span>
             </>
           ) : (
             <>
-              <Moon className="mr-2 h-4 w-4" />
+              <Moon className={styles.itemIcon} />
               <span>Dark Mode</span>
             </>
           )}
         </DropdownMenuItem>
         <DropdownMenuSeparator
-          className={isDarkMode ? "bg-slate-700" : "bg-slate-200"}
+          className={isDarkMode ? styles.separatorDark : styles.separatorLight}
         />
         <DropdownMenuItem
           onClick={handleLogout}
-          className={`cursor-pointer hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${isDarkMode ? "text-white" : "text-slate-900"}`}
+          className={cn(
+            styles.menuItem,
+            isDarkMode ? styles.menuItemDark : styles.menuItemLight
+          )}
         >
-          <LogOut className="mr-2 h-4 w-4" />
+          <LogOut className={styles.itemIcon} />
           <span>Log out</span>
         </DropdownMenuItem>
       </DropdownMenuContent>

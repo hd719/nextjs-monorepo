@@ -3,6 +3,7 @@ import { Droplets } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { WaterGlass } from "./WaterGlass";
 import type { WaterIntake } from "@/types/nutrition";
+import styles from "./WaterTracker.module.css";
 
 export interface WaterTrackerProps {
   data: WaterIntake;
@@ -21,24 +22,24 @@ export function WaterTracker({ data, onUpdate }: WaterTrackerProps) {
   const percentage = Math.round((current / data.goal) * 100);
 
   return (
-    <section className="space-y-4">
-      <h2 className="text-2xl font-bold">Water Intake</h2>
+    <section className={styles.section}>
+      <h2 className={styles.heading}>Water Intake</h2>
       <Card>
         <CardHeader>
-          <div className="flex items-center justify-between">
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Droplets className="w-5 h-5 text-accent" />
+          <div className={styles.header}>
+            <CardTitle className={styles.title}>
+              <Droplets className={styles.titleIcon} />
               Daily Hydration
             </CardTitle>
-            <div className="text-sm font-medium">
-              <span className="text-2xl font-bold text-accent">{current}</span>
-              <span className="text-muted-foreground"> / {data.goal}</span>
+            <div className={styles.stats}>
+              <span className={styles.statsCurrent}>{current}</span>
+              <span className={styles.statsGoal}> / {data.goal}</span>
             </div>
           </div>
         </CardHeader>
         <CardContent>
           {/* Glass Grid */}
-          <div className="grid grid-cols-4 gap-2 mb-4">
+          <div className={styles.glassGrid}>
             {Array.from({ length: data.goal }).map((_, index) => (
               <WaterGlass
                 key={index}
@@ -50,10 +51,10 @@ export function WaterTracker({ data, onUpdate }: WaterTrackerProps) {
           </div>
 
           {/* Progress Text */}
-          <div className="text-center">
-            <p className="text-sm text-muted-foreground">
+          <div className={styles.progress}>
+            <p className={styles.progressText}>
               {percentage >= 100 ? (
-                <span className="text-accent font-medium">
+                <span className={styles.progressSuccess}>
                   🎉 Great job! You've reached your daily goal!
                 </span>
               ) : percentage >= 50 ? (

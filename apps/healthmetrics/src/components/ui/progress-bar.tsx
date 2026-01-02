@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import styles from "./progress-bar.module.css";
 
 export interface ProgressBarProps {
   value: number;
@@ -16,26 +17,23 @@ export function ProgressBar({
   const percentage = Math.min((value / max) * 100, 100);
 
   // Color-coded based on percentage
-  const getColorClass = () => {
-    if (percentage > 100) return "bg-destructive"; // Red: over limit
-    if (percentage >= 90) return "bg-warning"; // Amber: approaching limit
-    return "bg-accent"; // Green: on track
+  const getFillClass = () => {
+    if (percentage > 100) return styles.fillOverLimit; // Red: over limit
+    if (percentage >= 90) return styles.fillWarning; // Amber: approaching limit
+    return styles.fillOnTrack; // Green: on track
   };
 
   return (
-    <div className={cn("space-y-2", className)}>
+    <div className={cn(styles.container, className)}>
       {label && (
-        <div className="flex items-center justify-between text-sm">
-          <span className="text-muted-foreground">{label}</span>
-          <span className="font-medium">{Math.round(percentage)}%</span>
+        <div className={styles.labelRow}>
+          <span className={styles.label}>{label}</span>
+          <span className={styles.percentage}>{Math.round(percentage)}%</span>
         </div>
       )}
-      <div className="h-2 w-full bg-secondary rounded-full overflow-hidden">
+      <div className={styles.track}>
         <div
-          className={cn(
-            "h-full transition-all duration-500 ease-out rounded-full",
-            getColorClass()
-          )}
+          className={cn(styles.fill, getFillClass())}
           style={{ width: `${percentage}%` }}
         />
       </div>

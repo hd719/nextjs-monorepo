@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { AuthLayout } from "@/components/forms/AuthLayout";
 import { AuthCard } from "@/components/forms/AuthCard";
 import { AuthFormField } from "@/components/forms/AuthFormField";
+import styles from "@/components/forms/AuthCard.module.css";
 import {
   forgotPasswordSchema,
   type ForgotPasswordFormData,
@@ -72,7 +73,7 @@ function ForgotPasswordComponent() {
         title="Forgot Password"
         description="Enter your email address and we'll send you a link to reset your password"
       >
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className={styles.formContainer}>
           {serverError && (
             <div className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
               {serverError}
@@ -114,23 +115,15 @@ function ForgotPasswordComponent() {
             {isLoading ? "Sending..." : "Send Reset Link"}
           </Button>
 
-          <div className="text-center text-sm space-y-2">
+          <div className={styles.linkSection}>
             <div>
-              <Link
-                to="/login"
-                className="text-accent hover:underline font-medium"
-              >
+              <Link to="/login" className={styles.link}>
                 Back to Login
               </Link>
             </div>
             <div>
-              <span className="text-muted-foreground">
-                Don't have an account?{" "}
-              </span>
-              <Link
-                to="/signup"
-                className="text-accent hover:underline font-medium"
-              >
+              <span className={styles.linkText}>Don't have an account? </span>
+              <Link to="/signup" className={styles.link}>
                 Sign up
               </Link>
             </div>

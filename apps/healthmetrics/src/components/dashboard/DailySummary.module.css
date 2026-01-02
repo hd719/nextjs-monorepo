@@ -1,0 +1,44 @@
+@import "tailwindcss" reference;
+
+/**
+ * DailySummary Component Styles
+ * 
+ * Shows today's nutrition summary with metric cards
+ */
+
+/* ==========================================================================
+   Section Container
+   ========================================================================== */
+
+.section {
+  @apply space-y-4;
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.header {
+  @apply flex items-center justify-between;
+}
+
+.heading {
+  @apply text-2xl font-bold;
+}
+
+.date {
+  @apply flex items-center gap-2 text-sm;
+  color: var(--muted-foreground);
+}
+
+.dateIcon {
+  @apply w-4 h-4;
+}
+
+/* ==========================================================================
+   Metrics Grid
+   ========================================================================== */
+
+.grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4;
+}

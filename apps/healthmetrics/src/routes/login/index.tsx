@@ -8,6 +8,7 @@ import { AuthCard } from "@/components/forms/AuthCard";
 import { AuthFormField } from "@/components/forms/AuthFormField";
 import { loginSchema, type LoginFormData } from "@/lib/validation";
 import { getErrorMessage } from "@/utils/auth-helpers";
+import styles from "@/components/forms/AuthCard.module.css";
 
 export const Route = createFileRoute("/login/")({
   component: LoginPage,
@@ -80,7 +81,7 @@ function LoginPage() {
         title="Log In"
         description="Enter your credentials to access your account"
       >
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className={styles.formContainer}>
           {serverError && (
             <div className="p-3 rounded-md bg-destructive/10 border border-destructive/20">
               <p className="text-sm text-destructive">{serverError}</p>
@@ -126,25 +127,18 @@ function LoginPage() {
             )}
           </Button>
 
-          <div className="text-center text-sm">
-            <Link
-              to="/auth/forgot-password"
-              className="text-accent hover:underline font-medium"
-            >
-              Forgot password?
-            </Link>
-          </div>
-
-          <div className="text-center text-sm">
-            <span className="text-muted-foreground">
-              Don't have an account?{" "}
-            </span>
-            <Link
-              to="/signup"
-              className="text-accent hover:underline font-medium"
-            >
-              Sign up
-            </Link>
+          <div className={styles.linkSection}>
+            <div>
+              <Link to="/auth/forgot-password" className={styles.link}>
+                Forgot password?
+              </Link>
+            </div>
+            <div>
+              <span className={styles.linkText}>Don't have an account? </span>
+              <Link to="/signup" className={styles.link}>
+                Sign up
+              </Link>
+            </div>
           </div>
         </form>
       </AuthCard>

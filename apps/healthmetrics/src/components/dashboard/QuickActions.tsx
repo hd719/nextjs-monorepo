@@ -1,6 +1,7 @@
 import { UtensilsCrossed, Dumbbell, Scale } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import styles from "./QuickActions.module.css";
 
 const actions = [
   {
@@ -25,29 +26,21 @@ const actions = [
 
 export function QuickActions() {
   return (
-    <section className="space-y-4">
-      <h2 className="text-2xl font-bold">Quick Actions</h2>
+    <section className={styles.section}>
+      <h2 className={styles.heading}>Quick Actions</h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className={styles.grid}>
         {actions.map((action) => {
           const Icon = action.icon;
           return (
-            <Card
-              key={action.id}
-              className="hover:shadow-lg transition-shadow cursor-pointer group"
-            >
-              <Button
-                variant="ghost"
-                className="w-full h-full p-6 flex flex-col items-center gap-3 hover:bg-accent/5"
-              >
-                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
-                  <Icon className="w-6 h-6 text-accent" />
+            <Card key={action.id} className={styles.actionCard}>
+              <Button variant="ghost" className={styles.actionButton}>
+                <div className={styles.iconContainer}>
+                  <Icon className={styles.icon} />
                 </div>
-                <div className="text-center space-y-1">
-                  <p className="font-semibold">{action.label}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {action.description}
-                  </p>
+                <div className={styles.content}>
+                  <p className={styles.label}>{action.label}</p>
+                  <p className={styles.description}>{action.description}</p>
                 </div>
               </Button>
             </Card>
