@@ -235,5 +235,5 @@ After converting each module:
 ## References
 
 - [Tailwind CSS @layer directive](https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer)
-- [Vite CSS handling](https://vitejs.dev/guide/features.html#css)
-- Video reference: https://www.youtube.com/watch?v=JkWS-S51s-U
+- [Video reference](https://www.youtube.com/watch?v=JkWS-S51s-U)
+- [Layering and Apply](https://bloggie.io/@kinopyo/organize-your-css-in-the-tailwind-style-with-layer-directive)

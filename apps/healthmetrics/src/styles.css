@@ -4,9 +4,6 @@
 /* Import Tailwind CSS */
 @import "tailwindcss";
 
-/* Component styles */
-@import "./styles/components/landing.css";
-
 /* Base layer styles */
 @layer base {
   * {
@@ -30,3 +27,8 @@
       source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
   }
 }
+
+/* Component styles */
+@import "./styles/components/landing.css";
+
+/* Utilities */
