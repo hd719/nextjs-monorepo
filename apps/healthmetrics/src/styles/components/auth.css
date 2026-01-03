@@ -1,0 +1,163 @@
+/* ==========================================================================
+   Auth Page Component Styles
+   Using @layer components to bundle with main CSS (prevents FOUC)
+   ========================================================================== */
+
+@layer components {
+  /**
+ * AuthLayout Component Styles
+ *
+ * Layout wrapper for authentication pages
+ */
+
+  /* ==========================================================================
+   Container
+   ========================================================================== */
+
+  .auth-layout-container {
+    @apply min-h-screen flex flex-col;
+    background-color: var(--background);
+  }
+
+  /* ==========================================================================
+   Header
+   ========================================================================== */
+
+  .auth-layout-header {
+    border-bottom: 1px solid;
+    border-color: var(--border);
+  }
+
+  .auth-layout-header-content {
+    @apply container mx-auto px-4 py-4;
+  }
+
+  .auth-layout-header-inner {
+    @apply flex items-center justify-between;
+  }
+
+  /* Logo */
+  .auth-layout-logo-link {
+    @apply flex items-center gap-2 transition-opacity;
+  }
+
+  .auth-layout-logo-link:hover {
+    @apply opacity-80;
+  }
+
+  .auth-layout-logo-icon {
+    @apply w-10 h-10 rounded-lg flex items-center justify-center;
+    background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+
+  .auth-layout-icon-svg {
+    @apply w-6 h-6;
+    color: var(--accent);
+  }
+
+  .auth-layout-logo-text {
+    @apply text-xl font-bold;
+  }
+
+  /* ==========================================================================
+   Main Content Area
+   ========================================================================== */
+
+  .main {
+    @apply flex-1 flex items-center justify-center px-4 py-12;
+  }
+
+  /**
+ * AuthCard Component Styles
+ *
+ * Card wrapper for authentication forms
+ */
+
+  /* ==========================================================================
+   Card Container
+   ========================================================================== */
+
+  .auth-card {
+    @apply w-full max-w-md;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ==========================================================================
+   Header
+   ========================================================================== */
+
+  .auth-card-header {
+    @apply space-y-3;
+    padding-bottom: 0.5rem;
+  }
+
+  .auth-card-title {
+    @apply text-2xl font-bold text-center;
+  }
+
+  .auth-card-description {
+    @apply text-center;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+   Form Content - for consistent spacing across all auth forms
+   ========================================================================== */
+
+  .auth-form-container {
+    @apply space-y-5;
+  }
+
+  .auth-form-link-section {
+    @apply text-center text-sm pt-4;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .auth-form-link-text {
+    color: var(--foreground);
+  }
+
+  .auth-form-link {
+    @apply font-medium;
+    color: var(--foreground);
+  }
+
+  .auth-form-link:hover {
+    @apply underline;
+  }
+
+  /**
+ * AuthFormField Component Styles
+ *
+ * Reusable form field for auth forms with label, input, and error display
+ */
+
+  /* ==========================================================================
+   Field Container
+   ========================================================================== */
+
+  .auth-form-field-container {
+    @apply space-y-2;
+  }
+
+  /* ==========================================================================
+   Error Message
+   ========================================================================== */
+
+  .auth-form-field-error-message {
+    @apply text-sm;
+    color: var(--destructive);
+  }
+
+  /* ==========================================================================
+   Main Content Area
+   ========================================================================== */
+
+  .auth-layout-main {
+    @apply flex-1 flex items-center justify-center px-4 py-12;
+  }
+}

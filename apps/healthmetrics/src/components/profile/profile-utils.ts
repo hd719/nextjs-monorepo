@@ -1,9 +1,6 @@
 import { type UserProfile } from "@/server/profile";
 import { type UpdateUserProfileInput } from "@/lib/validation";
 
-/**
- * Helper function to format dates for display
- */
 export function formatDate(date: Date | string | null | undefined): string {
   if (!date) return "N/A";
   try {
@@ -19,25 +16,16 @@ export function formatDate(date: Date | string | null | undefined): string {
   }
 }
 
-/**
- * Convert kg to lbs with proper formatting
- */
 export function kgToLbs(kg: number | null | undefined): string {
   if (!kg) return "";
   return (kg * 2.20462).toFixed(1);
 }
 
-/**
- * Convert cm to inches with proper formatting
- */
 export function cmToInches(cm: number | null | undefined): string {
   if (!cm) return "";
   return (cm / 2.54).toFixed(1);
 }
 
-/**
- * Initialize form default values from user profile data
- */
 export function getDefaultFormValues(initialData: UserProfile) {
   return {
     displayName: initialData.displayName || "",
@@ -59,15 +47,10 @@ export function getDefaultFormValues(initialData: UserProfile) {
   };
 }
 
-/**
- * Build the updates object for profile submission
- * Handles type transformations from form strings to proper types
- */
 export function buildProfileUpdates(
   formValues: ReturnType<typeof getDefaultFormValues>,
   avatarUrl: string
 ): UpdateUserProfileInput {
-  // Type-safe conversion helper for enum values
   const toEnumValue = <T extends string>(
     value: string | undefined,
     validValues: readonly T[]
@@ -115,17 +98,11 @@ export function buildProfileUpdates(
   };
 }
 
-/**
- * Validate avatar file for upload
- * Returns error message if invalid, null if valid
- */
 export function validateAvatarFile(file: File): string | null {
-  // Validate file size (max 2MB)
   if (file.size > 2 * 1024 * 1024) {
     return "Avatar image must be less than 2MB";
   }
 
-  // Validate file type
   if (!file.type.startsWith("image/")) {
     return "Avatar must be an image file";
   }
@@ -133,9 +110,6 @@ export function validateAvatarFile(file: File): string | null {
   return null;
 }
 
-/**
- * Convert file to base64 string for preview
- */
 export function fileToBase64(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -147,9 +121,6 @@ export function fileToBase64(file: File): Promise<string> {
   });
 }
 
-/**
- * Calculate macro breakdown percentages
- */
 export function calculateMacroBreakdown(
   protein: string,
   carbs: string,

@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { ExerciseSummary as ExerciseSummaryType } from "@/types/nutrition";
-import styles from "./ExerciseSummary.module.css";
 
 export interface ExerciseSummaryProps {
   data: ExerciseSummaryType | null;
@@ -13,16 +12,16 @@ export interface ExerciseSummaryProps {
 export function ExerciseSummary({ data, isLoading }: ExerciseSummaryProps) {
   if (isLoading) {
     return (
-      <section className={styles.section}>
+      <section className="dashboard-exercise-section">
         <Skeleton className="h-8 w-48" />
         <Card>
           <CardHeader>
             <Skeleton className="h-6 w-32" />
           </CardHeader>
           <CardContent>
-            <div className={styles.loadingGrid}>
+            <div className="dashboard-exercise-loading-grid">
               {[1, 2, 3].map((i) => (
-                <div key={i} className={styles.loadingItem}>
+                <div key={i} className="dashboard-exercise-loading-item">
                   <Skeleton className="h-10 w-10 rounded-full" />
                   <Skeleton className="h-8 w-20" />
                   <Skeleton className="h-4 w-24" />
@@ -37,10 +36,10 @@ export function ExerciseSummary({ data, isLoading }: ExerciseSummaryProps) {
 
   if (!data || data.exercisesCompleted === 0) {
     return (
-      <section className={styles.section}>
-        <h2 className={styles.heading}>Today's Exercise</h2>
+      <section className="dashboard-exercise-section">
+        <h2 className="dashboard-exercise-heading">Today's Exercise</h2>
         <Card>
-          <CardContent className={styles.emptyCardContent}>
+          <CardContent className="dashboard-exercise-empty-card-content">
             <EmptyState
               icon={Dumbbell}
               title="No exercises logged today"
@@ -57,43 +56,47 @@ export function ExerciseSummary({ data, isLoading }: ExerciseSummaryProps) {
   }
 
   return (
-    <section className={styles.section}>
-      <h2 className={styles.heading}>Today's Exercise</h2>
+    <section className="dashboard-exercise-section">
+      <h2 className="dashboard-exercise-heading">Today's Exercise</h2>
       <Card>
         <CardHeader>
-          <CardTitle className={styles.title}>Workout Summary</CardTitle>
+          <CardTitle className="dashboard-exercise-title">
+            Workout Summary
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className={styles.grid}>
+          <div className="dashboard-exercise-grid">
             {/* Total Time */}
-            <div className={styles.statItem}>
-              <div className={styles.iconContainer}>
-                <Clock className={styles.icon} />
+            <div className="dashboard-exercise-stat-item">
+              <div className="dashboard-exercise-icon-container">
+                <Clock className="dashboard-exercise-icon" />
               </div>
-              <div className={styles.value}>{data.totalMinutes}</div>
-              <div className={styles.label}>minutes</div>
+              <div className="dashboard-exercise-value">
+                {data.totalMinutes}
+              </div>
+              <div className="dashboard-exercise-label">minutes</div>
             </div>
 
             {/* Calories Burned */}
-            <div className={styles.statItem}>
-              <div className={styles.iconContainerDestructive}>
-                <Flame className={styles.iconDestructive} />
+            <div className="dashboard-exercise-stat-item">
+              <div className="dashboard-exercise-icon-container-destructive">
+                <Flame className="dashboard-exercise-icon-destructive" />
               </div>
-              <div className={styles.value}>{data.caloriesBurned}</div>
-              <div className={styles.label}>
-                calories burned
+              <div className="dashboard-exercise-value">
+                {data.caloriesBurned}
               </div>
+              <div className="dashboard-exercise-label">calories burned</div>
             </div>
 
             {/* Exercises Completed */}
-            <div className={styles.statItem}>
-              <div className={styles.iconContainerPrimary}>
-                <Activity className={styles.iconPrimary} />
+            <div className="dashboard-exercise-stat-item">
+              <div className="dashboard-exercise-icon-container-primary">
+                <Activity className="dashboard-exercise-icon-primary" />
               </div>
-              <div className={styles.value}>
+              <div className="dashboard-exercise-value">
                 {data.exercisesCompleted}
               </div>
-              <div className={styles.label}>
+              <div className="dashboard-exercise-label">
                 {data.exercisesCompleted === 1 ? "exercise" : "exercises"}
               </div>
             </div>

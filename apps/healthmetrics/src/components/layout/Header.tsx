@@ -2,41 +2,40 @@ import { Search, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { ProfileMenu } from "./ProfileMenu";
-import styles from "./Header.module.css";
 
 export function Header() {
   return (
-    <header className={styles.header}>
-      <div className={styles.container}>
+    <header className="header-container">
+      <div className="header-inner">
         {/* Mobile logo */}
-        <div className={styles.mobileLogo}>
-          <h1 className={styles.logoText}>
-            <span className={styles.logoAccent}>Health</span>Metrics
+        <div className="header-mobile-logo">
+          <h1 className="header-logo-text">
+            <span className="header-logo-accent">Health</span>Metrics
           </h1>
         </div>
 
         {/* Search bar */}
-        <div className={styles.searchContainer}>
-          <div className={styles.searchWrapper}>
-            <Search className={styles.searchIcon} />
+        <div className="header-search-container">
+          <div className="header-search-wrapper">
+            <Search className="header-search-icon" />
             <input
               type="search"
               placeholder="Search foods, exercises..."
-              className={styles.searchInput}
+              className="header-search-input"
             />
           </div>
         </div>
 
         {/* Right side actions */}
-        <div className={styles.actions}>
+        <div className="header-actions">
           {/* Mobile search button */}
           <Button
             variant="ghost"
             size="icon"
-            className={styles.mobileSearchButton}
+            className="header-mobile-search-button"
             aria-label="Search"
           >
-            <Search className={styles.icon} />
+            <Search className="header-icon" />
           </Button>
 
           {/* Theme Toggle */}
@@ -44,7 +43,7 @@ export function Header() {
 
           {/* Notifications */}
           <Button variant="ghost" size="icon" aria-label="Notifications">
-            <Bell className={styles.icon} />
+            <Bell className="header-icon" />
           </Button>
 
           {/* Profile Menu */}

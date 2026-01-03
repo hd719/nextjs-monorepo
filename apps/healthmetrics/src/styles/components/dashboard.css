@@ -1,0 +1,503 @@
+/* ==========================================================================
+   Dashboard Component Styles
+   Using @layer components to bundle with main CSS (prevents FOUC)
+   ========================================================================== */
+
+@layer components {
+  /**
+   * DailySummary Component Styles
+   *
+   * Shows today's nutrition summary with metric cards
+   */
+
+  /* ==========================================================================
+     Section Container
+     ========================================================================== */
+
+  .dashboard-summary-section {
+    @apply space-y-4;
+  }
+
+  /* ==========================================================================
+     Header
+     ========================================================================== */
+
+  .dashboard-summary-header {
+    @apply flex items-center justify-between;
+  }
+
+  .dashboard-summary-heading {
+    @apply text-2xl font-bold;
+  }
+
+  .dashboard-summary-date {
+    @apply flex items-center gap-2 text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .dashboard-summary-date-icon {
+    @apply w-4 h-4;
+  }
+
+  /* ==========================================================================
+     Metrics Grid
+     ========================================================================== */
+
+  .dashboard-summary-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4;
+  }
+
+  /**
+   * MetricCard Component Styles
+   *
+   * Displays nutrition metrics with progress bars
+   */
+
+  /* ==========================================================================
+     Card Content
+     ========================================================================== */
+
+  .dashboard-metric-card-content {
+    @apply p-6;
+  }
+
+  .dashboard-metric-content {
+    @apply space-y-4;
+  }
+
+  /* ==========================================================================
+     Loading State
+     ========================================================================== */
+
+  .dashboard-metric-loading-container {
+    @apply space-y-4;
+  }
+
+  .dashboard-metric-loading-values {
+    @apply space-y-2;
+  }
+
+  /* ==========================================================================
+     Label Section
+     ========================================================================== */
+
+  .dashboard-metric-label {
+    @apply text-sm font-medium;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Values Section
+     ========================================================================== */
+
+  .dashboard-metric-values {
+    @apply space-y-1;
+  }
+
+  .dashboard-metric-consumed {
+    @apply text-3xl font-bold;
+  }
+
+  .dashboard-metric-goal {
+    @apply text-lg font-normal;
+    color: var(--muted-foreground);
+  }
+
+  .dashboard-metric-unit {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  /**
+   * WaterTracker Component Styles
+   *
+   * Tracks daily water intake with interactive glasses
+   */
+
+  /* ==========================================================================
+     Section Container
+     ========================================================================== */
+
+  .dashboard-water-section {
+    @apply space-y-4;
+  }
+
+  .dashboard-water-heading {
+    @apply text-2xl font-bold;
+  }
+
+  /* ==========================================================================
+     Header
+     ========================================================================== */
+
+  .dashboard-water-header {
+    @apply flex items-center justify-between;
+  }
+
+  .dashboard-water-title {
+    @apply text-lg flex items-center gap-2;
+  }
+
+  .dashboard-water-title-icon {
+    @apply w-5 h-5;
+    color: var(--accent);
+  }
+
+  .dashboard-water-stats {
+    @apply text-sm font-medium;
+  }
+
+  .dashboard-water-stats-current {
+    @apply text-2xl font-bold;
+    color: var(--accent);
+  }
+
+  .dashboard-water-stats-goal {
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Content
+     ========================================================================== */
+
+  .dashboard-water-glass-grid {
+    @apply grid grid-cols-4 gap-2 mb-4;
+  }
+
+  .dashboard-water-progress {
+    @apply text-center;
+  }
+
+  .dashboard-water-progress-text {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .dashboard-water-progress-success {
+    @apply font-medium;
+    color: var(--accent);
+  }
+
+  /**
+   * WaterGlass Component Styles
+   *
+   * Individual water glass button for tracking hydration
+   */
+
+  /* ==========================================================================
+     Glass Button
+     ========================================================================== */
+
+  .dashboard-water-glass-button {
+    @apply flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-300;
+  }
+
+  .dashboard-water-glass-button:hover {
+    background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+
+  .dashboard-water-glass-button:active {
+    @apply scale-95;
+  }
+
+  .dashboard-water-glass-button-filled {
+    color: var(--accent);
+  }
+
+  .dashboard-water-glass-button-empty {
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Glass Icon
+     ========================================================================== */
+
+  .dashboard-water-glass-icon {
+    @apply w-8 h-8 transition-all duration-300;
+  }
+
+  .dashboard-water-glass-icon-filled {
+    fill: color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+
+  /**
+   * TodaysDiary Component Styles
+   *
+   * Shows today's meal entries
+   */
+
+  /* ==========================================================================
+     Section Container
+     ========================================================================== */
+
+  .dashboard-diary-section {
+    @apply space-y-4;
+  }
+
+  .dashboard-diary-heading {
+    @apply text-2xl font-bold;
+  }
+
+  .dashboard-diary-meals-list {
+    @apply space-y-4;
+  }
+
+  /**
+   * QuickActions Component Styles
+   *
+   * Quick action buttons for common tasks
+   */
+
+  /* ==========================================================================
+     Section Container
+     ========================================================================== */
+
+  .dashboard-actions-section {
+    @apply space-y-4;
+  }
+
+  .dashboard-actions-heading {
+    @apply text-2xl font-bold;
+  }
+
+  .dashboard-actions-grid {
+    @apply grid grid-cols-1 sm:grid-cols-3 gap-4;
+  }
+
+  /* ==========================================================================
+     Action Card
+     ========================================================================== */
+
+  .dashboard-action-card {
+    @apply transition-shadow cursor-pointer;
+  }
+
+  .dashboard-action-card:hover {
+    box-shadow:
+      var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000),
+      0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+
+  .dashboard-action-button {
+    @apply w-full h-full p-6 flex flex-col items-center gap-3;
+  }
+
+  .dashboard-action-button:hover {
+    background-color: color-mix(in srgb, var(--accent) 5%, transparent);
+  }
+
+  /* ==========================================================================
+     Icon Container
+     ========================================================================== */
+
+  .dashboard-action-icon-container {
+    @apply w-12 h-12 rounded-full flex items-center justify-center transition-colors;
+    background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+
+  /* When card is hovered, change icon container opacity */
+  .dashboard-action-card:hover .dashboard-action-icon-container {
+    background-color: color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+
+  .dashboard-action-icon {
+    @apply w-6 h-6;
+    color: var(--accent);
+  }
+
+  /* ==========================================================================
+     Text Content
+     ========================================================================== */
+
+  .dashboard-action-content {
+    @apply text-center space-y-1;
+  }
+
+  .dashboard-action-label {
+    @apply font-semibold;
+  }
+
+  .dashboard-action-description {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  /**
+   * RecentActivity Component Styles
+   *
+   * Activity feed showing recent exercises, meals, and goals
+   */
+
+  /* ==========================================================================
+     Section Container
+     ========================================================================== */
+
+  .dashboard-activity-section {
+    @apply space-y-4;
+  }
+
+  .dashboard-activity-heading {
+    @apply text-2xl font-bold;
+  }
+
+  .dashboard-activity-title {
+    @apply text-lg;
+  }
+
+  /* ==========================================================================
+     Content
+     ========================================================================== */
+
+  .dashboard-activity-content {
+    @apply space-y-4;
+  }
+
+  /* ==========================================================================
+     Activity Item
+     ========================================================================== */
+
+  .dashboard-activity-item {
+    @apply flex items-start gap-3 pb-4 last:pb-0 border-b last:border-0;
+  }
+
+  .dashboard-activity-icon-container {
+    @apply w-10 h-10 rounded-full flex items-center justify-center shrink-0;
+    background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+
+  .dashboard-activity-icon {
+    @apply w-5 h-5;
+    color: var(--accent);
+  }
+
+  .dashboard-activity-item-content {
+    @apply flex-1 min-w-0;
+  }
+
+  .dashboard-activity-description {
+    @apply text-sm font-medium;
+  }
+
+  .dashboard-activity-metadata {
+    @apply flex items-center gap-2 mt-1;
+  }
+
+  .dashboard-activity-meta-text {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .dashboard-activity-calories {
+    @apply text-xs font-medium;
+    color: var(--accent);
+  }
+
+  /* ==========================================================================
+     Loading State
+     ========================================================================== */
+
+  .dashboard-activity-loading-item {
+    @apply flex items-start gap-3 pb-4 border-b last:border-0;
+  }
+
+  .dashboard-activity-loading-content {
+    @apply flex-1 space-y-2;
+  }
+
+  /**
+   * ExerciseSummary Component Styles
+   *
+   * Shows today's exercise statistics
+   */
+
+  /* ==========================================================================
+     Section Container
+     ========================================================================== */
+
+  .dashboard-exercise-section {
+    @apply space-y-4;
+  }
+
+  .dashboard-exercise-heading {
+    @apply text-2xl font-bold;
+  }
+
+  .dashboard-exercise-title {
+    @apply text-lg;
+  }
+
+  /* ==========================================================================
+     Grid Layout
+     ========================================================================== */
+
+  .dashboard-exercise-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+  }
+
+  /* ==========================================================================
+     Stat Item
+     ========================================================================== */
+
+  .dashboard-exercise-stat-item {
+    @apply flex flex-col items-center text-center;
+  }
+
+  .dashboard-exercise-icon-container {
+    @apply w-12 h-12 rounded-full flex items-center justify-center mb-3;
+    background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+
+  .dashboard-exercise-icon-container-destructive {
+    @apply w-12 h-12 rounded-full flex items-center justify-center mb-3;
+    background-color: color-mix(in srgb, var(--destructive) 10%, transparent);
+  }
+
+  .dashboard-exercise-icon-container-primary {
+    @apply w-12 h-12 rounded-full flex items-center justify-center mb-3;
+    background-color: color-mix(in srgb, var(--primary) 10%, transparent);
+  }
+
+  .dashboard-exercise-icon {
+    @apply w-6 h-6;
+    color: var(--accent);
+  }
+
+  .dashboard-exercise-icon-destructive {
+    color: var(--destructive);
+  }
+
+  .dashboard-exercise-icon-primary {
+    color: var(--primary);
+  }
+
+  .dashboard-exercise-value {
+    @apply text-2xl font-bold;
+  }
+
+  .dashboard-exercise-label {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Loading State
+     ========================================================================== */
+
+  .dashboard-exercise-loading-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+  }
+
+  .dashboard-exercise-loading-item {
+    @apply space-y-2;
+  }
+
+  /* ==========================================================================
+     Empty State
+     ========================================================================== */
+
+  .dashboard-exercise-empty-card-content {
+    @apply p-0;
+  }
+}

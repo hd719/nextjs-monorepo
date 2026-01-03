@@ -1,6 +1,5 @@
 import { GlassWater } from "lucide-react";
 import { cn } from "@/lib/utils";
-import styles from "./WaterGlass.module.css";
 
 interface WaterGlassProps {
   filled: boolean;
@@ -13,13 +12,18 @@ export function WaterGlass({ filled, onClick, index }: WaterGlassProps) {
     <button
       onClick={onClick}
       className={cn(
-        styles.glassButton,
-        filled ? styles.glassButtonFilled : styles.glassButtonEmpty
+        "dashboard-water-glass-button",
+        filled
+          ? "dashboard-water-glass-button-filled"
+          : "dashboard-water-glass-button-empty"
       )}
       aria-label={`Glass ${index + 1} ${filled ? "filled" : "empty"}`}
     >
       <GlassWater
-        className={cn(styles.glassIcon, filled && styles.glassIconFilled)}
+        className={cn(
+          "dashboard-water-glass-icon",
+          filled && "dashboard-water-glass-icon-filled"
+        )}
         strokeWidth={filled ? 2.5 : 2}
       />
     </button>

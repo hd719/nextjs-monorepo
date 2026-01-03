@@ -51,7 +51,7 @@ export const createDiaryEntrySchema = z.object({
     .string()
     .regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format"),
   mealType: z.enum(["breakfast", "lunch", "dinner", "snack", "other"], {
-    errorMap: () => ({ message: "Invalid meal type" }),
+    message: "Invalid meal type",
   }),
   quantityG: z
     .number()

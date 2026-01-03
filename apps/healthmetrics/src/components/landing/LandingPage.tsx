@@ -9,8 +9,6 @@ import {
 } from "@/components/ui/card";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
-// No CSS module import needed - styles are in global styles.css using @layer
-
 export function LandingPage() {
   return (
     <div className="landing-container">
@@ -27,10 +25,10 @@ export function LandingPage() {
             <div className="landing-header-actions">
               <ThemeToggle />
               <Button variant="ghost" asChild>
-                <Link to="/login">Log In</Link>
+                <Link to="/auth/login">Log In</Link>
               </Button>
               <Button asChild>
-                <Link to="/signup">Sign Up</Link>
+                <Link to="/auth/signup">Sign Up</Link>
               </Button>
             </div>
           </div>
@@ -51,7 +49,7 @@ export function LandingPage() {
             </p>
             <div className="landing-hero-actions">
               <Button size="lg" asChild>
-                <Link to="/signup">Get Started Free</Link>
+                <Link to="/auth/signup">Get Started Free</Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
                 <Link to="/dashboard">View Demo</Link>
@@ -122,7 +120,7 @@ export function LandingPage() {
                 Join thousands of users tracking their health journey.
               </p>
               <Button size="lg" asChild>
-                <Link to="/signup">Create Free Account</Link>
+                <Link to="/auth/signup">Create Free Account</Link>
               </Button>
             </div>
           </div>

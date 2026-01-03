@@ -11,7 +11,6 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { DiaryEntryList } from "./DiaryEntryList";
 import { AddFoodDialog } from "./AddFoodDialog";
-import styles from "./DiaryDayView.module.css";
 
 export interface DiaryDayViewProps {
   userId: string;
@@ -76,61 +75,61 @@ export function DiaryDayView({
   };
 
   return (
-    <div className={styles.container}>
+    <div className="diary-day-container">
       {/* Date Selector */}
-      <Card className={styles.dateCard}>
-        <div className={styles.dateContent}>
-          <div className={styles.dateDisplay}>
-            <Calendar className={styles.dateIcon} />
-            <span className={styles.dateText}>{displayDate}</span>
+      <Card className="diary-day-date-card">
+        <div className="diary-day-date-content">
+          <div className="diary-day-date-display">
+            <Calendar className="diary-day-date-icon" />
+            <span className="diary-day-date-text">{displayDate}</span>
           </div>
           <Input
             type="date"
             value={date}
             onChange={(e) => onDateChange(e.target.value)}
-            className={styles.dateInput}
+            className="diary-day-date-input"
           />
         </div>
       </Card>
 
       {/* Daily Totals Summary */}
-      <Card className={styles.totalsCard}>
-        <h2 className={styles.totalsTitle}>Today's Nutrition</h2>
+      <Card className="diary-day-totals-card">
+        <h2 className="diary-day-totals-title">Today's Nutrition</h2>
         {isPending ? (
-          <div className={styles.totalsGrid}>
+          <div className="diary-day-totals-grid">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className={styles.loadingItem}>
-                <div className={styles.loadingLabel}></div>
-                <div className={styles.loadingValue}></div>
+              <div key={i} className="diary-day-loading-item">
+                <div className="diary-day-loading-label"></div>
+                <div className="diary-day-loading-value"></div>
               </div>
             ))}
           </div>
         ) : (
-          <div className={styles.totalsGrid}>
-            <div className={styles.totalItem}>
-              <p className={styles.totalLabel}>Calories</p>
-              <p className={styles.totalValue}>{totals?.calories || 0}</p>
-              <p className={styles.totalUnit}>kcal</p>
+          <div className="diary-day-totals-grid">
+            <div className="diary-day-total-item">
+              <p className="diary-day-total-label">Calories</p>
+              <p className="diary-day-total-value">{totals?.calories || 0}</p>
+              <p className="diary-day-total-unit">kcal</p>
             </div>
-            <div className={styles.totalItem}>
-              <p className={styles.totalLabel}>Protein</p>
-              <p className={styles.totalValue}>{totals?.protein || 0}</p>
-              <p className={styles.totalUnit}>g</p>
+            <div className="diary-day-total-item">
+              <p className="diary-day-total-label">Protein</p>
+              <p className="diary-day-total-value">{totals?.protein || 0}</p>
+              <p className="diary-day-total-unit">g</p>
             </div>
-            <div className={styles.totalItem}>
-              <p className={styles.totalLabel}>Carbs</p>
-              <p className={styles.totalValue}>{totals?.carbs || 0}</p>
-              <p className={styles.totalUnit}>g</p>
+            <div className="diary-day-total-item">
+              <p className="diary-day-total-label">Carbs</p>
+              <p className="diary-day-total-value">{totals?.carbs || 0}</p>
+              <p className="diary-day-total-unit">g</p>
             </div>
-            <div className={styles.totalItem}>
-              <p className={styles.totalLabel}>Fat</p>
-              <p className={styles.totalValue}>{totals?.fat || 0}</p>
-              <p className={styles.totalUnit}>g</p>
+            <div className="diary-day-total-item">
+              <p className="diary-day-total-label">Fat</p>
+              <p className="diary-day-total-value">{totals?.fat || 0}</p>
+              <p className="diary-day-total-unit">g</p>
             </div>
           </div>
         )}
         {totals && totals.entryCount > 0 && (
-          <p className={styles.entryCount}>
+          <p className="diary-day-entry-count">
             {totals.entryCount} {totals.entryCount === 1 ? "entry" : "entries"}{" "}
             logged today
           </p>
@@ -138,10 +137,10 @@ export function DiaryDayView({
       </Card>
 
       {/* Add Food Button */}
-      <div className={styles.mealsHeader}>
-        <h2 className={styles.mealsTitle}>Meals</h2>
+      <div className="diary-day-meals-header">
+        <h2 className="diary-day-meals-title">Meals</h2>
         <Button onClick={() => setIsAddFoodOpen(true)}>
-          <Plus className={styles.addIcon} />
+          <Plus className="diary-day-add-icon" />
           Add Food
         </Button>
       </div>

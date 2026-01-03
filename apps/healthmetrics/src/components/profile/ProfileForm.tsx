@@ -25,7 +25,6 @@ import {
   carbGoalValidator,
   fatGoalValidator,
 } from "./profile-validators";
-import styles from "./ProfileForm.module.css";
 
 export interface ProfileFormProps {
   userId: string;
@@ -100,19 +99,19 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
         e.stopPropagation();
         form.handleSubmit();
       }}
-      className={styles.form}
+      className="profile-form"
     >
       {/* Success Message */}
       {successMessage && (
-        <div className={styles.successMessage}>
-          <p className={styles.successText}>{successMessage}</p>
+        <div className="profile-form-success-message">
+          <p className="profile-form-success-text">{successMessage}</p>
         </div>
       )}
 
       {/* Error Message */}
       {errorMessage && (
-        <div className={styles.errorMessage}>
-          <p className={styles.errorText}>{errorMessage}</p>
+        <div className="profile-form-error-message">
+          <p className="profile-form-error-text">{errorMessage}</p>
         </div>
       )}
 
@@ -123,20 +122,20 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
       />
 
       {/* Personal Information Section */}
-      <Card className={styles.formSection}>
-        <h2 className={styles.sectionHeading}>Personal Information</h2>
-        <div className={styles.fieldGrid}>
+      <Card className="profile-form-section">
+        <h2 className="profile-form-section-heading">Personal Information</h2>
+        <div className="profile-form-field-grid">
           {/* Email (read-only) */}
-          <div className={styles.emailField}>
+          <div className="profile-form-email-field">
             <Label htmlFor="email">Email</Label>
             <Input
               id="email"
               type="email"
               value={initialData.email || ""}
               disabled
-              className={styles.readOnlyInput}
+              className="profile-form-read-only-input"
             />
-            <p className={styles.helperText}>
+            <p className="profile-form-helper-text">
               Email cannot be changed here. Contact support if needed.
             </p>
           </div>
@@ -160,7 +159,7 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
                 />
                 {field.state.meta.errors &&
                   field.state.meta.errors.length > 0 && (
-                    <p className={styles.errorText}>
+                    <p className="profile-form-error-text">
                       {field.state.meta.errors.join(", ")}
                     </p>
                   )}
@@ -197,7 +196,7 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
-                  className={styles.selectInput}
+                  className="profile-form-select-input"
                 >
                   <option value="">Prefer not to say</option>
                   <option value="male">Male</option>
@@ -229,14 +228,14 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
                   placeholder="67"
                 />
                 {field.state.value && !field.state.meta.errors.length && (
-                  <p className={styles.heightDisplay}>
+                  <p className="profile-form-height-display">
                     {Math.floor(parseFloat(field.state.value) / 12)}'{" "}
                     {Math.round(parseFloat(field.state.value) % 12)}"
                   </p>
                 )}
                 {field.state.meta.errors &&
                   field.state.meta.errors.length > 0 && (
-                    <p className={styles.errorText}>
+                    <p className="profile-form-error-text">
                       {field.state.meta.errors.join(", ")}
                     </p>
                   )}
@@ -266,7 +265,7 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
                 />
                 {field.state.meta.errors &&
                   field.state.meta.errors.length > 0 && (
-                    <p className={styles.errorText}>
+                    <p className="profile-form-error-text">
                       {field.state.meta.errors.join(", ")}
                     </p>
                   )}
@@ -296,7 +295,7 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
                 />
                 {field.state.meta.errors &&
                   field.state.meta.errors.length > 0 && (
-                    <p className={styles.errorText}>
+                    <p className="profile-form-error-text">
                       {field.state.meta.errors.join(", ")}
                     </p>
                   )}
@@ -315,7 +314,7 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
-                  className={styles.selectInput}
+                  className="profile-form-select-input"
                 >
                   <option value="sedentary">
                     Sedentary (little or no exercise)
@@ -348,7 +347,7 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
-                  className={styles.selectInput}
+                  className="profile-form-select-input"
                 >
                   <option value="lose_weight">Lose Weight</option>
                   <option value="maintain_weight">Maintain Weight</option>
@@ -362,9 +361,9 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
       </Card>
 
       {/* Account Settings Section */}
-      <Card className={styles.formSection}>
-        <h2 className={styles.sectionHeading}>Account Settings</h2>
-        <div className={styles.fieldGrid}>
+      <Card className="profile-form-section">
+        <h2 className="profile-form-section-heading">Account Settings</h2>
+        <div className="profile-form-field-grid">
           {/* Timezone */}
           <form.Field name="timezone">
             {(field) => (
@@ -376,7 +375,7 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
-                  className={styles.selectInput}
+                  className="profile-form-select-input"
                 >
                   <option value="America/New_York">Eastern Time (ET)</option>
                   <option value="America/Chicago">Central Time (CT)</option>
@@ -397,7 +396,7 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
               type="text"
               value={formatDate(initialData.createdAt)}
               disabled
-              className={styles.readOnlyInput}
+              className="profile-form-read-only-input"
             />
           </div>
 
@@ -409,22 +408,22 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
               type="text"
               value={formatDate(initialData.updatedAt)}
               disabled
-              className={styles.readOnlyInput}
+              className="profile-form-read-only-input"
             />
           </div>
 
           {/* Admin Status (read-only) */}
           {initialData.isAdmin && (
-            <div className={styles.emailField}>
+            <div className="profile-form-email-field">
               <Label htmlFor="isAdmin">Account Type</Label>
               <Input
                 id="isAdmin"
                 type="text"
                 value="Administrator"
                 disabled
-                className={styles.readOnlyInput}
+                className="profile-form-read-only-input"
               />
-              <p className={styles.helperText}>
+              <p className="profile-form-helper-text">
                 You have administrator privileges.
               </p>
             </div>
@@ -433,14 +432,14 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
       </Card>
 
       {/* Daily Nutrition Goals Section */}
-      <Card className={styles.formSection}>
-        <h2 className={styles.sectionHeading}>Daily Nutrition Goals</h2>
-        <p className={styles.sectionDescription}>
+      <Card className="profile-form-section">
+        <h2 className="profile-form-section-heading">Daily Nutrition Goals</h2>
+        <p className="profile-form-section-description">
           Set your daily targets for calories and macronutrients. These will be
           shown on your dashboard.
         </p>
 
-        <div className={styles.fieldGrid}>
+        <div className="profile-form-field-grid">
           {/* Daily Calorie Goal */}
           <form.Field
             name="dailyCalorieGoal"
@@ -462,7 +461,7 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
                 />
                 {field.state.meta.errors &&
                   field.state.meta.errors.length > 0 && (
-                    <p className={styles.errorText}>
+                    <p className="profile-form-error-text">
                       {field.state.meta.errors.join(", ")}
                     </p>
                   )}
@@ -491,7 +490,7 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
                 />
                 {field.state.meta.errors &&
                   field.state.meta.errors.length > 0 && (
-                    <p className={styles.errorText}>
+                    <p className="profile-form-error-text">
                       {field.state.meta.errors.join(", ")}
                     </p>
                   )}
@@ -520,7 +519,7 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
                 />
                 {field.state.meta.errors &&
                   field.state.meta.errors.length > 0 && (
-                    <p className={styles.errorText}>
+                    <p className="profile-form-error-text">
                       {field.state.meta.errors.join(", ")}
                     </p>
                   )}
@@ -549,7 +548,7 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
                 />
                 {field.state.meta.errors &&
                   field.state.meta.errors.length > 0 && (
-                    <p className={styles.errorText}>
+                    <p className="profile-form-error-text">
                       {field.state.meta.errors.join(", ")}
                     </p>
                   )}
@@ -576,9 +575,9 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
             );
 
             return (
-              <div className={styles.macroContainer}>
-                <p className={styles.macroTitle}>Macro Breakdown:</p>
-                <div className={styles.macroList}>
+              <div className="profile-form-macro-container">
+                <p className="profile-form-macro-title">Macro Breakdown:</p>
+                <div className="profile-form-macro-list">
                   <div>
                     Protein: {breakdown.proteinCals.toLocaleString()} kcal (
                     {breakdown.proteinPercent}%)
@@ -603,7 +602,7 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
         selector={(state) => [state.canSubmit, state.isSubmitting]}
       >
         {([canSubmit, isSubmitting]) => (
-          <div className={styles.submitContainer}>
+          <div className="profile-form-submit-container">
             <Button
               type="submit"
               disabled={!canSubmit || isSubmitting}
@@ -613,7 +612,7 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
                 <>Saving...</>
               ) : (
                 <>
-                  <Save className={styles.buttonIcon} />
+                  <Save className="profile-form-button-icon" />
                   Save Changes
                 </>
               )}

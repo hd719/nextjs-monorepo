@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { FoodItem } from "./FoodItem";
 import type { MealEntry } from "@/types/nutrition";
-import styles from "./MealCard.module.css";
 
 export interface MealCardProps {
   meal: MealEntry;
@@ -32,17 +31,17 @@ export function MealCard({ meal, isLoading }: MealCardProps) {
   if (isLoading) {
     return (
       <Card>
-        <CardHeader className={styles.header}>
-          <div className={styles.headerContent}>
-            <div className={styles.headerLeft}>
+        <CardHeader className="diary-meal-header">
+          <div className="diary-meal-header-content">
+            <div className="diary-meal-header-left">
               <Skeleton className="h-5 w-5 rounded-full" />
               <Skeleton className="h-6 w-24" />
             </div>
             <Skeleton className="h-5 w-16" />
           </div>
         </CardHeader>
-        <CardContent className={styles.loadingContent}>
-          <div className={styles.loadingFoodList}>
+        <CardContent className="diary-meal-loading-content">
+          <div className="diary-meal-loading-food-list">
             <Skeleton className="h-8 w-full" />
             <Skeleton className="h-8 w-full" />
             <Skeleton className="h-8 w-3/4" />
@@ -55,28 +54,28 @@ export function MealCard({ meal, isLoading }: MealCardProps) {
 
   return (
     <Card>
-      <CardHeader className={styles.header}>
-        <div className={styles.headerContent}>
-          <div className={styles.headerLeft}>
-            <Icon className={styles.icon} />
-            <h3 className={styles.title}>{label}</h3>
+      <CardHeader className="diary-meal-header">
+        <div className="diary-meal-header-content">
+          <div className="diary-meal-header-left">
+            <Icon className="diary-meal-icon" />
+            <h3 className="diary-meal-title">{label}</h3>
           </div>
-          <div className={styles.totalCalories}>
+          <div className="diary-meal-total-calories">
             {meal.totalCalories}{" "}
-            <span className={styles.caloriesUnit}>cal</span>
+            <span className="diary-meal-calories-unit">cal</span>
           </div>
         </div>
       </CardHeader>
-      <CardContent className={styles.content}>
+      <CardContent className="diary-meal-content">
         {/* Food items list */}
-        <div className={styles.foodList}>
+        <div className="diary-meal-food-list">
           {meal.foods.map((food) => (
             <FoodItem key={food.id} food={food} />
           ))}
         </div>
 
         {/* Add food button */}
-        <Button variant="ghost" className={styles.addButton} size="sm">
+        <Button variant="ghost" className="diary-meal-add-button" size="sm">
           + Add food
         </Button>
       </CardContent>

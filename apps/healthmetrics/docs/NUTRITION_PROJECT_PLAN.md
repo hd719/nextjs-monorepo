@@ -235,7 +235,7 @@ routes/
 // Authentication middleware
 export const authMiddleware = createMiddleware().server(async ({ request, next }) => {
   const user = await getUser(request)
-  if (!user) throw redirect('/login')
+  if (!user) throw redirect('/auth/login')
   return next({ context: { user } })
 })
 

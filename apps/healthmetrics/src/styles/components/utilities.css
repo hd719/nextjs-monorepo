@@ -1,0 +1,134 @@
+/* ==========================================================================
+   Global Utility Classes
+   Using @layer utilities to bundle with Tailwind's utility classes
+   ========================================================================== */
+
+/**
+ * Global Utility Classes for CSS Modules
+ *
+ * This file contains reusable CSS utility classes using Tailwind's @apply directive.
+ * These utilities can be used across multiple components to prevent duplication.
+ *
+ * NAMING CONVENTIONS:
+ * - Use kebab-case for class names (e.g., .space-y-4, .text-sm)
+ * - Be descriptive but concise
+ * - Group related utilities together with comments
+ *
+ * WHEN TO ADD HERE:
+ * - Pattern is used in 3+ components
+ * - Pattern is a common layout/spacing utility
+ * - Pattern represents a reusable design token
+ *
+ * WHEN TO USE COMPONENT-SPECIFIC STYLES:
+ * - Styling is unique to one component
+ * - Styling has specific business logic or context
+ */
+
+@layer utilities {
+  /* ==========================================================================
+     Layout & Spacing
+     ========================================================================== */
+
+  .util-space-y-1 {
+    @apply space-y-1;
+  }
+
+  .util-space-y-2 {
+    @apply space-y-2;
+  }
+
+  .util-space-y-4 {
+    @apply space-y-4;
+  }
+
+  .util-space-y-6 {
+    @apply space-y-6;
+  }
+
+  .util-grid-2-col {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+  }
+
+  .util-flex-end {
+    @apply flex justify-end;
+  }
+
+  .util-flex-between {
+    @apply flex justify-between items-center;
+  }
+
+  .util-flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  /* ==========================================================================
+     Typography
+     ========================================================================== */
+
+  .util-text-xs {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .util-text-sm {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .util-text-base {
+    @apply text-base;
+    color: var(--foreground);
+  }
+
+  .util-heading {
+    @apply text-xl font-semibold mb-4;
+  }
+
+  .util-heading-lg {
+    @apply text-2xl font-bold;
+  }
+
+  /* ==========================================================================
+     Common UI Patterns
+     ========================================================================== */
+
+  .util-card-content {
+    @apply p-6;
+  }
+
+  .util-card-header {
+    @apply p-6 pb-4;
+  }
+
+  .util-rounded-md {
+    @apply rounded-md;
+  }
+
+  .util-rounded-lg {
+    @apply rounded-lg;
+  }
+
+  /* ==========================================================================
+     Form Elements
+     ========================================================================== */
+
+  .util-input-base {
+    @apply flex h-10 w-full rounded-md border px-3 py-2 text-sm;
+    border-color: var(--input);
+    background-color: var(--background);
+    --tw-ring-offset-color: var(--background);
+  }
+
+  .util-input-base:focus-visible {
+    @apply outline-none ring-2 ring-offset-2;
+    --tw-ring-color: var(--ring);
+  }
+
+  .util-label {
+    @apply text-sm font-medium leading-none;
+  }
+
+  .util-field-error {
+    @apply text-sm text-red-600 dark:text-red-400 mt-1 font-medium;
+  }
+}

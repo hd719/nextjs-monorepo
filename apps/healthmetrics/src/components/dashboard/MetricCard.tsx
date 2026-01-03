@@ -1,7 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Skeleton } from "@/components/ui/skeleton";
-import styles from "./MetricCard.module.css";
 
 export interface MetricCardProps {
   label: string;
@@ -21,10 +20,10 @@ export function MetricCard({
   if (isLoading) {
     return (
       <Card>
-        <CardContent className={styles.cardContent}>
-          <div className={styles.loadingContainer}>
+        <CardContent className="dashboard-metric-card-content">
+          <div className="dashboard-metric-loading-container">
             <Skeleton className="h-4 w-20" />
-            <div className={styles.loadingValues}>
+            <div className="dashboard-metric-loading-values">
               <Skeleton className="h-9 w-32" />
               <Skeleton className="h-4 w-16" />
             </div>
@@ -37,18 +36,21 @@ export function MetricCard({
 
   return (
     <Card>
-      <CardContent className={styles.cardContent}>
-        <div className={styles.content}>
+      <CardContent className="dashboard-metric-card-content">
+        <div className="dashboard-metric-content">
           {/* Label */}
-          <h3 className={styles.label}>{label}</h3>
+          <h3 className="dashboard-metric-label">{label}</h3>
 
           {/* Values */}
-          <div className={styles.values}>
-            <div className={styles.consumed}>
+          <div className="dashboard-metric-values">
+            <div className="dashboard-metric-consumed">
               {consumed.toLocaleString()}
-              <span className={styles.goal}> / {goal.toLocaleString()}</span>
+              <span className="dashboard-metric-goal">
+                {" "}
+                / {goal.toLocaleString()}
+              </span>
             </div>
-            <p className={styles.unit}>{unit}</p>
+            <p className="dashboard-metric-unit">{unit}</p>
           </div>
 
           {/* Progress bar */}

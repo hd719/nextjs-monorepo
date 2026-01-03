@@ -1,17 +1,17 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
+import { useForm } from "@tanstack/react-form";
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { AuthLayout } from "@/components/forms/AuthLayout";
 import { AuthCard } from "@/components/forms/AuthCard";
-import { AuthFormField } from "@/components/forms/AuthFormField";
-import {
-  resetPasswordSchema,
-  type ResetPasswordFormData,
-} from "@/lib/validation";
+import { resetPasswordSchema } from "@/lib/validation";
 import { getErrorMessage } from "@/utils/auth-helpers";
+import { getFieldError } from "@/utils/form-errors";
 
-export const Route = createFileRoute("/auth/reset-password" as any)({
+export const Route = createFileRoute("/auth/reset-password")({
   component: ResetPasswordComponent,
 });
 
@@ -19,15 +19,7 @@ function ResetPasswordComponent() {
   const navigate = useNavigate();
   const search = Route.useSearch() as { token?: string };
 
-  const [formData, setFormData] = useState<ResetPasswordFormData>({
-    password: "",
-    confirmPassword: "",
-  });
-  const [errors, setErrors] = useState<
-    Partial<Record<keyof ResetPasswordFormData, string>>
-  >({});
   const [serverError, setServerError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [tokenError, setTokenError] = useState<string | null>(null);
 
   // Check if token is present
@@ -39,54 +31,43 @@ function ResetPasswordComponent() {
     }
   }, [search.token]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrors({});
-    setServerError(null);
+  const form = useForm({
+    defaultValues: {
+      password: "",
+      confirmPassword: "",
+    },
+    validators: {
+      onChange: resetPasswordSchema,
+    },
+    onSubmit: async ({ value }) => {
+      setServerError(null);
 
-    if (!search.token) {
-      setServerError(
-        "No reset token provided. Please request a new reset link."
-      );
-      return;
-    }
-
-    // Validate form
-    const result = resetPasswordSchema.safeParse(formData);
-    if (!result.success) {
-      const fieldErrors: Partial<Record<keyof ResetPasswordFormData, string>> =
-        {};
-      result.error.errors.forEach((err) => {
-        if (err.path[0]) {
-          fieldErrors[err.path[0] as keyof ResetPasswordFormData] = err.message;
-        }
-      });
-      setErrors(fieldErrors);
-      return;
-    }
-
-    setIsLoading(true);
-
-    try {
-      // Call Better-Auth reset password API
-      const response = await authClient.resetPassword({
-        token: search.token,
-        newPassword: formData.password,
-      });
-
-      if (response.error) {
-        setServerError(getErrorMessage(response.error));
+      if (!search.token) {
+        setServerError(
+          "No reset token provided. Please request a new reset link."
+        );
         return;
       }
 
-      // Success! Redirect to login
-      navigate({ to: "/login" as any });
-    } catch (error) {
-      setServerError(getErrorMessage(error));
-    } finally {
-      setIsLoading(false);
-    }
-  };
+      try {
+        // Call Better-Auth reset password API
+        const response = await authClient.resetPassword({
+          token: search.token,
+          newPassword: value.password,
+        });
+
+        if (response.error) {
+          setServerError(getErrorMessage(response.error));
+          return;
+        }
+
+        // Success! Redirect to login
+        navigate({ to: "/auth/login" as any });
+      } catch (error) {
+        setServerError(getErrorMessage(error));
+      }
+    },
+  });
 
   if (tokenError) {
     return (
@@ -108,7 +89,7 @@ function ResetPasswordComponent() {
               </div>
               <div>
                 <Link
-                  to="/login"
+                  to="/auth/login"
                   className="text-accent hover:underline font-medium"
                 >
                   Back to Login
@@ -127,64 +108,67 @@ function ResetPasswordComponent() {
         title="Reset Password"
         description="Enter your new password below"
       >
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            form.handleSubmit();
+          }}
+          className="space-y-4"
+        >
           {serverError && (
             <div className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
               {serverError}
             </div>
           )}
 
-          <AuthFormField
-            name="password"
-            label="New Password"
-            type="password"
-            placeholder="Enter your new password"
-            value={formData.password}
-            onChange={(value) => setFormData({ ...formData, password: value })}
-            onBlur={() => {
-              const result = resetPasswordSchema.safeParse(formData);
-              if (!result.success) {
-                const passwordError = result.error.errors.find(
-                  (err) => err.path[0] === "password"
-                );
-                setErrors({
-                  ...errors,
-                  password: passwordError?.message,
-                });
-              } else {
-                setErrors({ ...errors, password: undefined });
-              }
-            }}
-            error={errors.password}
-            autoComplete="new-password"
-          />
+          <form.Field name="password">
+            {(field) => (
+              <div>
+                <Label htmlFor={field.name}>New Password</Label>
+                <Input
+                  id={field.name}
+                  name={field.name}
+                  type="password"
+                  value={field.state.value}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  onBlur={field.handleBlur}
+                  placeholder="Enter your new password"
+                  autoComplete="new-password"
+                />
+                {field.state.meta.errors &&
+                  field.state.meta.errors.length > 0 && (
+                    <p className="util-field-error">
+                      {getFieldError(field.state.meta.errors)}
+                    </p>
+                  )}
+              </div>
+            )}
+          </form.Field>
 
-          <AuthFormField
-            name="confirmPassword"
-            label="Confirm New Password"
-            type="password"
-            placeholder="Confirm your new password"
-            value={formData.confirmPassword}
-            onChange={(value) =>
-              setFormData({ ...formData, confirmPassword: value })
-            }
-            onBlur={() => {
-              const result = resetPasswordSchema.safeParse(formData);
-              if (!result.success) {
-                const confirmError = result.error.errors.find(
-                  (err) => err.path[0] === "confirmPassword"
-                );
-                setErrors({
-                  ...errors,
-                  confirmPassword: confirmError?.message,
-                });
-              } else {
-                setErrors({ ...errors, confirmPassword: undefined });
-              }
-            }}
-            error={errors.confirmPassword}
-            autoComplete="new-password"
-          />
+          <form.Field name="confirmPassword">
+            {(field) => (
+              <div>
+                <Label htmlFor={field.name}>Confirm New Password</Label>
+                <Input
+                  id={field.name}
+                  name={field.name}
+                  type="password"
+                  value={field.state.value}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  onBlur={field.handleBlur}
+                  placeholder="Confirm your new password"
+                  autoComplete="new-password"
+                />
+                {field.state.meta.errors &&
+                  field.state.meta.errors.length > 0 && (
+                    <p className="util-field-error">
+                      {getFieldError(field.state.meta.errors)}
+                    </p>
+                  )}
+              </div>
+            )}
+          </form.Field>
 
           <div className="text-xs text-muted-foreground space-y-1">
             <p>Password must:</p>
@@ -196,13 +180,19 @@ function ResetPasswordComponent() {
             </ul>
           </div>
 
-          <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? "Resetting..." : "Reset Password"}
-          </Button>
+          <form.Subscribe
+            selector={(state) => [state.canSubmit, state.isSubmitting]}
+          >
+            {([canSubmit, isSubmitting]) => (
+              <Button type="submit" className="w-full" disabled={!canSubmit}>
+                {isSubmitting ? "Resetting..." : "Reset Password"}
+              </Button>
+            )}
+          </form.Subscribe>
 
           <div className="text-center text-sm">
             <Link
-              to="/login"
+              to="/auth/login"
               className="text-accent hover:underline font-medium"
             >
               Back to Login

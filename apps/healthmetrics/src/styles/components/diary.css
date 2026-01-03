@@ -1,0 +1,597 @@
+/* ==========================================================================
+   Diary Component Styles
+   Using @layer components to bundle with main CSS (prevents FOUC)
+   ========================================================================== */
+
+@layer components {
+  /**
+   * DiaryDayView Component Styles
+   *
+   * Day view with date selector, totals, and entries
+   */
+
+  /* ==========================================================================
+     Container
+     ========================================================================== */
+
+  .diary-day-container {
+    @apply space-y-6;
+  }
+
+  /* ==========================================================================
+     Date Selector Card
+     ========================================================================== */
+
+  .diary-day-date-card {
+    @apply p-4;
+  }
+
+  .diary-day-date-content {
+    @apply flex items-center justify-between gap-4;
+  }
+
+  .diary-day-date-display {
+    @apply flex items-center gap-2;
+  }
+
+  .diary-day-date-icon {
+    @apply w-5 h-5;
+    color: var(--muted-foreground);
+  }
+
+  .diary-day-date-text {
+    @apply text-sm font-medium;
+  }
+
+  .diary-day-date-input {
+    @apply w-auto;
+  }
+
+  /* ==========================================================================
+     Totals Card
+     ========================================================================== */
+
+  .diary-day-totals-card {
+    @apply p-6;
+  }
+
+  .diary-day-totals-title {
+    @apply text-xl font-semibold mb-4;
+  }
+
+  .diary-day-totals-grid {
+    @apply grid grid-cols-2 md:grid-cols-4 gap-4;
+  }
+
+  .diary-day-total-item {
+    /* No additional styles needed */
+  }
+
+  .diary-day-total-label {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .diary-day-total-value {
+    @apply text-2xl font-bold;
+  }
+
+  .diary-day-total-unit {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .diary-day-entry-count {
+    @apply text-xs mt-4;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Loading State
+     ========================================================================== */
+
+  .diary-day-loading-item {
+    @apply animate-pulse;
+  }
+
+  .diary-day-loading-label {
+    @apply h-4 rounded w-20 mb-2;
+    background-color: var(--muted);
+  }
+
+  .diary-day-loading-value {
+    @apply h-8 rounded w-16;
+    background-color: var(--muted);
+  }
+
+  /* ==========================================================================
+     Meals Section
+     ========================================================================== */
+
+  .diary-day-meals-header {
+    @apply flex justify-between items-center;
+  }
+
+  .diary-day-meals-title {
+    @apply text-xl font-semibold;
+  }
+
+  .diary-day-add-icon {
+    @apply w-4 h-4 mr-2;
+  }
+
+  /**
+   * DiaryEntryList Component Styles
+   *
+   * List of diary entries grouped by meal type
+   */
+
+  /* ==========================================================================
+     Container
+     ========================================================================== */
+
+  .diary-entry-list-container {
+    @apply space-y-4;
+  }
+
+  /* ==========================================================================
+     Loading State
+     ========================================================================== */
+
+  .diary-entry-loading-card {
+    @apply p-4 animate-pulse;
+  }
+
+  .diary-entry-loading-title {
+    @apply h-6 rounded w-32 mb-3;
+    background-color: var(--muted);
+  }
+
+  .diary-entry-loading-list {
+    @apply space-y-2;
+  }
+
+  .diary-entry-loading-item {
+    @apply h-4 rounded;
+    background-color: var(--muted);
+  }
+
+  /* ==========================================================================
+     Empty State
+     ========================================================================== */
+
+  .diary-entry-empty-card {
+    @apply p-12 text-center;
+  }
+
+  .diary-entry-empty-icon {
+    @apply w-12 h-12 mx-auto mb-4 opacity-50;
+    color: var(--muted-foreground);
+  }
+
+  .diary-entry-empty-title {
+    @apply text-lg font-medium mb-2;
+  }
+
+  .diary-entry-empty-description {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Meal Card
+     ========================================================================== */
+
+  .diary-entry-meal-card {
+    @apply p-4;
+  }
+
+  .diary-entry-meal-header {
+    @apply flex items-center justify-between mb-3 pb-3 border-b;
+  }
+
+  .diary-entry-meal-header-left {
+    @apply flex items-center gap-2;
+  }
+
+  .diary-entry-meal-icon {
+    @apply w-5 h-5;
+    color: var(--primary);
+  }
+
+  .diary-entry-meal-label {
+    @apply font-semibold;
+  }
+
+  .diary-entry-meal-calories {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Entry List
+     ========================================================================== */
+
+  .diary-entry-list {
+    @apply space-y-3;
+  }
+
+  .diary-entry {
+    @apply flex items-start justify-between gap-4;
+  }
+
+  .diary-entry-content {
+    @apply flex-1 min-w-0;
+  }
+
+  .diary-entry-name {
+    @apply font-medium truncate;
+  }
+
+  .diary-entry-brand {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .diary-entry-quantity {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .diary-entry-notes {
+    @apply text-xs italic mt-1;
+    color: var(--muted-foreground);
+  }
+
+  .diary-entry-nutrition {
+    @apply text-right shrink-0;
+  }
+
+  .diary-entry-calories {
+    @apply font-semibold;
+  }
+
+  .diary-entry-unit {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .diary-entry-macros {
+    @apply text-xs mt-1 space-y-0.5;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Meal Totals
+     ========================================================================== */
+
+  .diary-entry-meal-totals {
+    @apply mt-3 pt-3 border-t;
+  }
+
+  .diary-entry-totals-row {
+    @apply flex justify-between text-sm font-medium;
+  }
+
+  .diary-entry-totals-label {
+    /* No additional styles needed */
+  }
+
+  .diary-entry-totals-values {
+    @apply text-right;
+  }
+
+  .diary-entry-totals-macros {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  /**
+   * MealCard Component Styles
+   *
+   * Card displaying a meal with food items
+   */
+
+  /* ==========================================================================
+     Header
+     ========================================================================== */
+
+  .diary-meal-header {
+    @apply pb-3;
+  }
+
+  .diary-meal-header-content {
+    @apply flex items-center justify-between;
+  }
+
+  .diary-meal-header-left {
+    @apply flex items-center gap-2;
+  }
+
+  .diary-meal-icon {
+    @apply w-5 h-5;
+    color: var(--accent);
+  }
+
+  .diary-meal-title {
+    @apply text-lg font-semibold;
+  }
+
+  .diary-meal-total-calories {
+    @apply text-sm font-medium;
+  }
+
+  .diary-meal-calories-unit {
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Content
+     ========================================================================== */
+
+  .diary-meal-content {
+    @apply space-y-2;
+  }
+
+  .diary-meal-food-list {
+    @apply space-y-1;
+  }
+
+  /* ==========================================================================
+     Add Button
+     ========================================================================== */
+
+  .diary-meal-add-button {
+    @apply w-full justify-start;
+    color: var(--muted-foreground);
+  }
+
+  .diary-meal-add-button:hover {
+    color: var(--accent);
+  }
+
+  /* ==========================================================================
+     Loading State
+     ========================================================================== */
+
+  .diary-meal-loading-content {
+    @apply space-y-2;
+  }
+
+  .diary-meal-loading-food-list {
+    @apply space-y-2;
+  }
+
+  /**
+   * FoodItem Component Styles
+   *
+   * Individual food item in a meal
+   */
+
+  /* ==========================================================================
+     Item Container
+     ========================================================================== */
+
+  .diary-food-item {
+    @apply flex items-center justify-between py-2 rounded-md px-2 -mx-2 transition-colors;
+  }
+
+  .diary-food-item:hover {
+    background-color: color-mix(in srgb, var(--accent) 5%, transparent);
+  }
+
+  /* ==========================================================================
+     Content
+     ========================================================================== */
+
+  .diary-food-content {
+    @apply flex-1;
+  }
+
+  .diary-food-details {
+    @apply flex items-baseline gap-2;
+  }
+
+  .diary-food-name {
+    @apply text-sm;
+  }
+
+  .diary-food-quantity {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Calories
+     ========================================================================== */
+
+  .diary-food-calories {
+    @apply text-sm font-medium;
+  }
+
+  .diary-food-calories-unit {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  /**
+   * AddFoodDialog Component Styles
+   *
+   * Dialog for adding food items to diary
+   */
+
+  /* ==========================================================================
+     Dialog Content
+     ========================================================================== */
+
+  .diary-add-dialog-content {
+    @apply max-w-2xl max-h-[90vh] overflow-y-auto;
+  }
+
+  .diary-add-form {
+    @apply space-y-4;
+  }
+
+  /* ==========================================================================
+     Search Section
+     ========================================================================== */
+
+  .diary-add-search-section {
+    @apply space-y-2;
+  }
+
+  .diary-add-search-wrapper {
+    @apply relative;
+  }
+
+  .diary-add-search-icon {
+    @apply absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Search Results
+     ========================================================================== */
+
+  .diary-add-results-container {
+    @apply border rounded-md max-h-60 overflow-y-auto;
+  }
+
+  .diary-add-results-loading {
+    @apply flex items-center justify-center p-8;
+  }
+
+  .diary-add-loading-spinner {
+    @apply w-6 h-6 animate-spin;
+    color: var(--muted-foreground);
+  }
+
+  .diary-add-results-empty {
+    @apply p-8 text-center text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .diary-add-results-list {
+    @apply divide-y;
+  }
+
+  .diary-add-result-item {
+    @apply w-full p-3 text-left transition-colors;
+  }
+
+  .diary-add-result-item:hover {
+    background-color: var(--accent);
+  }
+
+  .diary-add-result-name {
+    @apply font-medium;
+  }
+
+  .diary-add-result-brand {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .diary-add-result-nutrition {
+    @apply text-xs mt-1;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Selected Food Card
+     ========================================================================== */
+
+  .diary-add-selected-card {
+    @apply p-4 rounded-md;
+    background-color: var(--accent);
+  }
+
+  .diary-add-selected-content {
+    @apply flex items-start justify-between;
+  }
+
+  .diary-add-selected-info {
+    /* No additional styles needed */
+  }
+
+  .diary-add-selected-name {
+    @apply font-semibold;
+  }
+
+  .diary-add-selected-brand {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .diary-add-selected-per100g {
+    @apply text-xs mt-1;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Form Fields
+     ========================================================================== */
+
+  .diary-add-field-section {
+    @apply space-y-2;
+  }
+
+  .diary-add-field-grid {
+    @apply grid grid-cols-2 gap-4;
+  }
+
+  .diary-add-select-input {
+    @apply flex h-10 w-full rounded-md border px-3 py-2 text-sm;
+    border-color: var(--input);
+    background-color: var(--background);
+    --tw-ring-offset-color: var(--background);
+  }
+
+  .diary-add-select-input:focus-visible {
+    @apply outline-none ring-2 ring-offset-2;
+    --tw-ring-color: var(--ring);
+  }
+
+  /* ==========================================================================
+     Calculated Nutrition
+     ========================================================================== */
+
+  .diary-add-nutrition-card {
+    @apply p-4 rounded-md border;
+    background-color: var(--muted);
+    border-color: var(--border);
+  }
+
+  .diary-add-nutrition-title {
+    @apply text-sm font-medium mb-3;
+  }
+
+  .diary-add-nutrition-grid {
+    @apply grid grid-cols-4 gap-2 text-center;
+  }
+
+  .diary-add-nutrition-item {
+    /* No additional styles needed */
+  }
+
+  .diary-add-nutrition-value {
+    @apply text-lg font-bold;
+  }
+
+  .diary-add-nutrition-label {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Footer
+     ========================================================================== */
+
+  .diary-add-footer {
+    @apply flex justify-end gap-2;
+  }
+
+  .diary-add-submit-button {
+    /* No additional styles needed - uses Button component */
+  }
+}

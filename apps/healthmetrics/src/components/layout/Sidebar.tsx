@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import { Home, Book, Dumbbell, TrendingUp, User } from "lucide-react";
-import styles from "./Sidebar.module.css";
 
 interface NavItem {
   icon: React.ComponentType<{ className?: string }>;
@@ -9,7 +8,7 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { icon: Home, label: "Home", href: "/" },
+  { icon: Home, label: "Home", href: "/dashboard" },
   { icon: Book, label: "Diary", href: "/diary" },
   { icon: Dumbbell, label: "Exercise", href: "/exercise" },
   { icon: TrendingUp, label: "Progress", href: "/progress" },
@@ -18,16 +17,16 @@ const navItems: NavItem[] = [
 
 export function Sidebar() {
   return (
-    <aside className={styles.sidebar}>
+    <aside className="sidebar-container">
       {/* Logo */}
-      <div className={styles.logo}>
-        <h1 className={styles.logoText}>
-          <span className={styles.logoAccent}>Health</span>Metrics
+      <div className="sidebar-logo">
+        <h1 className="sidebar-logo-text">
+          <span className="sidebar-logo-accent">Health</span>Metrics
         </h1>
       </div>
 
       {/* Navigation */}
-      <nav className={styles.nav}>
+      <nav className="sidebar-nav">
         {navItems.map((item) => {
           const Icon = item.icon;
 
@@ -35,13 +34,13 @@ export function Sidebar() {
             <Link
               key={item.href}
               to={item.href}
-              className={styles.navLink}
+              className="sidebar-nav-link"
               activeProps={{
-                className: styles.navLinkActive,
+                className: "sidebar-nav-link-active",
               }}
             >
-              <Icon className={styles.icon} />
-              <span className={styles.label}>{item.label}</span>
+              <Icon className="sidebar-icon" />
+              <span className="sidebar-label">{item.label}</span>
             </Link>
           );
         })}
