@@ -1,0 +1,116 @@
+/* ==========================================================================
+   Auth Component Styles
+   Using @layer components to bundle with main CSS (prevents FOUC)
+   ========================================================================== */
+
+@layer components {
+  /* ==========================================================================
+     Auth Layout
+     ========================================================================== */
+
+  .auth-container {
+    @apply min-h-screen flex flex-col;
+    background-color: var(--background);
+  }
+
+  .auth-header {
+    border-bottom: 1px solid;
+    border-color: var(--border);
+  }
+
+  .auth-header-content {
+    @apply container mx-auto px-4 py-4;
+  }
+
+  .auth-header-inner {
+    @apply flex items-center justify-between;
+  }
+
+  .auth-logo-link {
+    @apply flex items-center gap-2 transition-opacity;
+  }
+
+  .auth-logo-link:hover {
+    @apply opacity-80;
+  }
+
+  .auth-logo-icon {
+    @apply w-10 h-10 rounded-lg flex items-center justify-center;
+    background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+
+  .auth-icon-svg {
+    @apply w-6 h-6;
+    color: var(--accent);
+  }
+
+  .auth-logo-text {
+    @apply text-xl font-bold;
+  }
+
+  .auth-main {
+    @apply flex-1 flex items-center justify-center px-4 py-12;
+  }
+
+  /* ==========================================================================
+     Auth Card
+     ========================================================================== */
+
+  .auth-card {
+    @apply w-full max-w-md;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .auth-card-header {
+    @apply space-y-3;
+    padding-bottom: 0.5rem;
+  }
+
+  .auth-card-title {
+    @apply text-2xl font-bold text-center;
+  }
+
+  .auth-card-description {
+    @apply text-center;
+    color: var(--muted-foreground);
+  }
+
+  .auth-form-container {
+    @apply space-y-5;
+  }
+
+  .auth-link-section {
+    @apply text-center text-sm pt-4;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .auth-link-text {
+    color: var(--foreground);
+  }
+
+  .auth-link {
+    @apply font-medium;
+    color: var(--foreground);
+  }
+
+  .auth-link:hover {
+    @apply underline;
+  }
+
+  /* ==========================================================================
+     Auth Form Field
+     ========================================================================== */
+
+  .auth-field-container {
+    @apply space-y-2;
+  }
+
+  .auth-error-message {
+    @apply text-sm;
+    color: var(--destructive);
+  }
+}
