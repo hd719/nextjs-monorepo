@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 import { Sidebar } from "./Sidebar";
 import { BottomNav } from "./BottomNav";
 import { Header } from "./Header";
-import styles from "./AppLayout.module.css";
 
 export interface AppLayoutProps {
   children: ReactNode;
@@ -10,18 +9,18 @@ export interface AppLayoutProps {
 
 export function AppLayout({ children }: AppLayoutProps) {
   return (
-    <div className={styles.container}>
+    <div className="app-layout-container">
       {/* Desktop Sidebar */}
       <Sidebar />
 
       {/* Main content area */}
-      <div className={styles.contentWrapper}>
+      <div className="app-layout-content-wrapper">
         {/* Header */}
         <Header />
 
         {/* Page content */}
-        <main className={styles.main}>
-          <div className={styles.mainInner}>{children}</div>
+        <main className="app-layout-main">
+          <div className="app-layout-main-inner">{children}</div>
         </main>
       </div>
 

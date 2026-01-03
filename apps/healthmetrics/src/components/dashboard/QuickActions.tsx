@@ -1,7 +1,6 @@
 import { UtensilsCrossed, Dumbbell, Scale } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import styles from "./QuickActions.module.css";
 
 const actions = [
   {
@@ -26,21 +25,23 @@ const actions = [
 
 export function QuickActions() {
   return (
-    <section className={styles.section}>
-      <h2 className={styles.heading}>Quick Actions</h2>
+    <section className="dashboard-actions-section">
+      <h2 className="dashboard-actions-heading">Quick Actions</h2>
 
-      <div className={styles.grid}>
+      <div className="dashboard-actions-grid">
         {actions.map((action) => {
           const Icon = action.icon;
           return (
-            <Card key={action.id} className={styles.actionCard}>
-              <Button variant="ghost" className={styles.actionButton}>
-                <div className={styles.iconContainer}>
-                  <Icon className={styles.icon} />
+            <Card key={action.id} className="dashboard-action-card">
+              <Button variant="ghost" className="dashboard-action-button">
+                <div className="dashboard-action-icon-container">
+                  <Icon className="dashboard-action-icon" />
                 </div>
-                <div className={styles.content}>
-                  <p className={styles.label}>{action.label}</p>
-                  <p className={styles.description}>{action.description}</p>
+                <div className="dashboard-action-content">
+                  <p className="dashboard-action-label">{action.label}</p>
+                  <p className="dashboard-action-description">
+                    {action.description}
+                  </p>
                 </div>
               </Button>
             </Card>

@@ -1,0 +1,107 @@
+/* ==========================================================================
+   UI Component Styles
+   Using @layer components to bundle with main CSS (prevents FOUC)
+   ========================================================================== */
+
+@layer components {
+  /**
+   * ProgressBar Component Styles
+   *
+   * Color-coded progress bar with label and percentage display
+   */
+
+  /* ==========================================================================
+     Container
+     ========================================================================== */
+
+  .progress-bar-container {
+    @apply space-y-2;
+  }
+
+  /* ==========================================================================
+     Label Row
+     ========================================================================== */
+
+  .progress-bar-label-row {
+    @apply flex items-center justify-between text-sm;
+  }
+
+  .progress-bar-label {
+    color: var(--muted-foreground);
+  }
+
+  .progress-bar-percentage {
+    @apply font-medium;
+  }
+
+  /* ==========================================================================
+     Progress Track
+     ========================================================================== */
+
+  .progress-bar-track {
+    @apply h-2 w-full rounded-full overflow-hidden;
+    background-color: var(--secondary);
+  }
+
+  /* ==========================================================================
+     Progress Bar Fill
+     ========================================================================== */
+
+  .progress-bar-fill {
+    @apply h-full transition-all duration-500 ease-out rounded-full;
+  }
+
+  /* Color variants based on progress */
+  .progress-bar-fill-on-track {
+    background-color: var(--accent);
+  }
+
+  .progress-bar-fill-warning {
+    background-color: var(--warning);
+  }
+
+  .progress-bar-fill-over-limit {
+    background-color: var(--destructive);
+  }
+
+  /**
+   * EmptyState Component Styles
+   *
+   * Reusable empty state component for displaying when no data is available
+   */
+
+  /* ==========================================================================
+     Container
+     ========================================================================== */
+
+  .empty-state-container {
+    @apply flex flex-col items-center justify-center py-12 px-4 text-center;
+  }
+
+  /* ==========================================================================
+     Icon Container
+     ========================================================================== */
+
+  .empty-state-icon-container {
+    @apply w-16 h-16 rounded-full flex items-center justify-center mb-4;
+    background-color: var(--muted);
+  }
+
+  .empty-state-icon {
+    @apply w-8 h-8;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Content
+     ========================================================================== */
+
+  .empty-state-title {
+    @apply text-lg font-semibold mb-2;
+  }
+
+  .empty-state-description {
+    @apply text-sm mb-6 max-w-sm;
+    color: var(--muted-foreground);
+  }
+}

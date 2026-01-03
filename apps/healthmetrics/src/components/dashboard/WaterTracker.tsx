@@ -3,7 +3,6 @@ import { Droplets } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { WaterGlass } from "./WaterGlass";
 import type { WaterIntake } from "@/types/nutrition";
-import styles from "./WaterTracker.module.css";
 
 export interface WaterTrackerProps {
   data: WaterIntake;
@@ -22,24 +21,24 @@ export function WaterTracker({ data, onUpdate }: WaterTrackerProps) {
   const percentage = Math.round((current / data.goal) * 100);
 
   return (
-    <section className={styles.section}>
-      <h2 className={styles.heading}>Water Intake</h2>
+    <section className="dashboard-water-section">
+      <h2 className="dashboard-water-heading">Water Intake</h2>
       <Card>
         <CardHeader>
-          <div className={styles.header}>
-            <CardTitle className={styles.title}>
-              <Droplets className={styles.titleIcon} />
+          <div className="dashboard-water-header">
+            <CardTitle className="dashboard-water-title">
+              <Droplets className="dashboard-water-title-icon" />
               Daily Hydration
             </CardTitle>
-            <div className={styles.stats}>
-              <span className={styles.statsCurrent}>{current}</span>
-              <span className={styles.statsGoal}> / {data.goal}</span>
+            <div className="dashboard-water-stats">
+              <span className="dashboard-water-stats-current">{current}</span>
+              <span className="dashboard-water-stats-goal"> / {data.goal}</span>
             </div>
           </div>
         </CardHeader>
         <CardContent>
           {/* Glass Grid */}
-          <div className={styles.glassGrid}>
+          <div className="dashboard-water-glass-grid">
             {Array.from({ length: data.goal }).map((_, index) => (
               <WaterGlass
                 key={index}
@@ -51,10 +50,10 @@ export function WaterTracker({ data, onUpdate }: WaterTrackerProps) {
           </div>
 
           {/* Progress Text */}
-          <div className={styles.progress}>
-            <p className={styles.progressText}>
+          <div className="dashboard-water-progress">
+            <p className="dashboard-water-progress-text">
               {percentage >= 100 ? (
-                <span className={styles.progressSuccess}>
+                <span className="dashboard-water-progress-success">
                   🎉 Great job! You've reached your daily goal!
                 </span>
               ) : percentage >= 50 ? (

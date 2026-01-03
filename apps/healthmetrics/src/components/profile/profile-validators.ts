@@ -1,8 +1,3 @@
-/**
- * Form validators for profile fields
- * Each validator returns undefined if valid, or an error message if invalid
- */
-
 export const displayNameValidator = ({ value }: { value: string }) => {
   if (value && value.length < 2) {
     return "Display name must be at least 2 characters";

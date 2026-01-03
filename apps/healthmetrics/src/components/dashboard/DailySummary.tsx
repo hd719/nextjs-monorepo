@@ -1,7 +1,6 @@
 import { Calendar } from "lucide-react";
 import { MetricCard } from "./MetricCard";
 import type { DailySummary as DailySummaryType } from "@/types/nutrition";
-import styles from "./DailySummary.module.css";
 
 export interface DailySummaryProps {
   data: DailySummaryType;
@@ -9,18 +8,18 @@ export interface DailySummaryProps {
 
 export function DailySummary({ data }: DailySummaryProps) {
   return (
-    <section className={styles.section}>
+    <section className="dashboard-summary-section">
       {/* Header with date */}
-      <div className={styles.header}>
-        <h2 className={styles.heading}>Today's Summary</h2>
-        <div className={styles.date}>
-          <Calendar className={styles.dateIcon} />
+      <div className="dashboard-summary-header">
+        <h2 className="dashboard-summary-heading">Today's Summary</h2>
+        <div className="dashboard-summary-date">
+          <Calendar className="dashboard-summary-date-icon" />
           <span>{data.date}</span>
         </div>
       </div>
 
       {/* Metric cards grid */}
-      <div className={styles.grid}>
+      <div className="dashboard-summary-grid">
         <MetricCard
           label="Calories"
           consumed={data.calories.consumed}

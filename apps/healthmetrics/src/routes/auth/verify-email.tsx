@@ -37,7 +37,7 @@ function VerifyEmail() {
         }
 
         setStatus("success");
-        setTimeout(() => navigate({ to: "/login" }), 2000);
+        setTimeout(() => navigate({ to: "/auth/login" }), 2000);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Verification failed");
         setStatus("error");
@@ -100,7 +100,7 @@ function VerifyEmail() {
                   <Link to="/">Go to Home</Link>
                 </Button>
                 <Button asChild>
-                  <Link to="/login">Log In</Link>
+                  <Link to="/auth/login">Log In</Link>
                 </Button>
               </div>
             </div>

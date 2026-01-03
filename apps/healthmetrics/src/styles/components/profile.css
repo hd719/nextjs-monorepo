@@ -1,0 +1,187 @@
+/* ==========================================================================
+   Profile Page Component Styles
+   Using @layer components to bundle with main CSS (prevents FOUC)
+   ========================================================================== */
+
+@layer components {
+  /**
+ * ProfileForm Component Styles
+ *
+ * This module contains all styling for the ProfileForm component.
+ * Uses Tailwind's @apply directive for consistent design tokens.
+ */
+
+  /* ==========================================================================
+   Form Container
+   ========================================================================== */
+
+  .profile-form {
+    @apply space-y-6;
+  }
+
+  /* ==========================================================================
+   Messages
+   ========================================================================== */
+
+  .profile-form-success-message {
+    @apply p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-md;
+  }
+
+  .profile-form-success-text {
+    @apply text-sm text-green-800 dark:text-green-200;
+  }
+
+  .profile-form-error-message {
+    @apply p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md;
+  }
+
+  .profile-form-error-text {
+    @apply text-sm text-red-800 dark:text-red-200;
+  }
+
+  /* ==========================================================================
+   Avatar Section
+   ========================================================================== */
+
+  .profile-form-avatar-container {
+    @apply flex flex-col items-center gap-4;
+  }
+
+  .profile-form-avatar-preview {
+    @apply w-32 h-32 rounded-full overflow-hidden flex items-center justify-center;
+    background-color: var(--muted);
+    border: 3px solid;
+    border-color: var(--border);
+  }
+
+  .profile-form-avatar-image {
+    @apply w-full h-full object-cover;
+  }
+
+  .profile-form-avatar-placeholder {
+    @apply w-16 h-16;
+    color: var(--muted-foreground);
+  }
+
+  .profile-form-avatar-actions {
+    @apply flex flex-col items-center gap-2 text-center;
+  }
+
+  .profile-form-avatar-label {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-md cursor-pointer transition-colors;
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+  }
+
+  .profile-form-avatar-label:hover {
+    background-color: color-mix(in srgb, var(--accent) 90%, black);
+  }
+
+  .profile-form-upload-icon {
+    @apply w-4 h-4;
+  }
+
+  .profile-form-avatar-input {
+    @apply hidden;
+  }
+
+  .profile-form-avatar-help {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+   Form Sections
+   ========================================================================== */
+
+  .profile-form-section {
+    @apply p-6;
+  }
+
+  .profile-form-section-heading {
+    @apply text-xl font-semibold mb-4;
+  }
+
+  .profile-form-section-description {
+    @apply text-sm mb-4;
+    color: var(--muted-foreground);
+  }
+
+  .profile-form-field-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+  }
+
+  /* Email field spans full width */
+  .profile-form-email-field {
+    @apply md:col-span-2;
+  }
+
+  .profile-form-read-only-input {
+    @apply opacity-60 cursor-not-allowed;
+    background-color: var(--muted);
+  }
+
+  .profile-form-helper-text {
+    @apply text-xs mt-1;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+   Select Inputs
+   ========================================================================== */
+
+  .profile-form-select-input {
+    @apply flex h-10 w-full rounded-md border px-3 py-2 text-sm;
+    border-color: var(--input);
+    background-color: var(--background);
+    --tw-ring-offset-color: var(--background);
+  }
+
+  .profile-form-select-input:focus-visible {
+    @apply outline-none ring-2 ring-offset-2;
+    --tw-ring-color: var(--ring);
+  }
+
+  /* ==========================================================================
+   Height Display
+   ========================================================================== */
+
+  .profile-form-height-display {
+    @apply text-xs mt-1;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+   Macro Breakdown Section
+   ========================================================================== */
+
+  .profile-form-macro-container {
+    @apply mt-4 p-4 rounded-md;
+    background-color: var(--muted);
+  }
+
+  .profile-form-macro-title {
+    @apply text-sm font-medium mb-2;
+  }
+
+  .profile-form-macro-list {
+    @apply text-xs space-y-1;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+   Submit Section
+   ========================================================================== */
+
+  .profile-form-submit-container {
+    @apply flex justify-end;
+  }
+
+  /* ==========================================================================
+   Button Icon Spacing
+   ========================================================================== */
+
+  .profile-form-button-icon {
+    @apply w-4 h-4 mr-2;
+  }
+}

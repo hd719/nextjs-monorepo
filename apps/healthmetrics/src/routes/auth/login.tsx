@@ -1,46 +1,51 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useForm } from "@tanstack/react-form";
-import { authClient } from "@/lib/auth-client";
+import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { authClient } from "@/lib/auth-client";
 import { AuthLayout } from "@/components/forms/AuthLayout";
 import { AuthCard } from "@/components/forms/AuthCard";
-import { AUTH_ERRORS } from "@/constants/errors";
 import { getErrorMessage } from "@/utils/auth-helpers";
 import { getFieldError } from "@/utils/form-errors";
-import { forgotPasswordSchema } from "@/lib/validation";
+import { loginSchema } from "@/lib/validation";
 
-export const Route = createFileRoute("/auth/forgot-password" as any)({
-  component: ForgotPasswordComponent,
+export const Route = createFileRoute("/auth/login")({
+  component: LoginPage,
 });
 
-function ForgotPasswordComponent() {
+function LoginPage() {
+  const navigate = useNavigate();
   const [serverError, setServerError] = useState<string | null>(null);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const form = useForm({
     defaultValues: {
       email: "",
+      password: "",
     },
     validators: {
-      onChange: forgotPasswordSchema,
+      onChange: loginSchema,
     },
     onSubmit: async ({ value }) => {
       setServerError(null);
-      setSuccessMessage(null);
 
       try {
-        await authClient.requestPasswordReset({
+        // Call auth client
+        const result = await authClient.signIn.email({
           email: value.email,
-          redirectTo: "/auth/reset-password",
+          password: value.password,
         });
 
-        // Show success message (for security, we show this even if email doesn't exist)
-        setSuccessMessage(AUTH_ERRORS.RESET_EMAIL_SENT);
-        form.reset();
-      } catch (error) {
+        if (result.error) {
+          setServerError(getErrorMessage(result.error));
+          return;
+        }
+
+        // Redirect to dashboard on success
+        navigate({ to: "/dashboard" });
+      } catch (error: any) {
         setServerError(getErrorMessage(error));
       }
     },
@@ -49,8 +54,8 @@ function ForgotPasswordComponent() {
   return (
     <AuthLayout>
       <AuthCard
-        title="Forgot Password"
-        description="Enter your email address and we'll send you a link to reset your password"
+        title="Log In"
+        description="Enter your credentials to access your account"
       >
         <form
           onSubmit={(e) => {
@@ -61,14 +66,8 @@ function ForgotPasswordComponent() {
           className="auth-form-container"
         >
           {serverError && (
-            <div className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
-              {serverError}
-            </div>
-          )}
-
-          {successMessage && (
-            <div className="rounded-md bg-green-500/10 p-3 text-sm text-green-600 dark:text-green-400">
-              {successMessage}
+            <div className="p-3 rounded-md bg-destructive/10 border border-destructive/20">
+              <p className="text-sm text-destructive">{serverError}</p>
             </div>
           )}
 
@@ -96,20 +95,51 @@ function ForgotPasswordComponent() {
             )}
           </form.Field>
 
+          <form.Field name="password">
+            {(field) => (
+              <div>
+                <Label htmlFor={field.name}>Password</Label>
+                <Input
+                  id={field.name}
+                  name={field.name}
+                  type="password"
+                  value={field.state.value}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  onBlur={field.handleBlur}
+                  placeholder="••••••••"
+                  autoComplete="current-password"
+                />
+                {field.state.meta.errors &&
+                  field.state.meta.errors.length > 0 && (
+                    <p className="util-field-error">
+                      {getFieldError(field.state.meta.errors)}
+                    </p>
+                  )}
+              </div>
+            )}
+          </form.Field>
+
           <form.Subscribe
             selector={(state) => [state.canSubmit, state.isSubmitting]}
           >
             {([canSubmit, isSubmitting]) => (
               <Button type="submit" className="w-full" disabled={!canSubmit}>
-                {isSubmitting ? "Sending..." : "Send Reset Link"}
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Logging in...
+                  </>
+                ) : (
+                  "Log In"
+                )}
               </Button>
             )}
           </form.Subscribe>
 
           <div className="auth-form-link-section">
             <div>
-              <Link to="/auth/login" className="auth-form-link">
-                Back to Login
+              <Link to="/auth/forgot-password" className="auth-form-link">
+                Forgot password?
               </Link>
             </div>
             <div>

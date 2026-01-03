@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import { Home, Book, Dumbbell, TrendingUp, User } from "lucide-react";
-import styles from "./BottomNav.module.css";
 
 interface NavItem {
   icon: React.ComponentType<{ className?: string }>;
@@ -18,8 +17,8 @@ const navItems: NavItem[] = [
 
 export function BottomNav() {
   return (
-    <nav className={styles.nav}>
-      <div className={styles.container}>
+    <nav className="bottom-nav-container">
+      <div className="bottom-nav-inner">
         {navItems.map((item) => {
           const Icon = item.icon;
 
@@ -27,13 +26,13 @@ export function BottomNav() {
             <Link
               key={item.href}
               to={item.href}
-              className={styles.navLink}
+              className="bottom-nav-link"
               activeProps={{
-                className: styles.navLinkActive,
+                className: "bottom-nav-link-active",
               }}
             >
-              <Icon className={styles.icon} />
-              <span className={styles.label}>{item.label}</span>
+              <Icon className="bottom-nav-icon" />
+              <span className="bottom-nav-label">{item.label}</span>
             </Link>
           );
         })}

@@ -4,8 +4,9 @@ import { TanStackDevtools } from "@tanstack/react-devtools";
 import { ThemeProvider } from "@/components/theme-provider";
 import { fetchUser } from "@/server/auth";
 
-// Import CSS directly (not as URL) to prevent FOUC
-import "../styles.css";
+// Import CSS with ?url to get the URL for linking in <head>
+// This ensures CSS loads as a stylesheet, not via JavaScript injection
+import appCss from "../styles.css?url";
 
 export const Route = createRootRoute({
   beforeLoad: async () => {
@@ -26,6 +27,13 @@ export const Route = createRootRoute({
       },
       {
         title: "HealthMetrics - Track Your Fitness Journey",
+      },
+    ],
+    // Link CSS as stylesheet in <head> - loads before page renders
+    links: [
+      {
+        rel: "stylesheet",
+        href: appCss,
       },
     ],
   }),

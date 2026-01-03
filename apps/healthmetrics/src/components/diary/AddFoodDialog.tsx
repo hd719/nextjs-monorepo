@@ -16,7 +16,6 @@ import {
   createDiaryEntry,
   type FoodItemSearchResult,
 } from "@/server/diary";
-import styles from "./AddFoodDialog.module.css";
 
 export interface AddFoodDialogProps {
   open: boolean;
@@ -170,7 +169,7 @@ export function AddFoodDialog({
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className={styles.dialogContent}>
+      <DialogContent className="diary-add-dialog-content">
         <DialogHeader>
           <DialogTitle>Add Food to Diary</DialogTitle>
           <DialogDescription>
@@ -178,51 +177,51 @@ export function AddFoodDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className={styles.form}>
+        <form onSubmit={handleSubmit} className="diary-add-form">
           {/* Food Search */}
           {!selectedFood && (
-            <div className={styles.searchSection}>
-              <Label htmlFor="search">Search Food</Label>
-              <div className={styles.searchWrapper}>
-                <Search className={styles.searchIcon} />
+            <div className="diary-add-search-section">
+              <div className="diary-add-search-wrapper">
                 <Input
                   id="search"
                   type="text"
                   placeholder="Search for food..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className={styles.searchInput}
+                  className="diary-add-search-input"
                   autoFocus
                 />
               </div>
 
               {/* Search Results */}
               {searchQuery && (
-                <div className={styles.resultsContainer}>
+                <div className="diary-add-results-container">
                   {isSearching ? (
-                    <div className={styles.resultsLoading}>
-                      <Loader2 className={styles.loadingSpinner} />
+                    <div className="diary-add-results-loading">
+                      <Loader2 className="diary-add-loading-spinner" />
                     </div>
                   ) : searchResults.length === 0 ? (
-                    <div className={styles.resultsEmpty}>
+                    <div className="diary-add-results-empty">
                       No foods found. Try a different search.
                     </div>
                   ) : (
-                    <div className={styles.resultsList}>
+                    <div className="diary-add-results-list">
                       {searchResults.map((food: FoodItemSearchResult) => (
                         <button
                           key={food.id}
                           type="button"
                           onClick={() => handleSelectFood(food)}
-                          className={styles.resultItem}
+                          className="diary-add-result-item"
                         >
-                          <div className={styles.resultName}>{food.name}</div>
+                          <div className="diary-add-result-name">
+                            {food.name}
+                          </div>
                           {food.brand && (
-                            <div className={styles.resultBrand}>
+                            <div className="diary-add-result-brand">
                               {food.brand}
                             </div>
                           )}
-                          <div className={styles.resultNutrition}>
+                          <div className="diary-add-result-nutrition">
                             Per 100g: {food.caloriesPer100g} cal • P:{" "}
                             {food.proteinG}g • C: {food.carbsG}g • F:{" "}
                             {food.fatG}g
@@ -239,16 +238,18 @@ export function AddFoodDialog({
           {/* Selected Food Details */}
           {selectedFood && (
             <>
-              <div className={styles.selectedCard}>
-                <div className={styles.selectedContent}>
-                  <div className={styles.selectedInfo}>
-                    <p className={styles.selectedName}>{selectedFood.name}</p>
+              <div className="diary-add-selected-card">
+                <div className="diary-add-selected-content">
+                  <div className="diary-add-selected-info">
+                    <p className="diary-add-selected-name">
+                      {selectedFood.name}
+                    </p>
                     {selectedFood.brand && (
-                      <p className={styles.selectedBrand}>
+                      <p className="diary-add-selected-brand">
                         {selectedFood.brand}
                       </p>
                     )}
-                    <p className={styles.selectedPer100g}>
+                    <p className="diary-add-selected-per100g">
                       Per 100g: {selectedFood.caloriesPer100g} cal
                     </p>
                   </div>
@@ -264,13 +265,13 @@ export function AddFoodDialog({
               </div>
 
               {/* Meal Type */}
-              <div className={styles.fieldSection}>
+              <div className="diary-add-field-section">
                 <Label htmlFor="mealType">Meal</Label>
                 <select
                   id="mealType"
                   value={mealType}
                   onChange={(e) => setMealType(e.target.value as any)}
-                  className={styles.selectInput}
+                  className="diary-add-select-input"
                 >
                   <option value="breakfast">Breakfast</option>
                   <option value="lunch">Lunch</option>
@@ -281,8 +282,8 @@ export function AddFoodDialog({
               </div>
 
               {/* Quantity */}
-              <div className={styles.fieldGrid}>
-                <div className={styles.fieldSection}>
+              <div className="diary-add-field-grid">
+                <div className="diary-add-field-section">
                   <Label htmlFor="quantity">Quantity (grams)</Label>
                   <Input
                     id="quantity"
@@ -295,7 +296,7 @@ export function AddFoodDialog({
                   />
                 </div>
 
-                <div className={styles.fieldSection}>
+                <div className="diary-add-field-section">
                   <Label htmlFor="servings">Servings</Label>
                   <Input
                     id="servings"
@@ -310,32 +311,32 @@ export function AddFoodDialog({
 
               {/* Calculated Nutrition */}
               {calculatedNutrition && (
-                <div className={styles.nutritionCard}>
-                  <p className={styles.nutritionTitle}>
+                <div className="diary-add-nutrition-card">
+                  <p className="diary-add-nutrition-title">
                     Nutrition for this entry:
                   </p>
-                  <div className={styles.nutritionGrid}>
-                    <div className={styles.nutritionItem}>
-                      <p className={styles.nutritionLabel}>Calories</p>
-                      <p className={styles.nutritionValue}>
+                  <div className="diary-add-nutrition-grid">
+                    <div className="diary-add-nutrition-item">
+                      <p className="diary-add-nutrition-label">Calories</p>
+                      <p className="diary-add-nutrition-value">
                         {calculatedNutrition.calories}
                       </p>
                     </div>
-                    <div className={styles.nutritionItem}>
-                      <p className={styles.nutritionLabel}>Protein</p>
-                      <p className={styles.nutritionValue}>
+                    <div className="diary-add-nutrition-item">
+                      <p className="diary-add-nutrition-label">Protein</p>
+                      <p className="diary-add-nutrition-value">
                         {calculatedNutrition.protein}g
                       </p>
                     </div>
-                    <div className={styles.nutritionItem}>
-                      <p className={styles.nutritionLabel}>Carbs</p>
-                      <p className={styles.nutritionValue}>
+                    <div className="diary-add-nutrition-item">
+                      <p className="diary-add-nutrition-label">Carbs</p>
+                      <p className="diary-add-nutrition-value">
                         {calculatedNutrition.carbs}g
                       </p>
                     </div>
-                    <div className={styles.nutritionItem}>
-                      <p className={styles.nutritionLabel}>Fat</p>
-                      <p className={styles.nutritionValue}>
+                    <div className="diary-add-nutrition-item">
+                      <p className="diary-add-nutrition-label">Fat</p>
+                      <p className="diary-add-nutrition-value">
                         {calculatedNutrition.fat}g
                       </p>
                     </div>
@@ -344,7 +345,7 @@ export function AddFoodDialog({
               )}
 
               {/* Notes */}
-              <div className={styles.fieldSection}>
+              <div className="diary-add-field-section">
                 <Label htmlFor="notes">Notes (optional)</Label>
                 <Input
                   id="notes"

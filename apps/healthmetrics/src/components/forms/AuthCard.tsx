@@ -5,7 +5,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import styles from "./AuthCard.module.css";
 
 interface AuthCardProps {
   title: string;
@@ -15,10 +14,10 @@ interface AuthCardProps {
 
 export function AuthCard({ title, description, children }: AuthCardProps) {
   return (
-    <Card className={styles.card}>
-      <CardHeader className={styles.header}>
-        <CardTitle className={styles.title}>{title}</CardTitle>
-        <CardDescription className={styles.description}>
+    <Card className="auth-card">
+      <CardHeader className="auth-card-header">
+        <CardTitle className="auth-card-title">{title}</CardTitle>
+        <CardDescription className="auth-card-description">
           {description}
         </CardDescription>
       </CardHeader>

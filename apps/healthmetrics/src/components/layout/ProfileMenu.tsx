@@ -12,7 +12,6 @@ import { useTheme } from "@/components/theme-provider";
 import { authClient } from "@/lib/auth-client";
 import { useNavigate } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
-import styles from "./ProfileMenu.module.css";
 
 export function ProfileMenu() {
   const { theme, setTheme } = useTheme();
@@ -53,74 +52,86 @@ export function ProfileMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" aria-label="Profile menu">
-          <User className={styles.menuIcon} />
+          <User className="profile-menu-icon" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
         className={cn(
-          styles.menuContent,
-          isDarkMode ? styles.menuContentDark : styles.menuContentLight
+          "profile-menu-content",
+          isDarkMode
+            ? "profile-menu-content-dark"
+            : "profile-menu-content-light"
         )}
       >
         <DropdownMenuLabel
-          className={isDarkMode ? styles.menuLabelDark : styles.menuLabelLight}
+          className={
+            isDarkMode ? "profile-menu-label-dark" : "profile-menu-label-light"
+          }
         >
           My Account
         </DropdownMenuLabel>
         <DropdownMenuSeparator
-          className={isDarkMode ? styles.separatorDark : styles.separatorLight}
+          className={
+            isDarkMode
+              ? "profile-menu-separator-dark"
+              : "profile-menu-separator-light"
+          }
         />
         <DropdownMenuItem
           onClick={handleProfileClick}
           className={cn(
-            styles.menuItem,
-            isDarkMode ? styles.menuItemDark : styles.menuItemLight
+            "profile-menu-item",
+            isDarkMode ? "profile-menu-item-dark" : "profile-menu-item-light"
           )}
         >
-          <User className={styles.itemIcon} />
+          <User className="profile-menu-item-icon" />
           <span>Profile</span>
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={handleProfileClick}
           className={cn(
-            styles.menuItem,
-            isDarkMode ? styles.menuItemDark : styles.menuItemLight
+            "profile-menu-item",
+            isDarkMode ? "profile-menu-item-dark" : "profile-menu-item-light"
           )}
         >
-          <Settings className={styles.itemIcon} />
+          <Settings className="profile-menu-item-icon" />
           <span>Settings</span>
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={handleToggleTheme}
           className={cn(
-            styles.menuItem,
-            isDarkMode ? styles.menuItemDark : styles.menuItemLight
+            "profile-menu-item",
+            isDarkMode ? "profile-menu-item-dark" : "profile-menu-item-light"
           )}
         >
           {isDarkMode ? (
             <>
-              <Sun className={styles.itemIcon} />
+              <Sun className="profile-menu-item-icon" />
               <span>Light Mode</span>
             </>
           ) : (
             <>
-              <Moon className={styles.itemIcon} />
+              <Moon className="profile-menu-item-icon" />
               <span>Dark Mode</span>
             </>
           )}
         </DropdownMenuItem>
         <DropdownMenuSeparator
-          className={isDarkMode ? styles.separatorDark : styles.separatorLight}
+          className={
+            isDarkMode
+              ? "profile-menu-separator-dark"
+              : "profile-menu-separator-light"
+          }
         />
         <DropdownMenuItem
           onClick={handleLogout}
           className={cn(
-            styles.menuItem,
-            isDarkMode ? styles.menuItemDark : styles.menuItemLight
+            "profile-menu-item",
+            isDarkMode ? "profile-menu-item-dark" : "profile-menu-item-light"
           )}
         >
-          <LogOut className={styles.itemIcon} />
+          <LogOut className="profile-menu-item-icon" />
           <span>Log out</span>
         </DropdownMenuItem>
       </DropdownMenuContent>

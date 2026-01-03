@@ -568,7 +568,7 @@ export const Route = createFileRoute("/dashboard/")({
   beforeLoad: async () => {
     const user = await fetchUser();
     if (!user) {
-      throw redirect({ to: "/login" });
+      throw redirect({ to: "/auth/login" });
     }
     return { user };
   },
@@ -581,7 +581,7 @@ export const Route = createFileRoute("/dashboard/")({
 1. User navigates to `/dashboard`
 2. `beforeLoad` runs on server
 3. `fetchUser()` checks for valid session
-4. If no session → redirect to `/login`
+4. If no session → redirect to `/auth/login`
 5. If session exists → allow access + provide user data
 
 ---
@@ -675,7 +675,7 @@ function VerifyEmailComponent() {
         setSuccess(true);
         // Redirect to login after 2 seconds
         setTimeout(() => {
-          navigate({ to: "/login" });
+          navigate({ to: "/auth/login" });
         }, 2000);
       } catch (error) {
         setError(getErrorMessage(error));

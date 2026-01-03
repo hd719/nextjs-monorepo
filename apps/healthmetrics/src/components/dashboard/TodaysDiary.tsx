@@ -2,7 +2,6 @@ import { UtensilsCrossed } from "lucide-react";
 import { MealCard } from "@/components/diary/MealCard";
 import { EmptyState } from "@/components/ui/empty-state";
 import type { MealEntry } from "@/types/nutrition";
-import styles from "./TodaysDiary.module.css";
 
 export interface TodaysDiaryProps {
   meals: MealEntry[];
@@ -10,11 +9,11 @@ export interface TodaysDiaryProps {
 
 export function TodaysDiary({ meals }: TodaysDiaryProps) {
   return (
-    <section className={styles.section}>
-      <h2 className={styles.heading}>Today's Diary</h2>
+    <section className="dashboard-diary-section">
+      <h2 className="dashboard-diary-heading">Today's Diary</h2>
 
       {/* Meal cards */}
-      <div className={styles.mealsList}>
+      <div className="dashboard-diary-meals-list">
         {meals.length > 0 ? (
           meals.map((meal) => <MealCard key={meal.id} meal={meal} />)
         ) : (

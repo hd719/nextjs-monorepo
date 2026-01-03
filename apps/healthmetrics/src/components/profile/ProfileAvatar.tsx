@@ -2,7 +2,6 @@ import { Upload, User } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import styles from "./ProfileForm.module.css";
 
 interface ProfileAvatarProps {
   avatarPreview: string;
@@ -14,22 +13,22 @@ export function ProfileAvatar({
   onAvatarChange,
 }: ProfileAvatarProps) {
   return (
-    <Card className={styles.formSection}>
-      <div className={styles.avatarContainer}>
-        <div className={styles.avatarPreview}>
+    <Card className="profile-form-section">
+      <div className="profile-form-avatar-container">
+        <div className="profile-form-avatar-preview">
           {avatarPreview ? (
             <img
               src={avatarPreview}
               alt="Avatar"
-              className={styles.avatarImage}
+              className="profile-form-avatar-image"
             />
           ) : (
-            <User className={styles.avatarPlaceholder} />
+            <User className="profile-form-avatar-placeholder" />
           )}
         </div>
-        <div className={styles.avatarActions}>
-          <Label htmlFor="avatar-upload" className={styles.avatarLabel}>
-            <Upload className={styles.uploadIcon} />
+        <div className="profile-form-avatar-actions">
+          <Label htmlFor="avatar-upload" className="profile-form-avatar-label">
+            <Upload className="profile-form-upload-icon" />
             <span>Upload Avatar</span>
           </Label>
           <Input
@@ -37,9 +36,9 @@ export function ProfileAvatar({
             type="file"
             accept="image/*"
             onChange={onAvatarChange}
-            className={styles.avatarInput}
+            className="profile-form-avatar-input"
           />
-          <p className={styles.avatarHelp}>Max 2MB. JPG, PNG, or GIF</p>
+          <p className="profile-form-avatar-help">Max 2MB. JPG, PNG, or GIF</p>
         </div>
       </div>
     </Card>
