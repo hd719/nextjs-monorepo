@@ -1,18 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { prisma } from "@/lib/prisma";
-
-// ============================================================================
-// TYPES
-// ============================================================================
-
-export type WeightEntry = {
-  id: string;
-  userId: string;
-  date: Date;
-  weightKg: number;
-  notes: string | null;
-  createdAt: Date;
-};
+import type { WeightEntry } from "@/types/weight";
 
 // ============================================================================
 // QUERY FUNCTIONS
@@ -32,13 +20,13 @@ export const getLatestWeight = createServerFn({ method: "GET" })
           id: true,
           userId: true,
           date: true,
-          weightKg: true,
+          weightLbs: true,
           notes: true,
           createdAt: true,
         },
       });
 
-      if (!entry || !entry.weightKg) {
+      if (!entry || !entry.weightLbs) {
         return null;
       }
 
@@ -46,7 +34,7 @@ export const getLatestWeight = createServerFn({ method: "GET" })
         id: entry.id,
         userId: entry.userId,
         date: entry.date,
-        weightKg: Number(entry.weightKg),
+        weightLbs: Number(entry.weightLbs),
         notes: entry.notes,
         createdAt: entry.createdAt,
       };
@@ -79,7 +67,6 @@ export const saveWeightEntry = createServerFn({ method: "POST" })
     }): Promise<WeightEntry> => {
       try {
         const entryDate = date ? new Date(date) : new Date();
-        const weightKg = weightLbs * 0.453592; // Convert lbs to kg
 
         // Check if entry exists for this date
         const existing = await prisma.weightEntry.findFirst({
@@ -95,7 +82,7 @@ export const saveWeightEntry = createServerFn({ method: "POST" })
           entry = await prisma.weightEntry.update({
             where: { id: existing.id },
             data: {
-              weightKg,
+              weightLbs,
               notes,
               updatedAt: new Date(),
             },
@@ -106,7 +93,7 @@ export const saveWeightEntry = createServerFn({ method: "POST" })
             data: {
               userId,
               date: entryDate,
-              weightKg,
+              weightLbs,
               notes,
             },
           });
@@ -116,12 +103,16 @@ export const saveWeightEntry = createServerFn({ method: "POST" })
           id: entry.id,
           userId: entry.userId,
           date: entry.date,
-          weightKg: Number(entry.weightKg),
+          weightLbs: Number(entry.weightLbs),
           notes: entry.notes,
           createdAt: entry.createdAt,
         };
       } catch (error) {
         console.error("Failed to save weight entry:", error);
+        // Preserve validation error messages
+        if (error instanceof Error) {
+          throw error;
+        }
         throw new Error("Failed to save weight entry");
       }
     }

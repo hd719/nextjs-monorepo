@@ -20,7 +20,7 @@ export function RecentActivity({ activities, isLoading }: RecentActivityProps) {
     <section className="dashboard-activity-section">
       <h2 className="dashboard-activity-heading">Recent Activity</h2>
 
-      <Card>
+      <Card variant="supporting">
         <CardHeader>
           <CardTitle className="dashboard-activity-title">
             Activity Feed
@@ -33,10 +33,10 @@ export function RecentActivity({ activities, isLoading }: RecentActivityProps) {
               <>
                 {[1, 2, 3].map((i) => (
                   <div key={i} className="dashboard-activity-loading-item">
-                    <Skeleton className="w-10 h-10 rounded-full shrink-0" />
+                    <Skeleton className="skeleton-avatar" />
                     <div className="dashboard-activity-loading-content">
-                      <Skeleton className="h-4 w-3/4" />
-                      <Skeleton className="h-3 w-1/2" />
+                      <Skeleton className="skeleton-md" />
+                      <Skeleton className="skeleton-sm" />
                     </div>
                   </div>
                 ))}
@@ -45,7 +45,10 @@ export function RecentActivity({ activities, isLoading }: RecentActivityProps) {
               activities.map((activity) => {
                 const Icon = activityIcons[activity.type];
                 return (
-                  <div key={activity.id} className="dashboard-activity-item">
+                  <div
+                    key={activity.id}
+                    className="dashboard-activity-item row-hover"
+                  >
                     <div className="dashboard-activity-icon-container">
                       <Icon className="dashboard-activity-icon" />
                     </div>
@@ -87,6 +90,7 @@ export function RecentActivity({ activities, isLoading }: RecentActivityProps) {
                 icon={TrendingUp}
                 title="No recent activity"
                 description="Log meals and exercises to see your activity here"
+                framed={false}
               />
             )}
           </div>

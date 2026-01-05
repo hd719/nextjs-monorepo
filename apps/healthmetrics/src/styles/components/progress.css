@@ -1,0 +1,1194 @@
+/* ==========================================================================
+   Progress Page Component Styles
+   Using @layer components to bundle with main CSS (prevents FOUC)
+   ========================================================================== */
+
+@layer components {
+  /* ==========================================================================
+     Progress Page Layout
+     ========================================================================== */
+
+  .progress-page-layout {
+    @apply flex flex-col gap-6;
+  }
+
+  .progress-page-header {
+    @apply flex items-center justify-between flex-wrap gap-4;
+  }
+
+  .progress-page-title {
+    @apply text-2xl font-bold;
+  }
+
+  .progress-page-date-selector {
+    @apply flex items-center gap-2;
+  }
+
+  /* ==========================================================================
+     Summary Hero Card (At-a-Glance)
+     ========================================================================== */
+
+  .progress-summary-section {
+    @apply space-y-4;
+  }
+
+  .progress-summary-header {
+    @apply flex items-center justify-between;
+  }
+
+  .progress-summary-title {
+    @apply flex items-center gap-2 text-lg font-semibold;
+  }
+
+  .progress-summary-title-icon {
+    @apply w-5 h-5;
+    color: var(--accent);
+  }
+
+  .progress-summary-period {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .progress-summary-grid {
+    @apply grid grid-cols-2 lg:grid-cols-4 gap-4;
+  }
+
+  .progress-summary-stat {
+    @apply flex flex-col items-center text-center p-4 rounded-lg transition-all duration-200;
+    background-color: color-mix(in srgb, var(--muted) 50%, transparent);
+  }
+
+  .progress-summary-stat:hover {
+    background-color: var(--muted);
+  }
+
+  .progress-summary-stat-value {
+    @apply text-3xl font-bold;
+  }
+
+  .progress-summary-stat-value-positive {
+    color: var(--success);
+  }
+
+  .progress-summary-stat-value-negative {
+    color: var(--destructive);
+  }
+
+  .progress-summary-stat-unit {
+    @apply text-lg font-normal;
+    color: var(--muted-foreground);
+  }
+
+  .progress-summary-stat-label {
+    @apply text-sm mt-1;
+    color: var(--muted-foreground);
+  }
+
+  .progress-summary-stat-trend {
+    @apply flex items-center gap-1 text-xs mt-1;
+  }
+
+  .progress-summary-stat-trend-icon {
+    @apply w-3 h-3;
+  }
+
+  /* ==========================================================================
+     Chart Grid Layout
+     ========================================================================== */
+
+  .progress-charts-grid {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-6;
+  }
+
+  /* Stretch grid items to fill row height */
+  .progress-charts-grid > * {
+    @apply h-full;
+  }
+
+  /* Left column stack (Streaks + Achievements) */
+  .progress-left-column-stack {
+    @apply flex flex-col gap-6;
+  }
+
+  /* Make Insights panel fill available height */
+  .progress-insights-full-height {
+    @apply h-full flex flex-col;
+  }
+
+  .progress-insights-full-height .progress-insights-section {
+    @apply flex-1 flex flex-col;
+  }
+
+  .progress-insights-full-height .progress-insights-list {
+    @apply flex-1;
+  }
+
+  /* Spacer to push button to bottom */
+  .progress-insights-spacer {
+    @apply flex-1;
+  }
+
+  .progress-chart-card {
+    @apply p-4 space-y-4;
+  }
+
+  .progress-chart-card-fill {
+    @apply p-4 h-full;
+  }
+
+  .progress-chart-header {
+    @apply flex items-center justify-between flex-wrap gap-2;
+  }
+
+  .progress-chart-title {
+    @apply flex items-center gap-2 font-semibold;
+  }
+
+  .progress-chart-title-icon {
+    @apply w-5 h-5;
+    color: var(--accent);
+  }
+
+  .progress-chart-controls {
+    @apply flex items-center gap-2;
+  }
+
+  .progress-chart-container {
+    @apply w-full;
+    min-height: 250px;
+  }
+
+  .progress-chart-legend {
+    @apply flex items-center justify-center gap-4 text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .progress-chart-legend-item {
+    @apply flex items-center gap-1.5;
+  }
+
+  .progress-chart-legend-dot {
+    @apply w-2.5 h-2.5 rounded-full;
+  }
+
+  /* ==========================================================================
+     Weight Trend Chart
+     ========================================================================== */
+
+  .progress-weight-current {
+    @apply text-right text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .progress-weight-current-value {
+    @apply font-semibold;
+    color: var(--foreground);
+  }
+
+  /* ==========================================================================
+     Calorie Intake Chart
+     ========================================================================== */
+
+  .progress-calorie-bar-on-goal {
+    fill: var(--success);
+  }
+
+  .progress-calorie-bar-over-goal {
+    fill: var(--warning);
+  }
+
+  .progress-calorie-bar-projected {
+    fill: var(--muted);
+  }
+
+  /* ==========================================================================
+     Macro Breakdown
+     ========================================================================== */
+
+  .progress-macro-section {
+    @apply flex flex-col lg:flex-row gap-6 items-center;
+  }
+
+  .progress-macro-donut-container {
+    @apply relative w-48 h-48 shrink-0;
+  }
+
+  .progress-macro-donut-center {
+    @apply absolute inset-0 flex flex-col items-center justify-center;
+  }
+
+  .progress-macro-donut-total {
+    @apply text-2xl font-bold;
+  }
+
+  .progress-macro-donut-label {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .progress-macro-bars {
+    @apply flex-1 w-full space-y-4;
+  }
+
+  .progress-macro-bar-item {
+    @apply space-y-1.5;
+  }
+
+  .progress-macro-bar-header {
+    @apply flex items-center justify-between text-sm;
+  }
+
+  .progress-macro-bar-label {
+    @apply font-medium;
+  }
+
+  .progress-macro-bar-value {
+    color: var(--muted-foreground);
+  }
+
+  .progress-macro-bar-track {
+    @apply h-2.5 rounded-full overflow-hidden;
+    background-color: var(--muted);
+  }
+
+  .progress-macro-bar-fill {
+    @apply h-full rounded-full transition-all duration-500;
+    /* Width is set via CSS custom property --bar-width */
+    width: var(--bar-width, 0%);
+  }
+
+  .progress-macro-protein {
+    background-color: #3b82f6;
+  }
+
+  .progress-macro-carbs {
+    background-color: #f59e0b;
+  }
+
+  .progress-macro-fat {
+    background-color: #ec4899;
+  }
+
+  /* ==========================================================================
+     Sleep Section (inside Macro Breakdown card)
+     ========================================================================== */
+
+  .progress-icon-sleep {
+    color: #8b5cf6;
+  }
+
+  .progress-sleep-stats {
+    @apply grid grid-cols-3 gap-2 text-center;
+  }
+
+  .progress-sleep-stat-item {
+    @apply flex flex-col;
+  }
+
+  .progress-sleep-stat-value {
+    @apply text-lg font-semibold;
+    color: var(--foreground);
+  }
+
+  .progress-sleep-stat-label {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .progress-sleep-chart {
+    @apply relative flex items-end justify-between gap-1 h-16;
+  }
+
+  .progress-sleep-bar-col {
+    @apply flex-1 flex flex-col items-center gap-1;
+  }
+
+  .progress-sleep-bar-container {
+    @apply w-full h-12 flex items-end justify-center;
+  }
+
+  .progress-sleep-bar {
+    @apply w-full rounded-t;
+    height: var(--bar-height);
+    transition: height 0.4s ease;
+  }
+
+  .progress-sleep-bar-good {
+    background-color: #8b5cf6;
+  }
+
+  .progress-sleep-bar-under {
+    background-color: #c4b5fd;
+  }
+
+  .progress-sleep-day-label {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .progress-sleep-goal-line {
+    @apply absolute left-0 right-0 border-t-2 border-dashed pointer-events-none;
+    border-color: var(--muted-foreground);
+    bottom: calc(
+      var(--goal-position) * 0.75 + 1rem
+    ); /* Adjusted for bar container height */
+    opacity: 0.5;
+  }
+
+  .progress-sleep-quality {
+    @apply flex items-center gap-3;
+  }
+
+  .progress-sleep-quality-label {
+    @apply text-xs shrink-0;
+    color: var(--muted-foreground);
+  }
+
+  .progress-sleep-quality-bar-track {
+    @apply flex-1 h-2 rounded-full;
+    background-color: var(--muted);
+  }
+
+  .progress-sleep-quality-bar-fill {
+    @apply h-full rounded-full;
+    width: var(--quality-width);
+    background: linear-gradient(90deg, #c4b5fd, #8b5cf6);
+    transition: width 0.4s ease;
+  }
+
+  .progress-sleep-quality-value {
+    @apply text-xs font-medium;
+    color: #8b5cf6;
+  }
+
+  .progress-sleep-best {
+    @apply flex items-center gap-2 text-xs pt-2;
+    color: var(--muted-foreground);
+  }
+
+  .progress-sleep-best-icon {
+    @apply w-4 h-4;
+    color: #8b5cf6;
+  }
+
+  /* Macro legend dot colors */
+  .progress-legend-dot-protein {
+    background-color: #3b82f6;
+  }
+
+  .progress-legend-dot-carbs {
+    background-color: #f59e0b;
+  }
+
+  .progress-legend-dot-fat {
+    background-color: #ec4899;
+  }
+
+  /* Legend dots using CSS variables */
+  .progress-legend-dot-success {
+    background-color: var(--success);
+  }
+
+  .progress-legend-dot-warning {
+    background-color: var(--warning);
+  }
+
+  .progress-legend-dot-accent {
+    background-color: var(--accent);
+  }
+
+  .progress-legend-dot-goal {
+    background-color: var(--success);
+    border: 1px dashed var(--success);
+  }
+
+  /* Icon colors */
+  .progress-icon-accent {
+    color: var(--accent);
+  }
+
+  /* Stat card icon */
+  .progress-stat-icon {
+    @apply w-6 h-6 mb-2;
+    color: var(--accent);
+  }
+
+  /* Achievement icon */
+  .progress-achievement-icon-inner {
+    @apply w-5 h-5;
+    color: var(--accent);
+  }
+
+  /* Streak best award icon */
+  .progress-streak-best-icon {
+    @apply w-3 h-3;
+  }
+
+  /* View more chevron icon */
+  .progress-view-more-icon {
+    @apply w-4 h-4;
+  }
+
+  /* Loading skeleton sizes */
+  .progress-skeleton-header-title {
+    @apply h-6 w-40;
+  }
+
+  .progress-skeleton-header-period {
+    @apply h-4 w-24;
+  }
+
+  .progress-skeleton-stat-icon {
+    @apply w-6 h-6 rounded-full;
+  }
+
+  .progress-skeleton-stat-value {
+    @apply h-8 w-20;
+  }
+
+  .progress-skeleton-stat-label {
+    @apply h-4 w-16;
+  }
+
+  /* View more button */
+  .progress-view-more-btn {
+    @apply w-full flex items-center justify-center gap-1 py-2 mt-2 text-sm rounded-lg transition-colors;
+    color: var(--muted-foreground);
+  }
+
+  .progress-view-more-btn:hover {
+    color: var(--foreground);
+    background-color: color-mix(in srgb, var(--muted) 50%, transparent);
+  }
+
+  /* Chart tooltip */
+  .progress-chart-tooltip {
+    @apply rounded-lg p-3 shadow-lg;
+    background-color: var(--popover);
+    border: 1px solid var(--border);
+  }
+
+  .progress-chart-tooltip-date {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .progress-chart-tooltip-value {
+    @apply text-lg font-bold;
+  }
+
+  .progress-chart-tooltip-wide {
+    min-width: 140px;
+  }
+
+  .progress-chart-tooltip-date-mb {
+    @apply text-sm mb-2;
+    color: var(--muted-foreground);
+  }
+
+  .progress-chart-tooltip-row {
+    @apply flex justify-between;
+  }
+
+  .progress-chart-tooltip-label {
+    @apply text-sm;
+  }
+
+  .progress-chart-tooltip-value-sm {
+    @apply text-sm font-semibold;
+  }
+
+  .progress-chart-tooltip-value-normal {
+    @apply text-sm;
+  }
+
+  .progress-chart-tooltip-burned {
+    @apply text-sm;
+    color: var(--success);
+  }
+
+  .progress-chart-tooltip-divider {
+    @apply pt-1 mt-1;
+    border-top: 1px solid var(--border);
+  }
+
+  .progress-chart-tooltip-net-over {
+    color: var(--warning);
+  }
+
+  .progress-chart-tooltip-net-under {
+    color: var(--success);
+  }
+
+  /* Text utilities */
+  .progress-text-subtitle {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .progress-text-success {
+    color: var(--success);
+  }
+
+  .progress-text-warning {
+    color: var(--warning);
+  }
+
+  /* Streak best indicator */
+  .progress-streak-best-wrapper {
+    @apply flex items-center gap-1;
+    color: var(--success);
+  }
+
+  /* Achievements section divider */
+  .progress-section-divider {
+    @apply pt-4 mt-4;
+    border-top: 1px solid var(--border);
+  }
+
+  .progress-milestones-section {
+    @apply space-y-3;
+  }
+
+  /* Tooltip content rows */
+  .progress-tooltip-rows {
+    @apply space-y-1;
+  }
+
+  /* Achievements recent section */
+  .progress-achievements-recent {
+    @apply space-y-3;
+  }
+
+  .progress-icon-fire {
+    color: #f97316;
+  }
+
+  .progress-icon-trophy {
+    color: #f59e0b;
+  }
+
+  .progress-icon-purple {
+    color: #8b5cf6;
+  }
+
+  /* ==========================================================================
+     Exercise Heatmap (Full Year - 52 weeks, Full Width)
+     ========================================================================== */
+
+  .progress-heatmap-container {
+    @apply w-full;
+  }
+
+  /* Month labels row */
+  .progress-heatmap-months {
+    @apply flex mb-1;
+  }
+
+  .progress-heatmap-day-label-spacer {
+    @apply w-7 shrink-0;
+  }
+
+  .progress-heatmap-month-labels {
+    @apply relative flex-1 flex justify-between;
+    padding-right: 8px;
+  }
+
+  .progress-heatmap-month-label {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .progress-heatmap-grid {
+    @apply flex flex-col;
+    gap: 3px;
+  }
+
+  .progress-heatmap-row {
+    @apply flex items-center;
+    gap: 3px;
+  }
+
+  .progress-heatmap-day-label {
+    @apply w-7 text-xs text-right pr-1 shrink-0;
+    color: var(--muted-foreground);
+  }
+
+  .progress-heatmap-cells {
+    @apply flex flex-1 justify-between;
+  }
+
+  .progress-heatmap-cell {
+    @apply rounded-sm transition-all duration-200 flex-1;
+    aspect-ratio: 1;
+    max-width: 14px;
+    max-height: 14px;
+  }
+
+  .progress-heatmap-cell:hover {
+    @apply ring-1 ring-offset-1;
+    ring-color: var(--ring);
+    ring-offset-color: var(--background);
+  }
+
+  .progress-heatmap-cell-future {
+    opacity: 0.3;
+  }
+
+  .progress-heatmap-cell-0 {
+    background-color: var(--muted);
+  }
+
+  .progress-heatmap-cell-1 {
+    background-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+
+  .progress-heatmap-cell-2 {
+    background-color: color-mix(in srgb, var(--accent) 60%, transparent);
+  }
+
+  .progress-heatmap-cell-3 {
+    background-color: var(--accent);
+  }
+
+  .progress-heatmap-legend {
+    @apply flex items-center justify-end gap-1.5 mt-3 text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .progress-heatmap-legend-cell {
+    @apply w-3 h-3 rounded-sm;
+  }
+
+  /* Exercise Stats Row */
+  .progress-exercise-stats {
+    @apply grid grid-cols-3 gap-4 pt-4 border-t;
+    border-color: var(--border);
+  }
+
+  .progress-exercise-stat-item {
+    @apply text-center;
+  }
+
+  .progress-exercise-stat-value {
+    @apply text-xl font-bold;
+  }
+
+  .progress-exercise-stat-label {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Weekly Comparison Table
+     ========================================================================== */
+
+  .progress-comparison-section {
+    @apply space-y-4;
+  }
+
+  .progress-comparison-table {
+    @apply w-full text-sm;
+  }
+
+  .progress-comparison-thead {
+    @apply text-left;
+  }
+
+  .progress-comparison-th {
+    @apply py-2 px-3 font-medium;
+    color: var(--muted-foreground);
+  }
+
+  .progress-comparison-th-metric {
+    @apply w-1/3;
+  }
+
+  .progress-comparison-th-week {
+    @apply text-right w-1/4;
+  }
+
+  .progress-comparison-th-change {
+    @apply text-right w-1/6;
+  }
+
+  .progress-comparison-row {
+    @apply border-t;
+    border-color: var(--border);
+  }
+
+  .progress-comparison-row:hover {
+    background-color: color-mix(in srgb, var(--muted) 50%, transparent);
+  }
+
+  .progress-comparison-td {
+    @apply py-3 px-3;
+  }
+
+  .progress-comparison-metric {
+    @apply font-medium;
+  }
+
+  .progress-comparison-value {
+    @apply text-right;
+  }
+
+  .progress-comparison-change {
+    @apply text-right flex items-center justify-end gap-1;
+  }
+
+  .progress-comparison-change-positive {
+    color: var(--success);
+  }
+
+  .progress-comparison-change-negative {
+    color: var(--destructive);
+  }
+
+  .progress-comparison-change-neutral {
+    color: var(--muted-foreground);
+  }
+
+  .progress-comparison-change-icon {
+    @apply w-3.5 h-3.5;
+  }
+
+  .progress-comparison-category-header {
+    @apply py-2 px-3 text-xs font-semibold uppercase tracking-wider;
+    background-color: var(--muted);
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Streaks Card
+     ========================================================================== */
+
+  .progress-streaks-section {
+    @apply space-y-4;
+  }
+
+  .progress-streaks-grid {
+    @apply grid grid-cols-3 gap-4;
+  }
+
+  .progress-streak-item {
+    @apply flex flex-col items-center text-center p-4 rounded-lg transition-all duration-200;
+    background-color: color-mix(in srgb, var(--muted) 50%, transparent);
+  }
+
+  .progress-streak-item:hover {
+    background-color: var(--muted);
+  }
+
+  .progress-streak-icon {
+    @apply w-8 h-8 mb-2;
+  }
+
+  .progress-streak-icon-fire {
+    color: #f97316;
+  }
+
+  .progress-streak-icon-water {
+    color: #06b6d4;
+  }
+
+  .progress-streak-icon-exercise {
+    color: #8b5cf6;
+  }
+
+  .progress-streak-value {
+    @apply text-2xl font-bold;
+  }
+
+  .progress-streak-label {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .progress-streak-best {
+    @apply text-xs mt-1;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Achievements Card
+     ========================================================================== */
+
+  .progress-achievements-section {
+    @apply flex flex-col gap-4 h-full;
+  }
+
+  .progress-achievements-heading {
+    @apply text-sm font-medium;
+    color: var(--muted-foreground);
+  }
+
+  .progress-achievements-grid {
+    @apply grid grid-cols-2 gap-3;
+  }
+
+  .progress-achievement-item {
+    @apply flex items-center gap-3 p-3 rounded-lg transition-all duration-200;
+    background-color: color-mix(in srgb, var(--muted) 50%, transparent);
+  }
+
+  .progress-achievement-item:hover {
+    background-color: var(--muted);
+  }
+
+  .progress-achievement-icon {
+    @apply w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-lg;
+    background-color: color-mix(in srgb, var(--accent) 15%, transparent);
+  }
+
+  .progress-achievement-content {
+    @apply flex-1 min-w-0;
+  }
+
+  .progress-achievement-title {
+    @apply text-sm font-medium truncate;
+  }
+
+  .progress-achievement-date {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  /* Milestones */
+  .progress-milestones-list {
+    @apply grid grid-cols-2 gap-4;
+  }
+
+  .progress-milestone-item {
+    @apply flex items-center gap-4;
+  }
+
+  /* Circular progress ring wrapper */
+  .progress-milestone-ring-wrapper {
+    @apply relative shrink-0;
+    width: 44px;
+    height: 44px;
+  }
+
+  .progress-milestone-ring {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  .progress-milestone-ring-bg {
+    stroke: var(--muted);
+  }
+
+  .progress-milestone-ring-progress {
+    stroke: var(--accent);
+    transition: stroke-dasharray 0.4s ease;
+  }
+
+  .progress-milestone-ring-complete {
+    stroke: var(--success);
+  }
+
+  .progress-milestone-ring-text {
+    @apply absolute inset-0 flex items-center justify-center text-xs font-semibold;
+    color: var(--foreground);
+  }
+
+  .progress-milestone-content {
+    @apply flex-1;
+  }
+
+  .progress-milestone-title {
+    @apply text-sm font-medium;
+    color: var(--foreground);
+  }
+
+  .progress-milestone-progress {
+    @apply text-xs mt-0.5;
+    color: var(--muted-foreground);
+  }
+
+  .progress-milestone-remaining {
+    @apply font-semibold;
+    color: var(--accent);
+  }
+
+  /* Achievements Footer */
+  .progress-achievements-footer {
+    @apply mt-auto pt-4 border-t space-y-3;
+    border-color: var(--border);
+  }
+
+  .progress-achievements-motivation {
+    @apply flex items-center gap-2 text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .progress-achievements-motivation-icon {
+    @apply w-4 h-4;
+    color: var(--accent);
+  }
+
+  .progress-achievements-new-goal-btn {
+    @apply w-full flex items-center justify-center gap-2 py-2.5 px-4 text-sm font-medium rounded-lg transition-all;
+    background-color: var(--muted);
+    color: var(--foreground);
+    border: 1px dashed var(--border);
+  }
+
+  .progress-achievements-new-goal-btn:hover {
+    background-color: var(--accent);
+    color: white;
+    border-style: solid;
+    border-color: var(--accent);
+  }
+
+  .progress-achievements-new-goal-icon {
+    @apply w-4 h-4;
+  }
+
+  /* ==========================================================================
+     Insights Panel
+     ========================================================================== */
+
+  .progress-insights-section {
+    @apply space-y-4;
+  }
+
+  .progress-insights-list {
+    @apply space-y-3;
+  }
+
+  .progress-insight-item {
+    @apply p-4 rounded-lg border-l-4 transition-all duration-200;
+  }
+
+  .progress-insight-item:hover {
+    background-color: color-mix(in srgb, var(--muted) 50%, transparent);
+  }
+
+  .progress-insight-positive {
+    background-color: color-mix(in srgb, var(--success) 8%, transparent);
+    border-left-color: var(--success);
+  }
+
+  .progress-insight-warning {
+    background-color: color-mix(in srgb, var(--warning) 8%, transparent);
+    border-left-color: var(--warning);
+  }
+
+  .progress-insight-opportunity {
+    background-color: color-mix(in srgb, var(--accent) 8%, transparent);
+    border-left-color: var(--accent);
+  }
+
+  .progress-insight-header {
+    @apply flex items-center gap-2 mb-1;
+  }
+
+  .progress-insight-icon {
+    @apply w-4 h-4;
+  }
+
+  .progress-insight-icon-positive {
+    color: var(--success);
+  }
+
+  .progress-insight-icon-warning {
+    color: var(--warning);
+  }
+
+  .progress-insight-icon-opportunity {
+    color: var(--accent);
+  }
+
+  .progress-insight-title {
+    @apply text-sm font-semibold;
+  }
+
+  .progress-insight-message {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Date Range Selector
+     ========================================================================== */
+
+  .progress-date-range-selector {
+    @apply flex items-center rounded-lg overflow-hidden border;
+    border-color: var(--border);
+  }
+
+  .progress-date-range-btn {
+    @apply px-3 py-1.5 text-xs font-medium transition-colors;
+    color: var(--muted-foreground);
+  }
+
+  .progress-date-range-btn:hover {
+    background-color: color-mix(in srgb, var(--muted) 50%, transparent);
+  }
+
+  .progress-date-range-btn-active {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+  }
+
+  .progress-date-range-btn-active:hover {
+    background-color: var(--accent-dark);
+  }
+
+  /* ==========================================================================
+     Loading States
+     ========================================================================== */
+
+  .progress-loading-chart {
+    @apply w-full h-64 flex items-center justify-center;
+    background-color: var(--muted);
+    border-radius: var(--radius);
+  }
+
+  .progress-loading-stat {
+    @apply flex flex-col items-center gap-2;
+  }
+
+  /* ==========================================================================
+     Responsive Adjustments
+     ========================================================================== */
+
+  /* Tablet breakpoint (768px) */
+  @media (max-width: 768px) {
+    /* Charts grid - single column on tablet */
+    .progress-charts-grid {
+      @apply grid-cols-1;
+    }
+
+    /* Macro section - stack vertically */
+    .progress-macro-section {
+      @apply flex-col;
+    }
+
+    /* Donut chart - smaller on tablet */
+    .progress-macro-donut-container {
+      @apply w-36 h-36;
+    }
+
+    /* Left column stack - full width */
+    .progress-left-column-stack {
+      @apply w-full;
+    }
+
+    /* Weekly comparison table - horizontal scroll */
+    .progress-comparison-table-wrapper {
+      @apply overflow-x-auto -mx-4 px-4;
+    }
+
+    /* Milestones grid - single column */
+    .progress-milestones-list {
+      @apply grid-cols-1;
+    }
+  }
+
+  /* Mobile breakpoint (640px) */
+  @media (max-width: 640px) {
+    /* Summary grid - 2 columns */
+    .progress-summary-grid {
+      @apply grid-cols-2;
+    }
+
+    .progress-summary-stat-value {
+      @apply text-2xl;
+    }
+
+    .progress-summary-stat {
+      @apply p-3;
+    }
+
+    /* Streaks and achievements - single column */
+    .progress-streaks-grid {
+      @apply grid-cols-1;
+    }
+
+    .progress-achievements-grid {
+      @apply grid-cols-1;
+    }
+
+    /* Heatmap - smaller cells */
+    .progress-heatmap-cell {
+      @apply w-2 h-2;
+    }
+
+    .progress-heatmap-day-label {
+      @apply text-xs;
+    }
+
+    .progress-heatmap-month-label {
+      @apply text-xs;
+    }
+
+    /* Sleep chart - smaller height */
+    .progress-sleep-chart {
+      @apply h-14;
+    }
+
+    /* Chart cards - reduce padding */
+    .progress-chart-card {
+      @apply p-4;
+    }
+
+    .progress-chart-title {
+      @apply text-base;
+    }
+
+    /* Page header - stack on mobile */
+    .progress-page-header {
+      @apply flex-col items-start;
+    }
+
+    /* Date range selector - full width */
+    .progress-date-range-selector {
+      @apply w-full;
+    }
+
+    .progress-date-range-btn {
+      @apply flex-1;
+    }
+  }
+
+  /* Small mobile (480px) */
+  @media (max-width: 480px) {
+    /* Summary grid - full stacked layout */
+    .progress-summary-grid {
+      @apply grid-cols-1;
+    }
+
+    .progress-summary-stat {
+      @apply flex-row justify-between p-3;
+    }
+
+    .progress-summary-stat-value {
+      @apply text-xl;
+    }
+
+    /* Chart legend - wrap items */
+    .progress-chart-legend {
+      @apply flex-wrap gap-2;
+    }
+
+    /* Macro bars - more compact */
+    .progress-macro-bar-header {
+      @apply text-xs;
+    }
+
+    /* Streaks - more compact */
+    .progress-streak-value {
+      @apply text-2xl;
+    }
+
+    /* Page title */
+    .progress-page-title {
+      @apply text-xl;
+    }
+  }
+}

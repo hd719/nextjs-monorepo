@@ -193,7 +193,7 @@ model User {
   heightCm          Decimal?       @map("height_cm") @db.Decimal(5, 2)
   activityLevel     ActivityLevel? @map("activity_level")
   goalType          GoalType?      @map("goal_type")
-  targetWeightKg    Decimal?       @map("target_weight_kg") @db.Decimal(5, 2)
+  targetWeightLbs   Decimal?       @map("target_weight_lbs") @db.Decimal(6, 2)
   dailyCalorieGoal  Int?           @map("daily_calorie_goal")
   dailyProteinGoalG Int?           @map("daily_protein_goal_g")
   dailyCarbGoalG    Int?           @map("daily_carb_goal_g")
@@ -210,6 +210,7 @@ model User {
   createdExercises        Exercise[]             @relation("CreatedExercises")
   diaryEntries            DiaryEntry[]
   workoutLogs             WorkoutLog[]
+  workoutSessions         WorkoutSession[]
   weightEntries           WeightEntry[]
   mealPlanTemplates       MealPlanTemplate[]
   mealPlans               MealPlan[]
@@ -313,30 +314,53 @@ model DiaryEntry {
   @@map("diary_entries")
 }
 
+// Workout sessions - groups multiple exercises into a single workout
+model WorkoutSession {
+  id            String   @id @default(uuid())
+  userId        String   @map("user_id")
+  date          DateTime @db.Date
+  sessionType   String   @default("full") @map("session_type") // "quick" | "full"
+  totalMinutes  Int      @default(0) @map("total_minutes")
+  totalCalories Int?     @map("total_calories")
+  notes         String?
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workoutLogs WorkoutLog[]
+
+  @@index([userId, date])
+  @@map("workout_sessions")
+}
+
 // Workout logs - exercise/workout history tracking
 
 model WorkoutLog {
-  id              String   @id @default(uuid())
-  userId          String   @map("user_id")
-  exerciseId      String   @map("exercise_id")
-  date            DateTime @db.Date
-  durationMinutes Int      @map("duration_minutes")
-  caloriesBurned  Int?     @map("calories_burned")
-  sets            Int?
-  reps            Int?
-  weightKg        Decimal? @map("weight_kg") @db.Decimal(6, 2)
-  distanceKm      Decimal? @map("distance_km") @db.Decimal(8, 2)
-  notes           String?
-  createdAt       DateTime @default(now()) @map("created_at")
-  updatedAt       DateTime @updatedAt @map("updated_at")
+  id               String   @id @default(uuid())
+  userId           String   @map("user_id")
+  exerciseId       String   @map("exercise_id")
+  workoutSessionId String   @map("workout_session_id")
+  date             DateTime @db.Date
+  durationMinutes  Int      @map("duration_minutes")
+  caloriesBurned   Int?     @map("calories_burned")
+  sets             Int?
+  reps             Int?
+  weightLbs        Decimal? @map("weight_lbs") @db.Decimal(7, 2)
+  distanceKm       Decimal? @map("distance_km") @db.Decimal(8, 2)
+  notes            String?
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
 
   // Relations
-  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  exercise Exercise @relation(fields: [exerciseId], references: [id], onDelete: Restrict)
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exercise       Exercise       @relation(fields: [exerciseId], references: [id], onDelete: Restrict)
+  workoutSession WorkoutSession @relation(fields: [workoutSessionId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([date])
   @@index([exerciseId])
+  @@index([workoutSessionId])
   @@index([userId, date])
   @@map("workout_logs")
 }
@@ -347,9 +371,9 @@ model WeightEntry {
   id                String   @id @default(uuid())
   userId            String   @map("user_id")
   date              DateTime @db.Date
-  weightKg          Decimal? @map("weight_kg") @db.Decimal(5, 2)
+  weightLbs         Decimal? @map("weight_lbs") @db.Decimal(6, 2)
   bodyFatPercentage Decimal? @map("body_fat_percentage") @db.Decimal(5, 2)
-  muscleMassKg      Decimal? @map("muscle_mass_kg") @db.Decimal(5, 2)
+  muscleMassLbs     Decimal? @map("muscle_mass_lbs") @db.Decimal(6, 2)
   waistCm           Decimal? @map("waist_cm") @db.Decimal(5, 2)
   hipsCm            Decimal? @map("hips_cm") @db.Decimal(5, 2)
   chestCm           Decimal? @map("chest_cm") @db.Decimal(5, 2)

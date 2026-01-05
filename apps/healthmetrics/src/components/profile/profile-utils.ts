@@ -1,5 +1,5 @@
-import { type UserProfile } from "@/server/profile";
-import { type UpdateUserProfileInput } from "@/lib/validation";
+import type { UserProfile } from "@/types/profile";
+import { type UpdateUserProfileInput } from "@/utils/validation";
 
 export function formatDate(date: Date | string | null | undefined): string {
   if (!date) return "N/A";
@@ -34,8 +34,8 @@ export function getDefaultFormValues(initialData: UserProfile) {
       : "",
     gender: initialData.gender?.toLowerCase() || "",
     heightInches: cmToInches(initialData.heightCm),
-    currentWeightLbs: kgToLbs(initialData.currentWeightKg),
-    targetWeightLbs: kgToLbs(initialData.targetWeightKg),
+    currentWeightLbs: initialData.currentWeightLbs?.toString() || "",
+    targetWeightLbs: initialData.targetWeightLbs?.toString() || "",
     activityLevel: initialData.activityLevel || "moderately_active",
     goalType: initialData.goalType || "maintain_weight",
     timezone:

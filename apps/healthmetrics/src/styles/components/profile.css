@@ -4,88 +4,193 @@
    ========================================================================== */
 
 @layer components {
-  /**
- * ProfileForm Component Styles
- *
- * This module contains all styling for the ProfileForm component.
- * Uses Tailwind's @apply directive for consistent design tokens.
- */
+  /* ==========================================================================
+     Profile Page Layout
+     ========================================================================== */
+
+  .profile-page-layout {
+    @apply flex flex-col gap-6;
+  }
+
+  .profile-page-header {
+    @apply flex items-center justify-between flex-wrap gap-4;
+  }
+
+  .profile-page-title {
+    @apply text-2xl font-bold;
+  }
+
+  .profile-page-subtitle {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .profile-loading-container {
+    @apply space-y-4;
+  }
+
+  .profile-loading-hero {
+    @apply h-32 w-full;
+  }
+
+  .profile-loading-section {
+    @apply h-64 w-full;
+  }
+
+  .profile-error-container {
+    @apply p-8 text-center;
+  }
+
+  .profile-error-text {
+    color: var(--muted-foreground);
+  }
 
   /* ==========================================================================
-   Form Container
-   ========================================================================== */
+     Profile Form
+     ========================================================================== */
 
   .profile-form {
     @apply space-y-6;
   }
 
   /* ==========================================================================
-   Messages
-   ========================================================================== */
+     Hero Section - Avatar + Personal Info
+     ========================================================================== */
 
-  .profile-form-success-message {
-    @apply p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-md;
+  .profile-hero-section {
+    @apply p-6;
   }
 
-  .profile-form-success-text {
-    @apply text-sm text-green-800 dark:text-green-200;
+  .profile-hero-layout {
+    @apply grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8 items-start;
   }
 
-  .profile-form-error-message {
-    @apply p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md;
+  .profile-hero-avatar {
+    @apply flex justify-center lg:justify-start;
   }
 
-  .profile-form-error-text {
-    @apply text-sm text-red-800 dark:text-red-200;
+  .profile-hero-info {
+    @apply flex-1;
   }
 
   /* ==========================================================================
-   Avatar Section
-   ========================================================================== */
+     Supporting Sections Grid
+     ========================================================================== */
 
-  .profile-form-avatar-container {
+  .profile-supporting-grid {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-6;
+  }
+
+  /* ==========================================================================
+     Messages - With slide-in animation for feedback
+     ========================================================================== */
+
+  .profile-form-success-message {
+    @apply p-4 rounded-md;
+    background-color: color-mix(in srgb, #22c55e 10%, var(--background));
+    border: 1px solid color-mix(in srgb, #22c55e 30%, transparent);
+    animation: fadeSlideIn var(--duration-normal) var(--ease-out-soft) forwards;
+  }
+
+  .profile-form-success-text {
+    @apply text-sm font-medium;
+    color: #15803d;
+  }
+
+  /*
+    This CSS selector targets elements with the "profile-form-success-text" class
+    specifically when the site is in dark mode.
+
+    - :root[class~="dark"] .profile-form-success-text: Targets when the <html> (root) element has the "dark" class (common in theming frameworks),
+      and applies the rule to .profile-form-success-text within that scope.
+
+    - .dark .profile-form-success-text: Redundant fallback for UI libraries that apply the "dark" class to a parent container (not necessarily :root).
+
+    The rule sets the text color to #86efac (a light green) in dark mode,
+    overriding the default success text color, which is darker and works better on light backgrounds.
+  */
+  :root[class~="dark"] .profile-form-success-text,
+  .dark .profile-form-success-text {
+    color: #86efac;
+  }
+
+  .profile-form-error-message {
+    @apply p-4 rounded-md;
+    background-color: color-mix(in srgb, #ef4444 10%, var(--background));
+    border: 1px solid color-mix(in srgb, #ef4444 30%, transparent);
+    animation: fadeSlideIn var(--duration-normal) var(--ease-out-soft) forwards;
+  }
+
+  .profile-form-error-text {
+    @apply text-sm font-medium;
+    color: #b91c1c;
+  }
+
+  :root[class~="dark"] .profile-form-error-text,
+  .dark .profile-form-error-text {
+    color: #fca5a5;
+  }
+
+  /* ==========================================================================
+     Avatar Section
+     ========================================================================== */
+
+  .profile-avatar-container {
     @apply flex flex-col items-center gap-4;
   }
 
-  .profile-form-avatar-preview {
+  .profile-avatar-preview {
     @apply w-32 h-32 rounded-full overflow-hidden flex items-center justify-center;
     background-color: var(--muted);
     border: 3px solid;
     border-color: var(--border);
+    transition: border-color var(--duration-fast) var(--ease-out-soft);
   }
 
-  .profile-form-avatar-image {
+  .profile-avatar-preview:hover {
+    border-color: var(--primary);
+  }
+
+  .profile-avatar-image {
     @apply w-full h-full object-cover;
   }
 
-  .profile-form-avatar-placeholder {
+  .profile-avatar-placeholder {
     @apply w-16 h-16;
     color: var(--muted-foreground);
   }
 
-  .profile-form-avatar-actions {
+  .profile-avatar-actions {
     @apply flex flex-col items-center gap-2 text-center;
   }
 
-  .profile-form-avatar-label {
-    @apply inline-flex items-center gap-2 px-4 py-2 rounded-md cursor-pointer transition-colors;
+  .profile-avatar-label {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-md cursor-pointer;
     background-color: var(--accent);
     color: var(--accent-foreground);
+    transition:
+      background-color var(--duration-fast) var(--ease-out-soft),
+      transform var(--duration-fast) var(--ease-out-soft);
   }
 
-  .profile-form-avatar-label:hover {
-    background-color: color-mix(in srgb, var(--accent) 90%, black);
+  .profile-avatar-label:hover {
+    background-color: color-mix(in srgb, var(--accent) 80%, var(--foreground));
+    transform: translateY(-1px);
   }
 
-  .profile-form-upload-icon {
+  .profile-avatar-label:active {
+    transform: translateY(0);
+  }
+
+  .profile-avatar-upload-icon {
     @apply w-4 h-4;
   }
 
-  .profile-form-avatar-input {
+  .profile-avatar-input {
     @apply hidden;
   }
 
-  .profile-form-avatar-help {
+  .profile-avatar-help {
     @apply text-xs;
     color: var(--muted-foreground);
   }
@@ -127,19 +232,27 @@
   }
 
   /* ==========================================================================
-   Select Inputs
-   ========================================================================== */
+     Select Inputs
+     ========================================================================== */
 
   .profile-form-select-input {
     @apply flex h-10 w-full rounded-md border px-3 py-2 text-sm;
     border-color: var(--input);
     background-color: var(--background);
     --tw-ring-offset-color: var(--background);
+    transition:
+      border-color var(--duration-fast) var(--ease-out-soft),
+      box-shadow var(--duration-fast) var(--ease-out-soft);
+  }
+
+  .profile-form-select-input:hover {
+    border-color: color-mix(in srgb, var(--input) 70%, var(--foreground));
   }
 
   .profile-form-select-input:focus-visible {
     @apply outline-none ring-2 ring-offset-2;
     --tw-ring-color: var(--ring);
+    border-color: var(--primary);
   }
 
   /* ==========================================================================

@@ -1,6 +1,7 @@
 import { Coffee, Sandwich, UtensilsCrossed, Cookie } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import type { DiaryEntryWithFood } from "@/server/diary";
+import { EmptyState } from "@/components/ui/empty-state";
+import type { DiaryEntryWithFood } from "@/types/diary";
 
 export interface DiaryEntryListProps {
   entries: DiaryEntryWithFood[];
@@ -48,13 +49,17 @@ function getMealInfo(mealType: string) {
 export function DiaryEntryList({ entries, isLoading }: DiaryEntryListProps) {
   if (isLoading) {
     return (
-      <div className="diary-entry-list-container">
+      <div className="diary-entry-list-container animate-fade-slide-in animate-stagger-1">
         {[...Array(3)].map((_, i) => (
-          <Card key={i} className="diary-entry-loading-card">
+          <Card
+            key={i}
+            variant="supporting"
+            className="diary-entry-loading-card"
+          >
             <div className="diary-entry-loading-title"></div>
             <div className="diary-entry-loading-list">
               <div className="diary-entry-loading-item"></div>
-              <div className="diary-entry-loading-item w-3/4"></div>
+              <div className="diary-entry-loading-item diary-entry-loading-item-short"></div>
             </div>
           </Card>
         ))}
@@ -64,20 +69,20 @@ export function DiaryEntryList({ entries, isLoading }: DiaryEntryListProps) {
 
   if (entries.length === 0) {
     return (
-      <Card className="diary-entry-empty-card">
-        <UtensilsCrossed className="diary-entry-empty-icon" />
-        <h3 className="diary-entry-empty-title">No entries yet</h3>
-        <p className="diary-entry-empty-description">
-          Click "Add Food" to log your first meal
-        </p>
-      </Card>
+      <div className="animate-fade-slide-in animate-stagger-1">
+        <EmptyState
+          icon={UtensilsCrossed}
+          title="No entries yet"
+          description="Click 'Add Food' to log your first meal"
+        />
+      </div>
     );
   }
 
   const groupedEntries = groupEntriesByMeal(entries);
 
   return (
-    <div className="diary-entry-list-container">
+    <div className="diary-entry-list-container animate-fade-slide-in animate-stagger-1">
       {Object.entries(groupedEntries).map(([mealType, mealEntries]) => {
         if (mealEntries.length === 0) return null;
 
@@ -95,22 +100,29 @@ export function DiaryEntryList({ entries, isLoading }: DiaryEntryListProps) {
         );
 
         return (
-          <Card key={mealType} className="diary-entry-meal-card">
+          <Card
+            key={mealType}
+            variant="supporting"
+            className="diary-entry-meal-card"
+          >
             {/* Meal Header */}
             <div className="diary-entry-meal-header">
               <div className="diary-entry-meal-header-left">
-                <Icon className="diary-entry-meal-icon" />
+                <Icon className="diary-entry-meal-icon" aria-hidden="true" />
                 <h3 className="diary-entry-meal-label">{label}</h3>
               </div>
               <div className="diary-entry-meal-calories">
-                {mealTotals.calories} cal
+                <span className="diary-entry-meal-calories-value">
+                  {mealTotals.calories}
+                </span>{" "}
+                cal
               </div>
             </div>
 
             {/* Entries */}
             <div className="diary-entry-list">
               {mealEntries.map((entry) => (
-                <div key={entry.id} className="diary-entry">
+                <div key={entry.id} className="diary-entry row-hover">
                   <div className="diary-entry-content">
                     <p className="diary-entry-name">{entry.foodItem.name}</p>
                     {entry.foodItem.brand && (
@@ -152,7 +164,7 @@ export function DiaryEntryList({ entries, isLoading }: DiaryEntryListProps) {
                     <div className="diary-entry-totals-macros">
                       P: {mealTotals.protein.toFixed(1)}g • C:{" "}
                       {mealTotals.carbs.toFixed(1)}g • F:{" "}
-                      {mealTotals.fat.toFixed(1)}g"
+                      {mealTotals.fat.toFixed(1)}g
                     </div>
                   </div>
                 </div>

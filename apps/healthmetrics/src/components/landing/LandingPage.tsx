@@ -1,13 +1,17 @@
 import { Link } from "@tanstack/react-router";
-import { Activity, Apple, Dumbbell, TrendingUp } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+  Activity,
+  Apple,
+  Dumbbell,
+  TrendingUp,
+  Zap,
+  Shield,
+  Sparkles,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { HeroMockup } from "./HeroMockup";
+import { ROUTES } from "@/constants/routes";
 
 export function LandingPage() {
   return (
@@ -15,7 +19,7 @@ export function LandingPage() {
       <header className="landing-header">
         <div className="landing-header-content">
           <div className="landing-header-inner">
-            <Link to="/" className="landing-logo-link">
+            <Link to={ROUTES.HOME} className="landing-logo-link">
               <div className="landing-logo-icon">
                 <Activity className="landing-logo-icon-svg" />
               </div>
@@ -25,10 +29,10 @@ export function LandingPage() {
             <div className="landing-header-actions">
               <ThemeToggle />
               <Button variant="ghost" asChild>
-                <Link to="/auth/login">Log In</Link>
+                <Link to={ROUTES.AUTH.LOGIN}>Log In</Link>
               </Button>
               <Button asChild>
-                <Link to="/auth/signup">Sign Up</Link>
+                <Link to={ROUTES.AUTH.SIGNUP}>Sign Up</Link>
               </Button>
             </div>
           </div>
@@ -36,92 +40,212 @@ export function LandingPage() {
       </header>
 
       <main className="landing-main">
-        <section className="landing-hero-section">
-          <div className="landing-hero-content">
-            <h1 className="landing-hero-title">
-              Track Your Health.
-              <br />
-              <span className="landing-hero-accent">Reach Your Goals.</span>
-            </h1>
-            <p className="landing-hero-description">
-              Monitor your nutrition, log workouts, and track progress with
-              simple, powerful tools.
-            </p>
-            <div className="landing-hero-actions">
-              <Button size="lg" asChild>
-                <Link to="/auth/signup">Get Started Free</Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link to="/dashboard">View Demo</Link>
-              </Button>
+        {/* ============================================
+            HERO SECTION
+
+            The main attention-grabbing area of the page.
+            Includes:
+            - Headline and description (left on desktop)
+            - Animated dashboard mockup (right on desktop)
+            - Floating orbs for visual interest
+            ============================================ */}
+        <div className="landing-hero-wrapper">
+          <div className="landing-hero-orb" aria-hidden="true" />
+          <section className="landing-hero-section">
+            <div className="landing-hero-split">
+              {/* Left side: Text content */}
+              <div className="landing-hero-content">
+                <h1 className="landing-hero-title">
+                  Track Your Health.
+                  <br />
+                  <span className="landing-hero-accent">Reach Your Goals.</span>
+                </h1>
+                <p className="landing-hero-description">
+                  Monitor your nutrition, log workouts, and track progress with
+                  simple, powerful tools designed to help you succeed.
+                </p>
+                <div className="landing-hero-actions">
+                  <Link to={ROUTES.AUTH.SIGNUP} className="landing-cta-primary">
+                    Get Started Free
+                  </Link>
+                  <Link to={ROUTES.DASHBOARD} className="landing-cta-secondary">
+                    View Demo
+                  </Link>
+                </div>
+              </div>
+
+              {/* Right side: Animated mockup */}
+              <div className="landing-hero-mockup">
+                <HeroMockup />
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
 
-        <section className="landing-features-section">
-          <div className="landing-features-content">
-            <div className="landing-features-inner">
-              <h2 className="landing-features-title">
-                Everything you need in one place
-              </h2>
-              <div className="landing-features-grid">
-                <Card>
-                  <CardHeader className="landing-feature-card-header">
-                    <div className="landing-feature-icon">
-                      <Apple className="landing-feature-icon-svg" />
-                    </div>
-                    <div>
-                      <CardTitle>Nutrition</CardTitle>
-                      <CardDescription className="landing-feature-description">
-                        Track meals and monitor your daily calorie and macro
-                        intake
-                      </CardDescription>
-                    </div>
-                  </CardHeader>
-                </Card>
-
-                <Card>
-                  <CardHeader className="landing-feature-card-header">
-                    <div className="landing-feature-icon">
-                      <Dumbbell className="landing-feature-icon-svg" />
-                    </div>
-                    <div>
-                      <CardTitle>Exercise</CardTitle>
-                      <CardDescription className="landing-feature-description">
-                        Log workouts and track your activity levels over time
-                      </CardDescription>
-                    </div>
-                  </CardHeader>
-                </Card>
-
-                <Card>
-                  <CardHeader className="landing-feature-card-header">
-                    <div className="landing-feature-icon">
-                      <TrendingUp className="landing-feature-icon-svg" />
-                    </div>
-                    <div>
-                      <CardTitle>Progress</CardTitle>
-                      <CardDescription className="landing-feature-description">
-                        Visualize your journey with charts and insights
-                      </CardDescription>
-                    </div>
-                  </CardHeader>
-                </Card>
+        {/* Stats Banner */}
+        <section className="landing-stats-section">
+          <div className="landing-stats-content">
+            <div className="landing-stats-grid">
+              <div className="landing-stat-item">
+                <div className="landing-stat-value">10K+</div>
+                <div className="landing-stat-label">Active Users</div>
+              </div>
+              <div className="landing-stat-item">
+                <div className="landing-stat-value">1M+</div>
+                <div className="landing-stat-label">Meals Tracked</div>
+              </div>
+              <div className="landing-stat-item">
+                <div className="landing-stat-value">500K+</div>
+                <div className="landing-stat-label">Workouts Logged</div>
+              </div>
+              <div className="landing-stat-item">
+                <div className="landing-stat-value">4.9★</div>
+                <div className="landing-stat-label">User Rating</div>
               </div>
             </div>
           </div>
         </section>
 
+        {/* Features Section */}
+        <section className="landing-features-section">
+          <div className="landing-features-content">
+            <div className="landing-features-inner">
+              <div className="landing-features-header">
+                <h2 className="landing-features-title">
+                  Everything you need in one place
+                </h2>
+                <p className="landing-features-subtitle">
+                  Powerful features designed to make health tracking effortless
+                  and enjoyable
+                </p>
+              </div>
+              <div className="landing-features-grid">
+                <div className="landing-feature-card">
+                  <div className="landing-feature-card-header">
+                    <div className="landing-feature-icon">
+                      <Apple className="landing-feature-icon-svg" />
+                    </div>
+                    <div>
+                      <h3 className="landing-feature-title">Nutrition</h3>
+                      <p className="landing-feature-description">
+                        Track meals and monitor your daily calorie and macro
+                        intake with our extensive food database
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="landing-feature-card">
+                  <div className="landing-feature-card-header">
+                    <div className="landing-feature-icon">
+                      <Dumbbell className="landing-feature-icon-svg" />
+                    </div>
+                    <div>
+                      <h3 className="landing-feature-title">Exercise</h3>
+                      <p className="landing-feature-description">
+                        Log workouts, track calories burned, and monitor your
+                        activity levels over time
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="landing-feature-card">
+                  <div className="landing-feature-card-header">
+                    <div className="landing-feature-icon">
+                      <TrendingUp className="landing-feature-icon-svg" />
+                    </div>
+                    <div>
+                      <h3 className="landing-feature-title">Progress</h3>
+                      <p className="landing-feature-description">
+                        Visualize your journey with beautiful charts, insights,
+                        and milestone tracking
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Why Choose Us Section */}
+        <section className="landing-preview-section">
+          <div className="landing-preview-content">
+            <div className="landing-features-header">
+              <h2 className="landing-features-title">
+                Why choose HealthMetrics?
+              </h2>
+              <p className="landing-features-subtitle">
+                Built with your success in mind
+              </p>
+            </div>
+            <div
+              className="landing-features-grid"
+              style={{ maxWidth: "64rem", margin: "0 auto" }}
+            >
+              <div className="landing-feature-card">
+                <div className="landing-feature-card-header">
+                  <div className="landing-feature-icon">
+                    <Zap className="landing-feature-icon-svg" />
+                  </div>
+                  <div>
+                    <h3 className="landing-feature-title">Lightning Fast</h3>
+                    <p className="landing-feature-description">
+                      Log meals in seconds with smart search and quick-add
+                      features
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="landing-feature-card">
+                <div className="landing-feature-card-header">
+                  <div className="landing-feature-icon">
+                    <Shield className="landing-feature-icon-svg" />
+                  </div>
+                  <div>
+                    <h3 className="landing-feature-title">Privacy First</h3>
+                    <p className="landing-feature-description">
+                      Your health data is encrypted and never shared with third
+                      parties
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="landing-feature-card">
+                <div className="landing-feature-card-header">
+                  <div className="landing-feature-icon">
+                    <Sparkles className="landing-feature-icon-svg" />
+                  </div>
+                  <div>
+                    <h3 className="landing-feature-title">Smart Insights</h3>
+                    <p className="landing-feature-description">
+                      Get personalized recommendations based on your goals and
+                      habits
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
         <section className="landing-cta-section">
           <div className="landing-cta-content">
             <div className="landing-cta-inner">
-              <h2 className="landing-cta-title">Ready to get started?</h2>
+              <h2 className="landing-cta-title">
+                Ready to transform your health?
+              </h2>
               <p className="landing-cta-description">
-                Join thousands of users tracking their health journey.
+                Join thousands of users who have already started their journey
+                to a healthier lifestyle.
               </p>
-              <Button size="lg" asChild>
-                <Link to="/auth/signup">Create Free Account</Link>
-              </Button>
+              <Link to={ROUTES.AUTH.SIGNUP} className="landing-cta-primary">
+                Start Your Free Trial
+              </Link>
             </div>
           </div>
         </section>

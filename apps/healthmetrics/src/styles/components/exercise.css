@@ -1,0 +1,600 @@
+/* ==========================================================================
+   Exercise Component Styles
+   ========================================================================== */
+
+@layer components {
+  /* ==========================================================================
+     Exercise Page Layout
+     ========================================================================== */
+
+  .exercise-page-layout {
+    @apply flex flex-col gap-6;
+  }
+
+  .exercise-page-header {
+    @apply flex items-center justify-between flex-wrap gap-4;
+  }
+
+  .exercise-page-header-title {
+    @apply text-2xl font-bold;
+  }
+
+  .exercise-page-header-subtitle {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .exercise-summary-section-title {
+    @apply mb-3 text-sm font-medium;
+    color: var(--muted-foreground);
+  }
+
+  .exercise-summary-grid {
+    @apply grid gap-4 sm:grid-cols-3;
+  }
+
+  .exercise-wizard-section-title {
+    @apply mb-4 text-xl font-semibold;
+  }
+
+  /* ==========================================================================
+     SummaryStatCard
+     ========================================================================== */
+
+  .exercise-stat-card-content {
+    @apply flex items-center gap-3 p-4;
+  }
+
+  .exercise-stat-icon-wrapper {
+    @apply flex h-10 w-10 items-center justify-center rounded-full shrink-0;
+  }
+
+  .exercise-stat-icon-wrapper-primary {
+    background-color: color-mix(in srgb, var(--primary) 10%, transparent);
+    color: var(--primary);
+  }
+
+  .exercise-stat-icon-wrapper-destructive {
+    background-color: color-mix(in srgb, var(--destructive) 10%, transparent);
+    color: var(--destructive);
+  }
+
+  .exercise-stat-icon {
+    @apply h-5 w-5;
+  }
+
+  .exercise-stat-body {
+    @apply flex-1;
+  }
+
+  .exercise-stat-value {
+    @apply text-xl font-bold;
+  }
+
+  .exercise-stat-label {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .exercise-stat-hint-link {
+    @apply mt-1 flex items-center gap-1 text-xs hover:underline;
+    color: var(--primary);
+  }
+
+  .exercise-stat-hint-icon {
+    @apply h-3 w-3;
+  }
+
+  /* ==========================================================================
+     ExerciseCard
+     ========================================================================== */
+
+  .exercise-card {
+    transition:
+      transform var(--duration-fast) var(--ease-out-soft),
+      border-color var(--duration-fast) var(--ease-out-soft),
+      background-color var(--duration-fast) var(--ease-out-soft),
+      box-shadow var(--duration-fast) var(--ease-out-soft);
+  }
+
+  .exercise-card-selected {
+    @apply ring-2;
+    background-color: color-mix(in srgb, var(--primary) 8%, transparent);
+    border-color: var(--primary);
+    --tw-ring-color: var(--primary);
+    /* Selected cards don't lift on hover - they're already emphasized */
+    transform: none !important;
+  }
+
+  .exercise-card-unselected:hover {
+    border-color: color-mix(in srgb, var(--primary) 50%, transparent);
+  }
+
+  .exercise-card-content {
+    @apply p-4;
+  }
+
+  .exercise-card-layout {
+    @apply flex items-start justify-between;
+  }
+
+  .exercise-card-body {
+    @apply flex-1;
+  }
+
+  .exercise-card-title-row {
+    @apply mb-2 flex items-center gap-2;
+  }
+
+  .exercise-card-title {
+    @apply font-semibold;
+  }
+
+  .exercise-card-selected-icon {
+    @apply h-5 w-5;
+    color: var(--primary);
+  }
+
+  .exercise-card-badges {
+    @apply mb-2 flex flex-wrap gap-2;
+  }
+
+  .exercise-card-description {
+    @apply mb-2 text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .exercise-card-muscles {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .exercise-card-muscles-label {
+    @apply font-medium;
+  }
+
+  .exercise-card-action {
+    @apply ml-4;
+  }
+
+  .exercise-card-action-icon {
+    @apply mr-1 h-4 w-4;
+  }
+
+  .exercise-badge-met {
+    @apply flex items-center gap-1;
+  }
+
+  .exercise-badge-met-icon {
+    @apply h-3 w-3;
+  }
+
+  .exercise-badge-category-cardio {
+    @apply bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200;
+  }
+
+  .exercise-badge-category-strength {
+    @apply bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200;
+  }
+
+  .exercise-badge-category-flexibility {
+    @apply bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200;
+  }
+
+  .exercise-badge-category-sports {
+    @apply bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200;
+  }
+
+  .exercise-badge-category-other {
+    @apply bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200;
+  }
+
+  .exercise-badge-difficulty-beginner {
+    @apply bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200;
+  }
+
+  .exercise-badge-difficulty-intermediate {
+    @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200;
+  }
+
+  .exercise-badge-difficulty-advanced {
+    @apply bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200;
+  }
+
+  /* ==========================================================================
+     ModeSelector
+     ========================================================================== */
+
+  .exercise-mode-grid {
+    @apply grid gap-6 md:grid-cols-2;
+  }
+
+  .exercise-mode-button {
+    @apply flex flex-col items-center rounded-lg border-2 p-8 text-center;
+    background-color: var(--card);
+    border-color: var(--border);
+    transition:
+      transform var(--duration-fast) var(--ease-out-soft),
+      border-color var(--duration-fast) var(--ease-out-soft),
+      background-color var(--duration-fast) var(--ease-out-soft),
+      box-shadow var(--duration-fast) var(--ease-out-soft);
+  }
+
+  .exercise-mode-button:hover {
+    border-color: var(--primary);
+    background-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+
+  .exercise-mode-button:active {
+    transform: translateY(0);
+  }
+
+  .exercise-mode-icon-container {
+    @apply mb-4 flex h-16 w-16 items-center justify-center rounded-full transition-colors;
+    color: var(--primary);
+    background-color: color-mix(in srgb, var(--primary) 10%, transparent);
+  }
+
+  .exercise-mode-button:hover .exercise-mode-icon-container {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  .exercise-mode-icon {
+    @apply h-8 w-8;
+  }
+
+  .exercise-mode-title {
+    @apply mb-2 text-xl font-semibold;
+  }
+
+  .exercise-mode-description {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     ExerciseWizard
+     ========================================================================== */
+
+  .exercise-wizard {
+    @apply space-y-6;
+  }
+
+  .exercise-wizard-card {
+    /* Hero card with extra padding for the wizard */
+  }
+
+  .exercise-wizard-content {
+    @apply pt-0;
+  }
+
+  .exercise-wizard-steps {
+    @apply flex items-center justify-center space-x-2;
+  }
+
+  .exercise-wizard-step {
+    @apply flex items-center;
+  }
+
+  .exercise-wizard-step-circle {
+    @apply flex h-10 w-10 items-center justify-center rounded-full border-2 text-sm font-semibold;
+  }
+
+  .exercise-wizard-step-circle-complete {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    border-color: var(--primary);
+  }
+
+  .exercise-wizard-step-circle-current {
+    background-color: var(--background);
+    color: var(--primary);
+    border-color: var(--primary);
+  }
+
+  .exercise-wizard-step-circle-upcoming {
+    background-color: var(--background);
+    border-color: var(--border);
+    color: var(--muted-foreground);
+  }
+
+  .exercise-wizard-step-label {
+    @apply ml-2 text-sm font-medium;
+  }
+
+  .exercise-wizard-step-label-active {
+    color: var(--foreground);
+  }
+
+  .exercise-wizard-step-label-inactive {
+    color: var(--muted-foreground);
+  }
+
+  .exercise-wizard-step-divider {
+    @apply mx-2 h-5 w-5;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     ExerciseSearch
+     ========================================================================== */
+
+  .exercise-search {
+    @apply space-y-6;
+  }
+
+  .exercise-search-filters {
+    @apply space-y-4;
+  }
+
+  .exercise-search-input-wrapper {
+    @apply relative;
+  }
+
+  .exercise-search-input-icon {
+    @apply absolute left-3 top-3 h-4 w-4;
+    color: var(--muted-foreground);
+  }
+
+  .exercise-search-input {
+    @apply pl-9;
+  }
+
+  .exercise-search-select {
+    @apply flex h-10 w-full rounded-md border px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+    background-color: var(--background);
+    border-color: var(--input);
+    --tw-ring-color: var(--ring);
+    --tw-ring-offset-color: var(--background);
+  }
+
+  .exercise-search-selected {
+    @apply rounded-lg border p-4;
+    background-color: color-mix(in srgb, var(--primary) 5%, transparent);
+  }
+
+  .exercise-search-selected-header {
+    @apply mb-2 flex items-center justify-between;
+  }
+
+  .exercise-search-selected-title {
+    @apply font-semibold;
+  }
+
+  .exercise-search-selected-note {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .exercise-search-selected-list {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .exercise-search-selected-pill {
+    @apply flex items-center gap-2 rounded-md px-3 py-1 text-sm;
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  .exercise-search-selected-remove {
+    @apply hover:opacity-80;
+  }
+
+  .exercise-search-remove-icon {
+    @apply h-4 w-4;
+  }
+
+  .exercise-search-results-title {
+    @apply mb-4 font-semibold;
+  }
+
+  .exercise-search-loading {
+    @apply space-y-4;
+  }
+
+  .exercise-search-skeleton {
+    @apply h-32 w-full;
+  }
+
+  .exercise-search-results {
+    @apply space-y-4;
+  }
+
+  .exercise-search-nav {
+    @apply flex justify-between pt-4;
+  }
+
+  .exercise-search-nav-icon-left {
+    @apply mr-2 h-4 w-4;
+  }
+
+  .exercise-search-nav-icon-right {
+    @apply ml-2 h-4 w-4;
+  }
+
+  /* ==========================================================================
+     ExerciseDetailsForm
+     ========================================================================== */
+
+  .exercise-details {
+    @apply space-y-6;
+  }
+
+  .exercise-details-description {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .exercise-details-list {
+    @apply space-y-6;
+  }
+
+  .exercise-details-card-content {
+    @apply p-6;
+  }
+
+  .exercise-details-title {
+    @apply mb-4 text-lg font-semibold;
+  }
+
+  .exercise-details-fields {
+    @apply space-y-4;
+  }
+
+  .exercise-details-strength-grid {
+    @apply grid gap-4 sm:grid-cols-3;
+  }
+
+  .exercise-details-error {
+    @apply mt-1 text-sm;
+    color: var(--destructive);
+  }
+
+  .exercise-details-help {
+    @apply rounded-md p-3 text-sm;
+    background-color: var(--muted);
+    color: var(--muted-foreground);
+  }
+
+  .exercise-details-nav {
+    @apply flex justify-between pt-4;
+  }
+
+  .exercise-details-nav-icon-left {
+    @apply mr-2 h-4 w-4;
+  }
+
+  .exercise-details-nav-icon-right {
+    @apply ml-2 h-4 w-4;
+  }
+
+  .exercise-input-error {
+    border-color: var(--destructive);
+  }
+
+  /* ==========================================================================
+     WorkoutReview
+     ========================================================================== */
+
+  .exercise-review {
+    @apply space-y-6;
+  }
+
+  .exercise-review-success {
+    @apply flex flex-col items-center justify-center py-12;
+  }
+
+  .exercise-review-success-icon {
+    @apply mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-200;
+  }
+
+  .exercise-review-success-check {
+    @apply h-8 w-8;
+  }
+
+  .exercise-review-success-title {
+    @apply mb-2 text-xl font-semibold;
+  }
+
+  .exercise-review-success-text {
+    color: var(--muted-foreground);
+  }
+
+  .exercise-review-stats {
+    @apply grid gap-4 sm:grid-cols-3;
+  }
+
+  .exercise-review-stat-content {
+    @apply flex items-center gap-3 p-4;
+  }
+
+  .exercise-review-stat-icon {
+    @apply flex h-10 w-10 items-center justify-center rounded-full;
+  }
+
+  .exercise-review-stat-icon-primary {
+    color: var(--primary);
+    background-color: color-mix(in srgb, var(--primary) 10%, transparent);
+  }
+
+  .exercise-review-stat-icon-destructive {
+    background-color: color-mix(in srgb, var(--destructive) 10%, transparent);
+    color: var(--destructive);
+  }
+
+  .exercise-review-stat-icon-inner {
+    @apply h-5 w-5;
+  }
+
+  .exercise-review-stat-value {
+    @apply text-2xl font-bold;
+  }
+
+  .exercise-review-stat-label {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .exercise-review-details-title {
+    @apply mb-4 font-semibold;
+  }
+
+  .exercise-review-details-list {
+    @apply space-y-3;
+  }
+
+  .exercise-review-details-card {
+    @apply p-4;
+  }
+
+  .exercise-review-details-header {
+    @apply flex items-start justify-between;
+  }
+
+  .exercise-review-details-body {
+    @apply flex-1;
+  }
+
+  .exercise-review-details-name {
+    @apply font-medium;
+  }
+
+  .exercise-review-details-meta {
+    @apply mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .exercise-review-details-estimate {
+    @apply text-xs italic;
+  }
+
+  .exercise-review-details-note {
+    @apply mt-2 text-sm italic;
+    color: var(--muted-foreground);
+  }
+
+  .exercise-review-nav {
+    @apply flex justify-between pt-4;
+  }
+
+  .exercise-review-nav-icon-left {
+    @apply mr-2 h-4 w-4;
+  }
+
+  .exercise-review-alert-icon {
+    @apply h-4 w-4;
+  }
+
+  .exercise-review-link {
+    @apply font-medium underline underline-offset-4;
+  }
+
+  .exercise-review-link:hover {
+    color: var(--primary);
+  }
+}

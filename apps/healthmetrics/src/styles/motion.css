@@ -1,0 +1,221 @@
+/* ==========================================================================
+   Motion & Animation System
+   Centralized animation tokens and keyframes for consistent motion across the app
+   ========================================================================== */
+
+/* ==========================================================================
+   Duration Tokens
+   Use these for consistent timing across all animations
+   ========================================================================== */
+
+:root {
+  /* Fast: Hovers, micro-interactions, instant feedback */
+  --duration-fast: 150ms;
+
+  /* Normal: Standard transitions, state changes */
+  --duration-normal: 200ms;
+
+  /* Slow: Page transitions, progress fills, emphasis animations */
+  --duration-slow: 300ms;
+
+  /* Stagger: Delay between sequential items in lists/grids */
+  --duration-stagger: 80ms;
+}
+
+/* ==========================================================================
+   Easing Tokens
+   Use these for consistent motion curves
+   ========================================================================== */
+
+:root {
+  /* Ease out soft: Natural deceleration, good for entrances */
+  --ease-out-soft: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  /* Ease in out: Symmetric acceleration/deceleration */
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Ease out back: Slight overshoot, playful feel */
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ==========================================================================
+   Keyframe Animations
+   Reusable animations for page load and component entrances
+   ========================================================================== */
+
+/* Fade and slide up - primary page load animation */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade in only - subtle entrance for supporting content */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Progress fill - for progress bars and meters */
+@keyframes progressFill {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* Slide in from left - for wizard step forward */
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide in from right - for wizard step back */
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ==========================================================================
+   Animation Utility Classes
+   Apply these classes to trigger animations
+   ========================================================================== */
+
+@layer components {
+  /* Primary entrance animation */
+  .animate-fade-slide-in {
+    animation: fadeSlideIn var(--duration-normal) var(--ease-out-soft) forwards;
+    opacity: 0;
+  }
+
+  /* Fade only entrance */
+  .animate-fade-in {
+    animation: fadeIn var(--duration-normal) var(--ease-out-soft) forwards;
+    opacity: 0;
+  }
+
+  /* Staggered entrance delays - apply to children */
+  .animate-stagger-1 {
+    animation-delay: calc(var(--duration-stagger) * 1);
+  }
+  .animate-stagger-2 {
+    animation-delay: calc(var(--duration-stagger) * 2);
+  }
+  .animate-stagger-3 {
+    animation-delay: calc(var(--duration-stagger) * 3);
+  }
+  .animate-stagger-4 {
+    animation-delay: calc(var(--duration-stagger) * 4);
+  }
+  .animate-stagger-5 {
+    animation-delay: calc(var(--duration-stagger) * 5);
+  }
+
+  /* Wizard step transitions */
+  .animate-slide-in-right {
+    animation: slideInFromRight var(--duration-normal) var(--ease-out-soft)
+      forwards;
+    opacity: 0;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInFromLeft var(--duration-normal) var(--ease-out-soft)
+      forwards;
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   Reduced Motion Support
+   Respect user's preference for reduced motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    /* Reduce all durations significantly */
+    --duration-fast: 0ms;
+    --duration-normal: 0ms;
+    --duration-slow: 50ms;
+    --duration-stagger: 0ms;
+  }
+
+  /* Disable transform-based animations, keep opacity changes minimal */
+  @keyframes fadeSlideIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes progressFill {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInFromRight {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInFromLeft {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Disable all animations on elements with these classes */
+  .animate-fade-slide-in,
+  .animate-fade-in,
+  .animate-slide-in-right,
+  .animate-slide-in-left {
+    animation: none;
+    opacity: 1;
+  }
+}

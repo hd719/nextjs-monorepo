@@ -5,14 +5,14 @@ import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { AuthLayout } from "@/components/forms/AuthLayout";
-import { AuthCard } from "@/components/forms/AuthCard";
+import { AuthLayout, AuthCard } from "@/components/auth";
 import { AUTH_ERRORS } from "@/constants/errors";
+import { ROUTES } from "@/constants/routes";
 import { getErrorMessage } from "@/utils/auth-helpers";
 import { getFieldError } from "@/utils/form-errors";
-import { forgotPasswordSchema } from "@/lib/validation";
+import { forgotPasswordSchema } from "@/utils/validation";
 
-export const Route = createFileRoute("/auth/forgot-password" as any)({
+export const Route = createFileRoute("/auth/forgot-password")({
   component: ForgotPasswordComponent,
 });
 
@@ -60,16 +60,10 @@ function ForgotPasswordComponent() {
           }}
           className="auth-form-container"
         >
-          {serverError && (
-            <div className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
-              {serverError}
-            </div>
-          )}
+          {serverError && <div className="auth-alert-error">{serverError}</div>}
 
           {successMessage && (
-            <div className="rounded-md bg-green-500/10 p-3 text-sm text-green-600 dark:text-green-400">
-              {successMessage}
-            </div>
+            <div className="auth-alert-success">{successMessage}</div>
           )}
 
           <form.Field name="email">
@@ -100,7 +94,11 @@ function ForgotPasswordComponent() {
             selector={(state) => [state.canSubmit, state.isSubmitting]}
           >
             {([canSubmit, isSubmitting]) => (
-              <Button type="submit" className="w-full" disabled={!canSubmit}>
+              <Button
+                type="submit"
+                className="auth-submit-btn"
+                disabled={!canSubmit}
+              >
                 {isSubmitting ? "Sending..." : "Send Reset Link"}
               </Button>
             )}
@@ -108,7 +106,7 @@ function ForgotPasswordComponent() {
 
           <div className="auth-form-link-section">
             <div>
-              <Link to="/auth/login" className="auth-form-link">
+              <Link to={ROUTES.AUTH.LOGIN} className="auth-form-link">
                 Back to Login
               </Link>
             </div>
@@ -116,7 +114,7 @@ function ForgotPasswordComponent() {
               <span className="auth-form-link-text">
                 Don't have an account?{" "}
               </span>
-              <Link to="/auth/signup" className="auth-form-link">
+              <Link to={ROUTES.AUTH.SIGNUP} className="auth-form-link">
                 Sign up
               </Link>
             </div>

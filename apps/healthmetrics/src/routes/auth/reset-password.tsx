@@ -5,11 +5,11 @@ import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { AuthLayout } from "@/components/forms/AuthLayout";
-import { AuthCard } from "@/components/forms/AuthCard";
-import { resetPasswordSchema } from "@/lib/validation";
+import { AuthLayout, AuthCard } from "@/components/auth";
+import { resetPasswordSchema } from "@/utils/validation";
 import { getErrorMessage } from "@/utils/auth-helpers";
 import { getFieldError } from "@/utils/form-errors";
+import { ROUTES } from "@/constants/routes";
 
 export const Route = createFileRoute("/auth/reset-password")({
   component: ResetPasswordComponent,
@@ -22,7 +22,6 @@ function ResetPasswordComponent() {
   const [serverError, setServerError] = useState<string | null>(null);
   const [tokenError, setTokenError] = useState<string | null>(null);
 
-  // Check if token is present
   useEffect(() => {
     if (!search.token) {
       setTokenError(
@@ -50,7 +49,6 @@ function ResetPasswordComponent() {
       }
 
       try {
-        // Call Better-Auth reset password API
         const response = await authClient.resetPassword({
           token: search.token,
           newPassword: value.password,
@@ -61,8 +59,7 @@ function ResetPasswordComponent() {
           return;
         }
 
-        // Success! Redirect to login
-        navigate({ to: "/auth/login" as any });
+        navigate({ to: ROUTES.AUTH.LOGIN });
       } catch (error) {
         setServerError(getErrorMessage(error));
       }
@@ -73,25 +70,20 @@ function ResetPasswordComponent() {
     return (
       <AuthLayout>
         <AuthCard title="Invalid Reset Link" description="">
-          <div className="space-y-4">
-            <div className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
-              {tokenError}
-            </div>
+          <div className="auth-text-space-y">
+            <div className="auth-alert-error">{tokenError}</div>
 
-            <div className="text-center text-sm space-y-2">
+            <div className="auth-text-center-sm auth-text-space-y">
               <div>
                 <Link
-                  to="/auth/forgot-password"
-                  className="text-accent hover:underline font-medium"
+                  to={ROUTES.AUTH.FORGOT_PASSWORD}
+                  className="auth-form-link"
                 >
                   Request a new reset link
                 </Link>
               </div>
               <div>
-                <Link
-                  to="/auth/login"
-                  className="text-accent hover:underline font-medium"
-                >
+                <Link to={ROUTES.AUTH.LOGIN} className="auth-form-link">
                   Back to Login
                 </Link>
               </div>
@@ -114,13 +106,9 @@ function ResetPasswordComponent() {
             e.stopPropagation();
             form.handleSubmit();
           }}
-          className="space-y-4"
+          className="auth-form-container"
         >
-          {serverError && (
-            <div className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
-              {serverError}
-            </div>
-          )}
+          {serverError && <div className="auth-alert-error">{serverError}</div>}
 
           <form.Field name="password">
             {(field) => (
@@ -170,9 +158,9 @@ function ResetPasswordComponent() {
             )}
           </form.Field>
 
-          <div className="text-xs text-muted-foreground space-y-1">
+          <div className="auth-text-center-xs auth-text-space-y">
             <p>Password must:</p>
-            <ul className="list-disc list-inside space-y-1">
+            <ul className="auth-list">
               <li>Be at least 8 characters long</li>
               <li>Contain at least one uppercase letter</li>
               <li>Contain at least one lowercase letter</li>
@@ -184,17 +172,18 @@ function ResetPasswordComponent() {
             selector={(state) => [state.canSubmit, state.isSubmitting]}
           >
             {([canSubmit, isSubmitting]) => (
-              <Button type="submit" className="w-full" disabled={!canSubmit}>
+              <Button
+                type="submit"
+                className="auth-submit-btn"
+                disabled={!canSubmit}
+              >
                 {isSubmitting ? "Resetting..." : "Reset Password"}
               </Button>
             )}
           </form.Subscribe>
 
-          <div className="text-center text-sm">
-            <Link
-              to="/auth/login"
-              className="text-accent hover:underline font-medium"
-            >
+          <div className="auth-text-center-sm">
+            <Link to={ROUTES.AUTH.LOGIN} className="auth-form-link">
               Back to Login
             </Link>
           </div>

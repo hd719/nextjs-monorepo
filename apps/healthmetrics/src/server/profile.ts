@@ -3,35 +3,9 @@ import { prisma } from "@/lib/prisma";
 import {
   updateUserProfileSchema,
   type UpdateUserProfileInput,
-} from "@/lib/validation";
+} from "@/utils/validation";
+import type { UserProfile } from "@/types/profile";
 import { getLatestWeight, saveWeightEntry } from "./weight";
-
-// ============================================================================
-// TYPES
-// ============================================================================
-
-export type UserProfile = {
-  id: string;
-  email: string | null;
-  displayName: string | null;
-  avatarUrl: string | null;
-  dateOfBirth: Date | null;
-  gender: string | null;
-  heightCm: number | null;
-  currentWeightKg: number | null;
-  targetWeightKg: number | null;
-  activityLevel: string | null;
-  goalType: string | null;
-  dailyCalorieGoal: number | null;
-  dailyProteinGoalG: number | null;
-  dailyCarbGoalG: number | null;
-  dailyFatGoalG: number | null;
-  unitsPreference: string;
-  timezone: string;
-  isAdmin: boolean;
-  createdAt: string; // ISO string for serialization
-  updatedAt: string; // ISO string for serialization
-};
 
 // ============================================================================
 // QUERY FUNCTIONS
@@ -71,9 +45,9 @@ export const getUserProfile = createServerFn({ method: "GET" })
         dateOfBirth: user.dateOfBirth,
         gender: user.gender,
         heightCm: user.heightCm ? Number(user.heightCm) : null,
-        currentWeightKg: latestWeight?.weightKg || null,
-        targetWeightKg: user.targetWeightKg
-          ? Number(user.targetWeightKg)
+        currentWeightLbs: latestWeight?.weightLbs || null,
+        targetWeightLbs: user.targetWeightLbs
+          ? Number(user.targetWeightLbs)
           : null,
         activityLevel: user.activityLevel,
         goalType: user.goalType,
@@ -112,10 +86,15 @@ export const updateUserProfile = createServerFn({ method: "POST" })
   .handler(async ({ data: { userId, updates } }): Promise<UserProfile> => {
     try {
       // Field mapping: input field -> { dbField, transform? }
-      const fieldMapping: Record<
-        string,
-        { dbField: string; transform?: (value: any) => any }
-      > = {
+      // Transform accepts unknown since we verify the value type at runtime
+      type FieldConfig = {
+        dbField: string;
+        transform?: (value: unknown) => unknown;
+      };
+
+      type UpdateKey = keyof UpdateUserProfileInput;
+
+      const fieldMapping: Partial<Record<UpdateKey, FieldConfig>> = {
         displayName: { dbField: "displayName" },
         avatarUrl: { dbField: "avatarUrl" },
         timezone: { dbField: "timezone" },
@@ -125,30 +104,32 @@ export const updateUserProfile = createServerFn({ method: "POST" })
         dailyFatGoalG: { dbField: "dailyFatGoalG" },
         heightInches: {
           dbField: "heightCm",
-          transform: (inches: number) => inches * 2.54, // inches to cm
+          transform: (inches) => (inches as number) * 2.54,
         },
         // currentWeightLbs handled separately via WeightEntry
-        targetWeightLbs: {
-          dbField: "targetWeightKg",
-          transform: (lbs: number) => lbs * 0.453592, // lbs to kg
-        },
-        targetWeightKg: { dbField: "targetWeightKg" },
+        targetWeightLbs: { dbField: "targetWeightLbs" },
         dateOfBirth: {
           dbField: "dateOfBirth",
-          transform: (date: string) => new Date(date),
+          transform: (date) => new Date(date as string),
         },
         gender: {
           dbField: "gender",
-          transform: (gender: string) => gender.toUpperCase(), // Match enum
+          transform: (gender) => (gender as string).toUpperCase(),
         },
         activityLevel: { dbField: "activityLevel" },
         goalType: { dbField: "goalType" },
       };
 
       // Build update object dynamically
-      const updateData: any = {};
-      for (const [key, config] of Object.entries(fieldMapping)) {
-        const value = (updates as any)[key];
+      const updateData: Record<string, unknown> = {};
+      for (const [key, config] of Object.entries(fieldMapping) as [
+        UpdateKey,
+        FieldConfig,
+      ][]) {
+        if (!config) {
+          continue;
+        }
+        const value = updates[key];
         if (value !== undefined) {
           updateData[config.dbField] = config.transform
             ? config.transform(value)
@@ -191,9 +172,9 @@ export const updateUserProfile = createServerFn({ method: "POST" })
         dateOfBirth: user.dateOfBirth,
         gender: user.gender,
         heightCm: user.heightCm ? Number(user.heightCm) : null,
-        currentWeightKg: latestWeight?.weightKg || null,
-        targetWeightKg: user.targetWeightKg
-          ? Number(user.targetWeightKg)
+        currentWeightLbs: latestWeight?.weightLbs || null,
+        targetWeightLbs: user.targetWeightLbs
+          ? Number(user.targetWeightLbs)
           : null,
         activityLevel: user.activityLevel,
         goalType: user.goalType,
@@ -209,6 +190,10 @@ export const updateUserProfile = createServerFn({ method: "POST" })
       };
     } catch (error) {
       console.error("Failed to update user profile:", error);
+      // Preserve validation error messages
+      if (error instanceof Error) {
+        throw error;
+      }
       throw new Error("Failed to update user profile");
     }
   });

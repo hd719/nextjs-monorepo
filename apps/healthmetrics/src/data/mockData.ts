@@ -7,7 +7,7 @@ import type {
   DailySummary,
   MealEntry,
   Activity,
-  UserProfile,
+  UserDisplayProfile,
   ExerciseSummary,
   WaterIntake,
 } from "../types/nutrition";
@@ -17,7 +17,7 @@ import type {
 const today = "Wed, Dec 10, 2025";
 
 // Mock user profile
-export const mockUser: UserProfile = {
+export const mockUser: UserDisplayProfile = {
   id: "user-1",
   displayName: "Alex Johnson",
   avatarUrl: undefined,

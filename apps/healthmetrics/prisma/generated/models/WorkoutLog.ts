@@ -31,7 +31,7 @@ export type WorkoutLogAvgAggregateOutputType = {
   caloriesBurned: number | null
   sets: number | null
   reps: number | null
-  weightKg: runtime.Decimal | null
+  weightLbs: runtime.Decimal | null
   distanceKm: runtime.Decimal | null
 }
 
@@ -40,7 +40,7 @@ export type WorkoutLogSumAggregateOutputType = {
   caloriesBurned: number | null
   sets: number | null
   reps: number | null
-  weightKg: runtime.Decimal | null
+  weightLbs: runtime.Decimal | null
   distanceKm: runtime.Decimal | null
 }
 
@@ -48,12 +48,13 @@ export type WorkoutLogMinAggregateOutputType = {
   id: string | null
   userId: string | null
   exerciseId: string | null
+  workoutSessionId: string | null
   date: Date | null
   durationMinutes: number | null
   caloriesBurned: number | null
   sets: number | null
   reps: number | null
-  weightKg: runtime.Decimal | null
+  weightLbs: runtime.Decimal | null
   distanceKm: runtime.Decimal | null
   notes: string | null
   createdAt: Date | null
@@ -64,12 +65,13 @@ export type WorkoutLogMaxAggregateOutputType = {
   id: string | null
   userId: string | null
   exerciseId: string | null
+  workoutSessionId: string | null
   date: Date | null
   durationMinutes: number | null
   caloriesBurned: number | null
   sets: number | null
   reps: number | null
-  weightKg: runtime.Decimal | null
+  weightLbs: runtime.Decimal | null
   distanceKm: runtime.Decimal | null
   notes: string | null
   createdAt: Date | null
@@ -80,12 +82,13 @@ export type WorkoutLogCountAggregateOutputType = {
   id: number
   userId: number
   exerciseId: number
+  workoutSessionId: number
   date: number
   durationMinutes: number
   caloriesBurned: number
   sets: number
   reps: number
-  weightKg: number
+  weightLbs: number
   distanceKm: number
   notes: number
   createdAt: number
@@ -99,7 +102,7 @@ export type WorkoutLogAvgAggregateInputType = {
   caloriesBurned?: true
   sets?: true
   reps?: true
-  weightKg?: true
+  weightLbs?: true
   distanceKm?: true
 }
 
@@ -108,7 +111,7 @@ export type WorkoutLogSumAggregateInputType = {
   caloriesBurned?: true
   sets?: true
   reps?: true
-  weightKg?: true
+  weightLbs?: true
   distanceKm?: true
 }
 
@@ -116,12 +119,13 @@ export type WorkoutLogMinAggregateInputType = {
   id?: true
   userId?: true
   exerciseId?: true
+  workoutSessionId?: true
   date?: true
   durationMinutes?: true
   caloriesBurned?: true
   sets?: true
   reps?: true
-  weightKg?: true
+  weightLbs?: true
   distanceKm?: true
   notes?: true
   createdAt?: true
@@ -132,12 +136,13 @@ export type WorkoutLogMaxAggregateInputType = {
   id?: true
   userId?: true
   exerciseId?: true
+  workoutSessionId?: true
   date?: true
   durationMinutes?: true
   caloriesBurned?: true
   sets?: true
   reps?: true
-  weightKg?: true
+  weightLbs?: true
   distanceKm?: true
   notes?: true
   createdAt?: true
@@ -148,12 +153,13 @@ export type WorkoutLogCountAggregateInputType = {
   id?: true
   userId?: true
   exerciseId?: true
+  workoutSessionId?: true
   date?: true
   durationMinutes?: true
   caloriesBurned?: true
   sets?: true
   reps?: true
-  weightKg?: true
+  weightLbs?: true
   distanceKm?: true
   notes?: true
   createdAt?: true
@@ -251,12 +257,13 @@ export type WorkoutLogGroupByOutputType = {
   id: string
   userId: string
   exerciseId: string
+  workoutSessionId: string
   date: Date
   durationMinutes: number
   caloriesBurned: number | null
   sets: number | null
   reps: number | null
-  weightKg: runtime.Decimal | null
+  weightLbs: runtime.Decimal | null
   distanceKm: runtime.Decimal | null
   notes: string | null
   createdAt: Date
@@ -290,36 +297,40 @@ export type WorkoutLogWhereInput = {
   id?: Prisma.StringFilter<"WorkoutLog"> | string
   userId?: Prisma.StringFilter<"WorkoutLog"> | string
   exerciseId?: Prisma.StringFilter<"WorkoutLog"> | string
+  workoutSessionId?: Prisma.StringFilter<"WorkoutLog"> | string
   date?: Prisma.DateTimeFilter<"WorkoutLog"> | Date | string
   durationMinutes?: Prisma.IntFilter<"WorkoutLog"> | number
   caloriesBurned?: Prisma.IntNullableFilter<"WorkoutLog"> | number | null
   sets?: Prisma.IntNullableFilter<"WorkoutLog"> | number | null
   reps?: Prisma.IntNullableFilter<"WorkoutLog"> | number | null
-  weightKg?: Prisma.DecimalNullableFilter<"WorkoutLog"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.DecimalNullableFilter<"WorkoutLog"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: Prisma.DecimalNullableFilter<"WorkoutLog"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: Prisma.StringNullableFilter<"WorkoutLog"> | string | null
   createdAt?: Prisma.DateTimeFilter<"WorkoutLog"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"WorkoutLog"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   exercise?: Prisma.XOR<Prisma.ExerciseScalarRelationFilter, Prisma.ExerciseWhereInput>
+  workoutSession?: Prisma.XOR<Prisma.WorkoutSessionScalarRelationFilter, Prisma.WorkoutSessionWhereInput>
 }
 
 export type WorkoutLogOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   exerciseId?: Prisma.SortOrder
+  workoutSessionId?: Prisma.SortOrder
   date?: Prisma.SortOrder
   durationMinutes?: Prisma.SortOrder
   caloriesBurned?: Prisma.SortOrderInput | Prisma.SortOrder
   sets?: Prisma.SortOrderInput | Prisma.SortOrder
   reps?: Prisma.SortOrderInput | Prisma.SortOrder
-  weightKg?: Prisma.SortOrderInput | Prisma.SortOrder
+  weightLbs?: Prisma.SortOrderInput | Prisma.SortOrder
   distanceKm?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   exercise?: Prisma.ExerciseOrderByWithRelationInput
+  workoutSession?: Prisma.WorkoutSessionOrderByWithRelationInput
 }
 
 export type WorkoutLogWhereUniqueInput = Prisma.AtLeast<{
@@ -329,30 +340,33 @@ export type WorkoutLogWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.WorkoutLogWhereInput | Prisma.WorkoutLogWhereInput[]
   userId?: Prisma.StringFilter<"WorkoutLog"> | string
   exerciseId?: Prisma.StringFilter<"WorkoutLog"> | string
+  workoutSessionId?: Prisma.StringFilter<"WorkoutLog"> | string
   date?: Prisma.DateTimeFilter<"WorkoutLog"> | Date | string
   durationMinutes?: Prisma.IntFilter<"WorkoutLog"> | number
   caloriesBurned?: Prisma.IntNullableFilter<"WorkoutLog"> | number | null
   sets?: Prisma.IntNullableFilter<"WorkoutLog"> | number | null
   reps?: Prisma.IntNullableFilter<"WorkoutLog"> | number | null
-  weightKg?: Prisma.DecimalNullableFilter<"WorkoutLog"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.DecimalNullableFilter<"WorkoutLog"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: Prisma.DecimalNullableFilter<"WorkoutLog"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: Prisma.StringNullableFilter<"WorkoutLog"> | string | null
   createdAt?: Prisma.DateTimeFilter<"WorkoutLog"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"WorkoutLog"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   exercise?: Prisma.XOR<Prisma.ExerciseScalarRelationFilter, Prisma.ExerciseWhereInput>
+  workoutSession?: Prisma.XOR<Prisma.WorkoutSessionScalarRelationFilter, Prisma.WorkoutSessionWhereInput>
 }, "id">
 
 export type WorkoutLogOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   exerciseId?: Prisma.SortOrder
+  workoutSessionId?: Prisma.SortOrder
   date?: Prisma.SortOrder
   durationMinutes?: Prisma.SortOrder
   caloriesBurned?: Prisma.SortOrderInput | Prisma.SortOrder
   sets?: Prisma.SortOrderInput | Prisma.SortOrder
   reps?: Prisma.SortOrderInput | Prisma.SortOrder
-  weightKg?: Prisma.SortOrderInput | Prisma.SortOrder
+  weightLbs?: Prisma.SortOrderInput | Prisma.SortOrder
   distanceKm?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -371,12 +385,13 @@ export type WorkoutLogScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"WorkoutLog"> | string
   userId?: Prisma.StringWithAggregatesFilter<"WorkoutLog"> | string
   exerciseId?: Prisma.StringWithAggregatesFilter<"WorkoutLog"> | string
+  workoutSessionId?: Prisma.StringWithAggregatesFilter<"WorkoutLog"> | string
   date?: Prisma.DateTimeWithAggregatesFilter<"WorkoutLog"> | Date | string
   durationMinutes?: Prisma.IntWithAggregatesFilter<"WorkoutLog"> | number
   caloriesBurned?: Prisma.IntNullableWithAggregatesFilter<"WorkoutLog"> | number | null
   sets?: Prisma.IntNullableWithAggregatesFilter<"WorkoutLog"> | number | null
   reps?: Prisma.IntNullableWithAggregatesFilter<"WorkoutLog"> | number | null
-  weightKg?: Prisma.DecimalNullableWithAggregatesFilter<"WorkoutLog"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.DecimalNullableWithAggregatesFilter<"WorkoutLog"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: Prisma.DecimalNullableWithAggregatesFilter<"WorkoutLog"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"WorkoutLog"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"WorkoutLog"> | Date | string
@@ -390,25 +405,27 @@ export type WorkoutLogCreateInput = {
   caloriesBurned?: number | null
   sets?: number | null
   reps?: number | null
-  weightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutWorkoutLogsInput
   exercise: Prisma.ExerciseCreateNestedOneWithoutWorkoutLogsInput
+  workoutSession: Prisma.WorkoutSessionCreateNestedOneWithoutWorkoutLogsInput
 }
 
 export type WorkoutLogUncheckedCreateInput = {
   id?: string
   userId: string
   exerciseId: string
+  workoutSessionId: string
   date: Date | string
   durationMinutes: number
   caloriesBurned?: number | null
   sets?: number | null
   reps?: number | null
-  weightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: string | null
   createdAt?: Date | string
@@ -422,25 +439,27 @@ export type WorkoutLogUpdateInput = {
   caloriesBurned?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reps?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  weightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutWorkoutLogsNestedInput
   exercise?: Prisma.ExerciseUpdateOneRequiredWithoutWorkoutLogsNestedInput
+  workoutSession?: Prisma.WorkoutSessionUpdateOneRequiredWithoutWorkoutLogsNestedInput
 }
 
 export type WorkoutLogUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   exerciseId?: Prisma.StringFieldUpdateOperationsInput | string
+  workoutSessionId?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   caloriesBurned?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reps?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  weightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -451,12 +470,13 @@ export type WorkoutLogCreateManyInput = {
   id?: string
   userId: string
   exerciseId: string
+  workoutSessionId: string
   date: Date | string
   durationMinutes: number
   caloriesBurned?: number | null
   sets?: number | null
   reps?: number | null
-  weightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: string | null
   createdAt?: Date | string
@@ -470,7 +490,7 @@ export type WorkoutLogUpdateManyMutationInput = {
   caloriesBurned?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reps?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  weightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -481,12 +501,13 @@ export type WorkoutLogUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   exerciseId?: Prisma.StringFieldUpdateOperationsInput | string
+  workoutSessionId?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   caloriesBurned?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reps?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  weightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -507,12 +528,13 @@ export type WorkoutLogCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   exerciseId?: Prisma.SortOrder
+  workoutSessionId?: Prisma.SortOrder
   date?: Prisma.SortOrder
   durationMinutes?: Prisma.SortOrder
   caloriesBurned?: Prisma.SortOrder
   sets?: Prisma.SortOrder
   reps?: Prisma.SortOrder
-  weightKg?: Prisma.SortOrder
+  weightLbs?: Prisma.SortOrder
   distanceKm?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -524,7 +546,7 @@ export type WorkoutLogAvgOrderByAggregateInput = {
   caloriesBurned?: Prisma.SortOrder
   sets?: Prisma.SortOrder
   reps?: Prisma.SortOrder
-  weightKg?: Prisma.SortOrder
+  weightLbs?: Prisma.SortOrder
   distanceKm?: Prisma.SortOrder
 }
 
@@ -532,12 +554,13 @@ export type WorkoutLogMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   exerciseId?: Prisma.SortOrder
+  workoutSessionId?: Prisma.SortOrder
   date?: Prisma.SortOrder
   durationMinutes?: Prisma.SortOrder
   caloriesBurned?: Prisma.SortOrder
   sets?: Prisma.SortOrder
   reps?: Prisma.SortOrder
-  weightKg?: Prisma.SortOrder
+  weightLbs?: Prisma.SortOrder
   distanceKm?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -548,12 +571,13 @@ export type WorkoutLogMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   exerciseId?: Prisma.SortOrder
+  workoutSessionId?: Prisma.SortOrder
   date?: Prisma.SortOrder
   durationMinutes?: Prisma.SortOrder
   caloriesBurned?: Prisma.SortOrder
   sets?: Prisma.SortOrder
   reps?: Prisma.SortOrder
-  weightKg?: Prisma.SortOrder
+  weightLbs?: Prisma.SortOrder
   distanceKm?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -565,7 +589,7 @@ export type WorkoutLogSumOrderByAggregateInput = {
   caloriesBurned?: Prisma.SortOrder
   sets?: Prisma.SortOrder
   reps?: Prisma.SortOrder
-  weightKg?: Prisma.SortOrder
+  weightLbs?: Prisma.SortOrder
   distanceKm?: Prisma.SortOrder
 }
 
@@ -653,12 +677,46 @@ export type WorkoutLogUncheckedUpdateManyWithoutExerciseNestedInput = {
   deleteMany?: Prisma.WorkoutLogScalarWhereInput | Prisma.WorkoutLogScalarWhereInput[]
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
+export type WorkoutLogCreateNestedManyWithoutWorkoutSessionInput = {
+  create?: Prisma.XOR<Prisma.WorkoutLogCreateWithoutWorkoutSessionInput, Prisma.WorkoutLogUncheckedCreateWithoutWorkoutSessionInput> | Prisma.WorkoutLogCreateWithoutWorkoutSessionInput[] | Prisma.WorkoutLogUncheckedCreateWithoutWorkoutSessionInput[]
+  connectOrCreate?: Prisma.WorkoutLogCreateOrConnectWithoutWorkoutSessionInput | Prisma.WorkoutLogCreateOrConnectWithoutWorkoutSessionInput[]
+  createMany?: Prisma.WorkoutLogCreateManyWorkoutSessionInputEnvelope
+  connect?: Prisma.WorkoutLogWhereUniqueInput | Prisma.WorkoutLogWhereUniqueInput[]
+}
+
+export type WorkoutLogUncheckedCreateNestedManyWithoutWorkoutSessionInput = {
+  create?: Prisma.XOR<Prisma.WorkoutLogCreateWithoutWorkoutSessionInput, Prisma.WorkoutLogUncheckedCreateWithoutWorkoutSessionInput> | Prisma.WorkoutLogCreateWithoutWorkoutSessionInput[] | Prisma.WorkoutLogUncheckedCreateWithoutWorkoutSessionInput[]
+  connectOrCreate?: Prisma.WorkoutLogCreateOrConnectWithoutWorkoutSessionInput | Prisma.WorkoutLogCreateOrConnectWithoutWorkoutSessionInput[]
+  createMany?: Prisma.WorkoutLogCreateManyWorkoutSessionInputEnvelope
+  connect?: Prisma.WorkoutLogWhereUniqueInput | Prisma.WorkoutLogWhereUniqueInput[]
+}
+
+export type WorkoutLogUpdateManyWithoutWorkoutSessionNestedInput = {
+  create?: Prisma.XOR<Prisma.WorkoutLogCreateWithoutWorkoutSessionInput, Prisma.WorkoutLogUncheckedCreateWithoutWorkoutSessionInput> | Prisma.WorkoutLogCreateWithoutWorkoutSessionInput[] | Prisma.WorkoutLogUncheckedCreateWithoutWorkoutSessionInput[]
+  connectOrCreate?: Prisma.WorkoutLogCreateOrConnectWithoutWorkoutSessionInput | Prisma.WorkoutLogCreateOrConnectWithoutWorkoutSessionInput[]
+  upsert?: Prisma.WorkoutLogUpsertWithWhereUniqueWithoutWorkoutSessionInput | Prisma.WorkoutLogUpsertWithWhereUniqueWithoutWorkoutSessionInput[]
+  createMany?: Prisma.WorkoutLogCreateManyWorkoutSessionInputEnvelope
+  set?: Prisma.WorkoutLogWhereUniqueInput | Prisma.WorkoutLogWhereUniqueInput[]
+  disconnect?: Prisma.WorkoutLogWhereUniqueInput | Prisma.WorkoutLogWhereUniqueInput[]
+  delete?: Prisma.WorkoutLogWhereUniqueInput | Prisma.WorkoutLogWhereUniqueInput[]
+  connect?: Prisma.WorkoutLogWhereUniqueInput | Prisma.WorkoutLogWhereUniqueInput[]
+  update?: Prisma.WorkoutLogUpdateWithWhereUniqueWithoutWorkoutSessionInput | Prisma.WorkoutLogUpdateWithWhereUniqueWithoutWorkoutSessionInput[]
+  updateMany?: Prisma.WorkoutLogUpdateManyWithWhereWithoutWorkoutSessionInput | Prisma.WorkoutLogUpdateManyWithWhereWithoutWorkoutSessionInput[]
+  deleteMany?: Prisma.WorkoutLogScalarWhereInput | Prisma.WorkoutLogScalarWhereInput[]
+}
+
+export type WorkoutLogUncheckedUpdateManyWithoutWorkoutSessionNestedInput = {
+  create?: Prisma.XOR<Prisma.WorkoutLogCreateWithoutWorkoutSessionInput, Prisma.WorkoutLogUncheckedCreateWithoutWorkoutSessionInput> | Prisma.WorkoutLogCreateWithoutWorkoutSessionInput[] | Prisma.WorkoutLogUncheckedCreateWithoutWorkoutSessionInput[]
+  connectOrCreate?: Prisma.WorkoutLogCreateOrConnectWithoutWorkoutSessionInput | Prisma.WorkoutLogCreateOrConnectWithoutWorkoutSessionInput[]
+  upsert?: Prisma.WorkoutLogUpsertWithWhereUniqueWithoutWorkoutSessionInput | Prisma.WorkoutLogUpsertWithWhereUniqueWithoutWorkoutSessionInput[]
+  createMany?: Prisma.WorkoutLogCreateManyWorkoutSessionInputEnvelope
+  set?: Prisma.WorkoutLogWhereUniqueInput | Prisma.WorkoutLogWhereUniqueInput[]
+  disconnect?: Prisma.WorkoutLogWhereUniqueInput | Prisma.WorkoutLogWhereUniqueInput[]
+  delete?: Prisma.WorkoutLogWhereUniqueInput | Prisma.WorkoutLogWhereUniqueInput[]
+  connect?: Prisma.WorkoutLogWhereUniqueInput | Prisma.WorkoutLogWhereUniqueInput[]
+  update?: Prisma.WorkoutLogUpdateWithWhereUniqueWithoutWorkoutSessionInput | Prisma.WorkoutLogUpdateWithWhereUniqueWithoutWorkoutSessionInput[]
+  updateMany?: Prisma.WorkoutLogUpdateManyWithWhereWithoutWorkoutSessionInput | Prisma.WorkoutLogUpdateManyWithWhereWithoutWorkoutSessionInput[]
+  deleteMany?: Prisma.WorkoutLogScalarWhereInput | Prisma.WorkoutLogScalarWhereInput[]
 }
 
 export type WorkoutLogCreateWithoutUserInput = {
@@ -668,23 +726,25 @@ export type WorkoutLogCreateWithoutUserInput = {
   caloriesBurned?: number | null
   sets?: number | null
   reps?: number | null
-  weightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   exercise: Prisma.ExerciseCreateNestedOneWithoutWorkoutLogsInput
+  workoutSession: Prisma.WorkoutSessionCreateNestedOneWithoutWorkoutLogsInput
 }
 
 export type WorkoutLogUncheckedCreateWithoutUserInput = {
   id?: string
   exerciseId: string
+  workoutSessionId: string
   date: Date | string
   durationMinutes: number
   caloriesBurned?: number | null
   sets?: number | null
   reps?: number | null
-  weightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: string | null
   createdAt?: Date | string
@@ -724,12 +784,13 @@ export type WorkoutLogScalarWhereInput = {
   id?: Prisma.StringFilter<"WorkoutLog"> | string
   userId?: Prisma.StringFilter<"WorkoutLog"> | string
   exerciseId?: Prisma.StringFilter<"WorkoutLog"> | string
+  workoutSessionId?: Prisma.StringFilter<"WorkoutLog"> | string
   date?: Prisma.DateTimeFilter<"WorkoutLog"> | Date | string
   durationMinutes?: Prisma.IntFilter<"WorkoutLog"> | number
   caloriesBurned?: Prisma.IntNullableFilter<"WorkoutLog"> | number | null
   sets?: Prisma.IntNullableFilter<"WorkoutLog"> | number | null
   reps?: Prisma.IntNullableFilter<"WorkoutLog"> | number | null
-  weightKg?: Prisma.DecimalNullableFilter<"WorkoutLog"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.DecimalNullableFilter<"WorkoutLog"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: Prisma.DecimalNullableFilter<"WorkoutLog"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: Prisma.StringNullableFilter<"WorkoutLog"> | string | null
   createdAt?: Prisma.DateTimeFilter<"WorkoutLog"> | Date | string
@@ -743,23 +804,25 @@ export type WorkoutLogCreateWithoutExerciseInput = {
   caloriesBurned?: number | null
   sets?: number | null
   reps?: number | null
-  weightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutWorkoutLogsInput
+  workoutSession: Prisma.WorkoutSessionCreateNestedOneWithoutWorkoutLogsInput
 }
 
 export type WorkoutLogUncheckedCreateWithoutExerciseInput = {
   id?: string
   userId: string
+  workoutSessionId: string
   date: Date | string
   durationMinutes: number
   caloriesBurned?: number | null
   sets?: number | null
   reps?: number | null
-  weightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: string | null
   createdAt?: Date | string
@@ -792,15 +855,74 @@ export type WorkoutLogUpdateManyWithWhereWithoutExerciseInput = {
   data: Prisma.XOR<Prisma.WorkoutLogUpdateManyMutationInput, Prisma.WorkoutLogUncheckedUpdateManyWithoutExerciseInput>
 }
 
-export type WorkoutLogCreateManyUserInput = {
+export type WorkoutLogCreateWithoutWorkoutSessionInput = {
   id?: string
+  date: Date | string
+  durationMinutes: number
+  caloriesBurned?: number | null
+  sets?: number | null
+  reps?: number | null
+  weightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distanceKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutWorkoutLogsInput
+  exercise: Prisma.ExerciseCreateNestedOneWithoutWorkoutLogsInput
+}
+
+export type WorkoutLogUncheckedCreateWithoutWorkoutSessionInput = {
+  id?: string
+  userId: string
   exerciseId: string
   date: Date | string
   durationMinutes: number
   caloriesBurned?: number | null
   sets?: number | null
   reps?: number | null
-  weightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distanceKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type WorkoutLogCreateOrConnectWithoutWorkoutSessionInput = {
+  where: Prisma.WorkoutLogWhereUniqueInput
+  create: Prisma.XOR<Prisma.WorkoutLogCreateWithoutWorkoutSessionInput, Prisma.WorkoutLogUncheckedCreateWithoutWorkoutSessionInput>
+}
+
+export type WorkoutLogCreateManyWorkoutSessionInputEnvelope = {
+  data: Prisma.WorkoutLogCreateManyWorkoutSessionInput | Prisma.WorkoutLogCreateManyWorkoutSessionInput[]
+  skipDuplicates?: boolean
+}
+
+export type WorkoutLogUpsertWithWhereUniqueWithoutWorkoutSessionInput = {
+  where: Prisma.WorkoutLogWhereUniqueInput
+  update: Prisma.XOR<Prisma.WorkoutLogUpdateWithoutWorkoutSessionInput, Prisma.WorkoutLogUncheckedUpdateWithoutWorkoutSessionInput>
+  create: Prisma.XOR<Prisma.WorkoutLogCreateWithoutWorkoutSessionInput, Prisma.WorkoutLogUncheckedCreateWithoutWorkoutSessionInput>
+}
+
+export type WorkoutLogUpdateWithWhereUniqueWithoutWorkoutSessionInput = {
+  where: Prisma.WorkoutLogWhereUniqueInput
+  data: Prisma.XOR<Prisma.WorkoutLogUpdateWithoutWorkoutSessionInput, Prisma.WorkoutLogUncheckedUpdateWithoutWorkoutSessionInput>
+}
+
+export type WorkoutLogUpdateManyWithWhereWithoutWorkoutSessionInput = {
+  where: Prisma.WorkoutLogScalarWhereInput
+  data: Prisma.XOR<Prisma.WorkoutLogUpdateManyMutationInput, Prisma.WorkoutLogUncheckedUpdateManyWithoutWorkoutSessionInput>
+}
+
+export type WorkoutLogCreateManyUserInput = {
+  id?: string
+  exerciseId: string
+  workoutSessionId: string
+  date: Date | string
+  durationMinutes: number
+  caloriesBurned?: number | null
+  sets?: number | null
+  reps?: number | null
+  weightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: string | null
   createdAt?: Date | string
@@ -814,23 +936,25 @@ export type WorkoutLogUpdateWithoutUserInput = {
   caloriesBurned?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reps?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  weightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   exercise?: Prisma.ExerciseUpdateOneRequiredWithoutWorkoutLogsNestedInput
+  workoutSession?: Prisma.WorkoutSessionUpdateOneRequiredWithoutWorkoutLogsNestedInput
 }
 
 export type WorkoutLogUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   exerciseId?: Prisma.StringFieldUpdateOperationsInput | string
+  workoutSessionId?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   caloriesBurned?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reps?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  weightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -840,12 +964,13 @@ export type WorkoutLogUncheckedUpdateWithoutUserInput = {
 export type WorkoutLogUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   exerciseId?: Prisma.StringFieldUpdateOperationsInput | string
+  workoutSessionId?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   caloriesBurned?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reps?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  weightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -855,12 +980,13 @@ export type WorkoutLogUncheckedUpdateManyWithoutUserInput = {
 export type WorkoutLogCreateManyExerciseInput = {
   id?: string
   userId: string
+  workoutSessionId: string
   date: Date | string
   durationMinutes: number
   caloriesBurned?: number | null
   sets?: number | null
   reps?: number | null
-  weightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: string | null
   createdAt?: Date | string
@@ -874,23 +1000,25 @@ export type WorkoutLogUpdateWithoutExerciseInput = {
   caloriesBurned?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reps?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  weightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutWorkoutLogsNestedInput
+  workoutSession?: Prisma.WorkoutSessionUpdateOneRequiredWithoutWorkoutLogsNestedInput
 }
 
 export type WorkoutLogUncheckedUpdateWithoutExerciseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  workoutSessionId?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   caloriesBurned?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reps?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  weightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -900,12 +1028,77 @@ export type WorkoutLogUncheckedUpdateWithoutExerciseInput = {
 export type WorkoutLogUncheckedUpdateManyWithoutExerciseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  workoutSessionId?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   caloriesBurned?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reps?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  weightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distanceKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type WorkoutLogCreateManyWorkoutSessionInput = {
+  id?: string
+  userId: string
+  exerciseId: string
+  date: Date | string
+  durationMinutes: number
+  caloriesBurned?: number | null
+  sets?: number | null
+  reps?: number | null
+  weightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distanceKm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type WorkoutLogUpdateWithoutWorkoutSessionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  caloriesBurned?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reps?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distanceKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutWorkoutLogsNestedInput
+  exercise?: Prisma.ExerciseUpdateOneRequiredWithoutWorkoutLogsNestedInput
+}
+
+export type WorkoutLogUncheckedUpdateWithoutWorkoutSessionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  exerciseId?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  caloriesBurned?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reps?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distanceKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type WorkoutLogUncheckedUpdateManyWithoutWorkoutSessionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  exerciseId?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  caloriesBurned?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reps?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distanceKm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -918,84 +1111,94 @@ export type WorkoutLogSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   id?: boolean
   userId?: boolean
   exerciseId?: boolean
+  workoutSessionId?: boolean
   date?: boolean
   durationMinutes?: boolean
   caloriesBurned?: boolean
   sets?: boolean
   reps?: boolean
-  weightKg?: boolean
+  weightLbs?: boolean
   distanceKm?: boolean
   notes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   exercise?: boolean | Prisma.ExerciseDefaultArgs<ExtArgs>
+  workoutSession?: boolean | Prisma.WorkoutSessionDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["workoutLog"]>
 
 export type WorkoutLogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
   exerciseId?: boolean
+  workoutSessionId?: boolean
   date?: boolean
   durationMinutes?: boolean
   caloriesBurned?: boolean
   sets?: boolean
   reps?: boolean
-  weightKg?: boolean
+  weightLbs?: boolean
   distanceKm?: boolean
   notes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   exercise?: boolean | Prisma.ExerciseDefaultArgs<ExtArgs>
+  workoutSession?: boolean | Prisma.WorkoutSessionDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["workoutLog"]>
 
 export type WorkoutLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
   exerciseId?: boolean
+  workoutSessionId?: boolean
   date?: boolean
   durationMinutes?: boolean
   caloriesBurned?: boolean
   sets?: boolean
   reps?: boolean
-  weightKg?: boolean
+  weightLbs?: boolean
   distanceKm?: boolean
   notes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   exercise?: boolean | Prisma.ExerciseDefaultArgs<ExtArgs>
+  workoutSession?: boolean | Prisma.WorkoutSessionDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["workoutLog"]>
 
 export type WorkoutLogSelectScalar = {
   id?: boolean
   userId?: boolean
   exerciseId?: boolean
+  workoutSessionId?: boolean
   date?: boolean
   durationMinutes?: boolean
   caloriesBurned?: boolean
   sets?: boolean
   reps?: boolean
-  weightKg?: boolean
+  weightLbs?: boolean
   distanceKm?: boolean
   notes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type WorkoutLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "exerciseId" | "date" | "durationMinutes" | "caloriesBurned" | "sets" | "reps" | "weightKg" | "distanceKm" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["workoutLog"]>
+export type WorkoutLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "exerciseId" | "workoutSessionId" | "date" | "durationMinutes" | "caloriesBurned" | "sets" | "reps" | "weightLbs" | "distanceKm" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["workoutLog"]>
 export type WorkoutLogInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   exercise?: boolean | Prisma.ExerciseDefaultArgs<ExtArgs>
+  workoutSession?: boolean | Prisma.WorkoutSessionDefaultArgs<ExtArgs>
 }
 export type WorkoutLogIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   exercise?: boolean | Prisma.ExerciseDefaultArgs<ExtArgs>
+  workoutSession?: boolean | Prisma.WorkoutSessionDefaultArgs<ExtArgs>
 }
 export type WorkoutLogIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   exercise?: boolean | Prisma.ExerciseDefaultArgs<ExtArgs>
+  workoutSession?: boolean | Prisma.WorkoutSessionDefaultArgs<ExtArgs>
 }
 
 export type $WorkoutLogPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1003,17 +1206,19 @@ export type $WorkoutLogPayload<ExtArgs extends runtime.Types.Extensions.Internal
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
     exercise: Prisma.$ExercisePayload<ExtArgs>
+    workoutSession: Prisma.$WorkoutSessionPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
     exerciseId: string
+    workoutSessionId: string
     date: Date
     durationMinutes: number
     caloriesBurned: number | null
     sets: number | null
     reps: number | null
-    weightKg: runtime.Decimal | null
+    weightLbs: runtime.Decimal | null
     distanceKm: runtime.Decimal | null
     notes: string | null
     createdAt: Date
@@ -1414,6 +1619,7 @@ export interface Prisma__WorkoutLogClient<T, Null = never, ExtArgs extends runti
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   exercise<T extends Prisma.ExerciseDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ExerciseDefaultArgs<ExtArgs>>): Prisma.Prisma__ExerciseClient<runtime.Types.Result.GetResult<Prisma.$ExercisePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  workoutSession<T extends Prisma.WorkoutSessionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WorkoutSessionDefaultArgs<ExtArgs>>): Prisma.Prisma__WorkoutSessionClient<runtime.Types.Result.GetResult<Prisma.$WorkoutSessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1446,12 +1652,13 @@ export interface WorkoutLogFieldRefs {
   readonly id: Prisma.FieldRef<"WorkoutLog", 'String'>
   readonly userId: Prisma.FieldRef<"WorkoutLog", 'String'>
   readonly exerciseId: Prisma.FieldRef<"WorkoutLog", 'String'>
+  readonly workoutSessionId: Prisma.FieldRef<"WorkoutLog", 'String'>
   readonly date: Prisma.FieldRef<"WorkoutLog", 'DateTime'>
   readonly durationMinutes: Prisma.FieldRef<"WorkoutLog", 'Int'>
   readonly caloriesBurned: Prisma.FieldRef<"WorkoutLog", 'Int'>
   readonly sets: Prisma.FieldRef<"WorkoutLog", 'Int'>
   readonly reps: Prisma.FieldRef<"WorkoutLog", 'Int'>
-  readonly weightKg: Prisma.FieldRef<"WorkoutLog", 'Decimal'>
+  readonly weightLbs: Prisma.FieldRef<"WorkoutLog", 'Decimal'>
   readonly distanceKm: Prisma.FieldRef<"WorkoutLog", 'Decimal'>
   readonly notes: Prisma.FieldRef<"WorkoutLog", 'String'>
   readonly createdAt: Prisma.FieldRef<"WorkoutLog", 'DateTime'>

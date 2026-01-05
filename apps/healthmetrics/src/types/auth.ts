@@ -23,8 +23,8 @@ export interface UserSession {
   name: string | null;
 }
 
-export interface AuthResponse {
+export interface AuthResponse<T = unknown> {
   success: boolean;
   error?: AuthError;
-  data?: any;
+  data?: T;
 }

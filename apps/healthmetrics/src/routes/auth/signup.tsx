@@ -6,11 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
-import { AuthLayout } from "@/components/forms/AuthLayout";
-import { AuthCard } from "@/components/forms/AuthCard";
-import { signupSchema } from "@/lib/validation";
+import { AuthLayout, AuthCard } from "@/components/auth";
+import { signupSchema } from "@/utils/validation";
 import { getErrorMessage } from "@/utils/auth-helpers";
 import { getFieldError } from "@/utils/form-errors";
+import { ROUTES } from "@/constants/routes";
 
 export const Route = createFileRoute("/auth/signup")({
   component: SignupPage,
@@ -35,7 +35,6 @@ function SignupPage() {
       setSuccessMessage(null);
 
       try {
-        // Call auth client
         const result = await authClient.signUp.email({
           email: value.email,
           password: value.password,
@@ -54,9 +53,9 @@ function SignupPage() {
 
         // Redirect to login after showing success message
         setTimeout(() => {
-          navigate({ to: "/auth/login" });
+          navigate({ to: ROUTES.AUTH.LOGIN });
         }, 2000);
-      } catch (error: any) {
+      } catch (error: unknown) {
         setServerError(getErrorMessage(error));
       }
     },
@@ -77,14 +76,14 @@ function SignupPage() {
           className="auth-form-container"
         >
           {successMessage && (
-            <div className="p-3 rounded-md bg-accent/10 border border-accent/20">
-              <p className="text-sm text-accent">{successMessage}</p>
+            <div className="auth-alert-container auth-alert-container-success">
+              <p className="auth-alert-text">{successMessage}</p>
             </div>
           )}
 
           {serverError && (
-            <div className="p-3 rounded-md bg-destructive/10 border border-destructive/20">
-              <p className="text-sm text-destructive">{serverError}</p>
+            <div className="auth-alert-container auth-alert-container-error">
+              <p className="auth-alert-text-error">{serverError}</p>
             </div>
           )}
 
@@ -164,10 +163,14 @@ function SignupPage() {
             selector={(state) => [state.canSubmit, state.isSubmitting]}
           >
             {([canSubmit, isSubmitting]) => (
-              <Button type="submit" className="w-full" disabled={!canSubmit}>
+              <Button
+                type="submit"
+                className="auth-submit-btn"
+                disabled={!canSubmit}
+              >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    <Loader2 className="loader-icon" aria-hidden="true" />
                     Creating account...
                   </>
                 ) : (
@@ -182,7 +185,7 @@ function SignupPage() {
               <span className="auth-form-link-text">
                 Already have an account?{" "}
               </span>
-              <Link to="/auth/login" className="auth-form-link">
+              <Link to={ROUTES.AUTH.LOGIN} className="auth-form-link">
                 Log in
               </Link>
             </div>

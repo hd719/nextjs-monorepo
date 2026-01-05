@@ -28,7 +28,7 @@ export type AggregateUser = {
 
 export type UserAvgAggregateOutputType = {
   heightCm: runtime.Decimal | null
-  targetWeightKg: runtime.Decimal | null
+  targetWeightLbs: runtime.Decimal | null
   dailyCalorieGoal: number | null
   dailyProteinGoalG: number | null
   dailyCarbGoalG: number | null
@@ -37,7 +37,7 @@ export type UserAvgAggregateOutputType = {
 
 export type UserSumAggregateOutputType = {
   heightCm: runtime.Decimal | null
-  targetWeightKg: runtime.Decimal | null
+  targetWeightLbs: runtime.Decimal | null
   dailyCalorieGoal: number | null
   dailyProteinGoalG: number | null
   dailyCarbGoalG: number | null
@@ -53,7 +53,7 @@ export type UserMinAggregateOutputType = {
   heightCm: runtime.Decimal | null
   activityLevel: $Enums.ActivityLevel | null
   goalType: $Enums.GoalType | null
-  targetWeightKg: runtime.Decimal | null
+  targetWeightLbs: runtime.Decimal | null
   dailyCalorieGoal: number | null
   dailyProteinGoalG: number | null
   dailyCarbGoalG: number | null
@@ -74,7 +74,7 @@ export type UserMaxAggregateOutputType = {
   heightCm: runtime.Decimal | null
   activityLevel: $Enums.ActivityLevel | null
   goalType: $Enums.GoalType | null
-  targetWeightKg: runtime.Decimal | null
+  targetWeightLbs: runtime.Decimal | null
   dailyCalorieGoal: number | null
   dailyProteinGoalG: number | null
   dailyCarbGoalG: number | null
@@ -95,7 +95,7 @@ export type UserCountAggregateOutputType = {
   heightCm: number
   activityLevel: number
   goalType: number
-  targetWeightKg: number
+  targetWeightLbs: number
   dailyCalorieGoal: number
   dailyProteinGoalG: number
   dailyCarbGoalG: number
@@ -111,7 +111,7 @@ export type UserCountAggregateOutputType = {
 
 export type UserAvgAggregateInputType = {
   heightCm?: true
-  targetWeightKg?: true
+  targetWeightLbs?: true
   dailyCalorieGoal?: true
   dailyProteinGoalG?: true
   dailyCarbGoalG?: true
@@ -120,7 +120,7 @@ export type UserAvgAggregateInputType = {
 
 export type UserSumAggregateInputType = {
   heightCm?: true
-  targetWeightKg?: true
+  targetWeightLbs?: true
   dailyCalorieGoal?: true
   dailyProteinGoalG?: true
   dailyCarbGoalG?: true
@@ -136,7 +136,7 @@ export type UserMinAggregateInputType = {
   heightCm?: true
   activityLevel?: true
   goalType?: true
-  targetWeightKg?: true
+  targetWeightLbs?: true
   dailyCalorieGoal?: true
   dailyProteinGoalG?: true
   dailyCarbGoalG?: true
@@ -157,7 +157,7 @@ export type UserMaxAggregateInputType = {
   heightCm?: true
   activityLevel?: true
   goalType?: true
-  targetWeightKg?: true
+  targetWeightLbs?: true
   dailyCalorieGoal?: true
   dailyProteinGoalG?: true
   dailyCarbGoalG?: true
@@ -178,7 +178,7 @@ export type UserCountAggregateInputType = {
   heightCm?: true
   activityLevel?: true
   goalType?: true
-  targetWeightKg?: true
+  targetWeightLbs?: true
   dailyCalorieGoal?: true
   dailyProteinGoalG?: true
   dailyCarbGoalG?: true
@@ -286,7 +286,7 @@ export type UserGroupByOutputType = {
   heightCm: runtime.Decimal | null
   activityLevel: $Enums.ActivityLevel | null
   goalType: $Enums.GoalType | null
-  targetWeightKg: runtime.Decimal | null
+  targetWeightLbs: runtime.Decimal | null
   dailyCalorieGoal: number | null
   dailyProteinGoalG: number | null
   dailyCarbGoalG: number | null
@@ -330,7 +330,7 @@ export type UserWhereInput = {
   heightCm?: Prisma.DecimalNullableFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.EnumActivityLevelNullableFilter<"User"> | $Enums.ActivityLevel | null
   goalType?: Prisma.EnumGoalTypeNullableFilter<"User"> | $Enums.GoalType | null
-  targetWeightKg?: Prisma.DecimalNullableFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.DecimalNullableFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.IntNullableFilter<"User"> | number | null
   dailyProteinGoalG?: Prisma.IntNullableFilter<"User"> | number | null
   dailyCarbGoalG?: Prisma.IntNullableFilter<"User"> | number | null
@@ -345,6 +345,7 @@ export type UserWhereInput = {
   createdExercises?: Prisma.ExerciseListRelationFilter
   diaryEntries?: Prisma.DiaryEntryListRelationFilter
   workoutLogs?: Prisma.WorkoutLogListRelationFilter
+  workoutSessions?: Prisma.WorkoutSessionListRelationFilter
   weightEntries?: Prisma.WeightEntryListRelationFilter
   mealPlanTemplates?: Prisma.MealPlanTemplateListRelationFilter
   mealPlans?: Prisma.MealPlanListRelationFilter
@@ -365,7 +366,7 @@ export type UserOrderByWithRelationInput = {
   heightCm?: Prisma.SortOrderInput | Prisma.SortOrder
   activityLevel?: Prisma.SortOrderInput | Prisma.SortOrder
   goalType?: Prisma.SortOrderInput | Prisma.SortOrder
-  targetWeightKg?: Prisma.SortOrderInput | Prisma.SortOrder
+  targetWeightLbs?: Prisma.SortOrderInput | Prisma.SortOrder
   dailyCalorieGoal?: Prisma.SortOrderInput | Prisma.SortOrder
   dailyProteinGoalG?: Prisma.SortOrderInput | Prisma.SortOrder
   dailyCarbGoalG?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -380,6 +381,7 @@ export type UserOrderByWithRelationInput = {
   createdExercises?: Prisma.ExerciseOrderByRelationAggregateInput
   diaryEntries?: Prisma.DiaryEntryOrderByRelationAggregateInput
   workoutLogs?: Prisma.WorkoutLogOrderByRelationAggregateInput
+  workoutSessions?: Prisma.WorkoutSessionOrderByRelationAggregateInput
   weightEntries?: Prisma.WeightEntryOrderByRelationAggregateInput
   mealPlanTemplates?: Prisma.MealPlanTemplateOrderByRelationAggregateInput
   mealPlans?: Prisma.MealPlanOrderByRelationAggregateInput
@@ -403,7 +405,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   heightCm?: Prisma.DecimalNullableFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.EnumActivityLevelNullableFilter<"User"> | $Enums.ActivityLevel | null
   goalType?: Prisma.EnumGoalTypeNullableFilter<"User"> | $Enums.GoalType | null
-  targetWeightKg?: Prisma.DecimalNullableFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.DecimalNullableFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.IntNullableFilter<"User"> | number | null
   dailyProteinGoalG?: Prisma.IntNullableFilter<"User"> | number | null
   dailyCarbGoalG?: Prisma.IntNullableFilter<"User"> | number | null
@@ -418,6 +420,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdExercises?: Prisma.ExerciseListRelationFilter
   diaryEntries?: Prisma.DiaryEntryListRelationFilter
   workoutLogs?: Prisma.WorkoutLogListRelationFilter
+  workoutSessions?: Prisma.WorkoutSessionListRelationFilter
   weightEntries?: Prisma.WeightEntryListRelationFilter
   mealPlanTemplates?: Prisma.MealPlanTemplateListRelationFilter
   mealPlans?: Prisma.MealPlanListRelationFilter
@@ -438,7 +441,7 @@ export type UserOrderByWithAggregationInput = {
   heightCm?: Prisma.SortOrderInput | Prisma.SortOrder
   activityLevel?: Prisma.SortOrderInput | Prisma.SortOrder
   goalType?: Prisma.SortOrderInput | Prisma.SortOrder
-  targetWeightKg?: Prisma.SortOrderInput | Prisma.SortOrder
+  targetWeightLbs?: Prisma.SortOrderInput | Prisma.SortOrder
   dailyCalorieGoal?: Prisma.SortOrderInput | Prisma.SortOrder
   dailyProteinGoalG?: Prisma.SortOrderInput | Prisma.SortOrder
   dailyCarbGoalG?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -467,7 +470,7 @@ export type UserScalarWhereWithAggregatesInput = {
   heightCm?: Prisma.DecimalNullableWithAggregatesFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.EnumActivityLevelNullableWithAggregatesFilter<"User"> | $Enums.ActivityLevel | null
   goalType?: Prisma.EnumGoalTypeNullableWithAggregatesFilter<"User"> | $Enums.GoalType | null
-  targetWeightKg?: Prisma.DecimalNullableWithAggregatesFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.DecimalNullableWithAggregatesFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
   dailyProteinGoalG?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
   dailyCarbGoalG?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
@@ -487,7 +490,7 @@ export type UserCreateInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -502,6 +505,7 @@ export type UserCreateInput = {
   createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
@@ -522,7 +526,7 @@ export type UserUncheckedCreateInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -536,6 +540,7 @@ export type UserUncheckedCreateInput = {
   createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
@@ -555,7 +560,7 @@ export type UserUpdateInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -570,6 +575,7 @@ export type UserUpdateInput = {
   createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
@@ -590,7 +596,7 @@ export type UserUncheckedUpdateInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -604,6 +610,7 @@ export type UserUncheckedUpdateInput = {
   createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
@@ -624,7 +631,7 @@ export type UserCreateManyInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -644,7 +651,7 @@ export type UserUpdateManyMutationInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -665,7 +672,7 @@ export type UserUncheckedUpdateManyInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -691,7 +698,7 @@ export type UserCountOrderByAggregateInput = {
   heightCm?: Prisma.SortOrder
   activityLevel?: Prisma.SortOrder
   goalType?: Prisma.SortOrder
-  targetWeightKg?: Prisma.SortOrder
+  targetWeightLbs?: Prisma.SortOrder
   dailyCalorieGoal?: Prisma.SortOrder
   dailyProteinGoalG?: Prisma.SortOrder
   dailyCarbGoalG?: Prisma.SortOrder
@@ -705,7 +712,7 @@ export type UserCountOrderByAggregateInput = {
 
 export type UserAvgOrderByAggregateInput = {
   heightCm?: Prisma.SortOrder
-  targetWeightKg?: Prisma.SortOrder
+  targetWeightLbs?: Prisma.SortOrder
   dailyCalorieGoal?: Prisma.SortOrder
   dailyProteinGoalG?: Prisma.SortOrder
   dailyCarbGoalG?: Prisma.SortOrder
@@ -721,7 +728,7 @@ export type UserMaxOrderByAggregateInput = {
   heightCm?: Prisma.SortOrder
   activityLevel?: Prisma.SortOrder
   goalType?: Prisma.SortOrder
-  targetWeightKg?: Prisma.SortOrder
+  targetWeightLbs?: Prisma.SortOrder
   dailyCalorieGoal?: Prisma.SortOrder
   dailyProteinGoalG?: Prisma.SortOrder
   dailyCarbGoalG?: Prisma.SortOrder
@@ -742,7 +749,7 @@ export type UserMinOrderByAggregateInput = {
   heightCm?: Prisma.SortOrder
   activityLevel?: Prisma.SortOrder
   goalType?: Prisma.SortOrder
-  targetWeightKg?: Prisma.SortOrder
+  targetWeightLbs?: Prisma.SortOrder
   dailyCalorieGoal?: Prisma.SortOrder
   dailyProteinGoalG?: Prisma.SortOrder
   dailyCarbGoalG?: Prisma.SortOrder
@@ -756,7 +763,7 @@ export type UserMinOrderByAggregateInput = {
 
 export type UserSumOrderByAggregateInput = {
   heightCm?: Prisma.SortOrder
-  targetWeightKg?: Prisma.SortOrder
+  targetWeightLbs?: Prisma.SortOrder
   dailyCalorieGoal?: Prisma.SortOrder
   dailyProteinGoalG?: Prisma.SortOrder
   dailyCarbGoalG?: Prisma.SortOrder
@@ -876,6 +883,20 @@ export type UserUpdateOneRequiredWithoutDiaryEntriesNestedInput = {
   upsert?: Prisma.UserUpsertWithoutDiaryEntriesInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDiaryEntriesInput, Prisma.UserUpdateWithoutDiaryEntriesInput>, Prisma.UserUncheckedUpdateWithoutDiaryEntriesInput>
+}
+
+export type UserCreateNestedOneWithoutWorkoutSessionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutWorkoutSessionsInput, Prisma.UserUncheckedCreateWithoutWorkoutSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWorkoutSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutWorkoutSessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutWorkoutSessionsInput, Prisma.UserUncheckedCreateWithoutWorkoutSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWorkoutSessionsInput
+  upsert?: Prisma.UserUpsertWithoutWorkoutSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutWorkoutSessionsInput, Prisma.UserUpdateWithoutWorkoutSessionsInput>, Prisma.UserUncheckedUpdateWithoutWorkoutSessionsInput>
 }
 
 export type UserCreateNestedOneWithoutWorkoutLogsInput = {
@@ -1026,7 +1047,7 @@ export type UserCreateWithoutAuthUserInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -1040,6 +1061,7 @@ export type UserCreateWithoutAuthUserInput = {
   createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
@@ -1059,7 +1081,7 @@ export type UserUncheckedCreateWithoutAuthUserInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -1073,6 +1095,7 @@ export type UserUncheckedCreateWithoutAuthUserInput = {
   createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
@@ -1108,7 +1131,7 @@ export type UserUpdateWithoutAuthUserInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1122,6 +1145,7 @@ export type UserUpdateWithoutAuthUserInput = {
   createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
@@ -1141,7 +1165,7 @@ export type UserUncheckedUpdateWithoutAuthUserInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1155,6 +1179,7 @@ export type UserUncheckedUpdateWithoutAuthUserInput = {
   createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
@@ -1174,7 +1199,7 @@ export type UserCreateWithoutCreatedFoodItemsInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -1188,6 +1213,7 @@ export type UserCreateWithoutCreatedFoodItemsInput = {
   createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
@@ -1208,7 +1234,7 @@ export type UserUncheckedCreateWithoutCreatedFoodItemsInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -1221,6 +1247,7 @@ export type UserUncheckedCreateWithoutCreatedFoodItemsInput = {
   createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
@@ -1256,7 +1283,7 @@ export type UserUpdateWithoutCreatedFoodItemsInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1270,6 +1297,7 @@ export type UserUpdateWithoutCreatedFoodItemsInput = {
   createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
@@ -1290,7 +1318,7 @@ export type UserUncheckedUpdateWithoutCreatedFoodItemsInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1303,6 +1331,7 @@ export type UserUncheckedUpdateWithoutCreatedFoodItemsInput = {
   createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
@@ -1322,7 +1351,7 @@ export type UserCreateWithoutCreatedExercisesInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -1336,6 +1365,7 @@ export type UserCreateWithoutCreatedExercisesInput = {
   createdFoodItems?: Prisma.FoodItemCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
@@ -1356,7 +1386,7 @@ export type UserUncheckedCreateWithoutCreatedExercisesInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -1369,6 +1399,7 @@ export type UserUncheckedCreateWithoutCreatedExercisesInput = {
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
@@ -1404,7 +1435,7 @@ export type UserUpdateWithoutCreatedExercisesInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1418,6 +1449,7 @@ export type UserUpdateWithoutCreatedExercisesInput = {
   createdFoodItems?: Prisma.FoodItemUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
@@ -1438,7 +1470,7 @@ export type UserUncheckedUpdateWithoutCreatedExercisesInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1451,6 +1483,7 @@ export type UserUncheckedUpdateWithoutCreatedExercisesInput = {
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
@@ -1470,7 +1503,7 @@ export type UserCreateWithoutDiaryEntriesInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -1484,6 +1517,7 @@ export type UserCreateWithoutDiaryEntriesInput = {
   createdFoodItems?: Prisma.FoodItemCreateNestedManyWithoutCreatorInput
   createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
   workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
@@ -1504,7 +1538,7 @@ export type UserUncheckedCreateWithoutDiaryEntriesInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -1517,6 +1551,7 @@ export type UserUncheckedCreateWithoutDiaryEntriesInput = {
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
   createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
   workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
@@ -1552,7 +1587,7 @@ export type UserUpdateWithoutDiaryEntriesInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1566,6 +1601,7 @@ export type UserUpdateWithoutDiaryEntriesInput = {
   createdFoodItems?: Prisma.FoodItemUpdateManyWithoutCreatorNestedInput
   createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
   workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
@@ -1586,7 +1622,7 @@ export type UserUncheckedUpdateWithoutDiaryEntriesInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1598,6 +1634,159 @@ export type UserUncheckedUpdateWithoutDiaryEntriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
   createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
+  workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
+  mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
+  goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
+  sentFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutUserNestedInput
+  receivedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutFriendNestedInput
+  requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
+  createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
+  challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutWorkoutSessionsInput = {
+  displayName?: string | null
+  avatarUrl?: string | null
+  dateOfBirth?: Date | string | null
+  gender?: $Enums.Gender | null
+  heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: $Enums.ActivityLevel | null
+  goalType?: $Enums.GoalType | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: number | null
+  dailyProteinGoalG?: number | null
+  dailyCarbGoalG?: number | null
+  dailyFatGoalG?: number | null
+  unitsPreference?: $Enums.Units
+  timezone?: string
+  isAdmin?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
+  createdFoodItems?: Prisma.FoodItemCreateNestedManyWithoutCreatorInput
+  createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
+  diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
+  workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
+  mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
+  goals?: Prisma.GoalCreateNestedManyWithoutUserInput
+  sentFriendships?: Prisma.FriendshipCreateNestedManyWithoutUserInput
+  receivedFriendships?: Prisma.FriendshipCreateNestedManyWithoutFriendInput
+  requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
+  createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
+  challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutWorkoutSessionsInput = {
+  id: string
+  displayName?: string | null
+  avatarUrl?: string | null
+  dateOfBirth?: Date | string | null
+  gender?: $Enums.Gender | null
+  heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: $Enums.ActivityLevel | null
+  goalType?: $Enums.GoalType | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: number | null
+  dailyProteinGoalG?: number | null
+  dailyCarbGoalG?: number | null
+  dailyFatGoalG?: number | null
+  unitsPreference?: $Enums.Units
+  timezone?: string
+  isAdmin?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
+  createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
+  diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
+  workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
+  mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
+  goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
+  sentFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUserInput
+  receivedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutFriendInput
+  requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
+  createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
+  challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutWorkoutSessionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutWorkoutSessionsInput, Prisma.UserUncheckedCreateWithoutWorkoutSessionsInput>
+}
+
+export type UserUpsertWithoutWorkoutSessionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutWorkoutSessionsInput, Prisma.UserUncheckedUpdateWithoutWorkoutSessionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutWorkoutSessionsInput, Prisma.UserUncheckedCreateWithoutWorkoutSessionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutWorkoutSessionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutWorkoutSessionsInput, Prisma.UserUncheckedUpdateWithoutWorkoutSessionsInput>
+}
+
+export type UserUpdateWithoutWorkoutSessionsInput = {
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyFatGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
+  createdFoodItems?: Prisma.FoodItemUpdateManyWithoutCreatorNestedInput
+  createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
+  diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
+  workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
+  mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
+  goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
+  sentFriendships?: Prisma.FriendshipUpdateManyWithoutUserNestedInput
+  receivedFriendships?: Prisma.FriendshipUpdateManyWithoutFriendNestedInput
+  requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
+  createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
+  challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutWorkoutSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyFatGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
+  createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
+  diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
@@ -1618,7 +1807,7 @@ export type UserCreateWithoutWorkoutLogsInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -1632,6 +1821,7 @@ export type UserCreateWithoutWorkoutLogsInput = {
   createdFoodItems?: Prisma.FoodItemCreateNestedManyWithoutCreatorInput
   createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
@@ -1652,7 +1842,7 @@ export type UserUncheckedCreateWithoutWorkoutLogsInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -1665,6 +1855,7 @@ export type UserUncheckedCreateWithoutWorkoutLogsInput = {
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
   createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
@@ -1700,7 +1891,7 @@ export type UserUpdateWithoutWorkoutLogsInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1714,6 +1905,7 @@ export type UserUpdateWithoutWorkoutLogsInput = {
   createdFoodItems?: Prisma.FoodItemUpdateManyWithoutCreatorNestedInput
   createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
@@ -1734,7 +1926,7 @@ export type UserUncheckedUpdateWithoutWorkoutLogsInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1747,6 +1939,7 @@ export type UserUncheckedUpdateWithoutWorkoutLogsInput = {
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
   createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
@@ -1766,7 +1959,7 @@ export type UserCreateWithoutWeightEntriesInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -1781,6 +1974,7 @@ export type UserCreateWithoutWeightEntriesInput = {
   createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
@@ -1800,7 +1994,7 @@ export type UserUncheckedCreateWithoutWeightEntriesInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -1814,6 +2008,7 @@ export type UserUncheckedCreateWithoutWeightEntriesInput = {
   createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
@@ -1848,7 +2043,7 @@ export type UserUpdateWithoutWeightEntriesInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1863,6 +2058,7 @@ export type UserUpdateWithoutWeightEntriesInput = {
   createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
@@ -1882,7 +2078,7 @@ export type UserUncheckedUpdateWithoutWeightEntriesInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1896,6 +2092,7 @@ export type UserUncheckedUpdateWithoutWeightEntriesInput = {
   createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
@@ -1914,7 +2111,7 @@ export type UserCreateWithoutMealPlanTemplatesInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -1929,6 +2126,7 @@ export type UserCreateWithoutMealPlanTemplatesInput = {
   createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
@@ -1948,7 +2146,7 @@ export type UserUncheckedCreateWithoutMealPlanTemplatesInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -1962,6 +2160,7 @@ export type UserUncheckedCreateWithoutMealPlanTemplatesInput = {
   createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
@@ -1996,7 +2195,7 @@ export type UserUpdateWithoutMealPlanTemplatesInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2011,6 +2210,7 @@ export type UserUpdateWithoutMealPlanTemplatesInput = {
   createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
@@ -2030,7 +2230,7 @@ export type UserUncheckedUpdateWithoutMealPlanTemplatesInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2044,6 +2244,7 @@ export type UserUncheckedUpdateWithoutMealPlanTemplatesInput = {
   createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
@@ -2062,7 +2263,7 @@ export type UserCreateWithoutMealPlansInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -2077,6 +2278,7 @@ export type UserCreateWithoutMealPlansInput = {
   createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
@@ -2096,7 +2298,7 @@ export type UserUncheckedCreateWithoutMealPlansInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -2110,6 +2312,7 @@ export type UserUncheckedCreateWithoutMealPlansInput = {
   createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
@@ -2144,7 +2347,7 @@ export type UserUpdateWithoutMealPlansInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2159,6 +2362,7 @@ export type UserUpdateWithoutMealPlansInput = {
   createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
@@ -2178,7 +2382,7 @@ export type UserUncheckedUpdateWithoutMealPlansInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2192,6 +2396,7 @@ export type UserUncheckedUpdateWithoutMealPlansInput = {
   createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
@@ -2210,7 +2415,7 @@ export type UserCreateWithoutGoalsInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -2225,6 +2430,7 @@ export type UserCreateWithoutGoalsInput = {
   createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
@@ -2244,7 +2450,7 @@ export type UserUncheckedCreateWithoutGoalsInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -2258,6 +2464,7 @@ export type UserUncheckedCreateWithoutGoalsInput = {
   createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
@@ -2292,7 +2499,7 @@ export type UserUpdateWithoutGoalsInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2307,6 +2514,7 @@ export type UserUpdateWithoutGoalsInput = {
   createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
@@ -2326,7 +2534,7 @@ export type UserUncheckedUpdateWithoutGoalsInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2340,6 +2548,7 @@ export type UserUncheckedUpdateWithoutGoalsInput = {
   createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
@@ -2358,7 +2567,7 @@ export type UserCreateWithoutSentFriendshipsInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -2373,6 +2582,7 @@ export type UserCreateWithoutSentFriendshipsInput = {
   createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
@@ -2392,7 +2602,7 @@ export type UserUncheckedCreateWithoutSentFriendshipsInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -2406,6 +2616,7 @@ export type UserUncheckedCreateWithoutSentFriendshipsInput = {
   createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
@@ -2429,7 +2640,7 @@ export type UserCreateWithoutReceivedFriendshipsInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -2444,6 +2655,7 @@ export type UserCreateWithoutReceivedFriendshipsInput = {
   createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
@@ -2463,7 +2675,7 @@ export type UserUncheckedCreateWithoutReceivedFriendshipsInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -2477,6 +2689,7 @@ export type UserUncheckedCreateWithoutReceivedFriendshipsInput = {
   createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
@@ -2500,7 +2713,7 @@ export type UserCreateWithoutRequestedFriendshipsInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -2515,6 +2728,7 @@ export type UserCreateWithoutRequestedFriendshipsInput = {
   createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
@@ -2534,7 +2748,7 @@ export type UserUncheckedCreateWithoutRequestedFriendshipsInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -2548,6 +2762,7 @@ export type UserUncheckedCreateWithoutRequestedFriendshipsInput = {
   createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
@@ -2582,7 +2797,7 @@ export type UserUpdateWithoutSentFriendshipsInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2597,6 +2812,7 @@ export type UserUpdateWithoutSentFriendshipsInput = {
   createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
@@ -2616,7 +2832,7 @@ export type UserUncheckedUpdateWithoutSentFriendshipsInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2630,6 +2846,7 @@ export type UserUncheckedUpdateWithoutSentFriendshipsInput = {
   createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
@@ -2659,7 +2876,7 @@ export type UserUpdateWithoutReceivedFriendshipsInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2674,6 +2891,7 @@ export type UserUpdateWithoutReceivedFriendshipsInput = {
   createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
@@ -2693,7 +2911,7 @@ export type UserUncheckedUpdateWithoutReceivedFriendshipsInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2707,6 +2925,7 @@ export type UserUncheckedUpdateWithoutReceivedFriendshipsInput = {
   createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
@@ -2736,7 +2955,7 @@ export type UserUpdateWithoutRequestedFriendshipsInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2751,6 +2970,7 @@ export type UserUpdateWithoutRequestedFriendshipsInput = {
   createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
@@ -2770,7 +2990,7 @@ export type UserUncheckedUpdateWithoutRequestedFriendshipsInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2784,6 +3004,7 @@ export type UserUncheckedUpdateWithoutRequestedFriendshipsInput = {
   createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
@@ -2802,7 +3023,7 @@ export type UserCreateWithoutCreatedChallengesInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -2817,6 +3038,7 @@ export type UserCreateWithoutCreatedChallengesInput = {
   createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
@@ -2836,7 +3058,7 @@ export type UserUncheckedCreateWithoutCreatedChallengesInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -2850,6 +3072,7 @@ export type UserUncheckedCreateWithoutCreatedChallengesInput = {
   createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
@@ -2884,7 +3107,7 @@ export type UserUpdateWithoutCreatedChallengesInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2899,6 +3122,7 @@ export type UserUpdateWithoutCreatedChallengesInput = {
   createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
@@ -2918,7 +3142,7 @@ export type UserUncheckedUpdateWithoutCreatedChallengesInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2932,6 +3156,7 @@ export type UserUncheckedUpdateWithoutCreatedChallengesInput = {
   createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
@@ -2950,7 +3175,7 @@ export type UserCreateWithoutChallengeParticipationsInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -2965,6 +3190,7 @@ export type UserCreateWithoutChallengeParticipationsInput = {
   createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
@@ -2984,7 +3210,7 @@ export type UserUncheckedCreateWithoutChallengeParticipationsInput = {
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: $Enums.ActivityLevel | null
   goalType?: $Enums.GoalType | null
-  targetWeightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: number | null
   dailyProteinGoalG?: number | null
   dailyCarbGoalG?: number | null
@@ -2998,6 +3224,7 @@ export type UserUncheckedCreateWithoutChallengeParticipationsInput = {
   createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
   diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
   workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
@@ -3032,7 +3259,7 @@ export type UserUpdateWithoutChallengeParticipationsInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -3047,6 +3274,7 @@ export type UserUpdateWithoutChallengeParticipationsInput = {
   createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
@@ -3066,7 +3294,7 @@ export type UserUncheckedUpdateWithoutChallengeParticipationsInput = {
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
   goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
-  targetWeightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -3080,6 +3308,7 @@ export type UserUncheckedUpdateWithoutChallengeParticipationsInput = {
   createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
   diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
   workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
@@ -3100,6 +3329,7 @@ export type UserCountOutputType = {
   createdExercises: number
   diaryEntries: number
   workoutLogs: number
+  workoutSessions: number
   weightEntries: number
   mealPlanTemplates: number
   mealPlans: number
@@ -3116,6 +3346,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   createdExercises?: boolean | UserCountOutputTypeCountCreatedExercisesArgs
   diaryEntries?: boolean | UserCountOutputTypeCountDiaryEntriesArgs
   workoutLogs?: boolean | UserCountOutputTypeCountWorkoutLogsArgs
+  workoutSessions?: boolean | UserCountOutputTypeCountWorkoutSessionsArgs
   weightEntries?: boolean | UserCountOutputTypeCountWeightEntriesArgs
   mealPlanTemplates?: boolean | UserCountOutputTypeCountMealPlanTemplatesArgs
   mealPlans?: boolean | UserCountOutputTypeCountMealPlansArgs
@@ -3163,6 +3394,13 @@ export type UserCountOutputTypeCountDiaryEntriesArgs<ExtArgs extends runtime.Typ
  */
 export type UserCountOutputTypeCountWorkoutLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.WorkoutLogWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountWorkoutSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WorkoutSessionWhereInput
 }
 
 /**
@@ -3238,7 +3476,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   heightCm?: boolean
   activityLevel?: boolean
   goalType?: boolean
-  targetWeightKg?: boolean
+  targetWeightLbs?: boolean
   dailyCalorieGoal?: boolean
   dailyProteinGoalG?: boolean
   dailyCarbGoalG?: boolean
@@ -3253,6 +3491,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdExercises?: boolean | Prisma.User$createdExercisesArgs<ExtArgs>
   diaryEntries?: boolean | Prisma.User$diaryEntriesArgs<ExtArgs>
   workoutLogs?: boolean | Prisma.User$workoutLogsArgs<ExtArgs>
+  workoutSessions?: boolean | Prisma.User$workoutSessionsArgs<ExtArgs>
   weightEntries?: boolean | Prisma.User$weightEntriesArgs<ExtArgs>
   mealPlanTemplates?: boolean | Prisma.User$mealPlanTemplatesArgs<ExtArgs>
   mealPlans?: boolean | Prisma.User$mealPlansArgs<ExtArgs>
@@ -3274,7 +3513,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   heightCm?: boolean
   activityLevel?: boolean
   goalType?: boolean
-  targetWeightKg?: boolean
+  targetWeightLbs?: boolean
   dailyCalorieGoal?: boolean
   dailyProteinGoalG?: boolean
   dailyCarbGoalG?: boolean
@@ -3296,7 +3535,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   heightCm?: boolean
   activityLevel?: boolean
   goalType?: boolean
-  targetWeightKg?: boolean
+  targetWeightLbs?: boolean
   dailyCalorieGoal?: boolean
   dailyProteinGoalG?: boolean
   dailyCarbGoalG?: boolean
@@ -3318,7 +3557,7 @@ export type UserSelectScalar = {
   heightCm?: boolean
   activityLevel?: boolean
   goalType?: boolean
-  targetWeightKg?: boolean
+  targetWeightLbs?: boolean
   dailyCalorieGoal?: boolean
   dailyProteinGoalG?: boolean
   dailyCarbGoalG?: boolean
@@ -3330,13 +3569,14 @@ export type UserSelectScalar = {
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "displayName" | "avatarUrl" | "dateOfBirth" | "gender" | "heightCm" | "activityLevel" | "goalType" | "targetWeightKg" | "dailyCalorieGoal" | "dailyProteinGoalG" | "dailyCarbGoalG" | "dailyFatGoalG" | "unitsPreference" | "timezone" | "isAdmin" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "displayName" | "avatarUrl" | "dateOfBirth" | "gender" | "heightCm" | "activityLevel" | "goalType" | "targetWeightLbs" | "dailyCalorieGoal" | "dailyProteinGoalG" | "dailyCarbGoalG" | "dailyFatGoalG" | "unitsPreference" | "timezone" | "isAdmin" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   authUser?: boolean | Prisma.User$authUserArgs<ExtArgs>
   createdFoodItems?: boolean | Prisma.User$createdFoodItemsArgs<ExtArgs>
   createdExercises?: boolean | Prisma.User$createdExercisesArgs<ExtArgs>
   diaryEntries?: boolean | Prisma.User$diaryEntriesArgs<ExtArgs>
   workoutLogs?: boolean | Prisma.User$workoutLogsArgs<ExtArgs>
+  workoutSessions?: boolean | Prisma.User$workoutSessionsArgs<ExtArgs>
   weightEntries?: boolean | Prisma.User$weightEntriesArgs<ExtArgs>
   mealPlanTemplates?: boolean | Prisma.User$mealPlanTemplatesArgs<ExtArgs>
   mealPlans?: boolean | Prisma.User$mealPlansArgs<ExtArgs>
@@ -3363,6 +3603,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     createdExercises: Prisma.$ExercisePayload<ExtArgs>[]
     diaryEntries: Prisma.$DiaryEntryPayload<ExtArgs>[]
     workoutLogs: Prisma.$WorkoutLogPayload<ExtArgs>[]
+    workoutSessions: Prisma.$WorkoutSessionPayload<ExtArgs>[]
     weightEntries: Prisma.$WeightEntryPayload<ExtArgs>[]
     mealPlanTemplates: Prisma.$MealPlanTemplatePayload<ExtArgs>[]
     mealPlans: Prisma.$MealPlanPayload<ExtArgs>[]
@@ -3382,7 +3623,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     heightCm: runtime.Decimal | null
     activityLevel: $Enums.ActivityLevel | null
     goalType: $Enums.GoalType | null
-    targetWeightKg: runtime.Decimal | null
+    targetWeightLbs: runtime.Decimal | null
     dailyCalorieGoal: number | null
     dailyProteinGoalG: number | null
     dailyCarbGoalG: number | null
@@ -3791,6 +4032,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   createdExercises<T extends Prisma.User$createdExercisesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdExercisesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExercisePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   diaryEntries<T extends Prisma.User$diaryEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$diaryEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DiaryEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   workoutLogs<T extends Prisma.User$workoutLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$workoutLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorkoutLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  workoutSessions<T extends Prisma.User$workoutSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$workoutSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorkoutSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   weightEntries<T extends Prisma.User$weightEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$weightEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WeightEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   mealPlanTemplates<T extends Prisma.User$mealPlanTemplatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$mealPlanTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MealPlanTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   mealPlans<T extends Prisma.User$mealPlansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$mealPlansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MealPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3837,7 +4079,7 @@ export interface UserFieldRefs {
   readonly heightCm: Prisma.FieldRef<"User", 'Decimal'>
   readonly activityLevel: Prisma.FieldRef<"User", 'ActivityLevel'>
   readonly goalType: Prisma.FieldRef<"User", 'GoalType'>
-  readonly targetWeightKg: Prisma.FieldRef<"User", 'Decimal'>
+  readonly targetWeightLbs: Prisma.FieldRef<"User", 'Decimal'>
   readonly dailyCalorieGoal: Prisma.FieldRef<"User", 'Int'>
   readonly dailyProteinGoalG: Prisma.FieldRef<"User", 'Int'>
   readonly dailyCarbGoalG: Prisma.FieldRef<"User", 'Int'>
@@ -4355,6 +4597,30 @@ export type User$workoutLogsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.WorkoutLogScalarFieldEnum | Prisma.WorkoutLogScalarFieldEnum[]
+}
+
+/**
+ * User.workoutSessions
+ */
+export type User$workoutSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WorkoutSession
+   */
+  select?: Prisma.WorkoutSessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WorkoutSession
+   */
+  omit?: Prisma.WorkoutSessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WorkoutSessionInclude<ExtArgs> | null
+  where?: Prisma.WorkoutSessionWhereInput
+  orderBy?: Prisma.WorkoutSessionOrderByWithRelationInput | Prisma.WorkoutSessionOrderByWithRelationInput[]
+  cursor?: Prisma.WorkoutSessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WorkoutSessionScalarFieldEnum | Prisma.WorkoutSessionScalarFieldEnum[]
 }
 
 /**

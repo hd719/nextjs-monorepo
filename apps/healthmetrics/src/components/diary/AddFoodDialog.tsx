@@ -1,5 +1,5 @@
-import { useState, useEffect, useTransition } from "react";
-import { Search, Loader2 } from "lucide-react";
+import { useState, useEffect, startTransition } from "react";
+import { Loader2 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -9,13 +9,13 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  searchFoodItems,
-  createDiaryEntry,
-  type FoodItemSearchResult,
-} from "@/server/diary";
+import type { FoodItemSearchResult } from "@/types/diary";
+import { useCreateDiaryEntry, useFoodSearch } from "@/hooks/useDiary";
+
+type MealType = "breakfast" | "lunch" | "dinner" | "snack" | "other";
 
 export interface AddFoodDialogProps {
   open: boolean;
@@ -39,15 +39,14 @@ export function AddFoodDialog({
   );
   const [quantity, setQuantity] = useState("100");
   const [servings, setServings] = useState("1");
-  const [mealType, setMealType] = useState<
-    "breakfast" | "lunch" | "dinner" | "snack" | "other"
-  >("breakfast");
+  const [mealType, setMealType] = useState<MealType>("breakfast");
   const [notes, setNotes] = useState("");
-  const [searchResults, setSearchResults] = useState<FoodItemSearchResult[]>(
-    []
-  );
-  const [isSearching, startSearchTransition] = useTransition();
-  const [isSubmitting, startSubmitTransition] = useTransition();
+  const [formError, setFormError] = useState<string | null>(null);
+  const { data, isFetching } = useFoodSearch(debouncedQuery, 10);
+  const searchResults = debouncedQuery ? (data ?? []) : [];
+  const isSearching = debouncedQuery.length > 0 && isFetching;
+  const createEntryMutation = useCreateDiaryEntry();
+  const isSubmitting = createEntryMutation.isPending;
 
   // Debounce search query
   useEffect(() => {
@@ -58,46 +57,30 @@ export function AddFoodDialog({
     return () => clearTimeout(timer);
   }, [searchQuery]);
 
-  // Search food items when debounced query changes - using useTransition for automatic pending state
-  useEffect(() => {
-    if (debouncedQuery.length === 0) {
-      setSearchResults([]);
-      return;
-    }
-
-    startSearchTransition(async () => {
-      try {
-        const results = await searchFoodItems({
-          data: { query: debouncedQuery, limit: 10 },
-        });
-        setSearchResults(results);
-      } catch (error) {
-        console.error("Search failed:", error);
-        setSearchResults([]);
-      }
-    });
-  }, [debouncedQuery]);
-
   const resetForm = () => {
-    setSearchQuery("");
-    setDebouncedQuery("");
-    setSelectedFood(null);
-    setQuantity("100");
-    setServings("1");
-    setMealType("breakfast");
-    setNotes("");
+    startTransition(() => {
+      setSearchQuery("");
+      setDebouncedQuery("");
+      setSelectedFood(null);
+      setQuantity("100");
+      setServings("1");
+      setMealType("breakfast");
+      setNotes("");
+      setFormError(null);
+    });
   };
 
   const handleSelectFood = (food: FoodItemSearchResult) => {
     setSelectedFood(food);
     setQuantity(food.servingSizeG.toString());
+    setFormError(null);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!selectedFood) {
-      alert("Please select a food item");
+      setFormError("Please select a food item.");
       return;
     }
 
@@ -105,43 +88,41 @@ export function AddFoodDialog({
     const servingsNum = parseFloat(servings);
 
     if (isNaN(quantityNum) || quantityNum <= 0) {
-      alert("Please enter a valid quantity");
+      setFormError("Please enter a valid quantity.");
       return;
     }
 
     if (isNaN(servingsNum) || servingsNum <= 0) {
-      alert("Please enter valid servings");
+      setFormError("Please enter valid servings.");
       return;
     }
 
-    // Use useTransition for automatic pending state during submission
-    startSubmitTransition(async () => {
-      try {
-        await createDiaryEntry({
-          data: {
-            userId,
-            foodItemId: selectedFood.id,
-            date,
-            mealType,
-            quantityG: quantityNum,
-            servings: servingsNum,
-            notes: notes.trim() || undefined,
-          },
-        });
+    setFormError(null);
+
+    createEntryMutation
+      .mutateAsync({
+        userId,
+        foodItemId: selectedFood.id,
+        date,
+        mealType,
+        quantityG: quantityNum,
+        servings: servingsNum,
+        notes: notes.trim() || undefined,
+      })
+      .then(() => {
         onSuccess();
         resetForm();
-      } catch (error) {
+      })
+      .catch((error) => {
         console.error("Failed to create entry:", error);
-        alert("Failed to add food entry. Please try again.");
-      }
-    });
+        setFormError("Failed to add food entry. Please try again.");
+      });
   };
 
   const handleClose = () => {
     if (!isSubmitting) {
+      resetForm();
       onOpenChange(false);
-      // Reset form after dialog close animation
-      setTimeout(resetForm, 300);
     }
   };
 
@@ -270,7 +251,7 @@ export function AddFoodDialog({
                 <select
                   id="mealType"
                   value={mealType}
-                  onChange={(e) => setMealType(e.target.value as any)}
+                  onChange={(e) => setMealType(e.target.value as MealType)}
                   className="diary-add-select-input"
                 >
                   <option value="breakfast">Breakfast</option>
@@ -316,30 +297,36 @@ export function AddFoodDialog({
                     Nutrition for this entry:
                   </p>
                   <div className="diary-add-nutrition-grid">
-                    <div className="diary-add-nutrition-item">
-                      <p className="diary-add-nutrition-label">Calories</p>
-                      <p className="diary-add-nutrition-value">
-                        {calculatedNutrition.calories}
-                      </p>
-                    </div>
-                    <div className="diary-add-nutrition-item">
-                      <p className="diary-add-nutrition-label">Protein</p>
-                      <p className="diary-add-nutrition-value">
-                        {calculatedNutrition.protein}g
-                      </p>
-                    </div>
-                    <div className="diary-add-nutrition-item">
-                      <p className="diary-add-nutrition-label">Carbs</p>
-                      <p className="diary-add-nutrition-value">
-                        {calculatedNutrition.carbs}g
-                      </p>
-                    </div>
-                    <div className="diary-add-nutrition-item">
-                      <p className="diary-add-nutrition-label">Fat</p>
-                      <p className="diary-add-nutrition-value">
-                        {calculatedNutrition.fat}g
-                      </p>
-                    </div>
+                    {[
+                      {
+                        label: "Calories",
+                        value: calculatedNutrition.calories,
+                        unit: "",
+                      },
+                      {
+                        label: "Protein",
+                        value: calculatedNutrition.protein,
+                        unit: "g",
+                      },
+                      {
+                        label: "Carbs",
+                        value: calculatedNutrition.carbs,
+                        unit: "g",
+                      },
+                      {
+                        label: "Fat",
+                        value: calculatedNutrition.fat,
+                        unit: "g",
+                      },
+                    ].map(({ label, value, unit }) => (
+                      <div className="diary-add-nutrition-item" key={label}>
+                        <p className="diary-add-nutrition-label">{label}</p>
+                        <p className="diary-add-nutrition-value">
+                          {value}
+                          {unit}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
@@ -359,6 +346,12 @@ export function AddFoodDialog({
             </>
           )}
 
+          {formError && (
+            <Alert variant="destructive">
+              <AlertDescription>{formError}</AlertDescription>
+            </Alert>
+          )}
+
           <DialogFooter>
             <Button
               type="button"
@@ -371,7 +364,7 @@ export function AddFoodDialog({
             <Button type="submit" disabled={!selectedFood || isSubmitting}>
               {isSubmitting ? (
                 <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  <Loader2 className="loader-icon" aria-hidden="true" />
                   Adding...
                 </>
               ) : (

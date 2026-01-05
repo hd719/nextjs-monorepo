@@ -1,8 +1,10 @@
-import { Dumbbell, Clock, Flame, Activity } from "lucide-react";
+import { Dumbbell, Clock, Flame, Activity, Info } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useNavigate, Link } from "@tanstack/react-router";
 import type { ExerciseSummary as ExerciseSummaryType } from "@/types/nutrition";
+import { ROUTES } from "@/constants/routes";
 
 export interface ExerciseSummaryProps {
   data: ExerciseSummaryType | null;
@@ -10,23 +12,28 @@ export interface ExerciseSummaryProps {
 }
 
 export function ExerciseSummary({ data, isLoading }: ExerciseSummaryProps) {
+  const navigate = useNavigate();
+
   if (isLoading) {
     return (
       <section className="dashboard-exercise-section">
-        <Skeleton className="h-8 w-48" />
-        <Card>
+        <Skeleton className="skeleton-xl" />
+        <Card variant="supporting">
           <CardHeader>
-            <Skeleton className="h-6 w-32" />
+            <Skeleton className="skeleton-lg" />
           </CardHeader>
           <CardContent>
+            {/* Loading skeletons for the number of exercise summary stats we display */}
             <div className="dashboard-exercise-loading-grid">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="dashboard-exercise-loading-item">
-                  <Skeleton className="h-10 w-10 rounded-full" />
-                  <Skeleton className="h-8 w-20" />
-                  <Skeleton className="h-4 w-24" />
-                </div>
-              ))}
+              {["totalMinutes", "caloriesBurned", "exercisesCompleted"].map(
+                (stat) => (
+                  <div key={stat} className="dashboard-exercise-loading-item">
+                    <Skeleton className="skeleton-icon-lg" />
+                    <Skeleton className="skeleton-value-sm" />
+                    <Skeleton className="skeleton-label" />
+                  </div>
+                )
+              )}
             </div>
           </CardContent>
         </Card>
@@ -38,19 +45,16 @@ export function ExerciseSummary({ data, isLoading }: ExerciseSummaryProps) {
     return (
       <section className="dashboard-exercise-section">
         <h2 className="dashboard-exercise-heading">Today's Exercise</h2>
-        <Card>
-          <CardContent className="dashboard-exercise-empty-card-content">
-            <EmptyState
-              icon={Dumbbell}
-              title="No exercises logged today"
-              description="Start your fitness journey by logging your first workout"
-              action={{
-                label: "Log Exercise",
-                onClick: () => console.log("Log exercise clicked"),
-              }}
-            />
-          </CardContent>
-        </Card>
+        <EmptyState
+          icon={Dumbbell}
+          title="No exercises logged today"
+          description="Start your fitness journey by logging your first workout"
+          action={{
+            label: "Log Exercise",
+            onClick: () => navigate({ to: ROUTES.EXERCISE }),
+          }}
+          clickable
+        />
       </section>
     );
   }
@@ -58,7 +62,7 @@ export function ExerciseSummary({ data, isLoading }: ExerciseSummaryProps) {
   return (
     <section className="dashboard-exercise-section">
       <h2 className="dashboard-exercise-heading">Today's Exercise</h2>
-      <Card>
+      <Card variant="supporting">
         <CardHeader>
           <CardTitle className="dashboard-exercise-title">
             Workout Summary
@@ -83,9 +87,21 @@ export function ExerciseSummary({ data, isLoading }: ExerciseSummaryProps) {
                 <Flame className="dashboard-exercise-icon-destructive" />
               </div>
               <div className="dashboard-exercise-value">
-                {data.caloriesBurned}
+                {data.caloriesBurned > 0 ? data.caloriesBurned : "--"}
               </div>
               <div className="dashboard-exercise-label">calories burned</div>
+              {data.caloriesBurned === 0 && (
+                <Link
+                  to={ROUTES.PROFILE}
+                  className="dashboard-exercise-weight-link"
+                >
+                  <Info
+                    className="dashboard-exercise-weight-link-icon"
+                    aria-hidden="true"
+                  />
+                  Add weight to calculate
+                </Link>
+              )}
             </div>
 
             {/* Exercises Completed */}
@@ -106,3 +122,5 @@ export function ExerciseSummary({ data, isLoading }: ExerciseSummaryProps) {
     </section>
   );
 }
+
+export type { ExerciseSummaryType };

@@ -41,8 +41,9 @@ export interface Activity {
   duration?: string;
 }
 
-// User profile type
-export interface UserProfile {
+// Simplified user profile for UI display (mock data)
+// For full user profile, use types/profile.ts
+export interface UserDisplayProfile {
   id: string;
   displayName: string;
   avatarUrl?: string;

@@ -6,11 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
-import { AuthLayout } from "@/components/forms/AuthLayout";
-import { AuthCard } from "@/components/forms/AuthCard";
+import { AuthLayout, AuthCard } from "@/components/auth";
 import { getErrorMessage } from "@/utils/auth-helpers";
 import { getFieldError } from "@/utils/form-errors";
-import { loginSchema } from "@/lib/validation";
+import { loginSchema } from "@/utils/validation";
+import { ROUTES } from "@/constants/routes";
 
 export const Route = createFileRoute("/auth/login")({
   component: LoginPage,
@@ -44,9 +44,9 @@ function LoginPage() {
         }
 
         // Redirect to dashboard on success
-        navigate({ to: "/dashboard" });
-      } catch (error: any) {
-        setServerError(getErrorMessage(error));
+        navigate({ to: ROUTES.DASHBOARD });
+      } catch (error: unknown) {
+        setServerError(getErrorMessage(error as Error));
       }
     },
   });
@@ -66,8 +66,8 @@ function LoginPage() {
           className="auth-form-container"
         >
           {serverError && (
-            <div className="p-3 rounded-md bg-destructive/10 border border-destructive/20">
-              <p className="text-sm text-destructive">{serverError}</p>
+            <div className="auth-alert-container auth-alert-container-error">
+              <p className="auth-alert-text-error">{serverError}</p>
             </div>
           )}
 
@@ -123,10 +123,14 @@ function LoginPage() {
             selector={(state) => [state.canSubmit, state.isSubmitting]}
           >
             {([canSubmit, isSubmitting]) => (
-              <Button type="submit" className="w-full" disabled={!canSubmit}>
+              <Button
+                type="submit"
+                className="auth-submit-btn"
+                disabled={!canSubmit}
+              >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    <Loader2 className="loader-icon" aria-hidden="true" />
                     Logging in...
                   </>
                 ) : (
@@ -138,7 +142,7 @@ function LoginPage() {
 
           <div className="auth-form-link-section">
             <div>
-              <Link to="/auth/forgot-password" className="auth-form-link">
+              <Link to={ROUTES.AUTH.FORGOT_PASSWORD} className="auth-form-link">
                 Forgot password?
               </Link>
             </div>
@@ -146,7 +150,7 @@ function LoginPage() {
               <span className="auth-form-link-text">
                 Don't have an account?{" "}
               </span>
-              <Link to="/auth/signup" className="auth-form-link">
+              <Link to={ROUTES.AUTH.SIGNUP} className="auth-form-link">
                 Sign up
               </Link>
             </div>

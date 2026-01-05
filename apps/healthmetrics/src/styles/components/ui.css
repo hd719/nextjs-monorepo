@@ -5,6 +5,53 @@
 
 @layer components {
   /**
+   * Card Variant Styles
+   *
+   * Visual hierarchy variants for cards:
+   * - hero: Primary focal point with stronger presence
+   * - supporting: Secondary content with reduced emphasis
+   */
+
+  /* ==========================================================================
+     Hero Card - Primary focal point
+     ========================================================================== */
+
+  .card-hero {
+    /* Stronger elevation and presence */
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+    /* Slightly stronger border */
+    border-color: var(--border);
+    border-width: 1px;
+  }
+
+  /* Dark theme adjustments for hero cards */
+  :root[class~="dark"] .card-hero,
+  .dark .card-hero {
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.3),
+      0 2px 4px -2px rgb(0 0 0 / 0.2);
+  }
+
+  /* ==========================================================================
+     Supporting Card - Secondary content
+     ========================================================================== */
+
+  .card-supporting {
+    /* Reduced shadow and softer appearance */
+    box-shadow: none;
+    /* Softer border */
+    border-color: color-mix(in srgb, var(--border) 60%, transparent);
+  }
+
+  /* Dark theme adjustments for supporting cards */
+  :root[class~="dark"] .card-supporting,
+  .dark .card-supporting {
+    border-color: color-mix(in srgb, var(--border) 50%, transparent);
+  }
+
+  /**
    * ProgressBar Component Styles
    *
    * Color-coded progress bar with label and percentage display
@@ -40,7 +87,12 @@
 
   .progress-bar-track {
     @apply h-2 w-full rounded-full overflow-hidden;
-    background-color: var(--secondary);
+    /* Light gray that's clearly visible as a progress track */
+    background-color: #e2e8f0;
+  }
+
+  .dark .progress-bar-track {
+    background-color: #334155;
   }
 
   /* ==========================================================================
@@ -103,5 +155,456 @@
   .empty-state-description {
     @apply text-sm mb-6 max-w-sm;
     color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Framed Empty State Card
+     ========================================================================== */
+
+  .empty-state-card {
+    /* Ensure the card has proper internal spacing */
+    @apply overflow-hidden;
+  }
+
+  .empty-state-card .empty-state-container {
+    /* Adjust padding when inside a card frame */
+    @apply py-8 px-4;
+  }
+
+  /* Clickable empty state card - same animation as Quick Actions */
+  .empty-state-card-clickable {
+    @apply cursor-pointer;
+    transition:
+      transform var(--duration-fast) var(--ease-out-soft),
+      box-shadow var(--duration-fast) var(--ease-out-soft),
+      border-color var(--duration-fast) var(--ease-out-soft),
+      background-color var(--duration-fast) var(--ease-out-soft);
+  }
+
+  .empty-state-card-clickable:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    background-color: color-mix(in srgb, var(--accent) 5%, var(--card));
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+
+  .empty-state-card-clickable:focus-visible {
+    @apply outline-none;
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow:
+      0 0 0 2px var(--accent),
+      0 4px 6px -1px rgb(0 0 0 / 0.1);
+  }
+
+  .empty-state-card-clickable:active {
+    transform: translateY(0);
+  }
+
+  /* Dark mode shadow adjustments */
+  .dark .empty-state-card-clickable:hover {
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.3),
+      0 2px 4px -2px rgb(0 0 0 / 0.2);
+  }
+
+  /* Hint text for clickable empty state */
+  .empty-state-clickable-hint {
+    @apply text-sm font-medium;
+    color: var(--accent);
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .empty-state-card-clickable {
+      transition: none;
+    }
+
+    .empty-state-card-clickable:hover,
+    .empty-state-card-clickable:focus-visible {
+      transform: none;
+    }
+  }
+
+  /* ==========================================================================
+     Error State Variant
+     ========================================================================== */
+
+  .empty-state-error {
+    /* Error states use destructive color tokens */
+  }
+
+  .empty-state-icon-error {
+    background-color: color-mix(in srgb, var(--destructive) 15%, transparent);
+  }
+
+  .empty-state-icon-error .empty-state-icon {
+    color: var(--destructive);
+  }
+
+  /**
+   * Skeleton Component Styles
+   *
+   * Loading placeholders with variants matching card hierarchy
+   */
+
+  /* ==========================================================================
+     Base Skeleton
+     ========================================================================== */
+
+  .skeleton {
+    @apply rounded-md;
+    background-color: var(--muted);
+    animation: skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes skeleton-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  /* ==========================================================================
+     Hero Skeleton - Matches hero card styling
+     ========================================================================== */
+
+  .skeleton-hero {
+    /* Slightly different shade to indicate primary content loading */
+    background-color: color-mix(
+      in srgb,
+      var(--muted) 80%,
+      var(--foreground) 5%
+    );
+  }
+
+  /* ==========================================================================
+     Supporting Skeleton - Matches supporting card styling
+     ========================================================================== */
+
+  .skeleton-supporting {
+    /* Softer appearance for secondary content */
+    background-color: color-mix(in srgb, var(--muted) 70%, transparent);
+  }
+
+  /* ==========================================================================
+     Reduced Motion Support for Skeleton
+     ========================================================================== */
+
+  @media (prefers-reduced-motion: reduce) {
+    .skeleton {
+      animation: none;
+      opacity: 0.7;
+    }
+  }
+
+  /* ==========================================================================
+     Calendar Component Styles (react-day-picker)
+     ========================================================================== */
+
+  /* Calendar popover background - ensures solid background */
+  .rdp {
+    background-color: var(--popover);
+    border-radius: var(--radius);
+  }
+
+  /* Month container - position relative for nav positioning */
+  .rdp-month {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-top: 0;
+  }
+
+  /* Caption centered */
+  .rdp-month_caption {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+  }
+
+  /* Nav container positioned at top of month, with buttons at sides */
+  .rdp-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 2rem;
+    pointer-events: none;
+  }
+
+  .rdp-button_previous,
+  .rdp-button_next {
+    pointer-events: auto;
+  }
+
+  /* Ensure the calendar table uses proper grid layout */
+  [data-slot="calendar"] table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  [data-slot="calendar"] thead,
+  [data-slot="calendar"] tbody {
+    display: table;
+    width: 100%;
+  }
+
+  [data-slot="calendar"] tr {
+    display: table-row;
+  }
+
+  [data-slot="calendar"] th,
+  [data-slot="calendar"] td {
+    display: table-cell;
+    width: calc(100% / 7);
+    text-align: center;
+    padding: 0;
+  }
+
+  /* Weekday header cells */
+  [data-slot="calendar"] th {
+    @apply h-8 text-xs font-medium;
+    color: var(--muted-foreground);
+  }
+
+  /* Day cells */
+  [data-slot="calendar"] td {
+    @apply h-9 w-9 p-0;
+  }
+
+  /* Day buttons */
+  [data-slot="calendar"] td button {
+    @apply h-9 w-9;
+  }
+
+  /* ==========================================================================
+     NutritionSummary Component
+     Shared hero card for Dashboard and Diary nutrition stats
+     ========================================================================== */
+
+  .nutrition-summary-card {
+    @apply p-6;
+  }
+
+  .nutrition-summary-section {
+    @apply space-y-4;
+  }
+
+  .nutrition-summary-header {
+    @apply flex items-center justify-between flex-wrap gap-4;
+  }
+
+  .nutrition-summary-title {
+    @apply text-lg font-semibold;
+  }
+
+  .nutrition-summary-action {
+    @apply flex items-center gap-2;
+  }
+
+  .nutrition-summary-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4;
+  }
+
+  /* Individual metric cards */
+  .nutrition-metric-card {
+    @apply p-4;
+  }
+
+  .nutrition-metric-content {
+    @apply space-y-2;
+  }
+
+  .nutrition-metric-label {
+    @apply text-sm font-medium;
+    color: var(--muted-foreground);
+  }
+
+  .nutrition-metric-values {
+    @apply space-y-1;
+  }
+
+  .nutrition-metric-consumed {
+    @apply text-2xl font-bold;
+  }
+
+  .nutrition-metric-goal {
+    @apply text-sm font-normal;
+    color: var(--muted-foreground);
+  }
+
+  .nutrition-metric-unit {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .nutrition-metric-loading {
+    @apply space-y-2;
+  }
+
+  .nutrition-metric-loading-values {
+    @apply space-y-1;
+  }
+
+  /* Date display in header */
+  .nutrition-summary-date {
+    @apply flex items-center gap-2 text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .nutrition-summary-date-icon {
+    @apply w-4 h-4;
+  }
+
+  /* Date picker button variant */
+  .nutrition-summary-date-button {
+    @apply h-auto py-2 px-3 justify-start text-left font-normal gap-2 cursor-pointer;
+  }
+
+  .nutrition-summary-date-button-text {
+    @apply text-sm font-medium;
+  }
+
+  .nutrition-summary-date-button-icon {
+    @apply w-4 h-4;
+    color: var(--accent);
+  }
+
+  /* Date display (non-interactive) - for dashboard */
+  .nutrition-summary-date-display {
+    @apply flex items-center gap-2 py-2 px-3 rounded-md;
+    background-color: var(--secondary);
+  }
+
+  .nutrition-summary-date-display-text {
+    @apply text-sm font-medium;
+    color: var(--foreground);
+  }
+
+  .nutrition-summary-date-display-icon {
+    @apply w-4 h-4;
+    color: var(--accent);
+  }
+
+  /* ==========================================================================
+     Common Skeleton Loading Sizes
+     Reusable skeleton dimensions for consistent loading states
+     ========================================================================== */
+
+  .skeleton-sm {
+    @apply h-3 w-1/2;
+  }
+
+  .skeleton-md {
+    @apply h-4 w-3/4;
+  }
+
+  .skeleton-lg {
+    @apply h-6 w-32;
+  }
+
+  .skeleton-xl {
+    @apply h-8 w-48;
+  }
+
+  .skeleton-label {
+    @apply h-4 w-20;
+  }
+
+  .skeleton-value {
+    @apply h-9 w-32;
+  }
+
+  .skeleton-value-sm {
+    @apply h-8 w-20;
+  }
+
+  .skeleton-unit {
+    @apply h-4 w-16;
+  }
+
+  .skeleton-progress {
+    @apply h-2 w-full;
+  }
+
+  .skeleton-avatar {
+    @apply h-10 w-10 rounded-full shrink-0;
+  }
+
+  .skeleton-avatar-sm {
+    @apply h-8 w-8 rounded-full;
+  }
+
+  .skeleton-icon {
+    @apply h-5 w-5 rounded-full;
+  }
+
+  .skeleton-icon-lg {
+    @apply h-10 w-10 rounded-full;
+  }
+
+  .skeleton-title {
+    @apply h-6 w-24;
+  }
+
+  .skeleton-text-line {
+    @apply h-4 w-full;
+  }
+
+  .skeleton-text-line-short {
+    @apply h-4 w-3/4;
+  }
+
+  .skeleton-text-line-xs {
+    @apply h-3 w-1/2;
+  }
+
+  .skeleton-water-glass {
+    @apply h-12 w-8 rounded-lg;
+  }
+
+  /* ==========================================================================
+     Popover Content Styles
+     ========================================================================== */
+
+  .popover-calendar {
+    @apply w-auto p-0 border shadow-lg;
+  }
+
+  /* ==========================================================================
+     Spinner/Loader Styles
+     ========================================================================== */
+
+  .loader-icon {
+    @apply w-4 h-4 mr-2 animate-spin;
+  }
+
+  .loader-icon-sm {
+    @apply w-3 h-3 animate-spin;
+  }
+
+  /* ==========================================================================
+     Link with Icon Styles
+     ========================================================================== */
+
+  .link-with-icon {
+    @apply flex items-center justify-center gap-1 text-xs hover:underline;
+    color: var(--primary);
+  }
+
+  .link-icon-sm {
+    @apply h-3 w-3;
   }
 }

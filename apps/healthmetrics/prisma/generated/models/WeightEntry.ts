@@ -27,9 +27,9 @@ export type AggregateWeightEntry = {
 }
 
 export type WeightEntryAvgAggregateOutputType = {
-  weightKg: runtime.Decimal | null
+  weightLbs: runtime.Decimal | null
   bodyFatPercentage: runtime.Decimal | null
-  muscleMassKg: runtime.Decimal | null
+  muscleMassLbs: runtime.Decimal | null
   waistCm: runtime.Decimal | null
   hipsCm: runtime.Decimal | null
   chestCm: runtime.Decimal | null
@@ -38,9 +38,9 @@ export type WeightEntryAvgAggregateOutputType = {
 }
 
 export type WeightEntrySumAggregateOutputType = {
-  weightKg: runtime.Decimal | null
+  weightLbs: runtime.Decimal | null
   bodyFatPercentage: runtime.Decimal | null
-  muscleMassKg: runtime.Decimal | null
+  muscleMassLbs: runtime.Decimal | null
   waistCm: runtime.Decimal | null
   hipsCm: runtime.Decimal | null
   chestCm: runtime.Decimal | null
@@ -52,9 +52,9 @@ export type WeightEntryMinAggregateOutputType = {
   id: string | null
   userId: string | null
   date: Date | null
-  weightKg: runtime.Decimal | null
+  weightLbs: runtime.Decimal | null
   bodyFatPercentage: runtime.Decimal | null
-  muscleMassKg: runtime.Decimal | null
+  muscleMassLbs: runtime.Decimal | null
   waistCm: runtime.Decimal | null
   hipsCm: runtime.Decimal | null
   chestCm: runtime.Decimal | null
@@ -70,9 +70,9 @@ export type WeightEntryMaxAggregateOutputType = {
   id: string | null
   userId: string | null
   date: Date | null
-  weightKg: runtime.Decimal | null
+  weightLbs: runtime.Decimal | null
   bodyFatPercentage: runtime.Decimal | null
-  muscleMassKg: runtime.Decimal | null
+  muscleMassLbs: runtime.Decimal | null
   waistCm: runtime.Decimal | null
   hipsCm: runtime.Decimal | null
   chestCm: runtime.Decimal | null
@@ -88,9 +88,9 @@ export type WeightEntryCountAggregateOutputType = {
   id: number
   userId: number
   date: number
-  weightKg: number
+  weightLbs: number
   bodyFatPercentage: number
-  muscleMassKg: number
+  muscleMassLbs: number
   waistCm: number
   hipsCm: number
   chestCm: number
@@ -105,9 +105,9 @@ export type WeightEntryCountAggregateOutputType = {
 
 
 export type WeightEntryAvgAggregateInputType = {
-  weightKg?: true
+  weightLbs?: true
   bodyFatPercentage?: true
-  muscleMassKg?: true
+  muscleMassLbs?: true
   waistCm?: true
   hipsCm?: true
   chestCm?: true
@@ -116,9 +116,9 @@ export type WeightEntryAvgAggregateInputType = {
 }
 
 export type WeightEntrySumAggregateInputType = {
-  weightKg?: true
+  weightLbs?: true
   bodyFatPercentage?: true
-  muscleMassKg?: true
+  muscleMassLbs?: true
   waistCm?: true
   hipsCm?: true
   chestCm?: true
@@ -130,9 +130,9 @@ export type WeightEntryMinAggregateInputType = {
   id?: true
   userId?: true
   date?: true
-  weightKg?: true
+  weightLbs?: true
   bodyFatPercentage?: true
-  muscleMassKg?: true
+  muscleMassLbs?: true
   waistCm?: true
   hipsCm?: true
   chestCm?: true
@@ -148,9 +148,9 @@ export type WeightEntryMaxAggregateInputType = {
   id?: true
   userId?: true
   date?: true
-  weightKg?: true
+  weightLbs?: true
   bodyFatPercentage?: true
-  muscleMassKg?: true
+  muscleMassLbs?: true
   waistCm?: true
   hipsCm?: true
   chestCm?: true
@@ -166,9 +166,9 @@ export type WeightEntryCountAggregateInputType = {
   id?: true
   userId?: true
   date?: true
-  weightKg?: true
+  weightLbs?: true
   bodyFatPercentage?: true
-  muscleMassKg?: true
+  muscleMassLbs?: true
   waistCm?: true
   hipsCm?: true
   chestCm?: true
@@ -271,9 +271,9 @@ export type WeightEntryGroupByOutputType = {
   id: string
   userId: string
   date: Date
-  weightKg: runtime.Decimal | null
+  weightLbs: runtime.Decimal | null
   bodyFatPercentage: runtime.Decimal | null
-  muscleMassKg: runtime.Decimal | null
+  muscleMassLbs: runtime.Decimal | null
   waistCm: runtime.Decimal | null
   hipsCm: runtime.Decimal | null
   chestCm: runtime.Decimal | null
@@ -312,9 +312,9 @@ export type WeightEntryWhereInput = {
   id?: Prisma.StringFilter<"WeightEntry"> | string
   userId?: Prisma.StringFilter<"WeightEntry"> | string
   date?: Prisma.DateTimeFilter<"WeightEntry"> | Date | string
-  weightKg?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   bodyFatPercentage?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  muscleMassKg?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  muscleMassLbs?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   waistCm?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   hipsCm?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   chestCm?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -331,9 +331,9 @@ export type WeightEntryOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   date?: Prisma.SortOrder
-  weightKg?: Prisma.SortOrderInput | Prisma.SortOrder
+  weightLbs?: Prisma.SortOrderInput | Prisma.SortOrder
   bodyFatPercentage?: Prisma.SortOrderInput | Prisma.SortOrder
-  muscleMassKg?: Prisma.SortOrderInput | Prisma.SortOrder
+  muscleMassLbs?: Prisma.SortOrderInput | Prisma.SortOrder
   waistCm?: Prisma.SortOrderInput | Prisma.SortOrder
   hipsCm?: Prisma.SortOrderInput | Prisma.SortOrder
   chestCm?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -353,9 +353,9 @@ export type WeightEntryWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.WeightEntryWhereInput | Prisma.WeightEntryWhereInput[]
   userId?: Prisma.StringFilter<"WeightEntry"> | string
   date?: Prisma.DateTimeFilter<"WeightEntry"> | Date | string
-  weightKg?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   bodyFatPercentage?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  muscleMassKg?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  muscleMassLbs?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   waistCm?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   hipsCm?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   chestCm?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -372,9 +372,9 @@ export type WeightEntryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   date?: Prisma.SortOrder
-  weightKg?: Prisma.SortOrderInput | Prisma.SortOrder
+  weightLbs?: Prisma.SortOrderInput | Prisma.SortOrder
   bodyFatPercentage?: Prisma.SortOrderInput | Prisma.SortOrder
-  muscleMassKg?: Prisma.SortOrderInput | Prisma.SortOrder
+  muscleMassLbs?: Prisma.SortOrderInput | Prisma.SortOrder
   waistCm?: Prisma.SortOrderInput | Prisma.SortOrder
   hipsCm?: Prisma.SortOrderInput | Prisma.SortOrder
   chestCm?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -398,9 +398,9 @@ export type WeightEntryScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"WeightEntry"> | string
   userId?: Prisma.StringWithAggregatesFilter<"WeightEntry"> | string
   date?: Prisma.DateTimeWithAggregatesFilter<"WeightEntry"> | Date | string
-  weightKg?: Prisma.DecimalNullableWithAggregatesFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.DecimalNullableWithAggregatesFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   bodyFatPercentage?: Prisma.DecimalNullableWithAggregatesFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  muscleMassKg?: Prisma.DecimalNullableWithAggregatesFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  muscleMassLbs?: Prisma.DecimalNullableWithAggregatesFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   waistCm?: Prisma.DecimalNullableWithAggregatesFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   hipsCm?: Prisma.DecimalNullableWithAggregatesFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   chestCm?: Prisma.DecimalNullableWithAggregatesFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -415,9 +415,9 @@ export type WeightEntryScalarWhereWithAggregatesInput = {
 export type WeightEntryCreateInput = {
   id?: string
   date: Date | string
-  weightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   bodyFatPercentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  muscleMassKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  muscleMassLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   waistCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   hipsCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   chestCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -434,9 +434,9 @@ export type WeightEntryUncheckedCreateInput = {
   id?: string
   userId: string
   date: Date | string
-  weightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   bodyFatPercentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  muscleMassKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  muscleMassLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   waistCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   hipsCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   chestCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -451,9 +451,9 @@ export type WeightEntryUncheckedCreateInput = {
 export type WeightEntryUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   bodyFatPercentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  muscleMassKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  muscleMassLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   waistCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   hipsCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   chestCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -470,9 +470,9 @@ export type WeightEntryUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   bodyFatPercentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  muscleMassKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  muscleMassLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   waistCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   hipsCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   chestCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -488,9 +488,9 @@ export type WeightEntryCreateManyInput = {
   id?: string
   userId: string
   date: Date | string
-  weightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   bodyFatPercentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  muscleMassKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  muscleMassLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   waistCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   hipsCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   chestCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -505,9 +505,9 @@ export type WeightEntryCreateManyInput = {
 export type WeightEntryUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   bodyFatPercentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  muscleMassKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  muscleMassLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   waistCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   hipsCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   chestCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -523,9 +523,9 @@ export type WeightEntryUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   bodyFatPercentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  muscleMassKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  muscleMassLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   waistCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   hipsCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   chestCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -551,9 +551,9 @@ export type WeightEntryCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   date?: Prisma.SortOrder
-  weightKg?: Prisma.SortOrder
+  weightLbs?: Prisma.SortOrder
   bodyFatPercentage?: Prisma.SortOrder
-  muscleMassKg?: Prisma.SortOrder
+  muscleMassLbs?: Prisma.SortOrder
   waistCm?: Prisma.SortOrder
   hipsCm?: Prisma.SortOrder
   chestCm?: Prisma.SortOrder
@@ -566,9 +566,9 @@ export type WeightEntryCountOrderByAggregateInput = {
 }
 
 export type WeightEntryAvgOrderByAggregateInput = {
-  weightKg?: Prisma.SortOrder
+  weightLbs?: Prisma.SortOrder
   bodyFatPercentage?: Prisma.SortOrder
-  muscleMassKg?: Prisma.SortOrder
+  muscleMassLbs?: Prisma.SortOrder
   waistCm?: Prisma.SortOrder
   hipsCm?: Prisma.SortOrder
   chestCm?: Prisma.SortOrder
@@ -580,9 +580,9 @@ export type WeightEntryMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   date?: Prisma.SortOrder
-  weightKg?: Prisma.SortOrder
+  weightLbs?: Prisma.SortOrder
   bodyFatPercentage?: Prisma.SortOrder
-  muscleMassKg?: Prisma.SortOrder
+  muscleMassLbs?: Prisma.SortOrder
   waistCm?: Prisma.SortOrder
   hipsCm?: Prisma.SortOrder
   chestCm?: Prisma.SortOrder
@@ -598,9 +598,9 @@ export type WeightEntryMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   date?: Prisma.SortOrder
-  weightKg?: Prisma.SortOrder
+  weightLbs?: Prisma.SortOrder
   bodyFatPercentage?: Prisma.SortOrder
-  muscleMassKg?: Prisma.SortOrder
+  muscleMassLbs?: Prisma.SortOrder
   waistCm?: Prisma.SortOrder
   hipsCm?: Prisma.SortOrder
   chestCm?: Prisma.SortOrder
@@ -613,9 +613,9 @@ export type WeightEntryMinOrderByAggregateInput = {
 }
 
 export type WeightEntrySumOrderByAggregateInput = {
-  weightKg?: Prisma.SortOrder
+  weightLbs?: Prisma.SortOrder
   bodyFatPercentage?: Prisma.SortOrder
-  muscleMassKg?: Prisma.SortOrder
+  muscleMassLbs?: Prisma.SortOrder
   waistCm?: Prisma.SortOrder
   hipsCm?: Prisma.SortOrder
   chestCm?: Prisma.SortOrder
@@ -668,9 +668,9 @@ export type WeightEntryUncheckedUpdateManyWithoutUserNestedInput = {
 export type WeightEntryCreateWithoutUserInput = {
   id?: string
   date: Date | string
-  weightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   bodyFatPercentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  muscleMassKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  muscleMassLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   waistCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   hipsCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   chestCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -685,9 +685,9 @@ export type WeightEntryCreateWithoutUserInput = {
 export type WeightEntryUncheckedCreateWithoutUserInput = {
   id?: string
   date: Date | string
-  weightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   bodyFatPercentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  muscleMassKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  muscleMassLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   waistCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   hipsCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   chestCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -732,9 +732,9 @@ export type WeightEntryScalarWhereInput = {
   id?: Prisma.StringFilter<"WeightEntry"> | string
   userId?: Prisma.StringFilter<"WeightEntry"> | string
   date?: Prisma.DateTimeFilter<"WeightEntry"> | Date | string
-  weightKg?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   bodyFatPercentage?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  muscleMassKg?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  muscleMassLbs?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   waistCm?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   hipsCm?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   chestCm?: Prisma.DecimalNullableFilter<"WeightEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -749,9 +749,9 @@ export type WeightEntryScalarWhereInput = {
 export type WeightEntryCreateManyUserInput = {
   id?: string
   date: Date | string
-  weightKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   bodyFatPercentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  muscleMassKg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  muscleMassLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   waistCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   hipsCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   chestCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -766,9 +766,9 @@ export type WeightEntryCreateManyUserInput = {
 export type WeightEntryUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   bodyFatPercentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  muscleMassKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  muscleMassLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   waistCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   hipsCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   chestCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -783,9 +783,9 @@ export type WeightEntryUpdateWithoutUserInput = {
 export type WeightEntryUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   bodyFatPercentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  muscleMassKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  muscleMassLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   waistCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   hipsCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   chestCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -800,9 +800,9 @@ export type WeightEntryUncheckedUpdateWithoutUserInput = {
 export type WeightEntryUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  weightKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  weightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   bodyFatPercentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  muscleMassKg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  muscleMassLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   waistCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   hipsCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   chestCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -820,9 +820,9 @@ export type WeightEntrySelect<ExtArgs extends runtime.Types.Extensions.InternalA
   id?: boolean
   userId?: boolean
   date?: boolean
-  weightKg?: boolean
+  weightLbs?: boolean
   bodyFatPercentage?: boolean
-  muscleMassKg?: boolean
+  muscleMassLbs?: boolean
   waistCm?: boolean
   hipsCm?: boolean
   chestCm?: boolean
@@ -839,9 +839,9 @@ export type WeightEntrySelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   userId?: boolean
   date?: boolean
-  weightKg?: boolean
+  weightLbs?: boolean
   bodyFatPercentage?: boolean
-  muscleMassKg?: boolean
+  muscleMassLbs?: boolean
   waistCm?: boolean
   hipsCm?: boolean
   chestCm?: boolean
@@ -858,9 +858,9 @@ export type WeightEntrySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   userId?: boolean
   date?: boolean
-  weightKg?: boolean
+  weightLbs?: boolean
   bodyFatPercentage?: boolean
-  muscleMassKg?: boolean
+  muscleMassLbs?: boolean
   waistCm?: boolean
   hipsCm?: boolean
   chestCm?: boolean
@@ -877,9 +877,9 @@ export type WeightEntrySelectScalar = {
   id?: boolean
   userId?: boolean
   date?: boolean
-  weightKg?: boolean
+  weightLbs?: boolean
   bodyFatPercentage?: boolean
-  muscleMassKg?: boolean
+  muscleMassLbs?: boolean
   waistCm?: boolean
   hipsCm?: boolean
   chestCm?: boolean
@@ -891,7 +891,7 @@ export type WeightEntrySelectScalar = {
   updatedAt?: boolean
 }
 
-export type WeightEntryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "date" | "weightKg" | "bodyFatPercentage" | "muscleMassKg" | "waistCm" | "hipsCm" | "chestCm" | "thighCm" | "bicepCm" | "photoUrl" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["weightEntry"]>
+export type WeightEntryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "date" | "weightLbs" | "bodyFatPercentage" | "muscleMassLbs" | "waistCm" | "hipsCm" | "chestCm" | "thighCm" | "bicepCm" | "photoUrl" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["weightEntry"]>
 export type WeightEntryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -911,9 +911,9 @@ export type $WeightEntryPayload<ExtArgs extends runtime.Types.Extensions.Interna
     id: string
     userId: string
     date: Date
-    weightKg: runtime.Decimal | null
+    weightLbs: runtime.Decimal | null
     bodyFatPercentage: runtime.Decimal | null
-    muscleMassKg: runtime.Decimal | null
+    muscleMassLbs: runtime.Decimal | null
     waistCm: runtime.Decimal | null
     hipsCm: runtime.Decimal | null
     chestCm: runtime.Decimal | null
@@ -1350,9 +1350,9 @@ export interface WeightEntryFieldRefs {
   readonly id: Prisma.FieldRef<"WeightEntry", 'String'>
   readonly userId: Prisma.FieldRef<"WeightEntry", 'String'>
   readonly date: Prisma.FieldRef<"WeightEntry", 'DateTime'>
-  readonly weightKg: Prisma.FieldRef<"WeightEntry", 'Decimal'>
+  readonly weightLbs: Prisma.FieldRef<"WeightEntry", 'Decimal'>
   readonly bodyFatPercentage: Prisma.FieldRef<"WeightEntry", 'Decimal'>
-  readonly muscleMassKg: Prisma.FieldRef<"WeightEntry", 'Decimal'>
+  readonly muscleMassLbs: Prisma.FieldRef<"WeightEntry", 'Decimal'>
   readonly waistCm: Prisma.FieldRef<"WeightEntry", 'Decimal'>
   readonly hipsCm: Prisma.FieldRef<"WeightEntry", 'Decimal'>
   readonly chestCm: Prisma.FieldRef<"WeightEntry", 'Decimal'>
