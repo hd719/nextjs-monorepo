@@ -1,4 +1,26 @@
+// Components
 export { ProfileForm } from "./ProfileForm";
 export { ProfileAvatar } from "./ProfileAvatar";
-export * from "./profile-utils";
-export * from "./profile-validators";
+
+// Utilities
+export {
+  formatDate,
+  kgToLbs,
+  cmToInches,
+  getDefaultFormValues,
+  buildProfileUpdates,
+  validateAvatarFile,
+  fileToBase64,
+  calculateMacroBreakdown,
+} from "./profile-utils";
+
+// Validators
+export {
+  displayNameValidator,
+  heightValidator,
+  weightValidator,
+  calorieGoalValidator,
+  proteinGoalValidator,
+  carbGoalValidator,
+  fatGoalValidator,
+} from "./profile-validators";

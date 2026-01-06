@@ -1,18 +1,36 @@
 import { forwardRef } from "react";
 import type { HTMLAttributes } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 
-export interface CardProps extends HTMLAttributes<HTMLDivElement> {}
+/**
+ * Card variants for visual hierarchy
+ * - default: Standard card styling (backwards compatible)
+ * - hero: Primary focal point with stronger presence
+ * - supporting: Secondary content with reduced emphasis
+ */
+const cardVariants = cva("rounded-lg border bg-card text-card-foreground", {
+  variants: {
+    variant: {
+      default: "shadow-sm",
+      hero: "card-hero",
+      supporting: "card-supporting",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
+
+export interface CardProps
+  extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {}
 
 const Card = forwardRef<HTMLDivElement, CardProps>(
-  ({ className, ...props }, ref) => (
+  ({ className, variant, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn(
-        "rounded-lg border bg-card text-card-foreground shadow-sm",
-        className
-      )}
+      className={cn(cardVariants({ variant }), className)}
       {...props}
     />
   )

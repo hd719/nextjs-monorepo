@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
 import { GlassWater } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/utils/cn";
 
 interface WaterGlassProps {
   filled: boolean;
@@ -8,8 +10,42 @@ interface WaterGlassProps {
 }
 
 export function WaterGlass({ filled, onClick, index }: WaterGlassProps) {
+  const isMockDashboard = import.meta.env.VITE_USE_MOCK_DASHBOARD === "true";
+  const [isLoading, setIsLoading] = useState(isMockDashboard);
+
+  useEffect(() => {
+    if (!isMockDashboard) {
+      setIsLoading(false);
+      return;
+    }
+
+    const timeout = setTimeout(
+      () => {
+        setIsLoading(false);
+      },
+      250 + index * 50
+    );
+
+    return () => clearTimeout(timeout);
+  }, [index, isMockDashboard]);
+
+  if (isLoading) {
+    return (
+      <button
+        type="button"
+        className="dashboard-water-glass-button"
+        aria-label={`Glass ${index + 1} loading`}
+        aria-busy="true"
+        disabled
+      >
+        <Skeleton className="skeleton-avatar-sm" />
+      </button>
+    );
+  }
+
   return (
     <button
+      type="button"
       onClick={onClick}
       className={cn(
         "dashboard-water-glass-button",

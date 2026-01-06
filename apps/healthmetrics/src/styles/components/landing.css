@@ -1,6 +1,6 @@
 /* ==========================================================================
    Landing Page Component Styles
-   Using @layer components to bundle with main CSS (prevents FOUC)
+   Electric Mint Theme - Fresh, Modern, Energetic
    ========================================================================== */
 
 @layer components {
@@ -10,13 +10,18 @@
     background-color: var(--background);
   }
 
-  /* Header */
+  /* ==========================================================================
+     Header
+     ========================================================================== */
+
   .landing-header {
-    border-bottom: 1px solid var(--border);
+    @apply sticky top-0 z-50 backdrop-blur-md;
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+    background-color: color-mix(in srgb, var(--background) 80%, transparent);
   }
 
   .landing-header-content {
-    @apply container mx-auto px-4 py-4;
+    @apply max-w-7xl mx-auto px-4 py-4;
   }
 
   .landing-header-inner {
@@ -24,17 +29,21 @@
   }
 
   .landing-logo-link {
-    @apply flex items-center gap-2;
+    @apply flex items-center gap-2 transition-all duration-300;
+  }
+
+  .landing-logo-link:hover {
+    transform: scale(1.02);
   }
 
   .landing-logo-icon {
-    @apply w-10 h-10 rounded-lg flex items-center justify-center;
-    background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+    @apply w-10 h-10 rounded-xl flex items-center justify-center;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 30%, transparent);
   }
 
   .landing-logo-icon-svg {
-    @apply w-6 h-6;
-    color: var(--accent);
+    @apply w-6 h-6 text-white;
   }
 
   .landing-logo-text {
@@ -50,21 +59,144 @@
     @apply flex-1;
   }
 
-  /* Hero Section */
+  /* ==========================================================================
+     Hero Section - The Star of the Show
+     ========================================================================== */
+
+  .landing-hero-wrapper {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+      135deg,
+      var(--gradient-start) 0%,
+      var(--background) 40%,
+      var(--gradient-end) 100%
+    );
+  }
+
+  /* Animated floating orbs */
+  .landing-hero-wrapper::before,
+  .landing-hero-wrapper::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+
+  .landing-hero-wrapper::before {
+    width: 600px;
+    height: 600px;
+    background: var(--accent);
+    top: -200px;
+    right: -100px;
+    opacity: 0.12;
+    animation: float-slow 25s ease-in-out infinite;
+  }
+
+  .landing-hero-wrapper::after {
+    width: 400px;
+    height: 400px;
+    background: var(--accent-light);
+    bottom: -100px;
+    left: -100px;
+    opacity: 0.08;
+    animation: float-slow 20s ease-in-out infinite reverse;
+  }
+
+  /* Third orb for extra depth */
+  .landing-hero-orb {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.06;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse-glow 8s ease-in-out infinite;
+  }
+
+  @keyframes float-slow {
+    0%,
+    100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+      transform: translate(40px, -40px) rotate(5deg);
+    }
+    50% {
+      transform: translate(-30px, 30px) rotate(-5deg);
+    }
+    75% {
+      transform: translate(20px, -20px) rotate(3deg);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      opacity: 0.06;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      opacity: 0.1;
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+  }
+
   .landing-hero-section {
-    @apply container mx-auto px-4 py-20 lg:py-32;
+    @apply max-w-7xl mx-auto px-4 py-20 lg:py-32;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*
+   * Split Layout for Hero
+   * On desktop: text left, mockup right
+   * On mobile: stacked with text on top
+   */
+  .landing-hero-split {
+    @apply flex flex-col lg:flex-row items-center gap-12 lg:gap-16;
   }
 
   .landing-hero-content {
-    @apply max-w-3xl mx-auto text-center space-y-8;
+    @apply flex-1 text-center lg:text-left space-y-8;
+  }
+
+  .landing-hero-mockup {
+    @apply flex-1 flex justify-center;
+    /* On mobile, limit the mockup size */
+    max-width: 450px;
+    /* Allow floating icons to overflow */
+    overflow: visible;
+  }
+
+  @media (min-width: 1024px) {
+    .landing-hero-mockup {
+      max-width: 500px;
+    }
   }
 
   .landing-hero-title {
     @apply text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight;
+    line-height: 1.1;
   }
 
+  /* Gradient accent text */
   .landing-hero-accent {
-    color: var(--accent);
+    background: linear-gradient(
+      135deg,
+      var(--accent) 0%,
+      var(--accent-light) 50%,
+      #a78bfa 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
   }
 
   .landing-hero-description {
@@ -73,29 +205,148 @@
   }
 
   .landing-hero-actions {
-    @apply flex flex-col sm:flex-row gap-4 justify-center;
+    @apply flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4;
   }
 
-  /* Features Section */
+  /* Primary CTA with glow effect */
+  .landing-cta-primary {
+    @apply relative px-8 py-3 rounded-xl font-semibold text-white transition-all duration-300;
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    box-shadow: 0 4px 20px color-mix(in srgb, var(--accent) 40%, transparent);
+  }
+
+  .landing-cta-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px color-mix(in srgb, var(--accent) 50%, transparent);
+  }
+
+  .landing-cta-primary:active {
+    transform: translateY(0);
+  }
+
+  /* Secondary CTA */
+  .landing-cta-secondary {
+    @apply px-8 py-3 rounded-xl font-semibold transition-all duration-300;
+    border: 2px solid var(--border);
+    color: var(--foreground);
+  }
+
+  .landing-cta-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 5%, transparent);
+  }
+
+  /* ==========================================================================
+     Stats Banner - Social Proof
+     ========================================================================== */
+
+  .landing-stats-section {
+    @apply py-12 border-y;
+    border-color: var(--border);
+    background: color-mix(in srgb, var(--muted) 30%, transparent);
+  }
+
+  .landing-stats-content {
+    @apply max-w-7xl mx-auto px-4;
+  }
+
+  .landing-stats-grid {
+    @apply grid grid-cols-2 md:grid-cols-4 gap-8;
+  }
+
+  .landing-stat-item {
+    @apply text-center;
+  }
+
+  .landing-stat-value {
+    @apply text-3xl sm:text-4xl font-bold;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .landing-stat-label {
+    @apply text-sm mt-1;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Features Section
+     ========================================================================== */
+
   .landing-features-section {
-    border-top: 1px solid var(--border);
-    background-color: color-mix(in srgb, var(--muted) 30%, transparent);
+    @apply relative overflow-hidden;
+    background: linear-gradient(
+      180deg,
+      var(--background) 0%,
+      var(--gradient-start) 100%
+    );
   }
 
   .landing-features-content {
-    @apply container mx-auto px-4 py-20;
+    @apply max-w-7xl mx-auto px-4 py-20;
   }
 
   .landing-features-inner {
     @apply max-w-5xl mx-auto;
   }
 
+  .landing-features-header {
+    @apply text-center mb-16;
+  }
+
   .landing-features-title {
-    @apply text-3xl sm:text-4xl font-bold text-center mb-12;
+    @apply text-3xl sm:text-4xl font-bold mb-4;
+  }
+
+  .landing-features-subtitle {
+    @apply text-lg max-w-2xl mx-auto;
+    color: var(--muted-foreground);
   }
 
   .landing-features-grid {
     @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+  }
+
+  /* Feature cards with hover effects */
+  .landing-feature-card {
+    @apply relative p-6 rounded-2xl transition-all duration-300;
+    background: var(--card);
+    border: 1px solid var(--border);
+  }
+
+  .landing-feature-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow:
+      0 20px 40px -15px color-mix(in srgb, var(--accent) 15%, transparent),
+      0 0 0 1px var(--accent);
+  }
+
+  /* Gradient border effect on hover */
+  .landing-feature-card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .landing-feature-card:hover::before {
+    opacity: 1;
   }
 
   .landing-feature-card-header {
@@ -103,26 +354,130 @@
   }
 
   .landing-feature-icon {
-    @apply w-12 h-12 rounded-lg flex items-center justify-center mx-auto;
-    background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+    @apply w-14 h-14 rounded-xl flex items-center justify-center mx-auto;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 25%, transparent);
   }
 
   .landing-feature-icon-svg {
-    @apply w-6 h-6;
-    color: var(--accent);
+    @apply w-7 h-7 text-white;
+  }
+
+  .landing-feature-title {
+    @apply text-xl font-semibold;
   }
 
   .landing-feature-description {
     @apply mt-2;
+    color: var(--muted-foreground);
   }
 
-  /* CTA Section */
+  /* ==========================================================================
+     App Preview Section - Show, Don't Just Tell
+     ========================================================================== */
+
+  .landing-preview-section {
+    @apply py-20;
+    background: var(--background);
+  }
+
+  .landing-preview-content {
+    @apply max-w-7xl mx-auto px-4;
+  }
+
+  .landing-preview-header {
+    @apply text-center mb-12;
+  }
+
+  .landing-preview-title {
+    @apply text-3xl sm:text-4xl font-bold mb-4;
+  }
+
+  .landing-preview-mockup {
+    @apply relative max-w-4xl mx-auto;
+  }
+
+  .landing-preview-frame {
+    @apply rounded-2xl overflow-hidden;
+    border: 1px solid var(--border);
+    box-shadow:
+      0 25px 50px -12px rgba(0, 0, 0, 0.15),
+      0 0 0 1px var(--border);
+  }
+
+  .landing-preview-image {
+    @apply w-full;
+  }
+
+  /* Floating badges around the mockup */
+  .landing-preview-badge {
+    @apply absolute px-4 py-2 rounded-full text-sm font-medium;
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    animation: float-badge 6s ease-in-out infinite;
+  }
+
+  .landing-preview-badge-1 {
+    top: 10%;
+    left: -5%;
+    animation-delay: 0s;
+  }
+
+  .landing-preview-badge-2 {
+    top: 30%;
+    right: -8%;
+    animation-delay: -2s;
+  }
+
+  .landing-preview-badge-3 {
+    bottom: 20%;
+    left: -8%;
+    animation-delay: -4s;
+  }
+
+  @keyframes float-badge {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  /* ==========================================================================
+     CTA Section
+     ========================================================================== */
+
   .landing-cta-section {
-    border-top: 1px solid var(--border);
+    @apply relative overflow-hidden;
+    background: linear-gradient(
+      135deg,
+      var(--gradient-start) 0%,
+      var(--gradient-accent) 50%,
+      var(--gradient-end) 100%
+    );
+  }
+
+  .landing-cta-section::before {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: var(--accent);
+    border-radius: 50%;
+    filter: blur(150px);
+    opacity: 0.1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .landing-cta-content {
-    @apply container mx-auto px-4 py-20;
+    @apply max-w-7xl mx-auto px-4 py-20;
+    position: relative;
+    z-index: 1;
   }
 
   .landing-cta-inner {
@@ -138,13 +493,17 @@
     color: var(--muted-foreground);
   }
 
-  /* Footer */
+  /* ==========================================================================
+     Footer
+     ========================================================================== */
+
   .landing-footer {
     border-top: 1px solid var(--border);
+    background: var(--background);
   }
 
   .landing-footer-content {
-    @apply container mx-auto px-4 py-8;
+    @apply max-w-7xl mx-auto px-4 py-8;
   }
 
   .landing-footer-inner {
@@ -169,6 +528,427 @@
   }
 
   .landing-footer-link:hover {
+    color: var(--accent);
+  }
+
+  /* ==========================================================================
+     HERO MOCKUP SECTION
+
+     This is the animated dashboard preview that showcases the app.
+     It includes:
+     - A phone-like frame with the dashboard inside
+     - Floating fitness icons around the mockup
+     - Animated progress rings, bars, and counting numbers
+     ========================================================================== */
+
+  /* Container - positions everything relative to this */
+  .hero-mockup-container {
+    @apply relative;
+    /* Give enough space for floating icons to be visible */
+    padding: 4rem 3rem;
+    /* Ensure icons aren't clipped */
+    overflow: visible;
+  }
+
+  /* ============================================
+     FLOATING ICONS
+
+     These icons float around the mockup to add visual interest.
+     Each icon has:
+     - A circular background with gradient
+     - A gentle floating animation
+     - Box shadow for depth
+     ============================================ */
+
+  .hero-floating-icons {
+    @apply absolute pointer-events-none;
+    /* Extend beyond the container to ensure icons are visible */
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    /* z-index above the glow but can be behind or in front of mockup */
+    z-index: 3;
+  }
+
+  .hero-floating-icon {
+    @apply absolute flex items-center justify-center rounded-full;
+    width: 60px;
+    height: 60px;
+    /* Gradient background matching our theme */
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    /* Stronger shadow for better visibility */
+    box-shadow:
+      0 10px 40px color-mix(in srgb, var(--accent) 40%, transparent),
+      0 4px 12px rgba(0, 0, 0, 0.15);
+    /* The floating animation */
+    animation: icon-float 6s ease-in-out infinite;
+  }
+
+  .hero-floating-icon-svg {
+    @apply w-7 h-7 text-white;
+  }
+
+  /*
+   * Icon Positions
+   * Placed around the mockup in a scattered pattern
+   * Positioned to be clearly visible outside the phone frame
+   */
+  .hero-float-pos-1 {
+    top: 0;
+    left: 15%;
+  }
+
+  .hero-float-pos-2 {
+    top: 5%;
+    right: 5%;
+  }
+
+  .hero-float-pos-3 {
+    top: 40%;
+    right: -10px;
+  }
+
+  .hero-float-pos-4 {
+    bottom: 10%;
+    right: 10%;
+  }
+
+  .hero-float-pos-5 {
+    bottom: 5%;
+    left: 15%;
+  }
+
+  .hero-float-pos-6 {
+    top: 45%;
+    left: -10px;
+  }
+
+  /*
+   * Floating Animation
+   * Creates a gentle up-and-down bobbing motion
+   * The transform includes slight X movement for natural feel
+   */
+  @keyframes icon-float {
+    0%,
+    100% {
+      transform: translateY(0) translateX(0);
+    }
+    25% {
+      transform: translateY(-12px) translateX(4px);
+    }
+    50% {
+      transform: translateY(-6px) translateX(-4px);
+    }
+    75% {
+      transform: translateY(-14px) translateX(2px);
+    }
+  }
+
+  /* ============================================
+     PHONE/APP FRAME
+
+     The main container that looks like a phone screen.
+     Contains the animated dashboard content.
+     ============================================ */
+
+  .hero-mockup-frame {
+    @apply relative mx-auto overflow-hidden rounded-3xl;
+    /* Size constraints - wider for better visibility */
+    width: 100%;
+    max-width: 380px;
+    /* Frosted glass effect */
+    background: color-mix(in srgb, var(--card) 95%, transparent);
+    backdrop-filter: blur(20px);
+    /* Border and shadow for depth */
+    border: 1px solid var(--border);
+    box-shadow:
+      0 25px 50px -12px rgba(0, 0, 0, 0.15),
+      0 12px 24px -8px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    /* Stack above floating icons */
+    z-index: 2;
+  }
+
+  /* Top bar (mimics mobile app header) */
+  .hero-mockup-header {
+    @apply flex items-center justify-between px-4 py-3;
+    background: linear-gradient(180deg, var(--accent), var(--accent-dark));
+    color: white;
+  }
+
+  /* Status indicator dot */
+  .hero-mockup-header-dot {
+    @apply w-2 h-2 rounded-full;
+    background: #4ade80; /* Green = online/healthy */
+  }
+
+  .hero-mockup-header-title {
+    @apply flex items-center gap-2 text-sm font-semibold;
+  }
+
+  .hero-mockup-header-time {
+    @apply text-xs opacity-80;
+  }
+
+  .hero-mockup-header-icon {
+    @apply w-4 h-4;
+  }
+
+  .hero-mockup-water-icon {
+    @apply w-4 h-4;
+  }
+
+  /* Main content area inside the "phone" */
+  .hero-mockup-content {
+    @apply p-4 space-y-5;
+  }
+
+  /* ============================================
+     CIRCULAR PROGRESS RING
+
+     The main calorie tracker visualization.
+     Uses SVG for smooth, scalable rendering.
+     ============================================ */
+
+  .hero-mockup-main-stat {
+    @apply relative flex items-center justify-center;
+  }
+
+  /* SVG ring styling */
+  .hero-mockup-ring {
+    /* Ensure it doesn't block clicks */
+    pointer-events: none;
+  }
+
+  /*
+   * The progress portion of the ring
+   * Animates from empty to filled using stroke-dashoffset
+   */
+  .hero-mockup-ring-progress {
+    /* Smooth transition when percentage changes */
+    transition: stroke-dashoffset 2s ease-out;
+  }
+
+  /* Center content (number + label) */
+  .hero-mockup-main-stat-inner {
+    @apply absolute inset-0 flex flex-col items-center justify-center;
+  }
+
+  .hero-mockup-main-stat-value {
+    @apply text-3xl font-bold;
     color: var(--foreground);
+  }
+
+  .hero-mockup-main-stat-label {
+    @apply text-xs uppercase tracking-wider;
+    color: var(--muted-foreground);
+  }
+
+  /* ============================================
+     MACRO PROGRESS BARS
+
+     Horizontal bars showing protein, carbs, fat progress.
+     Each has a different color for visual distinction.
+     ============================================ */
+
+  .hero-mockup-macros {
+    @apply space-y-3;
+  }
+
+  .hero-mockup-macro {
+    @apply space-y-1;
+  }
+
+  .hero-mockup-macro-header {
+    @apply flex justify-between text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .hero-mockup-macro-value {
+    @apply font-semibold;
+    color: var(--foreground);
+  }
+
+  /* The track (background) of the progress bar */
+  .hero-mockup-macro-bar {
+    @apply h-2 rounded-full overflow-hidden;
+    background: var(--muted);
+  }
+
+  /* The filled portion of the progress bar */
+  .hero-mockup-macro-fill {
+    @apply h-full rounded-full;
+    /* Animate the width change */
+    transition: width 1.5s ease-out;
+  }
+
+  /* Color variations for each macro */
+  .hero-mockup-macro-fill-protein {
+    background: linear-gradient(90deg, #3b82f6, #60a5fa); /* Blue */
+  }
+
+  .hero-mockup-macro-fill-carbs {
+    background: linear-gradient(90deg, #f59e0b, #fbbf24); /* Amber */
+  }
+
+  .hero-mockup-macro-fill-fat {
+    background: linear-gradient(90deg, #ec4899, #f472b6); /* Pink */
+  }
+
+  /* ============================================
+     WATER INTAKE VISUALIZATION
+
+     Shows glasses of water, filled ones are highlighted.
+     Simple but effective visual feedback.
+     ============================================ */
+
+  .hero-mockup-water {
+    @apply pt-2;
+  }
+
+  .hero-mockup-water-header {
+    @apply flex items-center gap-2 text-xs mb-2;
+    color: var(--muted-foreground);
+  }
+
+  .hero-mockup-water-count {
+    @apply ml-auto font-semibold;
+    color: var(--accent);
+  }
+
+  .hero-mockup-water-glasses {
+    @apply flex gap-2 justify-between;
+  }
+
+  /* Individual water glass */
+  .hero-mockup-water-glass {
+    @apply flex-1 h-8 rounded-md;
+    background: var(--muted);
+    border: 1px solid var(--border);
+    /* Animate the fill */
+    transition:
+      background 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  /* Filled glass state */
+  .hero-mockup-water-glass-filled {
+    background: linear-gradient(180deg, var(--accent-light), var(--accent));
+    border-color: var(--accent);
+    /* Staggered fill animation */
+    animation: glass-fill 0.5s ease-out forwards;
+  }
+
+  @keyframes glass-fill {
+    from {
+      opacity: 0.5;
+      transform: scaleY(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+  }
+
+  /* ============================================
+     GLOW EFFECT
+
+     Subtle gradient glow behind the mockup
+     Adds depth and draws attention to the mockup
+     ============================================ */
+
+  .hero-mockup-glow {
+    @apply absolute rounded-full pointer-events-none;
+    /* Center behind the mockup */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    /* Gradient glow */
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--accent) 20%, transparent) 0%,
+      transparent 70%
+    );
+    /* Behind everything */
+    z-index: 0;
+    /* Gentle pulse animation */
+    animation: glow-pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes glow-pulse {
+    0%,
+    100% {
+      opacity: 0.6;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+  }
+
+  /* ============================================
+     RESPONSIVE ADJUSTMENTS
+
+     Hide or simplify elements on smaller screens
+     ============================================ */
+
+  @media (max-width: 768px) {
+    /* Hide some floating icons on mobile to reduce clutter */
+    .hero-float-pos-3,
+    .hero-float-pos-6 {
+      display: none;
+    }
+
+    /* Reduce floating icon size */
+    .hero-floating-icon {
+      width: 48px;
+      height: 48px;
+    }
+
+    .hero-floating-icon-svg {
+      @apply w-5 h-5;
+    }
+
+    /* Smaller glow on mobile */
+    .hero-mockup-glow {
+      width: 300px;
+      height: 300px;
+    }
+
+    /* Adjust mockup container padding on mobile */
+    .hero-mockup-container {
+      padding: 3rem 2rem;
+    }
+  }
+
+  /* ==========================================================================
+     Reduced Motion Support
+     ========================================================================== */
+
+  @media (prefers-reduced-motion: reduce) {
+    .landing-hero-wrapper::before,
+    .landing-hero-wrapper::after,
+    .landing-hero-orb,
+    .landing-preview-badge,
+    .hero-floating-icon,
+    .hero-mockup-glow {
+      animation: none;
+    }
+
+    .landing-feature-card:hover,
+    .landing-cta-primary:hover {
+      transform: none;
+    }
+
+    /* Disable transitions for users who prefer reduced motion */
+    .hero-mockup-ring-progress,
+    .hero-mockup-macro-fill,
+    .hero-mockup-water-glass {
+      transition: none;
+    }
   }
 }

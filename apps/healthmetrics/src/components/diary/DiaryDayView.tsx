@@ -1,52 +1,43 @@
-import { useState, useEffect, useTransition } from "react";
-import { Calendar, Plus } from "lucide-react";
-import {
-  getDiaryDay,
-  getDailyTotals,
-  type DiaryEntryWithFood,
-  type DailyTotals,
-} from "@/server/diary";
+import { useState } from "react";
+import { format, parse } from "date-fns";
+import { Calendar as CalendarIcon, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  NutritionSummary,
+  type NutritionData,
+} from "@/components/ui/nutrition-summary";
 import { DiaryEntryList } from "./DiaryEntryList";
 import { AddFoodDialog } from "./AddFoodDialog";
+import { useDiaryDay, useDiaryTotals } from "@/hooks/useDiary";
+import { DEFAULT_NUTRITION_GOALS } from "@/constants/defaults";
 
 export interface DiaryDayViewProps {
   userId: string;
   date: string; // YYYY-MM-DD format
   onDateChange: (date: string) => void;
-  initialEntries?: DiaryEntryWithFood[];
-  initialTotals?: DailyTotals | null;
 }
 
 export function DiaryDayView({
   userId,
   date,
   onDateChange,
-  initialEntries = [],
-  initialTotals = null,
 }: DiaryDayViewProps) {
   const [isAddFoodOpen, setIsAddFoodOpen] = useState(false);
-  const [entries, setEntries] = useState(initialEntries);
-  const [totals, setTotals] = useState(initialTotals);
-  const [isPending, startTransition] = useTransition();
-
-  // Fetch data when date changes - using startTransition for better UX
-  useEffect(() => {
-    startTransition(async () => {
-      try {
-        const [entriesData, totalsData] = await Promise.all([
-          getDiaryDay({ data: { userId, date } }),
-          getDailyTotals({ data: { userId, date } }),
-        ]);
-        setEntries(entriesData);
-        setTotals(totalsData);
-      } catch (error) {
-        console.error("Failed to fetch diary data:", error);
-      }
-    });
-  }, [userId, date]);
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const { data: entries = [], isLoading: isEntriesLoading } = useDiaryDay(
+    userId,
+    date
+  );
+  const { data: totals, isLoading: isTotalsLoading } = useDiaryTotals(
+    userId,
+    date
+  );
 
   // Format date for display
   const displayDate = new Date(date + "T00:00:00").toLocaleDateString("en-US", {
@@ -56,85 +47,83 @@ export function DiaryDayView({
     year: "numeric",
   });
 
-  // Handle successful entry creation - refetch data
   const handleEntryCreated = () => {
     setIsAddFoodOpen(false);
-    // Refetch data with transition for smooth loading state
-    startTransition(async () => {
-      try {
-        const [entriesData, totalsData] = await Promise.all([
-          getDiaryDay({ data: { userId, date } }),
-          getDailyTotals({ data: { userId, date } }),
-        ]);
-        setEntries(entriesData);
-        setTotals(totalsData);
-      } catch (error) {
-        console.error("Failed to refresh diary data:", error);
-      }
-    });
   };
+
+  const isPending = isEntriesLoading || isTotalsLoading;
+
+  // Transform totals to NutritionData format
+  const nutritionData: NutritionData = {
+    calories: {
+      consumed: totals?.calories || 0,
+      goal: DEFAULT_NUTRITION_GOALS.calories,
+    },
+    protein: {
+      consumed: totals?.protein || 0,
+      goal: DEFAULT_NUTRITION_GOALS.protein,
+    },
+    carbs: {
+      consumed: totals?.carbs || 0,
+      goal: DEFAULT_NUTRITION_GOALS.carbs,
+    },
+    fat: {
+      consumed: totals?.fat || 0,
+      goal: DEFAULT_NUTRITION_GOALS.fat,
+    },
+  };
+
+  // Date picker component for the header action
+  const DatePicker = (
+    <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          className="nutrition-summary-date-button focus-ring"
+          aria-label="Select date"
+        >
+          <CalendarIcon
+            className="nutrition-summary-date-button-icon"
+            aria-hidden="true"
+          />
+          <span className="nutrition-summary-date-button-text">
+            {displayDate}
+          </span>
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="popover-calendar" align="end">
+        <Calendar
+          mode="single"
+          selected={parse(date, "yyyy-MM-dd", new Date())}
+          onSelect={(newDate) => {
+            if (newDate) {
+              onDateChange(format(newDate, "yyyy-MM-dd"));
+              setIsCalendarOpen(false);
+            }
+          }}
+          initialFocus
+        />
+      </PopoverContent>
+    </Popover>
+  );
 
   return (
     <div className="diary-day-container">
-      {/* Date Selector */}
-      <Card className="diary-day-date-card">
-        <div className="diary-day-date-content">
-          <div className="diary-day-date-display">
-            <Calendar className="diary-day-date-icon" />
-            <span className="diary-day-date-text">{displayDate}</span>
-          </div>
-          <Input
-            type="date"
-            value={date}
-            onChange={(e) => onDateChange(e.target.value)}
-            className="diary-day-date-input"
-          />
-        </div>
-      </Card>
+      {/* Hero Card: Nutrition Summary (shared component) */}
+      <NutritionSummary
+        title="Daily Totals"
+        data={nutritionData}
+        isLoading={isPending}
+        headerAction={DatePicker}
+      />
 
-      {/* Daily Totals Summary */}
-      <Card className="diary-day-totals-card">
-        <h2 className="diary-day-totals-title">Today's Nutrition</h2>
-        {isPending ? (
-          <div className="diary-day-totals-grid">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="diary-day-loading-item">
-                <div className="diary-day-loading-label"></div>
-                <div className="diary-day-loading-value"></div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="diary-day-totals-grid">
-            <div className="diary-day-total-item">
-              <p className="diary-day-total-label">Calories</p>
-              <p className="diary-day-total-value">{totals?.calories || 0}</p>
-              <p className="diary-day-total-unit">kcal</p>
-            </div>
-            <div className="diary-day-total-item">
-              <p className="diary-day-total-label">Protein</p>
-              <p className="diary-day-total-value">{totals?.protein || 0}</p>
-              <p className="diary-day-total-unit">g</p>
-            </div>
-            <div className="diary-day-total-item">
-              <p className="diary-day-total-label">Carbs</p>
-              <p className="diary-day-total-value">{totals?.carbs || 0}</p>
-              <p className="diary-day-total-unit">g</p>
-            </div>
-            <div className="diary-day-total-item">
-              <p className="diary-day-total-label">Fat</p>
-              <p className="diary-day-total-value">{totals?.fat || 0}</p>
-              <p className="diary-day-total-unit">g</p>
-            </div>
-          </div>
-        )}
-        {totals && totals.entryCount > 0 && (
-          <p className="diary-day-entry-count">
-            {totals.entryCount} {totals.entryCount === 1 ? "entry" : "entries"}{" "}
-            logged today
-          </p>
-        )}
-      </Card>
+      {/* Entry count info */}
+      {totals && totals.entryCount > 0 && (
+        <p className="diary-entry-count">
+          {totals.entryCount} {totals.entryCount === 1 ? "entry" : "entries"}{" "}
+          logged today
+        </p>
+      )}
 
       {/* Add Food Button */}
       <div className="diary-day-meals-header">

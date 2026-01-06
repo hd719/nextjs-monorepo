@@ -80,6 +80,11 @@ export type Exercise = Prisma.ExerciseModel
  */
 export type DiaryEntry = Prisma.DiaryEntryModel
 /**
+ * Model WorkoutSession
+ * 
+ */
+export type WorkoutSession = Prisma.WorkoutSessionModel
+/**
  * Model WorkoutLog
  * 
  */

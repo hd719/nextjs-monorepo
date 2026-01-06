@@ -4,109 +4,55 @@
    ========================================================================== */
 
 @layer components {
-  /**
-   * DailySummary Component Styles
-   *
-   * Shows today's nutrition summary with metric cards
-   */
-
   /* ==========================================================================
-     Section Container
+     Dashboard Layout
+     Grid-based layout with hero section and supporting rows
      ========================================================================== */
 
-  .dashboard-summary-section {
-    @apply space-y-4;
+  .dashboard-layout {
+    @apply flex flex-col gap-6;
   }
 
-  /* ==========================================================================
-     Header
-     ========================================================================== */
-
-  .dashboard-summary-header {
-    @apply flex items-center justify-between;
+  .dashboard-page-header {
+    @apply flex items-center justify-between flex-wrap gap-4;
   }
 
-  .dashboard-summary-heading {
+  .dashboard-page-title {
     @apply text-2xl font-bold;
   }
 
-  .dashboard-summary-date {
-    @apply flex items-center gap-2 text-sm;
-    color: var(--muted-foreground);
-  }
-
-  .dashboard-summary-date-icon {
-    @apply w-4 h-4;
-  }
-
-  /* ==========================================================================
-     Metrics Grid
-     ========================================================================== */
-
-  .dashboard-summary-grid {
-    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4;
-  }
-
-  /**
-   * MetricCard Component Styles
-   *
-   * Displays nutrition metrics with progress bars
-   */
-
-  /* ==========================================================================
-     Card Content
-     ========================================================================== */
-
-  .dashboard-metric-card-content {
-    @apply p-6;
-  }
-
-  .dashboard-metric-content {
-    @apply space-y-4;
-  }
-
-  /* ==========================================================================
-     Loading State
-     ========================================================================== */
-
-  .dashboard-metric-loading-container {
-    @apply space-y-4;
-  }
-
-  .dashboard-metric-loading-values {
-    @apply space-y-2;
-  }
-
-  /* ==========================================================================
-     Label Section
-     ========================================================================== */
-
-  .dashboard-metric-label {
-    @apply text-sm font-medium;
-    color: var(--muted-foreground);
-  }
-
-  /* ==========================================================================
-     Values Section
-     ========================================================================== */
-
-  .dashboard-metric-values {
-    @apply space-y-1;
-  }
-
-  .dashboard-metric-consumed {
-    @apply text-3xl font-bold;
-  }
-
-  .dashboard-metric-goal {
-    @apply text-lg font-normal;
-    color: var(--muted-foreground);
-  }
-
-  .dashboard-metric-unit {
+  .dashboard-page-subtitle {
     @apply text-sm;
     color: var(--muted-foreground);
   }
+
+  /* Two-column grid for supporting sections */
+  .dashboard-grid-row {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-6;
+  }
+
+  /* Ensure grid children stretch to fill row height */
+  .dashboard-grid-row > * {
+    @apply min-h-0;
+  }
+
+  /* Stack container for left column (QuickActions + Progress) */
+  .dashboard-left-stack {
+    @apply flex flex-col gap-6 h-full;
+  }
+
+  /* ==========================================================================
+     Hero Card - DailySummary wrapper
+     ========================================================================== */
+
+  .dashboard-hero-card {
+    @apply p-6;
+  }
+
+  /**
+   * DailySummary uses the shared NutritionSummary component
+   * CSS is in src/styles/components/ui.css (.nutrition-*)
+   */
 
   /**
    * WaterTracker Component Styles
@@ -238,8 +184,12 @@
     @apply text-2xl font-bold;
   }
 
+  .dashboard-diary-card {
+    @apply p-4;
+  }
+
   .dashboard-diary-meals-list {
-    @apply space-y-4;
+    @apply space-y-3;
   }
 
   /**
@@ -281,7 +231,9 @@
   }
 
   .dashboard-action-button {
-    @apply w-full h-full p-6 flex flex-col items-center gap-3;
+    @apply w-full p-6 flex flex-col items-center gap-3;
+    /* Override Button component's default h-10 constraint */
+    height: auto !important;
   }
 
   .dashboard-action-button:hover {
@@ -293,7 +245,12 @@
      ========================================================================== */
 
   .dashboard-action-icon-container {
-    @apply w-12 h-12 rounded-full flex items-center justify-center transition-colors;
+    @apply rounded-full flex items-center justify-center transition-colors shrink-0;
+    /* Fixed dimensions for circular icon container */
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
     background-color: color-mix(in srgb, var(--accent) 10%, transparent);
   }
 
@@ -351,24 +308,35 @@
      ========================================================================== */
 
   .dashboard-activity-content {
-    @apply space-y-4;
+    @apply space-y-0;
   }
 
   /* ==========================================================================
-     Activity Item
+     Activity Item - Denser layout for better scanability
      ========================================================================== */
 
   .dashboard-activity-item {
-    @apply flex items-start gap-3 pb-4 last:pb-0 border-b last:border-0;
+    @apply flex items-center gap-3 py-3 px-2 -mx-2 rounded-md;
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+  }
+
+  .dashboard-activity-item:last-child {
+    border-bottom: none;
   }
 
   .dashboard-activity-icon-container {
-    @apply w-10 h-10 rounded-full flex items-center justify-center shrink-0;
+    @apply w-9 h-9 rounded-full flex items-center justify-center shrink-0;
     background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+    transition: background-color var(--duration-fast) var(--ease-out-soft);
+  }
+
+  /* Icon emphasis on row hover */
+  .dashboard-activity-item:hover .dashboard-activity-icon-container {
+    background-color: color-mix(in srgb, var(--accent) 20%, transparent);
   }
 
   .dashboard-activity-icon {
-    @apply w-5 h-5;
+    @apply w-4 h-4;
     color: var(--accent);
   }
 
@@ -377,11 +345,11 @@
   }
 
   .dashboard-activity-description {
-    @apply text-sm font-medium;
+    @apply text-sm font-medium truncate;
   }
 
   .dashboard-activity-metadata {
-    @apply flex items-center gap-2 mt-1;
+    @apply flex items-center gap-2 mt-0.5;
   }
 
   .dashboard-activity-meta-text {
@@ -399,7 +367,12 @@
      ========================================================================== */
 
   .dashboard-activity-loading-item {
-    @apply flex items-start gap-3 pb-4 border-b last:border-0;
+    @apply flex items-center gap-3 py-3 px-2;
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+  }
+
+  .dashboard-activity-loading-item:last-child {
+    border-bottom: none;
   }
 
   .dashboard-activity-loading-content {
@@ -481,6 +454,15 @@
     color: var(--muted-foreground);
   }
 
+  .dashboard-exercise-weight-link {
+    @apply mt-1 flex items-center justify-center gap-1 text-xs hover:underline;
+    color: var(--primary);
+  }
+
+  .dashboard-exercise-weight-link-icon {
+    @apply h-3 w-3;
+  }
+
   /* ==========================================================================
      Loading State
      ========================================================================== */
@@ -499,5 +481,461 @@
 
   .dashboard-exercise-empty-card-content {
     @apply p-0;
+  }
+  /* ==========================================================================
+     Progress Activity Widget
+     ========================================================================== */
+
+  .dashboard-progress-section {
+    @apply flex flex-col flex-1 h-full;
+  }
+
+  .dashboard-progress-header {
+    @apply flex items-center justify-between mb-3;
+  }
+
+  .dashboard-progress-heading {
+    @apply text-lg font-semibold;
+  }
+
+  .dashboard-progress-view-all {
+    @apply flex items-center gap-1 text-xs font-medium transition-colors;
+    color: var(--muted-foreground);
+  }
+
+  .dashboard-progress-view-all:hover {
+    color: var(--accent);
+  }
+
+  .dashboard-progress-arrow {
+    @apply w-3 h-3;
+  }
+
+  .dashboard-progress-card {
+    @apply p-4 flex-1 flex flex-col gap-4 h-full;
+  }
+
+  /* Stats Row */
+  .dashboard-progress-stats {
+    @apply flex justify-between gap-2;
+  }
+
+  .dashboard-progress-stat {
+    @apply flex items-center gap-2;
+  }
+
+  .dashboard-progress-stat-icon {
+    @apply w-7 h-7 rounded-full flex items-center justify-center shrink-0;
+  }
+
+  .dashboard-progress-icon-sm {
+    @apply w-3.5 h-3.5;
+  }
+
+  .dashboard-progress-stat-icon-flame {
+    background-color: color-mix(in srgb, #f97316 15%, transparent);
+    color: #f97316;
+  }
+
+  .dashboard-progress-stat-icon-cal {
+    background-color: color-mix(in srgb, #3b82f6 15%, transparent);
+    color: #3b82f6;
+  }
+
+  .dashboard-progress-stat-icon-weight {
+    background-color: color-mix(in srgb, #10b981 15%, transparent);
+    color: #10b981;
+  }
+
+  .dashboard-progress-stat-icon-trophy {
+    background-color: color-mix(in srgb, #eab308 15%, transparent);
+    color: #eab308;
+  }
+
+  .dashboard-progress-stat-content {
+    @apply flex flex-col;
+  }
+
+  .dashboard-progress-stat-value {
+    @apply text-sm font-semibold leading-tight;
+  }
+
+  .dashboard-progress-stat-value-success {
+    color: #10b981;
+  }
+
+  .dashboard-progress-stat-value-sm {
+    @apply text-xs font-semibold leading-tight;
+  }
+
+  .dashboard-progress-stat-label {
+    @apply text-xs leading-tight;
+    color: var(--muted-foreground);
+  }
+
+  /* Mini Bar Chart */
+  .dashboard-progress-chart {
+    @apply relative flex-1 flex flex-col min-h-[100px];
+  }
+
+  .dashboard-progress-chart-bars {
+    @apply flex items-end justify-between gap-1 flex-1;
+  }
+
+  .dashboard-progress-chart-bar-col {
+    @apply flex flex-col items-center gap-1 flex-1 h-full;
+  }
+
+  .dashboard-progress-chart-bar-container {
+    @apply w-full flex-1 flex items-end min-h-[60px];
+  }
+
+  .dashboard-progress-chart-bar {
+    @apply w-full rounded-t-sm transition-all duration-300;
+  }
+
+  .dashboard-progress-chart-bar-normal {
+    background-color: var(--accent);
+  }
+
+  .dashboard-progress-chart-bar-over {
+    background-color: #f59e0b;
+  }
+
+  .dashboard-progress-chart-bar-today {
+    background-color: var(--muted);
+    border: 1px dashed var(--border);
+    border-bottom: none;
+  }
+
+  .dashboard-progress-chart-label {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .dashboard-progress-chart-label-today {
+    @apply font-medium;
+    color: var(--foreground);
+  }
+
+  .dashboard-progress-chart-goal-line {
+    @apply absolute left-0 right-0 border-t border-dashed pointer-events-none;
+    border-color: var(--muted-foreground);
+    opacity: 0.3;
+  }
+
+  /* ==========================================================================
+     Progress Widget - Row-based Layout
+     ========================================================================== */
+
+  /* Text color variants */
+  .dashboard-text-color-accent {
+    color: var(--accent);
+  }
+  .dashboard-text-color-green {
+    color: #10b981;
+  }
+  .dashboard-text-color-indigo {
+    color: #6366f1;
+  }
+  .dashboard-text-color-cyan {
+    color: #06b6d4;
+  }
+  .dashboard-text-color-amber {
+    color: #f59e0b;
+  }
+
+  /* Progress Row */
+  .dashboard-progress-row {
+    @apply py-4 border-b;
+    border-color: var(--border);
+  }
+
+  .dashboard-progress-row:first-child {
+    @apply pt-0;
+  }
+
+  .dashboard-progress-row-last {
+    @apply border-b-0 pb-0;
+  }
+
+  .dashboard-progress-row-header {
+    @apply flex items-center gap-3 mb-3;
+  }
+
+  .dashboard-progress-row-icon {
+    @apply w-10 h-10 rounded-xl flex items-center justify-center shrink-0;
+  }
+
+  .dashboard-progress-row-icon-inner {
+    @apply w-5 h-5;
+  }
+
+  .dashboard-icon-indigo {
+    background-color: color-mix(in srgb, #6366f1 15%, transparent);
+    color: #6366f1;
+  }
+
+  .dashboard-icon-green {
+    background-color: color-mix(in srgb, #10b981 15%, transparent);
+    color: #10b981;
+  }
+
+  .dashboard-icon-cyan {
+    background-color: color-mix(in srgb, #06b6d4 15%, transparent);
+    color: #06b6d4;
+  }
+
+  .dashboard-icon-amber {
+    background-color: color-mix(in srgb, #f59e0b 15%, transparent);
+    color: #f59e0b;
+  }
+
+  .dashboard-progress-row-title {
+    @apply flex flex-col flex-1;
+  }
+
+  .dashboard-progress-row-name {
+    @apply text-sm font-semibold;
+  }
+
+  .dashboard-progress-row-subtitle {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .dashboard-progress-row-value {
+    @apply flex flex-col items-end;
+  }
+
+  .dashboard-progress-row-main {
+    @apply text-lg font-bold;
+  }
+
+  .dashboard-progress-row-secondary {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .dashboard-progress-row-content {
+    @apply space-y-2;
+  }
+
+  .dashboard-progress-row-meta {
+    @apply flex items-center justify-between text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .dashboard-progress-row-meta-item {
+    @apply flex items-center gap-1;
+  }
+
+  .dashboard-trend-icon {
+    @apply w-3 h-3;
+  }
+
+  /* Mini Bar Chart */
+  .dashboard-mini-chart {
+    @apply flex items-end gap-1 h-8;
+  }
+
+  .dashboard-mini-chart-bar {
+    @apply flex-1 rounded-t transition-all;
+    min-height: 4px;
+  }
+
+  .dashboard-mini-chart-bar:nth-child(1) {
+    height: 75%;
+  }
+  .dashboard-mini-chart-bar:nth-child(2) {
+    height: 68%;
+  }
+  .dashboard-mini-chart-bar:nth-child(3) {
+    height: 72%;
+  }
+  .dashboard-mini-chart-bar:nth-child(4) {
+    height: 81%;
+  }
+  .dashboard-mini-chart-bar:nth-child(5) {
+    height: 65%;
+  }
+  .dashboard-mini-chart-bar:nth-child(6) {
+    height: 85%;
+  }
+  .dashboard-mini-chart-bar:nth-child(7) {
+    height: 70%;
+  }
+
+  .dashboard-bar-color-indigo {
+    background-color: #6366f1;
+  }
+
+  .dashboard-bar-color-green {
+    background-color: #10b981;
+  }
+
+  .dashboard-bar-color-cyan {
+    background-color: #06b6d4;
+  }
+
+  /* Progress Bar */
+  .dashboard-progress-bar-track {
+    @apply h-2 rounded-full;
+    background-color: var(--muted);
+  }
+
+  .dashboard-progress-bar-fill {
+    @apply h-full rounded-full transition-all;
+    width: 82%;
+  }
+
+  .dashboard-bar-color-cyan.dashboard-progress-bar-fill {
+    background-color: #06b6d4;
+  }
+
+  /* Achievements List */
+  .dashboard-achievements-list {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .dashboard-achievement-badge {
+    @apply flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-medium;
+    background-color: color-mix(in srgb, #f59e0b 15%, transparent);
+    color: #f59e0b;
+  }
+
+  .dashboard-achievement-icon {
+    @apply w-3.5 h-3.5;
+  }
+
+  .dashboard-achievement-title {
+    @apply text-xs;
+  }
+
+  /* ==========================================================================
+     Responsive Adjustments
+     ========================================================================== */
+
+  /* Tablet breakpoint (768px) */
+  @media (max-width: 768px) {
+    /* Dashboard grid - single column */
+    .dashboard-grid-row {
+      @apply grid-cols-1;
+    }
+
+    /* Progress section - reduce gap */
+    .dashboard-progress-section {
+      @apply gap-3;
+    }
+
+    /* Progress row header - smaller icon */
+    .dashboard-progress-row-icon {
+      @apply w-9 h-9;
+    }
+
+    .dashboard-progress-row-icon-inner {
+      @apply w-4 h-4;
+    }
+  }
+
+  /* Mobile breakpoint (640px) */
+  @media (max-width: 640px) {
+    /* Main layout adjustments */
+    .dashboard-layout {
+      @apply gap-4;
+    }
+
+    /* Progress widget */
+    .dashboard-progress-row {
+      @apply py-3;
+    }
+
+    .dashboard-progress-row-header {
+      @apply gap-2 mb-2;
+    }
+
+    .dashboard-progress-row-icon {
+      @apply w-8 h-8 rounded-lg;
+    }
+
+    .dashboard-progress-row-icon-inner {
+      @apply w-4 h-4;
+    }
+
+    .dashboard-progress-row-name {
+      @apply text-xs;
+    }
+
+    .dashboard-progress-row-subtitle {
+      @apply hidden;
+    }
+
+    .dashboard-progress-row-main {
+      @apply text-base;
+    }
+
+    .dashboard-progress-row-secondary {
+      @apply hidden;
+    }
+
+    /* Mini charts - smaller */
+    .dashboard-mini-chart {
+      @apply h-6;
+    }
+
+    /* Progress bar */
+    .dashboard-progress-bar-track {
+      @apply h-1.5;
+    }
+
+    /* Achievements list - wrap */
+    .dashboard-achievements-list {
+      @apply flex-wrap;
+    }
+
+    .dashboard-achievement-badge {
+      @apply px-1.5 py-0.5;
+    }
+
+    /* Meta items - stack */
+    .dashboard-progress-row-meta {
+      @apply flex-wrap gap-2;
+    }
+
+    /* Quick actions - smaller gap */
+    .dashboard-quick-actions-grid {
+      @apply gap-2;
+    }
+  }
+
+  /* Small mobile (480px) */
+  @media (max-width: 480px) {
+    /* Progress header */
+    .dashboard-progress-heading {
+      @apply text-base;
+    }
+
+    .dashboard-progress-view-all {
+      @apply text-xs;
+    }
+
+    /* Further reduce row padding */
+    .dashboard-progress-row {
+      @apply py-2.5;
+    }
+
+    /* Hide mini charts on very small screens */
+    .dashboard-mini-chart {
+      @apply hidden;
+    }
+
+    /* Compact meta */
+    .dashboard-progress-row-meta {
+      @apply text-xs;
+    }
+
+    .dashboard-trend-icon {
+      @apply w-3 h-3;
+    }
   }
 }

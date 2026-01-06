@@ -463,28 +463,525 @@ const commonFoods = [
   },
 ];
 
+// Curated exercise library with MET values
+// MET (Metabolic Equivalent of Task) values from Compendium of Physical Activities
+const curatedExercises = [
+  // Cardio exercises
+  {
+    name: "Running (6 mph / 10 min mile)",
+    category: "cardio" as const,
+    muscleGroups: ["legs", "cardiovascular"],
+    metValue: 10.0,
+    description: "Moderate pace running suitable for general fitness",
+    instructions: [
+      "Maintain a steady pace of about 6 mph",
+      "Keep proper running form with relaxed shoulders",
+      "Land midfoot and push off with toes",
+      "Breathe rhythmically",
+    ],
+    equipment: ["running shoes"],
+    difficulty: "intermediate" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Running (8 mph / 7.5 min mile)",
+    category: "cardio" as const,
+    muscleGroups: ["legs", "cardiovascular"],
+    metValue: 13.5,
+    description: "Fast pace running for experienced runners",
+    instructions: [
+      "Maintain a challenging pace of about 8 mph",
+      "Focus on breathing and form",
+      "Warm up thoroughly before starting",
+    ],
+    equipment: ["running shoes"],
+    difficulty: "advanced" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Walking (3.5 mph, brisk pace)",
+    category: "cardio" as const,
+    muscleGroups: ["legs", "cardiovascular"],
+    metValue: 4.3,
+    description: "Brisk walking for general fitness and health",
+    instructions: [
+      "Walk at a pace where you can talk but not sing",
+      "Swing arms naturally",
+      "Keep head up and shoulders back",
+    ],
+    equipment: ["walking shoes"],
+    difficulty: "beginner" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Cycling (moderate effort, 12-14 mph)",
+    category: "cardio" as const,
+    muscleGroups: ["legs", "cardiovascular"],
+    metValue: 8.0,
+    description: "Moderate intensity cycling on flat terrain",
+    instructions: [
+      "Maintain steady cadence of 60-80 RPM",
+      "Keep core engaged",
+      "Adjust seat height for proper leg extension",
+    ],
+    equipment: ["bicycle", "helmet"],
+    difficulty: "intermediate" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Cycling (vigorous effort, 14-16 mph)",
+    category: "cardio" as const,
+    muscleGroups: ["legs", "cardiovascular"],
+    metValue: 10.0,
+    description: "High intensity cycling for advanced fitness",
+    instructions: [
+      "Maintain higher cadence and speed",
+      "Focus on breathing and endurance",
+      "Stay hydrated",
+    ],
+    equipment: ["bicycle", "helmet"],
+    difficulty: "advanced" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Swimming (moderate effort)",
+    category: "cardio" as const,
+    muscleGroups: ["full body", "cardiovascular"],
+    metValue: 8.0,
+    description: "General lap swimming at moderate pace",
+    instructions: [
+      "Maintain steady breathing rhythm",
+      "Use proper stroke technique",
+      "Rest briefly between laps as needed",
+    ],
+    equipment: ["swimsuit", "goggles"],
+    difficulty: "intermediate" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Rowing Machine (moderate effort)",
+    category: "cardio" as const,
+    muscleGroups: ["full body", "back", "legs", "cardiovascular"],
+    metValue: 7.0,
+    description: "Moderate intensity rowing for full body workout",
+    instructions: [
+      "Drive with legs first, then pull with arms",
+      "Keep back straight throughout movement",
+      "Return to starting position with control",
+    ],
+    equipment: ["rowing machine"],
+    difficulty: "intermediate" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Jump Rope",
+    category: "cardio" as const,
+    muscleGroups: ["legs", "shoulders", "cardiovascular"],
+    metValue: 12.3,
+    description: "High intensity cardio with jump rope",
+    instructions: [
+      "Jump on balls of feet",
+      "Keep elbows close to body",
+      "Use wrists to turn rope",
+      "Land softly",
+    ],
+    equipment: ["jump rope"],
+    difficulty: "intermediate" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Elliptical Trainer (moderate effort)",
+    category: "cardio" as const,
+    muscleGroups: ["legs", "cardiovascular"],
+    metValue: 5.0,
+    description: "Low impact cardio on elliptical machine",
+    instructions: [
+      "Maintain upright posture",
+      "Use handles for upper body engagement",
+      "Keep feet flat on pedals",
+    ],
+    equipment: ["elliptical machine"],
+    difficulty: "beginner" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Stair Climbing",
+    category: "cardio" as const,
+    muscleGroups: ["legs", "glutes", "cardiovascular"],
+    metValue: 8.8,
+    description: "Climbing stairs for cardio and leg strength",
+    instructions: [
+      "Use full foot on each step",
+      "Maintain steady pace",
+      "Use handrail for balance if needed",
+    ],
+    equipment: ["stairs"],
+    difficulty: "intermediate" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+
+  // Strength training exercises
+  {
+    name: "Bench Press",
+    category: "strength" as const,
+    muscleGroups: ["chest", "triceps", "shoulders"],
+    metValue: 6.0,
+    description: "Classic chest exercise with barbell or dumbbells",
+    instructions: [
+      "Lie flat on bench with feet on floor",
+      "Lower bar to chest with control",
+      "Press up explosively",
+      "Keep shoulder blades retracted",
+    ],
+    equipment: ["barbell", "bench", "weights"],
+    difficulty: "intermediate" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Squats",
+    category: "strength" as const,
+    muscleGroups: ["legs", "glutes", "core"],
+    metValue: 5.0,
+    description: "Fundamental lower body compound exercise",
+    instructions: [
+      "Stand with feet shoulder-width apart",
+      "Lower hips back and down",
+      "Keep chest up and knees tracking over toes",
+      "Drive through heels to stand",
+    ],
+    equipment: ["barbell", "squat rack"],
+    difficulty: "intermediate" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Deadlifts",
+    category: "strength" as const,
+    muscleGroups: ["back", "legs", "glutes", "core"],
+    metValue: 6.0,
+    description: "Full body compound lift focusing on posterior chain",
+    instructions: [
+      "Stand with feet hip-width apart",
+      "Grip bar just outside legs",
+      "Keep back straight, lift by extending hips and knees",
+      "Lower with control",
+    ],
+    equipment: ["barbell", "weights"],
+    difficulty: "advanced" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Pull-ups",
+    category: "strength" as const,
+    muscleGroups: ["back", "biceps", "shoulders"],
+    metValue: 8.0,
+    description: "Bodyweight exercise for back and arm strength",
+    instructions: [
+      "Hang from bar with overhand grip",
+      "Pull body up until chin clears bar",
+      "Lower with control",
+      "Avoid swinging",
+    ],
+    equipment: ["pull-up bar"],
+    difficulty: "advanced" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Push-ups",
+    category: "strength" as const,
+    muscleGroups: ["chest", "triceps", "shoulders", "core"],
+    metValue: 3.8,
+    description: "Classic bodyweight exercise for upper body",
+    instructions: [
+      "Start in plank position",
+      "Lower body until chest nearly touches floor",
+      "Push back up to starting position",
+      "Keep core tight throughout",
+    ],
+    equipment: [],
+    difficulty: "beginner" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Shoulder Press",
+    category: "strength" as const,
+    muscleGroups: ["shoulders", "triceps"],
+    metValue: 6.0,
+    description: "Overhead pressing for shoulder development",
+    instructions: [
+      "Start with weights at shoulder height",
+      "Press overhead until arms fully extended",
+      "Lower with control",
+      "Keep core engaged",
+    ],
+    equipment: ["dumbbells or barbell"],
+    difficulty: "intermediate" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Bicep Curls",
+    category: "strength" as const,
+    muscleGroups: ["biceps"],
+    metValue: 3.0,
+    description: "Isolation exercise for bicep development",
+    instructions: [
+      "Stand with dumbbells at sides",
+      "Curl weights up to shoulders",
+      "Keep elbows stationary",
+      "Lower with control",
+    ],
+    equipment: ["dumbbells"],
+    difficulty: "beginner" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Lunges",
+    category: "strength" as const,
+    muscleGroups: ["legs", "glutes"],
+    metValue: 4.0,
+    description: "Single leg exercise for lower body strength and balance",
+    instructions: [
+      "Step forward into lunge position",
+      "Lower back knee toward ground",
+      "Push through front heel to return",
+      "Alternate legs",
+    ],
+    equipment: ["optional: dumbbells"],
+    difficulty: "beginner" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Plank",
+    category: "strength" as const,
+    muscleGroups: ["core", "shoulders"],
+    metValue: 3.8,
+    description: "Isometric core strengthening exercise",
+    instructions: [
+      "Hold forearm plank position",
+      "Keep body in straight line",
+      "Engage core and glutes",
+      "Breathe steadily",
+    ],
+    equipment: [],
+    difficulty: "beginner" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Dumbbell Rows",
+    category: "strength" as const,
+    muscleGroups: ["back", "biceps"],
+    metValue: 4.5,
+    description: "Back exercise for strength and muscle development",
+    instructions: [
+      "Bend at hips with one hand on bench",
+      "Pull dumbbell to hip",
+      "Squeeze shoulder blade",
+      "Lower with control",
+    ],
+    equipment: ["dumbbells", "bench"],
+    difficulty: "beginner" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+
+  // Flexibility exercises
+  {
+    name: "Yoga (Hatha)",
+    category: "flexibility" as const,
+    muscleGroups: ["full body"],
+    metValue: 2.5,
+    description: "Gentle yoga practice for flexibility and relaxation",
+    instructions: [
+      "Follow instructor or routine",
+      "Focus on breath and form",
+      "Hold poses for recommended duration",
+      "Listen to your body",
+    ],
+    equipment: ["yoga mat"],
+    difficulty: "beginner" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Yoga (Vinyasa)",
+    category: "flexibility" as const,
+    muscleGroups: ["full body"],
+    metValue: 4.0,
+    description: "Dynamic flowing yoga practice",
+    instructions: [
+      "Flow between poses with breath",
+      "Maintain proper alignment",
+      "Build heat and flexibility",
+    ],
+    equipment: ["yoga mat"],
+    difficulty: "intermediate" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Stretching (general)",
+    category: "flexibility" as const,
+    muscleGroups: ["full body"],
+    metValue: 2.3,
+    description: "General stretching routine for flexibility",
+    instructions: [
+      "Hold each stretch 15-30 seconds",
+      "Breathe deeply",
+      "Never bounce",
+      "Stretch to mild tension, not pain",
+    ],
+    equipment: [],
+    difficulty: "beginner" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Pilates",
+    category: "flexibility" as const,
+    muscleGroups: ["core", "full body"],
+    metValue: 3.0,
+    description: "Core-focused exercise system for strength and flexibility",
+    instructions: [
+      "Focus on controlled movements",
+      "Engage core throughout",
+      "Coordinate breath with movement",
+    ],
+    equipment: ["mat", "optional: reformer"],
+    difficulty: "intermediate" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+
+  // Sports activities
+  {
+    name: "Basketball (game)",
+    category: "sports" as const,
+    muscleGroups: ["full body", "cardiovascular"],
+    metValue: 8.0,
+    description: "Playing basketball game or pickup",
+    instructions: [
+      "Warm up before playing",
+      "Stay hydrated",
+      "Use proper form for shooting and dribbling",
+    ],
+    equipment: ["basketball", "court"],
+    difficulty: "intermediate" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Soccer (game)",
+    category: "sports" as const,
+    muscleGroups: ["legs", "cardiovascular"],
+    metValue: 10.0,
+    description: "Playing soccer match or practice",
+    instructions: [
+      "Warm up thoroughly",
+      "Focus on ball control and positioning",
+      "Stay hydrated throughout",
+    ],
+    equipment: ["soccer ball", "cleats", "shin guards"],
+    difficulty: "intermediate" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Tennis (singles)",
+    category: "sports" as const,
+    muscleGroups: ["full body", "cardiovascular"],
+    metValue: 8.0,
+    description: "Playing singles tennis match",
+    instructions: [
+      "Warm up before playing",
+      "Focus on footwork and positioning",
+      "Use proper stroke technique",
+    ],
+    equipment: ["tennis racket", "tennis balls", "court"],
+    difficulty: "intermediate" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+  {
+    name: "Hiking (moderate terrain)",
+    category: "sports" as const,
+    muscleGroups: ["legs", "cardiovascular"],
+    metValue: 6.0,
+    description: "Hiking on moderate trails with some elevation",
+    instructions: [
+      "Wear proper hiking boots",
+      "Bring water and snacks",
+      "Use trekking poles if needed",
+      "Watch footing on uneven terrain",
+    ],
+    equipment: ["hiking boots", "backpack"],
+    difficulty: "intermediate" as const,
+    source: "verified" as const,
+    verified: true,
+  },
+];
+
 async function main() {
   console.log("🌱 Starting seed...");
 
   // Check if foods already exist
-  const existingCount = await prisma.foodItem.count();
-  if (existingCount > 0) {
-    console.log(`⚠️  Database already has ${existingCount} food items.`);
-    console.log("Skipping seed to avoid duplicates.");
-    return;
+  const existingFoodCount = await prisma.foodItem.count();
+  if (existingFoodCount === 0) {
+    // Insert all foods
+    console.log(`📦 Inserting ${commonFoods.length} common foods...`);
+
+    for (const food of commonFoods) {
+      await prisma.foodItem.create({
+        data: food,
+      });
+    }
+
+    console.log(`✅ Added ${commonFoods.length} food items to the database.`);
+  } else {
+    console.log(
+      `⚠️  Database already has ${existingFoodCount} food items. Skipping food seed.`
+    );
   }
 
-  // Insert all foods
-  console.log(`📦 Inserting ${commonFoods.length} common foods...`);
+  // Check if exercises already exist
+  const existingExerciseCount = await prisma.exercise.count();
+  if (existingExerciseCount === 0) {
+    // Insert all exercises
+    console.log(`📦 Inserting ${curatedExercises.length} curated exercises...`);
 
-  for (const food of commonFoods) {
-    await prisma.foodItem.create({
-      data: food,
-    });
+    for (const exercise of curatedExercises) {
+      await prisma.exercise.create({
+        data: exercise,
+      });
+    }
+
+    console.log(
+      `✅ Added ${curatedExercises.length} exercises to the database.`
+    );
+  } else {
+    console.log(
+      `⚠️  Database already has ${existingExerciseCount} exercises. Skipping exercise seed.`
+    );
   }
 
   console.log("✅ Seed completed successfully!");
-  console.log(`   Added ${commonFoods.length} food items to the database.`);
 }
 
 main()

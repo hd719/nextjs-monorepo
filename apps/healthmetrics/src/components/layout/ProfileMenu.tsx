@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { User, Settings, LogOut, Moon, Sun } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -8,14 +10,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useTheme } from "@/components/theme-provider";
+import { useTheme } from "@/components/ui/theme-provider";
 import { authClient } from "@/lib/auth-client";
 import { useNavigate } from "@tanstack/react-router";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
+import { ROUTES } from "@/constants/routes";
 
 export function ProfileMenu() {
   const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
+  const [logoutError, setLogoutError] = useState<string | null>(null);
 
   // Helper to determine if we're in dark mode (for showing correct icon)
   const getIsDarkMode = () => {
@@ -36,15 +40,17 @@ export function ProfileMenu() {
   };
 
   const handleProfileClick = () => {
-    navigate({ to: "/profile" });
+    navigate({ to: ROUTES.PROFILE });
   };
 
   const handleLogout = async () => {
+    setLogoutError(null);
     try {
       await authClient.signOut();
-      navigate({ to: "/" });
+      navigate({ to: ROUTES.HOME });
     } catch (error) {
       console.error("Logout failed:", error);
+      setLogoutError("Logout failed. Please try again.");
     }
   };
 
@@ -78,6 +84,13 @@ export function ProfileMenu() {
               : "profile-menu-separator-light"
           }
         />
+        {logoutError && (
+          <div className="px-2 pb-2">
+            <Alert variant="destructive">
+              <AlertDescription>{logoutError}</AlertDescription>
+            </Alert>
+          </div>
+        )}
         <DropdownMenuItem
           onClick={handleProfileClick}
           className={cn(

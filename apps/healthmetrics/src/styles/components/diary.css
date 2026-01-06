@@ -4,6 +4,26 @@
    ========================================================================== */
 
 @layer components {
+  /* ==========================================================================
+     Diary Page Layout
+     ========================================================================== */
+
+  .diary-page-layout {
+    @apply flex flex-col gap-6;
+  }
+
+  .diary-page-header {
+    @apply flex items-center justify-between flex-wrap gap-4;
+  }
+
+  .diary-page-title {
+    @apply text-2xl font-bold;
+  }
+
+  .diary-page-subtitle {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
   /**
    * DiaryDayView Component Styles
    *
@@ -19,7 +39,12 @@
   }
 
   /* ==========================================================================
-     Date Selector Card
+     Hero Card uses shared NutritionSummary component
+     CSS is in src/styles/components/ui.css (.nutrition-*)
+     ========================================================================== */
+
+  /* ==========================================================================
+     Legacy Date Selector Card (keeping for backwards compatibility)
      ========================================================================== */
 
   .diary-day-date-card {
@@ -48,7 +73,7 @@
   }
 
   /* ==========================================================================
-     Totals Card
+     Legacy Totals Card (keeping for backwards compatibility)
      ========================================================================== */
 
   .diary-day-totals-card {
@@ -108,6 +133,11 @@
      Meals Section
      ========================================================================== */
 
+  .diary-entry-count {
+    @apply text-sm text-center mt-2;
+    color: var(--muted-foreground);
+  }
+
   .diary-day-meals-header {
     @apply flex justify-between items-center;
   }
@@ -154,6 +184,10 @@
   .diary-entry-loading-item {
     @apply h-4 rounded;
     background-color: var(--muted);
+  }
+
+  .diary-entry-loading-item-short {
+    @apply w-3/4;
   }
 
   /* ==========================================================================
@@ -204,8 +238,12 @@
   }
 
   .diary-entry-meal-calories {
-    @apply text-sm;
-    color: var(--muted-foreground);
+    @apply text-sm font-medium;
+  }
+
+  .diary-entry-meal-calories-value {
+    @apply text-base font-bold;
+    color: var(--foreground);
   }
 
   /* ==========================================================================
@@ -217,7 +255,8 @@
   }
 
   .diary-entry {
-    @apply flex items-start justify-between gap-4;
+    @apply flex items-start justify-between gap-4 py-2 px-2 -mx-2 rounded-md;
+    transition: background-color var(--duration-fast) var(--ease-out-soft);
   }
 
   .diary-entry-content {
@@ -321,6 +360,11 @@
     @apply text-sm font-medium;
   }
 
+  .diary-meal-calories-value {
+    @apply text-lg font-bold;
+    color: var(--foreground);
+  }
+
   .diary-meal-calories-unit {
     color: var(--muted-foreground);
   }
@@ -348,6 +392,16 @@
 
   .diary-meal-add-button:hover {
     color: var(--accent);
+  }
+
+  /* Clickable meal card link (for dashboard) */
+  .diary-meal-card-link {
+    @apply block no-underline;
+    color: inherit;
+  }
+
+  .diary-meal-card-clickable {
+    @apply cursor-pointer;
   }
 
   /* ==========================================================================

@@ -10,7 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProgressIndexRouteImport } from './routes/progress/index'
 import { Route as ProfileIndexRouteImport } from './routes/profile/index'
+import { Route as ExerciseIndexRouteImport } from './routes/exercise/index'
 import { Route as DiaryIndexRouteImport } from './routes/diary/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as AuthVerifyEmailRouteImport } from './routes/auth/verify-email'
@@ -25,9 +27,21 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProgressIndexRoute = ProgressIndexRouteImport.update({
+  id: '/progress/',
+  path: '/progress/',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./routes/progress/index.lazy').then((d) => d.Route),
+)
 const ProfileIndexRoute = ProfileIndexRouteImport.update({
   id: '/profile/',
   path: '/profile/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExerciseIndexRoute = ExerciseIndexRouteImport.update({
+  id: '/exercise/',
+  path: '/exercise/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DiaryIndexRoute = DiaryIndexRouteImport.update({
@@ -80,7 +94,9 @@ export interface FileRoutesByFullPath {
   '/auth/verify-email': typeof AuthVerifyEmailRoute
   '/dashboard': typeof DashboardIndexRoute
   '/diary': typeof DiaryIndexRoute
+  '/exercise': typeof ExerciseIndexRoute
   '/profile': typeof ProfileIndexRoute
+  '/progress': typeof ProgressIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
@@ -92,7 +108,9 @@ export interface FileRoutesByTo {
   '/auth/verify-email': typeof AuthVerifyEmailRoute
   '/dashboard': typeof DashboardIndexRoute
   '/diary': typeof DiaryIndexRoute
+  '/exercise': typeof ExerciseIndexRoute
   '/profile': typeof ProfileIndexRoute
+  '/progress': typeof ProgressIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesById {
@@ -105,7 +123,9 @@ export interface FileRoutesById {
   '/auth/verify-email': typeof AuthVerifyEmailRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/diary/': typeof DiaryIndexRoute
+  '/exercise/': typeof ExerciseIndexRoute
   '/profile/': typeof ProfileIndexRoute
+  '/progress/': typeof ProgressIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
@@ -119,7 +139,9 @@ export interface FileRouteTypes {
     | '/auth/verify-email'
     | '/dashboard'
     | '/diary'
+    | '/exercise'
     | '/profile'
+    | '/progress'
     | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -131,7 +153,9 @@ export interface FileRouteTypes {
     | '/auth/verify-email'
     | '/dashboard'
     | '/diary'
+    | '/exercise'
     | '/profile'
+    | '/progress'
     | '/api/auth/$'
   id:
     | '__root__'
@@ -143,7 +167,9 @@ export interface FileRouteTypes {
     | '/auth/verify-email'
     | '/dashboard/'
     | '/diary/'
+    | '/exercise/'
     | '/profile/'
+    | '/progress/'
     | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
@@ -156,7 +182,9 @@ export interface RootRouteChildren {
   AuthVerifyEmailRoute: typeof AuthVerifyEmailRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
   DiaryIndexRoute: typeof DiaryIndexRoute
+  ExerciseIndexRoute: typeof ExerciseIndexRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
+  ProgressIndexRoute: typeof ProgressIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
@@ -169,11 +197,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/progress/': {
+      id: '/progress/'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof ProgressIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/profile/': {
       id: '/profile/'
       path: '/profile'
       fullPath: '/profile'
       preLoaderRoute: typeof ProfileIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/exercise/': {
+      id: '/exercise/'
+      path: '/exercise'
+      fullPath: '/exercise'
+      preLoaderRoute: typeof ExerciseIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/diary/': {
@@ -244,7 +286,9 @@ const rootRouteChildren: RootRouteChildren = {
   AuthVerifyEmailRoute: AuthVerifyEmailRoute,
   DashboardIndexRoute: DashboardIndexRoute,
   DiaryIndexRoute: DiaryIndexRoute,
+  ExerciseIndexRoute: ExerciseIndexRoute,
   ProfileIndexRoute: ProfileIndexRoute,
+  ProgressIndexRoute: ProgressIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport

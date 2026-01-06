@@ -4,6 +4,7 @@ import { Activity, Loader2, CheckCircle, XCircle } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
+import { ROUTES } from "@/constants/routes";
 
 export const Route = createFileRoute("/auth/verify-email")({
   component: VerifyEmail,
@@ -37,7 +38,7 @@ function VerifyEmail() {
         }
 
         setStatus("success");
-        setTimeout(() => navigate({ to: "/auth/login" }), 2000);
+        setTimeout(() => navigate({ to: ROUTES.AUTH.LOGIN }), 2000);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Verification failed");
         setStatus("error");
@@ -48,38 +49,41 @@ function VerifyEmail() {
   }, [navigate]);
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-4">
-      <Card className="w-full max-w-md">
+    <div className="auth-verify-container">
+      <Card className="auth-card">
         <CardHeader>
-          <div className="flex items-center justify-center mb-4">
-            <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center">
-              <Activity className="w-8 h-8 text-accent" />
+          <div className="auth-verify-content">
+            <div className="auth-verify-logo-container">
+              <Activity className="auth-verify-logo-icon" aria-hidden="true" />
             </div>
           </div>
-          <CardTitle className="text-2xl text-center">
+          <CardTitle className="auth-verify-title">
             {status === "loading" && "Verifying your email..."}
             {status === "success" && "Email verified!"}
             {status === "error" && "Verification failed"}
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="auth-text-space-y">
           {status === "loading" && (
-            <div className="flex flex-col items-center gap-4 py-8">
-              <Loader2 className="w-12 h-12 text-accent animate-spin" />
-              <p className="text-center text-muted-foreground">
+            <div className="auth-verify-content">
+              <Loader2 className="auth-verify-spinner" aria-hidden="true" />
+              <p className="auth-verify-text">
                 Please wait while we verify your email...
               </p>
             </div>
           )}
 
           {status === "success" && (
-            <div className="flex flex-col items-center gap-4 py-8">
-              <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center">
-                <CheckCircle className="w-10 h-10 text-accent" />
+            <div className="auth-verify-content">
+              <div className="auth-verify-logo-container">
+                <CheckCircle
+                  className="auth-verify-success-icon"
+                  aria-hidden="true"
+                />
               </div>
-              <div className="text-center space-y-2">
-                <p className="text-lg font-semibold">Success!</p>
-                <p className="text-muted-foreground">
+              <div className="auth-text-center-sm auth-text-space-y">
+                <p className="auth-verify-success-title">Success!</p>
+                <p className="auth-verify-text">
                   Your email has been verified. Redirecting to login...
                 </p>
               </div>
@@ -87,20 +91,23 @@ function VerifyEmail() {
           )}
 
           {status === "error" && (
-            <div className="flex flex-col items-center gap-4 py-8">
-              <div className="w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center">
-                <XCircle className="w-10 h-10 text-destructive" />
+            <div className="auth-verify-content">
+              <div className="auth-verify-error-container">
+                <XCircle
+                  className="auth-verify-error-icon"
+                  aria-hidden="true"
+                />
               </div>
-              <div className="text-center space-y-2">
-                <p className="text-lg font-semibold">Verification failed</p>
-                <p className="text-sm text-destructive">{error}</p>
+              <div className="auth-text-center-sm auth-text-space-y">
+                <p className="auth-verify-success-title">Verification failed</p>
+                <p className="auth-verify-error-text">{error}</p>
               </div>
-              <div className="flex gap-3 pt-4">
+              <div className="auth-verify-actions">
                 <Button variant="outline" asChild>
-                  <Link to="/">Go to Home</Link>
+                  <Link to={ROUTES.HOME}>Go to Home</Link>
                 </Button>
                 <Button asChild>
-                  <Link to="/auth/login">Log In</Link>
+                  <Link to={ROUTES.AUTH.LOGIN}>Log In</Link>
                 </Button>
               </div>
             </div>

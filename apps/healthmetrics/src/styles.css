@@ -1,8 +1,8 @@
+/* Import Tailwind CSS FIRST - required for @layer and @apply to work */
+@import "tailwindcss";
+
 /* Import centralized color system - single source of truth for all colors */
 @import "./styles/colors.css";
-
-/* Import Tailwind CSS */
-@import "tailwindcss";
 
 /* Base layer styles */
 @layer base {
@@ -20,6 +20,7 @@
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
   }
 
   code {
@@ -28,6 +29,9 @@
   }
 }
 
+/* Motion utilities */
+@import "./styles/motion.css";
+
 /* Component styles */
 @import "./styles/components/landing.css";
 @import "./styles/components/auth.css";
@@ -35,7 +39,7 @@
 @import "./styles/components/layout.css";
 @import "./styles/components/dashboard.css";
 @import "./styles/components/diary.css";
+@import "./styles/components/exercise.css";
+@import "./styles/components/progress.css";
 @import "./styles/components/ui.css";
 @import "./styles/components/utilities.css";
-
-/* Utilities */

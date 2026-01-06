@@ -1,6 +1,7 @@
 import { UtensilsCrossed, Dumbbell, Scale } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useNavigate } from "@tanstack/react-router";
 import { Card } from "@/components/ui/card";
+import { ROUTES } from "@/constants/routes";
 
 const actions = [
   {
@@ -8,22 +9,31 @@ const actions = [
     icon: UtensilsCrossed,
     label: "Add Food",
     description: "Log a meal or snack",
+    route: ROUTES.DIARY,
   },
   {
     id: "log-exercise",
     icon: Dumbbell,
     label: "Log Exercise",
     description: "Record your workout",
+    route: ROUTES.EXERCISE,
   },
   {
     id: "add-weight",
     icon: Scale,
     label: "Add Weight",
     description: "Track your progress",
+    route: ROUTES.PROFILE,
   },
 ];
 
 export function QuickActions() {
+  const navigate = useNavigate();
+
+  const handleActionClick = (route: string) => {
+    navigate({ to: route });
+  };
+
   return (
     <section className="dashboard-actions-section">
       <h2 className="dashboard-actions-heading">Quick Actions</h2>
@@ -32,10 +42,24 @@ export function QuickActions() {
         {actions.map((action) => {
           const Icon = action.icon;
           return (
-            <Card key={action.id} className="dashboard-action-card">
-              <Button variant="ghost" className="dashboard-action-button">
+            <Card
+              key={action.id}
+              variant="supporting"
+              className="dashboard-action-card focusable-card"
+              tabIndex={0}
+              role="button"
+              aria-label={`${action.label}: ${action.description}`}
+              onClick={() => handleActionClick(action.route)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  handleActionClick(action.route);
+                }
+              }}
+            >
+              <div className="dashboard-action-button">
                 <div className="dashboard-action-icon-container">
-                  <Icon className="dashboard-action-icon" />
+                  <Icon className="dashboard-action-icon" aria-hidden="true" />
                 </div>
                 <div className="dashboard-action-content">
                   <p className="dashboard-action-label">{action.label}</p>
@@ -43,7 +67,7 @@ export function QuickActions() {
                     {action.description}
                   </p>
                 </div>
-              </Button>
+              </div>
             </Card>
           );
         })}

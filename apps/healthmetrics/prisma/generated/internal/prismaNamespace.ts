@@ -392,6 +392,7 @@ export const ModelName = {
   FoodItem: 'FoodItem',
   Exercise: 'Exercise',
   DiaryEntry: 'DiaryEntry',
+  WorkoutSession: 'WorkoutSession',
   WorkoutLog: 'WorkoutLog',
   WeightEntry: 'WeightEntry',
   RecipeCache: 'RecipeCache',
@@ -416,7 +417,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "betterAuthUser" | "betterAuthSession" | "betterAuthAccount" | "verification" | "user" | "foodItem" | "exercise" | "diaryEntry" | "workoutLog" | "weightEntry" | "recipeCache" | "mealPlanTemplate" | "mealPlan" | "goal" | "friendship" | "challenge" | "challengeParticipant"
+    modelProps: "betterAuthUser" | "betterAuthSession" | "betterAuthAccount" | "verification" | "user" | "foodItem" | "exercise" | "diaryEntry" | "workoutSession" | "workoutLog" | "weightEntry" | "recipeCache" | "mealPlanTemplate" | "mealPlan" | "goal" | "friendship" | "challenge" | "challengeParticipant"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1009,6 +1010,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.DiaryEntryCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.DiaryEntryCountAggregateOutputType> | number
+        }
+      }
+    }
+    WorkoutSession: {
+      payload: Prisma.$WorkoutSessionPayload<ExtArgs>
+      fields: Prisma.WorkoutSessionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.WorkoutSessionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkoutSessionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.WorkoutSessionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkoutSessionPayload>
+        }
+        findFirst: {
+          args: Prisma.WorkoutSessionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkoutSessionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.WorkoutSessionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkoutSessionPayload>
+        }
+        findMany: {
+          args: Prisma.WorkoutSessionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkoutSessionPayload>[]
+        }
+        create: {
+          args: Prisma.WorkoutSessionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkoutSessionPayload>
+        }
+        createMany: {
+          args: Prisma.WorkoutSessionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.WorkoutSessionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkoutSessionPayload>[]
+        }
+        delete: {
+          args: Prisma.WorkoutSessionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkoutSessionPayload>
+        }
+        update: {
+          args: Prisma.WorkoutSessionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkoutSessionPayload>
+        }
+        deleteMany: {
+          args: Prisma.WorkoutSessionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.WorkoutSessionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.WorkoutSessionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkoutSessionPayload>[]
+        }
+        upsert: {
+          args: Prisma.WorkoutSessionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkoutSessionPayload>
+        }
+        aggregate: {
+          args: Prisma.WorkoutSessionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateWorkoutSession>
+        }
+        groupBy: {
+          args: Prisma.WorkoutSessionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WorkoutSessionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.WorkoutSessionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WorkoutSessionCountAggregateOutputType> | number
         }
       }
     }
@@ -1782,7 +1857,7 @@ export const UserScalarFieldEnum = {
   heightCm: 'heightCm',
   activityLevel: 'activityLevel',
   goalType: 'goalType',
-  targetWeightKg: 'targetWeightKg',
+  targetWeightLbs: 'targetWeightLbs',
   dailyCalorieGoal: 'dailyCalorieGoal',
   dailyProteinGoalG: 'dailyProteinGoalG',
   dailyCarbGoalG: 'dailyCarbGoalG',
@@ -1858,16 +1933,32 @@ export const DiaryEntryScalarFieldEnum = {
 export type DiaryEntryScalarFieldEnum = (typeof DiaryEntryScalarFieldEnum)[keyof typeof DiaryEntryScalarFieldEnum]
 
 
+export const WorkoutSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  date: 'date',
+  sessionType: 'sessionType',
+  totalMinutes: 'totalMinutes',
+  totalCalories: 'totalCalories',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WorkoutSessionScalarFieldEnum = (typeof WorkoutSessionScalarFieldEnum)[keyof typeof WorkoutSessionScalarFieldEnum]
+
+
 export const WorkoutLogScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   exerciseId: 'exerciseId',
+  workoutSessionId: 'workoutSessionId',
   date: 'date',
   durationMinutes: 'durationMinutes',
   caloriesBurned: 'caloriesBurned',
   sets: 'sets',
   reps: 'reps',
-  weightKg: 'weightKg',
+  weightLbs: 'weightLbs',
   distanceKm: 'distanceKm',
   notes: 'notes',
   createdAt: 'createdAt',
@@ -1881,9 +1972,9 @@ export const WeightEntryScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   date: 'date',
-  weightKg: 'weightKg',
+  weightLbs: 'weightLbs',
   bodyFatPercentage: 'bodyFatPercentage',
-  muscleMassKg: 'muscleMassKg',
+  muscleMassLbs: 'muscleMassLbs',
   waistCm: 'waistCm',
   hipsCm: 'hipsCm',
   chestCm: 'chestCm',
@@ -2438,6 +2529,7 @@ export type GlobalOmitConfig = {
   foodItem?: Prisma.FoodItemOmit
   exercise?: Prisma.ExerciseOmit
   diaryEntry?: Prisma.DiaryEntryOmit
+  workoutSession?: Prisma.WorkoutSessionOmit
   workoutLog?: Prisma.WorkoutLogOmit
   weightEntry?: Prisma.WeightEntryOmit
   recipeCache?: Prisma.RecipeCacheOmit

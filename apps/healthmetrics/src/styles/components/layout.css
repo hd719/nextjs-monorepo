@@ -17,6 +17,20 @@
   .app-layout-container {
     @apply min-h-screen;
     background-color: var(--background);
+
+    /* Soft radial glow - subtle mint accents in corners */
+    background-image:
+      radial-gradient(
+        ellipse 80% 50% at 90% 10%,
+        var(--bg-glow-1) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse 60% 40% at 10% 90%,
+        var(--bg-glow-2) 0%,
+        transparent 50%
+      );
+    background-attachment: fixed;
   }
 
   /* ==========================================================================

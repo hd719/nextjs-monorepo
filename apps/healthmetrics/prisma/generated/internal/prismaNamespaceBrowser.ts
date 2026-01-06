@@ -59,6 +59,7 @@ export const ModelName = {
   FoodItem: 'FoodItem',
   Exercise: 'Exercise',
   DiaryEntry: 'DiaryEntry',
+  WorkoutSession: 'WorkoutSession',
   WorkoutLog: 'WorkoutLog',
   WeightEntry: 'WeightEntry',
   RecipeCache: 'RecipeCache',
@@ -151,7 +152,7 @@ export const UserScalarFieldEnum = {
   heightCm: 'heightCm',
   activityLevel: 'activityLevel',
   goalType: 'goalType',
-  targetWeightKg: 'targetWeightKg',
+  targetWeightLbs: 'targetWeightLbs',
   dailyCalorieGoal: 'dailyCalorieGoal',
   dailyProteinGoalG: 'dailyProteinGoalG',
   dailyCarbGoalG: 'dailyCarbGoalG',
@@ -227,16 +228,32 @@ export const DiaryEntryScalarFieldEnum = {
 export type DiaryEntryScalarFieldEnum = (typeof DiaryEntryScalarFieldEnum)[keyof typeof DiaryEntryScalarFieldEnum]
 
 
+export const WorkoutSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  date: 'date',
+  sessionType: 'sessionType',
+  totalMinutes: 'totalMinutes',
+  totalCalories: 'totalCalories',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WorkoutSessionScalarFieldEnum = (typeof WorkoutSessionScalarFieldEnum)[keyof typeof WorkoutSessionScalarFieldEnum]
+
+
 export const WorkoutLogScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   exerciseId: 'exerciseId',
+  workoutSessionId: 'workoutSessionId',
   date: 'date',
   durationMinutes: 'durationMinutes',
   caloriesBurned: 'caloriesBurned',
   sets: 'sets',
   reps: 'reps',
-  weightKg: 'weightKg',
+  weightLbs: 'weightLbs',
   distanceKm: 'distanceKm',
   notes: 'notes',
   createdAt: 'createdAt',
@@ -250,9 +267,9 @@ export const WeightEntryScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   date: 'date',
-  weightKg: 'weightKg',
+  weightLbs: 'weightLbs',
   bodyFatPercentage: 'bodyFatPercentage',
-  muscleMassKg: 'muscleMassKg',
+  muscleMassLbs: 'muscleMassLbs',
   waistCm: 'waistCm',
   hipsCm: 'hipsCm',
   chestCm: 'chestCm',

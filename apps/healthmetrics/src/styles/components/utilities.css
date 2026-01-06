@@ -131,4 +131,153 @@
   .util-field-error {
     @apply text-sm text-red-600 dark:text-red-400 mt-1 font-medium;
   }
+
+  /* ==========================================================================
+     Interactive States
+     Reusable hover, focus, and press utilities for cards, rows, and buttons
+     ========================================================================== */
+
+  /**
+   * Card Interactive
+   * Apply to cards that should lift on hover
+   * Uses GPU-accelerated transforms for smooth animation
+   */
+  .card-interactive {
+    transition:
+      transform var(--duration-fast) var(--ease-out-soft),
+      box-shadow var(--duration-fast) var(--ease-out-soft);
+    cursor: pointer;
+  }
+
+  .card-interactive:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+
+  .card-interactive:active {
+    transform: translateY(0);
+  }
+
+  /* Dark mode shadow adjustments */
+  :root[class~="dark"] .card-interactive:hover,
+  .dark .card-interactive:hover {
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.3),
+      0 2px 4px -2px rgb(0 0 0 / 0.2);
+  }
+
+  /**
+   * Row Hover
+   * Apply to list rows and table rows for subtle highlight on hover
+   */
+  .row-hover {
+    transition: background-color var(--duration-fast) var(--ease-out-soft);
+  }
+
+  .row-hover:hover {
+    background-color: color-mix(in srgb, var(--accent) 5%, transparent);
+  }
+
+  /**
+   * Button Pressed
+   * Apply to buttons for tactile press feedback
+   */
+  .btn-pressed {
+    transition: transform var(--duration-fast) var(--ease-out-soft);
+  }
+
+  .btn-pressed:active {
+    transform: scale(0.98);
+  }
+
+  /**
+   * Focus Ring
+   * Consistent focus ring for keyboard navigation accessibility
+   * Meets WCAG 2.1 AA requirements for focus indicators
+   */
+  .focus-ring {
+    outline: none;
+  }
+
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: inherit;
+  }
+
+  /**
+   * Focusable Card
+   * For cards that are clickable and should be keyboard accessible
+   * Combines interactive hover with focus visibility
+   */
+  .focusable-card {
+    transition:
+      transform var(--duration-fast) var(--ease-out-soft),
+      box-shadow var(--duration-fast) var(--ease-out-soft),
+      outline-color var(--duration-fast) var(--ease-out-soft);
+    cursor: pointer;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+
+  .focusable-card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+
+  .focusable-card:focus-visible {
+    outline-color: var(--ring);
+    transform: translateY(-2px);
+  }
+
+  .focusable-card:active {
+    transform: translateY(0);
+  }
+
+  /* Dark mode shadow adjustments */
+  :root[class~="dark"] .focusable-card:hover,
+  .dark .focusable-card:hover {
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.3),
+      0 2px 4px -2px rgb(0 0 0 / 0.2);
+  }
+
+  /**
+   * Icon Container Hover
+   * For icon containers that should emphasize on hover
+   */
+  .icon-container-hover {
+    transition:
+      background-color var(--duration-fast) var(--ease-out-soft),
+      color var(--duration-fast) var(--ease-out-soft);
+  }
+
+  .icon-container-hover:hover {
+    background-color: color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+
+  /* ==========================================================================
+     Reduced Motion Support
+     ========================================================================== */
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-interactive,
+    .row-hover,
+    .btn-pressed,
+    .icon-container-hover {
+      transition: none;
+    }
+
+    .card-interactive:hover {
+      transform: none;
+    }
+
+    .btn-pressed:active {
+      transform: none;
+    }
+  }
 }

@@ -1,17 +1,8 @@
 /**
- * Centralized Color System
+ * Centralized Color System - Electric Mint Theme
  *
- * This is the single source of truth for all colors in the application.
- * To change the entire app's color scheme, modify the hex values below.
- *
- * Format: --variable-name: #hexcolor;
- *
- * All colors use hex format for easy manipulation and dark mode support.
- * Colors are organized by semantic purpose (primary, secondary, accent, etc.)
- *
- * Balanced Neutral Palette:
- * - Primary: Deep slate/gray (#0F172A, #1E293B)
- * - Accent: Vibrant green (#22C55E) for fitness theme
+ * A fresh, modern cyan/mint palette that feels tech-forward and energetic.
+ * Perfect for health/fitness apps with a modern edge.
  */
 
 :root {
@@ -23,6 +14,10 @@
   --background: #ffffff;
   --foreground: #0f172a;
 
+  /* Background Gradient Glow Colors (rgba for compatibility) */
+  --bg-glow-1: rgba(6, 182, 212, 0.15); /* 15% cyan - top right glow */
+  --bg-glow-2: rgba(6, 182, 212, 0.12); /* 12% cyan - bottom left glow */
+
   /* Card */
   --card: #ffffff;
   --card-foreground: #0f172a;
@@ -31,43 +26,55 @@
   --popover: #ffffff;
   --popover-foreground: #0f172a;
 
-  /* Primary (Deep Slate/Gray - Balanced Neutral) */
+  /* Primary (Deep Slate - Clean Neutral) */
   --primary: #0f172a;
   --primary-foreground: #fafafa;
 
   /* Secondary */
-  --secondary: #f5f5f5;
+  --secondary: #f0fdfa;
   --secondary-foreground: #0f172a;
 
   /* Muted */
-  --muted: #f5f5f5;
-  --muted-foreground: #737373;
+  --muted: #f0fdfa;
+  --muted-foreground: #64748b;
 
-  /* Accent (Vibrant Green - Fitness Theme) */
-  --accent: #22c55e;
-  --accent-foreground: #fafafa;
+  /* Accent (Electric Mint/Cyan) */
+  --accent: #06b6d4;
+  --accent-foreground: #ffffff;
+  --accent-light: #22d3ee;
+  --accent-dark: #0891b2;
+
+  /* Success (Emerald - for positive feedback) */
+  --success: #10b981;
+  --success-foreground: #ffffff;
 
   /* Destructive */
   --destructive: #ef4444;
   --destructive-foreground: #fafafa;
 
-  /* Warning/Amber (for approaching limits) */
+  /* Warning */
   --warning: #f59e0b;
 
-  /* Border & Input */
-  --border: #d4d4d8;
-  --input: #d4d4d8;
-  --ring: #0f172a;
+  /* Border & Input - darker for better visibility */
+  --border: #cbd5e1;
+  --input: #cbd5e1;
+  --ring: #06b6d4;
 
   /* Border Radius */
   --radius: 0.5rem;
 
+  /* Gradient Colors (for backgrounds) */
+  --gradient-start: #ecfeff;
+  --gradient-mid: #f0fdfa;
+  --gradient-end: #faf5ff;
+  --gradient-accent: #cffafe;
+
   /* Chart Colors */
-  --chart-1: #f97316;
-  --chart-2: #0891b2;
-  --chart-3: #1e40af;
-  --chart-4: #fbbf24;
-  --chart-5: #f59e0b;
+  --chart-1: #06b6d4;
+  --chart-2: #10b981;
+  --chart-3: #8b5cf6;
+  --chart-4: #f59e0b;
+  --chart-5: #ec4899;
 }
 
 /* ============================================
@@ -75,49 +82,65 @@
    ============================================ */
 .dark {
   /* Background & Foreground */
-  --background: #020617;
-  --foreground: #fafafa;
+  --background: #0c1222; /* Slightly deeper for more contrast */
+  --foreground: #f1f5f9;
+
+  /* Background Gradient Glow Colors (Dark Mode - rgba for compatibility) */
+  --bg-glow-1: rgba(34, 211, 238, 0.12); /* 12% bright cyan - top right glow */
+  --bg-glow-2: rgba(6, 182, 212, 0.08); /* 8% cyan - bottom left glow */
 
   /* Card */
-  --card: #020617;
-  --card-foreground: #fafafa;
+  --card: #1e293b;
+  --card-foreground: #f1f5f9;
 
   /* Popover */
-  --popover: #020617;
-  --popover-foreground: #fafafa;
+  --popover: #1e293b;
+  --popover-foreground: #f1f5f9;
 
   /* Primary */
-  --primary: #fafafa;
+  --primary: #f1f5f9;
   --primary-foreground: #0f172a;
 
   /* Secondary */
   --secondary: #1e293b;
-  --secondary-foreground: #fafafa;
+  --secondary-foreground: #f1f5f9;
 
   /* Muted */
-  --muted: #1e293b;
-  --muted-foreground: #a3a3a3;
+  --muted: #334155;
+  --muted-foreground: #94a3b8;
 
-  /* Accent (Vibrant Green - Fitness Theme) */
-  --accent: #16a34a;
-  --accent-foreground: #fafafa;
+  /* Accent (Electric Mint/Cyan - Brighter for dark mode) */
+  --accent: #22d3ee;
+  --accent-foreground: #083344;
+  --accent-light: #67e8f9;
+  --accent-dark: #06b6d4;
+
+  /* Success */
+  --success: #34d399;
+  --success-foreground: #022c22;
 
   /* Destructive */
-  --destructive: #b91c1c;
-  --destructive-foreground: #fafafa;
+  --destructive: #f87171;
+  --destructive-foreground: #450a0a;
 
-  /* Warning/Amber (for approaching limits) */
-  --warning: #f59e0b;
+  /* Warning */
+  --warning: #fbbf24;
 
   /* Border & Input */
-  --border: #1e293b;
-  --input: #1e293b;
-  --ring: #cbd5e1;
+  --border: #334155;
+  --input: #334155;
+  --ring: #22d3ee;
+
+  /* Gradient Colors (for backgrounds) */
+  --gradient-start: #0c1929;
+  --gradient-mid: #0f172a;
+  --gradient-end: #1a1333;
+  --gradient-accent: #083344;
 
   /* Chart Colors (Dark Mode) */
-  --chart-1: #3b82f6;
-  --chart-2: #10b981;
-  --chart-3: #f59e0b;
-  --chart-4: #8b5cf6;
-  --chart-5: #ec4899;
+  --chart-1: #22d3ee;
+  --chart-2: #34d399;
+  --chart-3: #a78bfa;
+  --chart-4: #fbbf24;
+  --chart-5: #f472b6;
 }
