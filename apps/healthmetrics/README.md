@@ -218,14 +218,6 @@ See `docs/QA_TEST_PLAN.md` for manual testing checklist.
 - `PRD_HEALTH_INTEGRATION.md` - Apple Health / Google Fit sync
 - `PRD_DATA_EXPORT.md` - Export data as CSV/JSON/PDF
 
-## Contributing
-
-1. Check existing PRDs and issues
-2. Create a feature branch
-3. Follow existing code patterns
-4. Add tests for new functionality
-5. Update documentation as needed
-
 ## License
 
 TODO: Add license
