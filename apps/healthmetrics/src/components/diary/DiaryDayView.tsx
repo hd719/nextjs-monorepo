@@ -15,7 +15,13 @@ import {
 import { useToast, ToastContainer } from "@/components/ui/toast";
 import { DiaryEntryList } from "./DiaryEntryList";
 import { AddFoodDialog } from "./AddFoodDialog";
-import { useDiaryDay, useDiaryTotals, useCopyDiaryDay } from "@/hooks/useDiary";
+import { FastingWarningBanner } from "./FastingWarningBanner";
+import {
+  useDiaryDay,
+  useDiaryTotals,
+  useCopyDiaryDay,
+  useActiveFast,
+} from "@/hooks";
 import { DEFAULT_NUTRITION_GOALS } from "@/constants/defaults";
 
 export interface DiaryDayViewProps {
@@ -40,6 +46,7 @@ export function DiaryDayView({
     userId,
     date
   );
+  const { data: activeFast } = useActiveFast(userId);
   const copyDiaryMutation = useCopyDiaryDay();
 
   // Format date for display
@@ -137,6 +144,9 @@ export function DiaryDayView({
 
   return (
     <div className="diary-day-container">
+      {/* Fasting Warning Banner - shows when user has an active fast */}
+      <FastingWarningBanner userId={userId} />
+
       {/* Hero Card: Nutrition Summary (shared component) */}
       <NutritionSummary
         title="Daily Totals"
@@ -186,6 +196,7 @@ export function DiaryDayView({
         userId={userId}
         date={date}
         onSuccess={handleEntryCreated}
+        activeFast={activeFast}
       />
 
       {/* Toast notifications */}

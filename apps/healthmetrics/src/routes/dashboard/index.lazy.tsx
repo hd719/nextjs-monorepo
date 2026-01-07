@@ -1,33 +1,44 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { AppLayout } from "@/components/layout";
 import {
+  AchievementsCard,
   DailySummary,
   ExerciseSummary,
+  FastingCard,
   ProfileCompletion,
   WaterTracker,
   QuickActions,
   ProgressActivityPlaceholder,
+  SleepCard,
+  StreaksCard,
   TodaysDiary,
   RecentActivity,
 } from "@/components/dashboard";
 import { DevTools } from "@/components/dev";
 import { useToast, ToastContainer } from "@/components/ui/toast";
-import { useProfile } from "@/hooks/useProfile";
-import { useDiaryTotals } from "@/hooks/useDiary";
-import { useExerciseSummary } from "@/hooks/useExercise";
 import {
+  useProfile,
+  useDiaryTotals,
+  useExerciseSummary,
   useDashboardMeals,
   useRecentActivity,
   useWaterIntake,
   useUpdateWaterIntake,
   useStepCount,
-} from "@/hooks/useDashboard";
-import { useWeightTrend } from "@/hooks/useWeight";
+  useWeightTrend,
+  useSleepEntry,
+  useStreaks,
+  useAchievementSummary,
+} from "@/hooks";
 import {
   mockWaterIntake,
   mockMealEntries,
   mockActivities,
-} from "@/data/mockData";
+  mockSleepCardData,
+  mockStreaks,
+  mockAchievementSummary,
+} from "@/data";
+import { toSleepCardData } from "@/utils";
 
 export const Route = createLazyFileRoute("/dashboard/")({
   component: DashboardPage,
@@ -71,6 +82,15 @@ function DashboardPage() {
   const { data: activities = [], isLoading: isActivitiesLoading } =
     useRecentActivity(user.id, 10);
 
+  // Sleep, streaks, and achievements data
+  const { data: sleepEntry, isLoading: isSleepLoading } = useSleepEntry(
+    user.id,
+    today
+  );
+  const { data: streaks, isLoading: isStreaksLoading } = useStreaks(user.id);
+  const { data: achievementSummary, isLoading: isAchievementsLoading } =
+    useAchievementSummary(user.id);
+
   // Handler for water intake updates with toast feedback
   const handleWaterUpdate = (glasses: number) => {
     const previousGlasses = waterIntake?.current ?? 0;
@@ -96,10 +116,22 @@ function DashboardPage() {
   const mealData = useMockDashboard ? mockMealEntries : meals;
   const activityData = useMockDashboard ? mockActivities : activities;
 
+  // Resolve sleep/streaks/achievements data based on mock toggle
+  const sleepData = useMockDashboard
+    ? mockSleepCardData
+    : toSleepCardData(sleepEntry);
+  const streaksData = useMockDashboard ? mockStreaks : streaks;
+  const achievementsData = useMockDashboard
+    ? mockAchievementSummary
+    : achievementSummary;
+
   // Disable loading states and handlers when using mock data
   const waterLoading = useMockDashboard ? false : isWaterLoading;
   const mealsLoading = useMockDashboard ? false : isMealsLoading;
   const activitiesLoading = useMockDashboard ? false : isActivitiesLoading;
+  const sleepLoading = useMockDashboard ? false : isSleepLoading;
+  const streaksLoading = useMockDashboard ? false : isStreaksLoading;
+  const achievementsLoading = useMockDashboard ? false : isAchievementsLoading;
   const waterUpdateHandler = useMockDashboard ? undefined : handleWaterUpdate;
 
   // Use user's goals from profile, or fall back to defaults
@@ -163,21 +195,34 @@ function DashboardPage() {
           />
         </div>
 
-        {/* Row 2: QuickActions + Progress Activity | TodaysDiary */}
-        <div className="dashboard-grid-row animate-fade-slide-in animate-stagger-2">
-          <div className="dashboard-left-stack">
-            <QuickActions />
-            <ProgressActivityPlaceholder
-              stepData={stepCount}
-              weightData={weightTrend}
-              isWeightLoading={isWeightLoading}
-            />
-          </div>
+        {/* Row 2: Sleep | Fasting | Streaks | Achievements */}
+        <div className="dashboard-grid-row-4 animate-fade-slide-in animate-stagger-2">
+          <SleepCard data={sleepData} isLoading={sleepLoading} />
+          <FastingCard userId={user.id} />
+          <StreaksCard data={streaksData ?? null} isLoading={streaksLoading} />
+          <AchievementsCard
+            data={achievementsData ?? null}
+            isLoading={achievementsLoading}
+          />
+        </div>
+
+        {/* Row 3: Your Progress | Today's Diary */}
+        <div className="dashboard-grid-row animate-fade-slide-in animate-stagger-3">
+          <ProgressActivityPlaceholder
+            stepData={stepCount}
+            weightData={weightTrend}
+            isWeightLoading={isWeightLoading}
+          />
           <TodaysDiary meals={mealData} isLoading={mealsLoading} />
         </div>
 
-        {/* Row 3: RecentActivity (full width) */}
-        <div className="animate-fade-slide-in animate-stagger-3">
+        {/* Row 4: Quick Actions (full width) */}
+        <div className="animate-fade-slide-in animate-stagger-4">
+          <QuickActions />
+        </div>
+
+        {/* Row 5: Recent Activity (full width) */}
+        <div className="animate-fade-slide-in animate-stagger-5">
           <RecentActivity
             activities={activityData}
             isLoading={activitiesLoading}

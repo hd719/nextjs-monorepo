@@ -1,9 +1,16 @@
+/**
+ * StreaksProgressCard Component
+ *
+ * Displays streak comparison on the Progress page
+ * (distinct from dashboard StreaksCard).
+ */
+
 import { Flame, Droplets, Dumbbell, Award } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/utils/cn";
-import type { Streak } from "@/types/progress";
+import type { Streak } from "@/types";
 
-interface StreaksCardProps {
+interface StreaksProgressCardProps {
   data: {
     logging: Streak;
     water: Streak;
@@ -60,7 +67,7 @@ function StreakItem({
   );
 }
 
-export function StreaksCard({ data }: StreaksCardProps) {
+export function StreaksProgressCard({ data }: StreaksProgressCardProps) {
   const { logging, water, exercise } = data;
 
   return (

@@ -1,9 +1,9 @@
 import { Dumbbell, Scale, Target } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Skeleton } from "@/components/ui/skeleton";
-import type { Activity } from "@/types/nutrition";
+import type { Activity } from "@/types";
 import { ROUTES } from "@/constants/routes";
 
 export interface RecentActivityProps {
@@ -25,11 +25,6 @@ export function RecentActivity({ activities, isLoading }: RecentActivityProps) {
       <h2 className="dashboard-activity-heading">Recent Activity</h2>
 
       <Card variant="supporting">
-        <CardHeader>
-          <CardTitle className="dashboard-activity-title">
-            Activity Feed
-          </CardTitle>
-        </CardHeader>
         <CardContent>
           <div className="dashboard-activity-content">
             {isLoading ? (

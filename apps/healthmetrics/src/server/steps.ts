@@ -1,6 +1,9 @@
 import { createServerFn } from "@tanstack/react-start";
 import { prisma } from "@/lib/prisma";
+import { createLogger } from "@/lib/logger";
 import type { StepCount } from "@/types/nutrition";
+
+const log = createLogger("server:steps");
 
 // ============================================================================
 // QUERY FUNCTIONS
@@ -36,7 +39,7 @@ export const getStepCount = createServerFn({ method: "GET" })
         date,
       };
     } catch (error) {
-      console.error("Failed to fetch step count:", error);
+      log.error({ err: error, userId, date }, "Failed to fetch step count");
       return {
         current: 0,
         goal: 10000,
@@ -93,7 +96,7 @@ export const updateStepCount = createServerFn({ method: "POST" })
         date,
       };
     } catch (error) {
-      console.error("Failed to update step count:", error);
+      log.error({ err: error, userId, date }, "Failed to update step count");
       throw new Error("Failed to update step count");
     }
   });
@@ -142,7 +145,7 @@ export const addSteps = createServerFn({ method: "POST" })
           date,
         };
       } catch (error) {
-        console.error("Failed to add steps:", error);
+        log.error({ err: error, userId, date }, "Failed to add steps");
         throw new Error("Failed to add steps");
       }
     }

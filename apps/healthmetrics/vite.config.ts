@@ -25,9 +25,11 @@ const config = defineConfig({
       }),
   ].filter(Boolean),
   optimizeDeps: {
+    // Exclude Prisma from dependency optimization (handled by TanStack Start)
     exclude: ["@prisma/client", ".prisma/client"],
   },
   ssr: {
+    // Mark Prisma as external for SSR (required at runtime, not bundled)
     external: ["@prisma/client", ".prisma/client"],
   },
 });

@@ -2,12 +2,12 @@ import type {
   CalorieEntry,
   ProgressData,
   DateRange,
-  WeightEntry,
+  ProgressChartWeightEntry,
   ExerciseEntry,
-} from "@/types/progress";
+} from "@/types";
 
 // Re-export types for backward compatibility
-export type { DateRange } from "@/types/progress";
+export type { DateRange } from "@/types";
 
 /**
  * Generate dates going back N days from today
@@ -33,9 +33,9 @@ function generateWeightHistory(
   startWeight: number,
   currentWeight: number,
   days: number
-): WeightEntry[] {
+): ProgressChartWeightEntry[] {
   const dates = generateDates(days);
-  const entries: WeightEntry[] = [];
+  const entries: ProgressChartWeightEntry[] = [];
   const totalChange = currentWeight - startWeight;
   const dailyChange = totalChange / days;
 

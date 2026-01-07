@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import type { OnboardingStepData } from "@/types/onboarding";
+import type { OnboardingStepData } from "@/types";
 import { GOAL_OPTIONS } from "@/constants/onboarding";
 import { ROUTES } from "@/constants/routes";
 import { Button } from "@/components/ui/button";

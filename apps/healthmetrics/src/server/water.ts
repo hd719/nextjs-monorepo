@@ -1,6 +1,9 @@
 import { createServerFn } from "@tanstack/react-start";
 import { prisma } from "@/lib/prisma";
+import { createLogger } from "@/lib/logger";
 import type { WaterIntake } from "@/types/nutrition";
+
+const log = createLogger("server:water");
 
 // ============================================================================
 // QUERY FUNCTIONS
@@ -36,7 +39,7 @@ export const getWaterIntake = createServerFn({ method: "GET" })
         date,
       };
     } catch (error) {
-      console.error("Failed to fetch water intake:", error);
+      log.error({ err: error, userId, date }, "Failed to fetch water intake");
       return {
         current: 0,
         goal: 8,
@@ -94,7 +97,10 @@ export const updateWaterIntake = createServerFn({ method: "POST" })
           date,
         };
       } catch (error) {
-        console.error("Failed to update water intake:", error);
+        log.error(
+          { err: error, userId, date },
+          "Failed to update water intake"
+        );
         throw new Error("Failed to update water intake");
       }
     }
@@ -117,7 +123,7 @@ export const updateWaterGoal = createServerFn({ method: "POST" })
 
       return { goal: validGoal };
     } catch (error) {
-      console.error("Failed to update water goal:", error);
+      log.error({ err: error, userId }, "Failed to update water goal");
       throw new Error("Failed to update water goal");
     }
   });

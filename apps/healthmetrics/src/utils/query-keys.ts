@@ -49,6 +49,17 @@ export const queryKeys = {
     ["steps", "count", userId, date] as const,
   stepCountBase: () => ["steps"] as const,
 
+  // Sleep
+  sleepEntry: (userId: string, date: string) =>
+    ["sleep", "entry", userId, date] as const,
+  sleepHistory: (userId: string, days: number) =>
+    ["sleep", "history", userId, days] as const,
+  sleepHistoryBase: () => ["sleep", "history"] as const,
+  sleepAverage: (userId: string, days: number) =>
+    ["sleep", "average", userId, days] as const,
+  sleepAverageBase: () => ["sleep", "average"] as const,
+  sleepBase: () => ["sleep"] as const,
+
   // Weight
   weightLatest: (userId: string) => ["weight", "latest", userId] as const,
   weightHistory: (userId: string, limit?: number) =>
@@ -60,4 +71,29 @@ export const queryKeys = {
   // Onboarding
   onboardingState: (userId: string) => ["onboarding", "state", userId] as const,
   onboardingBase: () => ["onboarding"] as const,
+
+  // Streaks
+  streaks: (userId: string) => ["streaks", "user", userId] as const,
+  streaksBase: () => ["streaks"] as const,
+
+  // Achievements
+  achievementDefinitions: (category?: string) =>
+    ["achievements", "definitions", category] as const,
+  userAchievements: (userId: string) =>
+    ["achievements", "user", userId] as const,
+  achievementSummary: (userId: string) =>
+    ["achievements", "summary", userId] as const,
+  achievementsBase: () => ["achievements"] as const,
+
+  // Fasting
+  activeFast: (userId: string) => ["fasting", "active", userId] as const,
+  fastingProtocols: (userId: string) =>
+    ["fasting", "protocols", userId] as const,
+  fastingHistory: (userId: string, limit?: number) =>
+    ["fasting", "history", userId, limit] as const,
+  fastingHistoryBase: () => ["fasting", "history"] as const,
+  fastingStats: (userId: string) => ["fasting", "stats", userId] as const,
+  fastingCalendar: (userId: string, month: string) =>
+    ["fasting", "calendar", userId, month] as const,
+  fastingBase: () => ["fasting"] as const,
 };

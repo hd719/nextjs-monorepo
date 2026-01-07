@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useTheme } from "@/components/ui/theme-provider";
-import { authClient } from "@/lib/auth-client";
+import { authClient } from "@/lib";
 import { useNavigate } from "@tanstack/react-router";
 import { cn } from "@/utils/cn";
 import { ROUTES } from "@/constants/routes";

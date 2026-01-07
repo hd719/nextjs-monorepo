@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { prisma } from "@/lib/prisma";
+import { createLogger } from "@/lib/logger";
 import {
   searchExercisesSchema,
   createWorkoutSessionSchema,
@@ -26,6 +27,8 @@ import {
   getUserWeightLbs,
   validateExerciseRequirements,
 } from "@/utils/exercise-helpers";
+
+const log = createLogger("server:exercise");
 
 // ============================================================================
 // QUERY FUNCTIONS
@@ -82,7 +85,10 @@ export const searchExercises = createServerFn({ method: "GET" })
         })),
       };
     } catch (error) {
-      console.error("Failed to search exercises:", error);
+      log.error(
+        { err: error, query: data.query, category: data.category },
+        "Failed to search exercises"
+      );
       throw new Error("Failed to search exercises");
     }
   });
@@ -135,7 +141,10 @@ export const getWorkoutDay = createServerFn({ method: "GET" })
         })),
       };
     } catch (error) {
-      console.error("Failed to fetch workout day:", error);
+      log.error(
+        { err: error, userId: data.userId, date: data.date },
+        "Failed to fetch workout day"
+      );
       throw new Error("Failed to fetch workout day");
     }
   });
@@ -222,7 +231,10 @@ export const getTodayExerciseSummary = createServerFn({ method: "GET" })
         exercisesCompleted,
       };
     } catch (error) {
-      console.error("Failed to fetch exercise summary:", error);
+      log.error(
+        { err: error, userId: data.userId, date: data.date },
+        "Failed to fetch exercise summary"
+      );
       throw new Error("Failed to fetch exercise summary");
     }
   });
@@ -279,7 +291,10 @@ export const copyPreviousWorkout = createServerFn({ method: "POST" })
         })),
       };
     } catch (error) {
-      console.error("Failed to copy previous workout:", error);
+      log.error(
+        { err: error, userId: data.userId, targetDate: data.targetDate },
+        "Failed to copy previous workout"
+      );
       // Preserve validation error messages
       if (error instanceof Error) {
         throw error;
@@ -421,7 +436,10 @@ export const createWorkoutSession = createServerFn({ method: "POST" })
         hasWeight: userWeightLbs !== null,
       };
     } catch (error) {
-      console.error("Failed to create workout session:", error);
+      log.error(
+        { err: error, userId: data.userId },
+        "Failed to create workout session"
+      );
       throw new Error(
         error instanceof Error
           ? error.message
@@ -566,7 +584,10 @@ export const updateWorkoutSession = createServerFn({ method: "POST" })
 
       return { success: true };
     } catch (error) {
-      console.error("Failed to update workout session:", error);
+      log.error(
+        { err: error, sessionId: data.sessionId },
+        "Failed to update workout session"
+      );
       throw new Error(
         error instanceof Error
           ? error.message
@@ -678,7 +699,10 @@ export const updateWorkoutLog = createServerFn({ method: "POST" })
 
       return { success: true };
     } catch (error) {
-      console.error("Failed to update workout log:", error);
+      log.error(
+        { err: error, logId: data.logId },
+        "Failed to update workout log"
+      );
       throw new Error(
         error instanceof Error ? error.message : "Failed to update workout log"
       );
@@ -712,7 +736,10 @@ export const deleteWorkoutSession = createServerFn({ method: "POST" })
 
       return { success: true };
     } catch (error) {
-      console.error("Failed to delete workout session:", error);
+      log.error(
+        { err: error, sessionId: data.sessionId },
+        "Failed to delete workout session"
+      );
       // Preserve validation error messages
       if (error instanceof Error) {
         throw error;
@@ -782,7 +809,10 @@ export const deleteWorkoutLog = createServerFn({ method: "POST" })
 
       return { success: true };
     } catch (error) {
-      console.error("Failed to delete workout log:", error);
+      log.error(
+        { err: error, logId: data.logId },
+        "Failed to delete workout log"
+      );
       // Preserve validation error messages
       if (error instanceof Error) {
         throw error;

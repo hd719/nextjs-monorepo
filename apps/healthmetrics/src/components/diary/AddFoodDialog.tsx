@@ -12,9 +12,10 @@ import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import type { FoodItemSearchResult } from "@/types/diary";
+import { FastingWarningDialog } from "./FastingWarningDialog";
+import type { FoodItemSearchResult, ActiveFast } from "@/types";
 import type { MealType } from "@/constants/defaults";
-import { useCreateDiaryEntry, useFoodSearch } from "@/hooks/useDiary";
+import { useCreateDiaryEntry, useFoodSearch, useActiveFast } from "@/hooks";
 
 export interface AddFoodDialogProps {
   open: boolean;
@@ -22,6 +23,8 @@ export interface AddFoodDialogProps {
   userId: string;
   date: string; // YYYY-MM-DD
   onSuccess: () => void;
+  /** Optional: pre-fetched active fast data to avoid extra query */
+  activeFast?: ActiveFast | null;
 }
 
 export function AddFoodDialog({
@@ -30,6 +33,7 @@ export function AddFoodDialog({
   userId,
   date,
   onSuccess,
+  activeFast: propActiveFast,
 }: AddFoodDialogProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
@@ -41,11 +45,19 @@ export function AddFoodDialog({
   const [mealType, setMealType] = useState<MealType>("breakfast");
   const [notes, setNotes] = useState("");
   const [formError, setFormError] = useState<string | null>(null);
+  const [showFastingWarning, setShowFastingWarning] = useState(false);
   const { data, isFetching } = useFoodSearch(debouncedQuery, 10);
   const searchResults = debouncedQuery ? (data ?? []) : [];
   const isSearching = debouncedQuery.length > 0 && isFetching;
   const createEntryMutation = useCreateDiaryEntry();
   const isSubmitting = createEntryMutation.isPending;
+
+  // Fetch active fast if not provided via props
+  const { data: fetchedActiveFast } = useActiveFast(
+    propActiveFast === undefined ? userId : undefined
+  );
+  const activeFast = propActiveFast ?? fetchedActiveFast;
+  const isActivelyFasting = activeFast?.session && !activeFast.isPaused;
 
   // Debounce search query
   useEffect(() => {
@@ -66,6 +78,7 @@ export function AddFoodDialog({
       setMealType("breakfast");
       setNotes("");
       setFormError(null);
+      setShowFastingWarning(false);
     });
   };
 
@@ -73,6 +86,35 @@ export function AddFoodDialog({
     setSelectedFood(food);
     setQuantity(food.servingSizeG.toString());
     setFormError(null);
+  };
+
+  /**
+   * Actually submits the food entry to the database
+   */
+  const submitEntry = () => {
+    if (!selectedFood) return;
+
+    const quantityNum = parseFloat(quantity);
+    const servingsNum = parseFloat(servings);
+
+    createEntryMutation
+      .mutateAsync({
+        userId,
+        foodItemId: selectedFood.id,
+        date,
+        mealType,
+        quantityG: quantityNum,
+        servings: servingsNum,
+        notes: notes.trim() || undefined,
+      })
+      .then(() => {
+        onSuccess();
+        resetForm();
+      })
+      .catch((error) => {
+        console.error("Failed to create entry:", error);
+        setFormError("Failed to add food entry. Please try again.");
+      });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -98,24 +140,29 @@ export function AddFoodDialog({
 
     setFormError(null);
 
-    createEntryMutation
-      .mutateAsync({
-        userId,
-        foodItemId: selectedFood.id,
-        date,
-        mealType,
-        quantityG: quantityNum,
-        servings: servingsNum,
-        notes: notes.trim() || undefined,
-      })
-      .then(() => {
-        onSuccess();
-        resetForm();
-      })
-      .catch((error) => {
-        console.error("Failed to create entry:", error);
-        setFormError("Failed to add food entry. Please try again.");
-      });
+    // If actively fasting, show warning dialog first
+    if (isActivelyFasting) {
+      setShowFastingWarning(true);
+      return;
+    }
+
+    // Otherwise, submit directly
+    submitEntry();
+  };
+
+  // Handlers for fasting warning dialog
+  const handleEndFastAndLog = () => {
+    setShowFastingWarning(false);
+    submitEntry();
+  };
+
+  const handleLogAnyway = () => {
+    setShowFastingWarning(false);
+    submitEntry();
+  };
+
+  const handleCancelFastingWarning = () => {
+    setShowFastingWarning(false);
   };
 
   const handleClose = () => {
@@ -373,6 +420,19 @@ export function AddFoodDialog({
           </DialogFooter>
         </form>
       </DialogContent>
+
+      {/* Fasting Warning Dialog - shown when user tries to log food while fasting */}
+      {activeFast?.session && (
+        <FastingWarningDialog
+          open={showFastingWarning}
+          onOpenChange={setShowFastingWarning}
+          activeFast={activeFast}
+          userId={userId}
+          onEndFastAndLog={handleEndFastAndLog}
+          onLogAnyway={handleLogAnyway}
+          onCancel={handleCancelFastingWarning}
+        />
+      )}
     </Dialog>
   );
 }

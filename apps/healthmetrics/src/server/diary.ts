@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { Prisma } from "../../prisma/generated/client";
 import { prisma } from "@/lib/prisma";
+import { createLogger } from "@/lib/logger";
 import {
   createDiaryEntrySchema,
   searchFoodItemsSchema,
@@ -11,6 +12,8 @@ import type {
   DailyTotals,
   FoodItemSearchResult,
 } from "@/types/diary";
+
+const log = createLogger("server:diary");
 
 // Helper to convert number to Prisma Decimal
 function toDecimal(value: number): Prisma.Decimal {
@@ -92,7 +95,7 @@ export const getDiaryDay = createServerFn({ method: "GET" })
           };
         });
       } catch (error) {
-        console.error("Failed to fetch diary day:", error);
+        log.error({ err: error, userId, date }, "Failed to fetch diary day");
         throw new Error("Failed to fetch diary entries");
       }
     }
@@ -162,7 +165,7 @@ export const getDailyTotals = createServerFn({ method: "GET" })
         entryCount: totals.entryCount,
       };
     } catch (error) {
-      console.error("Failed to fetch daily totals:", error);
+      log.error({ err: error, userId, date }, "Failed to fetch daily totals");
       throw new Error("Failed to calculate daily totals");
     }
   });
@@ -205,7 +208,7 @@ export const searchFoodItems = createServerFn({ method: "GET" })
           verified: food.verified,
         }));
       } catch (error) {
-        console.error("Failed to search food items:", error);
+        log.error({ err: error, query }, "Failed to search food items");
         throw new Error("Failed to search food items");
       }
     }
@@ -260,7 +263,10 @@ export const copyDiaryDay = createServerFn({ method: "POST" })
 
         return { copiedCount: newEntries.length };
       } catch (error) {
-        console.error("Failed to copy diary day:", error);
+        log.error(
+          { err: error, userId, sourceDate, targetDate },
+          "Failed to copy diary day"
+        );
         throw new Error("Failed to copy meals from previous day");
       }
     }
@@ -344,7 +350,10 @@ export const createDiaryEntry = createServerFn({ method: "POST" })
         fat: Math.round(fat * 10) / 10,
       };
     } catch (error) {
-      console.error("Failed to create diary entry:", error);
+      log.error(
+        { err: error, userId: data.userId },
+        "Failed to create diary entry"
+      );
       if (error instanceof Error) {
         throw error;
       }

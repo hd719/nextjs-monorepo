@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { prisma } from "@/lib/prisma";
+import { createLogger } from "@/lib/logger";
 import type {
   OnboardingState,
   OnboardingStepData,
@@ -8,6 +9,8 @@ import type {
 } from "@/types/onboarding";
 import { calculateNutritionGoals, lbsToKg, calculateAge } from "@/utils";
 import { saveWeightEntry } from "./weight";
+
+const log = createLogger("server:onboarding");
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -119,7 +122,7 @@ export const getOnboardingState = createServerFn({ method: "GET" })
         skippedAt: user.onboardingSkippedAt?.toISOString() || null,
       };
     } catch (error) {
-      console.error("Failed to fetch onboarding state:", error);
+      log.error({ err: error, userId }, "Failed to fetch onboarding state");
       throw new Error("Failed to fetch onboarding state");
     }
   });
@@ -147,7 +150,7 @@ export const checkOnboardingRequired = createServerFn({ method: "GET" })
 
       return { required: !isCompleted && !isSkipped };
     } catch (error) {
-      console.error("Failed to check onboarding status:", error);
+      log.error({ err: error, userId }, "Failed to check onboarding status");
       return { required: false };
     }
   });
@@ -243,7 +246,10 @@ export const saveOnboardingStep = createServerFn({ method: "POST" })
 
         return { success: true, nextStep: step + 1 };
       } catch (error) {
-        console.error("Failed to save onboarding step:", error);
+        log.error(
+          { err: error, userId, step },
+          "Failed to save onboarding step"
+        );
         throw new Error("Failed to save onboarding step");
       }
     }
@@ -259,7 +265,7 @@ export const calculateGoals = createServerFn({ method: "POST" })
     try {
       return calculateNutritionGoals(data);
     } catch (error) {
-      console.error("Failed to calculate goals:", error);
+      log.error({ err: error }, "Failed to calculate goals");
       throw new Error("Failed to calculate nutrition goals");
     }
   });
@@ -315,7 +321,10 @@ export const calculateGoalsFromProfile = createServerFn({ method: "POST" })
 
       return calculateNutritionGoals(input);
     } catch (error) {
-      console.error("Failed to calculate goals from profile:", error);
+      log.error(
+        { err: error, userId },
+        "Failed to calculate goals from profile"
+      );
       return null;
     }
   });
@@ -339,7 +348,7 @@ export const completeOnboarding = createServerFn({ method: "POST" })
 
       return { success: true };
     } catch (error) {
-      console.error("Failed to complete onboarding:", error);
+      log.error({ err: error, userId }, "Failed to complete onboarding");
       throw new Error("Failed to complete onboarding");
     }
   });
@@ -361,7 +370,7 @@ export const skipOnboarding = createServerFn({ method: "POST" })
 
       return { success: true };
     } catch (error) {
-      console.error("Failed to skip onboarding:", error);
+      log.error({ err: error, userId }, "Failed to skip onboarding");
       throw new Error("Failed to skip onboarding");
     }
   });
@@ -391,7 +400,7 @@ export const resetOnboarding = createServerFn({ method: "POST" })
 
       return { success: true };
     } catch (error) {
-      console.error("Failed to reset onboarding:", error);
+      log.error({ err: error, userId }, "Failed to reset onboarding");
       throw new Error("Failed to reset onboarding");
     }
   });

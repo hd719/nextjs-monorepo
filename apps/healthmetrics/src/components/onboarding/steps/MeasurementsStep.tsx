@@ -7,7 +7,7 @@ import type {
   Gender,
   ActivityLevel,
   UnitsPreference,
-} from "@/types/onboarding";
+} from "@/types";
 import { feetInchesToCm, cmToFeetInches, lbsToKg, kgToLbs } from "@/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";

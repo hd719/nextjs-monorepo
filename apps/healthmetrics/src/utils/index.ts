@@ -1,6 +1,16 @@
 // Auth utilities
 export { getErrorMessage } from "./auth-helpers";
 
+// Environment validation
+export {
+  validateEnv,
+  getEnv,
+  isProduction,
+  isDevelopment,
+  isTest,
+  type Env,
+} from "./env";
+
 // Class name utility
 export { cn } from "./cn";
 
@@ -60,6 +70,12 @@ export { queryKeys } from "./query-keys";
 
 // Route guards
 export { requireAuthAndOnboarding, requireAuth } from "./route-guards";
+
+// Sleep utilities
+export { toSleepCardData } from "./sleep-helpers";
+
+// Time utilities
+export { formatDuration, formatDurationLong } from "./time-helpers";
 
 // Validation schemas and types (Zod)
 export {

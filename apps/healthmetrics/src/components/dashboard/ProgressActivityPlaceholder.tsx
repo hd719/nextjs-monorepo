@@ -15,8 +15,8 @@ import {
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { dashboardProgressData } from "@/data/progressMockData";
-import type { StepCount } from "@/types/nutrition";
+import { dashboardProgressData } from "@/data";
+import type { StepCount } from "@/types";
 
 // Weight trend data shape from hook
 export interface WeightTrendData {

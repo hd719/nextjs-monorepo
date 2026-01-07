@@ -21,4 +21,6 @@ export type UserProfile = {
   isAdmin: boolean;
   createdAt: string; // ISO string for serialization
   updatedAt: string; // ISO string for serialization
+  defaultFastingProtocolId: string | null;
+  fastingGoalPerWeek: number | null;
 };

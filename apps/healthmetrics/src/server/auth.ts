@@ -1,6 +1,9 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getRequestHeaders } from "@tanstack/react-start/server";
 import { auth } from "@/lib/auth-config";
+import { createLogger } from "@/lib/logger";
+
+const log = createLogger("server:auth");
 
 export const fetchUser = createServerFn({ method: "GET" }).handler(async () => {
   try {
@@ -17,7 +20,7 @@ export const fetchUser = createServerFn({ method: "GET" }).handler(async () => {
       name: session.user.name,
     };
   } catch (error) {
-    console.error("Failed to fetch user session:", error);
+    log.error({ err: error }, "Failed to fetch user session");
     return null;
   }
 });

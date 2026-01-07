@@ -64,13 +64,19 @@ export const ModelName = {
   WeightEntry: 'WeightEntry',
   WaterEntry: 'WaterEntry',
   StepEntry: 'StepEntry',
+  SleepEntry: 'SleepEntry',
   RecipeCache: 'RecipeCache',
   MealPlanTemplate: 'MealPlanTemplate',
   MealPlan: 'MealPlan',
   Goal: 'Goal',
   Friendship: 'Friendship',
   Challenge: 'Challenge',
-  ChallengeParticipant: 'ChallengeParticipant'
+  ChallengeParticipant: 'ChallengeParticipant',
+  UserStreak: 'UserStreak',
+  Achievement: 'Achievement',
+  UserAchievement: 'UserAchievement',
+  FastingProtocol: 'FastingProtocol',
+  FastingSession: 'FastingSession'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -168,6 +174,8 @@ export const UserScalarFieldEnum = {
   onboardingStep: 'onboardingStep',
   onboardingSkippedAt: 'onboardingSkippedAt',
   onboardingCompletedAt: 'onboardingCompletedAt',
+  defaultFastingProtocolId: 'defaultFastingProtocolId',
+  fastingGoalPerWeek: 'fastingGoalPerWeek',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -316,6 +324,22 @@ export const StepEntryScalarFieldEnum = {
 export type StepEntryScalarFieldEnum = (typeof StepEntryScalarFieldEnum)[keyof typeof StepEntryScalarFieldEnum]
 
 
+export const SleepEntryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  date: 'date',
+  hoursSlept: 'hoursSlept',
+  quality: 'quality',
+  bedtime: 'bedtime',
+  wakeTime: 'wakeTime',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SleepEntryScalarFieldEnum = (typeof SleepEntryScalarFieldEnum)[keyof typeof SleepEntryScalarFieldEnum]
+
+
 export const RecipeCacheScalarFieldEnum = {
   id: 'id',
   recipeId: 'recipeId',
@@ -439,6 +463,84 @@ export const ChallengeParticipantScalarFieldEnum = {
 } as const
 
 export type ChallengeParticipantScalarFieldEnum = (typeof ChallengeParticipantScalarFieldEnum)[keyof typeof ChallengeParticipantScalarFieldEnum]
+
+
+export const UserStreakScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  currentLogging: 'currentLogging',
+  currentCalorie: 'currentCalorie',
+  currentExercise: 'currentExercise',
+  bestLogging: 'bestLogging',
+  bestCalorie: 'bestCalorie',
+  bestExercise: 'bestExercise',
+  lastLoggingDate: 'lastLoggingDate',
+  lastExerciseDate: 'lastExerciseDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserStreakScalarFieldEnum = (typeof UserStreakScalarFieldEnum)[keyof typeof UserStreakScalarFieldEnum]
+
+
+export const AchievementScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name',
+  description: 'description',
+  icon: 'icon',
+  category: 'category',
+  requirement: 'requirement',
+  points: 'points',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AchievementScalarFieldEnum = (typeof AchievementScalarFieldEnum)[keyof typeof AchievementScalarFieldEnum]
+
+
+export const UserAchievementScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  achievementId: 'achievementId',
+  unlockedAt: 'unlockedAt'
+} as const
+
+export type UserAchievementScalarFieldEnum = (typeof UserAchievementScalarFieldEnum)[keyof typeof UserAchievementScalarFieldEnum]
+
+
+export const FastingProtocolScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  fastingMinutes: 'fastingMinutes',
+  eatingMinutes: 'eatingMinutes',
+  isPreset: 'isPreset',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FastingProtocolScalarFieldEnum = (typeof FastingProtocolScalarFieldEnum)[keyof typeof FastingProtocolScalarFieldEnum]
+
+
+export const FastingSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  protocolId: 'protocolId',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  targetDurationMin: 'targetDurationMin',
+  actualDurationMin: 'actualDurationMin',
+  pausedAt: 'pausedAt',
+  totalPausedMin: 'totalPausedMin',
+  status: 'status',
+  completedAtTarget: 'completedAtTarget',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FastingSessionScalarFieldEnum = (typeof FastingSessionScalarFieldEnum)[keyof typeof FastingSessionScalarFieldEnum]
 
 
 export const SortOrder = {

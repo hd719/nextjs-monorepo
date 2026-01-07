@@ -17,6 +17,11 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { tanstackStartCookies } from "better-auth/tanstack-start";
 import { prisma } from "@/lib/prisma";
 import { DEFAULT_DEV_URL } from "@/constants";
+import { validateEnv } from "@/utils/env";
+
+// Validate environment variables at startup
+// This fails fast if required vars (DATABASE_URL, BETTER_AUTH_SECRET) are missing
+validateEnv();
 
 export const auth = betterAuth({
   baseURL: process.env.BETTER_AUTH_URL || DEFAULT_DEV_URL,

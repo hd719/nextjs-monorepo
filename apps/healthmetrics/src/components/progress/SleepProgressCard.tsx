@@ -1,7 +1,8 @@
 /**
- * SleepCard Component
+ * SleepProgressCard Component
  *
  * Displays weekly sleep data with bar chart and quality indicator.
+ * Used on the Progress page (distinct from dashboard SleepCard).
  * Features:
  * - Weekly sleep hours bar chart
  * - Goal line indicator
@@ -19,11 +20,11 @@ interface SleepData {
   weeklyData: { day: string; hours: number }[];
 }
 
-interface SleepCardProps {
+interface SleepProgressCardProps {
   data: SleepData;
 }
 
-export function SleepCard({ data }: SleepCardProps) {
+export function SleepProgressCard({ data }: SleepProgressCardProps) {
   const { avgHours, goalHours, quality, weeklyData } = data;
 
   // Calculate best and worst days

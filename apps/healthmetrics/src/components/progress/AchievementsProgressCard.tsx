@@ -1,9 +1,16 @@
+/**
+ * AchievementsProgressCard Component
+ *
+ * Displays achievement gallery with milestones on the Progress page
+ * (distinct from dashboard AchievementsCard).
+ */
+
 import { Trophy, Target, Star, Dumbbell, Plus, Sparkles } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/utils/cn";
-import type { Achievement, Milestone } from "@/types/progress";
+import type { Achievement, Milestone } from "@/types";
 
-interface AchievementsCardProps {
+interface AchievementsProgressCardProps {
   achievements: Achievement[];
   milestones: Milestone[];
 }
@@ -120,10 +127,10 @@ function MilestoneItem({ milestone }: { milestone: Milestone }) {
   );
 }
 
-export function AchievementsCard({
+export function AchievementsProgressCard({
   achievements,
   milestones,
-}: AchievementsCardProps) {
+}: AchievementsProgressCardProps) {
   // Show most recent achievements first
   const sortedAchievements = [...achievements].sort(
     (a, b) => new Date(b.earnedAt).getTime() - new Date(a.earnedAt).getTime()

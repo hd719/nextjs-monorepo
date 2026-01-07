@@ -1,5 +1,14 @@
 import { Link } from "@tanstack/react-router";
-import { Home, Book, Dumbbell, TrendingUp, User } from "lucide-react";
+import {
+  Home,
+  Book,
+  Dumbbell,
+  Timer,
+  TrendingUp,
+  User,
+  Moon,
+  Trophy,
+} from "lucide-react";
 
 interface NavItem {
   icon: React.ComponentType<{ className?: string }>;
@@ -11,6 +20,9 @@ const navItems: NavItem[] = [
   { icon: Home, label: "Home", href: "/dashboard" },
   { icon: Book, label: "Diary", href: "/diary" },
   { icon: Dumbbell, label: "Exercise", href: "/exercise" },
+  { icon: Timer, label: "Fasting", href: "/fasting" },
+  { icon: Moon, label: "Sleep", href: "/sleep" },
+  { icon: Trophy, label: "Achievements", href: "/achievements" },
   { icon: TrendingUp, label: "Progress", href: "/progress" },
   { icon: User, label: "Profile", href: "/profile" },
 ];

@@ -6,9 +6,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Search, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { ExerciseCard } from "./ExerciseCard";
-import { useExerciseSearch } from "@/hooks/useExercise";
+import { useExerciseSearch } from "@/hooks";
 import type { WorkoutMode, SelectedExercise } from "./ExerciseWizard";
-import { ExerciseCategory } from "@/types";
+import type { ExerciseCategory } from "@/types";
 
 // Type for exercise from search results
 interface ExerciseResult {

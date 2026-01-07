@@ -1,10 +1,14 @@
+export { AchievementsCard } from "./AchievementsCard";
 export { DailySummary } from "./DailySummary";
 export { ExerciseSummary } from "./ExerciseSummary";
+export { FastingCard } from "./FastingCard";
 export { ProfileCompletion } from "./ProfileCompletion";
 export { ProgressActivityPlaceholder } from "./ProgressActivityPlaceholder";
 export { QuickActions } from "./QuickActions";
 export { RecentActivity } from "./RecentActivity";
+export { SleepCard } from "./SleepCard";
 export { StepTracker } from "./StepTracker";
+export { StreaksCard } from "./StreaksCard";
 export { TodaysDiary } from "./TodaysDiary";
 export { WaterGlass } from "./WaterGlass";
 export { WaterTracker } from "./WaterTracker";

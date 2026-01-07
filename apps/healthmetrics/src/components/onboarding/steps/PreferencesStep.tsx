@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import type { OnboardingStepData } from "@/types/onboarding";
+import type { OnboardingStepData } from "@/types";
 import { ONBOARDING_DEFAULTS, ONBOARDING_LIMITS } from "@/constants/onboarding";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

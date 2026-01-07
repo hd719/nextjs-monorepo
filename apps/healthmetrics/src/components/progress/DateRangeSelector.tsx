@@ -1,4 +1,4 @@
-import type { DateRange } from "@/types/progress";
+import type { DateRange } from "@/types";
 import { DATE_RANGE_OPTIONS } from "@/constants/progress";
 import { cn } from "@/utils/cn";
 

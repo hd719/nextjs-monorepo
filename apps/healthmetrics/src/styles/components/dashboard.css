@@ -28,12 +28,29 @@
 
   /* Two-column grid for supporting sections */
   .dashboard-grid-row {
-    @apply grid grid-cols-1 lg:grid-cols-2 gap-6;
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch;
+  }
+
+  /* Three-column grid for compact cards */
+  .dashboard-grid-row-3 {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch;
+  }
+
+  /* Four-column grid for compact cards */
+  .dashboard-grid-row-4 {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch;
   }
 
   /* Ensure grid children stretch to fill row height */
-  .dashboard-grid-row > * {
-    @apply min-h-0;
+  .dashboard-grid-row > *,
+  .dashboard-grid-row-3 > *,
+  .dashboard-grid-row-4 > * {
+    @apply min-h-0 h-full;
+  }
+
+  /* Card that stretches to fill available height in flex container */
+  .dashboard-card-stretch {
+    @apply flex-1;
   }
 
   /* Stack container for left column (QuickActions + Progress) */
@@ -65,7 +82,7 @@
      ========================================================================== */
 
   .dashboard-water-section {
-    @apply space-y-4;
+    @apply flex flex-col gap-4 h-full;
   }
 
   .dashboard-water-heading {
@@ -211,7 +228,7 @@
   }
 
   .dashboard-actions-grid {
-    @apply grid grid-cols-2 sm:grid-cols-4 gap-3;
+    @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4;
   }
 
   /* ==========================================================================
@@ -308,7 +325,7 @@
      ========================================================================== */
 
   .dashboard-activity-content {
-    @apply space-y-0;
+    @apply space-y-0 px-4 pb-2;
   }
 
   /* ==========================================================================
@@ -390,7 +407,7 @@
      ========================================================================== */
 
   .dashboard-exercise-section {
-    @apply space-y-4;
+    @apply flex flex-col gap-4 h-full;
   }
 
   .dashboard-exercise-heading {
@@ -482,6 +499,442 @@
   .dashboard-exercise-empty-card-content {
     @apply p-0;
   }
+
+  /**
+   * SleepCard Component Styles
+   *
+   * Shows last night's sleep statistics
+   */
+
+  /* ==========================================================================
+     Section Container
+     ========================================================================== */
+
+  .dashboard-sleep-section {
+    @apply flex flex-col gap-4 h-full;
+  }
+
+  .dashboard-sleep-heading {
+    @apply text-2xl font-bold;
+  }
+
+  .dashboard-sleep-title {
+    @apply text-lg;
+  }
+
+  /* ==========================================================================
+     Grid Layout
+     ========================================================================== */
+
+  .dashboard-sleep-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+  }
+
+  /* ==========================================================================
+     Stat Item
+     ========================================================================== */
+
+  .dashboard-sleep-stat-item {
+    @apply flex flex-col items-center text-center;
+  }
+
+  .dashboard-sleep-icon-container {
+    @apply w-12 h-12 rounded-full flex items-center justify-center mb-3;
+    background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+
+  .dashboard-sleep-icon-container-warning {
+    @apply w-12 h-12 rounded-full flex items-center justify-center mb-3;
+    background-color: color-mix(in srgb, var(--warning) 10%, transparent);
+  }
+
+  .dashboard-sleep-icon-container-accent {
+    @apply w-12 h-12 rounded-full flex items-center justify-center mb-3;
+    background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+
+  .dashboard-sleep-icon {
+    @apply w-6 h-6;
+    color: var(--accent);
+  }
+
+  .dashboard-sleep-icon-warning {
+    @apply w-6 h-6;
+    color: var(--warning);
+  }
+
+  .dashboard-sleep-icon-accent {
+    @apply w-6 h-6;
+    color: var(--accent);
+  }
+
+  .dashboard-sleep-value {
+    @apply text-2xl font-bold;
+  }
+
+  .dashboard-sleep-value-stars {
+    @apply flex items-center justify-center mb-1;
+  }
+
+  .dashboard-sleep-value-small {
+    @apply text-lg font-bold;
+  }
+
+  .dashboard-sleep-label {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Loading State
+     ========================================================================== */
+
+  .dashboard-sleep-loading-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+  }
+
+  .dashboard-sleep-loading-item {
+    @apply space-y-2;
+  }
+
+  /**
+   * StreaksCard Component Styles
+   *
+   * Shows current user streaks
+   */
+
+  /* ==========================================================================
+     Section Container
+     ========================================================================== */
+
+  .dashboard-streaks-section {
+    @apply flex flex-col gap-4 h-full;
+  }
+
+  .dashboard-streaks-heading {
+    @apply text-2xl font-bold;
+  }
+
+  .dashboard-streaks-title {
+    @apply text-lg;
+  }
+
+  /* ==========================================================================
+     Grid Layout
+     ========================================================================== */
+
+  .dashboard-streaks-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+  }
+
+  /* ==========================================================================
+     Stat Item
+     ========================================================================== */
+
+  .dashboard-streaks-stat-item {
+    @apply flex flex-col items-center text-center;
+  }
+
+  .dashboard-streaks-icon-container {
+    @apply w-12 h-12 rounded-full flex items-center justify-center mb-3;
+    background-color: color-mix(in srgb, #f97316 10%, transparent);
+  }
+
+  .dashboard-streaks-icon-container-success {
+    @apply w-12 h-12 rounded-full flex items-center justify-center mb-3;
+    background-color: color-mix(in srgb, var(--success) 10%, transparent);
+  }
+
+  .dashboard-streaks-icon-container-accent {
+    @apply w-12 h-12 rounded-full flex items-center justify-center mb-3;
+    background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+
+  .dashboard-streaks-icon {
+    @apply w-6 h-6;
+    color: #f97316;
+  }
+
+  .dashboard-streaks-icon-success {
+    @apply w-6 h-6;
+    color: var(--success);
+  }
+
+  .dashboard-streaks-icon-accent {
+    @apply w-6 h-6;
+    color: var(--accent);
+  }
+
+  .dashboard-streaks-value {
+    @apply text-2xl font-bold;
+  }
+
+  .dashboard-streaks-label {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .dashboard-streaks-best {
+    @apply flex items-center gap-1 text-xs mt-1;
+    color: var(--warning);
+  }
+
+  /* ==========================================================================
+     Loading State
+     ========================================================================== */
+
+  .dashboard-streaks-loading-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+  }
+
+  .dashboard-streaks-loading-item {
+    @apply space-y-2;
+  }
+
+  /**
+   * AchievementsCard Component Styles
+   *
+   * Shows achievements progress summary
+   */
+
+  /* ==========================================================================
+     Section Container
+     ========================================================================== */
+
+  .dashboard-achievements-section {
+    @apply flex flex-col gap-4 h-full;
+  }
+
+  .dashboard-achievements-heading {
+    @apply text-2xl font-bold;
+  }
+
+  .dashboard-achievements-title {
+    @apply text-lg;
+  }
+
+  /* ==========================================================================
+     Grid Layout
+     ========================================================================== */
+
+  .dashboard-achievements-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+  }
+
+  /* ==========================================================================
+     Stat Item
+     ========================================================================== */
+
+  .dashboard-achievements-stat-item {
+    @apply flex flex-col items-center text-center;
+  }
+
+  .dashboard-achievements-icon-container {
+    @apply w-12 h-12 rounded-full flex items-center justify-center mb-3;
+    background-color: color-mix(in srgb, var(--warning) 10%, transparent);
+  }
+
+  .dashboard-achievements-icon-container-warning {
+    @apply w-12 h-12 rounded-full flex items-center justify-center mb-3;
+    background-color: color-mix(in srgb, var(--warning) 10%, transparent);
+  }
+
+  .dashboard-achievements-icon-container-accent {
+    @apply w-12 h-12 rounded-full flex items-center justify-center mb-3;
+    background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+
+  .dashboard-achievements-icon {
+    @apply w-6 h-6;
+    color: var(--warning);
+  }
+
+  .dashboard-achievements-icon-warning {
+    @apply w-6 h-6;
+    color: var(--warning);
+  }
+
+  .dashboard-achievements-icon-accent {
+    @apply w-6 h-6;
+    color: var(--accent);
+  }
+
+  .dashboard-achievements-value {
+    @apply text-2xl font-bold;
+  }
+
+  .dashboard-achievements-label {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .dashboard-achievements-recent {
+    @apply flex items-center justify-center gap-2 mt-4 pt-4 text-sm;
+    border-top: 1px solid var(--border);
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Loading State
+     ========================================================================== */
+
+  .dashboard-achievements-loading-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+  }
+
+  .dashboard-achievements-loading-item {
+    @apply space-y-2;
+  }
+
+  /* ==========================================================================
+     Fasting Dashboard Widget
+     ========================================================================== */
+
+  .dashboard-fasting-section {
+    @apply flex flex-col gap-4 h-full;
+  }
+
+  .dashboard-fasting-heading {
+    @apply text-2xl font-bold;
+  }
+
+  .dashboard-fasting-header {
+    @apply flex items-center justify-between;
+  }
+
+  .dashboard-fasting-title {
+    @apply text-lg flex items-center gap-2;
+  }
+
+  .dashboard-fasting-title-icon {
+    @apply w-5 h-5;
+    color: var(--accent);
+  }
+
+  .dashboard-fasting-protocol {
+    @apply text-sm font-medium px-2 py-1 rounded-full;
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    color: var(--accent);
+  }
+
+  .dashboard-fasting-card-active {
+    @apply cursor-pointer transition-all;
+    border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+  }
+
+  .dashboard-fasting-card-active:hover {
+    border-color: var(--accent);
+  }
+
+  /* Active Fast Content */
+  .dashboard-fasting-active-content {
+    @apply flex items-center gap-6;
+  }
+
+  .dashboard-fasting-progress-wrapper {
+    @apply relative w-20 h-20 flex-shrink-0;
+  }
+
+  .dashboard-fasting-progress-ring {
+    @apply w-full h-full;
+  }
+
+  .dashboard-fasting-progress-bg {
+    stroke: var(--muted);
+  }
+
+  .dashboard-fasting-progress-fill {
+    stroke: var(--accent);
+    transition: stroke-dasharray 0.3s ease-out;
+  }
+
+  .dashboard-fasting-progress-text {
+    @apply absolute inset-0 flex items-center justify-center;
+  }
+
+  .dashboard-fasting-progress-percent {
+    @apply text-lg font-bold;
+  }
+
+  .dashboard-fasting-time-stats {
+    @apply flex items-center gap-4 flex-1;
+  }
+
+  .dashboard-fasting-time-item {
+    @apply flex flex-col;
+  }
+
+  .dashboard-fasting-time-value {
+    @apply text-xl font-bold tabular-nums;
+  }
+
+  .dashboard-fasting-time-label {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .dashboard-fasting-time-divider {
+    @apply w-px h-8;
+    background: var(--border);
+  }
+
+  /* Stats Grid (Idle State) */
+  .dashboard-fasting-stats-grid {
+    @apply grid grid-cols-3 gap-4 mb-4;
+  }
+
+  .dashboard-fasting-stat-item {
+    @apply flex flex-col items-center text-center;
+  }
+
+  .dashboard-fasting-icon-container {
+    @apply w-10 h-10 rounded-full flex items-center justify-center mb-2;
+    background-color: color-mix(in srgb, var(--warning) 10%, transparent);
+  }
+
+  .dashboard-fasting-icon {
+    @apply w-5 h-5;
+    color: var(--warning);
+  }
+
+  .dashboard-fasting-icon-container-success {
+    @apply w-10 h-10 rounded-full flex items-center justify-center mb-2;
+    background-color: color-mix(in srgb, var(--success) 10%, transparent);
+  }
+
+  .dashboard-fasting-icon-success {
+    @apply w-5 h-5;
+    color: var(--success);
+  }
+
+  .dashboard-fasting-icon-container-accent {
+    @apply w-10 h-10 rounded-full flex items-center justify-center mb-2;
+    background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+
+  .dashboard-fasting-icon-accent {
+    @apply w-5 h-5;
+    color: var(--accent);
+  }
+
+  .dashboard-fasting-stat-value {
+    @apply text-2xl font-bold;
+  }
+
+  .dashboard-fasting-stat-label {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .dashboard-fasting-start-btn {
+    @apply w-full;
+  }
+
+  /* Loading State */
+  .dashboard-fasting-loading-grid {
+    @apply flex flex-col items-center gap-3;
+  }
+
   /* ==========================================================================
      Progress Activity Widget
      ========================================================================== */
@@ -495,7 +948,7 @@
   }
 
   .dashboard-progress-heading {
-    @apply text-lg font-semibold;
+    @apply text-2xl font-bold;
   }
 
   .dashboard-progress-view-all {
@@ -912,7 +1365,7 @@
   @media (max-width: 480px) {
     /* Progress header */
     .dashboard-progress-heading {
-      @apply text-base;
+      @apply text-xl;
     }
 
     .dashboard-progress-view-all {

@@ -10,12 +10,15 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SleepIndexRouteImport } from './routes/sleep/index'
 import { Route as ProgressIndexRouteImport } from './routes/progress/index'
 import { Route as ProfileIndexRouteImport } from './routes/profile/index'
 import { Route as OnboardingIndexRouteImport } from './routes/onboarding/index'
+import { Route as FastingIndexRouteImport } from './routes/fasting/index'
 import { Route as ExerciseIndexRouteImport } from './routes/exercise/index'
 import { Route as DiaryIndexRouteImport } from './routes/diary/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as AchievementsIndexRouteImport } from './routes/achievements/index'
 import { Route as AuthVerifyEmailRouteImport } from './routes/auth/verify-email'
 import { Route as AuthSignupRouteImport } from './routes/auth/signup'
 import { Route as AuthResetPasswordRouteImport } from './routes/auth/reset-password'
@@ -28,6 +31,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SleepIndexRoute = SleepIndexRouteImport.update({
+  id: '/sleep/',
+  path: '/sleep/',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/sleep/index.lazy').then((d) => d.Route))
 const ProgressIndexRoute = ProgressIndexRouteImport.update({
   id: '/progress/',
   path: '/progress/',
@@ -47,6 +55,11 @@ const OnboardingIndexRoute = OnboardingIndexRouteImport.update({
 } as any).lazy(() =>
   import('./routes/onboarding/index.lazy').then((d) => d.Route),
 )
+const FastingIndexRoute = FastingIndexRouteImport.update({
+  id: '/fasting/',
+  path: '/fasting/',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/fasting/index.lazy').then((d) => d.Route))
 const ExerciseIndexRoute = ExerciseIndexRouteImport.update({
   id: '/exercise/',
   path: '/exercise/',
@@ -65,6 +78,13 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() =>
   import('./routes/dashboard/index.lazy').then((d) => d.Route),
+)
+const AchievementsIndexRoute = AchievementsIndexRouteImport.update({
+  id: '/achievements/',
+  path: '/achievements/',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./routes/achievements/index.lazy').then((d) => d.Route),
 )
 const AuthVerifyEmailRoute = AuthVerifyEmailRouteImport.update({
   id: '/auth/verify-email',
@@ -104,12 +124,15 @@ export interface FileRoutesByFullPath {
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/signup': typeof AuthSignupRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
+  '/achievements': typeof AchievementsIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/diary': typeof DiaryIndexRoute
   '/exercise': typeof ExerciseIndexRoute
+  '/fasting': typeof FastingIndexRoute
   '/onboarding': typeof OnboardingIndexRoute
   '/profile': typeof ProfileIndexRoute
   '/progress': typeof ProgressIndexRoute
+  '/sleep': typeof SleepIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
@@ -119,12 +142,15 @@ export interface FileRoutesByTo {
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/signup': typeof AuthSignupRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
+  '/achievements': typeof AchievementsIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/diary': typeof DiaryIndexRoute
   '/exercise': typeof ExerciseIndexRoute
+  '/fasting': typeof FastingIndexRoute
   '/onboarding': typeof OnboardingIndexRoute
   '/profile': typeof ProfileIndexRoute
   '/progress': typeof ProgressIndexRoute
+  '/sleep': typeof SleepIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesById {
@@ -135,12 +161,15 @@ export interface FileRoutesById {
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/signup': typeof AuthSignupRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
+  '/achievements/': typeof AchievementsIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/diary/': typeof DiaryIndexRoute
   '/exercise/': typeof ExerciseIndexRoute
+  '/fasting/': typeof FastingIndexRoute
   '/onboarding/': typeof OnboardingIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/progress/': typeof ProgressIndexRoute
+  '/sleep/': typeof SleepIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
@@ -152,12 +181,15 @@ export interface FileRouteTypes {
     | '/auth/reset-password'
     | '/auth/signup'
     | '/auth/verify-email'
+    | '/achievements'
     | '/dashboard'
     | '/diary'
     | '/exercise'
+    | '/fasting'
     | '/onboarding'
     | '/profile'
     | '/progress'
+    | '/sleep'
     | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -167,12 +199,15 @@ export interface FileRouteTypes {
     | '/auth/reset-password'
     | '/auth/signup'
     | '/auth/verify-email'
+    | '/achievements'
     | '/dashboard'
     | '/diary'
     | '/exercise'
+    | '/fasting'
     | '/onboarding'
     | '/profile'
     | '/progress'
+    | '/sleep'
     | '/api/auth/$'
   id:
     | '__root__'
@@ -182,12 +217,15 @@ export interface FileRouteTypes {
     | '/auth/reset-password'
     | '/auth/signup'
     | '/auth/verify-email'
+    | '/achievements/'
     | '/dashboard/'
     | '/diary/'
     | '/exercise/'
+    | '/fasting/'
     | '/onboarding/'
     | '/profile/'
     | '/progress/'
+    | '/sleep/'
     | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
@@ -198,12 +236,15 @@ export interface RootRouteChildren {
   AuthResetPasswordRoute: typeof AuthResetPasswordRoute
   AuthSignupRoute: typeof AuthSignupRoute
   AuthVerifyEmailRoute: typeof AuthVerifyEmailRoute
+  AchievementsIndexRoute: typeof AchievementsIndexRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
   DiaryIndexRoute: typeof DiaryIndexRoute
   ExerciseIndexRoute: typeof ExerciseIndexRoute
+  FastingIndexRoute: typeof FastingIndexRoute
   OnboardingIndexRoute: typeof OnboardingIndexRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
   ProgressIndexRoute: typeof ProgressIndexRoute
+  SleepIndexRoute: typeof SleepIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
@@ -214,6 +255,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sleep/': {
+      id: '/sleep/'
+      path: '/sleep'
+      fullPath: '/sleep'
+      preLoaderRoute: typeof SleepIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/progress/': {
@@ -237,6 +285,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/fasting/': {
+      id: '/fasting/'
+      path: '/fasting'
+      fullPath: '/fasting'
+      preLoaderRoute: typeof FastingIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/exercise/': {
       id: '/exercise/'
       path: '/exercise'
@@ -256,6 +311,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/achievements/': {
+      id: '/achievements/'
+      path: '/achievements'
+      fullPath: '/achievements'
+      preLoaderRoute: typeof AchievementsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth/verify-email': {
@@ -310,12 +372,15 @@ const rootRouteChildren: RootRouteChildren = {
   AuthResetPasswordRoute: AuthResetPasswordRoute,
   AuthSignupRoute: AuthSignupRoute,
   AuthVerifyEmailRoute: AuthVerifyEmailRoute,
+  AchievementsIndexRoute: AchievementsIndexRoute,
   DashboardIndexRoute: DashboardIndexRoute,
   DiaryIndexRoute: DiaryIndexRoute,
   ExerciseIndexRoute: ExerciseIndexRoute,
+  FastingIndexRoute: FastingIndexRoute,
   OnboardingIndexRoute: OnboardingIndexRoute,
   ProfileIndexRoute: ProfileIndexRoute,
   ProgressIndexRoute: ProgressIndexRoute,
+  SleepIndexRoute: SleepIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport

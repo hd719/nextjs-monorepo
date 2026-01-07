@@ -3,7 +3,7 @@ import { Droplets } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { WaterGlass } from "./WaterGlass";
-import type { WaterIntake } from "@/types/nutrition";
+import type { WaterIntake } from "@/types";
 
 export interface WaterTrackerProps {
   data: WaterIntake;
@@ -57,7 +57,7 @@ export function WaterTracker({ data, onUpdate, isLoading }: WaterTrackerProps) {
   return (
     <section className="dashboard-water-section">
       <h2 className="dashboard-water-heading">Water Intake</h2>
-      <Card variant="supporting">
+      <Card variant="supporting" className="dashboard-card-stretch">
         <CardHeader>
           <div className="dashboard-water-header">
             <CardTitle className="dashboard-water-title">

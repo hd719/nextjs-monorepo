@@ -562,6 +562,36 @@ export type EnumChallengeTypeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumChallengeTypeFilter<$PrismaModel>
 }
 
+export type EnumFastingStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastingStatus | Prisma.EnumFastingStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FastingStatus[] | Prisma.ListEnumFastingStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FastingStatus[] | Prisma.ListEnumFastingStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFastingStatusFilter<$PrismaModel> | $Enums.FastingStatus
+}
+
+export type BoolNullableFilter<$PrismaModel = never> = {
+  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedBoolNullableFilter<$PrismaModel> | boolean | null
+}
+
+export type EnumFastingStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastingStatus | Prisma.EnumFastingStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FastingStatus[] | Prisma.ListEnumFastingStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FastingStatus[] | Prisma.ListEnumFastingStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFastingStatusWithAggregatesFilter<$PrismaModel> | $Enums.FastingStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFastingStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFastingStatusFilter<$PrismaModel>
+}
+
+export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedBoolNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedBoolNullableFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -1067,6 +1097,36 @@ export type NestedEnumChallengeTypeWithAggregatesFilter<$PrismaModel = never> = 
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumChallengeTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumChallengeTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumFastingStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastingStatus | Prisma.EnumFastingStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FastingStatus[] | Prisma.ListEnumFastingStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FastingStatus[] | Prisma.ListEnumFastingStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFastingStatusFilter<$PrismaModel> | $Enums.FastingStatus
+}
+
+export type NestedBoolNullableFilter<$PrismaModel = never> = {
+  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedBoolNullableFilter<$PrismaModel> | boolean | null
+}
+
+export type NestedEnumFastingStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastingStatus | Prisma.EnumFastingStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FastingStatus[] | Prisma.ListEnumFastingStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FastingStatus[] | Prisma.ListEnumFastingStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFastingStatusWithAggregatesFilter<$PrismaModel> | $Enums.FastingStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFastingStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFastingStatusFilter<$PrismaModel>
+}
+
+export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedBoolNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedBoolNullableFilter<$PrismaModel>
 }
 
 

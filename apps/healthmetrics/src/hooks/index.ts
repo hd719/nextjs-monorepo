@@ -7,6 +7,30 @@ export { useWaterIntake, useUpdateWaterIntake } from "./useWater";
 // Steps hooks
 export { useStepCount, useAddSteps } from "./useSteps";
 
+// Sleep hooks
+export {
+  useSleepEntry,
+  useSleepHistory,
+  useSleepAverage,
+  useSaveSleepEntry,
+} from "./useSleep";
+
+// Streak hooks
+export {
+  useStreaks,
+  useUpdateLoggingStreak,
+  useUpdateExerciseStreak,
+} from "./useStreaks";
+
+// Achievement hooks
+export {
+  useAchievementDefinitions,
+  useUserAchievements,
+  useAchievementSummary,
+  useUnlockAchievement,
+  useCheckAchievements,
+} from "./useAchievements";
+
 // Diary hooks
 export {
   useDiaryDay,
@@ -42,3 +66,19 @@ export {
 
 // Goal calculation hook
 export { useGoalCalculation } from "./useGoalCalculation";
+
+// Fasting hooks
+export {
+  useActiveFast,
+  useFastingProtocols,
+  useFastingHistory,
+  useFastingStats,
+  useFastingCalendar,
+  useStartFast,
+  useEndFast,
+  useCancelFast,
+  usePauseFast,
+  useResumeFast,
+  useCreateCustomProtocol,
+  useDeleteCustomProtocol,
+} from "./useFasting";

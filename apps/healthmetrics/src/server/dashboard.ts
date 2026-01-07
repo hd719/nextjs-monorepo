@@ -1,7 +1,10 @@
 import { createServerFn } from "@tanstack/react-start";
 import { prisma } from "@/lib/prisma";
+import { createLogger } from "@/lib/logger";
 import type { Activity, MealEntry } from "@/types/nutrition";
 import { MEAL_TYPES, type MealType } from "@/constants/defaults";
+
+const log = createLogger("server:dashboard");
 
 function normalizeMealType(value: string): MealType | null {
   if (MEAL_TYPES.includes(value as MealType)) {
@@ -103,7 +106,10 @@ export const getDashboardMeals = createServerFn({ method: "GET" })
         (meal): meal is MealEntry => Boolean(meal && meal.foods.length > 0)
       );
     } catch (error) {
-      console.error("Failed to fetch dashboard meals:", error);
+      log.error(
+        { err: error, userId, date },
+        "Failed to fetch dashboard meals"
+      );
       throw new Error("Failed to fetch dashboard meals");
     }
   });
@@ -157,7 +163,10 @@ export const getRecentActivity = createServerFn({ method: "GET" })
         .sort((a, b) => b.timestamp.localeCompare(a.timestamp))
         .slice(0, limit);
     } catch (error) {
-      console.error("Failed to fetch recent activity:", error);
+      log.error(
+        { err: error, userId, limit },
+        "Failed to fetch recent activity"
+      );
       throw new Error("Failed to fetch recent activity");
     }
   });

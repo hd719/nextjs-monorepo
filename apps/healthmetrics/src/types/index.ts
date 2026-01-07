@@ -39,6 +39,34 @@ export type { WaterIntake } from "./water";
 // Steps types
 export type { StepCount } from "./steps";
 
+// Sleep types
+export type {
+  SleepEntry,
+  SleepData,
+  SleepCardData,
+  SaveSleepInput,
+  SleepHistoryEntry,
+} from "./sleep";
+export { DEFAULT_SLEEP_GOAL } from "./sleep";
+
+// Streak types
+export type { UserStreaks, StreakUpdate } from "./streaks";
+
+// Achievement types
+export type {
+  AchievementCategory,
+  AchievementDefinition,
+  AchievementRequirement,
+  UserAchievementData,
+  AchievementProgress,
+  AchievementSummary,
+} from "./achievements";
+export {
+  ACHIEVEMENT_DEFINITIONS,
+  achievementRequirementSchema,
+  parseAchievementRequirement,
+} from "./achievements";
+
 // Profile types (server/database types)
 export type { UserProfile } from "./profile";
 
@@ -53,11 +81,10 @@ export type {
   Milestone,
   Insight,
   WeekComparisonData,
-  SleepData,
+  ProgressSleepData,
   ProgressData,
   DateRange,
   DateRangeOption,
-  // Aliases for chart components
   WeightEntry as ProgressChartWeightEntry,
   ExerciseEntry,
 } from "./progress";
@@ -77,3 +104,21 @@ export type {
   NutritionGoals,
   SaveOnboardingStepInput,
 } from "./onboarding";
+
+// Fasting types
+export type {
+  FastingStatus,
+  FastingProtocol,
+  FastingProtocolOption,
+  FastingSession,
+  ActiveFast,
+  FastingStats,
+  FastingHistoryEntry,
+  FastingCalendarDay,
+  StartFastInput,
+  EndFastInput,
+  CreateProtocolInput,
+  UpdateFastingPreferencesInput,
+  FastingTimerState,
+  FastingTimerDisplay,
+} from "./fasting";

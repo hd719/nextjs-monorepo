@@ -4,8 +4,11 @@ import type {
   Activity,
   UserDisplayProfile,
   WaterIntake,
-} from "@/types/nutrition";
-import type { ExerciseSummary } from "@/types/exercise";
+  ExerciseSummary,
+  SleepCardData,
+  UserStreaks,
+  AchievementSummary,
+} from "@/types";
 
 // Static date for consistent SSR/client rendering
 // In production, this would be generated server-side per request
@@ -176,4 +179,56 @@ export const mockWaterIntake: WaterIntake = {
   current: 5,
   goal: 8,
   date: today,
+};
+
+// Mock sleep data for dashboard
+export const mockSleepCardData: SleepCardData = {
+  hoursSlept: 7.5,
+  quality: 4,
+  bedtime: "22:30",
+  wakeTime: "06:00",
+  hasEntry: true,
+};
+
+// Mock streaks data
+export const mockStreaks: UserStreaks = {
+  currentLogging: 12,
+  bestLogging: 21,
+  currentCalorie: 5,
+  bestCalorie: 14,
+  currentExercise: 3,
+  bestExercise: 7,
+  lastLoggingDate: "2025-12-10",
+  lastExerciseDate: "2025-12-09",
+};
+
+// Mock achievement summary
+export const mockAchievementSummary: AchievementSummary = {
+  totalPoints: 285,
+  unlockedCount: 5,
+  totalCount: 12,
+  recentUnlocks: [
+    {
+      id: "ua-1",
+      achievementId: "ach-1",
+      key: "streak_7",
+      name: "Week Warrior",
+      description: "7-day logging streak",
+      icon: "flame",
+      category: "streaks",
+      points: 25,
+      unlockedAt: "2025-12-08T10:00:00Z",
+    },
+    {
+      id: "ua-2",
+      achievementId: "ach-2",
+      key: "first_meal",
+      name: "First Bite",
+      description: "Log your first meal",
+      icon: "utensils",
+      category: "logging",
+      points: 10,
+      unlockedAt: "2025-12-01T08:30:00Z",
+    },
+  ],
 };

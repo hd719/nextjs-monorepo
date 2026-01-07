@@ -105,6 +105,11 @@ export type WaterEntry = Prisma.WaterEntryModel
  */
 export type StepEntry = Prisma.StepEntryModel
 /**
+ * Model SleepEntry
+ * 
+ */
+export type SleepEntry = Prisma.SleepEntryModel
+/**
  * Model RecipeCache
  * 
  */
@@ -139,3 +144,28 @@ export type Challenge = Prisma.ChallengeModel
  * 
  */
 export type ChallengeParticipant = Prisma.ChallengeParticipantModel
+/**
+ * Model UserStreak
+ * 
+ */
+export type UserStreak = Prisma.UserStreakModel
+/**
+ * Model Achievement
+ * 
+ */
+export type Achievement = Prisma.AchievementModel
+/**
+ * Model UserAchievement
+ * 
+ */
+export type UserAchievement = Prisma.UserAchievementModel
+/**
+ * Model FastingProtocol
+ * 
+ */
+export type FastingProtocol = Prisma.FastingProtocolModel
+/**
+ * Model FastingSession
+ * 
+ */
+export type FastingSession = Prisma.FastingSessionModel

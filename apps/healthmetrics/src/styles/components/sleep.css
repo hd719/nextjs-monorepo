@@ -1,0 +1,528 @@
+/* Sleep Page Styles */
+
+.sleep-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sleep-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.sleep-page-header-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sleep-page-title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+
+.sleep-page-subtitle {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+/* Log Sleep Button */
+.sleep-log-button {
+  background: var(--accent);
+  color: var(--accent-foreground);
+  font-weight: 500;
+}
+
+.sleep-log-button:hover {
+  background: var(--accent-dark);
+}
+
+/* Sleep Dialog */
+.sleep-dialog {
+  max-width: 400px;
+}
+
+.sleep-dialog-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sleep-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.sleep-form-times {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.sleep-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sleep-form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.sleep-form-input {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+  font-size: 1rem;
+}
+
+/* 12-hour Time Picker */
+.sleep-time-picker {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sleep-time-select {
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--foreground);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  min-width: 3.5rem;
+  text-align: center;
+}
+
+.sleep-time-select:hover {
+  border-color: var(--accent);
+}
+
+.sleep-time-select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.sleep-time-colon {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+/* AM/PM Toggle Buttons */
+.sleep-period-toggle {
+  display: flex;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.sleep-period-btn {
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-secondary);
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.sleep-period-btn:first-child {
+  border-right: 1px solid var(--color-border);
+}
+
+.sleep-period-btn:hover:not(.active) {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+}
+
+.sleep-period-btn.active {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.sleep-form-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.sleep-form-textarea {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+  font-size: 0.9rem;
+  resize: none;
+}
+
+.sleep-hours-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background: var(--color-bg-tertiary);
+  border-radius: 0.75rem;
+}
+
+.sleep-hours-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.sleep-hours-label {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+.sleep-quality-stars {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.5rem 0;
+}
+
+.sleep-star-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: transform 0.15s ease;
+}
+
+.sleep-star-button:hover {
+  transform: scale(1.2);
+}
+
+.sleep-quality-label {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-top: 0.25rem;
+}
+
+.sleep-submit-button {
+  margin-top: 0.5rem;
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.sleep-submit-button:hover {
+  background: var(--accent-dark);
+}
+
+/* Analytics Grid */
+.sleep-analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .sleep-analytics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .sleep-analytics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sleep-stat-card {
+  overflow: hidden;
+}
+
+.sleep-stat-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.sleep-stat-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sleep-stat-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.sleep-stat-icon-hours {
+  color: var(--accent);
+}
+
+.sleep-stat-icon-quality {
+  color: var(--warning);
+}
+
+.sleep-stat-icon-trend-up {
+  color: var(--success);
+}
+
+.sleep-stat-icon-trend-down {
+  color: var(--destructive);
+}
+
+.sleep-stat-icon-consistency {
+  color: var(--accent);
+}
+
+.sleep-stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.sleep-stat-label {
+  font-size: 0.75rem;
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sleep-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.sleep-stat-sublabel {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+/* Insights Card */
+.sleep-insights-card {
+  margin-top: 0.5rem;
+}
+
+.sleep-insights-content {
+  padding: 1.25rem;
+}
+
+.sleep-insights-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+}
+
+.sleep-insights-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sleep-insight-item {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background: var(--color-bg-tertiary);
+}
+
+.sleep-insight-icon {
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.sleep-insight-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sleep-insight-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.sleep-insight-description {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+/* Table */
+.sleep-table-card {
+  margin-top: 0.5rem;
+}
+
+.sleep-table-content {
+  padding: 1.25rem;
+}
+
+.sleep-table-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+}
+
+/* Sleep List Layout */
+.sleep-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sleep-list-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  transition: background 0.15s ease;
+}
+
+.sleep-list-item:hover {
+  background: var(--muted);
+}
+
+.sleep-list-date {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  min-width: 100px;
+  color: var(--foreground);
+}
+
+.sleep-list-times {
+  display: flex;
+  gap: 1.5rem;
+  flex: 1;
+}
+
+.sleep-list-time {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: var(--muted-foreground);
+  font-size: 0.9rem;
+}
+
+.sleep-list-time-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  opacity: 0.7;
+}
+
+.sleep-list-hours {
+  font-weight: 700;
+  font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
+  min-width: 50px;
+  text-align: center;
+}
+
+.sleep-list-quality {
+  display: flex;
+  gap: 0.125rem;
+}
+
+.sleep-list-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.sleep-action-edit {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: var(--accent);
+  font-size: 0.8rem;
+}
+
+.sleep-action-edit:hover {
+  color: var(--accent-light);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.sleep-action-delete {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: var(--destructive);
+  font-size: 0.8rem;
+}
+
+.sleep-action-delete:hover {
+  color: var(--destructive);
+  background: color-mix(in srgb, var(--destructive) 10%, transparent);
+}
+
+.sleep-table-action-btn {
+  color: var(--color-text-tertiary);
+}
+
+.sleep-table-action-btn:hover {
+  color: var(--color-rose-400);
+}
+
+.sleep-table-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  text-align: center;
+}
+
+.sleep-table-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  color: var(--color-text-secondary);
+}
+
+.sleep-loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

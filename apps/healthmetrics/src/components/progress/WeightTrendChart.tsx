@@ -10,10 +10,10 @@ import {
 } from "recharts";
 import { Scale } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import type { WeightEntry } from "@/types/progress";
+import type { ProgressWeightEntry } from "@/types";
 
 interface WeightTrendChartProps {
-  data: WeightEntry[];
+  data: ProgressWeightEntry[];
   goalWeight: number;
   currentWeight?: number;
 }
