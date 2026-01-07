@@ -239,7 +239,7 @@
      ========================================================================== */
 
   .auth-card {
-    @apply w-full max-w-md;
+    @apply w-full max-w-md px-6 py-4;
     min-height: 400px;
     display: flex;
     flex-direction: column;
@@ -340,7 +340,7 @@
      ========================================================================== */
 
   .auth-desktop-theme-toggle {
-    @apply hidden lg:block absolute top-6 right-6;
+    @apply hidden lg:block absolute top-6 right-6 z-10;
   }
 
   /* ==========================================================================
