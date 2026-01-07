@@ -1,6 +1,9 @@
 import { createServerFn } from "@tanstack/react-start";
 import { prisma } from "@/lib/prisma";
+import { createLogger } from "@/lib/logger";
 import type { SleepData, SleepHistoryEntry } from "@/types/sleep";
+
+const log = createLogger("server:sleep");
 
 // ============================================================================
 // QUERY FUNCTIONS
@@ -49,7 +52,7 @@ export const getSleepEntry = createServerFn({ method: "GET" })
         hasEntry: true,
       };
     } catch (error) {
-      console.error("Failed to fetch sleep entry:", error);
+      log.error({ err: error, userId, date }, "Failed to fetch sleep entry");
       return {
         hoursSlept: null,
         quality: null,
@@ -96,7 +99,7 @@ export const getSleepHistory = createServerFn({ method: "GET" })
         wakeTime: entry.wakeTime,
       }));
     } catch (error) {
-      console.error("Failed to fetch sleep history:", error);
+      log.error({ err: error, userId }, "Failed to fetch sleep history");
       return [];
     }
   });
@@ -136,7 +139,7 @@ export const getSleepAverage = createServerFn({ method: "GET" })
             : null,
         };
       } catch (error) {
-        console.error("Failed to calculate sleep average:", error);
+        log.error({ err: error, userId }, "Failed to calculate sleep average");
         return { averageHours: 0, averageQuality: null };
       }
     }
@@ -218,7 +221,10 @@ export const saveSleepEntry = createServerFn({ method: "POST" })
         hasEntry: true,
       };
     } catch (error) {
-      console.error("Failed to save sleep entry:", error);
+      log.error(
+        { err: error, userId: data.userId, date: data.date },
+        "Failed to save sleep entry"
+      );
       throw new Error("Failed to save sleep entry");
     }
   });
@@ -242,7 +248,7 @@ export const deleteSleepEntry = createServerFn({ method: "POST" })
         return { success: true };
       } catch (error) {
         // If entry doesn't exist, that's fine
-        console.error("Failed to delete sleep entry:", error);
+        log.error({ err: error, userId, date }, "Failed to delete sleep entry");
         return { success: false };
       }
     }

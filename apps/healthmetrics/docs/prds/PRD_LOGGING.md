@@ -1,5 +1,7 @@
 # PRD: Production Logging System
 
+> **Status:** Phase 1 Complete
+
 ## Overview
 
 Replace raw `console.*` statements with a structured, production-ready logging system that provides better debugging, monitoring, and observability.
@@ -63,68 +65,33 @@ After evaluating options, **Pino** is recommended for this project:
 
 ## Implementation Plan
 
-### Phase 1: Logger Setup (30 min)
+### Phase 1: Logger Setup [x] COMPLETE
 
-**Priority:** High
-**Effort:** Small
+**Status:** Done
+**Completed:** January 2026
 
-#### 1.1 Install Dependencies
+#### What Was Implemented
 
-```bash
-bun add pino pino-pretty
-bun add -d @types/pino
-```
+- [x] Installed `pino` and `pino-pretty` dependencies
+- [x] Created `src/lib/logger.ts` with:
+  - Environment-based log levels (debug in dev, info in prod)
+  - Pretty printing in development
+  - JSON output in production
+  - Automatic sensitive field redaction
+  - Child logger pattern with `createLogger()`
+  - Pre-configured loggers: `serverLog`, `authLog`, `dbLog`
+- [x] Exported from `src/lib/index.ts` barrel
 
-#### 1.2 Create Logger Utility
-
-**File:** `src/lib/logger.ts`
-
-```typescript
-import pino from "pino";
-
-// Base logger configuration
-export const logger = pino({
-  level: process.env.LOG_LEVEL || (process.env.NODE_ENV === "production" ? "info" : "debug"),
-
-  // Pretty print in development
-  transport: process.env.NODE_ENV === "development"
-    ? {
-        target: "pino-pretty",
-        options: {
-          colorize: true,
-          translateTime: "SYS:standard",
-          ignore: "pid,hostname",
-        },
-      }
-    : undefined,
-
-  // Base context for all logs
-  base: {
-    env: process.env.NODE_ENV,
-    app: "healthmetrics",
-  },
-
-  // Redact sensitive fields
-  redact: {
-    paths: ["password", "token", "authorization", "cookie", "*.password", "*.token"],
-    censor: "[REDACTED]",
-  },
-});
-
-// Create child logger with context (e.g., module name)
-export function createLogger(context: string) {
-  return logger.child({ context });
-}
-
-// Type-safe log helpers
-export type Logger = typeof logger;
-```
-
-#### 1.3 Export from lib barrel
+#### Usage
 
 ```typescript
-// src/lib/index.ts (create if doesn't exist)
-export { logger, createLogger } from "./logger";
+import { createLogger } from "@/lib";
+
+const log = createLogger("server:diary");
+
+log.info({ userId, date }, "Creating diary entry");
+log.error({ err: error, userId }, "Failed to create entry");
+log.warn({ attempts: 5 }, "Rate limit approaching");
 ```
 
 ---
@@ -413,14 +380,14 @@ export function withRequestId(handler) {
 
 ## Acceptance Criteria
 
-- [ ] Logger utility created at `src/lib/logger.ts`
+- [x] Logger utility created at `src/lib/logger.ts`
 - [ ] All server/*.ts files use structured logging
 - [ ] No raw console.* statements in src/ (except DevTools)
-- [ ] LOG_LEVEL environment variable works
-- [ ] Pretty printing works in development
-- [ ] JSON output works in production
-- [ ] Sensitive fields are redacted
-- [ ] Documentation updated
+- [x] LOG_LEVEL environment variable works
+- [x] Pretty printing works in development
+- [x] JSON output works in production
+- [x] Sensitive fields are redacted
+- [x] Documentation updated
 
 ---
 
@@ -441,12 +408,12 @@ LOG_LEVEL=warn
 
 ## Rollout Plan
 
-| Phase | Timeline | Owner |
-|-------|----------|-------|
-| Phase 1: Logger Setup | Day 1 | - |
-| Phase 2: Server Migration | Day 1-2 | - |
-| Phase 3: Auth Logging | Day 2 | - |
-| Phase 4: Component Logging | Day 3 | - |
-| Testing & Review | Day 3 | - |
+| Phase | Timeline | Status |
+|-------|----------|--------|
+| Phase 1: Logger Setup | Day 1 | Complete |
+| Phase 2: Server Migration | Day 1-2 | Not Started |
+| Phase 3: Auth Logging | Day 2 | Not Started |
+| Phase 4: Component Logging | Day 3 | Not Started |
+| Testing & Review | Day 3 | Not Started |
 
-**Total Effort:** ~4-6 hours
+**Remaining Effort:** ~3-4 hours

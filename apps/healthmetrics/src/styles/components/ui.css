@@ -51,6 +51,14 @@
     border-color: color-mix(in srgb, var(--border) 50%, transparent);
   }
 
+  /* ==========================================================================
+     Card Content - Default padding for card body
+     ========================================================================== */
+
+  .card-content {
+    @apply px-6 pb-6;
+  }
+
   /**
    * ProgressBar Component Styles
    *

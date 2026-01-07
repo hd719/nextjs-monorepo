@@ -1,6 +1,9 @@
 import { createServerFn } from "@tanstack/react-start";
 import { prisma } from "@/lib/prisma";
+import { createLogger } from "@/lib/logger";
 import type { UserStreaks } from "@/types/streaks";
+
+const log = createLogger("server:streaks");
 
 // ============================================================================
 // QUERY FUNCTIONS
@@ -44,7 +47,7 @@ export const getStreaks = createServerFn({ method: "GET" })
           streak.lastExerciseDate?.toISOString().split("T")[0] ?? null,
       };
     } catch (error) {
-      console.error("Failed to fetch streaks:", error);
+      log.error({ err: error, userId }, "Failed to fetch streaks");
       return {
         currentLogging: 0,
         currentCalorie: 0,
@@ -120,7 +123,7 @@ export const updateLoggingStreak = createServerFn({ method: "POST" })
 
       return formatStreak(streak);
     } catch (error) {
-      console.error("Failed to update logging streak:", error);
+      log.error({ err: error, userId }, "Failed to update logging streak");
       throw new Error("Failed to update streak");
     }
   });
@@ -183,7 +186,7 @@ export const updateExerciseStreak = createServerFn({ method: "POST" })
 
       return formatStreak(streak);
     } catch (error) {
-      console.error("Failed to update exercise streak:", error);
+      log.error({ err: error, userId }, "Failed to update exercise streak");
       throw new Error("Failed to update streak");
     }
   });
@@ -230,7 +233,7 @@ export const updateCalorieStreak = createServerFn({ method: "POST" })
 
       return formatStreak(updatedStreak);
     } catch (error) {
-      console.error("Failed to update calorie streak:", error);
+      log.error({ err: error, userId }, "Failed to update calorie streak");
       throw new Error("Failed to update streak");
     }
   });

@@ -1,6 +1,9 @@
 import { createServerFn } from "@tanstack/react-start";
 import { prisma } from "@/lib/prisma";
+import { createLogger } from "@/lib/logger";
 import type { WeightEntry } from "@/types/weight";
+
+const log = createLogger("server:weight");
 
 // ============================================================================
 // QUERY FUNCTIONS
@@ -39,7 +42,7 @@ export const getLatestWeight = createServerFn({ method: "GET" })
         createdAt: entry.createdAt,
       };
     } catch (error) {
-      console.error("Failed to fetch latest weight:", error);
+      log.error({ err: error, userId }, "Failed to fetch latest weight");
       return null;
     }
   });
@@ -117,7 +120,7 @@ export const getWeightTrend = createServerFn({ method: "GET" })
             : null,
         };
       } catch (error) {
-        console.error("Failed to fetch weight trend:", error);
+        log.error({ err: error, userId }, "Failed to fetch weight trend");
         return { entries: [], change: 0, goalWeight: null };
       }
     }
@@ -187,7 +190,7 @@ export const saveWeightEntry = createServerFn({ method: "POST" })
           createdAt: entry.createdAt,
         };
       } catch (error) {
-        console.error("Failed to save weight entry:", error);
+        log.error({ err: error, userId }, "Failed to save weight entry");
         // Preserve validation error messages
         if (error instanceof Error) {
           throw error;

@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { prisma } from "@/lib/prisma";
+import { createLogger } from "@/lib/logger";
 import type {
   AchievementDefinition,
   UserAchievementData,
@@ -7,6 +8,8 @@ import type {
   AchievementCategory,
 } from "@/types/achievements";
 import { parseAchievementRequirement } from "@/types/achievements";
+
+const log = createLogger("server:achievements");
 
 // ============================================================================
 // QUERY FUNCTIONS
@@ -35,7 +38,7 @@ export const getAchievements = createServerFn({ method: "GET" })
         points: a.points,
       }));
     } catch (error) {
-      console.error("Failed to fetch achievements:", error);
+      log.error({ err: error, category }, "Failed to fetch achievements");
       return [];
     }
   });
@@ -65,7 +68,7 @@ export const getUserAchievements = createServerFn({ method: "GET" })
         unlockedAt: ua.unlockedAt.toISOString(),
       }));
     } catch (error) {
-      console.error("Failed to fetch user achievements:", error);
+      log.error({ err: error, userId }, "Failed to fetch user achievements");
       return [];
     }
   });
@@ -110,7 +113,7 @@ export const getAchievementSummary = createServerFn({ method: "GET" })
         recentUnlocks,
       };
     } catch (error) {
-      console.error("Failed to fetch achievement summary:", error);
+      log.error({ err: error, userId }, "Failed to fetch achievement summary");
       return {
         totalPoints: 0,
         unlockedCount: 0,
@@ -141,7 +144,7 @@ export const unlockAchievement = createServerFn({ method: "POST" })
         });
 
         if (!achievement) {
-          console.error(`Achievement not found: ${achievementKey}`);
+          log.warn({ achievementKey }, "Achievement not found");
           return null;
         }
 
@@ -181,7 +184,10 @@ export const unlockAchievement = createServerFn({ method: "POST" })
           unlockedAt: userAchievement.unlockedAt.toISOString(),
         };
       } catch (error) {
-        console.error("Failed to unlock achievement:", error);
+        log.error(
+          { err: error, userId, achievementKey },
+          "Failed to unlock achievement"
+        );
         return null;
       }
     }
@@ -282,7 +288,7 @@ export const checkAchievements = createServerFn({ method: "POST" })
 
         return newUnlocks;
       } catch (error) {
-        console.error("Failed to check achievements:", error);
+        log.error({ err: error, userId }, "Failed to check achievements");
         return [];
       }
     }

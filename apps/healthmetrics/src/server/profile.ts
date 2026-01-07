@@ -1,11 +1,14 @@
 import { createServerFn } from "@tanstack/react-start";
 import { prisma } from "@/lib/prisma";
+import { createLogger } from "@/lib/logger";
 import {
   updateUserProfileSchema,
   type UpdateUserProfileInput,
 } from "@/utils/validation";
 import type { UserProfile } from "@/types/profile";
 import { getLatestWeight, saveWeightEntry } from "./weight";
+
+const log = createLogger("server:profile");
 
 // ============================================================================
 // QUERY FUNCTIONS
@@ -64,7 +67,7 @@ export const getUserProfile = createServerFn({ method: "GET" })
         updatedAt: user.updatedAt.toISOString(),
       };
     } catch (error) {
-      console.error("Failed to fetch user profile:", error);
+      log.error({ err: error, userId }, "Failed to fetch user profile");
       throw new Error("Failed to fetch user profile");
     }
   });
@@ -195,7 +198,7 @@ export const updateUserProfile = createServerFn({ method: "POST" })
         updatedAt: user.updatedAt.toISOString(),
       };
     } catch (error) {
-      console.error("Failed to update user profile:", error);
+      log.error({ err: error, userId }, "Failed to update user profile");
       // Preserve validation error messages
       if (error instanceof Error) {
         throw error;

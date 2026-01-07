@@ -266,11 +266,11 @@
   }
 
   .exercise-wizard-card {
-    /* Hero card with extra padding for the wizard */
+    /* Hero card for the wizard */
   }
 
   .exercise-wizard-content {
-    @apply pt-0;
+    /* Content uses CardContent default padding */
   }
 
   .exercise-wizard-steps {
