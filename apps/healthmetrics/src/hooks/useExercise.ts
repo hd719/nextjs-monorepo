@@ -70,7 +70,7 @@ export function useExerciseSearch(
       searchExercises({
         data: {
           query: query || undefined,
-          category,
+          category: category || undefined, // Convert empty string to undefined
           limit: 20,
         },
       }),

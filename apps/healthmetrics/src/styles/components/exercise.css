@@ -42,7 +42,7 @@
      ========================================================================== */
 
   .exercise-stat-card-content {
-    @apply flex items-center gap-3 p-4;
+    @apply flex items-center justify-center gap-3 p-4;
   }
 
   .exercise-stat-icon-wrapper {
@@ -64,7 +64,7 @@
   }
 
   .exercise-stat-body {
-    @apply flex-1;
+    @apply flex-shrink-0;
   }
 
   .exercise-stat-value {

@@ -1,5 +1,6 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { fetchUser } from "@/server/auth";
+import { checkOnboardingRequired } from "@/server/onboarding";
 import { ROUTES } from "@/constants/routes";
 
 export const Route = createFileRoute("/exercise/")({
@@ -10,9 +11,15 @@ export const Route = createFileRoute("/exercise/")({
       throw redirect({ to: ROUTES.HOME });
     }
 
+    // Check if user needs onboarding
+    const { required: needsOnboarding } = await checkOnboardingRequired({
+      data: { userId: user.id },
+    });
+
+    if (needsOnboarding) {
+      throw redirect({ to: ROUTES.ONBOARDING });
+    }
+
     return { user };
   },
-  // Lazy load the component for better bundle splitting
-  component: () =>
-    import("./index.lazy").then((d) => d.Route.options.component),
 });

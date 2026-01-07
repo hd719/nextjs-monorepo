@@ -27,6 +27,17 @@ export function CompleteStep({
   isCompleting,
 }: CompleteStepProps) {
   const goalOption = GOAL_OPTIONS.find((g) => g.value === data.goalType);
+  const isMetric = data.unitsPreference === "metric";
+
+  // Format target weight based on units preference (whole numbers)
+  const formatTargetWeight = (weightLbs: number): string => {
+    if (isMetric) {
+      // Convert lbs to kg and round to whole number
+      return Math.round(weightLbs / 2.20462).toString();
+    }
+    // Round lbs to whole number
+    return Math.round(weightLbs).toString();
+  };
 
   return (
     <div className="onboarding-step onboarding-complete-step">
@@ -72,7 +83,8 @@ export function CompleteStep({
             <div className="onboarding-summary-item">
               <span className="onboarding-summary-label">Target Weight</span>
               <span className="onboarding-summary-value">
-                {data.targetWeightLbs} lbs
+                {formatTargetWeight(data.targetWeightLbs)}{" "}
+                {isMetric ? "kg" : "lbs"}
               </span>
             </div>
           )}

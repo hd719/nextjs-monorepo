@@ -50,16 +50,5 @@ export interface UserDisplayProfile {
   dailyFatGoal: number;
 }
 
-// Water intake type
-export interface WaterIntake {
-  current: number;
-  goal: number;
-  date: string;
-}
-
-// Step count type
-export interface StepCount {
-  current: number;
-  goal: number;
-  date: string;
-}
+export type { WaterIntake } from "./water";
+export type { StepCount } from "./steps";

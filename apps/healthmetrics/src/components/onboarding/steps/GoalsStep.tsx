@@ -42,11 +42,11 @@ export function GoalsStep({
   const [fat, setFat] = useState(
     data.dailyFatGoalG || calculatedGoals?.dailyFatGoalG || 65
   );
-  // Convert stored lbs to display units if metric
+  // Convert stored lbs to display units if metric (whole numbers)
   const initialTargetWeight = data.targetWeightLbs
     ? data.unitsPreference === "metric"
-      ? (data.targetWeightLbs / 2.20462).toFixed(1)
-      : data.targetWeightLbs.toString()
+      ? Math.round(data.targetWeightLbs / 2.20462).toString()
+      : Math.round(data.targetWeightLbs).toString()
     : "";
   const [targetWeight, setTargetWeight] = useState(initialTargetWeight);
 
@@ -194,7 +194,7 @@ export function GoalsStep({
             type="number"
             min={isMetric ? 20 : 50}
             max={isMetric ? 270 : 600}
-            step={0.5}
+            step={1}
             value={targetWeight}
             onChange={(e) => setTargetWeight(e.target.value)}
             placeholder={`Enter your goal weight in ${weightUnit}`}

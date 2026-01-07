@@ -31,9 +31,13 @@ export type {
   MealEntry,
   Activity,
   UserDisplayProfile,
-  WaterIntake,
-  StepCount,
 } from "./nutrition";
+
+// Water types
+export type { WaterIntake } from "./water";
+
+// Steps types
+export type { StepCount } from "./steps";
 
 // Profile types (server/database types)
 export type { UserProfile } from "./profile";

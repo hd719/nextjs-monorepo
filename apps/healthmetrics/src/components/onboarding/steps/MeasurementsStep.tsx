@@ -59,9 +59,8 @@ export function MeasurementsStep({
   const [heightInches, setHeightInches] = useState(initialFeetInches.inches);
   const [heightCm, setHeightCm] = useState(initialHeightCm.toString());
 
-  // Weight state - store in current unit system
-  const initialWeightLbs = data.currentWeightLbs || 150;
-  const initialWeightKg = Math.round(lbsToKg(initialWeightLbs) * 10) / 10;
+  const initialWeightLbs = Math.round(data.currentWeightLbs || 150);
+  const initialWeightKg = Math.round(lbsToKg(initialWeightLbs));
 
   const [weightLbs, setWeightLbs] = useState(initialWeightLbs.toString());
   const [weightKg, setWeightKg] = useState(initialWeightKg.toString());
@@ -199,7 +198,7 @@ export function MeasurementsStep({
                   type="number"
                   min={50}
                   max={600}
-                  step={0.1}
+                  step={1}
                   value={weightLbs}
                   onChange={(e) => setWeightLbs(e.target.value)}
                   placeholder="150"
@@ -213,7 +212,7 @@ export function MeasurementsStep({
                   type="number"
                   min={25}
                   max={275}
-                  step={0.1}
+                  step={1}
                   value={weightKg}
                   onChange={(e) => setWeightKg(e.target.value)}
                   placeholder="70"

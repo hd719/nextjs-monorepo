@@ -118,7 +118,7 @@ export const updateUserProfile = createServerFn({ method: "POST" })
         },
         gender: {
           dbField: "gender",
-          transform: (gender) => (gender as string).toUpperCase(),
+          transform: (gender) => (gender as string).toLowerCase(),
         },
         activityLevel: { dbField: "activityLevel" },
         goalType: { dbField: "goalType" },

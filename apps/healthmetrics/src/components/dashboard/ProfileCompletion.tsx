@@ -9,18 +9,24 @@ export interface ProfileCompletionProps {
 }
 
 export function ProfileCompletion({ profile }: ProfileCompletionProps) {
-  const { percentage } = calculateProfileCompletion(profile);
+  const { percentage, missingFields } = calculateProfileCompletion(profile);
 
-  // Don't show if profile is complete
   if (percentage === 100) {
     return null;
   }
 
   return (
     <Link to={ROUTES.PROFILE} className="dashboard-profile-completion">
-      <span className="dashboard-profile-completion-text">
-        Complete your profile ({percentage}%)
-      </span>
+      <div className="dashboard-profile-completion-content">
+        <span className="dashboard-profile-completion-text">
+          Complete your profile ({percentage}%)
+        </span>
+        {missingFields.length > 0 && (
+          <span className="dashboard-profile-completion-missing">
+            Missing: {missingFields.join(", ")}
+          </span>
+        )}
+      </div>
       <ChevronRight className="dashboard-profile-completion-arrow" />
     </Link>
   );

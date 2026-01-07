@@ -69,16 +69,53 @@ export function cmToInches(cm: number | null | undefined): string {
   return (cm / 2.54).toFixed(1);
 }
 
+// Convert lbs to kg for display
+export function lbsToKgDisplay(lbs: number | null | undefined): string {
+  if (!lbs) return "";
+  return (lbs / 2.20462).toFixed(1);
+}
+
+// Get height value based on units preference (whole numbers only)
+function getHeightValue(
+  heightCm: number | null | undefined,
+  units: string
+): string {
+  if (!heightCm) return "";
+  if (units === "metric") {
+    return Math.round(heightCm).toString();
+  }
+  // Imperial: convert to inches
+  return Math.round(heightCm / 2.54).toString();
+}
+
+// Get weight value based on units preference (whole numbers only)
+function getWeightValue(
+  weightLbs: number | null | undefined,
+  units: string
+): string {
+  if (!weightLbs) return "";
+  if (units === "metric") {
+    // Convert lbs to kg
+    return Math.round(weightLbs / 2.20462).toString();
+  }
+  // Imperial: keep as lbs
+  return Math.round(weightLbs).toString();
+}
+
 export function getDefaultFormValues(initialData: UserProfile) {
+  const units = initialData.unitsPreference || "imperial";
+
   return {
     displayName: initialData.displayName || "",
     dateOfBirth: initialData.dateOfBirth
       ? new Date(initialData.dateOfBirth).toISOString().split("T")[0]
       : "",
     gender: initialData.gender?.toLowerCase() || "",
-    heightInches: cmToInches(initialData.heightCm),
-    currentWeightLbs: initialData.currentWeightLbs?.toString() || "",
-    targetWeightLbs: initialData.targetWeightLbs?.toString() || "",
+    // Height in user's preferred units (cm or inches)
+    height: getHeightValue(initialData.heightCm, units),
+    // Weights in user's preferred units (kg or lbs)
+    currentWeight: getWeightValue(initialData.currentWeightLbs, units),
+    targetWeight: getWeightValue(initialData.targetWeightLbs, units),
     activityLevel: initialData.activityLevel || "moderately_active",
     goalType: initialData.goalType || "maintain_weight",
     timezone:
@@ -94,7 +131,8 @@ export function getDefaultFormValues(initialData: UserProfile) {
 
 export function buildProfileUpdates(
   formValues: ReturnType<typeof getDefaultFormValues>,
-  avatarUrl: string
+  avatarUrl: string,
+  unitsPreference: string = "imperial"
 ): UpdateUserProfileInput {
   const toEnumValue = <T extends string>(
     value: string | undefined,
@@ -103,6 +141,45 @@ export function buildProfileUpdates(
     if (!value || value === "") return undefined;
     return validValues.includes(value as T) ? (value as T) : undefined;
   };
+
+  // Convert height to inches for storage (API expects inches)
+  let heightInches: number | undefined;
+  if (formValues.height) {
+    const heightValue = parseFloat(formValues.height);
+    if (unitsPreference === "metric") {
+      // Form value is in cm, convert to inches
+      heightInches = heightValue / 2.54;
+    } else {
+      // Form value is already in inches
+      heightInches = heightValue;
+    }
+  }
+
+  // Convert weights to lbs for storage (API expects lbs)
+  let currentWeightLbs: number | undefined;
+  let targetWeightLbs: number | undefined;
+
+  if (formValues.currentWeight) {
+    const weightValue = parseFloat(formValues.currentWeight);
+    if (unitsPreference === "metric") {
+      // Form value is in kg, convert to lbs
+      currentWeightLbs = weightValue * 2.20462;
+    } else {
+      // Form value is already in lbs
+      currentWeightLbs = weightValue;
+    }
+  }
+
+  if (formValues.targetWeight) {
+    const weightValue = parseFloat(formValues.targetWeight);
+    if (unitsPreference === "metric") {
+      // Form value is in kg, convert to lbs
+      targetWeightLbs = weightValue * 2.20462;
+    } else {
+      // Form value is already in lbs
+      targetWeightLbs = weightValue;
+    }
+  }
 
   return {
     displayName: formValues.displayName || undefined,
@@ -114,15 +191,9 @@ export function buildProfileUpdates(
       "female",
       "other",
     ] as const),
-    heightInches: formValues.heightInches
-      ? parseFloat(formValues.heightInches)
-      : undefined,
-    currentWeightLbs: formValues.currentWeightLbs
-      ? parseFloat(formValues.currentWeightLbs)
-      : undefined,
-    targetWeightLbs: formValues.targetWeightLbs
-      ? parseFloat(formValues.targetWeightLbs)
-      : undefined,
+    heightInches,
+    currentWeightLbs,
+    targetWeightLbs,
     dailyCalorieGoal: parseInt(formValues.dailyCalorieGoal) || undefined,
     dailyProteinGoalG: parseInt(formValues.dailyProteinGoalG) || undefined,
     dailyCarbGoalG: parseInt(formValues.dailyCarbGoalG) || undefined,

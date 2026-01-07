@@ -4,6 +4,7 @@ export { ProfileCompletion } from "./ProfileCompletion";
 export { ProgressActivityPlaceholder } from "./ProgressActivityPlaceholder";
 export { QuickActions } from "./QuickActions";
 export { RecentActivity } from "./RecentActivity";
+export { StepTracker } from "./StepTracker";
 export { TodaysDiary } from "./TodaysDiary";
 export { WaterGlass } from "./WaterGlass";
 export { WaterTracker } from "./WaterTracker";

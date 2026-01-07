@@ -107,12 +107,21 @@ export type UpdateUserProfileInput = z.infer<typeof updateUserProfileSchema>;
 // EXERCISE VALIDATION SCHEMAS
 // ============================================================================
 
+// Reusable schema for optional strings that treats empty strings as undefined
+const optionalString = (maxLength = 100) =>
+  z
+    .string()
+    .max(maxLength)
+    .optional()
+    .transform((val) => (val === "" ? undefined : val));
+
 // Exercise search validation
 export const searchExercisesSchema = z.object({
-  query: z.string().min(0).max(100).optional(),
+  query: optionalString(100),
   category: z
     .enum(["cardio", "strength", "flexibility", "sports", "other"])
-    .optional(),
+    .optional()
+    .or(z.literal("").transform(() => undefined)),
   limit: z.number().min(1).max(50).default(20),
 });
 

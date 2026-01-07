@@ -1,12 +1,11 @@
 // Dashboard hooks
-export {
-  useDashboardMeals,
-  useRecentActivity,
-  useWaterIntake,
-  useUpdateWaterIntake,
-  useStepCount,
-  useAddSteps,
-} from "./useDashboard";
+export { useDashboardMeals, useRecentActivity } from "./useDashboard";
+
+// Water hooks
+export { useWaterIntake, useUpdateWaterIntake } from "./useWater";
+
+// Steps hooks
+export { useStepCount, useAddSteps } from "./useSteps";
 
 // Diary hooks
 export {

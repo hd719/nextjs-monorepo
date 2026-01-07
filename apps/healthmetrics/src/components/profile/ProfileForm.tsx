@@ -1,11 +1,19 @@
 import { useState } from "react";
 import { useForm } from "@tanstack/react-form";
-import { Save } from "lucide-react";
+import { format } from "date-fns";
+import { Save, CalendarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast, ToastContainer } from "@/components/ui/toast";
+import { cn } from "@/utils";
 import type { UserProfile } from "@/types/profile";
 import { useUpdateProfile } from "@/hooks/useProfile";
 import { ProfileAvatar } from "./ProfileAvatar";
@@ -16,18 +24,14 @@ import {
   validateAvatarFile,
   fileToBase64,
   calculateMacroBreakdown,
-} from "@/utils/profile-helpers";
-import {
   displayNameValidator,
-  heightValidator,
-  weightValidator,
   calorieGoalValidator,
   proteinGoalValidator,
   carbGoalValidator,
   fatGoalValidator,
   waterGoalValidator,
   stepGoalValidator,
-} from "@/utils/profile-validators";
+} from "@/utils";
 
 export interface ProfileFormProps {
   userId: string;
@@ -38,6 +42,9 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
   const updateProfileMutation = useUpdateProfile();
   const { toasts, toast, removeToast } = useToast();
 
+  // Determine if user prefers metric or imperial
+  const isMetric = initialData.unitsPreference === "metric";
+
   const [avatarUrl, setAvatarUrl] = useState(initialData.avatarUrl || "");
   const [avatarPreview, setAvatarPreview] = useState(
     initialData.avatarUrl || ""
@@ -45,6 +52,7 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
 
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [calendarOpen, setCalendarOpen] = useState(false);
 
   const form = useForm({
     defaultValues: getDefaultFormValues(initialData),
@@ -54,7 +62,11 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
 
       try {
         // Build updates object with proper transformations
-        const updates = buildProfileUpdates(value, avatarUrl);
+        const updates = buildProfileUpdates(
+          value,
+          avatarUrl,
+          initialData.unitsPreference
+        );
 
         await updateProfileMutation.mutateAsync({
           userId,
@@ -187,20 +199,59 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
 
               {/* Date of Birth */}
               <form.Field name="dateOfBirth">
-                {(field) => (
-                  <div>
-                    <Label htmlFor={field.name}>Date of Birth</Label>
-                    <Input
-                      id={field.name}
-                      name={field.name}
-                      type="date"
-                      value={field.state.value}
-                      onBlur={field.handleBlur}
-                      onChange={(e) => field.handleChange(e.target.value)}
-                      max={new Date().toISOString().split("T")[0]}
-                    />
-                  </div>
-                )}
+                {(field) => {
+                  const selectedDate = field.state.value
+                    ? new Date(field.state.value)
+                    : undefined;
+                  return (
+                    <div>
+                      <Label>Date of Birth</Label>
+                      <Popover
+                        open={calendarOpen}
+                        onOpenChange={setCalendarOpen}
+                      >
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant="outline"
+                            className={cn(
+                              "w-full justify-start text-left font-normal",
+                              !selectedDate && "text-muted-foreground"
+                            )}
+                          >
+                            <CalendarIcon className="mr-2 h-4 w-4" />
+                            {selectedDate
+                              ? format(selectedDate, "PPP")
+                              : "Select your birth date"}
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={selectedDate}
+                            onSelect={(date) => {
+                              if (date) {
+                                field.handleChange(
+                                  date.toISOString().split("T")[0]
+                                );
+                              }
+                              setCalendarOpen(false);
+                            }}
+                            disabled={(date) =>
+                              date > new Date() || date < new Date("1900-01-01")
+                            }
+                            defaultMonth={selectedDate || new Date(1990, 0)}
+                            captionLayout="dropdown"
+                            fromYear={1920}
+                            toYear={new Date().getFullYear()}
+                            classNames={{
+                              caption_label: "hidden",
+                            }}
+                          />
+                        </PopoverContent>
+                      </Popover>
+                    </div>
+                  );
+                }}
               </form.Field>
 
               {/* Gender */}
@@ -225,32 +276,34 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
                 )}
               </form.Field>
 
-              {/* Height */}
-              <form.Field
-                name="heightInches"
-                validators={{ onChange: heightValidator }}
-              >
+              {/* Height - shows cm for metric, inches for imperial */}
+              <form.Field name="height">
                 {(field) => (
                   <div>
-                    <Label htmlFor={field.name}>Height</Label>
+                    <Label htmlFor={field.name}>
+                      Height {isMetric ? "(cm)" : "(inches)"}
+                    </Label>
                     <Input
                       id={field.name}
                       name={field.name}
                       type="number"
-                      min="36"
-                      max="96"
-                      step="0.5"
+                      min={isMetric ? "90" : "36"}
+                      max={isMetric ? "250" : "96"}
+                      step="1"
                       value={field.state.value}
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
-                      placeholder="67"
+                      placeholder={isMetric ? "170" : "67"}
                     />
-                    {field.state.value && !field.state.meta.errors.length && (
-                      <p className="profile-form-height-display">
-                        {Math.floor(parseFloat(field.state.value) / 12)}'{" "}
-                        {Math.round(parseFloat(field.state.value) % 12)}"
-                      </p>
-                    )}
+                    {/* Show feet/inches conversion for imperial */}
+                    {!isMetric &&
+                      field.state.value &&
+                      !field.state.meta.errors.length && (
+                        <p className="profile-form-height-display">
+                          {Math.floor(parseFloat(field.state.value) / 12)}'{" "}
+                          {Math.round(parseFloat(field.state.value) % 12)}"
+                        </p>
+                      )}
                     {field.state.meta.errors &&
                       field.state.meta.errors.length > 0 && (
                         <p className="profile-form-error-text">
@@ -261,25 +314,24 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
                 )}
               </form.Field>
 
-              {/* Current Weight */}
-              <form.Field
-                name="currentWeightLbs"
-                validators={{ onChange: weightValidator }}
-              >
+              {/* Current Weight - shows kg for metric, lbs for imperial */}
+              <form.Field name="currentWeight">
                 {(field) => (
                   <div>
-                    <Label htmlFor={field.name}>Current Weight (lbs)</Label>
+                    <Label htmlFor={field.name}>
+                      Current Weight {isMetric ? "(kg)" : "(lbs)"}
+                    </Label>
                     <Input
                       id={field.name}
                       name={field.name}
                       type="number"
-                      min="50"
-                      max="1000"
-                      step="0.1"
+                      min={isMetric ? "20" : "50"}
+                      max={isMetric ? "450" : "1000"}
+                      step="1"
                       value={field.state.value}
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
-                      placeholder="150"
+                      placeholder={isMetric ? "70" : "150"}
                     />
                     {field.state.meta.errors &&
                       field.state.meta.errors.length > 0 && (
@@ -291,25 +343,24 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
                 )}
               </form.Field>
 
-              {/* Target Weight */}
-              <form.Field
-                name="targetWeightLbs"
-                validators={{ onChange: weightValidator }}
-              >
+              {/* Target Weight - shows kg for metric, lbs for imperial */}
+              <form.Field name="targetWeight">
                 {(field) => (
                   <div>
-                    <Label htmlFor={field.name}>Target Weight (lbs)</Label>
+                    <Label htmlFor={field.name}>
+                      Target Weight {isMetric ? "(kg)" : "(lbs)"}
+                    </Label>
                     <Input
                       id={field.name}
                       name={field.name}
                       type="number"
-                      min="50"
-                      max="1000"
-                      step="0.1"
+                      min={isMetric ? "20" : "50"}
+                      max={isMetric ? "450" : "1000"}
+                      step="1"
                       value={field.state.value}
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
-                      placeholder="145"
+                      placeholder={isMetric ? "65" : "145"}
                     />
                     {field.state.meta.errors &&
                       field.state.meta.errors.length > 0 && (

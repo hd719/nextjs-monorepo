@@ -37,6 +37,8 @@ export {
   proteinGoalValidator,
   carbGoalValidator,
   fatGoalValidator,
+  waterGoalValidator,
+  stepGoalValidator,
 } from "./profile-validators";
 
 // Nutrition calculator

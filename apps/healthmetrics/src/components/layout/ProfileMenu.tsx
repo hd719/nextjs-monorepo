@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { User, Settings, LogOut, Moon, Sun } from "lucide-react";
+import { User, LogOut, Moon, Sun } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
@@ -100,16 +100,6 @@ export function ProfileMenu() {
         >
           <User className="profile-menu-item-icon" />
           <span>Profile</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={handleProfileClick}
-          className={cn(
-            "profile-menu-item",
-            isDarkMode ? "profile-menu-item-dark" : "profile-menu-item-light"
-          )}
-        >
-          <Settings className="profile-menu-item-icon" />
-          <span>Settings</span>
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={handleToggleTheme}
