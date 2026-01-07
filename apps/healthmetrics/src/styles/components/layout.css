@@ -81,6 +81,14 @@
 
   .header-mobile-logo {
     @apply flex lg:hidden items-center flex-1;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .header-mobile-logo-hidden {
+    @apply opacity-0 pointer-events-none absolute;
+    transform: translateX(-20px);
   }
 
   .header-logo-text {
@@ -130,6 +138,14 @@
 
   .header-actions {
     @apply flex items-center gap-2;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .header-actions-hidden {
+    @apply opacity-0 pointer-events-none;
+    transform: translateX(20px);
   }
 
   .header-mobile-search-button {
@@ -138,6 +154,59 @@
 
   .header-icon {
     @apply w-5 h-5;
+  }
+
+  /* ==========================================================================
+     Mobile Search Overlay
+     ========================================================================== */
+
+  .header-mobile-search-overlay {
+    @apply absolute left-0 right-0 top-0 h-16 items-center gap-2 px-4 lg:px-6;
+    @apply hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+    background-color: color-mix(in srgb, var(--background) 98%, transparent);
+  }
+
+  .header-mobile-search-overlay-open {
+    @apply flex; /* Show on all screen sizes */
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .header-mobile-search-input-wrapper {
+    @apply relative flex-1;
+  }
+
+  .header-mobile-search-input-icon {
+    @apply absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4;
+    color: var(--muted-foreground);
+  }
+
+  .header-mobile-search-input {
+    @apply w-full h-10 pl-10 pr-4 rounded-lg border text-sm;
+    border-color: var(--accent);
+    background-color: var(--background);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+
+  .header-mobile-search-input::placeholder {
+    color: var(--muted-foreground);
+  }
+
+  .header-mobile-search-input:focus {
+    @apply outline-none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+
+  .header-mobile-search-close {
+    @apply shrink-0;
   }
 
   /**
