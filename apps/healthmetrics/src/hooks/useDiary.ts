@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   createDiaryEntry,
+  copyDiaryDay,
   getDailyTotals,
   getDiaryDay,
   searchFoodItems,
@@ -71,6 +72,30 @@ export function useCreateDiaryEntry() {
       });
       queryClient.invalidateQueries({
         queryKey: queryKeys.diaryTotals(variables.userId, variables.date),
+      });
+    },
+  });
+}
+
+/**
+ * Hook to copy all meals from one day to another
+ */
+export function useCopyDiaryDay() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (data: {
+      userId: string;
+      sourceDate: string;
+      targetDate: string;
+    }) => copyDiaryDay({ data }),
+    onSuccess: (_result, variables) => {
+      // Invalidate the target date queries
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.diaryDay(variables.userId, variables.targetDate),
+      });
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.diaryTotals(variables.userId, variables.targetDate),
       });
     },
   });

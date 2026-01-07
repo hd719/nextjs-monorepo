@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { prisma } from "@/lib/prisma";
-import type { Activity, MealEntry, WaterIntake } from "@/types/nutrition";
+import type { Activity, MealEntry } from "@/types/nutrition";
 import { MEAL_TYPES, type MealType } from "@/constants/defaults";
 
 function normalizeMealType(value: string): MealType | null {
@@ -160,14 +160,4 @@ export const getRecentActivity = createServerFn({ method: "GET" })
       console.error("Failed to fetch recent activity:", error);
       throw new Error("Failed to fetch recent activity");
     }
-  });
-
-export const getWaterIntake = createServerFn({ method: "GET" })
-  .inputValidator((data: { userId: string; date: string }) => data)
-  .handler(async ({ data: { date } }): Promise<WaterIntake> => {
-    return {
-      current: 0,
-      goal: 8,
-      date,
-    };
   });

@@ -2,11 +2,7 @@
 export { fetchUser } from "./auth";
 
 // Dashboard server functions
-export {
-  getDashboardMeals,
-  getRecentActivity,
-  getWaterIntake,
-} from "./dashboard";
+export { getDashboardMeals, getRecentActivity } from "./dashboard";
 
 // Diary server functions
 export {
@@ -14,6 +10,7 @@ export {
   getDailyTotals,
   searchFoodItems,
   createDiaryEntry,
+  copyDiaryDay,
 } from "./diary";
 
 // Exercise server functions
@@ -32,5 +29,11 @@ export {
 // Profile server functions
 export { getUserProfile, updateUserProfile } from "./profile";
 
+// Water server functions
+export { getWaterIntake, updateWaterIntake, updateWaterGoal } from "./water";
+
+// Step server functions
+export { getStepCount, updateStepCount, addSteps } from "./steps";
+
 // Weight server functions
-export { getLatestWeight, saveWeightEntry } from "./weight";
+export { getLatestWeight, saveWeightEntry, getWeightTrend } from "./weight";

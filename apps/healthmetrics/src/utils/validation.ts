@@ -80,7 +80,9 @@ export const updateUserProfileSchema = z.object({
   dailyProteinGoalG: z.number().min(0).max(500).optional(),
   dailyCarbGoalG: z.number().min(0).max(1000).optional(),
   dailyFatGoalG: z.number().min(0).max(300).optional(),
-  heightInches: z.number().min(36).max(96).optional(), // Height in inches (3ft - 8ft)
+  dailyWaterGoal: z.number().min(1).max(20).optional(),
+  dailyStepGoal: z.number().min(1000).max(50000).optional(),
+  heightInches: z.number().min(36).max(96).optional(),
   currentWeightLbs: z.number().min(50).max(1000).optional(), // Weight in pounds (50-1000 lbs)
   targetWeightLbs: z.number().min(50).max(1000).optional(), // Target weight in pounds
   dateOfBirth: z.string().optional(), // ISO date string

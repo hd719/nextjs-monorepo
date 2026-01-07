@@ -1,11 +1,16 @@
-import { Coffee, Sandwich, UtensilsCrossed, Cookie } from "lucide-react";
+import { Coffee, Sandwich, UtensilsCrossed, Cookie, Plus } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
 import type { DiaryEntryWithFood } from "@/types/diary";
 
+// Event name for triggering "Add Food" dialog
+// Parent component listens for this event
+export const ADD_FOOD_EVENT = "diary:openAddFood";
+
 export interface DiaryEntryListProps {
   entries: DiaryEntryWithFood[];
   isLoading: boolean;
+  onAddFood?: () => void;
 }
 
 // Group entries by meal type
@@ -46,7 +51,11 @@ function getMealInfo(mealType: string) {
   }
 }
 
-export function DiaryEntryList({ entries, isLoading }: DiaryEntryListProps) {
+export function DiaryEntryList({
+  entries,
+  isLoading,
+  onAddFood,
+}: DiaryEntryListProps) {
   if (isLoading) {
     return (
       <div className="diary-entry-list-container animate-fade-slide-in animate-stagger-1">
@@ -71,9 +80,15 @@ export function DiaryEntryList({ entries, isLoading }: DiaryEntryListProps) {
     return (
       <div className="animate-fade-slide-in animate-stagger-1">
         <EmptyState
-          icon={UtensilsCrossed}
-          title="No entries yet"
-          description="Click 'Add Food' to log your first meal"
+          icon={Plus}
+          title="No meals logged yet"
+          description="Start tracking your nutrition by adding your first meal"
+          action={
+            onAddFood
+              ? { label: "Add Your First Meal", onClick: onAddFood }
+              : undefined
+          }
+          clickable={!!onAddFood}
         />
       </div>
     );

@@ -211,7 +211,7 @@
   }
 
   .dashboard-actions-grid {
-    @apply grid grid-cols-1 sm:grid-cols-3 gap-4;
+    @apply grid grid-cols-2 sm:grid-cols-4 gap-3;
   }
 
   /* ==========================================================================
@@ -937,5 +937,27 @@
     .dashboard-trend-icon {
       @apply w-3 h-3;
     }
+  }
+
+  /* ==========================================================================
+     Profile Completion Component
+     Subtle inline link prompting profile completion
+     ========================================================================== */
+
+  .dashboard-profile-completion {
+    @apply flex items-center justify-center gap-1 py-2 text-sm rounded-md transition-colors;
+    color: var(--muted-foreground);
+  }
+
+  .dashboard-profile-completion:hover {
+    color: var(--primary);
+  }
+
+  .dashboard-profile-completion-text {
+    @apply font-normal;
+  }
+
+  .dashboard-profile-completion-arrow {
+    @apply w-4 h-4;
   }
 }

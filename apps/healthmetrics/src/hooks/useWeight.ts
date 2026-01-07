@@ -1,5 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getLatestWeight, saveWeightEntry } from "@/server/weight";
+import {
+  getLatestWeight,
+  saveWeightEntry,
+  getWeightTrend,
+} from "@/server/weight";
 import { queryKeys } from "@/utils/query-keys";
 
 /**
@@ -42,6 +46,28 @@ export function useSaveWeight() {
       queryClient.invalidateQueries({
         queryKey: queryKeys.profile(variables.userId),
       });
+      // Invalidate weight trend
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.weightTrend(variables.userId),
+      });
     },
+  });
+}
+
+/**
+ * Hook to fetch weight trend data for the last N days
+ */
+export function useWeightTrend(userId?: string, days: number = 7) {
+  const enabled = Boolean(userId);
+  const queryKey = enabled
+    ? queryKeys.weightTrend(userId!, days)
+    : queryKeys.weightBase();
+
+  return useQuery({
+    queryKey,
+    queryFn: () => getWeightTrend({ data: { userId: userId!, days } }),
+    enabled,
+    placeholderData: (previousData) => previousData,
+    staleTime: 5 * 60 * 1000, // 5 minutes
   });
 }

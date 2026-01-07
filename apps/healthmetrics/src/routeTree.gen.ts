@@ -43,12 +43,14 @@ const ExerciseIndexRoute = ExerciseIndexRouteImport.update({
   id: '/exercise/',
   path: '/exercise/',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any).lazy(() =>
+  import('./routes/exercise/index.lazy').then((d) => d.Route),
+)
 const DiaryIndexRoute = DiaryIndexRouteImport.update({
   id: '/diary/',
   path: '/diary/',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any).lazy(() => import('./routes/diary/index.lazy').then((d) => d.Route))
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/dashboard/',
   path: '/dashboard/',

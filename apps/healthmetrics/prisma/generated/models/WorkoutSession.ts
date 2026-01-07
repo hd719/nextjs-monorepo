@@ -509,14 +509,6 @@ export type WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.WorkoutSessionScalarWhereInput | Prisma.WorkoutSessionScalarWhereInput[]
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type WorkoutSessionCreateNestedOneWithoutWorkoutLogsInput = {
   create?: Prisma.XOR<Prisma.WorkoutSessionCreateWithoutWorkoutLogsInput, Prisma.WorkoutSessionUncheckedCreateWithoutWorkoutLogsInput>
   connectOrCreate?: Prisma.WorkoutSessionCreateOrConnectWithoutWorkoutLogsInput

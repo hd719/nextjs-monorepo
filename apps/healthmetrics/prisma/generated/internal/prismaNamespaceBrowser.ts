@@ -62,6 +62,8 @@ export const ModelName = {
   WorkoutSession: 'WorkoutSession',
   WorkoutLog: 'WorkoutLog',
   WeightEntry: 'WeightEntry',
+  WaterEntry: 'WaterEntry',
+  StepEntry: 'StepEntry',
   RecipeCache: 'RecipeCache',
   MealPlanTemplate: 'MealPlanTemplate',
   MealPlan: 'MealPlan',
@@ -157,6 +159,8 @@ export const UserScalarFieldEnum = {
   dailyProteinGoalG: 'dailyProteinGoalG',
   dailyCarbGoalG: 'dailyCarbGoalG',
   dailyFatGoalG: 'dailyFatGoalG',
+  dailyWaterGoal: 'dailyWaterGoal',
+  dailyStepGoal: 'dailyStepGoal',
   unitsPreference: 'unitsPreference',
   timezone: 'timezone',
   isAdmin: 'isAdmin',
@@ -282,6 +286,30 @@ export const WeightEntryScalarFieldEnum = {
 } as const
 
 export type WeightEntryScalarFieldEnum = (typeof WeightEntryScalarFieldEnum)[keyof typeof WeightEntryScalarFieldEnum]
+
+
+export const WaterEntryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  date: 'date',
+  glasses: 'glasses',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WaterEntryScalarFieldEnum = (typeof WaterEntryScalarFieldEnum)[keyof typeof WaterEntryScalarFieldEnum]
+
+
+export const StepEntryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  date: 'date',
+  steps: 'steps',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StepEntryScalarFieldEnum = (typeof StepEntryScalarFieldEnum)[keyof typeof StepEntryScalarFieldEnum]
 
 
 export const RecipeCacheScalarFieldEnum = {

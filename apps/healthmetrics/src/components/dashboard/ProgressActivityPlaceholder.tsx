@@ -14,7 +14,20 @@ import {
   Target,
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { dashboardProgressData } from "@/data/progressMockData";
+import type { StepCount } from "@/types/nutrition";
+
+// Weight trend data shape from hook
+export interface WeightTrendData {
+  entries: Array<{
+    id: string;
+    date: Date;
+    weightLbs: number;
+  }>;
+  change: number;
+  goalWeight: number | null;
+}
 
 // Map achievement titles to their icons (icons can't be stored in data files)
 const achievementIcons: Record<string, LucideIcon> = {
@@ -34,8 +47,14 @@ const achievements = {
   nextUp: dashboardProgressData.achievements.nextUp,
 };
 
-// Re-export for easy access within this component
-const { sleep, weight, steps } = dashboardProgressData;
+// Re-export mock data for sleep (still using mock)
+const { sleep, weight: mockWeight, steps: mockSteps } = dashboardProgressData;
+
+export interface ProgressActivityPlaceholderProps {
+  stepData?: StepCount;
+  weightData?: WeightTrendData;
+  isWeightLoading?: boolean;
+}
 
 /**
  * Mini bar chart for weekly data
@@ -98,7 +117,34 @@ function ProgressBar({
   );
 }
 
-export function ProgressActivityPlaceholder() {
+export function ProgressActivityPlaceholder({
+  stepData,
+  weightData,
+  isWeightLoading,
+}: ProgressActivityPlaceholderProps) {
+  // Use real step data if available, fall back to mock data
+  const steps = stepData
+    ? {
+        today: stepData.current,
+        goal: stepData.goal,
+        percentOfGoal: Math.min(
+          100,
+          Math.round((stepData.current / stepData.goal) * 100)
+        ),
+        weeklyAvg: mockSteps.weeklyAvg, // Still mock for weekly average
+      }
+    : mockSteps;
+
+  // Build weight data from real entries or use mock
+  const weight = weightData?.entries?.length
+    ? {
+        current: weightData.entries[weightData.entries.length - 1].weightLbs,
+        change: weightData.change,
+        goalWeight: weightData.goalWeight ?? mockWeight.goalWeight,
+        weeklyData: weightData.entries.slice(-7).map((e) => e.weightLbs),
+      }
+    : mockWeight;
+
   return (
     <section className="dashboard-progress-section">
       <div className="dashboard-progress-header">
@@ -169,15 +215,29 @@ export function ProgressActivityPlaceholder() {
                 Last 7 days
               </span>
             </div>
-            <div className="dashboard-progress-row-value">
-              <span className="dashboard-progress-row-main dashboard-text-color-green">
-                {weight.change > 0 ? "+" : ""}
-                {weight.change} lbs
-              </span>
-              <span className="dashboard-progress-row-secondary">
-                {weight.current} lbs
-              </span>
-            </div>
+            {isWeightLoading ? (
+              <div className="dashboard-progress-row-value">
+                <Skeleton className="skeleton-value-sm" />
+              </div>
+            ) : (
+              <div className="dashboard-progress-row-value">
+                <span
+                  className={`dashboard-progress-row-main ${
+                    weight.change < 0
+                      ? "dashboard-text-color-green"
+                      : weight.change > 0
+                        ? "dashboard-text-color-red"
+                        : ""
+                  }`}
+                >
+                  {weight.change > 0 ? "+" : ""}
+                  {weight.change} lbs
+                </span>
+                <span className="dashboard-progress-row-secondary">
+                  {weight.current} lbs
+                </span>
+              </div>
+            )}
           </div>
           <div className="dashboard-progress-row-content">
             <MiniBarChart

@@ -139,11 +139,15 @@
   }
 
   .diary-day-meals-header {
-    @apply flex justify-between items-center;
+    @apply flex justify-between items-center flex-wrap gap-3;
   }
 
   .diary-day-meals-title {
     @apply text-xl font-semibold;
+  }
+
+  .diary-day-actions {
+    @apply flex items-center gap-2;
   }
 
   .diary-day-add-icon {

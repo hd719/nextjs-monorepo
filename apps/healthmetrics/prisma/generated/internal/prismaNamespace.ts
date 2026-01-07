@@ -395,6 +395,8 @@ export const ModelName = {
   WorkoutSession: 'WorkoutSession',
   WorkoutLog: 'WorkoutLog',
   WeightEntry: 'WeightEntry',
+  WaterEntry: 'WaterEntry',
+  StepEntry: 'StepEntry',
   RecipeCache: 'RecipeCache',
   MealPlanTemplate: 'MealPlanTemplate',
   MealPlan: 'MealPlan',
@@ -417,7 +419,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "betterAuthUser" | "betterAuthSession" | "betterAuthAccount" | "verification" | "user" | "foodItem" | "exercise" | "diaryEntry" | "workoutSession" | "workoutLog" | "weightEntry" | "recipeCache" | "mealPlanTemplate" | "mealPlan" | "goal" | "friendship" | "challenge" | "challengeParticipant"
+    modelProps: "betterAuthUser" | "betterAuthSession" | "betterAuthAccount" | "verification" | "user" | "foodItem" | "exercise" | "diaryEntry" | "workoutSession" | "workoutLog" | "weightEntry" | "waterEntry" | "stepEntry" | "recipeCache" | "mealPlanTemplate" | "mealPlan" | "goal" | "friendship" | "challenge" | "challengeParticipant"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1235,6 +1237,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    WaterEntry: {
+      payload: Prisma.$WaterEntryPayload<ExtArgs>
+      fields: Prisma.WaterEntryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.WaterEntryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WaterEntryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.WaterEntryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WaterEntryPayload>
+        }
+        findFirst: {
+          args: Prisma.WaterEntryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WaterEntryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.WaterEntryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WaterEntryPayload>
+        }
+        findMany: {
+          args: Prisma.WaterEntryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WaterEntryPayload>[]
+        }
+        create: {
+          args: Prisma.WaterEntryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WaterEntryPayload>
+        }
+        createMany: {
+          args: Prisma.WaterEntryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.WaterEntryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WaterEntryPayload>[]
+        }
+        delete: {
+          args: Prisma.WaterEntryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WaterEntryPayload>
+        }
+        update: {
+          args: Prisma.WaterEntryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WaterEntryPayload>
+        }
+        deleteMany: {
+          args: Prisma.WaterEntryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.WaterEntryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.WaterEntryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WaterEntryPayload>[]
+        }
+        upsert: {
+          args: Prisma.WaterEntryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WaterEntryPayload>
+        }
+        aggregate: {
+          args: Prisma.WaterEntryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateWaterEntry>
+        }
+        groupBy: {
+          args: Prisma.WaterEntryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WaterEntryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.WaterEntryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WaterEntryCountAggregateOutputType> | number
+        }
+      }
+    }
+    StepEntry: {
+      payload: Prisma.$StepEntryPayload<ExtArgs>
+      fields: Prisma.StepEntryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StepEntryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StepEntryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StepEntryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StepEntryPayload>
+        }
+        findFirst: {
+          args: Prisma.StepEntryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StepEntryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StepEntryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StepEntryPayload>
+        }
+        findMany: {
+          args: Prisma.StepEntryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StepEntryPayload>[]
+        }
+        create: {
+          args: Prisma.StepEntryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StepEntryPayload>
+        }
+        createMany: {
+          args: Prisma.StepEntryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StepEntryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StepEntryPayload>[]
+        }
+        delete: {
+          args: Prisma.StepEntryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StepEntryPayload>
+        }
+        update: {
+          args: Prisma.StepEntryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StepEntryPayload>
+        }
+        deleteMany: {
+          args: Prisma.StepEntryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StepEntryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StepEntryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StepEntryPayload>[]
+        }
+        upsert: {
+          args: Prisma.StepEntryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StepEntryPayload>
+        }
+        aggregate: {
+          args: Prisma.StepEntryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStepEntry>
+        }
+        groupBy: {
+          args: Prisma.StepEntryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StepEntryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StepEntryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StepEntryCountAggregateOutputType> | number
+        }
+      }
+    }
     RecipeCache: {
       payload: Prisma.$RecipeCachePayload<ExtArgs>
       fields: Prisma.RecipeCacheFieldRefs
@@ -1862,6 +2012,8 @@ export const UserScalarFieldEnum = {
   dailyProteinGoalG: 'dailyProteinGoalG',
   dailyCarbGoalG: 'dailyCarbGoalG',
   dailyFatGoalG: 'dailyFatGoalG',
+  dailyWaterGoal: 'dailyWaterGoal',
+  dailyStepGoal: 'dailyStepGoal',
   unitsPreference: 'unitsPreference',
   timezone: 'timezone',
   isAdmin: 'isAdmin',
@@ -1987,6 +2139,30 @@ export const WeightEntryScalarFieldEnum = {
 } as const
 
 export type WeightEntryScalarFieldEnum = (typeof WeightEntryScalarFieldEnum)[keyof typeof WeightEntryScalarFieldEnum]
+
+
+export const WaterEntryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  date: 'date',
+  glasses: 'glasses',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WaterEntryScalarFieldEnum = (typeof WaterEntryScalarFieldEnum)[keyof typeof WaterEntryScalarFieldEnum]
+
+
+export const StepEntryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  date: 'date',
+  steps: 'steps',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StepEntryScalarFieldEnum = (typeof StepEntryScalarFieldEnum)[keyof typeof StepEntryScalarFieldEnum]
 
 
 export const RecipeCacheScalarFieldEnum = {
@@ -2532,6 +2708,8 @@ export type GlobalOmitConfig = {
   workoutSession?: Prisma.WorkoutSessionOmit
   workoutLog?: Prisma.WorkoutLogOmit
   weightEntry?: Prisma.WeightEntryOmit
+  waterEntry?: Prisma.WaterEntryOmit
+  stepEntry?: Prisma.StepEntryOmit
   recipeCache?: Prisma.RecipeCacheOmit
   mealPlanTemplate?: Prisma.MealPlanTemplateOmit
   mealPlan?: Prisma.MealPlanOmit

@@ -607,4 +607,99 @@
   .link-icon-sm {
     @apply h-3 w-3;
   }
+
+  /* ==========================================================================
+     Toast Notifications
+     Dark-mode aware toast styling using CSS variables
+     ========================================================================== */
+
+  .toast-stack {
+    @apply fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 transform flex-col space-y-2;
+  }
+
+  .toast-container {
+    @apply pointer-events-auto w-max min-w-[240px] max-w-[min(600px,90vw)] overflow-hidden rounded-lg border shadow-lg transition-all duration-300 sm:min-w-[320px];
+    background-color: var(--card);
+    border-color: var(--border);
+  }
+
+  .toast-visible {
+    @apply translate-x-0 opacity-100;
+  }
+
+  .toast-hidden {
+    @apply translate-x-full opacity-0;
+  }
+
+  /* Toast type variants */
+  .toast-success {
+    border-left: 4px solid var(--success, #22c55e);
+  }
+
+  .toast-error {
+    border-left: 4px solid var(--destructive);
+  }
+
+  .toast-info {
+    border-left: 4px solid var(--primary);
+  }
+
+  .toast-content {
+    @apply p-4;
+  }
+
+  .toast-body {
+    @apply flex items-start;
+  }
+
+  .toast-icon-wrapper {
+    @apply flex-shrink-0;
+  }
+
+  .toast-icon {
+    @apply h-5 w-5;
+  }
+
+  .toast-icon-success {
+    color: var(--success, #22c55e);
+  }
+
+  .toast-icon-error {
+    color: var(--destructive);
+  }
+
+  .toast-icon-info {
+    color: var(--primary);
+  }
+
+  .toast-text {
+    @apply ml-3 w-0 flex-1 pt-0.5;
+  }
+
+  .toast-title {
+    @apply text-sm font-medium;
+    color: var(--foreground);
+  }
+
+  .toast-description {
+    @apply mt-1 text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .toast-close-wrapper {
+    @apply ml-4 flex flex-shrink-0;
+  }
+
+  .toast-close-button {
+    @apply inline-flex rounded-md bg-transparent;
+    color: var(--muted-foreground);
+  }
+
+  .toast-close-button:hover {
+    color: var(--foreground);
+  }
+
+  .toast-close-icon {
+    @apply h-5 w-5;
+  }
 }

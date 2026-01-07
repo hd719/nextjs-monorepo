@@ -198,6 +198,8 @@ model User {
   dailyProteinGoalG Int?           @map("daily_protein_goal_g")
   dailyCarbGoalG    Int?           @map("daily_carb_goal_g")
   dailyFatGoalG     Int?           @map("daily_fat_goal_g")
+  dailyWaterGoal    Int            @default(8) @map("daily_water_goal")
+  dailyStepGoal     Int            @default(10000) @map("daily_step_goal")
   unitsPreference   Units          @default(metric) @map("units_preference")
   timezone          String         @default("UTC")
   isAdmin           Boolean        @default(false) @map("is_admin")
@@ -212,6 +214,8 @@ model User {
   workoutLogs             WorkoutLog[]
   workoutSessions         WorkoutSession[]
   weightEntries           WeightEntry[]
+  waterEntries            WaterEntry[]
+  stepEntries             StepEntry[]
   mealPlanTemplates       MealPlanTemplate[]
   mealPlans               MealPlan[]
   goals                   Goal[]
@@ -391,6 +395,44 @@ model WeightEntry {
   @@index([date])
   @@index([userId, date])
   @@map("weight_entries")
+}
+
+// Water entries - daily water intake tracking
+
+model WaterEntry {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  date      DateTime @db.Date
+  glasses   Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
+  @@index([userId])
+  @@index([date])
+  @@map("water_entries")
+}
+
+// Step entries - daily step count tracking
+
+model StepEntry {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  date      DateTime @db.Date
+  steps     Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
+  @@index([userId])
+  @@index([date])
+  @@map("step_entries")
 }
 
 // Recipe cache - cached nutrition data from cookbook app

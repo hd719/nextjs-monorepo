@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { format, parse } from "date-fns";
-import { Calendar as CalendarIcon, Plus } from "lucide-react";
+import { format, parse, subDays } from "date-fns";
+import { Calendar as CalendarIcon, Plus, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -12,9 +12,10 @@ import {
   NutritionSummary,
   type NutritionData,
 } from "@/components/ui/nutrition-summary";
+import { useToast, ToastContainer } from "@/components/ui/toast";
 import { DiaryEntryList } from "./DiaryEntryList";
 import { AddFoodDialog } from "./AddFoodDialog";
-import { useDiaryDay, useDiaryTotals } from "@/hooks/useDiary";
+import { useDiaryDay, useDiaryTotals, useCopyDiaryDay } from "@/hooks/useDiary";
 import { DEFAULT_NUTRITION_GOALS } from "@/constants/defaults";
 
 export interface DiaryDayViewProps {
@@ -30,6 +31,7 @@ export function DiaryDayView({
 }: DiaryDayViewProps) {
   const [isAddFoodOpen, setIsAddFoodOpen] = useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const { toasts, toast, removeToast } = useToast();
   const { data: entries = [], isLoading: isEntriesLoading } = useDiaryDay(
     userId,
     date
@@ -38,6 +40,7 @@ export function DiaryDayView({
     userId,
     date
   );
+  const copyDiaryMutation = useCopyDiaryDay();
 
   // Format date for display
   const displayDate = new Date(date + "T00:00:00").toLocaleDateString("en-US", {
@@ -49,6 +52,31 @@ export function DiaryDayView({
 
   const handleEntryCreated = () => {
     setIsAddFoodOpen(false);
+  };
+
+  // Copy yesterday's meals to today
+  const handleCopyYesterday = async () => {
+    const yesterday = format(
+      subDays(parse(date, "yyyy-MM-dd", new Date()), 1),
+      "yyyy-MM-dd"
+    );
+    try {
+      const result = await copyDiaryMutation.mutateAsync({
+        userId,
+        sourceDate: yesterday,
+        targetDate: date,
+      });
+      if (result.copiedCount > 0) {
+        toast.success(
+          "Meals Copied",
+          `Copied ${result.copiedCount} ${result.copiedCount === 1 ? "entry" : "entries"} from yesterday`
+        );
+      } else {
+        toast.info("No Meals", "No meals found from yesterday to copy");
+      }
+    } catch {
+      toast.error("Copy Failed", "Failed to copy meals from yesterday");
+    }
   };
 
   const isPending = isEntriesLoading || isTotalsLoading;
@@ -128,14 +156,28 @@ export function DiaryDayView({
       {/* Add Food Button */}
       <div className="diary-day-meals-header">
         <h2 className="diary-day-meals-title">Meals</h2>
-        <Button onClick={() => setIsAddFoodOpen(true)}>
-          <Plus className="diary-day-add-icon" />
-          Add Food
-        </Button>
+        <div className="diary-day-actions">
+          <Button
+            variant="outline"
+            onClick={handleCopyYesterday}
+            disabled={copyDiaryMutation.isPending}
+          >
+            <Copy className="diary-day-add-icon" />
+            {copyDiaryMutation.isPending ? "Copying..." : "Copy Yesterday"}
+          </Button>
+          <Button onClick={() => setIsAddFoodOpen(true)}>
+            <Plus className="diary-day-add-icon" />
+            Add Food
+          </Button>
+        </div>
       </div>
 
       {/* Diary Entries List */}
-      <DiaryEntryList entries={entries} isLoading={isPending} />
+      <DiaryEntryList
+        entries={entries}
+        isLoading={isPending}
+        onAddFood={() => setIsAddFoodOpen(true)}
+      />
 
       {/* Add Food Dialog */}
       <AddFoodDialog
@@ -145,6 +187,9 @@ export function DiaryDayView({
         date={date}
         onSuccess={handleEntryCreated}
       />
+
+      {/* Toast notifications */}
+      <ToastContainer toasts={toasts} onRemove={removeToast} />
     </div>
   );
 }

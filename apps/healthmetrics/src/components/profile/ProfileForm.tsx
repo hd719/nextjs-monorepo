@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useToast, ToastContainer } from "@/components/ui/toast";
 import type { UserProfile } from "@/types/profile";
 import { useUpdateProfile } from "@/hooks/useProfile";
 import { ProfileAvatar } from "./ProfileAvatar";
@@ -24,6 +25,8 @@ import {
   proteinGoalValidator,
   carbGoalValidator,
   fatGoalValidator,
+  waterGoalValidator,
+  stepGoalValidator,
 } from "@/utils/profile-validators";
 
 export interface ProfileFormProps {
@@ -33,6 +36,7 @@ export interface ProfileFormProps {
 
 export function ProfileForm({ userId, initialData }: ProfileFormProps) {
   const updateProfileMutation = useUpdateProfile();
+  const { toasts, toast, removeToast } = useToast();
 
   const [avatarUrl, setAvatarUrl] = useState(initialData.avatarUrl || "");
   const [avatarPreview, setAvatarPreview] = useState(
@@ -58,9 +62,18 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
         });
 
         setSuccessMessage("Profile updated successfully!");
+        // Show toast notification for profile save
+        toast.success(
+          "Profile Saved",
+          "Your profile has been updated successfully."
+        );
       } catch (error) {
         console.error("Failed to update profile:", error);
         setErrorMessage("Failed to update profile. Please try again.");
+        toast.error(
+          "Save Failed",
+          "Failed to update profile. Please try again."
+        );
       }
     },
   });
@@ -568,6 +581,71 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
                 </div>
               )}
             </form.Field>
+
+            {/* Daily Water Goal */}
+            <form.Field
+              name="dailyWaterGoal"
+              validators={{ onChange: waterGoalValidator }}
+            >
+              {(field) => (
+                <div>
+                  <Label htmlFor={field.name}>Water Goal (glasses)</Label>
+                  <Input
+                    id={field.name}
+                    name={field.name}
+                    type="number"
+                    min="1"
+                    max="20"
+                    required
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                  />
+                  <p className="profile-form-helper-text">
+                    1 glass ≈ 8 oz (240ml)
+                  </p>
+                  {field.state.meta.errors &&
+                    field.state.meta.errors.length > 0 && (
+                      <p className="profile-form-error-text">
+                        {field.state.meta.errors.join(", ")}
+                      </p>
+                    )}
+                </div>
+              )}
+            </form.Field>
+
+            {/* Daily Step Goal */}
+            <form.Field
+              name="dailyStepGoal"
+              validators={{ onChange: stepGoalValidator }}
+            >
+              {(field) => (
+                <div>
+                  <Label htmlFor={field.name}>Step Goal (steps)</Label>
+                  <Input
+                    id={field.name}
+                    name={field.name}
+                    type="number"
+                    min="1000"
+                    max="50000"
+                    step="500"
+                    required
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                  />
+                  <p className="profile-form-helper-text">
+                    Recommended: 7,000-10,000 steps/day
+                  </p>
+                  {field.state.meta.errors &&
+                    field.state.meta.errors.length > 0 && (
+                      <p className="profile-form-error-text">
+                        {field.state.meta.errors.join(", ")}
+                      </p>
+                    )}
+                </div>
+              )}
+            </form.Field>
           </div>
 
           {/* Macro Breakdown Display */}
@@ -634,6 +712,9 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
           </div>
         )}
       </form.Subscribe>
+
+      {/* Toast notifications */}
+      <ToastContainer toasts={toasts} onRemove={removeToast} />
     </form>
   );
 }

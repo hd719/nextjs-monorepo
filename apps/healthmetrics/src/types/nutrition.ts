@@ -56,3 +56,10 @@ export interface WaterIntake {
   goal: number;
   date: string;
 }
+
+// Step count type
+export interface StepCount {
+  current: number;
+  goal: number;
+  date: string;
+}

@@ -216,6 +216,57 @@ export const searchFoodItems = createServerFn({ method: "GET" })
 // ============================================================================
 
 /**
+ * Copy all diary entries from one day to another
+ * Useful for duplicating yesterday's meals
+ */
+export const copyDiaryDay = createServerFn({ method: "POST" })
+  .inputValidator(
+    (data: { userId: string; sourceDate: string; targetDate: string }) => data
+  )
+  .handler(
+    async ({
+      data: { userId, sourceDate, targetDate },
+    }): Promise<{ copiedCount: number }> => {
+      try {
+        const sourceDateObj = new Date(sourceDate + "T00:00:00.000Z");
+        const targetDateObj = new Date(targetDate + "T00:00:00.000Z");
+
+        // Get all entries from the source date
+        const sourceEntries = await prisma.diaryEntry.findMany({
+          where: {
+            userId,
+            date: sourceDateObj,
+          },
+        });
+
+        if (sourceEntries.length === 0) {
+          return { copiedCount: 0 };
+        }
+
+        // Create new entries for the target date
+        const newEntries = sourceEntries.map((entry) => ({
+          userId: entry.userId,
+          foodItemId: entry.foodItemId,
+          date: targetDateObj,
+          mealType: entry.mealType,
+          quantityG: entry.quantityG,
+          servings: entry.servings,
+          notes: entry.notes,
+        }));
+
+        await prisma.diaryEntry.createMany({
+          data: newEntries,
+        });
+
+        return { copiedCount: newEntries.length };
+      } catch (error) {
+        console.error("Failed to copy diary day:", error);
+        throw new Error("Failed to copy meals from previous day");
+      }
+    }
+  );
+
+/**
  * Create a new diary entry
  * Validates input and creates the entry in the database
  */

@@ -3,12 +3,14 @@ import { AppLayout } from "@/components/layout";
 import {
   DailySummary,
   ExerciseSummary,
+  ProfileCompletion,
   WaterTracker,
   QuickActions,
   ProgressActivityPlaceholder,
   TodaysDiary,
   RecentActivity,
 } from "@/components/dashboard";
+import { useToast, ToastContainer } from "@/components/ui/toast";
 import { fetchUser } from "@/server/auth";
 import { ROUTES } from "@/constants/routes";
 import { useProfile } from "@/hooks/useProfile";
@@ -18,7 +20,10 @@ import {
   useDashboardMeals,
   useRecentActivity,
   useWaterIntake,
+  useUpdateWaterIntake,
+  useStepCount,
 } from "@/hooks/useDashboard";
+import { useWeightTrend } from "@/hooks/useWeight";
 import {
   mockWaterIntake,
   mockMealEntries,
@@ -40,6 +45,7 @@ export const Route = createFileRoute("/dashboard/")({
 
 function DashboardPage() {
   const { user } = Route.useRouteContext();
+  const { toasts, toast, removeToast } = useToast();
   const { data: profile } = useProfile(user.id);
   const timezone = profile?.timezone || "UTC";
   const today = new Date().toLocaleDateString("en-CA", {
@@ -66,19 +72,45 @@ function DashboardPage() {
     user.id,
     today
   );
+  const { mutate: updateWater } = useUpdateWaterIntake();
+  const { data: stepCount } = useStepCount(user.id, today);
+  const { data: weightTrend, isLoading: isWeightLoading } = useWeightTrend(
+    user.id,
+    7
+  );
   const { data: activities = [], isLoading: isActivitiesLoading } =
     useRecentActivity(user.id, 10);
 
+  // Handler for water intake updates with toast feedback
+  const handleWaterUpdate = (glasses: number) => {
+    const previousGlasses = waterIntake?.current ?? 0;
+    updateWater(
+      { userId: user.id, date: today, glasses },
+      {
+        onSuccess: () => {
+          if (glasses > previousGlasses) {
+            toast.success("Water logged!", `${glasses} glasses today`);
+          }
+        },
+      }
+    );
+  };
+
+  // Mock data toggle for development/testing
   const useMockDashboard = import.meta.env.VITE_USE_MOCK_DASHBOARD === "true";
+
+  // Resolve data sources based on mock toggle
   const waterData = useMockDashboard
     ? mockWaterIntake
-    : (waterIntake ?? {
-        current: 0,
-        goal: 8,
-        date: today,
-      });
+    : (waterIntake ?? { current: 0, goal: 8, date: today });
   const mealData = useMockDashboard ? mockMealEntries : meals;
   const activityData = useMockDashboard ? mockActivities : activities;
+
+  // Disable loading states and handlers when using mock data
+  const waterLoading = useMockDashboard ? false : isWaterLoading;
+  const mealsLoading = useMockDashboard ? false : isMealsLoading;
+  const activitiesLoading = useMockDashboard ? false : isActivitiesLoading;
+  const waterUpdateHandler = useMockDashboard ? undefined : handleWaterUpdate;
 
   // Use user's goals from profile, or fall back to defaults
   const goals = {
@@ -122,6 +154,9 @@ function DashboardPage() {
           </div>
         </div>
 
+        {/* Profile Completion (only shows if incomplete) */}
+        <ProfileCompletion profile={profile ?? null} />
+
         {/* Hero: Daily Summary */}
         <DailySummary data={dailySummary} isLoading={isTotalsLoading} />
 
@@ -133,7 +168,8 @@ function DashboardPage() {
           />
           <WaterTracker
             data={waterData}
-            isLoading={useMockDashboard ? false : isWaterLoading}
+            onUpdate={waterUpdateHandler}
+            isLoading={waterLoading}
           />
         </div>
 
@@ -141,22 +177,26 @@ function DashboardPage() {
         <div className="dashboard-grid-row animate-fade-slide-in animate-stagger-2">
           <div className="dashboard-left-stack">
             <QuickActions />
-            <ProgressActivityPlaceholder />
+            <ProgressActivityPlaceholder
+              stepData={stepCount}
+              weightData={weightTrend}
+              isWeightLoading={isWeightLoading}
+            />
           </div>
-          <TodaysDiary
-            meals={mealData}
-            isLoading={useMockDashboard ? false : isMealsLoading}
-          />
+          <TodaysDiary meals={mealData} isLoading={mealsLoading} />
         </div>
 
         {/* Row 3: RecentActivity (full width) */}
         <div className="animate-fade-slide-in animate-stagger-3">
           <RecentActivity
             activities={activityData}
-            isLoading={useMockDashboard ? false : isActivitiesLoading}
+            isLoading={activitiesLoading}
           />
         </div>
       </div>
+
+      {/* Toast notifications */}
+      <ToastContainer toasts={toasts} onRemove={removeToast} />
     </AppLayout>
   );
 }
