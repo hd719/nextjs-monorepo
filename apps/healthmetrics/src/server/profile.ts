@@ -65,6 +65,8 @@ export const getUserProfile = createServerFn({ method: "GET" })
         isAdmin: user.isAdmin,
         createdAt: user.createdAt.toISOString(),
         updatedAt: user.updatedAt.toISOString(),
+        defaultFastingProtocolId: user.defaultFastingProtocolId,
+        fastingGoalPerWeek: user.fastingGoalPerWeek,
       };
     } catch (error) {
       log.error({ err: error, userId }, "Failed to fetch user profile");
@@ -196,6 +198,8 @@ export const updateUserProfile = createServerFn({ method: "POST" })
         isAdmin: user.isAdmin,
         createdAt: user.createdAt.toISOString(),
         updatedAt: user.updatedAt.toISOString(),
+        defaultFastingProtocolId: user.defaultFastingProtocolId,
+        fastingGoalPerWeek: user.fastingGoalPerWeek,
       };
     } catch (error) {
       log.error({ err: error, userId }, "Failed to update user profile");

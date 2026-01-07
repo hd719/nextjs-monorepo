@@ -36,9 +36,15 @@
     @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch;
   }
 
+  /* Four-column grid for compact cards */
+  .dashboard-grid-row-4 {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch;
+  }
+
   /* Ensure grid children stretch to fill row height */
   .dashboard-grid-row > *,
-  .dashboard-grid-row-3 > * {
+  .dashboard-grid-row-3 > *,
+  .dashboard-grid-row-4 > * {
     @apply min-h-0 h-full;
   }
 
@@ -778,6 +784,155 @@
 
   .dashboard-achievements-loading-item {
     @apply space-y-2;
+  }
+
+  /* ==========================================================================
+     Fasting Dashboard Widget
+     ========================================================================== */
+
+  .dashboard-fasting-section {
+    @apply flex flex-col gap-4 h-full;
+  }
+
+  .dashboard-fasting-heading {
+    @apply text-2xl font-bold;
+  }
+
+  .dashboard-fasting-header {
+    @apply flex items-center justify-between;
+  }
+
+  .dashboard-fasting-title {
+    @apply text-lg flex items-center gap-2;
+  }
+
+  .dashboard-fasting-title-icon {
+    @apply w-5 h-5;
+    color: var(--accent);
+  }
+
+  .dashboard-fasting-protocol {
+    @apply text-sm font-medium px-2 py-1 rounded-full;
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    color: var(--accent);
+  }
+
+  .dashboard-fasting-card-active {
+    @apply cursor-pointer transition-all;
+    border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+  }
+
+  .dashboard-fasting-card-active:hover {
+    border-color: var(--accent);
+  }
+
+  /* Active Fast Content */
+  .dashboard-fasting-active-content {
+    @apply flex items-center gap-6;
+  }
+
+  .dashboard-fasting-progress-wrapper {
+    @apply relative w-20 h-20 flex-shrink-0;
+  }
+
+  .dashboard-fasting-progress-ring {
+    @apply w-full h-full;
+  }
+
+  .dashboard-fasting-progress-bg {
+    stroke: var(--muted);
+  }
+
+  .dashboard-fasting-progress-fill {
+    stroke: var(--accent);
+    transition: stroke-dasharray 0.3s ease-out;
+  }
+
+  .dashboard-fasting-progress-text {
+    @apply absolute inset-0 flex items-center justify-center;
+  }
+
+  .dashboard-fasting-progress-percent {
+    @apply text-lg font-bold;
+  }
+
+  .dashboard-fasting-time-stats {
+    @apply flex items-center gap-4 flex-1;
+  }
+
+  .dashboard-fasting-time-item {
+    @apply flex flex-col;
+  }
+
+  .dashboard-fasting-time-value {
+    @apply text-xl font-bold tabular-nums;
+  }
+
+  .dashboard-fasting-time-label {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .dashboard-fasting-time-divider {
+    @apply w-px h-8;
+    background: var(--border);
+  }
+
+  /* Stats Grid (Idle State) */
+  .dashboard-fasting-stats-grid {
+    @apply grid grid-cols-3 gap-4 mb-4;
+  }
+
+  .dashboard-fasting-stat-item {
+    @apply flex flex-col items-center text-center;
+  }
+
+  .dashboard-fasting-icon-container {
+    @apply w-10 h-10 rounded-full flex items-center justify-center mb-2;
+    background-color: color-mix(in srgb, var(--warning) 10%, transparent);
+  }
+
+  .dashboard-fasting-icon {
+    @apply w-5 h-5;
+    color: var(--warning);
+  }
+
+  .dashboard-fasting-icon-container-success {
+    @apply w-10 h-10 rounded-full flex items-center justify-center mb-2;
+    background-color: color-mix(in srgb, var(--success) 10%, transparent);
+  }
+
+  .dashboard-fasting-icon-success {
+    @apply w-5 h-5;
+    color: var(--success);
+  }
+
+  .dashboard-fasting-icon-container-accent {
+    @apply w-10 h-10 rounded-full flex items-center justify-center mb-2;
+    background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+
+  .dashboard-fasting-icon-accent {
+    @apply w-5 h-5;
+    color: var(--accent);
+  }
+
+  .dashboard-fasting-stat-value {
+    @apply text-2xl font-bold;
+  }
+
+  .dashboard-fasting-stat-label {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .dashboard-fasting-start-btn {
+    @apply w-full;
+  }
+
+  /* Loading State */
+  .dashboard-fasting-loading-grid {
+    @apply flex flex-col items-center gap-3;
   }
 
   /* ==========================================================================

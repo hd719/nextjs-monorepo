@@ -74,7 +74,9 @@ export const ModelName = {
   ChallengeParticipant: 'ChallengeParticipant',
   UserStreak: 'UserStreak',
   Achievement: 'Achievement',
-  UserAchievement: 'UserAchievement'
+  UserAchievement: 'UserAchievement',
+  FastingProtocol: 'FastingProtocol',
+  FastingSession: 'FastingSession'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -172,6 +174,8 @@ export const UserScalarFieldEnum = {
   onboardingStep: 'onboardingStep',
   onboardingSkippedAt: 'onboardingSkippedAt',
   onboardingCompletedAt: 'onboardingCompletedAt',
+  defaultFastingProtocolId: 'defaultFastingProtocolId',
+  fastingGoalPerWeek: 'fastingGoalPerWeek',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -503,6 +507,40 @@ export const UserAchievementScalarFieldEnum = {
 } as const
 
 export type UserAchievementScalarFieldEnum = (typeof UserAchievementScalarFieldEnum)[keyof typeof UserAchievementScalarFieldEnum]
+
+
+export const FastingProtocolScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  fastingMinutes: 'fastingMinutes',
+  eatingMinutes: 'eatingMinutes',
+  isPreset: 'isPreset',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FastingProtocolScalarFieldEnum = (typeof FastingProtocolScalarFieldEnum)[keyof typeof FastingProtocolScalarFieldEnum]
+
+
+export const FastingSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  protocolId: 'protocolId',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  targetDurationMin: 'targetDurationMin',
+  actualDurationMin: 'actualDurationMin',
+  pausedAt: 'pausedAt',
+  totalPausedMin: 'totalPausedMin',
+  status: 'status',
+  completedAtTarget: 'completedAtTarget',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FastingSessionScalarFieldEnum = (typeof FastingSessionScalarFieldEnum)[keyof typeof FastingSessionScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -66,3 +66,19 @@ export {
 
 // Goal calculation hook
 export { useGoalCalculation } from "./useGoalCalculation";
+
+// Fasting hooks
+export {
+  useActiveFast,
+  useFastingProtocols,
+  useFastingHistory,
+  useFastingStats,
+  useFastingCalendar,
+  useStartFast,
+  useEndFast,
+  useCancelFast,
+  usePauseFast,
+  useResumeFast,
+  useCreateCustomProtocol,
+  useDeleteCustomProtocol,
+} from "./useFasting";

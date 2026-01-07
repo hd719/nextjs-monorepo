@@ -652,4 +652,195 @@
   .diary-add-submit-button {
     /* No additional styles needed - uses Button component */
   }
+
+  /* ==========================================================================
+     Fasting Warning Banner
+     Shows at the top of diary when user has an active fast
+     ========================================================================== */
+
+  .diary-fasting-banner {
+    @apply flex items-center gap-4 p-4 rounded-xl;
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--warning) 15%, var(--card)) 0%,
+      color-mix(in srgb, var(--warning) 5%, var(--card)) 100%
+    );
+    border: 1px solid color-mix(in srgb, var(--warning) 30%, transparent);
+  }
+
+  .diary-fasting-banner-success {
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--success) 15%, var(--card)) 0%,
+      color-mix(in srgb, var(--success) 5%, var(--card)) 100%
+    );
+    border-color: color-mix(in srgb, var(--success) 30%, transparent);
+  }
+
+  .diary-fasting-banner-icon {
+    @apply flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full;
+    background: color-mix(in srgb, var(--warning) 20%, transparent);
+  }
+
+  .diary-fasting-banner-success .diary-fasting-banner-icon {
+    background: color-mix(in srgb, var(--success) 20%, transparent);
+  }
+
+  .diary-fasting-banner-icon-svg {
+    @apply w-5 h-5;
+    color: var(--warning);
+  }
+
+  .diary-fasting-banner-success .diary-fasting-banner-icon-svg {
+    color: var(--success);
+  }
+
+  .diary-fasting-banner-content {
+    @apply flex-1 min-w-0;
+  }
+
+  .diary-fasting-banner-title {
+    @apply font-semibold text-sm;
+  }
+
+  .diary-fasting-banner-details {
+    @apply flex items-center gap-2 text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .diary-fasting-banner-protocol {
+    @apply font-medium;
+  }
+
+  .diary-fasting-banner-separator {
+    @apply opacity-50;
+  }
+
+  .diary-fasting-banner-time {
+    /* inherits */
+  }
+
+  .diary-fasting-banner-warning {
+    @apply text-xs mt-1;
+    color: var(--warning);
+  }
+
+  .diary-fasting-banner-success .diary-fasting-banner-warning {
+    color: var(--success);
+  }
+
+  .diary-fasting-banner-action {
+    @apply flex-shrink-0;
+  }
+
+  .diary-fasting-banner-action-icon {
+    @apply w-4 h-4 ml-1;
+  }
+
+  /* ==========================================================================
+     Fasting Warning Dialog
+     Shown when user tries to add food while actively fasting
+     ========================================================================== */
+
+  .fasting-warning-dialog {
+    @apply max-w-md;
+  }
+
+  .fasting-warning-dialog-icon-wrapper {
+    @apply flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-full;
+    background: color-mix(in srgb, var(--warning) 15%, transparent);
+  }
+
+  .fasting-warning-dialog-icon {
+    @apply w-6 h-6;
+    color: var(--warning);
+  }
+
+  .fasting-warning-dialog-title {
+    @apply text-center text-lg font-semibold;
+  }
+
+  .fasting-warning-dialog-description {
+    @apply text-center;
+    color: var(--muted-foreground);
+  }
+
+  .fasting-warning-status-card {
+    @apply p-4 rounded-lg my-4;
+    background: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+  .fasting-warning-status-header {
+    @apply flex items-center gap-2 mb-3;
+  }
+
+  .fasting-warning-status-icon {
+    @apply w-4 h-4;
+    color: var(--accent);
+  }
+
+  .fasting-warning-status-protocol {
+    @apply font-medium text-sm;
+  }
+
+  .fasting-warning-status-progress {
+    @apply flex items-center gap-3 mb-3;
+  }
+
+  .fasting-warning-progress-bar {
+    @apply flex-1 h-2 rounded-full overflow-hidden;
+    background: var(--border);
+  }
+
+  .fasting-warning-progress-fill {
+    @apply h-full rounded-full transition-all;
+    background: var(--accent);
+  }
+
+  .fasting-warning-progress-text {
+    @apply text-xs font-medium whitespace-nowrap;
+    color: var(--muted-foreground);
+  }
+
+  .fasting-warning-status-times {
+    @apply flex justify-between;
+  }
+
+  .fasting-warning-time-item {
+    @apply flex flex-col;
+  }
+
+  .fasting-warning-time-label {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .fasting-warning-time-value {
+    @apply text-sm font-semibold tabular-nums;
+  }
+
+  .fasting-warning-dialog-footer {
+    @apply flex flex-col gap-2;
+  }
+
+  .fasting-warning-btn-end {
+    @apply w-full;
+  }
+
+  .fasting-warning-btn-icon {
+    @apply w-4 h-4 mr-2;
+  }
+
+  .fasting-warning-btn-icon-spin {
+    @apply w-4 h-4 mr-2 animate-spin;
+  }
+
+  .fasting-warning-btn-log {
+    @apply w-full;
+  }
+
+  .fasting-warning-btn-cancel {
+    @apply w-full;
+  }
 }

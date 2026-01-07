@@ -104,3 +104,21 @@ export type {
   NutritionGoals,
   SaveOnboardingStepInput,
 } from "./onboarding";
+
+// Fasting types
+export type {
+  FastingStatus,
+  FastingProtocol,
+  FastingProtocolOption,
+  FastingSession,
+  ActiveFast,
+  FastingStats,
+  FastingHistoryEntry,
+  FastingCalendarDay,
+  StartFastInput,
+  EndFastInput,
+  CreateProtocolInput,
+  UpdateFastingPreferencesInput,
+  FastingTimerState,
+  FastingTimerDisplay,
+} from "./fasting";

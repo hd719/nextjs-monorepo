@@ -466,6 +466,34 @@ const commonFoods = [
 // Curated exercise library with MET values
 // MET (Metabolic Equivalent of Task) values
 // Achievement definitions for gamification system
+// Preset fasting protocols
+const fastingProtocols = [
+  {
+    name: "16:8",
+    fastingMinutes: 960, // 16 hours
+    eatingMinutes: 480, // 8 hours
+    isPreset: true,
+  },
+  {
+    name: "18:6",
+    fastingMinutes: 1080, // 18 hours
+    eatingMinutes: 360, // 6 hours
+    isPreset: true,
+  },
+  {
+    name: "20:4",
+    fastingMinutes: 1200, // 20 hours
+    eatingMinutes: 240, // 4 hours
+    isPreset: true,
+  },
+  {
+    name: "OMAD (23:1)",
+    fastingMinutes: 1380, // 23 hours
+    eatingMinutes: 60, // 1 hour
+    isPreset: true,
+  },
+];
+
 const achievementDefinitions = [
   {
     key: "first_meal",
@@ -1221,6 +1249,27 @@ async function main() {
   } else {
     console.log(
       `⚠️  Database already has ${existingAchievementCount} achievements. Skipping achievement seed.`
+    );
+  }
+
+  // Check if fasting protocols already exist
+  const existingProtocolCount = await prisma.fastingProtocol.count();
+  if (existingProtocolCount === 0) {
+    // Insert all fasting protocols
+    console.log(`📦 Inserting ${fastingProtocols.length} fasting protocols...`);
+
+    for (const protocol of fastingProtocols) {
+      await prisma.fastingProtocol.create({
+        data: protocol,
+      });
+    }
+
+    console.log(
+      `✅ Added ${fastingProtocols.length} fasting protocols to the database.`
+    );
+  } else {
+    console.log(
+      `⚠️  Database already has ${existingProtocolCount} fasting protocols. Skipping protocol seed.`
     );
   }
 

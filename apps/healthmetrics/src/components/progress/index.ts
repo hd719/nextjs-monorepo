@@ -9,3 +9,4 @@ export { AchievementsProgressCard } from "./AchievementsProgressCard";
 export { InsightsPanel } from "./InsightsPanel";
 export { DateRangeSelector } from "./DateRangeSelector";
 export { SleepProgressCard } from "./SleepProgressCard";
+export { FastingProgressCard } from "./FastingProgressCard";

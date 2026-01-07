@@ -36,6 +36,7 @@ export type UserAvgAggregateOutputType = {
   dailyWaterGoal: number | null
   dailyStepGoal: number | null
   onboardingStep: number | null
+  fastingGoalPerWeek: number | null
 }
 
 export type UserSumAggregateOutputType = {
@@ -48,6 +49,7 @@ export type UserSumAggregateOutputType = {
   dailyWaterGoal: number | null
   dailyStepGoal: number | null
   onboardingStep: number | null
+  fastingGoalPerWeek: number | null
 }
 
 export type UserMinAggregateOutputType = {
@@ -73,6 +75,8 @@ export type UserMinAggregateOutputType = {
   onboardingStep: number | null
   onboardingSkippedAt: Date | null
   onboardingCompletedAt: Date | null
+  defaultFastingProtocolId: string | null
+  fastingGoalPerWeek: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -100,6 +104,8 @@ export type UserMaxAggregateOutputType = {
   onboardingStep: number | null
   onboardingSkippedAt: Date | null
   onboardingCompletedAt: Date | null
+  defaultFastingProtocolId: string | null
+  fastingGoalPerWeek: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -127,6 +133,8 @@ export type UserCountAggregateOutputType = {
   onboardingStep: number
   onboardingSkippedAt: number
   onboardingCompletedAt: number
+  defaultFastingProtocolId: number
+  fastingGoalPerWeek: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -143,6 +151,7 @@ export type UserAvgAggregateInputType = {
   dailyWaterGoal?: true
   dailyStepGoal?: true
   onboardingStep?: true
+  fastingGoalPerWeek?: true
 }
 
 export type UserSumAggregateInputType = {
@@ -155,6 +164,7 @@ export type UserSumAggregateInputType = {
   dailyWaterGoal?: true
   dailyStepGoal?: true
   onboardingStep?: true
+  fastingGoalPerWeek?: true
 }
 
 export type UserMinAggregateInputType = {
@@ -180,6 +190,8 @@ export type UserMinAggregateInputType = {
   onboardingStep?: true
   onboardingSkippedAt?: true
   onboardingCompletedAt?: true
+  defaultFastingProtocolId?: true
+  fastingGoalPerWeek?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -207,6 +219,8 @@ export type UserMaxAggregateInputType = {
   onboardingStep?: true
   onboardingSkippedAt?: true
   onboardingCompletedAt?: true
+  defaultFastingProtocolId?: true
+  fastingGoalPerWeek?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -234,6 +248,8 @@ export type UserCountAggregateInputType = {
   onboardingStep?: true
   onboardingSkippedAt?: true
   onboardingCompletedAt?: true
+  defaultFastingProtocolId?: true
+  fastingGoalPerWeek?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -348,6 +364,8 @@ export type UserGroupByOutputType = {
   onboardingStep: number
   onboardingSkippedAt: Date | null
   onboardingCompletedAt: Date | null
+  defaultFastingProtocolId: string | null
+  fastingGoalPerWeek: number | null
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -398,6 +416,8 @@ export type UserWhereInput = {
   onboardingStep?: Prisma.IntFilter<"User"> | number
   onboardingSkippedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   onboardingCompletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  defaultFastingProtocolId?: Prisma.StringNullableFilter<"User"> | string | null
+  fastingGoalPerWeek?: Prisma.IntNullableFilter<"User"> | number | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   authUser?: Prisma.XOR<Prisma.BetterAuthUserNullableScalarRelationFilter, Prisma.BetterAuthUserWhereInput> | null
@@ -420,6 +440,8 @@ export type UserWhereInput = {
   challengeParticipations?: Prisma.ChallengeParticipantListRelationFilter
   streak?: Prisma.XOR<Prisma.UserStreakNullableScalarRelationFilter, Prisma.UserStreakWhereInput> | null
   userAchievements?: Prisma.UserAchievementListRelationFilter
+  fastingProtocols?: Prisma.FastingProtocolListRelationFilter
+  fastingSessions?: Prisma.FastingSessionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -445,6 +467,8 @@ export type UserOrderByWithRelationInput = {
   onboardingStep?: Prisma.SortOrder
   onboardingSkippedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   onboardingCompletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  defaultFastingProtocolId?: Prisma.SortOrderInput | Prisma.SortOrder
+  fastingGoalPerWeek?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   authUser?: Prisma.BetterAuthUserOrderByWithRelationInput
@@ -467,6 +491,8 @@ export type UserOrderByWithRelationInput = {
   challengeParticipations?: Prisma.ChallengeParticipantOrderByRelationAggregateInput
   streak?: Prisma.UserStreakOrderByWithRelationInput
   userAchievements?: Prisma.UserAchievementOrderByRelationAggregateInput
+  fastingProtocols?: Prisma.FastingProtocolOrderByRelationAggregateInput
+  fastingSessions?: Prisma.FastingSessionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -495,6 +521,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   onboardingStep?: Prisma.IntFilter<"User"> | number
   onboardingSkippedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   onboardingCompletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  defaultFastingProtocolId?: Prisma.StringNullableFilter<"User"> | string | null
+  fastingGoalPerWeek?: Prisma.IntNullableFilter<"User"> | number | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   authUser?: Prisma.XOR<Prisma.BetterAuthUserNullableScalarRelationFilter, Prisma.BetterAuthUserWhereInput> | null
@@ -517,6 +545,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   challengeParticipations?: Prisma.ChallengeParticipantListRelationFilter
   streak?: Prisma.XOR<Prisma.UserStreakNullableScalarRelationFilter, Prisma.UserStreakWhereInput> | null
   userAchievements?: Prisma.UserAchievementListRelationFilter
+  fastingProtocols?: Prisma.FastingProtocolListRelationFilter
+  fastingSessions?: Prisma.FastingSessionListRelationFilter
 }, "id">
 
 export type UserOrderByWithAggregationInput = {
@@ -542,6 +572,8 @@ export type UserOrderByWithAggregationInput = {
   onboardingStep?: Prisma.SortOrder
   onboardingSkippedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   onboardingCompletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  defaultFastingProtocolId?: Prisma.SortOrderInput | Prisma.SortOrder
+  fastingGoalPerWeek?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -577,6 +609,8 @@ export type UserScalarWhereWithAggregatesInput = {
   onboardingStep?: Prisma.IntWithAggregatesFilter<"User"> | number
   onboardingSkippedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   onboardingCompletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  defaultFastingProtocolId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  fastingGoalPerWeek?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -603,6 +637,8 @@ export type UserCreateInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -625,6 +661,8 @@ export type UserCreateInput = {
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -650,6 +688,8 @@ export type UserUncheckedCreateInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -671,6 +711,8 @@ export type UserUncheckedCreateInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -695,6 +737,8 @@ export type UserUpdateInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -717,6 +761,8 @@ export type UserUpdateInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -742,6 +788,8 @@ export type UserUncheckedUpdateInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -763,6 +811,8 @@ export type UserUncheckedUpdateInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -788,6 +838,8 @@ export type UserCreateManyInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -814,6 +866,8 @@ export type UserUpdateManyMutationInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -841,6 +895,8 @@ export type UserUncheckedUpdateManyInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -873,6 +929,8 @@ export type UserCountOrderByAggregateInput = {
   onboardingStep?: Prisma.SortOrder
   onboardingSkippedAt?: Prisma.SortOrder
   onboardingCompletedAt?: Prisma.SortOrder
+  defaultFastingProtocolId?: Prisma.SortOrder
+  fastingGoalPerWeek?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -887,6 +945,7 @@ export type UserAvgOrderByAggregateInput = {
   dailyWaterGoal?: Prisma.SortOrder
   dailyStepGoal?: Prisma.SortOrder
   onboardingStep?: Prisma.SortOrder
+  fastingGoalPerWeek?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -912,6 +971,8 @@ export type UserMaxOrderByAggregateInput = {
   onboardingStep?: Prisma.SortOrder
   onboardingSkippedAt?: Prisma.SortOrder
   onboardingCompletedAt?: Prisma.SortOrder
+  defaultFastingProtocolId?: Prisma.SortOrder
+  fastingGoalPerWeek?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -939,6 +1000,8 @@ export type UserMinOrderByAggregateInput = {
   onboardingStep?: Prisma.SortOrder
   onboardingSkippedAt?: Prisma.SortOrder
   onboardingCompletedAt?: Prisma.SortOrder
+  defaultFastingProtocolId?: Prisma.SortOrder
+  fastingGoalPerWeek?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -953,6 +1016,7 @@ export type UserSumOrderByAggregateInput = {
   dailyWaterGoal?: Prisma.SortOrder
   dailyStepGoal?: Prisma.SortOrder
   onboardingStep?: Prisma.SortOrder
+  fastingGoalPerWeek?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -1302,6 +1366,36 @@ export type UserUpdateOneRequiredWithoutUserAchievementsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUserAchievementsInput, Prisma.UserUpdateWithoutUserAchievementsInput>, Prisma.UserUncheckedUpdateWithoutUserAchievementsInput>
 }
 
+export type UserCreateNestedOneWithoutFastingProtocolsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFastingProtocolsInput, Prisma.UserUncheckedCreateWithoutFastingProtocolsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFastingProtocolsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutFastingProtocolsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFastingProtocolsInput, Prisma.UserUncheckedCreateWithoutFastingProtocolsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFastingProtocolsInput
+  upsert?: Prisma.UserUpsertWithoutFastingProtocolsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFastingProtocolsInput, Prisma.UserUpdateWithoutFastingProtocolsInput>, Prisma.UserUncheckedUpdateWithoutFastingProtocolsInput>
+}
+
+export type UserCreateNestedOneWithoutFastingSessionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFastingSessionsInput, Prisma.UserUncheckedCreateWithoutFastingSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFastingSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutFastingSessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFastingSessionsInput, Prisma.UserUncheckedCreateWithoutFastingSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFastingSessionsInput
+  upsert?: Prisma.UserUpsertWithoutFastingSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFastingSessionsInput, Prisma.UserUpdateWithoutFastingSessionsInput>, Prisma.UserUncheckedUpdateWithoutFastingSessionsInput>
+}
+
 export type UserCreateWithoutAuthUserInput = {
   displayName?: string | null
   avatarUrl?: string | null
@@ -1324,6 +1418,8 @@ export type UserCreateWithoutAuthUserInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemCreateNestedManyWithoutCreatorInput
@@ -1345,6 +1441,8 @@ export type UserCreateWithoutAuthUserInput = {
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAuthUserInput = {
@@ -1369,6 +1467,8 @@ export type UserUncheckedCreateWithoutAuthUserInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -1390,6 +1490,8 @@ export type UserUncheckedCreateWithoutAuthUserInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAuthUserInput = {
@@ -1430,6 +1532,8 @@ export type UserUpdateWithoutAuthUserInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUpdateManyWithoutCreatorNestedInput
@@ -1451,6 +1555,8 @@ export type UserUpdateWithoutAuthUserInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuthUserInput = {
@@ -1475,6 +1581,8 @@ export type UserUncheckedUpdateWithoutAuthUserInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -1496,6 +1604,8 @@ export type UserUncheckedUpdateWithoutAuthUserInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreatedFoodItemsInput = {
@@ -1520,6 +1630,8 @@ export type UserCreateWithoutCreatedFoodItemsInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -1541,6 +1653,8 @@ export type UserCreateWithoutCreatedFoodItemsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreatedFoodItemsInput = {
@@ -1566,6 +1680,8 @@ export type UserUncheckedCreateWithoutCreatedFoodItemsInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
@@ -1586,6 +1702,8 @@ export type UserUncheckedCreateWithoutCreatedFoodItemsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreatedFoodItemsInput = {
@@ -1626,6 +1744,8 @@ export type UserUpdateWithoutCreatedFoodItemsInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -1647,6 +1767,8 @@ export type UserUpdateWithoutCreatedFoodItemsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedFoodItemsInput = {
@@ -1672,6 +1794,8 @@ export type UserUncheckedUpdateWithoutCreatedFoodItemsInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
@@ -1692,6 +1816,8 @@ export type UserUncheckedUpdateWithoutCreatedFoodItemsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreatedExercisesInput = {
@@ -1716,6 +1842,8 @@ export type UserCreateWithoutCreatedExercisesInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -1737,6 +1865,8 @@ export type UserCreateWithoutCreatedExercisesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreatedExercisesInput = {
@@ -1762,6 +1892,8 @@ export type UserUncheckedCreateWithoutCreatedExercisesInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -1782,6 +1914,8 @@ export type UserUncheckedCreateWithoutCreatedExercisesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreatedExercisesInput = {
@@ -1822,6 +1956,8 @@ export type UserUpdateWithoutCreatedExercisesInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -1843,6 +1979,8 @@ export type UserUpdateWithoutCreatedExercisesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedExercisesInput = {
@@ -1868,6 +2006,8 @@ export type UserUncheckedUpdateWithoutCreatedExercisesInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -1888,6 +2028,8 @@ export type UserUncheckedUpdateWithoutCreatedExercisesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDiaryEntriesInput = {
@@ -1912,6 +2054,8 @@ export type UserCreateWithoutDiaryEntriesInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -1933,6 +2077,8 @@ export type UserCreateWithoutDiaryEntriesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDiaryEntriesInput = {
@@ -1958,6 +2104,8 @@ export type UserUncheckedCreateWithoutDiaryEntriesInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -1978,6 +2126,8 @@ export type UserUncheckedCreateWithoutDiaryEntriesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDiaryEntriesInput = {
@@ -2018,6 +2168,8 @@ export type UserUpdateWithoutDiaryEntriesInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -2039,6 +2191,8 @@ export type UserUpdateWithoutDiaryEntriesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDiaryEntriesInput = {
@@ -2064,6 +2218,8 @@ export type UserUncheckedUpdateWithoutDiaryEntriesInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -2084,6 +2240,8 @@ export type UserUncheckedUpdateWithoutDiaryEntriesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutWorkoutSessionsInput = {
@@ -2108,6 +2266,8 @@ export type UserCreateWithoutWorkoutSessionsInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -2129,6 +2289,8 @@ export type UserCreateWithoutWorkoutSessionsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWorkoutSessionsInput = {
@@ -2154,6 +2316,8 @@ export type UserUncheckedCreateWithoutWorkoutSessionsInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -2174,6 +2338,8 @@ export type UserUncheckedCreateWithoutWorkoutSessionsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWorkoutSessionsInput = {
@@ -2214,6 +2380,8 @@ export type UserUpdateWithoutWorkoutSessionsInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -2235,6 +2403,8 @@ export type UserUpdateWithoutWorkoutSessionsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWorkoutSessionsInput = {
@@ -2260,6 +2430,8 @@ export type UserUncheckedUpdateWithoutWorkoutSessionsInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -2280,6 +2452,8 @@ export type UserUncheckedUpdateWithoutWorkoutSessionsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutWorkoutLogsInput = {
@@ -2304,6 +2478,8 @@ export type UserCreateWithoutWorkoutLogsInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -2325,6 +2501,8 @@ export type UserCreateWithoutWorkoutLogsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWorkoutLogsInput = {
@@ -2350,6 +2528,8 @@ export type UserUncheckedCreateWithoutWorkoutLogsInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -2370,6 +2550,8 @@ export type UserUncheckedCreateWithoutWorkoutLogsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWorkoutLogsInput = {
@@ -2410,6 +2592,8 @@ export type UserUpdateWithoutWorkoutLogsInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -2431,6 +2615,8 @@ export type UserUpdateWithoutWorkoutLogsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWorkoutLogsInput = {
@@ -2456,6 +2642,8 @@ export type UserUncheckedUpdateWithoutWorkoutLogsInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -2476,6 +2664,8 @@ export type UserUncheckedUpdateWithoutWorkoutLogsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutWeightEntriesInput = {
@@ -2500,6 +2690,8 @@ export type UserCreateWithoutWeightEntriesInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -2521,6 +2713,8 @@ export type UserCreateWithoutWeightEntriesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWeightEntriesInput = {
@@ -2546,6 +2740,8 @@ export type UserUncheckedCreateWithoutWeightEntriesInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -2566,6 +2762,8 @@ export type UserUncheckedCreateWithoutWeightEntriesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWeightEntriesInput = {
@@ -2606,6 +2804,8 @@ export type UserUpdateWithoutWeightEntriesInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -2627,6 +2827,8 @@ export type UserUpdateWithoutWeightEntriesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWeightEntriesInput = {
@@ -2652,6 +2854,8 @@ export type UserUncheckedUpdateWithoutWeightEntriesInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -2672,6 +2876,8 @@ export type UserUncheckedUpdateWithoutWeightEntriesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutWaterEntriesInput = {
@@ -2696,6 +2902,8 @@ export type UserCreateWithoutWaterEntriesInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -2717,6 +2925,8 @@ export type UserCreateWithoutWaterEntriesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWaterEntriesInput = {
@@ -2742,6 +2952,8 @@ export type UserUncheckedCreateWithoutWaterEntriesInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -2762,6 +2974,8 @@ export type UserUncheckedCreateWithoutWaterEntriesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWaterEntriesInput = {
@@ -2802,6 +3016,8 @@ export type UserUpdateWithoutWaterEntriesInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -2823,6 +3039,8 @@ export type UserUpdateWithoutWaterEntriesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWaterEntriesInput = {
@@ -2848,6 +3066,8 @@ export type UserUncheckedUpdateWithoutWaterEntriesInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -2868,6 +3088,8 @@ export type UserUncheckedUpdateWithoutWaterEntriesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutStepEntriesInput = {
@@ -2892,6 +3114,8 @@ export type UserCreateWithoutStepEntriesInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -2913,6 +3137,8 @@ export type UserCreateWithoutStepEntriesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutStepEntriesInput = {
@@ -2938,6 +3164,8 @@ export type UserUncheckedCreateWithoutStepEntriesInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -2958,6 +3186,8 @@ export type UserUncheckedCreateWithoutStepEntriesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutStepEntriesInput = {
@@ -2998,6 +3228,8 @@ export type UserUpdateWithoutStepEntriesInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -3019,6 +3251,8 @@ export type UserUpdateWithoutStepEntriesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStepEntriesInput = {
@@ -3044,6 +3278,8 @@ export type UserUncheckedUpdateWithoutStepEntriesInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -3064,6 +3300,8 @@ export type UserUncheckedUpdateWithoutStepEntriesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSleepEntriesInput = {
@@ -3088,6 +3326,8 @@ export type UserCreateWithoutSleepEntriesInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -3109,6 +3349,8 @@ export type UserCreateWithoutSleepEntriesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSleepEntriesInput = {
@@ -3134,6 +3376,8 @@ export type UserUncheckedCreateWithoutSleepEntriesInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -3154,6 +3398,8 @@ export type UserUncheckedCreateWithoutSleepEntriesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSleepEntriesInput = {
@@ -3194,6 +3440,8 @@ export type UserUpdateWithoutSleepEntriesInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -3215,6 +3463,8 @@ export type UserUpdateWithoutSleepEntriesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSleepEntriesInput = {
@@ -3240,6 +3490,8 @@ export type UserUncheckedUpdateWithoutSleepEntriesInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -3260,6 +3512,8 @@ export type UserUncheckedUpdateWithoutSleepEntriesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMealPlanTemplatesInput = {
@@ -3284,6 +3538,8 @@ export type UserCreateWithoutMealPlanTemplatesInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -3305,6 +3561,8 @@ export type UserCreateWithoutMealPlanTemplatesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMealPlanTemplatesInput = {
@@ -3330,6 +3588,8 @@ export type UserUncheckedCreateWithoutMealPlanTemplatesInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -3350,6 +3610,8 @@ export type UserUncheckedCreateWithoutMealPlanTemplatesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMealPlanTemplatesInput = {
@@ -3390,6 +3652,8 @@ export type UserUpdateWithoutMealPlanTemplatesInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -3411,6 +3675,8 @@ export type UserUpdateWithoutMealPlanTemplatesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMealPlanTemplatesInput = {
@@ -3436,6 +3702,8 @@ export type UserUncheckedUpdateWithoutMealPlanTemplatesInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -3456,6 +3724,8 @@ export type UserUncheckedUpdateWithoutMealPlanTemplatesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMealPlansInput = {
@@ -3480,6 +3750,8 @@ export type UserCreateWithoutMealPlansInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -3501,6 +3773,8 @@ export type UserCreateWithoutMealPlansInput = {
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMealPlansInput = {
@@ -3526,6 +3800,8 @@ export type UserUncheckedCreateWithoutMealPlansInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -3546,6 +3822,8 @@ export type UserUncheckedCreateWithoutMealPlansInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMealPlansInput = {
@@ -3586,6 +3864,8 @@ export type UserUpdateWithoutMealPlansInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -3607,6 +3887,8 @@ export type UserUpdateWithoutMealPlansInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMealPlansInput = {
@@ -3632,6 +3914,8 @@ export type UserUncheckedUpdateWithoutMealPlansInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -3652,6 +3936,8 @@ export type UserUncheckedUpdateWithoutMealPlansInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutGoalsInput = {
@@ -3676,6 +3962,8 @@ export type UserCreateWithoutGoalsInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -3697,6 +3985,8 @@ export type UserCreateWithoutGoalsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutGoalsInput = {
@@ -3722,6 +4012,8 @@ export type UserUncheckedCreateWithoutGoalsInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -3742,6 +4034,8 @@ export type UserUncheckedCreateWithoutGoalsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutGoalsInput = {
@@ -3782,6 +4076,8 @@ export type UserUpdateWithoutGoalsInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -3803,6 +4099,8 @@ export type UserUpdateWithoutGoalsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutGoalsInput = {
@@ -3828,6 +4126,8 @@ export type UserUncheckedUpdateWithoutGoalsInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -3848,6 +4148,8 @@ export type UserUncheckedUpdateWithoutGoalsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSentFriendshipsInput = {
@@ -3872,6 +4174,8 @@ export type UserCreateWithoutSentFriendshipsInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -3893,6 +4197,8 @@ export type UserCreateWithoutSentFriendshipsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSentFriendshipsInput = {
@@ -3918,6 +4224,8 @@ export type UserUncheckedCreateWithoutSentFriendshipsInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -3938,6 +4246,8 @@ export type UserUncheckedCreateWithoutSentFriendshipsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSentFriendshipsInput = {
@@ -3967,6 +4277,8 @@ export type UserCreateWithoutReceivedFriendshipsInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -3988,6 +4300,8 @@ export type UserCreateWithoutReceivedFriendshipsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReceivedFriendshipsInput = {
@@ -4013,6 +4327,8 @@ export type UserUncheckedCreateWithoutReceivedFriendshipsInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -4033,6 +4349,8 @@ export type UserUncheckedCreateWithoutReceivedFriendshipsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReceivedFriendshipsInput = {
@@ -4062,6 +4380,8 @@ export type UserCreateWithoutRequestedFriendshipsInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -4083,6 +4403,8 @@ export type UserCreateWithoutRequestedFriendshipsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRequestedFriendshipsInput = {
@@ -4108,6 +4430,8 @@ export type UserUncheckedCreateWithoutRequestedFriendshipsInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -4128,6 +4452,8 @@ export type UserUncheckedCreateWithoutRequestedFriendshipsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRequestedFriendshipsInput = {
@@ -4168,6 +4494,8 @@ export type UserUpdateWithoutSentFriendshipsInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -4189,6 +4517,8 @@ export type UserUpdateWithoutSentFriendshipsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSentFriendshipsInput = {
@@ -4214,6 +4544,8 @@ export type UserUncheckedUpdateWithoutSentFriendshipsInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -4234,6 +4566,8 @@ export type UserUncheckedUpdateWithoutSentFriendshipsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutReceivedFriendshipsInput = {
@@ -4269,6 +4603,8 @@ export type UserUpdateWithoutReceivedFriendshipsInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -4290,6 +4626,8 @@ export type UserUpdateWithoutReceivedFriendshipsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReceivedFriendshipsInput = {
@@ -4315,6 +4653,8 @@ export type UserUncheckedUpdateWithoutReceivedFriendshipsInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -4335,6 +4675,8 @@ export type UserUncheckedUpdateWithoutReceivedFriendshipsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutRequestedFriendshipsInput = {
@@ -4370,6 +4712,8 @@ export type UserUpdateWithoutRequestedFriendshipsInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -4391,6 +4735,8 @@ export type UserUpdateWithoutRequestedFriendshipsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRequestedFriendshipsInput = {
@@ -4416,6 +4762,8 @@ export type UserUncheckedUpdateWithoutRequestedFriendshipsInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -4436,6 +4784,8 @@ export type UserUncheckedUpdateWithoutRequestedFriendshipsInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreatedChallengesInput = {
@@ -4460,6 +4810,8 @@ export type UserCreateWithoutCreatedChallengesInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -4481,6 +4833,8 @@ export type UserCreateWithoutCreatedChallengesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreatedChallengesInput = {
@@ -4506,6 +4860,8 @@ export type UserUncheckedCreateWithoutCreatedChallengesInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -4526,6 +4882,8 @@ export type UserUncheckedCreateWithoutCreatedChallengesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreatedChallengesInput = {
@@ -4566,6 +4924,8 @@ export type UserUpdateWithoutCreatedChallengesInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -4587,6 +4947,8 @@ export type UserUpdateWithoutCreatedChallengesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedChallengesInput = {
@@ -4612,6 +4974,8 @@ export type UserUncheckedUpdateWithoutCreatedChallengesInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -4632,6 +4996,8 @@ export type UserUncheckedUpdateWithoutCreatedChallengesInput = {
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutChallengeParticipationsInput = {
@@ -4656,6 +5022,8 @@ export type UserCreateWithoutChallengeParticipationsInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -4677,6 +5045,8 @@ export type UserCreateWithoutChallengeParticipationsInput = {
   createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
   streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutChallengeParticipationsInput = {
@@ -4702,6 +5072,8 @@ export type UserUncheckedCreateWithoutChallengeParticipationsInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -4722,6 +5094,8 @@ export type UserUncheckedCreateWithoutChallengeParticipationsInput = {
   createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
   streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutChallengeParticipationsInput = {
@@ -4762,6 +5136,8 @@ export type UserUpdateWithoutChallengeParticipationsInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -4783,6 +5159,8 @@ export type UserUpdateWithoutChallengeParticipationsInput = {
   createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
   streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutChallengeParticipationsInput = {
@@ -4808,6 +5186,8 @@ export type UserUncheckedUpdateWithoutChallengeParticipationsInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -4828,6 +5208,8 @@ export type UserUncheckedUpdateWithoutChallengeParticipationsInput = {
   createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
   streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutStreakInput = {
@@ -4852,6 +5234,8 @@ export type UserCreateWithoutStreakInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -4873,6 +5257,8 @@ export type UserCreateWithoutStreakInput = {
   createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutStreakInput = {
@@ -4898,6 +5284,8 @@ export type UserUncheckedCreateWithoutStreakInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -4918,6 +5306,8 @@ export type UserUncheckedCreateWithoutStreakInput = {
   createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutStreakInput = {
@@ -4958,6 +5348,8 @@ export type UserUpdateWithoutStreakInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -4979,6 +5371,8 @@ export type UserUpdateWithoutStreakInput = {
   createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStreakInput = {
@@ -5004,6 +5398,8 @@ export type UserUncheckedUpdateWithoutStreakInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -5024,6 +5420,8 @@ export type UserUncheckedUpdateWithoutStreakInput = {
   createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUserAchievementsInput = {
@@ -5048,6 +5446,8 @@ export type UserCreateWithoutUserAchievementsInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -5069,6 +5469,8 @@ export type UserCreateWithoutUserAchievementsInput = {
   createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUserAchievementsInput = {
@@ -5094,6 +5496,8 @@ export type UserUncheckedCreateWithoutUserAchievementsInput = {
   onboardingStep?: number
   onboardingSkippedAt?: Date | string | null
   onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -5114,6 +5518,8 @@ export type UserUncheckedCreateWithoutUserAchievementsInput = {
   createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
   streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUserAchievementsInput = {
@@ -5154,6 +5560,8 @@ export type UserUpdateWithoutUserAchievementsInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -5175,6 +5583,8 @@ export type UserUpdateWithoutUserAchievementsInput = {
   createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserAchievementsInput = {
@@ -5200,6 +5610,8 @@ export type UserUncheckedUpdateWithoutUserAchievementsInput = {
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -5220,6 +5632,432 @@ export type UserUncheckedUpdateWithoutUserAchievementsInput = {
   createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
   streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutFastingProtocolsInput = {
+  displayName?: string | null
+  avatarUrl?: string | null
+  dateOfBirth?: Date | string | null
+  gender?: $Enums.Gender | null
+  heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: $Enums.ActivityLevel | null
+  goalType?: $Enums.GoalType | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: number | null
+  dailyProteinGoalG?: number | null
+  dailyCarbGoalG?: number | null
+  dailyFatGoalG?: number | null
+  dailyWaterGoal?: number
+  dailyStepGoal?: number
+  unitsPreference?: $Enums.Units
+  timezone?: string
+  isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
+  createdFoodItems?: Prisma.FoodItemCreateNestedManyWithoutCreatorInput
+  createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
+  diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
+  workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
+  waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
+  stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
+  mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
+  goals?: Prisma.GoalCreateNestedManyWithoutUserInput
+  sentFriendships?: Prisma.FriendshipCreateNestedManyWithoutUserInput
+  receivedFriendships?: Prisma.FriendshipCreateNestedManyWithoutFriendInput
+  requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
+  createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
+  challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutFastingProtocolsInput = {
+  id: string
+  displayName?: string | null
+  avatarUrl?: string | null
+  dateOfBirth?: Date | string | null
+  gender?: $Enums.Gender | null
+  heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: $Enums.ActivityLevel | null
+  goalType?: $Enums.GoalType | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: number | null
+  dailyProteinGoalG?: number | null
+  dailyCarbGoalG?: number | null
+  dailyFatGoalG?: number | null
+  dailyWaterGoal?: number
+  dailyStepGoal?: number
+  unitsPreference?: $Enums.Units
+  timezone?: string
+  isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
+  createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
+  diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
+  workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
+  waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
+  stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
+  mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
+  goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
+  sentFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUserInput
+  receivedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutFriendInput
+  requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
+  createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
+  challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutFastingProtocolsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFastingProtocolsInput, Prisma.UserUncheckedCreateWithoutFastingProtocolsInput>
+}
+
+export type UserUpsertWithoutFastingProtocolsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFastingProtocolsInput, Prisma.UserUncheckedUpdateWithoutFastingProtocolsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFastingProtocolsInput, Prisma.UserUncheckedCreateWithoutFastingProtocolsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutFastingProtocolsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFastingProtocolsInput, Prisma.UserUncheckedUpdateWithoutFastingProtocolsInput>
+}
+
+export type UserUpdateWithoutFastingProtocolsInput = {
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyFatGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyWaterGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  dailyStepGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
+  createdFoodItems?: Prisma.FoodItemUpdateManyWithoutCreatorNestedInput
+  createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
+  diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
+  workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
+  waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
+  stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
+  mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
+  goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
+  sentFriendships?: Prisma.FriendshipUpdateManyWithoutUserNestedInput
+  receivedFriendships?: Prisma.FriendshipUpdateManyWithoutFriendNestedInput
+  requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
+  createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
+  challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFastingProtocolsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyFatGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyWaterGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  dailyStepGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
+  createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
+  diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
+  workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
+  waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
+  stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
+  mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
+  goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
+  sentFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutUserNestedInput
+  receivedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutFriendNestedInput
+  requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
+  createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
+  challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutFastingSessionsInput = {
+  displayName?: string | null
+  avatarUrl?: string | null
+  dateOfBirth?: Date | string | null
+  gender?: $Enums.Gender | null
+  heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: $Enums.ActivityLevel | null
+  goalType?: $Enums.GoalType | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: number | null
+  dailyProteinGoalG?: number | null
+  dailyCarbGoalG?: number | null
+  dailyFatGoalG?: number | null
+  dailyWaterGoal?: number
+  dailyStepGoal?: number
+  unitsPreference?: $Enums.Units
+  timezone?: string
+  isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
+  createdFoodItems?: Prisma.FoodItemCreateNestedManyWithoutCreatorInput
+  createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
+  diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
+  workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
+  waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
+  stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
+  mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
+  goals?: Prisma.GoalCreateNestedManyWithoutUserInput
+  sentFriendships?: Prisma.FriendshipCreateNestedManyWithoutUserInput
+  receivedFriendships?: Prisma.FriendshipCreateNestedManyWithoutFriendInput
+  requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
+  createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
+  challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutFastingSessionsInput = {
+  id: string
+  displayName?: string | null
+  avatarUrl?: string | null
+  dateOfBirth?: Date | string | null
+  gender?: $Enums.Gender | null
+  heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: $Enums.ActivityLevel | null
+  goalType?: $Enums.GoalType | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: number | null
+  dailyProteinGoalG?: number | null
+  dailyCarbGoalG?: number | null
+  dailyFatGoalG?: number | null
+  dailyWaterGoal?: number
+  dailyStepGoal?: number
+  unitsPreference?: $Enums.Units
+  timezone?: string
+  isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
+  createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
+  diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
+  workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
+  waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
+  stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
+  mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
+  goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
+  sentFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUserInput
+  receivedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutFriendInput
+  requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
+  createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
+  challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutFastingSessionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFastingSessionsInput, Prisma.UserUncheckedCreateWithoutFastingSessionsInput>
+}
+
+export type UserUpsertWithoutFastingSessionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFastingSessionsInput, Prisma.UserUncheckedUpdateWithoutFastingSessionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFastingSessionsInput, Prisma.UserUncheckedCreateWithoutFastingSessionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutFastingSessionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFastingSessionsInput, Prisma.UserUncheckedUpdateWithoutFastingSessionsInput>
+}
+
+export type UserUpdateWithoutFastingSessionsInput = {
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyFatGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyWaterGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  dailyStepGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
+  createdFoodItems?: Prisma.FoodItemUpdateManyWithoutCreatorNestedInput
+  createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
+  diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
+  workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
+  waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
+  stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
+  mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
+  goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
+  sentFriendships?: Prisma.FriendshipUpdateManyWithoutUserNestedInput
+  receivedFriendships?: Prisma.FriendshipUpdateManyWithoutFriendNestedInput
+  requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
+  createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
+  challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFastingSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyFatGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyWaterGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  dailyStepGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
+  createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
+  diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
+  workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
+  waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
+  stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
+  mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
+  goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
+  sentFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutUserNestedInput
+  receivedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutFriendNestedInput
+  requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
+  createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
+  challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -5246,6 +6084,8 @@ export type UserCountOutputType = {
   createdChallenges: number
   challengeParticipations: number
   userAchievements: number
+  fastingProtocols: number
+  fastingSessions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5267,6 +6107,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   createdChallenges?: boolean | UserCountOutputTypeCountCreatedChallengesArgs
   challengeParticipations?: boolean | UserCountOutputTypeCountChallengeParticipationsArgs
   userAchievements?: boolean | UserCountOutputTypeCountUserAchievementsArgs
+  fastingProtocols?: boolean | UserCountOutputTypeCountFastingProtocolsArgs
+  fastingSessions?: boolean | UserCountOutputTypeCountFastingSessionsArgs
 }
 
 /**
@@ -5405,6 +6247,20 @@ export type UserCountOutputTypeCountUserAchievementsArgs<ExtArgs extends runtime
   where?: Prisma.UserAchievementWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountFastingProtocolsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FastingProtocolWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountFastingSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FastingSessionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -5429,6 +6285,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   onboardingStep?: boolean
   onboardingSkippedAt?: boolean
   onboardingCompletedAt?: boolean
+  defaultFastingProtocolId?: boolean
+  fastingGoalPerWeek?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   authUser?: boolean | Prisma.User$authUserArgs<ExtArgs>
@@ -5451,6 +6309,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   challengeParticipations?: boolean | Prisma.User$challengeParticipationsArgs<ExtArgs>
   streak?: boolean | Prisma.User$streakArgs<ExtArgs>
   userAchievements?: boolean | Prisma.User$userAchievementsArgs<ExtArgs>
+  fastingProtocols?: boolean | Prisma.User$fastingProtocolsArgs<ExtArgs>
+  fastingSessions?: boolean | Prisma.User$fastingSessionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -5477,6 +6337,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   onboardingStep?: boolean
   onboardingSkippedAt?: boolean
   onboardingCompletedAt?: boolean
+  defaultFastingProtocolId?: boolean
+  fastingGoalPerWeek?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   authUser?: boolean | Prisma.User$authUserArgs<ExtArgs>
@@ -5505,6 +6367,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   onboardingStep?: boolean
   onboardingSkippedAt?: boolean
   onboardingCompletedAt?: boolean
+  defaultFastingProtocolId?: boolean
+  fastingGoalPerWeek?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   authUser?: boolean | Prisma.User$authUserArgs<ExtArgs>
@@ -5533,11 +6397,13 @@ export type UserSelectScalar = {
   onboardingStep?: boolean
   onboardingSkippedAt?: boolean
   onboardingCompletedAt?: boolean
+  defaultFastingProtocolId?: boolean
+  fastingGoalPerWeek?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "displayName" | "avatarUrl" | "dateOfBirth" | "gender" | "heightCm" | "activityLevel" | "goalType" | "targetWeightLbs" | "dailyCalorieGoal" | "dailyProteinGoalG" | "dailyCarbGoalG" | "dailyFatGoalG" | "dailyWaterGoal" | "dailyStepGoal" | "unitsPreference" | "timezone" | "isAdmin" | "onboardingCompleted" | "onboardingStep" | "onboardingSkippedAt" | "onboardingCompletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "displayName" | "avatarUrl" | "dateOfBirth" | "gender" | "heightCm" | "activityLevel" | "goalType" | "targetWeightLbs" | "dailyCalorieGoal" | "dailyProteinGoalG" | "dailyCarbGoalG" | "dailyFatGoalG" | "dailyWaterGoal" | "dailyStepGoal" | "unitsPreference" | "timezone" | "isAdmin" | "onboardingCompleted" | "onboardingStep" | "onboardingSkippedAt" | "onboardingCompletedAt" | "defaultFastingProtocolId" | "fastingGoalPerWeek" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   authUser?: boolean | Prisma.User$authUserArgs<ExtArgs>
   createdFoodItems?: boolean | Prisma.User$createdFoodItemsArgs<ExtArgs>
@@ -5559,6 +6425,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   challengeParticipations?: boolean | Prisma.User$challengeParticipationsArgs<ExtArgs>
   streak?: boolean | Prisma.User$streakArgs<ExtArgs>
   userAchievements?: boolean | Prisma.User$userAchievementsArgs<ExtArgs>
+  fastingProtocols?: boolean | Prisma.User$fastingProtocolsArgs<ExtArgs>
+  fastingSessions?: boolean | Prisma.User$fastingSessionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5591,6 +6459,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     challengeParticipations: Prisma.$ChallengeParticipantPayload<ExtArgs>[]
     streak: Prisma.$UserStreakPayload<ExtArgs> | null
     userAchievements: Prisma.$UserAchievementPayload<ExtArgs>[]
+    fastingProtocols: Prisma.$FastingProtocolPayload<ExtArgs>[]
+    fastingSessions: Prisma.$FastingSessionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -5615,6 +6485,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     onboardingStep: number
     onboardingSkippedAt: Date | null
     onboardingCompletedAt: Date | null
+    defaultFastingProtocolId: string | null
+    fastingGoalPerWeek: number | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -6031,6 +6903,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   challengeParticipations<T extends Prisma.User$challengeParticipationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$challengeParticipationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChallengeParticipantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   streak<T extends Prisma.User$streakArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$streakArgs<ExtArgs>>): Prisma.Prisma__UserStreakClient<runtime.Types.Result.GetResult<Prisma.$UserStreakPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   userAchievements<T extends Prisma.User$userAchievementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userAchievementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserAchievementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  fastingProtocols<T extends Prisma.User$fastingProtocolsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$fastingProtocolsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FastingProtocolPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  fastingSessions<T extends Prisma.User$fastingSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$fastingSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FastingSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6082,6 +6956,8 @@ export interface UserFieldRefs {
   readonly onboardingStep: Prisma.FieldRef<"User", 'Int'>
   readonly onboardingSkippedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly onboardingCompletedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly defaultFastingProtocolId: Prisma.FieldRef<"User", 'String'>
+  readonly fastingGoalPerWeek: Prisma.FieldRef<"User", 'Int'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
@@ -6947,6 +7823,54 @@ export type User$userAchievementsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.UserAchievementScalarFieldEnum | Prisma.UserAchievementScalarFieldEnum[]
+}
+
+/**
+ * User.fastingProtocols
+ */
+export type User$fastingProtocolsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FastingProtocol
+   */
+  select?: Prisma.FastingProtocolSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FastingProtocol
+   */
+  omit?: Prisma.FastingProtocolOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FastingProtocolInclude<ExtArgs> | null
+  where?: Prisma.FastingProtocolWhereInput
+  orderBy?: Prisma.FastingProtocolOrderByWithRelationInput | Prisma.FastingProtocolOrderByWithRelationInput[]
+  cursor?: Prisma.FastingProtocolWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FastingProtocolScalarFieldEnum | Prisma.FastingProtocolScalarFieldEnum[]
+}
+
+/**
+ * User.fastingSessions
+ */
+export type User$fastingSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FastingSession
+   */
+  select?: Prisma.FastingSessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FastingSession
+   */
+  omit?: Prisma.FastingSessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FastingSessionInclude<ExtArgs> | null
+  where?: Prisma.FastingSessionWhereInput
+  orderBy?: Prisma.FastingSessionOrderByWithRelationInput | Prisma.FastingSessionOrderByWithRelationInput[]
+  cursor?: Prisma.FastingSessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FastingSessionScalarFieldEnum | Prisma.FastingSessionScalarFieldEnum[]
 }
 
 /**

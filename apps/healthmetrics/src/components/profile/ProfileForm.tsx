@@ -17,6 +17,7 @@ import { cn } from "@/utils";
 import type { UserProfile } from "@/types";
 import { useUpdateProfile } from "@/hooks";
 import { ProfileAvatar } from "./ProfileAvatar";
+import { FastingPreferences } from "./FastingPreferences";
 import {
   formatDate,
   getDefaultFormValues,
@@ -738,6 +739,15 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
             }}
           </form.Subscribe>
         </Card>
+      </div>
+
+      {/* Fasting Preferences Section */}
+      <div className="animate-fade-slide-in animate-stagger-2">
+        <FastingPreferences
+          userId={userId}
+          defaultProtocolId={initialData.defaultFastingProtocolId ?? null}
+          weeklyGoal={initialData.fastingGoalPerWeek ?? null}
+        />
       </div>
 
       {/* Submit Button */}

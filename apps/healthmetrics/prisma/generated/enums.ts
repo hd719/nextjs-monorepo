@@ -130,3 +130,13 @@ export const UserGoalType = {
 } as const
 
 export type UserGoalType = (typeof UserGoalType)[keyof typeof UserGoalType]
+
+
+export const FastingStatus = {
+  active: 'active',
+  paused: 'paused',
+  completed: 'completed',
+  cancelled: 'cancelled'
+} as const
+
+export type FastingStatus = (typeof FastingStatus)[keyof typeof FastingStatus]

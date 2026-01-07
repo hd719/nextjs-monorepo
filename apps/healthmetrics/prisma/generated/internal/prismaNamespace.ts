@@ -407,7 +407,9 @@ export const ModelName = {
   ChallengeParticipant: 'ChallengeParticipant',
   UserStreak: 'UserStreak',
   Achievement: 'Achievement',
-  UserAchievement: 'UserAchievement'
+  UserAchievement: 'UserAchievement',
+  FastingProtocol: 'FastingProtocol',
+  FastingSession: 'FastingSession'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -423,7 +425,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "betterAuthUser" | "betterAuthSession" | "betterAuthAccount" | "verification" | "user" | "foodItem" | "exercise" | "diaryEntry" | "workoutSession" | "workoutLog" | "weightEntry" | "waterEntry" | "stepEntry" | "sleepEntry" | "recipeCache" | "mealPlanTemplate" | "mealPlan" | "goal" | "friendship" | "challenge" | "challengeParticipant" | "userStreak" | "achievement" | "userAchievement"
+    modelProps: "betterAuthUser" | "betterAuthSession" | "betterAuthAccount" | "verification" | "user" | "foodItem" | "exercise" | "diaryEntry" | "workoutSession" | "workoutLog" | "weightEntry" | "waterEntry" | "stepEntry" | "sleepEntry" | "recipeCache" | "mealPlanTemplate" | "mealPlan" | "goal" | "friendship" | "challenge" | "challengeParticipant" | "userStreak" | "achievement" | "userAchievement" | "fastingProtocol" | "fastingSession"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2203,6 +2205,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    FastingProtocol: {
+      payload: Prisma.$FastingProtocolPayload<ExtArgs>
+      fields: Prisma.FastingProtocolFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FastingProtocolFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingProtocolPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FastingProtocolFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingProtocolPayload>
+        }
+        findFirst: {
+          args: Prisma.FastingProtocolFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingProtocolPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FastingProtocolFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingProtocolPayload>
+        }
+        findMany: {
+          args: Prisma.FastingProtocolFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingProtocolPayload>[]
+        }
+        create: {
+          args: Prisma.FastingProtocolCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingProtocolPayload>
+        }
+        createMany: {
+          args: Prisma.FastingProtocolCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FastingProtocolCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingProtocolPayload>[]
+        }
+        delete: {
+          args: Prisma.FastingProtocolDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingProtocolPayload>
+        }
+        update: {
+          args: Prisma.FastingProtocolUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingProtocolPayload>
+        }
+        deleteMany: {
+          args: Prisma.FastingProtocolDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FastingProtocolUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FastingProtocolUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingProtocolPayload>[]
+        }
+        upsert: {
+          args: Prisma.FastingProtocolUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingProtocolPayload>
+        }
+        aggregate: {
+          args: Prisma.FastingProtocolAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFastingProtocol>
+        }
+        groupBy: {
+          args: Prisma.FastingProtocolGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FastingProtocolGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FastingProtocolCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FastingProtocolCountAggregateOutputType> | number
+        }
+      }
+    }
+    FastingSession: {
+      payload: Prisma.$FastingSessionPayload<ExtArgs>
+      fields: Prisma.FastingSessionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FastingSessionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingSessionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FastingSessionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingSessionPayload>
+        }
+        findFirst: {
+          args: Prisma.FastingSessionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingSessionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FastingSessionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingSessionPayload>
+        }
+        findMany: {
+          args: Prisma.FastingSessionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingSessionPayload>[]
+        }
+        create: {
+          args: Prisma.FastingSessionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingSessionPayload>
+        }
+        createMany: {
+          args: Prisma.FastingSessionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FastingSessionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingSessionPayload>[]
+        }
+        delete: {
+          args: Prisma.FastingSessionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingSessionPayload>
+        }
+        update: {
+          args: Prisma.FastingSessionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingSessionPayload>
+        }
+        deleteMany: {
+          args: Prisma.FastingSessionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FastingSessionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FastingSessionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingSessionPayload>[]
+        }
+        upsert: {
+          args: Prisma.FastingSessionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastingSessionPayload>
+        }
+        aggregate: {
+          args: Prisma.FastingSessionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFastingSession>
+        }
+        groupBy: {
+          args: Prisma.FastingSessionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FastingSessionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FastingSessionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FastingSessionCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2321,6 +2471,8 @@ export const UserScalarFieldEnum = {
   onboardingStep: 'onboardingStep',
   onboardingSkippedAt: 'onboardingSkippedAt',
   onboardingCompletedAt: 'onboardingCompletedAt',
+  defaultFastingProtocolId: 'defaultFastingProtocolId',
+  fastingGoalPerWeek: 'fastingGoalPerWeek',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2654,6 +2806,40 @@ export const UserAchievementScalarFieldEnum = {
 export type UserAchievementScalarFieldEnum = (typeof UserAchievementScalarFieldEnum)[keyof typeof UserAchievementScalarFieldEnum]
 
 
+export const FastingProtocolScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  fastingMinutes: 'fastingMinutes',
+  eatingMinutes: 'eatingMinutes',
+  isPreset: 'isPreset',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FastingProtocolScalarFieldEnum = (typeof FastingProtocolScalarFieldEnum)[keyof typeof FastingProtocolScalarFieldEnum]
+
+
+export const FastingSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  protocolId: 'protocolId',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  targetDurationMin: 'targetDurationMin',
+  actualDurationMin: 'actualDurationMin',
+  pausedAt: 'pausedAt',
+  totalPausedMin: 'totalPausedMin',
+  status: 'status',
+  completedAtTarget: 'completedAtTarget',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FastingSessionScalarFieldEnum = (typeof FastingSessionScalarFieldEnum)[keyof typeof FastingSessionScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2954,6 +3140,20 @@ export type ListEnumChallengeTypeFieldRefInput<$PrismaModel> = FieldRefInputType
 
 
 /**
+ * Reference to a field of type 'FastingStatus'
+ */
+export type EnumFastingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FastingStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'FastingStatus[]'
+ */
+export type ListEnumFastingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FastingStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -3085,6 +3285,8 @@ export type GlobalOmitConfig = {
   userStreak?: Prisma.UserStreakOmit
   achievement?: Prisma.AchievementOmit
   userAchievement?: Prisma.UserAchievementOmit
+  fastingProtocol?: Prisma.FastingProtocolOmit
+  fastingSession?: Prisma.FastingSessionOmit
 }
 
 /* Types for Logging */

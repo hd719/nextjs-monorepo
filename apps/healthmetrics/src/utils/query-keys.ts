@@ -84,4 +84,16 @@ export const queryKeys = {
   achievementSummary: (userId: string) =>
     ["achievements", "summary", userId] as const,
   achievementsBase: () => ["achievements"] as const,
+
+  // Fasting
+  activeFast: (userId: string) => ["fasting", "active", userId] as const,
+  fastingProtocols: (userId: string) =>
+    ["fasting", "protocols", userId] as const,
+  fastingHistory: (userId: string, limit?: number) =>
+    ["fasting", "history", userId, limit] as const,
+  fastingHistoryBase: () => ["fasting", "history"] as const,
+  fastingStats: (userId: string) => ["fasting", "stats", userId] as const,
+  fastingCalendar: (userId: string, month: string) =>
+    ["fasting", "calendar", userId, month] as const,
+  fastingBase: () => ["fasting"] as const,
 };

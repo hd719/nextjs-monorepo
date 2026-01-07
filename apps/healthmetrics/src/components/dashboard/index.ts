@@ -1,6 +1,7 @@
 export { AchievementsCard } from "./AchievementsCard";
 export { DailySummary } from "./DailySummary";
 export { ExerciseSummary } from "./ExerciseSummary";
+export { FastingCard } from "./FastingCard";
 export { ProfileCompletion } from "./ProfileCompletion";
 export { ProgressActivityPlaceholder } from "./ProgressActivityPlaceholder";
 export { QuickActions } from "./QuickActions";

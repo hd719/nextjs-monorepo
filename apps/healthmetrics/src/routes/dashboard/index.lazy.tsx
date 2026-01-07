@@ -4,6 +4,7 @@ import {
   AchievementsCard,
   DailySummary,
   ExerciseSummary,
+  FastingCard,
   ProfileCompletion,
   WaterTracker,
   QuickActions,
@@ -194,9 +195,10 @@ function DashboardPage() {
           />
         </div>
 
-        {/* Row 2: Sleep | Streaks | Achievements */}
-        <div className="dashboard-grid-row-3 animate-fade-slide-in animate-stagger-2">
+        {/* Row 2: Sleep | Fasting | Streaks | Achievements */}
+        <div className="dashboard-grid-row-4 animate-fade-slide-in animate-stagger-2">
           <SleepCard data={sleepData} isLoading={sleepLoading} />
+          <FastingCard userId={user.id} />
           <StreaksCard data={streaksData ?? null} isLoading={streaksLoading} />
           <AchievementsCard
             data={achievementsData ?? null}

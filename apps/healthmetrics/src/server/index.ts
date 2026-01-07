@@ -75,3 +75,20 @@ export {
   skipOnboarding,
   resetOnboarding,
 } from "./onboarding";
+
+// Fasting server functions
+export {
+  getActiveFast,
+  getFastingProtocols,
+  getFastingHistory,
+  getFastingStats,
+  getFastingCalendar,
+  startFast,
+  endFast,
+  cancelFast,
+  pauseFast,
+  resumeFast,
+  createCustomProtocol,
+  deleteCustomProtocol,
+  updateFastingPreferences,
+} from "./fasting";

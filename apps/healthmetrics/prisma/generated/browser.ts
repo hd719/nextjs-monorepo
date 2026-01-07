@@ -137,3 +137,13 @@ export type Achievement = Prisma.AchievementModel
  * 
  */
 export type UserAchievement = Prisma.UserAchievementModel
+/**
+ * Model FastingProtocol
+ * 
+ */
+export type FastingProtocol = Prisma.FastingProtocolModel
+/**
+ * Model FastingSession
+ * 
+ */
+export type FastingSession = Prisma.FastingSessionModel

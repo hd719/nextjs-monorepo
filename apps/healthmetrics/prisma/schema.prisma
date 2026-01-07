@@ -104,6 +104,13 @@ enum UserGoalType {
   nutrition
 }
 
+enum FastingStatus {
+  active
+  paused
+  completed
+  cancelled
+}
+
 // ============================================================================
 // BETTER-AUTH MODELS
 // ============================================================================
@@ -187,30 +194,33 @@ model Verification {
 // User profile table - extends better-auth user with fitness-specific data
 
 model User {
-  id                    String         @id
-  displayName           String?        @map("display_name")
-  avatarUrl             String?        @map("avatar_url")
-  dateOfBirth           DateTime?      @map("date_of_birth") @db.Date
-  gender                Gender?
-  heightCm              Decimal?       @map("height_cm") @db.Decimal(5, 2)
-  activityLevel         ActivityLevel? @map("activity_level")
-  goalType              GoalType?      @map("goal_type")
-  targetWeightLbs       Decimal?       @map("target_weight_lbs") @db.Decimal(6, 2)
-  dailyCalorieGoal      Int?           @map("daily_calorie_goal")
-  dailyProteinGoalG     Int?           @map("daily_protein_goal_g")
-  dailyCarbGoalG        Int?           @map("daily_carb_goal_g")
-  dailyFatGoalG         Int?           @map("daily_fat_goal_g")
-  dailyWaterGoal        Int            @default(8) @map("daily_water_goal")
-  dailyStepGoal         Int            @default(10000) @map("daily_step_goal")
-  unitsPreference       Units          @default(metric) @map("units_preference")
-  timezone              String         @default("UTC")
-  isAdmin               Boolean        @default(false) @map("is_admin")
-  onboardingCompleted   Boolean        @default(false) @map("onboarding_completed")
-  onboardingStep        Int            @default(0) @map("onboarding_step")
-  onboardingSkippedAt   DateTime?      @map("onboarding_skipped_at")
-  onboardingCompletedAt DateTime?      @map("onboarding_completed_at")
-  createdAt             DateTime       @default(now()) @map("created_at")
-  updatedAt             DateTime       @updatedAt @map("updated_at")
+  id                       String         @id
+  displayName              String?        @map("display_name")
+  avatarUrl                String?        @map("avatar_url")
+  dateOfBirth              DateTime?      @map("date_of_birth") @db.Date
+  gender                   Gender?
+  heightCm                 Decimal?       @map("height_cm") @db.Decimal(5, 2)
+  activityLevel            ActivityLevel? @map("activity_level")
+  goalType                 GoalType?      @map("goal_type")
+  targetWeightLbs          Decimal?       @map("target_weight_lbs") @db.Decimal(6, 2)
+  dailyCalorieGoal         Int?           @map("daily_calorie_goal")
+  dailyProteinGoalG        Int?           @map("daily_protein_goal_g")
+  dailyCarbGoalG           Int?           @map("daily_carb_goal_g")
+  dailyFatGoalG            Int?           @map("daily_fat_goal_g")
+  dailyWaterGoal           Int            @default(8) @map("daily_water_goal")
+  dailyStepGoal            Int            @default(10000) @map("daily_step_goal")
+  unitsPreference          Units          @default(metric) @map("units_preference")
+  timezone                 String         @default("UTC")
+  isAdmin                  Boolean        @default(false) @map("is_admin")
+  onboardingCompleted      Boolean        @default(false) @map("onboarding_completed")
+  onboardingStep           Int            @default(0) @map("onboarding_step")
+  onboardingSkippedAt      DateTime?      @map("onboarding_skipped_at")
+  onboardingCompletedAt    DateTime?      @map("onboarding_completed_at")
+  // Fasting preferences
+  defaultFastingProtocolId String?        @map("default_fasting_protocol_id")
+  fastingGoalPerWeek       Int?           @map("fasting_goal_per_week")
+  createdAt                DateTime       @default(now()) @map("created_at")
+  updatedAt                DateTime       @updatedAt @map("updated_at")
 
   // Relations
   authUser                BetterAuthUser?        @relation(fields: [id], references: [id], onDelete: Cascade)
@@ -233,6 +243,8 @@ model User {
   challengeParticipations ChallengeParticipant[]
   streak                  UserStreak?
   userAchievements        UserAchievement[]
+  fastingProtocols        FastingProtocol[]
+  fastingSessions         FastingSession[]
 
   @@map("users")
 }
@@ -718,4 +730,57 @@ model UserAchievement {
   @@index([userId])
   @@index([achievementId])
   @@map("user_achievements")
+}
+
+// ============================================================================
+// FASTING TRACKING
+// ============================================================================
+
+// Fasting protocols - preset and user-created fasting schedules
+
+model FastingProtocol {
+  id             String   @id @default(uuid())
+  userId         String?  @map("user_id") // null = system preset
+  name           String
+  fastingMinutes Int      @map("fasting_minutes")
+  eatingMinutes  Int      @map("eating_minutes")
+  isPreset       Boolean  @default(false) @map("is_preset")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  user            User?            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fastingSessions FastingSession[]
+
+  @@index([userId])
+  @@index([isPreset])
+  @@map("fasting_protocols")
+}
+
+// Individual fasting sessions
+
+model FastingSession {
+  id                String        @id @default(uuid())
+  userId            String        @map("user_id")
+  protocolId        String        @map("protocol_id")
+  startTime         DateTime      @map("start_time")
+  endTime           DateTime?     @map("end_time")
+  targetDurationMin Int           @map("target_duration_min")
+  actualDurationMin Int?          @map("actual_duration_min")
+  pausedAt          DateTime?     @map("paused_at")
+  totalPausedMin    Int           @default(0) @map("total_paused_min")
+  status            FastingStatus
+  completedAtTarget Boolean?      @map("completed_at_target")
+  notes             String?
+  createdAt         DateTime      @default(now()) @map("created_at")
+  updatedAt         DateTime      @updatedAt @map("updated_at")
+
+  // Relations
+  user     User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  protocol FastingProtocol @relation(fields: [protocolId], references: [id], onDelete: Restrict)
+
+  @@index([userId])
+  @@index([userId, status])
+  @@index([userId, startTime])
+  @@map("fasting_sessions")
 }

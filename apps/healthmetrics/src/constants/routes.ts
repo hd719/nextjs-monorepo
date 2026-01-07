@@ -19,6 +19,7 @@ export const ROUTES = {
   DASHBOARD: "/dashboard",
   DIARY: "/diary",
   EXERCISE: "/exercise",
+  FASTING: "/fasting",
   SLEEP: "/sleep",
   ACHIEVEMENTS: "/achievements",
   PROGRESS: "/progress",

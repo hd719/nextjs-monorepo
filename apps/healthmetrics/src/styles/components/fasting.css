@@ -1,0 +1,1062 @@
+/* ==========================================================================
+   Fasting Component Styles
+   ========================================================================== */
+
+@layer components {
+  /* ==========================================================================
+     Fasting Page Layout
+     ========================================================================== */
+
+  .fasting-page {
+    @apply flex flex-col gap-6;
+  }
+
+  .fasting-page-header {
+    @apply flex items-center justify-between flex-wrap gap-4;
+  }
+
+  .fasting-page-title {
+    @apply text-2xl font-bold;
+  }
+
+  .fasting-page-subtitle {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .fasting-page-row {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-6;
+  }
+
+  /* ==========================================================================
+     Fasting Timer Card
+     ========================================================================== */
+
+  .fasting-timer-card {
+    @apply flex flex-col items-center;
+  }
+
+  .fasting-timer-card-content {
+    @apply flex flex-col items-center gap-6 py-8;
+  }
+
+  /* ==========================================================================
+     Fasting Progress Ring
+     ========================================================================== */
+
+  .fasting-progress {
+    @apply relative flex items-center justify-center;
+  }
+
+  .fasting-progress-ring {
+    @apply transform -rotate-90;
+  }
+
+  .fasting-progress-ring-bg {
+    stroke: var(--muted);
+    fill: none;
+  }
+
+  .fasting-progress-ring-fill {
+    fill: none;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease-out;
+  }
+
+  .fasting-progress-ring-fill-active {
+    stroke: var(--primary);
+  }
+
+  .fasting-progress-ring-fill-paused {
+    stroke: var(--warning, #f59e0b);
+  }
+
+  .fasting-progress-ring-fill-completing {
+    stroke: var(--success, #22c55e);
+  }
+
+  .fasting-progress-center {
+    @apply absolute inset-0 flex flex-col items-center justify-center;
+  }
+
+  /* ==========================================================================
+     Fasting Timer Display
+     ========================================================================== */
+
+  .fasting-timer {
+    @apply flex flex-col items-center gap-2;
+  }
+
+  .fasting-timer-elapsed {
+    @apply text-5xl font-bold tabular-nums tracking-tight;
+  }
+
+  .fasting-timer-label {
+    @apply text-sm font-medium;
+    color: var(--muted-foreground);
+  }
+
+  .fasting-timer-remaining {
+    @apply text-lg tabular-nums;
+    color: var(--muted-foreground);
+  }
+
+  .fasting-timer-protocol {
+    @apply mt-2 flex items-center gap-2 text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .fasting-timer-protocol-name {
+    @apply font-medium;
+    color: var(--foreground);
+  }
+
+  .fasting-timer-separator {
+    @apply h-4 w-4;
+    color: var(--muted-foreground);
+  }
+
+  .fasting-timer-end-time {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Fasting Controls
+     ========================================================================== */
+
+  .fasting-controls {
+    @apply flex items-center justify-center gap-4;
+  }
+
+  .fasting-controls-primary {
+    @apply min-w-[140px];
+  }
+
+  .fasting-btn-icon {
+    @apply mr-2 h-4 w-4;
+  }
+
+  .fasting-btn-icon-spin {
+    @apply mr-2 h-4 w-4 animate-spin;
+  }
+
+  .fasting-btn-icon-only {
+    @apply h-4 w-4;
+  }
+
+  .fasting-btn-icon-only-spin {
+    @apply h-4 w-4 animate-spin;
+  }
+
+  /* ==========================================================================
+     Fasting Idle State
+     ========================================================================== */
+
+  .fasting-idle {
+    @apply flex flex-col items-center gap-6 py-8;
+  }
+
+  .fasting-idle-icon {
+    @apply flex h-24 w-24 items-center justify-center rounded-full;
+    background-color: color-mix(in srgb, var(--primary) 10%, transparent);
+  }
+
+  .fasting-idle-icon-inner {
+    @apply h-12 w-12;
+    color: var(--primary);
+  }
+
+  .fasting-idle-text {
+    @apply text-center;
+  }
+
+  .fasting-idle-title {
+    @apply text-xl font-semibold;
+  }
+
+  .fasting-idle-description {
+    @apply mt-1 text-sm;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Fasting Stats Grid
+     ========================================================================== */
+
+  .fasting-stats-grid {
+    @apply grid gap-4 sm:grid-cols-2;
+  }
+
+  .fasting-stat-card-content {
+    @apply flex items-center gap-3 p-4;
+  }
+
+  .fasting-stat-icon-wrapper {
+    @apply flex h-10 w-10 items-center justify-center rounded-full shrink-0;
+  }
+
+  .fasting-stat-icon-wrapper-primary {
+    background-color: color-mix(in srgb, var(--primary) 10%, transparent);
+    color: var(--primary);
+  }
+
+  .fasting-stat-icon-wrapper-success {
+    background-color: color-mix(
+      in srgb,
+      var(--success, #22c55e) 10%,
+      transparent
+    );
+    color: var(--success, #22c55e);
+  }
+
+  .fasting-stat-icon {
+    @apply h-5 w-5;
+  }
+
+  .fasting-stat-body {
+    @apply flex-1;
+  }
+
+  .fasting-stat-value {
+    @apply text-2xl font-bold;
+  }
+
+  .fasting-stat-label {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Fasting Protocol Selector - Enhanced
+     ========================================================================== */
+
+  .protocol-dialog {
+    @apply max-w-lg;
+  }
+
+  .protocol-dialog-header {
+    @apply flex flex-col items-center text-center pb-2;
+  }
+
+  .protocol-dialog-icon-wrapper {
+    @apply flex h-14 w-14 items-center justify-center rounded-full mb-3;
+    background: linear-gradient(
+      135deg,
+      var(--accent) 0%,
+      var(--accent-dark) 100%
+    );
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+
+  .protocol-dialog-icon {
+    @apply h-7 w-7 text-white;
+  }
+
+  .protocol-dialog-title {
+    @apply text-xl font-bold;
+  }
+
+  .protocol-dialog-description {
+    @apply text-sm mt-1;
+    color: var(--muted-foreground);
+  }
+
+  .protocol-selector-body {
+    @apply py-4;
+  }
+
+  .protocol-selector-loading {
+    @apply flex items-center justify-center py-12;
+  }
+
+  .protocol-selector-loading-icon {
+    @apply h-8 w-8 animate-spin;
+    color: var(--accent);
+  }
+
+  .protocol-selector-grid {
+    @apply grid grid-cols-2 gap-3;
+  }
+
+  .protocol-section-label {
+    @apply text-xs font-medium uppercase tracking-wider mb-3 mt-4;
+    color: var(--muted-foreground);
+  }
+
+  .protocol-custom-section {
+    @apply mt-4 pt-4 border-t;
+    border-color: var(--border);
+  }
+
+  .protocol-custom-list {
+    @apply grid grid-cols-2 gap-3;
+  }
+
+  .protocol-dialog-footer {
+    @apply pt-2;
+  }
+
+  .protocol-btn-icon {
+    @apply mr-2 h-4 w-4;
+  }
+
+  .protocol-btn-icon-spin {
+    @apply mr-2 h-4 w-4 animate-spin;
+  }
+
+  /* ==========================================================================
+     Protocol Card
+     ========================================================================== */
+
+  .protocol-card {
+    @apply relative flex flex-col items-center p-4 rounded-xl border-2 cursor-pointer text-center;
+    background-color: var(--card);
+    border-color: var(--border);
+    transition: all 0.2s ease-out;
+  }
+
+  .protocol-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .protocol-card-selected {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+
+  /* Check mark */
+  .protocol-card-check {
+    @apply absolute top-2 right-2 h-5 w-5 rounded-full flex items-center justify-center opacity-0 scale-50;
+    background-color: var(--accent);
+    transition: all 0.2s ease-out;
+  }
+
+  .protocol-card-check-visible {
+    @apply opacity-100 scale-100;
+  }
+
+  .protocol-card-check-icon {
+    @apply h-3 w-3 text-white;
+  }
+
+  /* Icon wrapper */
+  .protocol-card-icon-wrapper {
+    @apply flex h-12 w-12 items-center justify-center rounded-full mb-3;
+  }
+
+  .protocol-card-icon {
+    @apply h-6 w-6;
+  }
+
+  /* Color variants for icon - using design system colors */
+  .protocol-icon-success {
+    background: linear-gradient(
+      135deg,
+      var(--success) 0%,
+      color-mix(in srgb, var(--success) 80%, white) 100%
+    );
+    color: white;
+  }
+
+  .protocol-icon-accent {
+    background: linear-gradient(
+      135deg,
+      var(--accent) 0%,
+      var(--accent-light) 100%
+    );
+    color: white;
+  }
+
+  .protocol-icon-warning {
+    background: linear-gradient(
+      135deg,
+      var(--warning) 0%,
+      color-mix(in srgb, var(--warning) 80%, white) 100%
+    );
+    color: white;
+  }
+
+  .protocol-icon-chart3 {
+    background: linear-gradient(
+      135deg,
+      var(--chart-3) 0%,
+      color-mix(in srgb, var(--chart-3) 80%, white) 100%
+    );
+    color: white;
+  }
+
+  /* Content */
+  .protocol-card-content {
+    @apply flex flex-col gap-0.5 mb-2;
+    border: none;
+  }
+
+  .protocol-card-content::after {
+    display: none !important;
+  }
+
+  .protocol-card-name {
+    @apply text-lg font-bold;
+  }
+
+  .protocol-card-tagline {
+    @apply text-xs;
+    color: var(--muted-foreground);
+    border: none;
+  }
+
+  /* Time labels */
+  .protocol-card-times {
+    @apply flex items-center justify-center gap-2 text-xs mb-2;
+    color: var(--muted-foreground);
+  }
+
+  .protocol-time-value {
+    @apply font-semibold;
+    color: var(--foreground);
+  }
+
+  .protocol-time-divider {
+    color: var(--muted-foreground);
+  }
+
+  /* Difficulty badge - using design system colors */
+  .protocol-difficulty {
+    @apply text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full;
+  }
+
+  .protocol-difficulty-beginner {
+    background-color: color-mix(in srgb, var(--success) 15%, transparent);
+    color: var(--success);
+  }
+
+  .protocol-difficulty-intermediate {
+    background-color: color-mix(in srgb, var(--accent) 15%, transparent);
+    color: var(--accent);
+  }
+
+  .protocol-difficulty-advanced {
+    background-color: color-mix(in srgb, var(--warning) 15%, transparent);
+    color: var(--warning);
+  }
+
+  .protocol-difficulty-expert {
+    background-color: color-mix(in srgb, var(--chart-3) 15%, transparent);
+    color: var(--chart-3);
+  }
+
+  /* Hover effects per color - using design system */
+  .protocol-card-success:hover {
+    border-color: var(--success);
+  }
+
+  .protocol-card-accent:hover {
+    border-color: var(--accent);
+  }
+
+  .protocol-card-warning:hover {
+    border-color: var(--warning);
+  }
+
+  .protocol-card-chart3:hover {
+    border-color: var(--chart-3);
+  }
+
+  /* ==========================================================================
+     Fasting History
+     ========================================================================== */
+
+  .fasting-history-list {
+    @apply space-y-3;
+  }
+
+  .fasting-history-item {
+    @apply flex items-center justify-between p-4;
+  }
+
+  .fasting-history-item-info {
+    @apply flex flex-col gap-1;
+  }
+
+  .fasting-history-item-date {
+    @apply font-medium;
+  }
+
+  .fasting-history-item-protocol {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .fasting-history-item-result {
+    @apply text-right;
+  }
+
+  .fasting-history-item-duration {
+    @apply font-medium;
+  }
+
+  .fasting-history-item-status {
+    @apply text-xs;
+  }
+
+  .fasting-history-item-status-complete {
+    color: var(--success, #22c55e);
+  }
+
+  .fasting-history-item-status-incomplete {
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Fasting State Colors
+     ========================================================================== */
+
+  .fasting-state-active {
+    color: var(--primary);
+  }
+
+  .fasting-state-paused {
+    color: var(--warning, #f59e0b);
+  }
+
+  .fasting-state-completing {
+    color: var(--success, #22c55e);
+  }
+
+  /* ==========================================================================
+     Empty State
+     ========================================================================== */
+
+  .fasting-empty {
+    @apply flex flex-col items-center justify-center py-8 text-center;
+  }
+
+  .fasting-empty-icon {
+    @apply mb-4 h-12 w-12;
+    color: var(--muted-foreground);
+  }
+
+  .fasting-empty-text {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Custom Protocol Creation
+     ========================================================================== */
+
+  /* Back button in create view */
+  .protocol-back-btn {
+    @apply absolute left-4 top-4 p-2 rounded-full transition-colors;
+    color: var(--muted-foreground);
+  }
+
+  .protocol-back-btn:hover {
+    background: var(--muted);
+    color: var(--foreground);
+  }
+
+  /* Create custom button */
+  .protocol-create-btn {
+    @apply flex items-center justify-center gap-2 w-full py-3 px-4 rounded-lg;
+    @apply border-2 border-dashed transition-all;
+    border-color: var(--border);
+    color: var(--muted-foreground);
+  }
+
+  .protocol-create-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 5%, transparent);
+  }
+
+  .protocol-create-btn-icon {
+    @apply w-5 h-5;
+  }
+
+  /* Delete button on custom protocols */
+  .protocol-card-delete {
+    @apply absolute top-2 right-2 p-1.5 rounded-full opacity-0 transition-all;
+    color: var(--muted-foreground);
+  }
+
+  .protocol-card-delete:hover {
+    background: color-mix(in srgb, var(--destructive) 10%, transparent);
+  }
+
+  .protocol-card:hover .protocol-card-delete {
+    @apply opacity-100;
+  }
+
+  .protocol-card-delete:hover {
+    color: var(--destructive);
+  }
+
+  .protocol-card-delete-icon {
+    @apply w-4 h-4;
+  }
+
+  /* Create form */
+  .protocol-create-form {
+    @apply flex flex-col gap-5 py-4;
+  }
+
+  .protocol-form-field {
+    @apply flex flex-col gap-2;
+  }
+
+  .protocol-form-label {
+    @apply text-sm font-medium;
+  }
+
+  .protocol-form-input {
+    @apply w-full;
+  }
+
+  /* Hours display */
+  .protocol-hours-display {
+    @apply flex items-center gap-2 py-3 px-4 rounded-lg;
+    background: var(--muted);
+  }
+
+  .protocol-hours-value {
+    @apply text-2xl font-bold;
+    color: var(--accent);
+  }
+
+  .protocol-hours-eat {
+    @apply text-2xl font-bold;
+    color: var(--success);
+  }
+
+  .protocol-hours-unit {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .protocol-hours-divider {
+    @apply mx-2;
+    color: var(--muted-foreground);
+  }
+
+  /* Slider */
+  .protocol-hours-slider {
+    @apply w-full h-2 rounded-full appearance-none cursor-pointer;
+    background: linear-gradient(
+      to right,
+      var(--accent) 0%,
+      var(--accent) var(--value, 66%),
+      var(--muted) var(--value, 66%),
+      var(--muted) 100%
+    );
+  }
+
+  .protocol-hours-slider::-webkit-slider-thumb {
+    @apply w-5 h-5 rounded-full appearance-none cursor-pointer;
+    background: var(--accent);
+    border: 3px solid white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  .protocol-hours-slider::-moz-range-thumb {
+    @apply w-5 h-5 rounded-full cursor-pointer border-0;
+    background: var(--accent);
+    border: 3px solid white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  .protocol-hours-labels {
+    @apply flex justify-between text-xs;
+    color: var(--muted-foreground);
+  }
+
+  /* Preview */
+  .protocol-preview {
+    @apply flex flex-col items-center gap-1 py-4 px-6 rounded-lg;
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--accent) 5%, var(--card)) 0%,
+      var(--card) 100%
+    );
+    border: 1px solid var(--border);
+  }
+
+  .protocol-preview-label {
+    @apply text-xs uppercase tracking-wider;
+    color: var(--muted-foreground);
+  }
+
+  .protocol-preview-name {
+    @apply text-lg font-semibold;
+  }
+
+  .protocol-preview-times {
+    @apply text-2xl font-bold;
+    color: var(--accent);
+  }
+
+  /* Form error */
+  .protocol-form-error {
+    @apply text-sm py-2 px-3 rounded-lg;
+    background: color-mix(in srgb, var(--destructive) 10%, transparent);
+    color: var(--destructive);
+  }
+
+  /* Form buttons */
+  .protocol-form-cancel {
+    @apply flex-1;
+  }
+
+  .protocol-form-submit {
+    @apply flex-1;
+  }
+
+  /* ==========================================================================
+     Fasting Preferences (Profile Section)
+     ========================================================================== */
+
+  .fasting-preferences-header {
+    @apply flex items-center justify-between flex-wrap gap-2 mb-1;
+  }
+
+  .fasting-preferences-stats {
+    @apply flex items-center gap-2 text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .fasting-preferences-stat {
+    @apply font-medium;
+    color: var(--accent);
+  }
+
+  .fasting-preferences-stat-divider {
+    color: var(--border);
+  }
+
+  .fasting-preferences-field {
+    @apply flex flex-col gap-2;
+  }
+
+  .fasting-preferences-label {
+    @apply flex items-center gap-2 font-medium;
+  }
+
+  .fasting-preferences-label-icon {
+    @apply w-4 h-4;
+    color: var(--accent);
+  }
+
+  .fasting-preferences-helper {
+    @apply text-sm -mt-1;
+    color: var(--muted-foreground);
+  }
+
+  .fasting-preferences-loading {
+    @apply flex items-center justify-center py-4;
+  }
+
+  .fasting-preferences-loading-icon {
+    @apply w-5 h-5 animate-spin;
+    color: var(--muted-foreground);
+  }
+
+  .fasting-preferences-goal-selector {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .fasting-preferences-goal-btn {
+    @apply flex items-center justify-center rounded-lg cursor-pointer;
+    @apply font-semibold text-lg;
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border: 2px solid var(--border);
+    background-color: var(--card);
+    color: var(--foreground);
+    transition: all 0.15s ease;
+  }
+
+  .fasting-preferences-goal-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .fasting-preferences-goal-btn-active {
+    border-color: var(--accent);
+    background-color: color-mix(in srgb, var(--accent) 10%, var(--card));
+    color: var(--accent);
+  }
+
+  .fasting-preferences-goal-label {
+    @apply text-sm font-medium;
+    color: var(--muted-foreground);
+  }
+
+  .fasting-preferences-actions {
+    @apply flex justify-end pt-4 mt-4;
+    border-top: 1px solid var(--border);
+  }
+
+  .fasting-preferences-btn-icon {
+    @apply w-4 h-4 mr-2;
+  }
+
+  .fasting-preferences-btn-spin {
+    @apply animate-spin;
+  }
+
+  /* ==========================================================================
+     Fasting Calendar
+     ========================================================================== */
+
+  .fasting-calendar-card {
+    @apply w-full;
+  }
+
+  .fasting-calendar-header {
+    @apply flex flex-col sm:flex-row items-center justify-between gap-3;
+  }
+
+  .fasting-calendar-nav {
+    @apply flex items-center gap-2;
+  }
+
+  .fasting-calendar-nav-btn {
+    @apply h-8 w-8;
+  }
+
+  .fasting-calendar-title {
+    @apply text-lg font-semibold min-w-[160px] text-center;
+  }
+
+  .fasting-calendar-today-btn {
+    @apply h-8;
+  }
+
+  .fasting-calendar-loading {
+    @apply flex items-center justify-center py-12;
+  }
+
+  .fasting-calendar-loading-icon {
+    @apply w-6 h-6 animate-spin;
+    color: var(--muted-foreground);
+  }
+
+  .fasting-calendar-weekdays {
+    @apply grid grid-cols-7 gap-1 mb-2;
+  }
+
+  .fasting-calendar-weekday {
+    @apply text-xs font-medium text-center py-2;
+    color: var(--muted-foreground);
+  }
+
+  .fasting-calendar-grid {
+    @apply grid grid-cols-7 gap-1;
+  }
+
+  .fasting-calendar-day {
+    @apply relative flex flex-col items-center justify-center aspect-square rounded-lg;
+    @apply text-sm font-medium transition-all cursor-default;
+    background: var(--muted);
+  }
+
+  .fasting-calendar-day-empty {
+    @apply bg-transparent;
+  }
+
+  .fasting-calendar-day-none {
+    background: color-mix(in srgb, var(--muted) 50%, transparent);
+  }
+
+  .fasting-calendar-day-partial {
+    background: color-mix(in srgb, var(--warning) 15%, var(--card));
+    border: 1px solid color-mix(in srgb, var(--warning) 30%, transparent);
+  }
+
+  .fasting-calendar-day-complete {
+    background: color-mix(in srgb, var(--success) 15%, var(--card));
+    border: 1px solid color-mix(in srgb, var(--success) 30%, transparent);
+  }
+
+  .fasting-calendar-day-today {
+    @apply ring-2;
+    ring-color: var(--accent);
+  }
+
+  .fasting-calendar-day-num {
+    @apply z-10;
+  }
+
+  .fasting-calendar-day-indicator {
+    @apply absolute bottom-1 w-1.5 h-1.5 rounded-full;
+  }
+
+  .fasting-calendar-day-complete .fasting-calendar-day-indicator {
+    background: var(--success);
+  }
+
+  .fasting-calendar-day-partial .fasting-calendar-day-indicator {
+    background: var(--warning);
+  }
+
+  /* Legend */
+  .fasting-calendar-legend {
+    @apply flex items-center justify-center gap-4 mt-4 pt-4;
+    border-top: 1px solid var(--border);
+  }
+
+  .fasting-calendar-legend-item {
+    @apply flex items-center gap-1.5 text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .fasting-calendar-legend-dot {
+    @apply w-3 h-3 rounded;
+  }
+
+  .fasting-calendar-legend-complete {
+    background: color-mix(in srgb, var(--success) 30%, var(--card));
+    border: 1px solid var(--success);
+  }
+
+  .fasting-calendar-legend-partial {
+    background: color-mix(in srgb, var(--warning) 30%, var(--card));
+    border: 1px solid var(--warning);
+  }
+
+  .fasting-calendar-legend-none {
+    background: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+  /* Summary */
+  .fasting-calendar-summary {
+    @apply text-center mt-4 text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .fasting-calendar-summary-value {
+    @apply font-bold;
+    color: var(--success);
+  }
+
+  .fasting-calendar-summary-label {
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     Fasting Progress Card (Progress Page)
+     ========================================================================== */
+
+  .fasting-progress-card {
+    @apply h-full;
+  }
+
+  .fasting-progress-card-clickable {
+    @apply cursor-pointer transition-all;
+  }
+
+  .fasting-progress-card-clickable:hover {
+    border-color: var(--accent);
+  }
+
+  .fasting-progress-title {
+    @apply flex items-center gap-2;
+  }
+
+  .fasting-progress-title-icon {
+    @apply w-5 h-5;
+    color: var(--accent);
+  }
+
+  .fasting-progress-loading {
+    @apply space-y-4;
+  }
+
+  .fasting-progress-empty {
+    @apply py-6 text-center;
+  }
+
+  .fasting-progress-empty-text {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .fasting-progress-stats-grid {
+    @apply grid grid-cols-2 gap-4 mb-4;
+  }
+
+  .fasting-progress-stat {
+    @apply flex items-center gap-3;
+  }
+
+  .fasting-progress-stat-icon {
+    @apply flex items-center justify-center w-10 h-10 rounded-lg;
+  }
+
+  .fasting-progress-stat-icon-flame {
+    background: color-mix(in srgb, var(--warning) 15%, transparent);
+    color: var(--warning);
+  }
+
+  .fasting-progress-stat-icon-target {
+    background: color-mix(in srgb, var(--success) 15%, transparent);
+    color: var(--success);
+  }
+
+  .fasting-progress-stat-icon-trend {
+    background: color-mix(in srgb, var(--accent) 15%, transparent);
+    color: var(--accent);
+  }
+
+  .fasting-progress-stat-icon-award {
+    background: color-mix(in srgb, var(--chart-3) 15%, transparent);
+    color: var(--chart-3);
+  }
+
+  .fasting-progress-stat-content {
+    @apply flex flex-col;
+  }
+
+  .fasting-progress-stat-value {
+    @apply text-lg font-bold;
+  }
+
+  .fasting-progress-stat-goal {
+    @apply text-sm font-normal;
+    color: var(--muted-foreground);
+  }
+
+  .fasting-progress-stat-label {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .fasting-progress-summary {
+    @apply flex items-center justify-center gap-2 pt-4 text-sm;
+    border-top: 1px solid var(--border);
+    color: var(--muted-foreground);
+  }
+
+  .fasting-progress-summary-total {
+    @apply font-medium;
+    color: var(--foreground);
+  }
+
+  .fasting-progress-summary-divider {
+    color: var(--border);
+  }
+
+  .fasting-progress-summary-time {
+    color: var(--muted-foreground);
+  }
+
+  .fasting-progress-best {
+    @apply text-center text-sm mt-3 py-2 px-4 rounded-lg;
+    background: color-mix(in srgb, var(--warning) 10%, transparent);
+    color: var(--warning);
+  }
+}

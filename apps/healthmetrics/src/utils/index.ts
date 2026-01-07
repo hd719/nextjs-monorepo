@@ -74,6 +74,9 @@ export { requireAuthAndOnboarding, requireAuth } from "./route-guards";
 // Sleep utilities
 export { toSleepCardData } from "./sleep-helpers";
 
+// Time utilities
+export { formatDuration, formatDurationLong } from "./time-helpers";
+
 // Validation schemas and types (Zod)
 export {
   loginSchema,

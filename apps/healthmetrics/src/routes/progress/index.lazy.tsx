@@ -33,6 +33,7 @@ import {
   AchievementsProgressCard,
   InsightsPanel,
   SleepProgressCard,
+  FastingProgressCard,
 } from "@/components/progress";
 
 export const Route = createLazyFileRoute("/progress/")({
@@ -40,6 +41,7 @@ export const Route = createLazyFileRoute("/progress/")({
 });
 
 function ProgressPage() {
+  const { user } = Route.useRouteContext();
   const [dateRange, setDateRange] = useState<DateRange>("30d");
 
   // In production, these would be fetched based on dateRange
@@ -82,6 +84,11 @@ function ProgressPage() {
             <SleepProgressCard data={mockProgressData.sleepData} />
           </div>
           <WeeklyComparison data={mockProgressData.comparison} />
+        </div>
+
+        {/* Row 2.5: Fasting Progress */}
+        <div className="animate-fade-slide-in animate-stagger-2">
+          <FastingProgressCard userId={user.id} />
         </div>
 
         {/* Row 3: Streaks & Achievements | AI Insights */}
