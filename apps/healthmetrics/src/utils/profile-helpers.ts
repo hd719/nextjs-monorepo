@@ -59,7 +59,7 @@ export function formatDate(date: Date | string | null | undefined): string {
   }
 }
 
-export function kgToLbs(kg: number | null | undefined): string {
+export function formatKgToLbs(kg: number | null | undefined): string {
   if (!kg) return "";
   return (kg * 2.20462).toFixed(1);
 }

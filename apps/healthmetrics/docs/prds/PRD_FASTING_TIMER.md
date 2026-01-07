@@ -33,12 +33,14 @@ This feature seamlessly integrates with the existing HealthMetrics ecosystem, ap
 ## Problem Statement
 
 ### Current State
+
 - Users track meals, water, steps, weight, and exercise
 - No way to track fasting windows alongside nutrition
 - Users interested in intermittent fasting must use separate apps
 - Disconnected experience between fasting and eating windows
 
 ### Desired State
+
 - Unified experience for fasting and nutrition tracking
 - Visual timer showing current fast progress
 - Historical data and streak tracking
@@ -46,6 +48,7 @@ This feature seamlessly integrates with the existing HealthMetrics ecosystem, ap
 - Insights correlating fasting with weight/nutrition trends
 
 ### Target Users
+
 - Intermittent fasting practitioners (16:8, 18:6, 20:4, OMAD)
 - Users exploring fasting for weight management
 - Health-conscious users wanting complete daily health tracking
@@ -55,11 +58,13 @@ This feature seamlessly integrates with the existing HealthMetrics ecosystem, ap
 ## Goals & Success Metrics
 
 ### Primary Goals
+
 1. Enable users to track intermittent fasting sessions
 2. Integrate fasting data with existing nutrition tracking
 3. Provide motivational feedback through streaks and achievements
 
 ### Success Metrics
+
 | Metric | Target | Measurement |
 |--------|--------|-------------|
 | Feature Adoption | 40% of active users try fasting within 30 days | Database query |
@@ -87,6 +92,7 @@ This feature seamlessly integrates with the existing HealthMetrics ecosystem, ap
 | F-10 | User | Pause and resume a fast | I can handle unexpected situations | P2 |
 
 ### Edge Cases
+
 - User starts a new fast while one is already active
 - User logs food during a fast (warning/confirmation)
 - User's fast spans midnight (new day)
@@ -100,6 +106,7 @@ This feature seamlessly integrates with the existing HealthMetrics ecosystem, ap
 ### Functional Requirements
 
 #### FR-01: Fasting Protocols
+
 - **Preset Protocols:**
   - 16:8 (16 hours fasting, 8 hours eating)
   - 18:6 (18 hours fasting, 6 hours eating)
@@ -110,6 +117,7 @@ This feature seamlessly integrates with the existing HealthMetrics ecosystem, ap
 - **Quick Start:** One-tap to start fast with default protocol
 
 #### FR-02: Fast Timer
+
 - Real-time countdown/count-up display
 - Visual progress indicator (circular or linear)
 - Current phase indication (fasting vs eating window)
@@ -117,6 +125,7 @@ This feature seamlessly integrates with the existing HealthMetrics ecosystem, ap
 - Estimated completion time
 
 #### FR-03: Fast Management
+
 - Start fast (with protocol selection)
 - End fast (early or at target)
 - Cancel fast (delete without logging)
@@ -124,6 +133,7 @@ This feature seamlessly integrates with the existing HealthMetrics ecosystem, ap
 - Edit fast start time (for retroactive logging)
 
 #### FR-04: Fasting History
+
 - List of past fasts with duration and completion status
 - Calendar view of fasting days
 - Weekly/monthly fasting summaries
@@ -131,12 +141,14 @@ This feature seamlessly integrates with the existing HealthMetrics ecosystem, ap
 - Longest fast achieved
 
 #### FR-05: Streaks & Achievements
+
 - Current streak (consecutive days with completed fast)
 - Longest streak (historical best)
 - Achievements for milestones (first fast, 7-day streak, etc.)
 - Weekly fasting goal tracking
 
 #### FR-06: Dashboard Integration
+
 - Fasting widget showing current status
 - Quick action to start/view fast
 - Integration with daily summary
@@ -543,26 +555,31 @@ export function useUpdateFastingPreferences();
 ## Integration Points
 
 ### 1. Dashboard Integration
+
 - Add `FastingDashboardWidget` to dashboard grid
 - Update `QuickActions` to include "Start Fast" option
 - Show fasting status in daily summary
 
 ### 2. Diary Integration
+
 - Show eating window indicator on diary page
 - Warn if logging food during fasting window
 - Quick action to end fast when logging food
 
 ### 3. Progress Integration
+
 - Add fasting insights to `InsightsPanel`
 - Correlate fasting patterns with weight trends
 - Add fasting heatmap to progress page
 
 ### 4. Profile Integration
+
 - Add fasting preferences section
 - Default protocol selection
 - Weekly fasting goal setting
 
 ### 5. Navigation
+
 - Add "Fasting" to main navigation
 - Update `ROUTES` constant with fasting routes
 
@@ -652,24 +669,28 @@ export const ROUTES = {
 ## Testing Strategy
 
 ### Unit Tests
+
 - Server function input validation
 - Duration calculations
 - Streak calculation logic
 - Timer state transitions
 
 ### Integration Tests
+
 - Start fast → timer runs → end fast flow
 - Fast with pause/resume
 - Concurrent fast prevention
 - History query pagination
 
 ### E2E Tests
+
 - Complete fasting workflow
 - Dashboard widget interactions
 - Protocol selection
 - Cross-page navigation
 
 ### Manual Testing Scenarios
+
 1. Start fast, wait, end normally
 2. Start fast, end early
 3. Start fast, cancel
@@ -684,6 +705,7 @@ export const ROUTES = {
 ## Future Considerations
 
 ### V2 Features (Not in scope)
+
 - **Push notifications** for fast completion
 - **Apple Health / Google Fit** integration
 - **Social sharing** of fasting achievements
@@ -693,12 +715,14 @@ export const ROUTES = {
 - **Fasting window scheduling** (auto-start based on last meal)
 
 ### Technical Debt Prevention
+
 - Keep timer logic isolated for easy testing
 - Use consistent patterns with existing features
 - Document edge cases thoroughly
 - Consider timezone handling from the start
 
 ### Analytics & Monitoring
+
 - Track feature adoption rates
 - Monitor timer accuracy
 - Log error rates for server functions
@@ -718,11 +742,13 @@ export const ROUTES = {
 | **HealthMetrics** | Unified experience | Building new |
 
 ### B. Related Documentation
+
 - [Nutrition Project Plan](./NUTRITION_PROJECT_PLAN.md)
 - [Database Schema](../prisma/schema.prisma)
 - [Component Patterns](./CSS_FOUC_FIX.md)
 
 ### C. Design Mockup References
+
 - Timer designs inspired by Zero, Life Fasting Tracker
 - Progress rings similar to Apple Watch activity rings
 - History layout matches existing diary patterns

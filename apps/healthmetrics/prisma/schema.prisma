@@ -36,6 +36,8 @@ enum GoalType {
   maintain_weight
   gain_weight
   build_muscle
+  improve_fitness
+  eat_healthier
 }
 
 enum Units {
@@ -185,26 +187,30 @@ model Verification {
 // User profile table - extends better-auth user with fitness-specific data
 
 model User {
-  id                String         @id
-  displayName       String?        @map("display_name")
-  avatarUrl         String?        @map("avatar_url")
-  dateOfBirth       DateTime?      @map("date_of_birth") @db.Date
-  gender            Gender?
-  heightCm          Decimal?       @map("height_cm") @db.Decimal(5, 2)
-  activityLevel     ActivityLevel? @map("activity_level")
-  goalType          GoalType?      @map("goal_type")
-  targetWeightLbs   Decimal?       @map("target_weight_lbs") @db.Decimal(6, 2)
-  dailyCalorieGoal  Int?           @map("daily_calorie_goal")
-  dailyProteinGoalG Int?           @map("daily_protein_goal_g")
-  dailyCarbGoalG    Int?           @map("daily_carb_goal_g")
-  dailyFatGoalG     Int?           @map("daily_fat_goal_g")
-  dailyWaterGoal    Int            @default(8) @map("daily_water_goal")
-  dailyStepGoal     Int            @default(10000) @map("daily_step_goal")
-  unitsPreference   Units          @default(metric) @map("units_preference")
-  timezone          String         @default("UTC")
-  isAdmin           Boolean        @default(false) @map("is_admin")
-  createdAt         DateTime       @default(now()) @map("created_at")
-  updatedAt         DateTime       @updatedAt @map("updated_at")
+  id                    String         @id
+  displayName           String?        @map("display_name")
+  avatarUrl             String?        @map("avatar_url")
+  dateOfBirth           DateTime?      @map("date_of_birth") @db.Date
+  gender                Gender?
+  heightCm              Decimal?       @map("height_cm") @db.Decimal(5, 2)
+  activityLevel         ActivityLevel? @map("activity_level")
+  goalType              GoalType?      @map("goal_type")
+  targetWeightLbs       Decimal?       @map("target_weight_lbs") @db.Decimal(6, 2)
+  dailyCalorieGoal      Int?           @map("daily_calorie_goal")
+  dailyProteinGoalG     Int?           @map("daily_protein_goal_g")
+  dailyCarbGoalG        Int?           @map("daily_carb_goal_g")
+  dailyFatGoalG         Int?           @map("daily_fat_goal_g")
+  dailyWaterGoal        Int            @default(8) @map("daily_water_goal")
+  dailyStepGoal         Int            @default(10000) @map("daily_step_goal")
+  unitsPreference       Units          @default(metric) @map("units_preference")
+  timezone              String         @default("UTC")
+  isAdmin               Boolean        @default(false) @map("is_admin")
+  onboardingCompleted   Boolean        @default(false) @map("onboarding_completed")
+  onboardingStep        Int            @default(0) @map("onboarding_step")
+  onboardingSkippedAt   DateTime?      @map("onboarding_skipped_at")
+  onboardingCompletedAt DateTime?      @map("onboarding_completed_at")
+  createdAt             DateTime       @default(now()) @map("created_at")
+  updatedAt             DateTime       @updatedAt @map("updated_at")
 
   // Relations
   authUser                BetterAuthUser?        @relation(fields: [id], references: [id], onDelete: Cascade)

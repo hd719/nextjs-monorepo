@@ -37,3 +37,15 @@ export { getStepCount, updateStepCount, addSteps } from "./steps";
 
 // Weight server functions
 export { getLatestWeight, saveWeightEntry, getWeightTrend } from "./weight";
+
+// Onboarding server functions
+export {
+  getOnboardingState,
+  checkOnboardingRequired,
+  saveOnboardingStep,
+  calculateGoals,
+  calculateGoalsFromProfile,
+  completeOnboarding,
+  skipOnboarding,
+  resetOnboarding,
+} from "./onboarding";

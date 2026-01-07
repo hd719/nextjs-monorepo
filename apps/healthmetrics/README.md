@@ -1,287 +1,231 @@
-Welcome to your new TanStack app!
+# HealthMetrics
 
-# Getting Started
+A modern nutrition and health tracking application built with TanStack Start, React, and Prisma.
 
-To run this application:
+## Features
+
+### Implemented
+
+- **User Authentication** - Email/password with Better Auth, email verification, password reset
+- **Food Diary** - Log meals with nutrition tracking (calories, protein, carbs, fat)
+- **Exercise Logging** - Track workouts with calorie burn estimation
+- **Weight Tracking** - Log and visualize weight over time
+- **Water Intake** - Track daily water consumption
+- **Step Counting** - Daily step tracking
+- **Dashboard** - Overview of daily nutrition, activity, and progress
+- **Profile Management** - User settings, goals, and preferences
+- **Onboarding Flow** - Guided setup for new users
+- **Dark/Light Mode** - Theme toggle with system preference detection
+
+### Planned
+
+See `/docs/prds/` for detailed product requirements:
+
+- Barcode Scanner
+- AI Food Recognition
+- Push Notifications
+- Apple Health / Google Fit Integration
+- Data Export
+- Fasting Timer
+
+## Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| Framework | [TanStack Start](https://tanstack.com/start) |
+| UI | React 19, Tailwind CSS |
+| Routing | TanStack Router (file-based) |
+| Data Fetching | TanStack Query |
+| Forms | TanStack Form + Zod |
+| Database | PostgreSQL + Prisma ORM |
+| Authentication | Better Auth |
+| Styling | Tailwind CSS + CSS Variables |
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 22+
+- Bun
+- PostgreSQL database
+
+### Installation
 
 ```bash
-pnpm install
-pnpm start
+# Install dependencies
+bun install
+
+# Set up environment variables
+cp .env.example .env.development.local
+# Edit .env.development.local with your database URL and secrets
+
+# Run database migrations
+bunx prisma migrate dev
+
+# Start development server
+bun dev
 ```
 
-# Building For Production
+The app will be available at `http://localhost:3003`.
 
-To build this application for production:
+### Environment Variables
+
+```env
+DATABASE_URL="postgresql://..."
+BETTER_AUTH_SECRET="your-secret-key"
+BETTER_AUTH_URL="http://localhost:3003"
+```
+
+## Project Structure
+
+```
+src/
+├── components/       # React components
+│   ├── auth/         # Authentication forms
+│   ├── dashboard/    # Dashboard widgets
+│   ├── diary/        # Food diary components
+│   ├── exercise/     # Workout logging
+│   ├── layout/       # App shell, navigation
+│   ├── onboarding/   # New user onboarding
+│   ├── profile/      # User settings
+│   ├── progress/     # Analytics & charts
+│   └── ui/           # Shared UI components
+├── constants/        # App constants & config
+├── data/             # Mock data (dev only)
+├── hooks/            # Custom React hooks
+├── lib/              # External integrations
+├── routes/           # File-based routing
+├── server/           # Server functions (RPC)
+├── styles/           # CSS files
+├── types/            # TypeScript types
+└── utils/            # Pure helper functions
+
+docs/
+├── prds/             # Product requirements
+├── explainations/    # Technical documentation
+└── QA_TEST_PLAN.md   # Manual test cases
+
+prisma/
+└── schema.prisma     # Database schema
+```
+
+## Architecture
+
+### Directory Conventions
+
+| Directory | Purpose | Side Effects |
+|-----------|---------|--------------|
+| `src/lib/` | External integrations, singletons | Yes (DB, auth clients) |
+| `src/utils/` | Pure helper functions | No (easily testable) |
+| `src/server/` | Server-side functions (RPC) | Yes (DB queries) |
+| `src/hooks/` | React hooks (queries, mutations) | Yes (state, effects) |
+
+### Import Patterns
+
+```typescript
+// Direct imports
+import { useProfile } from "@/hooks/useProfile";
+import { ROUTES } from "@/constants/routes";
+import { Button } from "@/components/ui/button";
+
+// Utils barrel export
+import { cn, calculateBMR } from "@/utils";
+```
+
+### Lazy Loading
+
+Protected routes use code splitting:
+
+- `index.tsx` - Auth check (`beforeLoad`)
+- `index.lazy.tsx` - Page component (loaded on demand)
+
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `bun dev` | Start development server |
+| `bun build` | Build for production |
+| `bun start` | Start production server |
+| `bun test` | Run tests (Vitest) |
+| `bun prisma studio` | Open Prisma database GUI |
+| `bun prisma migrate dev` | Run database migrations |
+| `bun tsc --noEmit` | Type check |
+
+## Development
+
+### Mock Data
+
+Enable mock dashboard data for UI development:
+
+```env
+VITE_USE_MOCK_DASHBOARD=true
+```
+
+### Dev Tools
+
+Enable developer tools (reset onboarding, etc.):
+
+```env
+VITE_SHOW_DEV_TOOLS=true
+```
+
+A gear icon will appear in the bottom-right corner of the dashboard.
+
+### Database
 
 ```bash
-pnpm build
+# Generate Prisma client after schema changes
+bunx prisma generate
+
+# Create a new migration
+bunx prisma migrate dev --name your_migration_name
+
+# Reset database (development only)
+bunx prisma migrate reset
+
+# Open database GUI
+bunx prisma studio
 ```
 
 ## Testing
 
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
-
 ```bash
-pnpm test
+# Run all tests
+bun test
+
+# Run with UI
+bun test --ui
+
+# Run specific test file
+bun test src/utils/nutrition-calculator.test.ts
 ```
 
-## Styling
+See `docs/QA_TEST_PLAN.md` for manual testing checklist.
 
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
+## Documentation
 
-## Routing
+| Document | Description |
+|----------|-------------|
+| `docs/prds/` | Product requirements for planned features |
+| `docs/explainations/` | Technical deep-dives |
+| `docs/QA_TEST_PLAN.md` | Manual test cases |
 
-This project uses [TanStack Router](https://tanstack.com/router). The initial setup is a file based router. Which means that the routes are managed as files in `src/routes`.
+### Key PRDs
 
-### Adding A Route
+- `PRD_BARCODE_SCANNER.md` - Food barcode scanning
+- `PRD_AI_FOOD_RECOGNITION.md` - Photo-based food logging + AI chat
+- `PRD_PUSH_NOTIFICATIONS.md` - Meal & water reminders
+- `PRD_HEALTH_INTEGRATION.md` - Apple Health / Google Fit sync
+- `PRD_DATA_EXPORT.md` - Export data as CSV/JSON/PDF
 
-To add a new route to your application just add another a new file in the `./src/routes` directory.
+## Contributing
 
-TanStack will automatically generate the content of the route file for you.
+1. Check existing PRDs and issues
+2. Create a feature branch
+3. Follow existing code patterns
+4. Add tests for new functionality
+5. Update documentation as needed
 
-Now that you have two routes you can use a `Link` component to navigate between them.
+## License
 
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from "@tanstack/react-router";
-```
-
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you use the `<Outlet />` component.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { Outlet, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-
-import { Link } from "@tanstack/react-router";
-
-export const Route = createRootRoute({
-  component: () => (
-    <>
-      <header>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-        </nav>
-      </header>
-      <Outlet />
-      <TanStackRouterDevtools />
-    </>
-  ),
-})
-```
-
-The `<TanStackRouterDevtools />` component is not required so you can remove it if you don't want it in your layout.
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-const peopleRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/people",
-  loader: async () => {
-    const response = await fetch("https://swapi.dev/api/people");
-    return response.json() as Promise<{
-      results: {
-        name: string;
-      }[];
-    }>;
-  },
-  component: () => {
-    const data = peopleRoute.useLoaderData();
-    return (
-      <ul>
-        {data.results.map((person) => (
-          <li key={person.name}>{person.name}</li>
-        ))}
-      </ul>
-    );
-  },
-});
-```
-
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-### React-Query
-
-React-Query is an excellent addition or alternative to route loading and integrating it into you application is a breeze.
-
-First add your dependencies:
-
-```bash
-pnpm add @tanstack/react-query @tanstack/react-query-devtools
-```
-
-Next we'll need to create a query client and provider. We recommend putting those in `main.tsx`.
-
-```tsx
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-// ...
-
-const queryClient = new QueryClient();
-
-// ...
-
-if (!rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement);
-
-  root.render(
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
-  );
-}
-```
-
-You can also add TanStack Query Devtools to the root route (optional).
-
-```tsx
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-
-const rootRoute = createRootRoute({
-  component: () => (
-    <>
-      <Outlet />
-      <ReactQueryDevtools buttonPosition="top-right" />
-      <TanStackRouterDevtools />
-    </>
-  ),
-});
-```
-
-Now you can use `useQuery` to fetch your data.
-
-```tsx
-import { useQuery } from "@tanstack/react-query";
-
-import "./App.css";
-
-function App() {
-  const { data } = useQuery({
-    queryKey: ["people"],
-    queryFn: () =>
-      fetch("https://swapi.dev/api/people")
-        .then((res) => res.json())
-        .then((data) => data.results as { name: string }[]),
-    initialData: [],
-  });
-
-  return (
-    <div>
-      <ul>
-        {data.map((person) => (
-          <li key={person.name}>{person.name}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-export default App;
-```
-
-You can find out everything you need to know on how to use React-Query in the [React-Query documentation](https://tanstack.com/query/latest/docs/framework/react/overview).
-
-## State Management
-
-Another common requirement for React applications is state management. There are many options for state management in React. TanStack Store provides a great starting point for your project.
-
-First you need to add TanStack Store as a dependency:
-
-```bash
-pnpm add @tanstack/store
-```
-
-Now let's create a simple counter in the `src/App.tsx` file as a demonstration.
-
-```tsx
-import { useStore } from "@tanstack/react-store";
-import { Store } from "@tanstack/store";
-import "./App.css";
-
-const countStore = new Store(0);
-
-function App() {
-  const count = useStore(countStore);
-  return (
-    <div>
-      <button onClick={() => countStore.setState((n) => n + 1)}>
-        Increment - {count}
-      </button>
-    </div>
-  );
-}
-
-export default App;
-```
-
-One of the many nice features of TanStack Store is the ability to derive state from other state. That derived state will update when the base state updates.
-
-Let's check this out by doubling the count using derived state.
-
-```tsx
-import { useStore } from "@tanstack/react-store";
-import { Store, Derived } from "@tanstack/store";
-import "./App.css";
-
-const countStore = new Store(0);
-
-const doubledStore = new Derived({
-  fn: () => countStore.state * 2,
-  deps: [countStore],
-});
-doubledStore.mount();
-
-function App() {
-  const count = useStore(countStore);
-  const doubledCount = useStore(doubledStore);
-
-  return (
-    <div>
-      <button onClick={() => countStore.setState((n) => n + 1)}>
-        Increment - {count}
-      </button>
-      <div>Doubled - {doubledCount}</div>
-    </div>
-  );
-}
-
-export default App;
-```
-
-We use the `Derived` class to create a new store that is derived from another store. The `Derived` class has a `mount` method that will start the derived store updating.
-
-Once we've created the derived store we can use it in the `App` component just like we would any other store using the `useStore` hook.
-
-You can find out everything you need to know on how to use TanStack Store in the [TanStack Store documentation](https://tanstack.com/store/latest).
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
+TODO: Add license

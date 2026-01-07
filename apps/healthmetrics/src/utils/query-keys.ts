@@ -30,15 +30,15 @@ export const queryKeys = {
   waterIntake: (userId: string, date: string) =>
     ["waterIntake", userId, date] as const,
   waterIntakeBase: () => ["waterIntake"] as const,
-  // Step queries
   stepCount: (userId: string, date: string) =>
     ["stepCount", userId, date] as const,
   stepCountBase: () => ["stepCount"] as const,
-  // Weight queries
   weightLatest: (userId: string) => ["weight", "latest", userId] as const,
   weightHistory: (userId: string, limit?: number) =>
     ["weight", "history", userId, limit] as const,
   weightTrend: (userId: string, days?: number) =>
     ["weight", "trend", userId, days] as const,
   weightBase: () => ["weight"] as const,
+  onboardingState: (userId: string) => ["onboarding", userId] as const,
+  onboardingBase: () => ["onboarding"] as const,
 };

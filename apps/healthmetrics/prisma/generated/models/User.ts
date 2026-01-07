@@ -35,6 +35,7 @@ export type UserAvgAggregateOutputType = {
   dailyFatGoalG: number | null
   dailyWaterGoal: number | null
   dailyStepGoal: number | null
+  onboardingStep: number | null
 }
 
 export type UserSumAggregateOutputType = {
@@ -46,6 +47,7 @@ export type UserSumAggregateOutputType = {
   dailyFatGoalG: number | null
   dailyWaterGoal: number | null
   dailyStepGoal: number | null
+  onboardingStep: number | null
 }
 
 export type UserMinAggregateOutputType = {
@@ -67,6 +69,10 @@ export type UserMinAggregateOutputType = {
   unitsPreference: $Enums.Units | null
   timezone: string | null
   isAdmin: boolean | null
+  onboardingCompleted: boolean | null
+  onboardingStep: number | null
+  onboardingSkippedAt: Date | null
+  onboardingCompletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -90,6 +96,10 @@ export type UserMaxAggregateOutputType = {
   unitsPreference: $Enums.Units | null
   timezone: string | null
   isAdmin: boolean | null
+  onboardingCompleted: boolean | null
+  onboardingStep: number | null
+  onboardingSkippedAt: Date | null
+  onboardingCompletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -113,6 +123,10 @@ export type UserCountAggregateOutputType = {
   unitsPreference: number
   timezone: number
   isAdmin: number
+  onboardingCompleted: number
+  onboardingStep: number
+  onboardingSkippedAt: number
+  onboardingCompletedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -128,6 +142,7 @@ export type UserAvgAggregateInputType = {
   dailyFatGoalG?: true
   dailyWaterGoal?: true
   dailyStepGoal?: true
+  onboardingStep?: true
 }
 
 export type UserSumAggregateInputType = {
@@ -139,6 +154,7 @@ export type UserSumAggregateInputType = {
   dailyFatGoalG?: true
   dailyWaterGoal?: true
   dailyStepGoal?: true
+  onboardingStep?: true
 }
 
 export type UserMinAggregateInputType = {
@@ -160,6 +176,10 @@ export type UserMinAggregateInputType = {
   unitsPreference?: true
   timezone?: true
   isAdmin?: true
+  onboardingCompleted?: true
+  onboardingStep?: true
+  onboardingSkippedAt?: true
+  onboardingCompletedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -183,6 +203,10 @@ export type UserMaxAggregateInputType = {
   unitsPreference?: true
   timezone?: true
   isAdmin?: true
+  onboardingCompleted?: true
+  onboardingStep?: true
+  onboardingSkippedAt?: true
+  onboardingCompletedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -206,6 +230,10 @@ export type UserCountAggregateInputType = {
   unitsPreference?: true
   timezone?: true
   isAdmin?: true
+  onboardingCompleted?: true
+  onboardingStep?: true
+  onboardingSkippedAt?: true
+  onboardingCompletedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -316,6 +344,10 @@ export type UserGroupByOutputType = {
   unitsPreference: $Enums.Units
   timezone: string
   isAdmin: boolean
+  onboardingCompleted: boolean
+  onboardingStep: number
+  onboardingSkippedAt: Date | null
+  onboardingCompletedAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -362,6 +394,10 @@ export type UserWhereInput = {
   unitsPreference?: Prisma.EnumUnitsFilter<"User"> | $Enums.Units
   timezone?: Prisma.StringFilter<"User"> | string
   isAdmin?: Prisma.BoolFilter<"User"> | boolean
+  onboardingCompleted?: Prisma.BoolFilter<"User"> | boolean
+  onboardingStep?: Prisma.IntFilter<"User"> | number
+  onboardingSkippedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  onboardingCompletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   authUser?: Prisma.XOR<Prisma.BetterAuthUserNullableScalarRelationFilter, Prisma.BetterAuthUserWhereInput> | null
@@ -402,6 +438,10 @@ export type UserOrderByWithRelationInput = {
   unitsPreference?: Prisma.SortOrder
   timezone?: Prisma.SortOrder
   isAdmin?: Prisma.SortOrder
+  onboardingCompleted?: Prisma.SortOrder
+  onboardingStep?: Prisma.SortOrder
+  onboardingSkippedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  onboardingCompletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   authUser?: Prisma.BetterAuthUserOrderByWithRelationInput
@@ -445,6 +485,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   unitsPreference?: Prisma.EnumUnitsFilter<"User"> | $Enums.Units
   timezone?: Prisma.StringFilter<"User"> | string
   isAdmin?: Prisma.BoolFilter<"User"> | boolean
+  onboardingCompleted?: Prisma.BoolFilter<"User"> | boolean
+  onboardingStep?: Prisma.IntFilter<"User"> | number
+  onboardingSkippedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  onboardingCompletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   authUser?: Prisma.XOR<Prisma.BetterAuthUserNullableScalarRelationFilter, Prisma.BetterAuthUserWhereInput> | null
@@ -485,6 +529,10 @@ export type UserOrderByWithAggregationInput = {
   unitsPreference?: Prisma.SortOrder
   timezone?: Prisma.SortOrder
   isAdmin?: Prisma.SortOrder
+  onboardingCompleted?: Prisma.SortOrder
+  onboardingStep?: Prisma.SortOrder
+  onboardingSkippedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  onboardingCompletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -516,6 +564,10 @@ export type UserScalarWhereWithAggregatesInput = {
   unitsPreference?: Prisma.EnumUnitsWithAggregatesFilter<"User"> | $Enums.Units
   timezone?: Prisma.StringWithAggregatesFilter<"User"> | string
   isAdmin?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  onboardingCompleted?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  onboardingStep?: Prisma.IntWithAggregatesFilter<"User"> | number
+  onboardingSkippedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  onboardingCompletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -538,6 +590,10 @@ export type UserCreateInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -578,6 +634,10 @@ export type UserUncheckedCreateInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -616,6 +676,10 @@ export type UserUpdateInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -656,6 +720,10 @@ export type UserUncheckedUpdateInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -695,6 +763,10 @@ export type UserCreateManyInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -717,6 +789,10 @@ export type UserUpdateManyMutationInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -740,6 +816,10 @@ export type UserUncheckedUpdateManyInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -768,6 +848,10 @@ export type UserCountOrderByAggregateInput = {
   unitsPreference?: Prisma.SortOrder
   timezone?: Prisma.SortOrder
   isAdmin?: Prisma.SortOrder
+  onboardingCompleted?: Prisma.SortOrder
+  onboardingStep?: Prisma.SortOrder
+  onboardingSkippedAt?: Prisma.SortOrder
+  onboardingCompletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -781,6 +865,7 @@ export type UserAvgOrderByAggregateInput = {
   dailyFatGoalG?: Prisma.SortOrder
   dailyWaterGoal?: Prisma.SortOrder
   dailyStepGoal?: Prisma.SortOrder
+  onboardingStep?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -802,6 +887,10 @@ export type UserMaxOrderByAggregateInput = {
   unitsPreference?: Prisma.SortOrder
   timezone?: Prisma.SortOrder
   isAdmin?: Prisma.SortOrder
+  onboardingCompleted?: Prisma.SortOrder
+  onboardingStep?: Prisma.SortOrder
+  onboardingSkippedAt?: Prisma.SortOrder
+  onboardingCompletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -825,6 +914,10 @@ export type UserMinOrderByAggregateInput = {
   unitsPreference?: Prisma.SortOrder
   timezone?: Prisma.SortOrder
   isAdmin?: Prisma.SortOrder
+  onboardingCompleted?: Prisma.SortOrder
+  onboardingStep?: Prisma.SortOrder
+  onboardingSkippedAt?: Prisma.SortOrder
+  onboardingCompletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -838,6 +931,7 @@ export type UserSumOrderByAggregateInput = {
   dailyFatGoalG?: Prisma.SortOrder
   dailyWaterGoal?: Prisma.SortOrder
   dailyStepGoal?: Prisma.SortOrder
+  onboardingStep?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -1163,6 +1257,10 @@ export type UserCreateWithoutAuthUserInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemCreateNestedManyWithoutCreatorInput
@@ -1201,6 +1299,10 @@ export type UserUncheckedCreateWithoutAuthUserInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -1255,6 +1357,10 @@ export type UserUpdateWithoutAuthUserInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUpdateManyWithoutCreatorNestedInput
@@ -1293,6 +1399,10 @@ export type UserUncheckedUpdateWithoutAuthUserInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -1331,6 +1441,10 @@ export type UserCreateWithoutCreatedFoodItemsInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -1370,6 +1484,10 @@ export type UserUncheckedCreateWithoutCreatedFoodItemsInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
@@ -1423,6 +1541,10 @@ export type UserUpdateWithoutCreatedFoodItemsInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -1462,6 +1584,10 @@ export type UserUncheckedUpdateWithoutCreatedFoodItemsInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
@@ -1499,6 +1625,10 @@ export type UserCreateWithoutCreatedExercisesInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -1538,6 +1668,10 @@ export type UserUncheckedCreateWithoutCreatedExercisesInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -1591,6 +1725,10 @@ export type UserUpdateWithoutCreatedExercisesInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -1630,6 +1768,10 @@ export type UserUncheckedUpdateWithoutCreatedExercisesInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -1667,6 +1809,10 @@ export type UserCreateWithoutDiaryEntriesInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -1706,6 +1852,10 @@ export type UserUncheckedCreateWithoutDiaryEntriesInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -1759,6 +1909,10 @@ export type UserUpdateWithoutDiaryEntriesInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -1798,6 +1952,10 @@ export type UserUncheckedUpdateWithoutDiaryEntriesInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -1835,6 +1993,10 @@ export type UserCreateWithoutWorkoutSessionsInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -1874,6 +2036,10 @@ export type UserUncheckedCreateWithoutWorkoutSessionsInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -1927,6 +2093,10 @@ export type UserUpdateWithoutWorkoutSessionsInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -1966,6 +2136,10 @@ export type UserUncheckedUpdateWithoutWorkoutSessionsInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -2003,6 +2177,10 @@ export type UserCreateWithoutWorkoutLogsInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -2042,6 +2220,10 @@ export type UserUncheckedCreateWithoutWorkoutLogsInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -2095,6 +2277,10 @@ export type UserUpdateWithoutWorkoutLogsInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -2134,6 +2320,10 @@ export type UserUncheckedUpdateWithoutWorkoutLogsInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -2171,6 +2361,10 @@ export type UserCreateWithoutWeightEntriesInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -2210,6 +2404,10 @@ export type UserUncheckedCreateWithoutWeightEntriesInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -2263,6 +2461,10 @@ export type UserUpdateWithoutWeightEntriesInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -2302,6 +2504,10 @@ export type UserUncheckedUpdateWithoutWeightEntriesInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -2339,6 +2545,10 @@ export type UserCreateWithoutWaterEntriesInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -2378,6 +2588,10 @@ export type UserUncheckedCreateWithoutWaterEntriesInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -2431,6 +2645,10 @@ export type UserUpdateWithoutWaterEntriesInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -2470,6 +2688,10 @@ export type UserUncheckedUpdateWithoutWaterEntriesInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -2507,6 +2729,10 @@ export type UserCreateWithoutStepEntriesInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -2546,6 +2772,10 @@ export type UserUncheckedCreateWithoutStepEntriesInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -2599,6 +2829,10 @@ export type UserUpdateWithoutStepEntriesInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -2638,6 +2872,10 @@ export type UserUncheckedUpdateWithoutStepEntriesInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -2675,6 +2913,10 @@ export type UserCreateWithoutMealPlanTemplatesInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -2714,6 +2956,10 @@ export type UserUncheckedCreateWithoutMealPlanTemplatesInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -2767,6 +3013,10 @@ export type UserUpdateWithoutMealPlanTemplatesInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -2806,6 +3056,10 @@ export type UserUncheckedUpdateWithoutMealPlanTemplatesInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -2843,6 +3097,10 @@ export type UserCreateWithoutMealPlansInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -2882,6 +3140,10 @@ export type UserUncheckedCreateWithoutMealPlansInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -2935,6 +3197,10 @@ export type UserUpdateWithoutMealPlansInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -2974,6 +3240,10 @@ export type UserUncheckedUpdateWithoutMealPlansInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -3011,6 +3281,10 @@ export type UserCreateWithoutGoalsInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -3050,6 +3324,10 @@ export type UserUncheckedCreateWithoutGoalsInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -3103,6 +3381,10 @@ export type UserUpdateWithoutGoalsInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -3142,6 +3424,10 @@ export type UserUncheckedUpdateWithoutGoalsInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -3179,6 +3465,10 @@ export type UserCreateWithoutSentFriendshipsInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -3218,6 +3508,10 @@ export type UserUncheckedCreateWithoutSentFriendshipsInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -3260,6 +3554,10 @@ export type UserCreateWithoutReceivedFriendshipsInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -3299,6 +3597,10 @@ export type UserUncheckedCreateWithoutReceivedFriendshipsInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -3341,6 +3643,10 @@ export type UserCreateWithoutRequestedFriendshipsInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -3380,6 +3686,10 @@ export type UserUncheckedCreateWithoutRequestedFriendshipsInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -3433,6 +3743,10 @@ export type UserUpdateWithoutSentFriendshipsInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -3472,6 +3786,10 @@ export type UserUncheckedUpdateWithoutSentFriendshipsInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -3520,6 +3838,10 @@ export type UserUpdateWithoutReceivedFriendshipsInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -3559,6 +3881,10 @@ export type UserUncheckedUpdateWithoutReceivedFriendshipsInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -3607,6 +3933,10 @@ export type UserUpdateWithoutRequestedFriendshipsInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -3646,6 +3976,10 @@ export type UserUncheckedUpdateWithoutRequestedFriendshipsInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -3683,6 +4017,10 @@ export type UserCreateWithoutCreatedChallengesInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -3722,6 +4060,10 @@ export type UserUncheckedCreateWithoutCreatedChallengesInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -3775,6 +4117,10 @@ export type UserUpdateWithoutCreatedChallengesInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -3814,6 +4160,10 @@ export type UserUncheckedUpdateWithoutCreatedChallengesInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -3851,6 +4201,10 @@ export type UserCreateWithoutChallengeParticipationsInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
@@ -3890,6 +4244,10 @@ export type UserUncheckedCreateWithoutChallengeParticipationsInput = {
   unitsPreference?: $Enums.Units
   timezone?: string
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
@@ -3943,6 +4301,10 @@ export type UserUpdateWithoutChallengeParticipationsInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
@@ -3982,6 +4344,10 @@ export type UserUncheckedUpdateWithoutChallengeParticipationsInput = {
   unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
   timezone?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
@@ -4186,6 +4552,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   unitsPreference?: boolean
   timezone?: boolean
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: boolean
+  onboardingSkippedAt?: boolean
+  onboardingCompletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   authUser?: boolean | Prisma.User$authUserArgs<ExtArgs>
@@ -4227,6 +4597,10 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   unitsPreference?: boolean
   timezone?: boolean
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: boolean
+  onboardingSkippedAt?: boolean
+  onboardingCompletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   authUser?: boolean | Prisma.User$authUserArgs<ExtArgs>
@@ -4251,6 +4625,10 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   unitsPreference?: boolean
   timezone?: boolean
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: boolean
+  onboardingSkippedAt?: boolean
+  onboardingCompletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   authUser?: boolean | Prisma.User$authUserArgs<ExtArgs>
@@ -4275,11 +4653,15 @@ export type UserSelectScalar = {
   unitsPreference?: boolean
   timezone?: boolean
   isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: boolean
+  onboardingSkippedAt?: boolean
+  onboardingCompletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "displayName" | "avatarUrl" | "dateOfBirth" | "gender" | "heightCm" | "activityLevel" | "goalType" | "targetWeightLbs" | "dailyCalorieGoal" | "dailyProteinGoalG" | "dailyCarbGoalG" | "dailyFatGoalG" | "dailyWaterGoal" | "dailyStepGoal" | "unitsPreference" | "timezone" | "isAdmin" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "displayName" | "avatarUrl" | "dateOfBirth" | "gender" | "heightCm" | "activityLevel" | "goalType" | "targetWeightLbs" | "dailyCalorieGoal" | "dailyProteinGoalG" | "dailyCarbGoalG" | "dailyFatGoalG" | "dailyWaterGoal" | "dailyStepGoal" | "unitsPreference" | "timezone" | "isAdmin" | "onboardingCompleted" | "onboardingStep" | "onboardingSkippedAt" | "onboardingCompletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   authUser?: boolean | Prisma.User$authUserArgs<ExtArgs>
   createdFoodItems?: boolean | Prisma.User$createdFoodItemsArgs<ExtArgs>
@@ -4347,6 +4729,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     unitsPreference: $Enums.Units
     timezone: string
     isAdmin: boolean
+    onboardingCompleted: boolean
+    onboardingStep: number
+    onboardingSkippedAt: Date | null
+    onboardingCompletedAt: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -4807,6 +5193,10 @@ export interface UserFieldRefs {
   readonly unitsPreference: Prisma.FieldRef<"User", 'Units'>
   readonly timezone: Prisma.FieldRef<"User", 'String'>
   readonly isAdmin: Prisma.FieldRef<"User", 'Boolean'>
+  readonly onboardingCompleted: Prisma.FieldRef<"User", 'Boolean'>
+  readonly onboardingStep: Prisma.FieldRef<"User", 'Int'>
+  readonly onboardingSkippedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly onboardingCompletedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }

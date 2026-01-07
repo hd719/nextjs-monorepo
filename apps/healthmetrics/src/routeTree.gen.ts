@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProgressIndexRouteImport } from './routes/progress/index'
 import { Route as ProfileIndexRouteImport } from './routes/profile/index'
+import { Route as OnboardingIndexRouteImport } from './routes/onboarding/index'
 import { Route as ExerciseIndexRouteImport } from './routes/exercise/index'
 import { Route as DiaryIndexRouteImport } from './routes/diary/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
@@ -38,7 +39,14 @@ const ProfileIndexRoute = ProfileIndexRouteImport.update({
   id: '/profile/',
   path: '/profile/',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any).lazy(() => import('./routes/profile/index.lazy').then((d) => d.Route))
+const OnboardingIndexRoute = OnboardingIndexRouteImport.update({
+  id: '/onboarding/',
+  path: '/onboarding/',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./routes/onboarding/index.lazy').then((d) => d.Route),
+)
 const ExerciseIndexRoute = ExerciseIndexRouteImport.update({
   id: '/exercise/',
   path: '/exercise/',
@@ -55,7 +63,9 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/dashboard/',
   path: '/dashboard/',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any).lazy(() =>
+  import('./routes/dashboard/index.lazy').then((d) => d.Route),
+)
 const AuthVerifyEmailRoute = AuthVerifyEmailRouteImport.update({
   id: '/auth/verify-email',
   path: '/auth/verify-email',
@@ -97,6 +107,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardIndexRoute
   '/diary': typeof DiaryIndexRoute
   '/exercise': typeof ExerciseIndexRoute
+  '/onboarding': typeof OnboardingIndexRoute
   '/profile': typeof ProfileIndexRoute
   '/progress': typeof ProgressIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -111,6 +122,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardIndexRoute
   '/diary': typeof DiaryIndexRoute
   '/exercise': typeof ExerciseIndexRoute
+  '/onboarding': typeof OnboardingIndexRoute
   '/profile': typeof ProfileIndexRoute
   '/progress': typeof ProgressIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -126,6 +138,7 @@ export interface FileRoutesById {
   '/dashboard/': typeof DashboardIndexRoute
   '/diary/': typeof DiaryIndexRoute
   '/exercise/': typeof ExerciseIndexRoute
+  '/onboarding/': typeof OnboardingIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/progress/': typeof ProgressIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -142,6 +155,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/diary'
     | '/exercise'
+    | '/onboarding'
     | '/profile'
     | '/progress'
     | '/api/auth/$'
@@ -156,6 +170,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/diary'
     | '/exercise'
+    | '/onboarding'
     | '/profile'
     | '/progress'
     | '/api/auth/$'
@@ -170,6 +185,7 @@ export interface FileRouteTypes {
     | '/dashboard/'
     | '/diary/'
     | '/exercise/'
+    | '/onboarding/'
     | '/profile/'
     | '/progress/'
     | '/api/auth/$'
@@ -185,6 +201,7 @@ export interface RootRouteChildren {
   DashboardIndexRoute: typeof DashboardIndexRoute
   DiaryIndexRoute: typeof DiaryIndexRoute
   ExerciseIndexRoute: typeof ExerciseIndexRoute
+  OnboardingIndexRoute: typeof OnboardingIndexRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
   ProgressIndexRoute: typeof ProgressIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
@@ -211,6 +228,13 @@ declare module '@tanstack/react-router' {
       path: '/profile'
       fullPath: '/profile'
       preLoaderRoute: typeof ProfileIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding/': {
+      id: '/onboarding/'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/exercise/': {
@@ -289,6 +313,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardIndexRoute: DashboardIndexRoute,
   DiaryIndexRoute: DiaryIndexRoute,
   ExerciseIndexRoute: ExerciseIndexRoute,
+  OnboardingIndexRoute: OnboardingIndexRoute,
   ProfileIndexRoute: ProfileIndexRoute,
   ProgressIndexRoute: ProgressIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,

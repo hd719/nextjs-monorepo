@@ -12,6 +12,9 @@ export const ROUTES = {
     VERIFY_EMAIL: "/auth/verify-email",
   },
 
+  // Onboarding
+  ONBOARDING: "/onboarding",
+
   // Protected routes
   DASHBOARD: "/dashboard",
   DIARY: "/diary",

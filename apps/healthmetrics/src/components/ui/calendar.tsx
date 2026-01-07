@@ -9,6 +9,7 @@ import { buttonVariants } from "@/components/ui/button";
  * Calendar component built on react-day-picker with Tailwind styling
  *
  * Uses pure Tailwind classes (no defaultClassNames merge) for reliable styling.
+ * Supports dropdown mode for year/month selection.
  */
 function Calendar({
   className,
@@ -26,9 +27,18 @@ function Calendar({
         months: "flex flex-col sm:flex-row gap-4",
         month: "space-y-4",
 
-        // Caption - full width, centered text, same height as nav buttons
-        month_caption: "flex justify-center items-center h-7",
+        // Caption - contains month/year dropdowns or label
+        month_caption: "flex justify-center items-center h-7 gap-1",
         caption_label: "text-sm font-medium",
+
+        // Dropdown mode styles
+        dropdowns: "flex items-center gap-2",
+        dropdown:
+          "appearance-none bg-transparent border border-input rounded-md px-2 py-1 text-sm font-medium cursor-pointer hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring",
+        months_dropdown:
+          "appearance-none bg-transparent border border-input rounded-md px-2 py-1 text-sm font-medium cursor-pointer hover:bg-accent",
+        years_dropdown:
+          "appearance-none bg-transparent border border-input rounded-md px-2 py-1 text-sm font-medium cursor-pointer hover:bg-accent",
 
         // Navigation - positioned to appear on the same row as caption
         nav: "flex items-center gap-1 absolute left-3 right-3 top-3 h-7 justify-between pointer-events-none",

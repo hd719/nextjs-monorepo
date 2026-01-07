@@ -2017,6 +2017,10 @@ export const UserScalarFieldEnum = {
   unitsPreference: 'unitsPreference',
   timezone: 'timezone',
   isAdmin: 'isAdmin',
+  onboardingCompleted: 'onboardingCompleted',
+  onboardingStep: 'onboardingStep',
+  onboardingSkippedAt: 'onboardingSkippedAt',
+  onboardingCompletedAt: 'onboardingCompletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

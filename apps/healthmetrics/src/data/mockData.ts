@@ -4,8 +4,8 @@ import type {
   Activity,
   UserDisplayProfile,
   WaterIntake,
-} from "../types/nutrition";
-import type { ExerciseSummary } from "../types/exercise";
+} from "@/types/nutrition";
+import type { ExerciseSummary } from "@/types/exercise";
 
 // Static date for consistent SSR/client rendering
 // In production, this would be generated server-side per request

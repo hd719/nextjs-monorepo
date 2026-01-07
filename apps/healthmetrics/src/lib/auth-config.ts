@@ -16,10 +16,11 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { tanstackStartCookies } from "better-auth/tanstack-start";
 import { prisma } from "@/lib/prisma";
+import { DEFAULT_DEV_URL } from "@/constants";
 
 export const auth = betterAuth({
-  baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3003",
-  trustedOrigins: ["http://localhost:3003"],
+  baseURL: process.env.BETTER_AUTH_URL || DEFAULT_DEV_URL,
+  trustedOrigins: [DEFAULT_DEV_URL],
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
@@ -66,7 +67,7 @@ export const auth = betterAuth({
     // Password reset function (direct property, not nested)
     sendResetPassword: async ({ user, url, token }) => {
       const resetPasswordUrl =
-        `${process.env.APP_URL || "http://localhost:3003"}/auth/reset-password?token=${token}` ||
+        `${process.env.APP_URL || DEFAULT_DEV_URL}/auth/reset-password?token=${token}` ||
         url;
       console.log("=".repeat(80));
       console.log("PASSWORD RESET EMAIL");
@@ -86,7 +87,7 @@ export const auth = betterAuth({
   // Email verification (console logging for dev)
   emailVerification: {
     sendVerificationEmail: async ({ user, token }) => {
-      const url = `${process.env.APP_URL || "http://localhost:3003"}/auth/verify-email?token=${token}`;
+      const url = `${process.env.APP_URL || DEFAULT_DEV_URL}/auth/verify-email?token=${token}`;
       console.log("=".repeat(80));
       console.log("VERIFICATION EMAIL");
       console.log("To:", user.email);

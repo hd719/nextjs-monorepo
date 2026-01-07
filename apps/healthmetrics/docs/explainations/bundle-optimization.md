@@ -11,6 +11,7 @@ bun run build:analyze
 ```
 
 This command:
+
 1. Builds the production bundle
 2. Generates `stats.html` in the project root
 3. Auto-opens an interactive treemap visualization
@@ -44,6 +45,7 @@ src/routes/progress/
 ```
 
 **How it works:**
+
 - `index.tsx` contains only the route configuration and `beforeLoad` auth check
 - `index.lazy.tsx` contains the actual component and all Recharts imports
 - When user navigates to `/progress`, the lazy chunk loads on-demand
@@ -65,6 +67,7 @@ import * as Icons from "lucide-react";
 ### 3. CSS Optimization
 
 All CSS uses Tailwind's `@layer` system, which:
+
 - Enables dead code elimination for unused utilities
 - Produces optimized, minified output (~23 KB gzipped)
 - Avoids Flash of Unstyled Content (FOUC)
@@ -113,17 +116,17 @@ process.env.ANALYZE === "true" &&
 
 ### Medium Impact
 
-3. **Dynamic Import for date-fns Locales**
+1. **Dynamic Import for date-fns Locales**
    - Only load locale data when user changes language
    - Est. savings: ~10-20 KB
 
-4. **Code Split Form Validation**
+2. **Code Split Form Validation**
    - Zod is ~45 KB gzipped
    - Could lazy load on form pages only
 
 ### Low Impact (Micro-optimizations)
 
-5. **Use `clsx` instead of `clsx` + `tailwind-merge`**
+1. **Use `clsx` instead of `clsx` + `tailwind-merge`**
    - If not using complex merge logic
    - Est. savings: ~5 KB
 
@@ -174,11 +177,13 @@ bun run build:analyze
 ## Best Practices
 
 1. **Always check bundle impact before adding dependencies**
+
    ```bash
    npx bundle-phobia-cli <package-name>
    ```
 
 2. **Use dynamic imports for heavy features**
+
    ```typescript
    const HeavyComponent = lazy(() => import("./HeavyComponent"));
    ```

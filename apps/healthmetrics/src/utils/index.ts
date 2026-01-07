@@ -18,13 +18,14 @@ export { getFieldError, hasFieldError } from "./form-errors";
 // Profile utilities
 export {
   formatDate,
-  kgToLbs,
+  formatKgToLbs,
   cmToInches,
   getDefaultFormValues,
   buildProfileUpdates,
   validateAvatarFile,
   fileToBase64,
   calculateMacroBreakdown,
+  calculateProfileCompletion,
 } from "./profile-helpers";
 
 // Profile form validators (TanStack Form)
@@ -37,6 +38,20 @@ export {
   carbGoalValidator,
   fatGoalValidator,
 } from "./profile-validators";
+
+// Nutrition calculator
+export {
+  calculateBMR,
+  calculateTDEE,
+  calculateCalorieGoal,
+  calculateMacros,
+  lbsToKg,
+  kgToLbs,
+  feetInchesToCm,
+  cmToFeetInches,
+  calculateAge,
+  calculateNutritionGoals,
+} from "./nutrition-calculator";
 
 // Query keys
 export { queryKeys } from "./query-keys";

@@ -29,3 +29,17 @@ export { useProfile, useUpdateProfile } from "./useProfile";
 
 // Weight hooks
 export { useLatestWeight, useSaveWeight, useWeightTrend } from "./useWeight";
+
+// Onboarding hooks
+export {
+  useOnboardingState,
+  useSaveOnboardingStep,
+  useCalculateGoals,
+  useCompleteOnboarding,
+  useSkipOnboarding,
+  useResetOnboarding,
+  useOnboardingWizard,
+} from "./useOnboarding";
+
+// Goal calculation hook
+export { useGoalCalculation } from "./useGoalCalculation";

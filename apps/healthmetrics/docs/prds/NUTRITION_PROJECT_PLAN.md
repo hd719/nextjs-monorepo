@@ -49,6 +49,7 @@ Create a comprehensive fitness and nutrition platform that rivals MyFitnessPal, 
 ### Database Architecture (Supabase)
 
 **Core Tables**:
+
 - `users` - User profiles and preferences
 - `food_items` - Food database with nutrition data
 - `diary_entries` - Daily food logs
@@ -155,6 +156,7 @@ COOKBOOK_API_KEY=shared-secret
 ### TanStack Start Mastery Checklist
 
 #### **Core Routing & Navigation** (Phase 1)
+
 - [ ] File-based routing with dynamic parameters (`/diary/$date`, `/recipes/$id`)
 - [ ] Nested layouts for authenticated vs public sections
 - [ ] Route protection with middleware
@@ -162,6 +164,7 @@ COOKBOOK_API_KEY=shared-secret
 - [ ] Programmatic navigation and route preloading
 
 #### **Server Functions & Data Loading** (Phase 1-2)
+
 - [ ] Server functions for type-safe operations
 - [ ] Middleware for authentication and validation
 - [ ] Server-side data fetching with caching
@@ -169,6 +172,7 @@ COOKBOOK_API_KEY=shared-secret
 - [ ] Cross-route data sharing patterns
 
 #### **Advanced Caching Strategies** (Phase 2-3)
+
 - [ ] Route-level caching with staleTime/gcTime
 - [ ] Query invalidation patterns
 - [ ] Optimistic updates for instant feedback
@@ -176,6 +180,7 @@ COOKBOOK_API_KEY=shared-secret
 - [ ] Performance monitoring and optimization
 
 #### **Form Handling & Server Actions** (Phase 1-3)
+
 - [ ] Server actions for form submissions
 - [ ] Form validation with server-side feedback
 - [ ] File uploads to Supabase Storage
@@ -183,6 +188,7 @@ COOKBOOK_API_KEY=shared-secret
 - [ ] Real-time form validation
 
 #### **Real-time Features** (Phase 4)
+
 - [ ] Server-sent events for live updates
 - [ ] Real-time friend activity feeds
 - [ ] Live challenge leaderboards
@@ -190,6 +196,7 @@ COOKBOOK_API_KEY=shared-secret
 - [ ] WebSocket fallback patterns
 
 #### **Error Handling & Loading States** (All Phases)
+
 - [ ] Route-level error boundaries
 - [ ] Global error handling
 - [ ] Loading states and skeletons
@@ -197,6 +204,7 @@ COOKBOOK_API_KEY=shared-secret
 - [ ] Graceful degradation
 
 #### **Performance & Optimization** (Phase 5)
+
 - [ ] Code splitting by route
 - [ ] Lazy loading components
 - [ ] Bundle size optimization
@@ -444,21 +452,25 @@ export function NavigationLink({ to, children }: LinkProps) {
 ### Nutrition-Specific TanStack Start Patterns
 
 #### **Real-time Meal Planning**
+
 - Collaborative meal planning with live updates
 - Drag-and-drop meal scheduling with optimistic updates
 - Shopping list generation with real-time ingredient aggregation
 
 #### **Progressive Barcode Scanning**
+
 - Camera-based scanning with fallback to manual entry
 - Multiple API integration with streaming results
 - Offline barcode caching with sync when online
 
 #### **Smart Nutrition Analytics**
+
 - Streaming large nutrition datasets
 - Real-time trend calculations
 - Personalized recommendation engine
 
 #### **Social Fitness Features**
+
 - Real-time friend activity feeds
 - Live challenge leaderboards
 - Progress sharing with instant updates
