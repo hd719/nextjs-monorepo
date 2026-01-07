@@ -58,6 +58,9 @@ export {
 // Query keys
 export { queryKeys } from "./query-keys";
 
+// Route guards
+export { requireAuthAndOnboarding, requireAuth } from "./route-guards";
+
 // Validation schemas and types (Zod)
 export {
   loginSchema,
