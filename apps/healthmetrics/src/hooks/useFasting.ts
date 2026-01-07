@@ -13,7 +13,7 @@ import {
   createCustomProtocol,
   deleteCustomProtocol,
 } from "@/server";
-import { queryKeys } from "@/utils/query-keys";
+import { queryKeys } from "@/utils";
 
 // ============================================================================
 // QUERY HOOKS

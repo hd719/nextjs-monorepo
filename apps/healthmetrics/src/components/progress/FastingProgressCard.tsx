@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useFastingStats } from "@/hooks";
 import { useNavigate } from "@tanstack/react-router";
-import { ROUTES } from "@/constants/routes";
+import { ROUTES } from "@/constants";
 import { formatDuration } from "@/utils";
 
 export interface FastingProgressCardProps {

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useNavigate } from "@tanstack/react-router";
-import { ROUTES } from "@/constants/routes";
+import { ROUTES } from "@/constants";
 import { useActiveFast, useFastingStats } from "@/hooks";
 import { formatDuration } from "@/utils";
 import { useMemo } from "react";
