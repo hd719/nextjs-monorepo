@@ -1,7 +1,7 @@
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { Utensils } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import type { MacroData } from "@/types/progress";
+import type { MacroData } from "@/types";
 
 interface MacroBreakdownProps {
   data: {

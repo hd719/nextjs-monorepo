@@ -3,7 +3,7 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "@/components/ui/theme-provider";
-import { fetchUser } from "@/server/auth";
+import { fetchUser } from "@/server";
 
 // This ensures CSS loads as a stylesheet, not via JavaScript injection
 import appCss from "../styles.css?url";

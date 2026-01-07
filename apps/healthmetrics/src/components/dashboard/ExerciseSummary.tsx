@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useNavigate, Link } from "@tanstack/react-router";
-import type { ExerciseSummary as ExerciseSummaryType } from "@/types/exercise";
+import type { ExerciseSummary as ExerciseSummaryType } from "@/types";
 import { ROUTES } from "@/constants/routes";
 
 export interface ExerciseSummaryProps {
@@ -62,7 +62,7 @@ export function ExerciseSummary({ data, isLoading }: ExerciseSummaryProps) {
   return (
     <section className="dashboard-exercise-section">
       <h2 className="dashboard-exercise-heading">Today's Exercise</h2>
-      <Card variant="supporting">
+      <Card variant="supporting" className="dashboard-card-stretch">
         <CardHeader>
           <CardTitle className="dashboard-exercise-title">
             Workout Summary

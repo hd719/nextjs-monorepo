@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { Activity } from "lucide-react";
-import { useOnboardingWizard } from "@/hooks/useOnboarding";
-import { useGoalCalculation } from "@/hooks/useGoalCalculation";
+import { useOnboardingWizard, useGoalCalculation } from "@/hooks";
 import { ONBOARDING_TOTAL_STEPS, ROUTES } from "@/constants";
-import type { OnboardingStepData } from "@/types/onboarding";
+import type { OnboardingStepData } from "@/types";
 import { ONBOARDING_CONTENT_STEPS } from "@/constants/onboarding";
 import { WelcomeStep } from "./steps/WelcomeStep";
 import { MeasurementsStep } from "./steps/MeasurementsStep";

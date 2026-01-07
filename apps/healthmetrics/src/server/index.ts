@@ -35,6 +35,32 @@ export { getWaterIntake, updateWaterIntake, updateWaterGoal } from "./water";
 // Step server functions
 export { getStepCount, updateStepCount, addSteps } from "./steps";
 
+// Sleep server functions
+export {
+  getSleepEntry,
+  getSleepHistory,
+  getSleepAverage,
+  saveSleepEntry,
+  deleteSleepEntry,
+} from "./sleep";
+
+// Streak server functions
+export {
+  getStreaks,
+  updateLoggingStreak,
+  updateExerciseStreak,
+  updateCalorieStreak,
+} from "./streaks";
+
+// Achievement server functions
+export {
+  getAchievements,
+  getUserAchievements,
+  getAchievementSummary,
+  unlockAchievement,
+  checkAchievements,
+} from "./achievements";
+
 // Weight server functions
 export { getLatestWeight, saveWeightEntry, getWeightTrend } from "./weight";
 

@@ -3,7 +3,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { Card } from "@/components/ui/card";
 import { MealCard } from "@/components/diary/MealCard";
 import { EmptyState } from "@/components/ui/empty-state";
-import type { MealEntry } from "@/types/nutrition";
+import type { MealEntry } from "@/types";
 import { ROUTES } from "@/constants/routes";
 
 export interface TodaysDiaryProps {

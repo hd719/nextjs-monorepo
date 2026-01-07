@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { useResetOnboarding } from "@/hooks/useOnboarding";
+import { useResetOnboarding } from "@/hooks";
 import { ROUTES } from "@/constants/routes";
 import { Button } from "@/components/ui/button";
 import { Settings, RotateCcw, X } from "lucide-react";

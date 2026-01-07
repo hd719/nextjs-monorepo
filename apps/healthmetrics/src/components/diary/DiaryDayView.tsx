@@ -15,7 +15,7 @@ import {
 import { useToast, ToastContainer } from "@/components/ui/toast";
 import { DiaryEntryList } from "./DiaryEntryList";
 import { AddFoodDialog } from "./AddFoodDialog";
-import { useDiaryDay, useDiaryTotals, useCopyDiaryDay } from "@/hooks/useDiary";
+import { useDiaryDay, useDiaryTotals, useCopyDiaryDay } from "@/hooks";
 import { DEFAULT_NUTRITION_GOALS } from "@/constants/defaults";
 
 export interface DiaryDayViewProps {

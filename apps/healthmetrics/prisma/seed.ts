@@ -464,7 +464,227 @@ const commonFoods = [
 ];
 
 // Curated exercise library with MET values
-// MET (Metabolic Equivalent of Task) values from Compendium of Physical Activities
+// MET (Metabolic Equivalent of Task) values
+// Achievement definitions for gamification system
+const achievementDefinitions = [
+  {
+    key: "first_meal",
+    name: "First Bite",
+    description: "Log your first meal",
+    icon: "utensils",
+    category: "logging",
+    requirement: { type: "count", target: 1, metric: "meals" },
+    points: 10,
+  },
+  {
+    key: "streak_7",
+    name: "Week Warrior",
+    description: "Maintain a 7-day logging streak",
+    icon: "flame",
+    category: "streaks",
+    requirement: { type: "streak", target: 7, metric: "logging" },
+    points: 25,
+  },
+  {
+    key: "streak_30",
+    name: "Monthly Master",
+    description: "Maintain a 30-day logging streak",
+    icon: "trophy",
+    category: "streaks",
+    requirement: { type: "streak", target: 30, metric: "logging" },
+    points: 100,
+  },
+  {
+    key: "streak_100",
+    name: "Centurion Logger",
+    description: "Maintain a 100-day logging streak",
+    icon: "crown",
+    category: "streaks",
+    requirement: { type: "streak", target: 100, metric: "logging" },
+    points: 500,
+  },
+  {
+    key: "calorie_goal_7",
+    name: "On Target",
+    description: "Hit your calorie goal 7 days in a row",
+    icon: "target",
+    category: "goals",
+    requirement: { type: "streak", target: 7, metric: "calorie" },
+    points: 50,
+  },
+  {
+    key: "calorie_goal_30",
+    name: "Precision Eater",
+    description: "Hit your calorie goal 30 days in a row",
+    icon: "crosshair",
+    category: "goals",
+    requirement: { type: "streak", target: 30, metric: "calorie" },
+    points: 200,
+  },
+  {
+    key: "first_workout",
+    name: "Getting Moving",
+    description: "Log your first workout",
+    icon: "dumbbell",
+    category: "exercise",
+    requirement: { type: "count", target: 1, metric: "workouts" },
+    points: 10,
+  },
+  {
+    key: "exercise_streak_7",
+    name: "Fitness Fanatic",
+    description: "Exercise 7 days in a row",
+    icon: "zap",
+    category: "exercise",
+    requirement: { type: "streak", target: 7, metric: "exercise" },
+    points: 50,
+  },
+  {
+    key: "exercise_streak_30",
+    name: "Iron Will",
+    description: "Exercise 30 days in a row",
+    icon: "medal",
+    category: "exercise",
+    requirement: { type: "streak", target: 30, metric: "exercise" },
+    points: 200,
+  },
+  {
+    key: "water_goal_7",
+    name: "Hydrated",
+    description: "Hit your water goal 7 days in a row",
+    icon: "droplets",
+    category: "goals",
+    requirement: { type: "streak", target: 7, metric: "water" },
+    points: 25,
+  },
+  {
+    key: "water_goal_30",
+    name: "Hydration Hero",
+    description: "Hit your water goal 30 days in a row",
+    icon: "waves",
+    category: "goals",
+    requirement: { type: "streak", target: 30, metric: "water" },
+    points: 100,
+  },
+  {
+    key: "meals_50",
+    name: "Food Logger",
+    description: "Log 50 meals",
+    icon: "utensils-crossed",
+    category: "logging",
+    requirement: { type: "count", target: 50, metric: "meals" },
+    points: 25,
+  },
+  {
+    key: "meals_100",
+    name: "Centurion Chef",
+    description: "Log 100 meals",
+    icon: "chef-hat",
+    category: "logging",
+    requirement: { type: "count", target: 100, metric: "meals" },
+    points: 75,
+  },
+  {
+    key: "meals_500",
+    name: "Nutrition Master",
+    description: "Log 500 meals",
+    icon: "award",
+    category: "logging",
+    requirement: { type: "count", target: 500, metric: "meals" },
+    points: 250,
+  },
+  {
+    key: "workouts_10",
+    name: "Gym Goer",
+    description: "Complete 10 workouts",
+    icon: "activity",
+    category: "exercise",
+    requirement: { type: "count", target: 10, metric: "workouts" },
+    points: 30,
+  },
+  {
+    key: "workouts_50",
+    name: "Fitness Enthusiast",
+    description: "Complete 50 workouts",
+    icon: "heart-pulse",
+    category: "exercise",
+    requirement: { type: "count", target: 50, metric: "workouts" },
+    points: 100,
+  },
+  {
+    key: "workouts_100",
+    name: "Workout Warrior",
+    description: "Complete 100 workouts",
+    icon: "swords",
+    category: "exercise",
+    requirement: { type: "count", target: 100, metric: "workouts" },
+    points: 250,
+  },
+  {
+    key: "first_sleep",
+    name: "Sleep Tracker",
+    description: "Log your first sleep entry",
+    icon: "moon",
+    category: "logging",
+    requirement: { type: "count", target: 1, metric: "sleep" },
+    points: 10,
+  },
+  {
+    key: "sleep_7",
+    name: "Well Rested",
+    description: "Log sleep for 7 days in a row",
+    icon: "bed-double",
+    category: "streaks",
+    requirement: { type: "streak", target: 7, metric: "sleep" },
+    points: 25,
+  },
+  {
+    key: "sleep_quality_5",
+    name: "Sweet Dreams",
+    description: "Log 5-star quality sleep",
+    icon: "sparkles",
+    category: "goals",
+    requirement: { type: "count", target: 1, metric: "perfect_sleep" },
+    points: 15,
+  },
+  {
+    key: "weight_logged",
+    name: "Scale Starter",
+    description: "Log your first weight entry",
+    icon: "scale",
+    category: "logging",
+    requirement: { type: "count", target: 1, metric: "weight" },
+    points: 10,
+  },
+  {
+    key: "weight_trend_7",
+    name: "Progress Tracker",
+    description: "Log weight for 7 consecutive days",
+    icon: "trending-down",
+    category: "streaks",
+    requirement: { type: "streak", target: 7, metric: "weight" },
+    points: 25,
+  },
+  {
+    key: "steps_10k",
+    name: "10K Steps",
+    description: "Hit 10,000 steps in a day",
+    icon: "footprints",
+    category: "goals",
+    requirement: { type: "count", target: 10000, metric: "steps_daily" },
+    points: 20,
+  },
+  {
+    key: "early_bird",
+    name: "Early Bird",
+    description: "Log a meal before 7am",
+    icon: "sunrise",
+    category: "logging",
+    requirement: { type: "count", target: 1, metric: "early_meal" },
+    points: 15,
+  },
+];
+
 const curatedExercises = [
   // Cardio exercises
   {
@@ -978,6 +1198,29 @@ async function main() {
   } else {
     console.log(
       `⚠️  Database already has ${existingExerciseCount} exercises. Skipping exercise seed.`
+    );
+  }
+
+  // Check if achievements already exist
+  const existingAchievementCount = await prisma.achievement.count();
+  if (existingAchievementCount === 0) {
+    // Insert all achievements
+    console.log(
+      `📦 Inserting ${achievementDefinitions.length} achievement definitions...`
+    );
+
+    for (const achievement of achievementDefinitions) {
+      await prisma.achievement.create({
+        data: achievement,
+      });
+    }
+
+    console.log(
+      `✅ Added ${achievementDefinitions.length} achievements to the database.`
+    );
+  } else {
+    console.log(
+      `⚠️  Database already has ${existingAchievementCount} achievements. Skipping achievement seed.`
     );
   }
 

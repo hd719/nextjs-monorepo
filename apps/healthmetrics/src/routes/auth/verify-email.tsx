@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Activity, Loader2, CheckCircle, XCircle } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { authClient } from "@/lib/auth-client";
+import { authClient } from "@/lib";
 import { ROUTES } from "@/constants/routes";
 
 export const Route = createFileRoute("/auth/verify-email")({

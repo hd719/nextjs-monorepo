@@ -1,4 +1,4 @@
-import type { FoodItem as FoodItemType } from "@/types/nutrition";
+import type { FoodItem as FoodItemType } from "@/types";
 
 export interface FoodItemProps {
   food: FoodItemType;

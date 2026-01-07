@@ -13,7 +13,7 @@ import {
   NutritionSummary,
   type NutritionData,
 } from "@/components/ui/nutrition-summary";
-import type { DailySummary as DailySummaryType } from "@/types/nutrition";
+import type { DailySummary as DailySummaryType } from "@/types";
 import { ROUTES } from "@/constants/routes";
 
 export interface DailySummaryProps {

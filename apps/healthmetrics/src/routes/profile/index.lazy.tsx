@@ -2,7 +2,7 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import { AppLayout } from "@/components/layout";
 import { ProfileForm } from "@/components/profile";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useProfile } from "@/hooks/useProfile";
+import { useProfile } from "@/hooks";
 
 export const Route = createLazyFileRoute("/profile/")({
   component: ProfilePage,

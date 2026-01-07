@@ -397,13 +397,17 @@ export const ModelName = {
   WeightEntry: 'WeightEntry',
   WaterEntry: 'WaterEntry',
   StepEntry: 'StepEntry',
+  SleepEntry: 'SleepEntry',
   RecipeCache: 'RecipeCache',
   MealPlanTemplate: 'MealPlanTemplate',
   MealPlan: 'MealPlan',
   Goal: 'Goal',
   Friendship: 'Friendship',
   Challenge: 'Challenge',
-  ChallengeParticipant: 'ChallengeParticipant'
+  ChallengeParticipant: 'ChallengeParticipant',
+  UserStreak: 'UserStreak',
+  Achievement: 'Achievement',
+  UserAchievement: 'UserAchievement'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -419,7 +423,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "betterAuthUser" | "betterAuthSession" | "betterAuthAccount" | "verification" | "user" | "foodItem" | "exercise" | "diaryEntry" | "workoutSession" | "workoutLog" | "weightEntry" | "waterEntry" | "stepEntry" | "recipeCache" | "mealPlanTemplate" | "mealPlan" | "goal" | "friendship" | "challenge" | "challengeParticipant"
+    modelProps: "betterAuthUser" | "betterAuthSession" | "betterAuthAccount" | "verification" | "user" | "foodItem" | "exercise" | "diaryEntry" | "workoutSession" | "workoutLog" | "weightEntry" | "waterEntry" | "stepEntry" | "sleepEntry" | "recipeCache" | "mealPlanTemplate" | "mealPlan" | "goal" | "friendship" | "challenge" | "challengeParticipant" | "userStreak" | "achievement" | "userAchievement"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1385,6 +1389,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SleepEntry: {
+      payload: Prisma.$SleepEntryPayload<ExtArgs>
+      fields: Prisma.SleepEntryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SleepEntryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SleepEntryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SleepEntryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SleepEntryPayload>
+        }
+        findFirst: {
+          args: Prisma.SleepEntryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SleepEntryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SleepEntryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SleepEntryPayload>
+        }
+        findMany: {
+          args: Prisma.SleepEntryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SleepEntryPayload>[]
+        }
+        create: {
+          args: Prisma.SleepEntryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SleepEntryPayload>
+        }
+        createMany: {
+          args: Prisma.SleepEntryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SleepEntryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SleepEntryPayload>[]
+        }
+        delete: {
+          args: Prisma.SleepEntryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SleepEntryPayload>
+        }
+        update: {
+          args: Prisma.SleepEntryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SleepEntryPayload>
+        }
+        deleteMany: {
+          args: Prisma.SleepEntryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SleepEntryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SleepEntryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SleepEntryPayload>[]
+        }
+        upsert: {
+          args: Prisma.SleepEntryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SleepEntryPayload>
+        }
+        aggregate: {
+          args: Prisma.SleepEntryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSleepEntry>
+        }
+        groupBy: {
+          args: Prisma.SleepEntryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SleepEntryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SleepEntryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SleepEntryCountAggregateOutputType> | number
+        }
+      }
+    }
     RecipeCache: {
       payload: Prisma.$RecipeCachePayload<ExtArgs>
       fields: Prisma.RecipeCacheFieldRefs
@@ -1903,6 +1981,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    UserStreak: {
+      payload: Prisma.$UserStreakPayload<ExtArgs>
+      fields: Prisma.UserStreakFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserStreakFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserStreakPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserStreakFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserStreakPayload>
+        }
+        findFirst: {
+          args: Prisma.UserStreakFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserStreakPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserStreakFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserStreakPayload>
+        }
+        findMany: {
+          args: Prisma.UserStreakFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserStreakPayload>[]
+        }
+        create: {
+          args: Prisma.UserStreakCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserStreakPayload>
+        }
+        createMany: {
+          args: Prisma.UserStreakCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserStreakCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserStreakPayload>[]
+        }
+        delete: {
+          args: Prisma.UserStreakDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserStreakPayload>
+        }
+        update: {
+          args: Prisma.UserStreakUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserStreakPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserStreakDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserStreakUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserStreakUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserStreakPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserStreakUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserStreakPayload>
+        }
+        aggregate: {
+          args: Prisma.UserStreakAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserStreak>
+        }
+        groupBy: {
+          args: Prisma.UserStreakGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserStreakGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserStreakCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserStreakCountAggregateOutputType> | number
+        }
+      }
+    }
+    Achievement: {
+      payload: Prisma.$AchievementPayload<ExtArgs>
+      fields: Prisma.AchievementFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AchievementFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AchievementPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AchievementFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AchievementPayload>
+        }
+        findFirst: {
+          args: Prisma.AchievementFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AchievementPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AchievementFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AchievementPayload>
+        }
+        findMany: {
+          args: Prisma.AchievementFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AchievementPayload>[]
+        }
+        create: {
+          args: Prisma.AchievementCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AchievementPayload>
+        }
+        createMany: {
+          args: Prisma.AchievementCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AchievementCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AchievementPayload>[]
+        }
+        delete: {
+          args: Prisma.AchievementDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AchievementPayload>
+        }
+        update: {
+          args: Prisma.AchievementUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AchievementPayload>
+        }
+        deleteMany: {
+          args: Prisma.AchievementDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AchievementUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AchievementUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AchievementPayload>[]
+        }
+        upsert: {
+          args: Prisma.AchievementUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AchievementPayload>
+        }
+        aggregate: {
+          args: Prisma.AchievementAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAchievement>
+        }
+        groupBy: {
+          args: Prisma.AchievementGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AchievementGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AchievementCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AchievementCountAggregateOutputType> | number
+        }
+      }
+    }
+    UserAchievement: {
+      payload: Prisma.$UserAchievementPayload<ExtArgs>
+      fields: Prisma.UserAchievementFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserAchievementFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserAchievementPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserAchievementFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserAchievementPayload>
+        }
+        findFirst: {
+          args: Prisma.UserAchievementFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserAchievementPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserAchievementFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserAchievementPayload>
+        }
+        findMany: {
+          args: Prisma.UserAchievementFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserAchievementPayload>[]
+        }
+        create: {
+          args: Prisma.UserAchievementCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserAchievementPayload>
+        }
+        createMany: {
+          args: Prisma.UserAchievementCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserAchievementCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserAchievementPayload>[]
+        }
+        delete: {
+          args: Prisma.UserAchievementDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserAchievementPayload>
+        }
+        update: {
+          args: Prisma.UserAchievementUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserAchievementPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserAchievementDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserAchievementUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserAchievementUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserAchievementPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserAchievementUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserAchievementPayload>
+        }
+        aggregate: {
+          args: Prisma.UserAchievementAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserAchievement>
+        }
+        groupBy: {
+          args: Prisma.UserAchievementGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserAchievementGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserAchievementCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserAchievementCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2169,6 +2469,22 @@ export const StepEntryScalarFieldEnum = {
 export type StepEntryScalarFieldEnum = (typeof StepEntryScalarFieldEnum)[keyof typeof StepEntryScalarFieldEnum]
 
 
+export const SleepEntryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  date: 'date',
+  hoursSlept: 'hoursSlept',
+  quality: 'quality',
+  bedtime: 'bedtime',
+  wakeTime: 'wakeTime',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SleepEntryScalarFieldEnum = (typeof SleepEntryScalarFieldEnum)[keyof typeof SleepEntryScalarFieldEnum]
+
+
 export const RecipeCacheScalarFieldEnum = {
   id: 'id',
   recipeId: 'recipeId',
@@ -2292,6 +2608,50 @@ export const ChallengeParticipantScalarFieldEnum = {
 } as const
 
 export type ChallengeParticipantScalarFieldEnum = (typeof ChallengeParticipantScalarFieldEnum)[keyof typeof ChallengeParticipantScalarFieldEnum]
+
+
+export const UserStreakScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  currentLogging: 'currentLogging',
+  currentCalorie: 'currentCalorie',
+  currentExercise: 'currentExercise',
+  bestLogging: 'bestLogging',
+  bestCalorie: 'bestCalorie',
+  bestExercise: 'bestExercise',
+  lastLoggingDate: 'lastLoggingDate',
+  lastExerciseDate: 'lastExerciseDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserStreakScalarFieldEnum = (typeof UserStreakScalarFieldEnum)[keyof typeof UserStreakScalarFieldEnum]
+
+
+export const AchievementScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name',
+  description: 'description',
+  icon: 'icon',
+  category: 'category',
+  requirement: 'requirement',
+  points: 'points',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AchievementScalarFieldEnum = (typeof AchievementScalarFieldEnum)[keyof typeof AchievementScalarFieldEnum]
+
+
+export const UserAchievementScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  achievementId: 'achievementId',
+  unlockedAt: 'unlockedAt'
+} as const
+
+export type UserAchievementScalarFieldEnum = (typeof UserAchievementScalarFieldEnum)[keyof typeof UserAchievementScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -2714,6 +3074,7 @@ export type GlobalOmitConfig = {
   weightEntry?: Prisma.WeightEntryOmit
   waterEntry?: Prisma.WaterEntryOmit
   stepEntry?: Prisma.StepEntryOmit
+  sleepEntry?: Prisma.SleepEntryOmit
   recipeCache?: Prisma.RecipeCacheOmit
   mealPlanTemplate?: Prisma.MealPlanTemplateOmit
   mealPlan?: Prisma.MealPlanOmit
@@ -2721,6 +3082,9 @@ export type GlobalOmitConfig = {
   friendship?: Prisma.FriendshipOmit
   challenge?: Prisma.ChallengeOmit
   challengeParticipant?: Prisma.ChallengeParticipantOmit
+  userStreak?: Prisma.UserStreakOmit
+  achievement?: Prisma.AchievementOmit
+  userAchievement?: Prisma.UserAchievementOmit
 }
 
 /* Types for Logging */

@@ -378,7 +378,7 @@
      ========================================================================== */
 
   .diary-meal-content {
-    @apply space-y-2;
+    @apply space-y-2 px-4 pb-4;
   }
 
   .diary-meal-food-list {

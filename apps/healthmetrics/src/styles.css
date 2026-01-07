@@ -42,6 +42,8 @@
 @import "./styles/components/diary.css";
 @import "./styles/components/exercise.css";
 @import "./styles/components/progress.css";
+@import "./styles/components/sleep.css";
+@import "./styles/components/achievements.css";
 @import "./styles/components/ui.css";
 @import "./styles/components/utilities.css";
 @import "./styles/components/dev.css";

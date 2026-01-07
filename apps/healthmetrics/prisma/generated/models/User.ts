@@ -409,6 +409,7 @@ export type UserWhereInput = {
   weightEntries?: Prisma.WeightEntryListRelationFilter
   waterEntries?: Prisma.WaterEntryListRelationFilter
   stepEntries?: Prisma.StepEntryListRelationFilter
+  sleepEntries?: Prisma.SleepEntryListRelationFilter
   mealPlanTemplates?: Prisma.MealPlanTemplateListRelationFilter
   mealPlans?: Prisma.MealPlanListRelationFilter
   goals?: Prisma.GoalListRelationFilter
@@ -417,6 +418,8 @@ export type UserWhereInput = {
   requestedFriendships?: Prisma.FriendshipListRelationFilter
   createdChallenges?: Prisma.ChallengeListRelationFilter
   challengeParticipations?: Prisma.ChallengeParticipantListRelationFilter
+  streak?: Prisma.XOR<Prisma.UserStreakNullableScalarRelationFilter, Prisma.UserStreakWhereInput> | null
+  userAchievements?: Prisma.UserAchievementListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -453,6 +456,7 @@ export type UserOrderByWithRelationInput = {
   weightEntries?: Prisma.WeightEntryOrderByRelationAggregateInput
   waterEntries?: Prisma.WaterEntryOrderByRelationAggregateInput
   stepEntries?: Prisma.StepEntryOrderByRelationAggregateInput
+  sleepEntries?: Prisma.SleepEntryOrderByRelationAggregateInput
   mealPlanTemplates?: Prisma.MealPlanTemplateOrderByRelationAggregateInput
   mealPlans?: Prisma.MealPlanOrderByRelationAggregateInput
   goals?: Prisma.GoalOrderByRelationAggregateInput
@@ -461,6 +465,8 @@ export type UserOrderByWithRelationInput = {
   requestedFriendships?: Prisma.FriendshipOrderByRelationAggregateInput
   createdChallenges?: Prisma.ChallengeOrderByRelationAggregateInput
   challengeParticipations?: Prisma.ChallengeParticipantOrderByRelationAggregateInput
+  streak?: Prisma.UserStreakOrderByWithRelationInput
+  userAchievements?: Prisma.UserAchievementOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -500,6 +506,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   weightEntries?: Prisma.WeightEntryListRelationFilter
   waterEntries?: Prisma.WaterEntryListRelationFilter
   stepEntries?: Prisma.StepEntryListRelationFilter
+  sleepEntries?: Prisma.SleepEntryListRelationFilter
   mealPlanTemplates?: Prisma.MealPlanTemplateListRelationFilter
   mealPlans?: Prisma.MealPlanListRelationFilter
   goals?: Prisma.GoalListRelationFilter
@@ -508,6 +515,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   requestedFriendships?: Prisma.FriendshipListRelationFilter
   createdChallenges?: Prisma.ChallengeListRelationFilter
   challengeParticipations?: Prisma.ChallengeParticipantListRelationFilter
+  streak?: Prisma.XOR<Prisma.UserStreakNullableScalarRelationFilter, Prisma.UserStreakWhereInput> | null
+  userAchievements?: Prisma.UserAchievementListRelationFilter
 }, "id">
 
 export type UserOrderByWithAggregationInput = {
@@ -605,6 +614,7 @@ export type UserCreateInput = {
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
@@ -613,6 +623,8 @@ export type UserCreateInput = {
   requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -648,6 +660,7 @@ export type UserUncheckedCreateInput = {
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
@@ -656,6 +669,8 @@ export type UserUncheckedCreateInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -691,6 +706,7 @@ export type UserUpdateInput = {
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
@@ -699,6 +715,8 @@ export type UserUpdateInput = {
   requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -734,6 +752,7 @@ export type UserUncheckedUpdateInput = {
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
@@ -742,6 +761,8 @@ export type UserUncheckedUpdateInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -1127,6 +1148,20 @@ export type UserUpdateOneRequiredWithoutStepEntriesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStepEntriesInput, Prisma.UserUpdateWithoutStepEntriesInput>, Prisma.UserUncheckedUpdateWithoutStepEntriesInput>
 }
 
+export type UserCreateNestedOneWithoutSleepEntriesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSleepEntriesInput, Prisma.UserUncheckedCreateWithoutSleepEntriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSleepEntriesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSleepEntriesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSleepEntriesInput, Prisma.UserUncheckedCreateWithoutSleepEntriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSleepEntriesInput
+  upsert?: Prisma.UserUpsertWithoutSleepEntriesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSleepEntriesInput, Prisma.UserUpdateWithoutSleepEntriesInput>, Prisma.UserUncheckedUpdateWithoutSleepEntriesInput>
+}
+
 export type UserCreateNestedOneWithoutMealPlanTemplatesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutMealPlanTemplatesInput, Prisma.UserUncheckedCreateWithoutMealPlanTemplatesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutMealPlanTemplatesInput
@@ -1239,6 +1274,34 @@ export type UserUpdateOneRequiredWithoutChallengeParticipationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutChallengeParticipationsInput, Prisma.UserUpdateWithoutChallengeParticipationsInput>, Prisma.UserUncheckedUpdateWithoutChallengeParticipationsInput>
 }
 
+export type UserCreateNestedOneWithoutStreakInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStreakInput, Prisma.UserUncheckedCreateWithoutStreakInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStreakInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutStreakNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStreakInput, Prisma.UserUncheckedCreateWithoutStreakInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStreakInput
+  upsert?: Prisma.UserUpsertWithoutStreakInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStreakInput, Prisma.UserUpdateWithoutStreakInput>, Prisma.UserUncheckedUpdateWithoutStreakInput>
+}
+
+export type UserCreateNestedOneWithoutUserAchievementsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUserAchievementsInput, Prisma.UserUncheckedCreateWithoutUserAchievementsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserAchievementsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutUserAchievementsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUserAchievementsInput, Prisma.UserUncheckedCreateWithoutUserAchievementsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserAchievementsInput
+  upsert?: Prisma.UserUpsertWithoutUserAchievementsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUserAchievementsInput, Prisma.UserUpdateWithoutUserAchievementsInput>, Prisma.UserUncheckedUpdateWithoutUserAchievementsInput>
+}
+
 export type UserCreateWithoutAuthUserInput = {
   displayName?: string | null
   avatarUrl?: string | null
@@ -1271,6 +1334,7 @@ export type UserCreateWithoutAuthUserInput = {
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
@@ -1279,6 +1343,8 @@ export type UserCreateWithoutAuthUserInput = {
   requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAuthUserInput = {
@@ -1313,6 +1379,7 @@ export type UserUncheckedCreateWithoutAuthUserInput = {
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
@@ -1321,6 +1388,8 @@ export type UserUncheckedCreateWithoutAuthUserInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAuthUserInput = {
@@ -1371,6 +1440,7 @@ export type UserUpdateWithoutAuthUserInput = {
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
@@ -1379,6 +1449,8 @@ export type UserUpdateWithoutAuthUserInput = {
   requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuthUserInput = {
@@ -1413,6 +1485,7 @@ export type UserUncheckedUpdateWithoutAuthUserInput = {
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
@@ -1421,6 +1494,8 @@ export type UserUncheckedUpdateWithoutAuthUserInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreatedFoodItemsInput = {
@@ -1455,6 +1530,7 @@ export type UserCreateWithoutCreatedFoodItemsInput = {
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
@@ -1463,6 +1539,8 @@ export type UserCreateWithoutCreatedFoodItemsInput = {
   requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreatedFoodItemsInput = {
@@ -1497,6 +1575,7 @@ export type UserUncheckedCreateWithoutCreatedFoodItemsInput = {
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
@@ -1505,6 +1584,8 @@ export type UserUncheckedCreateWithoutCreatedFoodItemsInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreatedFoodItemsInput = {
@@ -1555,6 +1636,7 @@ export type UserUpdateWithoutCreatedFoodItemsInput = {
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
@@ -1563,6 +1645,8 @@ export type UserUpdateWithoutCreatedFoodItemsInput = {
   requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedFoodItemsInput = {
@@ -1597,6 +1681,7 @@ export type UserUncheckedUpdateWithoutCreatedFoodItemsInput = {
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
@@ -1605,6 +1690,8 @@ export type UserUncheckedUpdateWithoutCreatedFoodItemsInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreatedExercisesInput = {
@@ -1639,6 +1726,7 @@ export type UserCreateWithoutCreatedExercisesInput = {
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
@@ -1647,6 +1735,8 @@ export type UserCreateWithoutCreatedExercisesInput = {
   requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreatedExercisesInput = {
@@ -1681,6 +1771,7 @@ export type UserUncheckedCreateWithoutCreatedExercisesInput = {
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
@@ -1689,6 +1780,8 @@ export type UserUncheckedCreateWithoutCreatedExercisesInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreatedExercisesInput = {
@@ -1739,6 +1832,7 @@ export type UserUpdateWithoutCreatedExercisesInput = {
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
@@ -1747,6 +1841,8 @@ export type UserUpdateWithoutCreatedExercisesInput = {
   requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedExercisesInput = {
@@ -1781,6 +1877,7 @@ export type UserUncheckedUpdateWithoutCreatedExercisesInput = {
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
@@ -1789,6 +1886,8 @@ export type UserUncheckedUpdateWithoutCreatedExercisesInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDiaryEntriesInput = {
@@ -1823,6 +1922,7 @@ export type UserCreateWithoutDiaryEntriesInput = {
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
@@ -1831,6 +1931,8 @@ export type UserCreateWithoutDiaryEntriesInput = {
   requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDiaryEntriesInput = {
@@ -1865,6 +1967,7 @@ export type UserUncheckedCreateWithoutDiaryEntriesInput = {
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
@@ -1873,6 +1976,8 @@ export type UserUncheckedCreateWithoutDiaryEntriesInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDiaryEntriesInput = {
@@ -1923,6 +2028,7 @@ export type UserUpdateWithoutDiaryEntriesInput = {
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
@@ -1931,6 +2037,8 @@ export type UserUpdateWithoutDiaryEntriesInput = {
   requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDiaryEntriesInput = {
@@ -1965,6 +2073,7 @@ export type UserUncheckedUpdateWithoutDiaryEntriesInput = {
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
@@ -1973,6 +2082,8 @@ export type UserUncheckedUpdateWithoutDiaryEntriesInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutWorkoutSessionsInput = {
@@ -2007,6 +2118,7 @@ export type UserCreateWithoutWorkoutSessionsInput = {
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
@@ -2015,6 +2127,8 @@ export type UserCreateWithoutWorkoutSessionsInput = {
   requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWorkoutSessionsInput = {
@@ -2049,6 +2163,7 @@ export type UserUncheckedCreateWithoutWorkoutSessionsInput = {
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
@@ -2057,6 +2172,8 @@ export type UserUncheckedCreateWithoutWorkoutSessionsInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWorkoutSessionsInput = {
@@ -2107,6 +2224,7 @@ export type UserUpdateWithoutWorkoutSessionsInput = {
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
@@ -2115,6 +2233,8 @@ export type UserUpdateWithoutWorkoutSessionsInput = {
   requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWorkoutSessionsInput = {
@@ -2149,6 +2269,7 @@ export type UserUncheckedUpdateWithoutWorkoutSessionsInput = {
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
@@ -2157,6 +2278,8 @@ export type UserUncheckedUpdateWithoutWorkoutSessionsInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutWorkoutLogsInput = {
@@ -2191,6 +2314,7 @@ export type UserCreateWithoutWorkoutLogsInput = {
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
@@ -2199,6 +2323,8 @@ export type UserCreateWithoutWorkoutLogsInput = {
   requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWorkoutLogsInput = {
@@ -2233,6 +2359,7 @@ export type UserUncheckedCreateWithoutWorkoutLogsInput = {
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
@@ -2241,6 +2368,8 @@ export type UserUncheckedCreateWithoutWorkoutLogsInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWorkoutLogsInput = {
@@ -2291,6 +2420,7 @@ export type UserUpdateWithoutWorkoutLogsInput = {
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
@@ -2299,6 +2429,8 @@ export type UserUpdateWithoutWorkoutLogsInput = {
   requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWorkoutLogsInput = {
@@ -2333,6 +2465,7 @@ export type UserUncheckedUpdateWithoutWorkoutLogsInput = {
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
@@ -2341,6 +2474,8 @@ export type UserUncheckedUpdateWithoutWorkoutLogsInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutWeightEntriesInput = {
@@ -2375,6 +2510,7 @@ export type UserCreateWithoutWeightEntriesInput = {
   workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
@@ -2383,6 +2519,8 @@ export type UserCreateWithoutWeightEntriesInput = {
   requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWeightEntriesInput = {
@@ -2417,6 +2555,7 @@ export type UserUncheckedCreateWithoutWeightEntriesInput = {
   workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
@@ -2425,6 +2564,8 @@ export type UserUncheckedCreateWithoutWeightEntriesInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWeightEntriesInput = {
@@ -2475,6 +2616,7 @@ export type UserUpdateWithoutWeightEntriesInput = {
   workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
@@ -2483,6 +2625,8 @@ export type UserUpdateWithoutWeightEntriesInput = {
   requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWeightEntriesInput = {
@@ -2517,6 +2661,7 @@ export type UserUncheckedUpdateWithoutWeightEntriesInput = {
   workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
@@ -2525,6 +2670,8 @@ export type UserUncheckedUpdateWithoutWeightEntriesInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutWaterEntriesInput = {
@@ -2559,6 +2706,7 @@ export type UserCreateWithoutWaterEntriesInput = {
   workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
@@ -2567,6 +2715,8 @@ export type UserCreateWithoutWaterEntriesInput = {
   requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWaterEntriesInput = {
@@ -2601,6 +2751,7 @@ export type UserUncheckedCreateWithoutWaterEntriesInput = {
   workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
@@ -2609,6 +2760,8 @@ export type UserUncheckedCreateWithoutWaterEntriesInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWaterEntriesInput = {
@@ -2659,6 +2812,7 @@ export type UserUpdateWithoutWaterEntriesInput = {
   workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
@@ -2667,6 +2821,8 @@ export type UserUpdateWithoutWaterEntriesInput = {
   requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWaterEntriesInput = {
@@ -2701,6 +2857,7 @@ export type UserUncheckedUpdateWithoutWaterEntriesInput = {
   workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
@@ -2709,6 +2866,8 @@ export type UserUncheckedUpdateWithoutWaterEntriesInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutStepEntriesInput = {
@@ -2743,6 +2902,7 @@ export type UserCreateWithoutStepEntriesInput = {
   workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
@@ -2751,6 +2911,8 @@ export type UserCreateWithoutStepEntriesInput = {
   requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutStepEntriesInput = {
@@ -2785,6 +2947,7 @@ export type UserUncheckedCreateWithoutStepEntriesInput = {
   workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
@@ -2793,6 +2956,8 @@ export type UserUncheckedCreateWithoutStepEntriesInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutStepEntriesInput = {
@@ -2843,6 +3008,7 @@ export type UserUpdateWithoutStepEntriesInput = {
   workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
@@ -2851,6 +3017,8 @@ export type UserUpdateWithoutStepEntriesInput = {
   requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStepEntriesInput = {
@@ -2885,6 +3053,7 @@ export type UserUncheckedUpdateWithoutStepEntriesInput = {
   workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
@@ -2893,6 +3062,204 @@ export type UserUncheckedUpdateWithoutStepEntriesInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutSleepEntriesInput = {
+  displayName?: string | null
+  avatarUrl?: string | null
+  dateOfBirth?: Date | string | null
+  gender?: $Enums.Gender | null
+  heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: $Enums.ActivityLevel | null
+  goalType?: $Enums.GoalType | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: number | null
+  dailyProteinGoalG?: number | null
+  dailyCarbGoalG?: number | null
+  dailyFatGoalG?: number | null
+  dailyWaterGoal?: number
+  dailyStepGoal?: number
+  unitsPreference?: $Enums.Units
+  timezone?: string
+  isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
+  createdFoodItems?: Prisma.FoodItemCreateNestedManyWithoutCreatorInput
+  createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
+  diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
+  workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
+  waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
+  stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
+  mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
+  goals?: Prisma.GoalCreateNestedManyWithoutUserInput
+  sentFriendships?: Prisma.FriendshipCreateNestedManyWithoutUserInput
+  receivedFriendships?: Prisma.FriendshipCreateNestedManyWithoutFriendInput
+  requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
+  createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
+  challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutSleepEntriesInput = {
+  id: string
+  displayName?: string | null
+  avatarUrl?: string | null
+  dateOfBirth?: Date | string | null
+  gender?: $Enums.Gender | null
+  heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: $Enums.ActivityLevel | null
+  goalType?: $Enums.GoalType | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: number | null
+  dailyProteinGoalG?: number | null
+  dailyCarbGoalG?: number | null
+  dailyFatGoalG?: number | null
+  dailyWaterGoal?: number
+  dailyStepGoal?: number
+  unitsPreference?: $Enums.Units
+  timezone?: string
+  isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
+  createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
+  diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
+  workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
+  waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
+  stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
+  mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
+  goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
+  sentFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUserInput
+  receivedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutFriendInput
+  requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
+  createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
+  challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutSleepEntriesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSleepEntriesInput, Prisma.UserUncheckedCreateWithoutSleepEntriesInput>
+}
+
+export type UserUpsertWithoutSleepEntriesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSleepEntriesInput, Prisma.UserUncheckedUpdateWithoutSleepEntriesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSleepEntriesInput, Prisma.UserUncheckedCreateWithoutSleepEntriesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSleepEntriesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSleepEntriesInput, Prisma.UserUncheckedUpdateWithoutSleepEntriesInput>
+}
+
+export type UserUpdateWithoutSleepEntriesInput = {
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyFatGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyWaterGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  dailyStepGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
+  createdFoodItems?: Prisma.FoodItemUpdateManyWithoutCreatorNestedInput
+  createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
+  diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
+  workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
+  waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
+  stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
+  mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
+  goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
+  sentFriendships?: Prisma.FriendshipUpdateManyWithoutUserNestedInput
+  receivedFriendships?: Prisma.FriendshipUpdateManyWithoutFriendNestedInput
+  requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
+  createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
+  challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSleepEntriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyFatGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyWaterGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  dailyStepGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
+  createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
+  diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
+  workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
+  waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
+  stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
+  mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
+  goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
+  sentFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutUserNestedInput
+  receivedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutFriendNestedInput
+  requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
+  createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
+  challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMealPlanTemplatesInput = {
@@ -2928,6 +3295,7 @@ export type UserCreateWithoutMealPlanTemplatesInput = {
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
   sentFriendships?: Prisma.FriendshipCreateNestedManyWithoutUserInput
@@ -2935,6 +3303,8 @@ export type UserCreateWithoutMealPlanTemplatesInput = {
   requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMealPlanTemplatesInput = {
@@ -2970,6 +3340,7 @@ export type UserUncheckedCreateWithoutMealPlanTemplatesInput = {
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
   sentFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUserInput
@@ -2977,6 +3348,8 @@ export type UserUncheckedCreateWithoutMealPlanTemplatesInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMealPlanTemplatesInput = {
@@ -3028,6 +3401,7 @@ export type UserUpdateWithoutMealPlanTemplatesInput = {
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
   sentFriendships?: Prisma.FriendshipUpdateManyWithoutUserNestedInput
@@ -3035,6 +3409,8 @@ export type UserUpdateWithoutMealPlanTemplatesInput = {
   requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMealPlanTemplatesInput = {
@@ -3070,6 +3446,7 @@ export type UserUncheckedUpdateWithoutMealPlanTemplatesInput = {
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
   sentFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutUserNestedInput
@@ -3077,6 +3454,8 @@ export type UserUncheckedUpdateWithoutMealPlanTemplatesInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMealPlansInput = {
@@ -3112,6 +3491,7 @@ export type UserCreateWithoutMealPlansInput = {
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
   sentFriendships?: Prisma.FriendshipCreateNestedManyWithoutUserInput
@@ -3119,6 +3499,8 @@ export type UserCreateWithoutMealPlansInput = {
   requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMealPlansInput = {
@@ -3154,6 +3536,7 @@ export type UserUncheckedCreateWithoutMealPlansInput = {
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
   sentFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUserInput
@@ -3161,6 +3544,8 @@ export type UserUncheckedCreateWithoutMealPlansInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMealPlansInput = {
@@ -3212,6 +3597,7 @@ export type UserUpdateWithoutMealPlansInput = {
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
   sentFriendships?: Prisma.FriendshipUpdateManyWithoutUserNestedInput
@@ -3219,6 +3605,8 @@ export type UserUpdateWithoutMealPlansInput = {
   requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMealPlansInput = {
@@ -3254,6 +3642,7 @@ export type UserUncheckedUpdateWithoutMealPlansInput = {
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
   sentFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutUserNestedInput
@@ -3261,6 +3650,8 @@ export type UserUncheckedUpdateWithoutMealPlansInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutGoalsInput = {
@@ -3296,6 +3687,7 @@ export type UserCreateWithoutGoalsInput = {
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
   sentFriendships?: Prisma.FriendshipCreateNestedManyWithoutUserInput
@@ -3303,6 +3695,8 @@ export type UserCreateWithoutGoalsInput = {
   requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutGoalsInput = {
@@ -3338,6 +3732,7 @@ export type UserUncheckedCreateWithoutGoalsInput = {
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
   sentFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUserInput
@@ -3345,6 +3740,8 @@ export type UserUncheckedCreateWithoutGoalsInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutGoalsInput = {
@@ -3396,6 +3793,7 @@ export type UserUpdateWithoutGoalsInput = {
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
   sentFriendships?: Prisma.FriendshipUpdateManyWithoutUserNestedInput
@@ -3403,6 +3801,8 @@ export type UserUpdateWithoutGoalsInput = {
   requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutGoalsInput = {
@@ -3438,6 +3838,7 @@ export type UserUncheckedUpdateWithoutGoalsInput = {
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
   sentFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutUserNestedInput
@@ -3445,6 +3846,8 @@ export type UserUncheckedUpdateWithoutGoalsInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSentFriendshipsInput = {
@@ -3480,6 +3883,7 @@ export type UserCreateWithoutSentFriendshipsInput = {
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
@@ -3487,6 +3891,8 @@ export type UserCreateWithoutSentFriendshipsInput = {
   requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSentFriendshipsInput = {
@@ -3522,6 +3928,7 @@ export type UserUncheckedCreateWithoutSentFriendshipsInput = {
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
@@ -3529,6 +3936,8 @@ export type UserUncheckedCreateWithoutSentFriendshipsInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSentFriendshipsInput = {
@@ -3569,6 +3978,7 @@ export type UserCreateWithoutReceivedFriendshipsInput = {
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
@@ -3576,6 +3986,8 @@ export type UserCreateWithoutReceivedFriendshipsInput = {
   requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReceivedFriendshipsInput = {
@@ -3611,6 +4023,7 @@ export type UserUncheckedCreateWithoutReceivedFriendshipsInput = {
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
@@ -3618,6 +4031,8 @@ export type UserUncheckedCreateWithoutReceivedFriendshipsInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReceivedFriendshipsInput = {
@@ -3658,6 +4073,7 @@ export type UserCreateWithoutRequestedFriendshipsInput = {
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
@@ -3665,6 +4081,8 @@ export type UserCreateWithoutRequestedFriendshipsInput = {
   receivedFriendships?: Prisma.FriendshipCreateNestedManyWithoutFriendInput
   createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRequestedFriendshipsInput = {
@@ -3700,6 +4118,7 @@ export type UserUncheckedCreateWithoutRequestedFriendshipsInput = {
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
@@ -3707,6 +4126,8 @@ export type UserUncheckedCreateWithoutRequestedFriendshipsInput = {
   receivedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutFriendInput
   createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRequestedFriendshipsInput = {
@@ -3758,6 +4179,7 @@ export type UserUpdateWithoutSentFriendshipsInput = {
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
@@ -3765,6 +4187,8 @@ export type UserUpdateWithoutSentFriendshipsInput = {
   requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSentFriendshipsInput = {
@@ -3800,6 +4224,7 @@ export type UserUncheckedUpdateWithoutSentFriendshipsInput = {
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
@@ -3807,6 +4232,8 @@ export type UserUncheckedUpdateWithoutSentFriendshipsInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutReceivedFriendshipsInput = {
@@ -3853,6 +4280,7 @@ export type UserUpdateWithoutReceivedFriendshipsInput = {
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
@@ -3860,6 +4288,8 @@ export type UserUpdateWithoutReceivedFriendshipsInput = {
   requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReceivedFriendshipsInput = {
@@ -3895,6 +4325,7 @@ export type UserUncheckedUpdateWithoutReceivedFriendshipsInput = {
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
@@ -3902,6 +4333,8 @@ export type UserUncheckedUpdateWithoutReceivedFriendshipsInput = {
   requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutRequestedFriendshipsInput = {
@@ -3948,6 +4381,7 @@ export type UserUpdateWithoutRequestedFriendshipsInput = {
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
@@ -3955,6 +4389,8 @@ export type UserUpdateWithoutRequestedFriendshipsInput = {
   receivedFriendships?: Prisma.FriendshipUpdateManyWithoutFriendNestedInput
   createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRequestedFriendshipsInput = {
@@ -3990,6 +4426,7 @@ export type UserUncheckedUpdateWithoutRequestedFriendshipsInput = {
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
@@ -3997,6 +4434,8 @@ export type UserUncheckedUpdateWithoutRequestedFriendshipsInput = {
   receivedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutFriendNestedInput
   createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreatedChallengesInput = {
@@ -4032,6 +4471,7 @@ export type UserCreateWithoutCreatedChallengesInput = {
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
@@ -4039,6 +4479,8 @@ export type UserCreateWithoutCreatedChallengesInput = {
   receivedFriendships?: Prisma.FriendshipCreateNestedManyWithoutFriendInput
   requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
   challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreatedChallengesInput = {
@@ -4074,6 +4516,7 @@ export type UserUncheckedCreateWithoutCreatedChallengesInput = {
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
@@ -4081,6 +4524,8 @@ export type UserUncheckedCreateWithoutCreatedChallengesInput = {
   receivedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutFriendInput
   requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreatedChallengesInput = {
@@ -4132,6 +4577,7 @@ export type UserUpdateWithoutCreatedChallengesInput = {
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
@@ -4139,6 +4585,8 @@ export type UserUpdateWithoutCreatedChallengesInput = {
   receivedFriendships?: Prisma.FriendshipUpdateManyWithoutFriendNestedInput
   requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedChallengesInput = {
@@ -4174,6 +4622,7 @@ export type UserUncheckedUpdateWithoutCreatedChallengesInput = {
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
@@ -4181,6 +4630,8 @@ export type UserUncheckedUpdateWithoutCreatedChallengesInput = {
   receivedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutFriendNestedInput
   requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
   challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutChallengeParticipationsInput = {
@@ -4216,6 +4667,7 @@ export type UserCreateWithoutChallengeParticipationsInput = {
   weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
@@ -4223,6 +4675,8 @@ export type UserCreateWithoutChallengeParticipationsInput = {
   receivedFriendships?: Prisma.FriendshipCreateNestedManyWithoutFriendInput
   requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutChallengeParticipationsInput = {
@@ -4258,6 +4712,7 @@ export type UserUncheckedCreateWithoutChallengeParticipationsInput = {
   weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
   waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
   stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
@@ -4265,6 +4720,8 @@ export type UserUncheckedCreateWithoutChallengeParticipationsInput = {
   receivedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutFriendInput
   requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
   createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutChallengeParticipationsInput = {
@@ -4316,6 +4773,7 @@ export type UserUpdateWithoutChallengeParticipationsInput = {
   weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
@@ -4323,6 +4781,8 @@ export type UserUpdateWithoutChallengeParticipationsInput = {
   receivedFriendships?: Prisma.FriendshipUpdateManyWithoutFriendNestedInput
   requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutChallengeParticipationsInput = {
@@ -4358,6 +4818,7 @@ export type UserUncheckedUpdateWithoutChallengeParticipationsInput = {
   weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
   waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
   stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
   mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
@@ -4365,6 +4826,400 @@ export type UserUncheckedUpdateWithoutChallengeParticipationsInput = {
   receivedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutFriendNestedInput
   requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
   createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutStreakInput = {
+  displayName?: string | null
+  avatarUrl?: string | null
+  dateOfBirth?: Date | string | null
+  gender?: $Enums.Gender | null
+  heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: $Enums.ActivityLevel | null
+  goalType?: $Enums.GoalType | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: number | null
+  dailyProteinGoalG?: number | null
+  dailyCarbGoalG?: number | null
+  dailyFatGoalG?: number | null
+  dailyWaterGoal?: number
+  dailyStepGoal?: number
+  unitsPreference?: $Enums.Units
+  timezone?: string
+  isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
+  createdFoodItems?: Prisma.FoodItemCreateNestedManyWithoutCreatorInput
+  createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
+  diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
+  workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
+  waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
+  stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
+  mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
+  goals?: Prisma.GoalCreateNestedManyWithoutUserInput
+  sentFriendships?: Prisma.FriendshipCreateNestedManyWithoutUserInput
+  receivedFriendships?: Prisma.FriendshipCreateNestedManyWithoutFriendInput
+  requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
+  createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
+  challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutStreakInput = {
+  id: string
+  displayName?: string | null
+  avatarUrl?: string | null
+  dateOfBirth?: Date | string | null
+  gender?: $Enums.Gender | null
+  heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: $Enums.ActivityLevel | null
+  goalType?: $Enums.GoalType | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: number | null
+  dailyProteinGoalG?: number | null
+  dailyCarbGoalG?: number | null
+  dailyFatGoalG?: number | null
+  dailyWaterGoal?: number
+  dailyStepGoal?: number
+  unitsPreference?: $Enums.Units
+  timezone?: string
+  isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
+  createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
+  diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
+  workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
+  waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
+  stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
+  mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
+  goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
+  sentFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUserInput
+  receivedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutFriendInput
+  requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
+  createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
+  challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutStreakInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStreakInput, Prisma.UserUncheckedCreateWithoutStreakInput>
+}
+
+export type UserUpsertWithoutStreakInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStreakInput, Prisma.UserUncheckedUpdateWithoutStreakInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStreakInput, Prisma.UserUncheckedCreateWithoutStreakInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStreakInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStreakInput, Prisma.UserUncheckedUpdateWithoutStreakInput>
+}
+
+export type UserUpdateWithoutStreakInput = {
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyFatGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyWaterGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  dailyStepGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
+  createdFoodItems?: Prisma.FoodItemUpdateManyWithoutCreatorNestedInput
+  createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
+  diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
+  workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
+  waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
+  stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
+  mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
+  goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
+  sentFriendships?: Prisma.FriendshipUpdateManyWithoutUserNestedInput
+  receivedFriendships?: Prisma.FriendshipUpdateManyWithoutFriendNestedInput
+  requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
+  createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
+  challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStreakInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyFatGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyWaterGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  dailyStepGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
+  createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
+  diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
+  workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
+  waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
+  stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
+  mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
+  goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
+  sentFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutUserNestedInput
+  receivedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutFriendNestedInput
+  requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
+  createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
+  challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutUserAchievementsInput = {
+  displayName?: string | null
+  avatarUrl?: string | null
+  dateOfBirth?: Date | string | null
+  gender?: $Enums.Gender | null
+  heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: $Enums.ActivityLevel | null
+  goalType?: $Enums.GoalType | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: number | null
+  dailyProteinGoalG?: number | null
+  dailyCarbGoalG?: number | null
+  dailyFatGoalG?: number | null
+  dailyWaterGoal?: number
+  dailyStepGoal?: number
+  unitsPreference?: $Enums.Units
+  timezone?: string
+  isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
+  createdFoodItems?: Prisma.FoodItemCreateNestedManyWithoutCreatorInput
+  createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
+  diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
+  workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
+  waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
+  stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
+  mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
+  goals?: Prisma.GoalCreateNestedManyWithoutUserInput
+  sentFriendships?: Prisma.FriendshipCreateNestedManyWithoutUserInput
+  receivedFriendships?: Prisma.FriendshipCreateNestedManyWithoutFriendInput
+  requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
+  createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
+  challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutUserAchievementsInput = {
+  id: string
+  displayName?: string | null
+  avatarUrl?: string | null
+  dateOfBirth?: Date | string | null
+  gender?: $Enums.Gender | null
+  heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: $Enums.ActivityLevel | null
+  goalType?: $Enums.GoalType | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: number | null
+  dailyProteinGoalG?: number | null
+  dailyCarbGoalG?: number | null
+  dailyFatGoalG?: number | null
+  dailyWaterGoal?: number
+  dailyStepGoal?: number
+  unitsPreference?: $Enums.Units
+  timezone?: string
+  isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
+  createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
+  diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
+  workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
+  waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
+  stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
+  mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
+  goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
+  sentFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUserInput
+  receivedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutFriendInput
+  requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
+  createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
+  challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutUserAchievementsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUserAchievementsInput, Prisma.UserUncheckedCreateWithoutUserAchievementsInput>
+}
+
+export type UserUpsertWithoutUserAchievementsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUserAchievementsInput, Prisma.UserUncheckedUpdateWithoutUserAchievementsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUserAchievementsInput, Prisma.UserUncheckedCreateWithoutUserAchievementsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUserAchievementsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUserAchievementsInput, Prisma.UserUncheckedUpdateWithoutUserAchievementsInput>
+}
+
+export type UserUpdateWithoutUserAchievementsInput = {
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyFatGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyWaterGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  dailyStepGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
+  createdFoodItems?: Prisma.FoodItemUpdateManyWithoutCreatorNestedInput
+  createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
+  diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
+  workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
+  waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
+  stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
+  mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
+  goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
+  sentFriendships?: Prisma.FriendshipUpdateManyWithoutUserNestedInput
+  receivedFriendships?: Prisma.FriendshipUpdateManyWithoutFriendNestedInput
+  requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
+  createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
+  challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUserAchievementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyFatGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyWaterGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  dailyStepGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
+  createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
+  diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
+  workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
+  waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
+  stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
+  mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
+  goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
+  sentFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutUserNestedInput
+  receivedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutFriendNestedInput
+  requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
+  createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
+  challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
 }
 
 
@@ -4381,6 +5236,7 @@ export type UserCountOutputType = {
   weightEntries: number
   waterEntries: number
   stepEntries: number
+  sleepEntries: number
   mealPlanTemplates: number
   mealPlans: number
   goals: number
@@ -4389,6 +5245,7 @@ export type UserCountOutputType = {
   requestedFriendships: number
   createdChallenges: number
   challengeParticipations: number
+  userAchievements: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4400,6 +5257,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   weightEntries?: boolean | UserCountOutputTypeCountWeightEntriesArgs
   waterEntries?: boolean | UserCountOutputTypeCountWaterEntriesArgs
   stepEntries?: boolean | UserCountOutputTypeCountStepEntriesArgs
+  sleepEntries?: boolean | UserCountOutputTypeCountSleepEntriesArgs
   mealPlanTemplates?: boolean | UserCountOutputTypeCountMealPlanTemplatesArgs
   mealPlans?: boolean | UserCountOutputTypeCountMealPlansArgs
   goals?: boolean | UserCountOutputTypeCountGoalsArgs
@@ -4408,6 +5266,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   requestedFriendships?: boolean | UserCountOutputTypeCountRequestedFriendshipsArgs
   createdChallenges?: boolean | UserCountOutputTypeCountCreatedChallengesArgs
   challengeParticipations?: boolean | UserCountOutputTypeCountChallengeParticipationsArgs
+  userAchievements?: boolean | UserCountOutputTypeCountUserAchievementsArgs
 }
 
 /**
@@ -4479,6 +5338,13 @@ export type UserCountOutputTypeCountStepEntriesArgs<ExtArgs extends runtime.Type
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountSleepEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SleepEntryWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountMealPlanTemplatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.MealPlanTemplateWhereInput
 }
@@ -4532,6 +5398,13 @@ export type UserCountOutputTypeCountChallengeParticipationsArgs<ExtArgs extends 
   where?: Prisma.ChallengeParticipantWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUserAchievementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserAchievementWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -4567,6 +5440,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   weightEntries?: boolean | Prisma.User$weightEntriesArgs<ExtArgs>
   waterEntries?: boolean | Prisma.User$waterEntriesArgs<ExtArgs>
   stepEntries?: boolean | Prisma.User$stepEntriesArgs<ExtArgs>
+  sleepEntries?: boolean | Prisma.User$sleepEntriesArgs<ExtArgs>
   mealPlanTemplates?: boolean | Prisma.User$mealPlanTemplatesArgs<ExtArgs>
   mealPlans?: boolean | Prisma.User$mealPlansArgs<ExtArgs>
   goals?: boolean | Prisma.User$goalsArgs<ExtArgs>
@@ -4575,6 +5449,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   requestedFriendships?: boolean | Prisma.User$requestedFriendshipsArgs<ExtArgs>
   createdChallenges?: boolean | Prisma.User$createdChallengesArgs<ExtArgs>
   challengeParticipations?: boolean | Prisma.User$challengeParticipationsArgs<ExtArgs>
+  streak?: boolean | Prisma.User$streakArgs<ExtArgs>
+  userAchievements?: boolean | Prisma.User$userAchievementsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -4672,6 +5548,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   weightEntries?: boolean | Prisma.User$weightEntriesArgs<ExtArgs>
   waterEntries?: boolean | Prisma.User$waterEntriesArgs<ExtArgs>
   stepEntries?: boolean | Prisma.User$stepEntriesArgs<ExtArgs>
+  sleepEntries?: boolean | Prisma.User$sleepEntriesArgs<ExtArgs>
   mealPlanTemplates?: boolean | Prisma.User$mealPlanTemplatesArgs<ExtArgs>
   mealPlans?: boolean | Prisma.User$mealPlansArgs<ExtArgs>
   goals?: boolean | Prisma.User$goalsArgs<ExtArgs>
@@ -4680,6 +5557,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   requestedFriendships?: boolean | Prisma.User$requestedFriendshipsArgs<ExtArgs>
   createdChallenges?: boolean | Prisma.User$createdChallengesArgs<ExtArgs>
   challengeParticipations?: boolean | Prisma.User$challengeParticipationsArgs<ExtArgs>
+  streak?: boolean | Prisma.User$streakArgs<ExtArgs>
+  userAchievements?: boolean | Prisma.User$userAchievementsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4701,6 +5580,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     weightEntries: Prisma.$WeightEntryPayload<ExtArgs>[]
     waterEntries: Prisma.$WaterEntryPayload<ExtArgs>[]
     stepEntries: Prisma.$StepEntryPayload<ExtArgs>[]
+    sleepEntries: Prisma.$SleepEntryPayload<ExtArgs>[]
     mealPlanTemplates: Prisma.$MealPlanTemplatePayload<ExtArgs>[]
     mealPlans: Prisma.$MealPlanPayload<ExtArgs>[]
     goals: Prisma.$GoalPayload<ExtArgs>[]
@@ -4709,6 +5589,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     requestedFriendships: Prisma.$FriendshipPayload<ExtArgs>[]
     createdChallenges: Prisma.$ChallengePayload<ExtArgs>[]
     challengeParticipations: Prisma.$ChallengeParticipantPayload<ExtArgs>[]
+    streak: Prisma.$UserStreakPayload<ExtArgs> | null
+    userAchievements: Prisma.$UserAchievementPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -5138,6 +6020,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   weightEntries<T extends Prisma.User$weightEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$weightEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WeightEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   waterEntries<T extends Prisma.User$waterEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$waterEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WaterEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stepEntries<T extends Prisma.User$stepEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stepEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StepEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sleepEntries<T extends Prisma.User$sleepEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sleepEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SleepEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   mealPlanTemplates<T extends Prisma.User$mealPlanTemplatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$mealPlanTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MealPlanTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   mealPlans<T extends Prisma.User$mealPlansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$mealPlansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MealPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   goals<T extends Prisma.User$goalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$goalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GoalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -5146,6 +6029,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   requestedFriendships<T extends Prisma.User$requestedFriendshipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$requestedFriendshipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FriendshipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdChallenges<T extends Prisma.User$createdChallengesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdChallengesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChallengePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   challengeParticipations<T extends Prisma.User$challengeParticipationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$challengeParticipationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChallengeParticipantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  streak<T extends Prisma.User$streakArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$streakArgs<ExtArgs>>): Prisma.Prisma__UserStreakClient<runtime.Types.Result.GetResult<Prisma.$UserStreakPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  userAchievements<T extends Prisma.User$userAchievementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userAchievementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserAchievementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5806,6 +6691,30 @@ export type User$stepEntriesArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
+ * User.sleepEntries
+ */
+export type User$sleepEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SleepEntry
+   */
+  select?: Prisma.SleepEntrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SleepEntry
+   */
+  omit?: Prisma.SleepEntryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SleepEntryInclude<ExtArgs> | null
+  where?: Prisma.SleepEntryWhereInput
+  orderBy?: Prisma.SleepEntryOrderByWithRelationInput | Prisma.SleepEntryOrderByWithRelationInput[]
+  cursor?: Prisma.SleepEntryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SleepEntryScalarFieldEnum | Prisma.SleepEntryScalarFieldEnum[]
+}
+
+/**
  * User.mealPlanTemplates
  */
 export type User$mealPlanTemplatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5995,6 +6904,49 @@ export type User$challengeParticipationsArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.ChallengeParticipantScalarFieldEnum | Prisma.ChallengeParticipantScalarFieldEnum[]
+}
+
+/**
+ * User.streak
+ */
+export type User$streakArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserStreak
+   */
+  select?: Prisma.UserStreakSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserStreak
+   */
+  omit?: Prisma.UserStreakOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserStreakInclude<ExtArgs> | null
+  where?: Prisma.UserStreakWhereInput
+}
+
+/**
+ * User.userAchievements
+ */
+export type User$userAchievementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserAchievement
+   */
+  select?: Prisma.UserAchievementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserAchievement
+   */
+  omit?: Prisma.UserAchievementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserAchievementInclude<ExtArgs> | null
+  where?: Prisma.UserAchievementWhereInput
+  orderBy?: Prisma.UserAchievementOrderByWithRelationInput | Prisma.UserAchievementOrderByWithRelationInput[]
+  cursor?: Prisma.UserAchievementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserAchievementScalarFieldEnum | Prisma.UserAchievementScalarFieldEnum[]
 }
 
 /**

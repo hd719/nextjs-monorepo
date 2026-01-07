@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ChevronRight } from "lucide-react";
 import { ROUTES } from "@/constants/routes";
-import type { UserProfile } from "@/types/profile";
+import type { UserProfile } from "@/types";
 import { calculateProfileCompletion } from "@/utils/profile-helpers";
 
 export interface ProfileCompletionProps {

@@ -62,7 +62,7 @@ export interface WeekComparisonData {
   weightChange: number;
 }
 
-export interface SleepData {
+export interface ProgressSleepData {
   avgHours: number;
   goalHours: number;
   quality: number; // 0-100 score
@@ -86,7 +86,7 @@ export interface ProgressData {
     carbs: MacroData;
     fat: MacroData;
   };
-  sleepData: SleepData;
+  sleepData: ProgressSleepData;
   exerciseHistory: ProgressExerciseEntry[];
   exerciseSummary: {
     workoutsThisMonth: number;

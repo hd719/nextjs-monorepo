@@ -4,8 +4,7 @@ import { AppLayout } from "@/components/layout";
 import { ExerciseWizard } from "@/components/exercise";
 import { Card, CardContent } from "@/components/ui/card";
 import { Clock, Flame, Activity, Info } from "lucide-react";
-import { useProfile } from "@/hooks/useProfile";
-import { useExerciseSummary } from "@/hooks/useExercise";
+import { useProfile, useExerciseSummary } from "@/hooks";
 import { ROUTES } from "@/constants/routes";
 
 export const Route = createLazyFileRoute("/exercise/")({
@@ -50,7 +49,6 @@ function ExercisePage() {
   const { user } = Route.useRouteContext();
   const { data: profile } = useProfile(user.id);
 
-  // Use user's timezone for date calculations
   const timezone = profile?.timezone || "UTC";
   const currentDate = new Date().toLocaleDateString("en-CA", {
     timeZone: timezone,

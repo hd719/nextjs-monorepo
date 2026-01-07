@@ -5,6 +5,9 @@ export {
   mockActivities,
   mockExerciseSummary,
   mockWaterIntake,
+  mockSleepCardData,
+  mockStreaks,
+  mockAchievementSummary,
 } from "./mockData";
 
 export {

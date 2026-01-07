@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { Dumbbell } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/utils/cn";
-import type { ExerciseEntry } from "@/types/progress";
+import type { ExerciseEntry } from "@/types";
 
 interface ExerciseHeatmapProps {
   data: ExerciseEntry[];

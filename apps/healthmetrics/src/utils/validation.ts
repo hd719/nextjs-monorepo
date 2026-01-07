@@ -336,3 +336,28 @@ export const copyPreviousWorkoutSchema = z.object({
 export type CopyPreviousWorkoutInput = z.infer<
   typeof copyPreviousWorkoutSchema
 >;
+
+// ============================================================================
+// SLEEP VALIDATION SCHEMAS
+// ============================================================================
+
+// Time format validation (HH:MM)
+const timeSchema = z
+  .string()
+  .regex(
+    /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/,
+    "Invalid time format (use HH:MM)"
+  );
+
+// Sleep entry validation schema
+export const logSleepSchema = z.object({
+  bedtime: timeSchema,
+  wakeTime: timeSchema,
+  quality: z
+    .number()
+    .min(1, "Quality must be at least 1")
+    .max(5, "Quality must be at most 5"),
+  notes: z.string().max(500, "Notes must be 500 characters or less"),
+});
+
+export type LogSleepFormData = z.infer<typeof logSleepSchema>;

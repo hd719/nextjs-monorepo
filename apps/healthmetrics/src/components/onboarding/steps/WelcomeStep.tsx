@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { GOAL_OPTIONS } from "@/constants/onboarding";
-import type {
-  OnboardingGoalType,
-  OnboardingStepData,
-} from "@/types/onboarding";
+import type { OnboardingGoalType, OnboardingStepData } from "@/types";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/utils/cn";
 

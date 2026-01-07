@@ -19,8 +19,8 @@
 import { useState } from "react";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { AppLayout } from "@/components/layout";
-import { mockProgressData, filterByDateRange } from "@/data/progressMockData";
-import type { DateRange } from "@/types/progress";
+import { mockProgressData, filterByDateRange } from "@/data";
+import type { DateRange } from "@/types";
 import {
   ProgressSummary,
   DateRangeSelector,
@@ -29,10 +29,10 @@ import {
   MacroBreakdown,
   ExerciseHeatmap,
   WeeklyComparison,
-  StreaksCard,
-  AchievementsCard,
+  StreaksProgressCard,
+  AchievementsProgressCard,
   InsightsPanel,
-  SleepCard,
+  SleepProgressCard,
 } from "@/components/progress";
 
 export const Route = createLazyFileRoute("/progress/")({
@@ -79,7 +79,7 @@ function ProgressPage() {
         <div className="progress-charts-grid animate-fade-slide-in animate-stagger-2">
           <div className="progress-left-column-stack">
             <MacroBreakdown data={mockProgressData.macroAverages} />
-            <SleepCard data={mockProgressData.sleepData} />
+            <SleepProgressCard data={mockProgressData.sleepData} />
           </div>
           <WeeklyComparison data={mockProgressData.comparison} />
         </div>
@@ -87,8 +87,8 @@ function ProgressPage() {
         {/* Row 3: Streaks & Achievements | AI Insights */}
         <div className="progress-charts-grid animate-fade-slide-in animate-stagger-3">
           <div className="progress-left-column-stack">
-            <StreaksCard data={mockProgressData.streaks} />
-            <AchievementsCard
+            <StreaksProgressCard data={mockProgressData.streaks} />
+            <AchievementsProgressCard
               achievements={mockProgressData.achievements}
               milestones={mockProgressData.milestones}
             />

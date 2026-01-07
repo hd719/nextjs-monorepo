@@ -1,7 +1,7 @@
 import { Coffee, Sandwich, UtensilsCrossed, Cookie, Plus } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
-import type { DiaryEntryWithFood } from "@/types/diary";
+import type { DiaryEntryWithFood } from "@/types";
 
 // Event name for triggering "Add Food" dialog
 // Parent component listens for this event

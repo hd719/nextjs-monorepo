@@ -14,8 +14,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast, ToastContainer } from "@/components/ui/toast";
 import { cn } from "@/utils";
-import type { UserProfile } from "@/types/profile";
-import { useUpdateProfile } from "@/hooks/useProfile";
+import type { UserProfile } from "@/types";
+import { useUpdateProfile } from "@/hooks";
 import { ProfileAvatar } from "./ProfileAvatar";
 import {
   formatDate,

@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/utils/cn";
-import type { Insight } from "@/types/progress";
+import type { Insight } from "@/types";
 
 interface InsightsPanelProps {
   insights: Insight[];

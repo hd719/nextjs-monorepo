@@ -12,9 +12,9 @@ import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import type { FoodItemSearchResult } from "@/types/diary";
+import type { FoodItemSearchResult } from "@/types";
 import type { MealType } from "@/constants/defaults";
-import { useCreateDiaryEntry, useFoodSearch } from "@/hooks/useDiary";
+import { useCreateDiaryEntry, useFoodSearch } from "@/hooks";
 
 export interface AddFoodDialogProps {
   open: boolean;

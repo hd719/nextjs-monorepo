@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { FoodItem } from "./FoodItem";
-import type { MealEntry } from "@/types/nutrition";
+import type { MealEntry } from "@/types";
 import { ROUTES } from "@/constants/routes";
 
 export interface MealCardProps {

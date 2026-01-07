@@ -23,7 +23,7 @@ import {
 } from "recharts";
 import { Flame } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import type { CalorieEntry } from "@/types/progress";
+import type { CalorieEntry } from "@/types";
 
 interface CalorieIntakeChartProps {
   data: CalorieEntry[];

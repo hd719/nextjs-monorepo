@@ -222,6 +222,7 @@ model User {
   weightEntries           WeightEntry[]
   waterEntries            WaterEntry[]
   stepEntries             StepEntry[]
+  sleepEntries            SleepEntry[]
   mealPlanTemplates       MealPlanTemplate[]
   mealPlans               MealPlan[]
   goals                   Goal[]
@@ -230,6 +231,8 @@ model User {
   requestedFriendships    Friendship[]           @relation("RequestedByUser")
   createdChallenges       Challenge[]
   challengeParticipations ChallengeParticipant[]
+  streak                  UserStreak?
+  userAchievements        UserAchievement[]
 
   @@map("users")
 }
@@ -441,6 +444,30 @@ model StepEntry {
   @@map("step_entries")
 }
 
+// Sleep entries - daily sleep tracking
+
+model SleepEntry {
+  id         String   @id @default(uuid())
+  userId     String   @map("user_id")
+  date       DateTime @db.Date
+  hoursSlept Decimal  @map("hours_slept") @db.Decimal(4, 2)
+  quality    Int // 1-5 rating (required)
+  bedtime    String // HH:MM format (required)
+  wakeTime   String   @map("wake_time") // HH:MM format (required)
+  notes      String?
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
+  @@index([userId])
+  @@index([date])
+  @@index([userId, date])
+  @@map("sleep_entries")
+}
+
 // Recipe cache - cached nutrition data from cookbook app
 
 model RecipeCache {
@@ -618,4 +645,77 @@ model ChallengeParticipant {
   @@index([challengeId])
   @@index([userId])
   @@map("challenge_participants")
+}
+
+// ============================================================================
+// STREAKS & ACHIEVEMENTS
+// ============================================================================
+
+// User streaks - cached streak data for performance
+
+model UserStreak {
+  id     String @id @default(uuid())
+  userId String @unique @map("user_id")
+
+  // Current streaks
+  currentLogging  Int @default(0) @map("current_logging")
+  currentCalorie  Int @default(0) @map("current_calorie")
+  currentExercise Int @default(0) @map("current_exercise")
+
+  // Best streaks (all-time)
+  bestLogging  Int @default(0) @map("best_logging")
+  bestCalorie  Int @default(0) @map("best_calorie")
+  bestExercise Int @default(0) @map("best_exercise")
+
+  // Last activity dates (for streak calculation)
+  lastLoggingDate  DateTime? @map("last_logging_date") @db.Date
+  lastExerciseDate DateTime? @map("last_exercise_date") @db.Date
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_streaks")
+}
+
+// Achievement definitions (seeded data)
+
+model Achievement {
+  id          String @id @default(uuid())
+  key         String @unique
+  name        String
+  description String
+  icon        String
+  category    String
+  requirement Json
+  points      Int    @default(10)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  userAchievements UserAchievement[]
+
+  @@index([category])
+  @@map("achievements")
+}
+
+// User's unlocked achievements
+
+model UserAchievement {
+  id            String   @id @default(uuid())
+  userId        String   @map("user_id")
+  achievementId String   @map("achievement_id")
+  unlockedAt    DateTime @default(now()) @map("unlocked_at")
+
+  // Relations
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievement Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, achievementId])
+  @@index([userId])
+  @@index([achievementId])
+  @@map("user_achievements")
 }

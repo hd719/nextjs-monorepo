@@ -13,7 +13,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import { useCreateWorkoutSession } from "@/hooks/useExercise";
+import { useCreateWorkoutSession } from "@/hooks";
 import type {
   WorkoutMode,
   SelectedExercise,

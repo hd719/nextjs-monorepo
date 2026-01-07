@@ -2,9 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { getDashboardMeals, getRecentActivity } from "@/server/dashboard";
 import { queryKeys } from "@/utils/query-keys";
 
-export { useWaterIntake, useUpdateWaterIntake } from "./useWater";
-export { useStepCount, useAddSteps } from "./useSteps";
-
 export function useDashboardMeals(userId?: string, date?: string) {
   const enabled = Boolean(userId && date);
   const queryKey = enabled
