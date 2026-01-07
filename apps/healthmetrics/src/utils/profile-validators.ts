@@ -60,3 +60,21 @@ export const fatGoalValidator = ({ value }: { value: string }) => {
   }
   return undefined;
 };
+
+export const waterGoalValidator = ({ value }: { value: string }) => {
+  const glasses = parseInt(value);
+  if (isNaN(glasses)) return "Water goal must be a number";
+  if (glasses < 1 || glasses > 20) {
+    return "Water goal must be between 1 and 20 glasses";
+  }
+  return undefined;
+};
+
+export const stepGoalValidator = ({ value }: { value: string }) => {
+  const steps = parseInt(value);
+  if (isNaN(steps)) return "Step goal must be a number";
+  if (steps < 1000 || steps > 50000) {
+    return "Step goal must be between 1,000 and 50,000";
+  }
+  return undefined;
+};

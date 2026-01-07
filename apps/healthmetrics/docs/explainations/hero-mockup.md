@@ -28,6 +28,7 @@ This document explains the animated dashboard mockup displayed on the landing pa
 The HeroMockup component (`src/components/landing/HeroMockup.tsx`) renders an animated phone-style frame containing a dashboard preview. Six fitness-themed icons float around the frame, and the dashboard content animates when the component enters the viewport.
 
 Key visual elements:
+
 - Phone frame with header bar
 - Circular calorie progress ring (SVG-based)
 - Horizontal macro progress bars (protein, carbs, fat)
@@ -106,6 +107,7 @@ Six icons are positioned around the mockup using absolute positioning. Each icon
 ```
 
 **Positioning classes** (lines 597-625):
+
 - `.hero-float-pos-1` - Top left (Apple icon)
 - `.hero-float-pos-2` - Top right (Dumbbell icon)
 - `.hero-float-pos-3` - Right side (Heart icon)
@@ -115,6 +117,7 @@ Six icons are positioned around the mockup using absolute positioning. Each icon
 
 **Stagger Effect:**
 Each icon receives a different `animationDelay` via inline style:
+
 - Icon 1: 0s
 - Icon 2: 0.5s
 - Icon 3: 1s
@@ -133,6 +136,7 @@ The main calorie display uses an SVG-based circular progress indicator.
 **How it works:**
 
 The ring is drawn using two SVG `<circle>` elements:
+
 1. Background circle (grey track)
 2. Foreground circle (colored progress)
 
@@ -194,11 +198,13 @@ const animate = (timestamp: number) => {
 ```
 
 **Easing function:** `easeOutQuart`
+
 - Formula: `1 - Math.pow(1 - progress, 4)`
 - Effect: Numbers accelerate quickly then slow down as they approach the target
 - This creates a natural "settling" feel rather than an abrupt stop
 
 **Durations used:**
+
 - Calories (1847): 2500ms
 - Protein (98g): 2000ms
 - Carbs (156g): 2200ms
@@ -213,6 +219,7 @@ Three horizontal progress bars show protein, carbs, and fat percentages.
 **CSS Classes:**
 
 Track (background):
+
 ```css
 /* src/styles/components/landing.css lines 774-777 */
 .hero-mockup-macro-bar {
@@ -222,6 +229,7 @@ Track (background):
 ```
 
 Fill (animated portion):
+
 ```css
 /* src/styles/components/landing.css lines 780-784 */
 .hero-mockup-macro-fill {
@@ -231,6 +239,7 @@ Fill (animated portion):
 ```
 
 **Color variations:**
+
 ```css
 /* lines 787-797 */
 .hero-mockup-macro-fill-protein {
@@ -264,6 +273,7 @@ Eight water glasses are rendered. Six are filled (highlighted), two are empty.
 **CSS Classes:**
 
 Base glass:
+
 ```css
 /* src/styles/components/landing.css lines 825-833 */
 .hero-mockup-water-glass {
@@ -277,6 +287,7 @@ Base glass:
 ```
 
 Filled glass:
+
 ```css
 /* lines 836-841 */
 .hero-mockup-water-glass-filled {
@@ -355,6 +366,7 @@ useEffect(() => {
 ```
 
 **Key behaviors:**
+
 - Threshold of 0.3 means animations trigger when 30% of the component is visible
 - Once triggered, the observer stops watching (animations only play once)
 - The `isVisible` state gates all animated values (numbers, progress bars, etc.)

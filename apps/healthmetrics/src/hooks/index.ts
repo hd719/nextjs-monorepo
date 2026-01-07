@@ -3,6 +3,9 @@ export {
   useDashboardMeals,
   useRecentActivity,
   useWaterIntake,
+  useUpdateWaterIntake,
+  useStepCount,
+  useAddSteps,
 } from "./useDashboard";
 
 // Diary hooks
@@ -11,6 +14,7 @@ export {
   useDiaryTotals,
   useFoodSearch,
   useCreateDiaryEntry,
+  useCopyDiaryDay,
 } from "./useDiary";
 
 // Exercise hooks
@@ -24,4 +28,18 @@ export {
 export { useProfile, useUpdateProfile } from "./useProfile";
 
 // Weight hooks
-export { useLatestWeight, useSaveWeight } from "./useWeight";
+export { useLatestWeight, useSaveWeight, useWeightTrend } from "./useWeight";
+
+// Onboarding hooks
+export {
+  useOnboardingState,
+  useSaveOnboardingStep,
+  useCalculateGoals,
+  useCompleteOnboarding,
+  useSkipOnboarding,
+  useResetOnboarding,
+  useOnboardingWizard,
+} from "./useOnboarding";
+
+// Goal calculation hook
+export { useGoalCalculation } from "./useGoalCalculation";

@@ -73,6 +73,16 @@ export type WorkoutLog = Prisma.WorkoutLogModel
  */
 export type WeightEntry = Prisma.WeightEntryModel
 /**
+ * Model WaterEntry
+ * 
+ */
+export type WaterEntry = Prisma.WaterEntryModel
+/**
+ * Model StepEntry
+ * 
+ */
+export type StepEntry = Prisma.StepEntryModel
+/**
  * Model RecipeCache
  * 
  */

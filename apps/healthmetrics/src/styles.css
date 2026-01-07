@@ -35,6 +35,7 @@
 /* Component styles */
 @import "./styles/components/landing.css";
 @import "./styles/components/auth.css";
+@import "./styles/components/onboarding.css";
 @import "./styles/components/profile.css";
 @import "./styles/components/layout.css";
 @import "./styles/components/dashboard.css";
@@ -43,3 +44,4 @@
 @import "./styles/components/progress.css";
 @import "./styles/components/ui.css";
 @import "./styles/components/utilities.css";
+@import "./styles/components/dev.css";

@@ -1,8 +1,10 @@
-import { Dumbbell, Scale, Target, TrendingUp } from "lucide-react";
+import { Dumbbell, Scale, Target } from "lucide-react";
+import { useNavigate } from "@tanstack/react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { Activity } from "@/types/nutrition";
+import { ROUTES } from "@/constants/routes";
 
 export interface RecentActivityProps {
   activities: Activity[];
@@ -16,6 +18,8 @@ const activityIcons = {
 };
 
 export function RecentActivity({ activities, isLoading }: RecentActivityProps) {
+  const navigate = useNavigate();
+
   return (
     <section className="dashboard-activity-section">
       <h2 className="dashboard-activity-heading">Recent Activity</h2>
@@ -87,9 +91,13 @@ export function RecentActivity({ activities, isLoading }: RecentActivityProps) {
               })
             ) : (
               <EmptyState
-                icon={TrendingUp}
+                icon={Dumbbell}
                 title="No recent activity"
-                description="Log meals and exercises to see your activity here"
+                description="Start your health journey by logging a workout"
+                action={{
+                  label: "Log Your First Workout",
+                  onClick: () => navigate({ to: ROUTES.EXERCISE }),
+                }}
                 framed={false}
               />
             )}

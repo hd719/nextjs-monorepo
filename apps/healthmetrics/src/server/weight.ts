@@ -44,6 +44,85 @@ export const getLatestWeight = createServerFn({ method: "GET" })
     }
   });
 
+/**
+ * Get weight entries for the last N days (for trend chart)
+ * Returns array sorted by date ascending
+ */
+export const getWeightTrend = createServerFn({ method: "GET" })
+  .inputValidator((data: { userId: string; days?: number }) => data)
+  .handler(
+    async ({
+      data: { userId, days = 7 },
+    }): Promise<{
+      entries: WeightEntry[];
+      change: number;
+      goalWeight: number | null;
+    }> => {
+      try {
+        // Calculate date range
+        const endDate = new Date();
+        const startDate = new Date();
+        startDate.setDate(startDate.getDate() - days);
+
+        const entries = await prisma.weightEntry.findMany({
+          where: {
+            userId,
+            date: {
+              gte: startDate,
+              lte: endDate,
+            },
+            weightLbs: { not: null },
+          },
+          orderBy: { date: "asc" },
+          select: {
+            id: true,
+            userId: true,
+            date: true,
+            weightLbs: true,
+            notes: true,
+            createdAt: true,
+          },
+        });
+
+        // Get user's target weight from profile
+        const user = await prisma.user.findUnique({
+          where: { id: userId },
+          select: { targetWeightLbs: true },
+        });
+
+        // Calculate weight change
+        const weightEntries = entries
+          .filter((e) => e.weightLbs !== null)
+          .map((e) => ({
+            id: e.id,
+            userId: e.userId,
+            date: e.date,
+            weightLbs: Number(e.weightLbs),
+            notes: e.notes,
+            createdAt: e.createdAt,
+          }));
+
+        let change = 0;
+        if (weightEntries.length >= 2) {
+          const first = weightEntries[0].weightLbs;
+          const last = weightEntries[weightEntries.length - 1].weightLbs;
+          change = Math.round((last - first) * 10) / 10;
+        }
+
+        return {
+          entries: weightEntries,
+          change,
+          goalWeight: user?.targetWeightLbs
+            ? Number(user.targetWeightLbs)
+            : null,
+        };
+      } catch (error) {
+        console.error("Failed to fetch weight trend:", error);
+        return { entries: [], change: 0, goalWeight: null };
+      }
+    }
+  );
+
 // ============================================================================
 // MUTATION FUNCTIONS
 // ============================================================================

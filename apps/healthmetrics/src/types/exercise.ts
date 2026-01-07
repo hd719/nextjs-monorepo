@@ -41,7 +41,8 @@ export interface WorkoutSession {
   updatedAt: Date;
 }
 
-export interface ExerciseSummaryData {
+// Exercise summary for dashboard/UI display
+export interface ExerciseSummary {
   totalMinutes: number;
   caloriesBurned: number;
   exercisesCompleted: number;

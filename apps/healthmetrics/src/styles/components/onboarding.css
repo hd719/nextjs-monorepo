@@ -1,0 +1,568 @@
+/* ============================================================================
+   ONBOARDING STYLES
+   Styles for the onboarding wizard flow
+   ============================================================================ */
+
+@layer components {
+  /* ==========================================================================
+     CONTAINER & LAYOUT
+     ========================================================================== */
+
+  .onboarding-container {
+    @apply min-h-screen flex flex-col items-center justify-start py-12 px-4;
+    /* Subtle gradient background with depth */
+    background:
+      radial-gradient(
+        ellipse at top,
+        hsl(var(--primary) / 0.03) 0%,
+        transparent 50%
+      ),
+      linear-gradient(
+        180deg,
+        hsl(var(--background)) 0%,
+        hsl(var(--muted) / 0.5) 100%
+      );
+  }
+
+  .onboarding-logo {
+    @apply flex items-center gap-3 mb-10;
+  }
+
+  .onboarding-logo-icon {
+    @apply w-10 h-10;
+    color: hsl(var(--primary));
+  }
+
+  .onboarding-logo-text {
+    @apply text-2xl font-bold tracking-tight;
+    color: var(--foreground);
+  }
+
+  .onboarding-content {
+    @apply w-full max-w-xl;
+  }
+
+  .onboarding-loading {
+    @apply flex flex-col items-center justify-center gap-4 py-16;
+  }
+
+  .onboarding-loading-icon {
+    @apply w-10 h-10 animate-spin;
+    color: hsl(var(--primary));
+  }
+
+  .onboarding-loading-text {
+    @apply text-sm font-medium;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     STEP COUNTER - Simple text-based progress
+     ========================================================================== */
+
+  .onboarding-step-counter {
+    @apply text-sm font-semibold tracking-wide uppercase mb-6;
+    color: hsl(var(--primary));
+    letter-spacing: 0.05em;
+  }
+
+  /* ==========================================================================
+     STEP LAYOUT
+     ========================================================================== */
+
+  .onboarding-step {
+    @apply flex flex-col gap-8 p-8 rounded-2xl;
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    box-shadow:
+      0 4px 6px -1px hsl(var(--foreground) / 0.05),
+      0 10px 30px -5px hsl(var(--foreground) / 0.08);
+  }
+
+  .onboarding-step-header {
+    @apply text-center space-y-3;
+  }
+
+  .onboarding-step-title {
+    @apply text-3xl font-bold tracking-tight;
+    color: var(--foreground);
+  }
+
+  .onboarding-step-subtitle {
+    @apply text-base;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     GOAL CARDS (Step 1)
+     ========================================================================== */
+
+  .onboarding-goal-grid {
+    @apply flex flex-col gap-3;
+  }
+
+  .onboarding-goal-card {
+    @apply flex items-center gap-4 p-5 rounded-xl text-left transition-all duration-200 cursor-pointer;
+    background-color: var(--background);
+    border: 2px solid var(--border);
+  }
+
+  .onboarding-goal-card:hover {
+    border-color: hsl(var(--primary) / 0.4);
+    background-color: hsl(var(--primary) / 0.03);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px hsl(var(--foreground) / 0.05);
+  }
+
+  .onboarding-goal-card-selected {
+    border-color: hsl(var(--primary));
+    background-color: hsl(var(--primary) / 0.08);
+    box-shadow:
+      0 0 0 3px hsl(var(--primary) / 0.1),
+      0 4px 12px hsl(var(--primary) / 0.1);
+  }
+
+  .onboarding-goal-card-selected:hover {
+    transform: none;
+  }
+
+  .onboarding-goal-icon {
+    @apply w-8 h-8 shrink-0 p-1.5 rounded-lg;
+    color: hsl(var(--primary));
+    background-color: hsl(var(--primary) / 0.1);
+  }
+
+  .onboarding-goal-card-selected .onboarding-goal-icon {
+    background-color: hsl(var(--primary) / 0.2);
+  }
+
+  .onboarding-goal-text {
+    @apply flex flex-col gap-1;
+  }
+
+  .onboarding-goal-label {
+    @apply font-semibold;
+    color: var(--foreground);
+  }
+
+  .onboarding-goal-description {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     FORM ELEMENTS
+     ========================================================================== */
+
+  .onboarding-form {
+    @apply flex flex-col gap-5;
+  }
+
+  .onboarding-field-group {
+    @apply flex flex-col gap-2;
+  }
+
+  .onboarding-field-hint {
+    @apply text-xs text-center;
+    color: var(--muted-foreground);
+  }
+
+  .onboarding-input {
+    @apply flex-1;
+  }
+
+  .onboarding-height-inputs {
+    @apply flex gap-3;
+  }
+
+  .onboarding-height-field {
+    @apply flex items-center gap-2 flex-1;
+  }
+
+  .onboarding-weight-field {
+    @apply flex items-center gap-2;
+  }
+
+  .onboarding-unit {
+    @apply text-sm font-medium shrink-0;
+    color: var(--muted-foreground);
+  }
+
+  /* Radio buttons (gender) */
+  .onboarding-radio-group {
+    @apply flex gap-2;
+  }
+
+  .onboarding-radio-button {
+    @apply flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200;
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    color: var(--foreground);
+  }
+
+  .onboarding-radio-button:hover {
+    border-color: hsl(var(--primary) / 0.5);
+  }
+
+  .onboarding-radio-button-selected {
+    border-color: hsl(var(--primary));
+    background-color: hsl(var(--primary) / 0.1);
+    color: hsl(var(--primary));
+  }
+
+  /* Activity level cards */
+  .onboarding-activity-grid {
+    @apply flex flex-col gap-2;
+  }
+
+  .onboarding-activity-card {
+    @apply flex flex-col gap-0.5 p-3 rounded-lg text-left transition-all duration-200;
+    background-color: var(--background);
+    border: 1px solid var(--border);
+  }
+
+  .onboarding-activity-card:hover {
+    border-color: hsl(var(--primary) / 0.5);
+  }
+
+  .onboarding-activity-card-selected {
+    border-color: hsl(var(--primary));
+    background-color: hsl(var(--primary) / 0.1);
+  }
+
+  .onboarding-activity-label {
+    @apply text-sm font-medium;
+    color: var(--foreground);
+  }
+
+  .onboarding-activity-description {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .onboarding-privacy-note {
+    @apply text-xs text-center;
+    color: var(--muted-foreground);
+  }
+
+  /* ==========================================================================
+     GOALS STEP (Step 3)
+     ========================================================================== */
+
+  .onboarding-calorie-hero {
+    @apply flex flex-col items-center gap-2 p-6 rounded-xl;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary) / 0.1) 0%,
+      hsl(var(--primary) / 0.05) 100%
+    );
+    border: 1px solid hsl(var(--primary) / 0.2);
+  }
+
+  .onboarding-calorie-label {
+    @apply text-sm font-medium;
+    color: var(--muted-foreground);
+  }
+
+  .onboarding-calorie-value {
+    @apply flex items-center justify-center gap-3;
+  }
+
+  .onboarding-calorie-input {
+    @apply text-center text-3xl font-bold w-32 h-14;
+  }
+
+  .onboarding-calorie-unit {
+    @apply text-xl font-medium flex items-center;
+    color: var(--muted-foreground);
+  }
+
+  .onboarding-calorie-note {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  /* Macros */
+  .onboarding-macros-section {
+    @apply space-y-3;
+  }
+
+  .onboarding-macros-title {
+    @apply text-sm font-medium;
+    color: var(--foreground);
+  }
+
+  .onboarding-macros-grid {
+    @apply grid grid-cols-3 gap-3;
+  }
+
+  .onboarding-macro-field {
+    @apply flex flex-col gap-2;
+  }
+
+  .onboarding-macro-input-wrapper {
+    @apply flex items-center gap-2;
+  }
+
+  .onboarding-macro-input {
+    @apply text-center text-lg font-semibold flex-1;
+  }
+
+  .onboarding-macro-unit {
+    @apply text-sm font-medium shrink-0;
+    color: var(--muted-foreground);
+  }
+
+  .onboarding-target-weight {
+    @apply flex flex-col gap-2;
+  }
+
+  /* ==========================================================================
+     PREFERENCES STEP (Step 4)
+     ========================================================================== */
+
+  .onboarding-toggle-group {
+    @apply flex gap-2;
+  }
+
+  .onboarding-toggle-button {
+    @apply flex-1 py-3 px-4 rounded-lg text-sm font-medium transition-all duration-200;
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    color: var(--foreground);
+  }
+
+  .onboarding-toggle-button:hover {
+    border-color: hsl(var(--primary) / 0.5);
+  }
+
+  .onboarding-toggle-button-selected {
+    border-color: hsl(var(--primary));
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  /* Slider */
+  .onboarding-slider-container {
+    @apply flex items-center gap-4 w-full;
+  }
+
+  .onboarding-slider-value {
+    @apply flex items-baseline gap-1 shrink-0;
+    justify-content: flex-end;
+  }
+
+  .onboarding-water-input-container {
+    @apply flex items-center gap-3;
+  }
+
+  .onboarding-slider-number {
+    @apply text-2xl font-bold tabular-nums;
+    color: hsl(var(--primary));
+  }
+
+  .onboarding-slider-unit {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  /* Step goal field */
+  .onboarding-step-goal-field {
+    @apply flex items-center gap-2;
+  }
+
+  .onboarding-step-presets {
+    @apply flex gap-2 mt-2;
+  }
+
+  .onboarding-preset-button {
+    @apply px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200;
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    color: var(--muted-foreground);
+  }
+
+  .onboarding-preset-button:hover {
+    border-color: hsl(var(--primary) / 0.5);
+  }
+
+  .onboarding-preset-button-selected {
+    border-color: hsl(var(--primary));
+    background-color: hsl(var(--primary) / 0.1);
+    color: hsl(var(--primary));
+  }
+
+  /* Select dropdown */
+  .onboarding-select {
+    @apply w-full p-3 rounded-lg text-sm;
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    color: var(--foreground);
+  }
+
+  .onboarding-select:focus {
+    outline: none;
+    border-color: hsl(var(--primary));
+  }
+
+  /* ==========================================================================
+     COMPLETE STEP (Step 5)
+     ========================================================================== */
+
+  .onboarding-complete-step {
+    @apply items-center text-center;
+  }
+
+  .onboarding-complete-animation {
+    @apply mb-4;
+  }
+
+  .onboarding-complete-checkmark {
+    @apply w-20 h-20 rounded-full flex items-center justify-center;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--success) / 0.2) 0%,
+      hsl(var(--success) / 0.1) 100%
+    );
+    animation: pulse-success 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-success {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 hsl(var(--success) / 0.3);
+    }
+    50% {
+      box-shadow: 0 0 0 15px hsl(var(--success) / 0);
+    }
+  }
+
+  .onboarding-complete-icon {
+    @apply w-10 h-10;
+    color: hsl(var(--success));
+  }
+
+  /* Summary card */
+  .onboarding-summary-card {
+    @apply w-full p-4 rounded-lg space-y-3;
+    background-color: var(--background);
+    border: 1px solid var(--border);
+  }
+
+  .onboarding-summary-title {
+    @apply text-sm font-medium;
+    color: var(--muted-foreground);
+  }
+
+  .onboarding-summary-items {
+    @apply space-y-2;
+  }
+
+  .onboarding-summary-item {
+    @apply flex justify-between items-center py-1;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .onboarding-summary-item:last-child {
+    border-bottom: none;
+  }
+
+  .onboarding-summary-label {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .onboarding-summary-value {
+    @apply text-sm font-medium;
+    color: var(--foreground);
+  }
+
+  .onboarding-summary-goal {
+    @apply flex items-center gap-1.5;
+  }
+
+  .onboarding-summary-goal-icon {
+    @apply w-4 h-4;
+    color: hsl(var(--primary));
+  }
+
+  /* Action buttons */
+  .onboarding-actions {
+    @apply w-full space-y-3;
+  }
+
+  .onboarding-actions-title {
+    @apply text-sm font-medium;
+    color: var(--muted-foreground);
+  }
+
+  .onboarding-action-buttons {
+    @apply flex flex-col gap-3 w-full;
+  }
+
+  .onboarding-action-button {
+    @apply w-full justify-start gap-3 h-12 text-base font-normal;
+  }
+
+  .onboarding-action-icon {
+    @apply w-5 h-5;
+    color: var(--muted-foreground);
+  }
+
+  .onboarding-complete-button {
+    @apply mt-4 text-sm underline;
+    color: var(--muted-foreground);
+  }
+
+  .onboarding-complete-button:hover {
+    color: var(--foreground);
+  }
+
+  /* ==========================================================================
+     NAVIGATION
+     ========================================================================== */
+
+  .onboarding-nav {
+    @apply flex justify-between items-center pt-6 mt-2;
+    border-top: 1px solid var(--border);
+  }
+
+  .onboarding-nav-right {
+    @apply flex gap-2;
+  }
+
+  /* Legacy button styles - kept for backwards compatibility */
+  /* The onboarding now uses Button components from the UI library */
+  .onboarding-back-button {
+    @apply py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200;
+    color: var(--muted-foreground);
+  }
+
+  .onboarding-back-button:hover {
+    color: var(--foreground);
+    background-color: var(--muted);
+  }
+
+  .onboarding-skip-button {
+    @apply py-2 px-4 text-sm font-medium transition-all duration-200;
+    color: var(--muted-foreground);
+  }
+
+  .onboarding-skip-button:hover {
+    color: var(--foreground);
+  }
+
+  .onboarding-next-button {
+    @apply py-2.5 px-6 rounded-lg text-sm font-medium transition-all duration-200;
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  .onboarding-next-button:hover:not(:disabled) {
+    background-color: hsl(var(--primary) / 0.9);
+  }
+
+  .onboarding-next-button:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+}

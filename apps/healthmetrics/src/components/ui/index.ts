@@ -15,7 +15,6 @@ export {
   Dialog,
   DialogPortal,
   DialogOverlay,
-  DialogClose,
   DialogTrigger,
   DialogContent,
   DialogHeader,
@@ -47,6 +46,7 @@ export { NutritionSummary } from "./nutrition-summary";
 export { Popover, PopoverTrigger, PopoverContent } from "./popover";
 export { ProgressBar } from "./progress-bar";
 export { Skeleton } from "./skeleton";
+export { Slider } from "./slider";
 export { ThemeProvider, useTheme } from "./theme-provider";
 export { ThemeToggle } from "./theme-toggle";
-export { toast, Toaster, useToast } from "./toast";
+export { ToastComponent, ToastContainer, useToast, type Toast } from "./toast";

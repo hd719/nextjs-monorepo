@@ -23,12 +23,14 @@ The problem is that CSS is **not** loaded as a traditional `<link rel="styleshee
 ### Evidence from Network Tab
 
 When CSS loads via JS injection:
+
 ```
 "url": "http://localhost:3003/src/styles.css",
 "resourceType": "script"  <-- WRONG! Should be "stylesheet"
 ```
 
 When CSS loads correctly:
+
 ```
 "url": "http://localhost:3003/src/styles.css",
 "resourceType": "stylesheet"  <-- CORRECT!
@@ -43,6 +45,7 @@ The fix has **two parts**:
 Instead of separate `.module.css` files, define component styles in the global `styles.css` using Tailwind's `@layer` directive.
 
 **Before (CSS Module):**
+
 ```css
 /* LandingPage.module.css */
 @import "tailwindcss" reference;
@@ -68,6 +71,7 @@ export function LandingPage() {
 ```
 
 **After (`@layer` in global CSS):**
+
 ```css
 /* styles.css */
 @layer components {
@@ -118,6 +122,7 @@ export const Route = createRootRoute({
 ```
 
 This ensures:
+
 - CSS is linked in `<head>` as a proper stylesheet
 - Browser loads CSS **before** rendering content
 - No JavaScript injection delay
@@ -125,18 +130,22 @@ This ensures:
 ## Files Changed
 
 ### `src/routes/__root.tsx`
+
 - Changed `import "../styles.css"` to `import appCss from "../styles.css?url"`
 - Added `links` array to `head()` function with stylesheet link
 
 ### `src/styles.css`
+
 - Added `@layer components { ... }` section with component styles
 - Styles use prefixed class names (e.g., `landing-container`, `landing-header`)
 
 ### `src/components/landing/LandingPage.tsx`
+
 - Removed `import styles from "./LandingPage.module.css"`
 - Changed `className={styles.xxx}` to `className="landing-xxx"`
 
 ### `src/components/landing/LandingPage.module.css`
+
 - **Can be deleted** (styles moved to `styles.css`)
 
 ## CSS Modules Still Needing Conversion
@@ -146,14 +155,17 @@ The following CSS modules still use the old pattern and may cause FOUC on their 
 **Total: 26 files**
 
 ### Already Converted ✅
+
 - [x] `src/components/landing/LandingPage.module.css` → Styles in `styles.css`, can delete file
 
 ### High Priority (Auth Flow - First User Experience)
+
 - [ ] `src/components/forms/AuthLayout.module.css`
 - [ ] `src/components/forms/AuthCard.module.css`
 - [ ] `src/components/forms/AuthFormField.module.css`
 
 ### Medium Priority (Main App Layout)
+
 - [ ] `src/components/layout/AppLayout.module.css`
 - [ ] `src/components/layout/Header.module.css`
 - [ ] `src/components/layout/Sidebar.module.css`
@@ -161,6 +173,7 @@ The following CSS modules still use the old pattern and may cause FOUC on their 
 - [ ] `src/components/layout/ProfileMenu.module.css`
 
 ### Dashboard Components
+
 - [ ] `src/components/dashboard/DailySummary.module.css`
 - [ ] `src/components/dashboard/MetricCard.module.css`
 - [ ] `src/components/dashboard/WaterTracker.module.css`
@@ -171,6 +184,7 @@ The following CSS modules still use the old pattern and may cause FOUC on their 
 - [ ] `src/components/dashboard/WaterGlass.module.css`
 
 ### Diary Components
+
 - [ ] `src/components/diary/DiaryDayView.module.css`
 - [ ] `src/components/diary/DiaryEntryList.module.css`
 - [ ] `src/components/diary/MealCard.module.css`
@@ -178,13 +192,16 @@ The following CSS modules still use the old pattern and may cause FOUC on their 
 - [ ] `src/components/diary/AddFoodDialog.module.css`
 
 ### Profile
+
 - [ ] `src/components/profile/ProfileForm.module.css`
 
 ### UI Components
+
 - [ ] `src/components/ui/progress-bar.module.css`
 - [ ] `src/components/ui/empty-state.module.css`
 
 ### Utilities
+
 - [ ] `src/styles/utilities.module.css`
 
 ## Conversion Steps for Each Module

@@ -1,18 +1,13 @@
 import type {
-  ProgressWeightEntry,
   CalorieEntry,
-  ProgressExerciseEntry,
   ProgressData,
   DateRange,
-  DateRangeOption,
+  WeightEntry,
+  ExerciseEntry,
 } from "@/types/progress";
 
 // Re-export types for backward compatibility
 export type { DateRange } from "@/types/progress";
-
-// ============================================================================
-// Helper Functions
-// ============================================================================
 
 /**
  * Generate dates going back N days from today
@@ -77,7 +72,6 @@ function generateCalorieHistory(goal: number, days: number): CalorieEntry[] {
     const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
 
     // Base consumption varies ±20% from goal
-    const variance = isWeekend ? 0.15 : 0.1;
     const baseMultiplier = 0.85 + Math.random() * 0.3;
     const weekendBoost = isWeekend ? 0.1 : 0;
 
@@ -291,10 +285,6 @@ export const mockProgressData: ProgressData = {
   ],
 };
 
-// ============================================================================
-// Dashboard Widget Mock Data
-// ============================================================================
-
 /**
  * Mock data for the dashboard progress widget.
  * Provides summary data for Sleep, Weight, Steps, and Achievements.
@@ -331,19 +321,6 @@ export const dashboardProgressData = {
     nextUp: "14-Day Streak (2 days away)",
   },
 };
-
-// ============================================================================
-// Date Range Options
-// ============================================================================
-
-export const dateRangeOptions: DateRangeOption[] = [
-  { value: "7d", label: "1W" },
-  { value: "30d", label: "1M" },
-  { value: "90d", label: "3M" },
-  { value: "180d", label: "6M" },
-  { value: "365d", label: "1Y" },
-  { value: "all", label: "ALL" },
-];
 
 /**
  * Filter data by date range

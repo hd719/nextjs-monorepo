@@ -1,4 +1,4 @@
-import { UtensilsCrossed, Dumbbell, Scale } from "lucide-react";
+import { UtensilsCrossed, Dumbbell, Scale, Footprints } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
 import { Card } from "@/components/ui/card";
 import { ROUTES } from "@/constants/routes";
@@ -17,6 +17,13 @@ const actions = [
     label: "Log Exercise",
     description: "Record your workout",
     route: ROUTES.EXERCISE,
+  },
+  {
+    id: "log-steps",
+    icon: Footprints,
+    label: "Log Steps",
+    description: "Track your activity",
+    route: ROUTES.PROGRESS,
   },
   {
     id: "add-weight",

@@ -607,4 +607,165 @@
   .link-icon-sm {
     @apply h-3 w-3;
   }
+
+  /* ==========================================================================
+     Toast Notifications
+     Dark-mode aware toast styling using CSS variables
+     ========================================================================== */
+
+  .toast-stack {
+    @apply fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 transform flex-col space-y-2;
+  }
+
+  .toast-container {
+    @apply pointer-events-auto w-max min-w-[240px] max-w-[min(600px,90vw)] overflow-hidden rounded-lg border shadow-lg transition-all duration-300 sm:min-w-[320px];
+    background-color: var(--card);
+    border-color: var(--border);
+  }
+
+  .toast-visible {
+    @apply translate-x-0 opacity-100;
+  }
+
+  .toast-hidden {
+    @apply translate-x-full opacity-0;
+  }
+
+  /* Toast type variants */
+  .toast-success {
+    border-left: 4px solid var(--success, #22c55e);
+  }
+
+  .toast-error {
+    border-left: 4px solid var(--destructive);
+  }
+
+  .toast-info {
+    border-left: 4px solid var(--primary);
+  }
+
+  .toast-content {
+    @apply p-4;
+  }
+
+  .toast-body {
+    @apply flex items-start;
+  }
+
+  .toast-icon-wrapper {
+    @apply flex-shrink-0;
+  }
+
+  .toast-icon {
+    @apply h-5 w-5;
+  }
+
+  .toast-icon-success {
+    color: var(--success, #22c55e);
+  }
+
+  .toast-icon-error {
+    color: var(--destructive);
+  }
+
+  .toast-icon-info {
+    color: var(--primary);
+  }
+
+  .toast-text {
+    @apply ml-3 w-0 flex-1 pt-0.5;
+  }
+
+  .toast-title {
+    @apply text-sm font-medium;
+    color: var(--foreground);
+  }
+
+  .toast-description {
+    @apply mt-1 text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .toast-close-wrapper {
+    @apply ml-4 flex flex-shrink-0;
+  }
+
+  .toast-close-button {
+    @apply inline-flex rounded-md bg-transparent;
+    color: var(--muted-foreground);
+  }
+
+  .toast-close-button:hover {
+    color: var(--foreground);
+  }
+
+  .toast-close-icon {
+    @apply h-5 w-5;
+  }
+
+  /* ==========================================================================
+     Slider Component (Radix UI)
+     ========================================================================== */
+
+  [data-radix-slider-root].slider-root,
+  .slider-root[data-orientation] {
+    position: relative;
+    display: flex;
+    width: 100%;
+    touch-action: none;
+    user-select: none;
+    align-items: center;
+    height: 28px;
+  }
+
+  [data-radix-slider-track].slider-track,
+  .slider-root .slider-track {
+    position: relative;
+    height: 6px;
+    width: 100%;
+    flex-grow: 1;
+    overflow: visible;
+    border-radius: 9999px;
+    background-color: var(--muted);
+  }
+
+  [data-radix-slider-range].slider-range,
+  .slider-root .slider-range {
+    position: absolute;
+    height: 100%;
+    border-radius: 9999px;
+    background-color: var(--foreground);
+  }
+
+  [data-radix-slider-thumb].slider-thumb,
+  .slider-root .slider-thumb {
+    display: block;
+    width: 28px;
+    height: 28px;
+    border-radius: 9999px;
+    background-color: var(--foreground);
+    border: 4px solid var(--background);
+    box-shadow: 0 2px 8px hsl(var(--foreground) / 0.15);
+    cursor: grab;
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .slider-root .slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px hsl(var(--foreground) / 0.2);
+  }
+
+  .slider-root .slider-thumb:active {
+    cursor: grabbing;
+    transform: scale(1.05);
+  }
+
+  .slider-root .slider-thumb:focus {
+    outline: none;
+    box-shadow:
+      0 0 0 3px hsl(var(--foreground) / 0.15),
+      0 2px 8px hsl(var(--foreground) / 0.15);
+  }
 }

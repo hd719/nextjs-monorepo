@@ -44,50 +44,48 @@ export function ToastComponent({
   const getIcon = () => {
     switch (type) {
       case "success":
-        return <CheckCircle className="h-5 w-5 text-green-600" />;
+        return <CheckCircle className="toast-icon toast-icon-success" />;
       case "error":
-        return <AlertCircle className="h-5 w-5 text-red-600" />;
+        return <AlertCircle className="toast-icon toast-icon-error" />;
       default:
-        return <AlertCircle className="h-5 w-5 text-blue-600" />;
+        return <AlertCircle className="toast-icon toast-icon-info" />;
     }
   };
 
   const getStyles = () => {
     switch (type) {
       case "success":
-        return "border-green-200 bg-green-50";
+        return "toast-success";
       case "error":
-        return "border-red-200 bg-red-50";
+        return "toast-error";
       default:
-        return "border-blue-200 bg-blue-50";
+        return "toast-info";
     }
   };
 
   return (
     <div
       className={cn(
-        "pointer-events-auto w-max min-w-[240px] max-w-[min(600px,90vw)] overflow-hidden rounded-lg border shadow-lg transition-all duration-300 sm:min-w-[320px]",
+        "toast-container",
         getStyles(),
-        isVisible ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+        isVisible ? "toast-visible" : "toast-hidden"
       )}
     >
-      <div className="p-4">
-        <div className="flex items-start">
-          <div className="flex-shrink-0">{getIcon()}</div>
-          <div className="ml-3 w-0 flex-1 pt-0.5">
-            <p className="text-sm font-medium text-gray-900">{title}</p>
-            {description && (
-              <p className="mt-1 text-sm text-gray-500">{description}</p>
-            )}
+      <div className="toast-content">
+        <div className="toast-body">
+          <div className="toast-icon-wrapper">{getIcon()}</div>
+          <div className="toast-text">
+            <p className="toast-title">{title}</p>
+            {description && <p className="toast-description">{description}</p>}
           </div>
-          <div className="ml-4 flex flex-shrink-0">
+          <div className="toast-close-wrapper">
             <button
               type="button"
-              className="inline-flex rounded-md bg-transparent text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              className="toast-close-button focus-ring"
               onClick={handleClose}
             >
               <span className="sr-only">Close</span>
-              <X className="h-5 w-5" />
+              <X className="toast-close-icon" />
             </button>
           </div>
         </div>
@@ -104,7 +102,7 @@ export function ToastContainer({
   onRemove: (id: string) => void;
 }) {
   return (
-    <div className="fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 transform flex-col space-y-2">
+    <div className="toast-stack">
       {toasts.map((toast) => (
         <ToastComponent key={toast.id} {...toast} onRemove={onRemove} />
       ))}

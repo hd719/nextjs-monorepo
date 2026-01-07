@@ -1,4 +1,47 @@
 import type { UserProfile } from "@/types/profile";
+
+/**
+ * Calculate profile completion percentage
+ * Returns a value between 0 and 100
+ */
+export function calculateProfileCompletion(profile: UserProfile | null): {
+  percentage: number;
+  missingFields: string[];
+} {
+  if (!profile) {
+    return { percentage: 0, missingFields: [] };
+  }
+
+  // Define fields to check with their display names
+  const fieldsToCheck: Array<{ key: keyof UserProfile; label: string }> = [
+    { key: "displayName", label: "Display name" },
+    { key: "avatarUrl", label: "Profile photo" },
+    { key: "dateOfBirth", label: "Date of birth" },
+    { key: "gender", label: "Gender" },
+    { key: "heightCm", label: "Height" },
+    { key: "currentWeightLbs", label: "Current weight" },
+    { key: "targetWeightLbs", label: "Target weight" },
+    { key: "activityLevel", label: "Activity level" },
+    { key: "goalType", label: "Goal type" },
+    { key: "dailyCalorieGoal", label: "Calorie goal" },
+  ];
+
+  const missingFields: string[] = [];
+  let completedCount = 0;
+
+  for (const field of fieldsToCheck) {
+    const value = profile[field.key];
+    // Consider field complete if it's not null/undefined and not empty string
+    if (value !== null && value !== undefined && value !== "") {
+      completedCount++;
+    } else {
+      missingFields.push(field.label);
+    }
+  }
+
+  const percentage = Math.round((completedCount / fieldsToCheck.length) * 100);
+  return { percentage, missingFields };
+}
 import { type UpdateUserProfileInput } from "@/utils/validation";
 
 export function formatDate(date: Date | string | null | undefined): string {
@@ -16,7 +59,7 @@ export function formatDate(date: Date | string | null | undefined): string {
   }
 }
 
-export function kgToLbs(kg: number | null | undefined): string {
+export function formatKgToLbs(kg: number | null | undefined): string {
   if (!kg) return "";
   return (kg * 2.20462).toFixed(1);
 }
@@ -44,6 +87,8 @@ export function getDefaultFormValues(initialData: UserProfile) {
     dailyProteinGoalG: initialData.dailyProteinGoalG?.toString() || "150",
     dailyCarbGoalG: initialData.dailyCarbGoalG?.toString() || "200",
     dailyFatGoalG: initialData.dailyFatGoalG?.toString() || "65",
+    dailyWaterGoal: initialData.dailyWaterGoal?.toString() || "8",
+    dailyStepGoal: initialData.dailyStepGoal?.toString() || "10000",
   };
 }
 
@@ -82,6 +127,8 @@ export function buildProfileUpdates(
     dailyProteinGoalG: parseInt(formValues.dailyProteinGoalG) || undefined,
     dailyCarbGoalG: parseInt(formValues.dailyCarbGoalG) || undefined,
     dailyFatGoalG: parseInt(formValues.dailyFatGoalG) || undefined,
+    dailyWaterGoal: parseInt(formValues.dailyWaterGoal) || undefined,
+    dailyStepGoal: parseInt(formValues.dailyStepGoal) || undefined,
     activityLevel: toEnumValue(formValues.activityLevel, [
       "sedentary",
       "lightly_active",

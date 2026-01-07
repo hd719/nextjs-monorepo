@@ -38,6 +38,7 @@ function VerifyEmail() {
         }
 
         setStatus("success");
+        // Redirect to login, which will then redirect to onboarding
         setTimeout(() => navigate({ to: ROUTES.AUTH.LOGIN }), 2000);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Verification failed");

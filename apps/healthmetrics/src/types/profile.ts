@@ -14,6 +14,8 @@ export type UserProfile = {
   dailyProteinGoalG: number | null;
   dailyCarbGoalG: number | null;
   dailyFatGoalG: number | null;
+  dailyWaterGoal: number;
+  dailyStepGoal: number;
   unitsPreference: string;
   timezone: string;
   isAdmin: boolean;

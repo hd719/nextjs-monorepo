@@ -9,8 +9,14 @@ export const DEFAULT_NUTRITION_GOALS = {
 // Water intake
 export const DEFAULT_WATER_GOAL = 8; // glasses per day
 
-// Meal types
-export const MEAL_TYPES = ["breakfast", "lunch", "dinner", "snack"] as const;
+// Meal types (matches validation schema)
+export const MEAL_TYPES = [
+  "breakfast",
+  "lunch",
+  "dinner",
+  "snack",
+  "other",
+] as const;
 export type MealType = (typeof MEAL_TYPES)[number];
 
 // Profile defaults

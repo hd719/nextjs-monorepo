@@ -20,7 +20,7 @@ export type {
   Exercise,
   WorkoutLog,
   WorkoutSession,
-  ExerciseSummaryData,
+  ExerciseSummary,
   ExerciseSearchResult,
 } from "./exercise";
 
@@ -31,8 +31,8 @@ export type {
   MealEntry,
   Activity,
   UserDisplayProfile,
-  ExerciseSummary,
   WaterIntake,
+  StepCount,
 } from "./nutrition";
 
 // Profile types (server/database types)
@@ -60,3 +60,16 @@ export type {
 
 // Weight types
 export type { WeightEntry } from "./weight";
+
+// Onboarding types
+export type {
+  OnboardingGoalType,
+  Gender,
+  ActivityLevel,
+  UnitsPreference,
+  OnboardingStepData,
+  OnboardingState,
+  NutritionCalculationInput,
+  NutritionGoals,
+  SaveOnboardingStepInput,
+} from "./onboarding";

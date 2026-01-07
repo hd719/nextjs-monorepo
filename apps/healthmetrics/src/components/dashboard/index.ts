@@ -1,5 +1,6 @@
 export { DailySummary } from "./DailySummary";
 export { ExerciseSummary } from "./ExerciseSummary";
+export { ProfileCompletion } from "./ProfileCompletion";
 export { ProgressActivityPlaceholder } from "./ProgressActivityPlaceholder";
 export { QuickActions } from "./QuickActions";
 export { RecentActivity } from "./RecentActivity";

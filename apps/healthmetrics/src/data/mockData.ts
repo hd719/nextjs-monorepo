@@ -1,16 +1,11 @@
-/**
- * Mock data for development
- * Easy migration path: replace with Supabase queries later
- */
-
 import type {
   DailySummary,
   MealEntry,
   Activity,
   UserDisplayProfile,
-  ExerciseSummary,
   WaterIntake,
-} from "../types/nutrition";
+} from "@/types/nutrition";
+import type { ExerciseSummary } from "@/types/exercise";
 
 // Static date for consistent SSR/client rendering
 // In production, this would be generated server-side per request
