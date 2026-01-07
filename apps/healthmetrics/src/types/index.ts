@@ -20,7 +20,7 @@ export type {
   Exercise,
   WorkoutLog,
   WorkoutSession,
-  ExerciseSummaryData,
+  ExerciseSummary,
   ExerciseSearchResult,
 } from "./exercise";
 
@@ -31,7 +31,6 @@ export type {
   MealEntry,
   Activity,
   UserDisplayProfile,
-  ExerciseSummary,
   WaterIntake,
 } from "./nutrition";
 

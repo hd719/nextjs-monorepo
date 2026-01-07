@@ -1,4 +1,4 @@
-import { Sunrise, Sun, Moon, Coffee } from "lucide-react";
+import { Sunrise, Sun, Moon, Coffee, Utensils } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -18,6 +18,7 @@ const mealIcons = {
   lunch: Sun,
   dinner: Moon,
   snack: Coffee,
+  other: Utensils,
 };
 
 const mealLabels = {
@@ -25,6 +26,7 @@ const mealLabels = {
   lunch: "Lunch",
   dinner: "Dinner",
   snack: "Snack",
+  other: "Other",
 };
 
 export function MealCard({

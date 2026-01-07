@@ -1,7 +1,12 @@
-// Dashboard mock data
-export { mockWaterIntake, mockMealEntries, mockActivities } from "./mockData";
+export {
+  mockUser,
+  mockDailySummary,
+  mockMealEntries,
+  mockActivities,
+  mockExerciseSummary,
+  mockWaterIntake,
+} from "./mockData";
 
-// Progress mock data
 export {
   mockProgressData,
   dashboardProgressData,

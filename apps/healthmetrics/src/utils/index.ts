@@ -15,10 +15,33 @@ export {
 // Form utilities
 export { getFieldError, hasFieldError } from "./form-errors";
 
+// Profile utilities
+export {
+  formatDate,
+  kgToLbs,
+  cmToInches,
+  getDefaultFormValues,
+  buildProfileUpdates,
+  validateAvatarFile,
+  fileToBase64,
+  calculateMacroBreakdown,
+} from "./profile-helpers";
+
+// Profile form validators (TanStack Form)
+export {
+  displayNameValidator,
+  heightValidator,
+  weightValidator,
+  calorieGoalValidator,
+  proteinGoalValidator,
+  carbGoalValidator,
+  fatGoalValidator,
+} from "./profile-validators";
+
 // Query keys
 export { queryKeys } from "./query-keys";
 
-// Validation schemas and types
+// Validation schemas and types (Zod)
 export {
   loginSchema,
   signupSchema,

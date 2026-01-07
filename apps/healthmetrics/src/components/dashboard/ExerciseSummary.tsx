@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useNavigate, Link } from "@tanstack/react-router";
-import type { ExerciseSummary as ExerciseSummaryType } from "@/types/nutrition";
+import type { ExerciseSummary as ExerciseSummaryType } from "@/types/exercise";
 import { ROUTES } from "@/constants/routes";
 
 export interface ExerciseSummaryProps {

@@ -15,7 +15,6 @@ export {
   Dialog,
   DialogPortal,
   DialogOverlay,
-  DialogClose,
   DialogTrigger,
   DialogContent,
   DialogHeader,
@@ -49,4 +48,4 @@ export { ProgressBar } from "./progress-bar";
 export { Skeleton } from "./skeleton";
 export { ThemeProvider, useTheme } from "./theme-provider";
 export { ThemeToggle } from "./theme-toggle";
-export { toast, Toaster, useToast } from "./toast";
+export { ToastComponent, ToastContainer, useToast, type Toast } from "./toast";

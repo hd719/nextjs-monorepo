@@ -15,7 +15,7 @@ import {
   validateAvatarFile,
   fileToBase64,
   calculateMacroBreakdown,
-} from "./profile-utils";
+} from "@/utils/profile-helpers";
 import {
   displayNameValidator,
   heightValidator,
@@ -24,7 +24,7 @@ import {
   proteinGoalValidator,
   carbGoalValidator,
   fatGoalValidator,
-} from "./profile-validators";
+} from "@/utils/profile-validators";
 
 export interface ProfileFormProps {
   userId: string;
@@ -34,7 +34,6 @@ export interface ProfileFormProps {
 export function ProfileForm({ userId, initialData }: ProfileFormProps) {
   const updateProfileMutation = useUpdateProfile();
 
-  // Avatar state (kept separate as it handles file uploads)
   const [avatarUrl, setAvatarUrl] = useState(initialData.avatarUrl || "");
   const [avatarPreview, setAvatarPreview] = useState(
     initialData.avatarUrl || ""
@@ -43,7 +42,6 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  // Initialize TanStack Form with default values from utility
   const form = useForm({
     defaultValues: getDefaultFormValues(initialData),
     onSubmit: async ({ value }) => {

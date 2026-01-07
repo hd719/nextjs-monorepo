@@ -1,7 +1,4 @@
-/**
- * TypeScript types for nutrition tracking
- * Designed to match Supabase schema from Sprint 0
- */
+import type { MealType } from "@/constants/defaults";
 
 // Daily summary types
 export interface DailySummary {
@@ -25,7 +22,7 @@ export interface FoodItem {
 
 export interface MealEntry {
   id: string;
-  type: "breakfast" | "lunch" | "dinner" | "snack";
+  type: MealType;
   foods: FoodItem[];
   totalCalories: number;
 }
@@ -51,13 +48,6 @@ export interface UserDisplayProfile {
   dailyProteinGoal: number;
   dailyCarbGoal: number;
   dailyFatGoal: number;
-}
-
-// Exercise summary type
-export interface ExerciseSummary {
-  totalMinutes: number;
-  caloriesBurned: number;
-  exercisesCompleted: number;
 }
 
 // Water intake type
