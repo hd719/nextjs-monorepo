@@ -16,7 +16,7 @@ const HomeHero: React.FC = () => {
         <div className="relative pb-6 pt-24 md:pb-10 lg:pb-[88px] lg:pt-[250px]">
           <div className="relative z-10 flex flex-col items-center text-center lg:items-start lg:text-left">
             <h1 className="mb-3 text-xl font-medium leading-[1.2] text-white md:text-3xl lg:mb-6 lg:text-7xl lg:leading-[1.1]">
-              Payal's Recipes
+              Payal&apos;s Recipes
             </h1>
             <p className="mb-6 text-xs font-medium leading-none text-white md:text-sm lg:mb-10 lg:text-xl lg:leading-none">
               From My Kitchen to Yours - Easy, Healthy, Balanced Meals

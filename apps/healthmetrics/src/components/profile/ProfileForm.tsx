@@ -108,7 +108,7 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
       const base64 = await fileToBase64(file);
       setAvatarPreview(base64);
       setAvatarUrl(base64);
-    } catch (error) {
+    } catch {
       setErrorMessage("Failed to process avatar image");
     }
   };
@@ -301,8 +301,8 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
                       field.state.value &&
                       !field.state.meta.errors.length && (
                         <p className="profile-form-height-display">
-                          {Math.floor(parseFloat(field.state.value) / 12)}'{" "}
-                          {Math.round(parseFloat(field.state.value) % 12)}"
+                          {Math.floor(parseFloat(field.state.value) / 12)}&apos;{" "}
+                          {Math.round(parseFloat(field.state.value) % 12)}&quot;
                         </p>
                       )}
                     {field.state.meta.errors &&

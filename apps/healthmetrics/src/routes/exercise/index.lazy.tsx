@@ -73,7 +73,7 @@ function ExercisePage() {
           (summary.totalMinutes > 0 || summary.exercisesCompleted > 0) && (
             <div className="animate-fade-slide-in animate-stagger-1">
               <h2 className="exercise-summary-section-title">
-                Today's Activity
+                Today&apos;s Activity
               </h2>
               <div className="exercise-summary-grid">
                 <SummaryStatCard

@@ -70,10 +70,9 @@ export const auth = betterAuth({
     enabled: true,
     requireEmailVerification: true,
     // Password reset function (direct property, not nested)
-    sendResetPassword: async ({ user, url, token }) => {
-      const resetPasswordUrl =
-        `${process.env.APP_URL || DEFAULT_DEV_URL}/auth/reset-password?token=${token}` ||
-        url;
+    sendResetPassword: async ({ user, token }) => {
+      const appUrl = process.env.APP_URL || DEFAULT_DEV_URL;
+      const resetPasswordUrl = `${appUrl}/auth/reset-password?token=${token}`;
       console.log("=".repeat(80));
       console.log("PASSWORD RESET EMAIL");
       console.log("To:", user.email);

@@ -776,4 +776,36 @@
       0 0 0 3px hsl(var(--foreground) / 0.15),
       0 2px 8px hsl(var(--foreground) / 0.15);
   }
+
+  /* ==========================================================================
+     Dialog / Modal
+     Dark-mode aware dialog styling using CSS variables
+     ========================================================================== */
+
+  .dialog-content {
+    background-color: var(--card);
+    color: var(--foreground);
+  }
+
+  .dialog-overlay {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  /* ==========================================================================
+     Form Inputs in Dialogs
+     Ensures inputs use design system colors properly in portals
+     ========================================================================== */
+
+  .dialog-content input,
+  .dialog-content textarea,
+  .dialog-content select {
+    background-color: var(--background);
+    color: var(--foreground);
+    border-color: var(--border);
+  }
+
+  .dialog-content input::placeholder,
+  .dialog-content textarea::placeholder {
+    color: var(--muted-foreground);
+  }
 }

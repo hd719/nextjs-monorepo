@@ -18,7 +18,7 @@ export function TodaysDiary({ meals, isLoading }: TodaysDiaryProps) {
   if (isLoading) {
     return (
       <section className="dashboard-diary-section">
-        <h2 className="dashboard-diary-heading">Today's Diary</h2>
+        <h2 className="dashboard-diary-heading">Today&apos;s Diary</h2>
         <Card variant="supporting" className="dashboard-diary-card">
           <div className="dashboard-diary-meals-list">
             {/* Show 2 skeleton meal cards */}
@@ -42,7 +42,7 @@ export function TodaysDiary({ meals, isLoading }: TodaysDiaryProps) {
 
   return (
     <section className="dashboard-diary-section">
-      <h2 className="dashboard-diary-heading">Today's Diary</h2>
+      <h2 className="dashboard-diary-heading">Today&apos;s Diary</h2>
 
       <Card variant="supporting" className="dashboard-diary-card">
         {/* Meal cards */}
