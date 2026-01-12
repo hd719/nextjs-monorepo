@@ -3,10 +3,26 @@ import { fetchUser } from "@/server/auth";
 import { checkOnboardingRequired } from "@/server/onboarding";
 import { ROUTES } from "@/constants/routes";
 
-/**
- * Route guard that requires authentication and completed onboarding.
- * Use in route `beforeLoad` for protected pages.
- */
+// Redirects authenticated users to dashboard (for landing, login, signup pages)
+export async function redirectIfAuthenticated() {
+  const user = await fetchUser();
+
+  if (user) {
+    const { required: needsOnboarding } = await checkOnboardingRequired({
+      data: { userId: user.id },
+    });
+
+    if (needsOnboarding) {
+      throw redirect({ to: ROUTES.ONBOARDING });
+    }
+
+    throw redirect({ to: ROUTES.DASHBOARD });
+  }
+
+  return { user: null };
+}
+
+// Requires authentication and completed onboarding (for protected pages)
 export async function requireAuthAndOnboarding() {
   const user = await fetchUser();
 

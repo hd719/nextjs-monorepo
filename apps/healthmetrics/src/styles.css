@@ -45,6 +45,7 @@
 @import "./styles/components/sleep.css";
 @import "./styles/components/fasting.css";
 @import "./styles/components/achievements.css";
+@import "./styles/components/scanner.css";
 @import "./styles/components/ui.css";
 @import "./styles/components/utilities.css";
 @import "./styles/components/dev.css";

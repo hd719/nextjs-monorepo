@@ -240,6 +240,7 @@
     border-color: var(--input);
     background-color: var(--background);
     --tw-ring-offset-color: var(--background);
+    cursor: pointer;
     transition:
       border-color var(--duration-fast) var(--ease-out-soft),
       box-shadow var(--duration-fast) var(--ease-out-soft);

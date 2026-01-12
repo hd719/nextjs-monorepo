@@ -1,0 +1,1106 @@
+/* ==========================================================================
+   Scanner Component Styles
+   Barcode scanner UI with camera feed, overlay, and controls
+   ========================================================================== */
+
+@layer components {
+  /* ==========================================================================
+     Main Container
+     ========================================================================== */
+
+  .scanner-container {
+    @apply relative flex flex-col w-full h-full min-h-[400px];
+    background-color: #000;
+  }
+
+  /* ==========================================================================
+     Header Bar (Close + Torch)
+     ========================================================================== */
+
+  .scanner-header {
+    @apply absolute top-0 left-0 right-0 z-20 flex items-center justify-between p-4;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
+  }
+
+  .scanner-header-btn {
+    @apply text-white hover:bg-white/20;
+    cursor: pointer;
+  }
+
+  .scanner-header-icon {
+    @apply w-6 h-6;
+  }
+
+  /* ==========================================================================
+     Camera Wrapper
+     ========================================================================== */
+
+  .scanner-camera-wrapper {
+    @apply relative flex-1 w-full overflow-hidden;
+  }
+
+  /* Style the video element from react-barcode-scanner */
+  .scanner-camera-wrapper video {
+    @apply w-full h-full object-cover;
+  }
+
+  /* ==========================================================================
+     Scan Overlay
+     ========================================================================== */
+
+  .scanner-overlay {
+    @apply absolute inset-0 z-10 flex flex-col pointer-events-none;
+  }
+
+  .scanner-overlay-top,
+  .scanner-overlay-bottom {
+    @apply flex-1;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .scanner-overlay-middle {
+    @apply flex;
+    height: 250px;
+  }
+
+  .scanner-overlay-side {
+    @apply flex-1;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  /* ==========================================================================
+     Scan Area (Target Box)
+     ========================================================================== */
+
+  .scanner-scan-area {
+    @apply relative;
+    width: 280px;
+    height: 250px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+
+  .scanner-scan-area-success {
+    border-color: var(--success, #22c55e);
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+  }
+
+  /* Corner indicators */
+  .scanner-corner {
+    @apply absolute w-6 h-6;
+    border-color: var(--accent);
+    border-width: 3px;
+  }
+
+  .scanner-corner-tl {
+    @apply top-0 left-0;
+    border-top-style: solid;
+    border-left-style: solid;
+    border-right: none;
+    border-bottom: none;
+    border-top-left-radius: 12px;
+  }
+
+  .scanner-corner-tr {
+    @apply top-0 right-0;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-left: none;
+    border-bottom: none;
+    border-top-right-radius: 12px;
+  }
+
+  .scanner-corner-bl {
+    @apply bottom-0 left-0;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-right: none;
+    border-top: none;
+    border-bottom-left-radius: 12px;
+  }
+
+  .scanner-corner-br {
+    @apply bottom-0 right-0;
+    border-bottom-style: solid;
+    border-right-style: solid;
+    border-left: none;
+    border-top: none;
+    border-bottom-right-radius: 12px;
+  }
+
+  /* Scanning line animation */
+  .scanner-line {
+    @apply absolute left-2 right-2;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    animation: scanner-line-move 2s ease-in-out infinite;
+  }
+
+  @keyframes scanner-line-move {
+    0%,
+    100% {
+      top: 10%;
+      opacity: 0.5;
+    }
+    50% {
+      top: 90%;
+      opacity: 1;
+    }
+  }
+
+  /* ==========================================================================
+     Instructions
+     ========================================================================== */
+
+  .scanner-instructions {
+    @apply absolute bottom-0 left-0 right-0 z-20 flex items-center justify-center gap-2 p-4 text-sm text-white;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+  }
+
+  .scanner-instructions-icon {
+    @apply w-4 h-4;
+  }
+
+  /* ==========================================================================
+     Error State
+     ========================================================================== */
+
+  .scanner-error-state {
+    @apply flex flex-col items-center justify-center h-full p-8 text-center;
+    background-color: var(--card);
+  }
+
+  .scanner-error-icon {
+    @apply flex items-center justify-center w-16 h-16 mb-4 rounded-full;
+    background-color: color-mix(in srgb, var(--destructive) 15%, transparent);
+  }
+
+  .scanner-error-icon-svg {
+    @apply w-8 h-8;
+    color: var(--destructive);
+  }
+
+  .scanner-error-title {
+    @apply text-lg font-semibold mb-2;
+    color: var(--foreground);
+  }
+
+  .scanner-error-message {
+    @apply text-sm mb-6 max-w-xs;
+    color: var(--muted-foreground);
+  }
+
+  .scanner-error-actions {
+    @apply flex gap-3;
+  }
+
+  /* Error icon variants */
+  .scanner-error-icon-camera {
+    background-color: color-mix(
+      in srgb,
+      var(--warning, #f59e0b) 15%,
+      transparent
+    );
+  }
+
+  .scanner-error-icon-camera .scanner-error-icon-svg {
+    color: var(--warning, #f59e0b);
+  }
+
+  .scanner-error-icon-network {
+    background-color: color-mix(in srgb, var(--destructive) 15%, transparent);
+  }
+
+  .scanner-error-icon-network .scanner-error-icon-svg {
+    color: var(--destructive);
+  }
+
+  .scanner-error-icon-api {
+    background-color: color-mix(
+      in srgb,
+      var(--warning, #f59e0b) 15%,
+      transparent
+    );
+  }
+
+  .scanner-error-icon-api .scanner-error-icon-svg {
+    color: var(--warning, #f59e0b);
+  }
+
+  .scanner-error-icon-invalid {
+    background-color: color-mix(in srgb, var(--destructive) 15%, transparent);
+  }
+
+  .scanner-error-icon-invalid .scanner-error-icon-svg {
+    color: var(--destructive);
+  }
+
+  .scanner-error-icon-default {
+    background-color: var(--muted);
+  }
+
+  .scanner-error-icon-default .scanner-error-icon-svg {
+    color: var(--muted-foreground);
+  }
+
+  .scanner-error-alert {
+    @apply mb-4 w-full max-w-xs;
+  }
+
+  .scanner-error-help {
+    @apply text-xs mb-4 max-w-xs;
+    color: var(--muted-foreground);
+    opacity: 0.8;
+  }
+
+  /* ==========================================================================
+     Scanner Dialog Specific Styles
+     ========================================================================== */
+
+  .scanner-dialog-content {
+    @apply p-0 max-w-md;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .scanner-dialog-header {
+    @apply p-4 border-b;
+    border-color: var(--border);
+  }
+
+  .scanner-dialog-body {
+    @apply flex flex-col;
+    min-height: 500px;
+  }
+
+  .scanner-dialog-body-hidden {
+    @apply hidden;
+  }
+
+  .scanner-dialog-footer {
+    @apply p-4 border-t;
+    border-color: var(--border);
+  }
+
+  /* ==========================================================================
+     Product Card (after scan)
+     ========================================================================== */
+
+  .scanner-product-card {
+    @apply p-5;
+    background-color: var(--card);
+  }
+
+  .scanner-product-header {
+    @apply flex items-start gap-4 mb-5 pb-5;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .scanner-product-image {
+    @apply w-16 h-16 rounded-xl flex-shrink-0 flex items-center justify-center;
+    background: linear-gradient(
+      135deg,
+      var(--accent) 0%,
+      var(--accent-dark) 100%
+    );
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+
+  .scanner-product-image-placeholder {
+    @apply w-8 h-8;
+    color: var(--accent-foreground);
+  }
+
+  .scanner-product-image img {
+    @apply w-full h-full object-cover rounded-xl;
+  }
+
+  .scanner-product-info {
+    @apply flex-1 min-w-0 overflow-hidden;
+  }
+
+  .scanner-product-name {
+    @apply font-bold text-lg mb-1 line-clamp-2;
+    color: var(--foreground);
+  }
+
+  .scanner-product-brand {
+    @apply text-sm font-medium;
+    color: var(--accent);
+  }
+
+  .scanner-product-serving {
+    @apply text-xs mt-1 px-2 py-0.5 rounded-full inline-block;
+    background-color: var(--muted);
+    color: var(--muted-foreground);
+  }
+
+  /* Nutrition grid - Colorful macro display */
+  .scanner-nutrition-grid {
+    @apply grid grid-cols-3 gap-3 mb-5;
+  }
+
+  .scanner-nutrition-item {
+    @apply text-center p-3 rounded-xl;
+    background-color: var(--secondary);
+    border: 1px solid var(--border);
+  }
+
+  /* Color coding for main macros */
+  .scanner-nutrition-item:nth-child(1) {
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--chart-1) 15%, var(--card)) 0%,
+      var(--card) 100%
+    );
+    border-color: color-mix(in srgb, var(--chart-1) 30%, transparent);
+  }
+
+  .scanner-nutrition-item:nth-child(2) {
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--chart-2) 15%, var(--card)) 0%,
+      var(--card) 100%
+    );
+    border-color: color-mix(in srgb, var(--chart-2) 30%, transparent);
+  }
+
+  .scanner-nutrition-item:nth-child(3) {
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--chart-3) 15%, var(--card)) 0%,
+      var(--card) 100%
+    );
+    border-color: color-mix(in srgb, var(--chart-3) 30%, transparent);
+  }
+
+  .scanner-nutrition-item:nth-child(4) {
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--chart-4) 15%, var(--card)) 0%,
+      var(--card) 100%
+    );
+    border-color: color-mix(in srgb, var(--chart-4) 30%, transparent);
+  }
+
+  .scanner-nutrition-item:nth-child(5) {
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--chart-5) 15%, var(--card)) 0%,
+      var(--card) 100%
+    );
+    border-color: color-mix(in srgb, var(--chart-5) 30%, transparent);
+  }
+
+  .scanner-nutrition-item:nth-child(6) {
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--success) 15%, var(--card)) 0%,
+      var(--card) 100%
+    );
+    border-color: color-mix(in srgb, var(--success) 30%, transparent);
+  }
+
+  .scanner-nutrition-value {
+    @apply text-xl font-bold;
+    color: var(--foreground);
+  }
+
+  .scanner-nutrition-label {
+    @apply text-xs font-medium uppercase tracking-wide mt-1;
+    color: var(--muted-foreground);
+  }
+
+  /* Servings control */
+  .scanner-servings-control {
+    @apply flex items-center justify-between p-4 rounded-xl mb-5;
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--muted) 100%);
+    border: 1px solid var(--border);
+  }
+
+  .scanner-servings-label {
+    @apply text-sm font-semibold;
+    color: var(--foreground);
+  }
+
+  .scanner-servings-buttons {
+    @apply flex items-center gap-2;
+  }
+
+  .scanner-servings-btn {
+    @apply w-10 h-10 rounded-xl flex items-center justify-center font-bold;
+    background-color: var(--card);
+    color: var(--foreground);
+    border: 1px solid var(--border);
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .scanner-servings-btn:hover:not(:disabled) {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+    border-color: var(--accent);
+    transform: scale(1.05);
+  }
+
+  .scanner-servings-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .scanner-servings-value {
+    @apply text-xl font-bold w-14 text-center;
+    color: var(--foreground);
+  }
+
+  /* Meal type selector */
+  .scanner-meal-selector {
+    @apply mb-2;
+  }
+
+  .scanner-meal-selector-label {
+    @apply block text-sm font-semibold mb-3;
+    color: var(--foreground);
+  }
+
+  .scanner-meal-options {
+    @apply grid grid-cols-4 gap-3;
+  }
+
+  .scanner-meal-option {
+    @apply flex flex-col items-center justify-center p-3 rounded-xl cursor-pointer transition-all;
+    border: 2px solid var(--border);
+    background-color: var(--card);
+  }
+
+  .scanner-meal-option:hover {
+    border-color: var(--accent);
+    background-color: color-mix(in srgb, var(--accent) 5%, var(--card));
+    transform: translateY(-2px);
+  }
+
+  .scanner-meal-option-selected {
+    border-color: var(--accent);
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--accent) 15%, var(--card)) 0%,
+      var(--card) 100%
+    );
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+
+  .scanner-meal-option-icon {
+    @apply w-6 h-6 mb-1;
+    color: var(--muted-foreground);
+  }
+
+  .scanner-meal-option-selected .scanner-meal-option-icon {
+    color: var(--accent);
+  }
+
+  .scanner-meal-option-label {
+    @apply text-xs font-medium;
+    color: var(--muted-foreground);
+  }
+
+  .scanner-meal-option-selected .scanner-meal-option-label {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ==========================================================================
+     Not Found State
+     ========================================================================== */
+
+  .scanner-not-found {
+    @apply flex flex-col items-center justify-center p-8 text-center;
+    background-color: var(--card);
+  }
+
+  .scanner-not-found-icon {
+    @apply flex items-center justify-center w-16 h-16 mb-4 rounded-full;
+    background-color: var(--muted);
+  }
+
+  .scanner-not-found-icon-svg {
+    @apply w-8 h-8;
+    color: var(--muted-foreground);
+  }
+
+  .scanner-not-found-title {
+    @apply text-lg font-semibold mb-2;
+    color: var(--foreground);
+  }
+
+  .scanner-not-found-barcode {
+    @apply text-sm mb-4 font-mono px-3 py-1 rounded;
+    background-color: var(--muted);
+    color: var(--muted-foreground);
+  }
+
+  .scanner-not-found-message {
+    @apply text-sm mb-6 max-w-xs;
+    color: var(--muted-foreground);
+  }
+
+  .scanner-not-found-actions {
+    @apply flex flex-col gap-2 w-full max-w-xs;
+  }
+
+  /* ==========================================================================
+     Manual Barcode Input
+     ========================================================================== */
+
+  .scanner-manual-input-section {
+    @apply p-4 border-t;
+    border-color: var(--border);
+  }
+
+  .scanner-manual-input-toggle {
+    @apply flex items-center justify-center gap-2 text-sm cursor-pointer;
+    color: var(--muted-foreground);
+  }
+
+  .scanner-manual-input-toggle:hover {
+    color: var(--foreground);
+  }
+
+  .scanner-manual-input-form {
+    @apply flex flex-col gap-3;
+  }
+
+  .scanner-manual-input-wrapper {
+    @apply relative flex-1;
+  }
+
+  .scanner-manual-input {
+    @apply w-full pr-10;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .scanner-manual-input-clear {
+    @apply absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full;
+    color: var(--muted-foreground);
+    transition: color 0.15s;
+    cursor: pointer;
+  }
+
+  .scanner-manual-input-clear:hover {
+    color: var(--foreground);
+  }
+
+  .scanner-manual-input-error {
+    @apply text-sm;
+    color: var(--destructive);
+  }
+
+  /* ==========================================================================
+     Recently Scanned
+     ========================================================================== */
+
+  .scanner-recent-section {
+    @apply p-4 border-t;
+    border-color: var(--border);
+  }
+
+  .scanner-recent-title {
+    @apply text-sm font-medium mb-3;
+    color: var(--muted-foreground);
+  }
+
+  .scanner-recent-grid {
+    @apply grid grid-cols-4 gap-2;
+  }
+
+  .scanner-recent-item {
+    @apply flex flex-col items-center p-2 rounded-lg cursor-pointer transition-all;
+    background-color: var(--secondary);
+  }
+
+  .scanner-recent-item:hover {
+    background-color: var(--muted);
+  }
+
+  .scanner-recent-item-image {
+    @apply w-10 h-10 rounded-md mb-1 flex items-center justify-center text-xl;
+    background-color: var(--muted);
+  }
+
+  .scanner-recent-item-name {
+    @apply text-xs text-center truncate w-full;
+    color: var(--foreground);
+  }
+
+  /* ==========================================================================
+     Loading State
+     ========================================================================== */
+
+  .scanner-loading {
+    @apply flex flex-col items-center justify-center p-8 text-center min-h-[300px];
+    background-color: var(--card);
+  }
+
+  .scanner-loading-icon {
+    @apply flex items-center justify-center w-16 h-16 mb-4 rounded-full;
+    background-color: color-mix(in srgb, var(--accent) 15%, transparent);
+    color: var(--accent);
+  }
+
+  .scanner-loading-icon svg {
+    @apply w-8 h-8;
+  }
+
+  .scanner-loading-spinner {
+    @apply w-6 h-6 mb-3 animate-spin;
+    color: var(--muted-foreground);
+  }
+
+  .scanner-loading-text {
+    @apply text-sm mb-2;
+    color: var(--muted-foreground);
+  }
+
+  .scanner-loading-barcode {
+    @apply text-base px-4 py-2 rounded-lg font-mono;
+    background-color: var(--muted);
+    color: var(--foreground);
+  }
+
+  /* ==========================================================================
+     Responsive Adjustments
+     ========================================================================== */
+
+  @media (max-width: 400px) {
+    .scanner-scan-area {
+      width: 240px;
+      height: 200px;
+    }
+
+    .scanner-overlay-middle {
+      height: 200px;
+    }
+
+    .scanner-meal-options {
+      @apply grid-cols-2;
+    }
+  }
+
+  /* ==========================================================================
+     RecentlyScanned Component
+     ========================================================================== */
+
+  .scanner-recently-scanned-section {
+    @apply px-4 pb-4;
+  }
+
+  .recently-scanned {
+    @apply flex flex-col gap-3;
+  }
+
+  .recently-scanned-header {
+    @apply flex items-center justify-between;
+  }
+
+  .recently-scanned-title {
+    @apply flex items-center gap-2 text-sm font-medium;
+    color: var(--foreground);
+  }
+
+  .recently-scanned-clear-btn {
+    @apply text-xs;
+    color: var(--muted-foreground);
+    cursor: pointer;
+  }
+
+  .recently-scanned-grid {
+    @apply grid gap-2;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+
+  .recently-scanned-card {
+    @apply relative rounded-lg border;
+    background-color: var(--card);
+    border-color: var(--border);
+  }
+
+  .recently-scanned-card-content {
+    @apply flex flex-col items-center gap-2 p-3 w-full text-left;
+    transition: background-color 0.15s ease;
+    cursor: pointer;
+  }
+
+  .recently-scanned-card-content:hover {
+    background-color: color-mix(in srgb, var(--accent) 10%, var(--card));
+  }
+
+  .recently-scanned-card-image {
+    @apply w-12 h-12 rounded-lg flex items-center justify-center;
+    background-color: var(--muted);
+  }
+
+  .recently-scanned-card-img {
+    @apply w-full h-full object-cover rounded-lg;
+  }
+
+  .recently-scanned-card-placeholder {
+    @apply w-6 h-6;
+    color: var(--muted-foreground);
+  }
+
+  .recently-scanned-card-info {
+    @apply flex flex-col items-center text-center gap-0.5;
+  }
+
+  .recently-scanned-card-name {
+    @apply text-xs font-medium line-clamp-1;
+    color: var(--foreground);
+  }
+
+  .recently-scanned-card-brand {
+    @apply text-xs line-clamp-1;
+    color: var(--muted-foreground);
+  }
+
+  .recently-scanned-card-calories {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .recently-scanned-card-time {
+    @apply text-xs;
+    color: var(--muted-foreground);
+    opacity: 0.7;
+  }
+
+  .recently-scanned-card-remove {
+    @apply absolute top-1 right-1 p-1 rounded-full;
+    background-color: var(--muted);
+    color: var(--muted-foreground);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    cursor: pointer;
+  }
+
+  .recently-scanned-card:hover .recently-scanned-card-remove {
+    opacity: 1;
+  }
+
+  .recently-scanned-card-remove:hover {
+    background-color: var(--destructive);
+    color: var(--destructive-foreground);
+  }
+
+  /* Empty state */
+  .recently-scanned-empty {
+    @apply flex flex-col items-center justify-center py-8 text-center;
+  }
+
+  .recently-scanned-empty-icon {
+    @apply w-10 h-10 mb-3;
+    color: var(--muted-foreground);
+    opacity: 0.5;
+  }
+
+  .recently-scanned-empty-text {
+    @apply text-sm font-medium;
+    color: var(--muted-foreground);
+  }
+
+  .recently-scanned-empty-subtext {
+    @apply text-xs mt-1;
+    color: var(--muted-foreground);
+    opacity: 0.7;
+  }
+
+  /* ==========================================================================
+     Camera Permission States
+     ========================================================================== */
+
+  .scanner-permission-state {
+    @apply flex flex-col items-center justify-center p-8 text-center min-h-[400px];
+    background-color: var(--card);
+  }
+
+  .scanner-permission-icon {
+    @apply flex items-center justify-center w-20 h-20 mb-6 rounded-full;
+  }
+
+  .scanner-permission-icon-checking {
+    background-color: color-mix(in srgb, var(--accent) 15%, transparent);
+    color: var(--accent);
+  }
+
+  .scanner-permission-icon-prompt {
+    background-color: color-mix(in srgb, var(--accent) 15%, transparent);
+    color: var(--accent);
+  }
+
+  .scanner-permission-icon-denied {
+    background-color: color-mix(in srgb, var(--destructive) 15%, transparent);
+    color: var(--destructive);
+  }
+
+  .scanner-permission-icon-unavailable {
+    background-color: var(--muted);
+    color: var(--muted-foreground);
+  }
+
+  .scanner-permission-title {
+    @apply text-xl font-semibold mb-3;
+    color: var(--foreground);
+  }
+
+  .scanner-permission-message {
+    @apply text-sm mb-6 max-w-sm leading-relaxed;
+    color: var(--muted-foreground);
+  }
+
+  .scanner-permission-actions {
+    @apply flex flex-col gap-3 w-full max-w-xs;
+  }
+
+  /* Platform-specific instructions */
+  .scanner-permission-instructions {
+    @apply w-full max-w-sm mb-6;
+  }
+
+  .scanner-platform-instructions {
+    @apply p-4 rounded-lg text-left;
+    background-color: var(--muted);
+  }
+
+  .scanner-platform-header {
+    @apply flex items-center gap-2 text-sm font-medium mb-3;
+    color: var(--foreground);
+  }
+
+  .scanner-platform-steps {
+    @apply text-sm space-y-2 pl-5 list-decimal;
+    color: var(--muted-foreground);
+  }
+
+  .scanner-platform-steps li {
+    @apply pl-1;
+  }
+
+  .scanner-settings-hint {
+    @apply flex items-start gap-2 mt-3 pt-3 text-xs border-t;
+    border-color: var(--border);
+    color: var(--muted-foreground);
+  }
+
+  .scanner-settings-hint strong {
+    @apply font-mono text-xs;
+    color: var(--foreground);
+  }
+
+  /* ==========================================================================
+     Accessibility Utilities
+     ========================================================================== */
+
+  /* Screen reader only - visually hidden but accessible */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* High contrast mode for scan area */
+  @media (prefers-contrast: more) {
+    .scanner-scan-area {
+      border-width: 4px;
+      border-color: #fff;
+    }
+
+    .scanner-corner {
+      border-width: 5px;
+      border-color: #fff;
+    }
+
+    .scanner-line {
+      height: 4px;
+      background: #fff;
+    }
+  }
+
+  /* Reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .scanner-line {
+      animation: none;
+      top: 50%;
+    }
+
+    .scanner-loading-spinner {
+      animation: none;
+    }
+  }
+
+  /* Focus visible styles for keyboard navigation */
+  .scanner-meal-option:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .scanner-servings-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .scanner-manual-input-toggle:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* ==========================================================================
+     Offline Queue Styles
+     ========================================================================== */
+
+  /* Offline indicator in scanner header */
+  .offline-indicator {
+    @apply flex flex-col items-center gap-1 py-2;
+  }
+
+  .offline-indicator-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium;
+    background-color: var(--warning);
+    color: var(--foreground);
+  }
+
+  .offline-indicator-badge svg {
+    @apply w-3.5 h-3.5;
+  }
+
+  .offline-indicator-message {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  /* Queued scan confirmation card */
+  .queued-scan-card {
+    @apply flex flex-col items-center p-6 text-center;
+    background-color: var(--card);
+  }
+
+  .queued-scan-header {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium mb-6;
+    background-color: color-mix(in srgb, var(--warning) 20%, transparent);
+    color: var(--warning);
+  }
+
+  .queued-scan-header svg {
+    @apply w-3.5 h-3.5;
+  }
+
+  .queued-scan-content {
+    @apply flex flex-col items-center mb-6;
+  }
+
+  .queued-scan-icon {
+    @apply w-16 h-16 rounded-full flex items-center justify-center mb-4;
+    background-color: color-mix(in srgb, var(--success) 15%, transparent);
+    color: var(--success);
+  }
+
+  .queued-scan-icon svg {
+    @apply w-8 h-8;
+  }
+
+  .queued-scan-title {
+    @apply text-lg font-semibold mb-2;
+    color: var(--foreground);
+  }
+
+  .queued-scan-barcode {
+    @apply font-mono text-sm px-3 py-1.5 rounded-lg mb-3;
+    background-color: var(--muted);
+    color: var(--foreground);
+  }
+
+  .queued-scan-message {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .queued-scan-details {
+    @apply flex items-center justify-center gap-4 mb-6 text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .queued-scan-detail {
+    @apply flex items-center gap-1.5;
+  }
+
+  .queued-scan-detail svg {
+    @apply w-4 h-4;
+  }
+
+  .queued-scan-actions {
+    @apply flex gap-3 mb-4;
+  }
+
+  .queued-scan-count {
+    @apply text-xs inline-flex items-center gap-1;
+    color: var(--muted-foreground);
+  }
+
+  .queued-scan-count svg {
+    @apply w-3.5 h-3.5;
+  }
+
+  /* Pending queue badge */
+  .pending-queue-badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium cursor-pointer;
+    background-color: color-mix(in srgb, var(--warning) 15%, transparent);
+    color: var(--warning);
+    border: 1px solid color-mix(in srgb, var(--warning) 30%, transparent);
+    transition: background-color 0.15s ease;
+  }
+
+  .pending-queue-badge:hover {
+    background-color: color-mix(in srgb, var(--warning) 25%, transparent);
+  }
+
+  .pending-queue-badge-icon {
+    @apply w-3.5 h-3.5;
+  }
+
+  .pending-queue-badge-count {
+    @apply font-semibold;
+  }
+
+  /* Sync toast styles (if needed) */
+  .sync-progress {
+    @apply flex flex-col gap-2;
+  }
+
+  .sync-progress-bar {
+    @apply h-1.5 rounded-full overflow-hidden;
+    background-color: var(--muted);
+  }
+
+  .sync-progress-fill {
+    @apply h-full rounded-full transition-all duration-300;
+    background-color: var(--accent);
+  }
+
+  .sync-summary {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .sync-summary-success {
+    color: var(--success);
+  }
+
+  .sync-summary-failed {
+    color: var(--destructive);
+  }
+}

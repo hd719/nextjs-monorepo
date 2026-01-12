@@ -205,6 +205,7 @@
   /* Logo */
   .auth-layout-logo-link {
     @apply flex items-center gap-2 transition-opacity;
+    cursor: pointer;
   }
 
   .auth-layout-logo-link:hover {
@@ -315,6 +316,7 @@
   .auth-form-link {
     @apply font-medium transition-colors;
     color: var(--accent);
+    cursor: pointer;
   }
 
   .auth-form-link:hover {

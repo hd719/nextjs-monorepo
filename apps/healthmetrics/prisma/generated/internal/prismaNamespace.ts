@@ -409,7 +409,8 @@ export const ModelName = {
   Achievement: 'Achievement',
   UserAchievement: 'UserAchievement',
   FastingProtocol: 'FastingProtocol',
-  FastingSession: 'FastingSession'
+  FastingSession: 'FastingSession',
+  BarcodeScan: 'BarcodeScan'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -425,7 +426,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "betterAuthUser" | "betterAuthSession" | "betterAuthAccount" | "verification" | "user" | "foodItem" | "exercise" | "diaryEntry" | "workoutSession" | "workoutLog" | "weightEntry" | "waterEntry" | "stepEntry" | "sleepEntry" | "recipeCache" | "mealPlanTemplate" | "mealPlan" | "goal" | "friendship" | "challenge" | "challengeParticipant" | "userStreak" | "achievement" | "userAchievement" | "fastingProtocol" | "fastingSession"
+    modelProps: "betterAuthUser" | "betterAuthSession" | "betterAuthAccount" | "verification" | "user" | "foodItem" | "exercise" | "diaryEntry" | "workoutSession" | "workoutLog" | "weightEntry" | "waterEntry" | "stepEntry" | "sleepEntry" | "recipeCache" | "mealPlanTemplate" | "mealPlan" | "goal" | "friendship" | "challenge" | "challengeParticipant" | "userStreak" | "achievement" | "userAchievement" | "fastingProtocol" | "fastingSession" | "barcodeScan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2353,6 +2354,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    BarcodeScan: {
+      payload: Prisma.$BarcodeScanPayload<ExtArgs>
+      fields: Prisma.BarcodeScanFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BarcodeScanFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarcodeScanPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BarcodeScanFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarcodeScanPayload>
+        }
+        findFirst: {
+          args: Prisma.BarcodeScanFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarcodeScanPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BarcodeScanFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarcodeScanPayload>
+        }
+        findMany: {
+          args: Prisma.BarcodeScanFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarcodeScanPayload>[]
+        }
+        create: {
+          args: Prisma.BarcodeScanCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarcodeScanPayload>
+        }
+        createMany: {
+          args: Prisma.BarcodeScanCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BarcodeScanCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarcodeScanPayload>[]
+        }
+        delete: {
+          args: Prisma.BarcodeScanDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarcodeScanPayload>
+        }
+        update: {
+          args: Prisma.BarcodeScanUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarcodeScanPayload>
+        }
+        deleteMany: {
+          args: Prisma.BarcodeScanDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BarcodeScanUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BarcodeScanUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarcodeScanPayload>[]
+        }
+        upsert: {
+          args: Prisma.BarcodeScanUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BarcodeScanPayload>
+        }
+        aggregate: {
+          args: Prisma.BarcodeScanAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBarcodeScan>
+        }
+        groupBy: {
+          args: Prisma.BarcodeScanGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BarcodeScanGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BarcodeScanCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BarcodeScanCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2840,6 +2915,17 @@ export const FastingSessionScalarFieldEnum = {
 export type FastingSessionScalarFieldEnum = (typeof FastingSessionScalarFieldEnum)[keyof typeof FastingSessionScalarFieldEnum]
 
 
+export const BarcodeScanScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  barcode: 'barcode',
+  foodItemId: 'foodItemId',
+  scannedAt: 'scannedAt'
+} as const
+
+export type BarcodeScanScalarFieldEnum = (typeof BarcodeScanScalarFieldEnum)[keyof typeof BarcodeScanScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -3287,6 +3373,7 @@ export type GlobalOmitConfig = {
   userAchievement?: Prisma.UserAchievementOmit
   fastingProtocol?: Prisma.FastingProtocolOmit
   fastingSession?: Prisma.FastingSessionOmit
+  barcodeScan?: Prisma.BarcodeScanOmit
 }
 
 /* Types for Logging */

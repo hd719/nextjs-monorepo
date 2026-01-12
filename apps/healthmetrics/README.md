@@ -71,10 +71,34 @@ The app will be available at `http://localhost:3003`.
 ### Environment Variables
 
 ```env
+# Required
 DATABASE_URL="postgresql://..."
-BETTER_AUTH_SECRET="your-secret-key"
+BETTER_AUTH_SECRET="your-secret-key-min-32-chars"  # Also used by Go service for JWT verification
 BETTER_AUTH_URL="http://localhost:3003"
+
+# Barcode Scanner - Go Service Integration
+BARCODE_SERVICE_URL="http://localhost:8080"       # Go microservice URL (required in prod)
+BARCODE_SERVICE_API_KEY="your-api-key-min-32-chars"  # Service-to-service auth (required in prod)
+
+# Optional - Mock Data Flags (for development/testing)
+VITE_USE_MOCK_DASHBOARD="true"         # Use mock dashboard data
+VITE_USE_MOCK_ACHIEVEMENTS="true"      # Use mock achievements data
+VITE_USE_MOCK_BARCODE="true"           # Use mock barcode data (skip Go service)
+VITE_SIMULATE_SCANNER_OFFLINE="true"   # Simulate offline for scanner only (test queue)
 ```
+
+#### Barcode Service Authentication
+
+When the Go barcode service (`healthmetrics-services`) is running, the app authenticates requests using:
+
+| Header | Source | Purpose |
+|--------|--------|---------|
+| `X-API-Key` | `BARCODE_SERVICE_API_KEY` | Proves request is from this app |
+| `Cookie` | User session | JWT for user identity verification |
+| `X-User-ID` | Session user ID | Auditing and logging |
+| `X-Request-ID` | Auto-generated | Distributed tracing |
+
+**Note:** Set `VITE_USE_MOCK_BARCODE=true` during development to skip the Go service entirely.
 
 ## Project Structure
 

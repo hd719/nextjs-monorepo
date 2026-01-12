@@ -432,6 +432,7 @@
 
   .diary-food-item {
     @apply flex items-center justify-between py-2 rounded-md px-2 -mx-2 transition-colors;
+    cursor: pointer;
   }
 
   .diary-food-item:hover {
@@ -535,6 +536,7 @@
 
   .diary-add-result-item {
     @apply w-full p-3 text-left transition-colors;
+    cursor: pointer;
   }
 
   .diary-add-result-item:hover {

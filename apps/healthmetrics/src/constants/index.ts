@@ -6,6 +6,7 @@ export {
   DEFAULT_WATER_GOAL,
   MEAL_TYPES,
   type MealType,
+  MEAL_TYPE_LABELS,
   DEFAULT_TIMEZONE,
   DEFAULT_UNITS_PREFERENCE,
   DEFAULT_PAGE_SIZE,
@@ -53,6 +54,14 @@ export {
   formatFastingTimer,
   getProtocolDisplayName,
 } from "./fasting";
+
+// Scanner
+export {
+  SCANNER_DIALOG_TITLES,
+  SCANNER_DIALOG_DESCRIPTIONS,
+  RECENTLY_SCANNED_STORAGE_KEY,
+  RECENTLY_SCANNED_MAX_ITEMS,
+} from "./scanner";
 
 // Environment URLs (single source of truth for dev URLs)
 export const DEFAULT_DEV_URL = "http://localhost:3003";

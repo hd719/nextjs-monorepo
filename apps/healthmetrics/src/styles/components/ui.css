@@ -588,7 +588,185 @@
      ========================================================================== */
 
   .popover-calendar {
-    @apply w-auto p-0 border shadow-lg;
+    @apply w-auto p-0 border shadow-lg rounded-lg;
+    background-color: var(--popover);
+    /* Ensure solid background - no transparency */
+    backdrop-filter: none;
+  }
+
+  /* ==========================================================================
+     Calendar Component Styles
+     ========================================================================== */
+
+  .calendar-root {
+    @apply p-3 rounded-lg relative;
+    background-color: var(--popover);
+    color: var(--popover-foreground);
+  }
+
+  /* Container structure */
+  .calendar-months {
+    @apply flex flex-col sm:flex-row gap-4;
+  }
+
+  .calendar-month {
+    @apply space-y-4;
+  }
+
+  /* Caption - month/year header */
+  .calendar-month-caption {
+    @apply flex justify-center items-center h-7 gap-1;
+  }
+
+  .calendar-caption-label {
+    @apply text-sm font-medium;
+  }
+
+  /* Dropdown styles */
+  .calendar-dropdowns {
+    @apply flex items-center gap-2;
+  }
+
+  .calendar-dropdown {
+    @apply appearance-none bg-transparent border rounded-md px-2 py-1 text-sm font-medium cursor-pointer;
+    border-color: var(--input);
+  }
+
+  .calendar-dropdown:hover {
+    background-color: var(--accent);
+  }
+
+  .calendar-dropdown:focus {
+    @apply outline-none ring-2;
+    --tw-ring-color: var(--ring);
+  }
+
+  /* Navigation */
+  .calendar-nav {
+    @apply flex items-center gap-1 absolute left-3 right-3 top-3 h-7 justify-between pointer-events-none;
+  }
+
+  .calendar-nav-button {
+    @apply h-7 w-7 p-0 pointer-events-auto rounded-md border;
+    background-color: transparent;
+    border-color: var(--input);
+  }
+
+  .calendar-nav-button:hover {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+  }
+
+  .calendar-nav-button svg {
+    @apply h-4 w-4;
+  }
+
+  /* Calendar grid */
+  .calendar-grid {
+    @apply w-full border-collapse space-y-1;
+  }
+
+  .calendar-weekdays {
+    @apply flex;
+  }
+
+  .calendar-weekday {
+    @apply rounded-md w-9 font-normal text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .calendar-week {
+    @apply flex w-full mt-2;
+  }
+
+  /* Day cells */
+  .calendar-day {
+    @apply h-9 w-9 text-center text-sm p-0 relative;
+  }
+
+  .calendar-day-button {
+    @apply h-9 w-9 p-0 font-normal rounded-md cursor-pointer;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease;
+    background-color: transparent;
+    color: var(--foreground);
+  }
+
+  .calendar-day-button:hover {
+    background-color: var(--accent) !important;
+    color: var(--accent-foreground) !important;
+  }
+
+  .calendar-day-button:focus-visible {
+    @apply outline-none ring-2;
+    --tw-ring-color: var(--ring);
+  }
+
+  /* Day states - applied directly to button */
+  .calendar-day-today-btn {
+    @apply font-semibold;
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+  }
+
+  .calendar-day-selected-btn {
+    @apply rounded-md;
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  .calendar-day-selected-btn:hover {
+    background-color: var(--primary) !important;
+    opacity: 0.9;
+  }
+
+  .calendar-day-outside {
+    @apply opacity-50;
+    color: var(--muted-foreground);
+  }
+
+  .calendar-day-disabled {
+    @apply opacity-50;
+    color: var(--muted-foreground);
+  }
+
+  .calendar-day-hidden {
+    @apply invisible;
+  }
+
+  /* Direct button state classes (applied via DayButton component) */
+  .calendar-day-today-btn {
+    @apply font-semibold;
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+  }
+
+  .calendar-day-selected-btn {
+    @apply rounded-md;
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  .calendar-day-selected-btn:hover {
+    opacity: 0.9;
+  }
+
+  /* Range selection */
+  .calendar-range-start {
+    @apply rounded-l-md;
+    background-color: var(--accent);
+  }
+
+  .calendar-range-end {
+    @apply rounded-r-md;
+    background-color: var(--accent);
+  }
+
+  .calendar-range-middle {
+    @apply rounded-none;
+    background-color: var(--accent);
+    color: var(--accent-foreground);
   }
 
   /* ==========================================================================

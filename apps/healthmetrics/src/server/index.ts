@@ -10,6 +10,7 @@ export {
   getDailyTotals,
   searchFoodItems,
   createDiaryEntry,
+  createDiaryEntryFromScan,
   copyDiaryDay,
 } from "./diary";
 
@@ -92,3 +93,7 @@ export {
   deleteCustomProtocol,
   updateFastingPreferences,
 } from "./fasting";
+
+// Barcode server functions
+// Note: lookupBarcode calls Go microservice which handles caching + persistence
+export { lookupBarcode, recordBarcodeScan, getRecentScans } from "./barcode";

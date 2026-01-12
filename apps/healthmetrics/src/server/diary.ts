@@ -4,8 +4,10 @@ import { prisma } from "@/lib/prisma";
 import { createLogger } from "@/lib/logger";
 import {
   createDiaryEntrySchema,
+  createDiaryEntryFromScanSchema,
   searchFoodItemsSchema,
   type CreateDiaryEntryInput,
+  type CreateDiaryEntryFromScanInput,
 } from "@/utils/validation";
 import type {
   DiaryEntryWithFood,
@@ -358,5 +360,162 @@ export const createDiaryEntry = createServerFn({ method: "POST" })
         throw error;
       }
       throw new Error("Failed to create diary entry");
+    }
+  });
+
+// When Go service is enabled, it owns the food_items domain
+// In mock mode, we still create food items here for development
+const GO_SERVICE_OWNS_FOOD_ITEMS = !process.env.VITE_USE_MOCK_BARCODE;
+
+/**
+ * Create a diary entry from a scanned barcode product
+ *
+ * Domain ownership:
+ * - When Go service is enabled: food_items are created by Go service, we only read here
+ * - When using mock data: we create food_items here for development convenience
+ */
+export const createDiaryEntryFromScan = createServerFn({ method: "POST" })
+  .inputValidator((data: CreateDiaryEntryFromScanInput) => {
+    return createDiaryEntryFromScanSchema.parse(data);
+  })
+  .handler(async ({ data }): Promise<DiaryEntryWithFood> => {
+    try {
+      const { product, ...entryData } = data;
+
+      // Find the food item by barcode
+      let foodItem = await prisma.foodItem.findFirst({
+        where: { barcode: product.barcode },
+      });
+
+      if (!foodItem) {
+        if (GO_SERVICE_OWNS_FOOD_ITEMS) {
+          // Go service should have created this food item during lookup
+          // If it doesn't exist, something went wrong in the flow
+          log.warn(
+            { barcode: product.barcode },
+            "Food item not found - Go service should have created it during lookup"
+          );
+
+          // Create it anyway to not break the user flow, but log for investigation
+          // This handles edge cases like race conditions or Go service not yet deployed
+          foodItem = await prisma.foodItem.create({
+            data: {
+              barcode: product.barcode,
+              name: product.name,
+              brand: product.brand,
+              caloriesPer100g: toDecimal(product.caloriesPer100g),
+              proteinG: toDecimal(product.proteinG),
+              carbsG: toDecimal(product.carbsG),
+              fatG: toDecimal(product.fatG),
+              fiberG: product.fiberG ? toDecimal(product.fiberG) : null,
+              sugarG: product.sugarG ? toDecimal(product.sugarG) : null,
+              sodiumMg: product.sodiumMg ? toDecimal(product.sodiumMg) : null,
+              servingSizeG: toDecimal(product.servingSizeG),
+              servingSizeUnit: "g",
+              source: product.source,
+              verified: product.verified,
+            },
+          });
+
+          log.info(
+            { barcode: product.barcode, foodItemId: foodItem.id },
+            "Created food item as fallback (Go service should own this)"
+          );
+        } else {
+          // Mock mode: create the food item from scanned product data
+          foodItem = await prisma.foodItem.create({
+            data: {
+              barcode: product.barcode,
+              name: product.name,
+              brand: product.brand,
+              caloriesPer100g: toDecimal(product.caloriesPer100g),
+              proteinG: toDecimal(product.proteinG),
+              carbsG: toDecimal(product.carbsG),
+              fatG: toDecimal(product.fatG),
+              fiberG: product.fiberG ? toDecimal(product.fiberG) : null,
+              sugarG: product.sugarG ? toDecimal(product.sugarG) : null,
+              sodiumMg: product.sodiumMg ? toDecimal(product.sodiumMg) : null,
+              servingSizeG: toDecimal(product.servingSizeG),
+              servingSizeUnit: "g",
+              source: product.source,
+              verified: product.verified,
+            },
+          });
+
+          log.info(
+            { barcode: product.barcode, foodItemId: foodItem.id },
+            "Created new food item from barcode scan (mock mode)"
+          );
+        }
+      }
+
+      // Parse date string to Date object
+      const dateObj = new Date(entryData.date + "T00:00:00.000Z");
+
+      // Create the diary entry
+      const entry = await prisma.diaryEntry.create({
+        data: {
+          userId: entryData.userId,
+          foodItemId: foodItem.id,
+          date: dateObj,
+          mealType: entryData.mealType,
+          quantityG: toDecimal(entryData.quantityG),
+          servings: entryData.servings
+            ? toDecimal(entryData.servings)
+            : toDecimal(1),
+        },
+        include: {
+          foodItem: true,
+        },
+      });
+
+      // Compute nutrition for this entry
+      const quantityG = Number(entry.quantityG);
+      const caloriesPer100g = Number(entry.foodItem.caloriesPer100g);
+      const proteinPer100g = Number(entry.foodItem.proteinG);
+      const carbsPer100g = Number(entry.foodItem.carbsG);
+      const fatPer100g = Number(entry.foodItem.fatG);
+
+      const calories = (caloriesPer100g * quantityG) / 100;
+      const protein = (proteinPer100g * quantityG) / 100;
+      const carbs = (carbsPer100g * quantityG) / 100;
+      const fat = (fatPer100g * quantityG) / 100;
+
+      return {
+        id: entry.id,
+        userId: entry.userId,
+        date: entry.date,
+        mealType: entry.mealType,
+        quantityG: quantityG,
+        servings: Number(entry.servings),
+        notes: entry.notes,
+        createdAt: entry.createdAt,
+        foodItem: {
+          id: entry.foodItem.id,
+          name: entry.foodItem.name,
+          brand: entry.foodItem.brand,
+          caloriesPer100g: caloriesPer100g,
+          proteinG: proteinPer100g,
+          carbsG: carbsPer100g,
+          fatG: fatPer100g,
+          fiberG: entry.foodItem.fiberG ? Number(entry.foodItem.fiberG) : null,
+          sugarG: entry.foodItem.sugarG ? Number(entry.foodItem.sugarG) : null,
+          servingSizeG: Number(entry.foodItem.servingSizeG),
+          servingSizeUnit: entry.foodItem.servingSizeUnit,
+        },
+        calories: Math.round(calories),
+        protein: Math.round(protein * 10) / 10,
+        carbs: Math.round(carbs * 10) / 10,
+        fat: Math.round(fat * 10) / 10,
+      };
+    } catch (error) {
+      log.error(
+        { err: error, userId: data.userId, barcode: data.product.barcode },
+        "Failed to create diary entry from scan"
+      );
+      if (error instanceof Error) {
+        throw error;
+      }
+      throw new Error("Failed to add scanned food to diary");
     }
   });

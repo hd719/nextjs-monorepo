@@ -13,8 +13,14 @@ const envSchema = z.object({
   LOG_LEVEL: z
     .enum(["fatal", "error", "warn", "info", "debug", "trace"])
     .optional(),
+  // Barcode service configuration
+  BARCODE_SERVICE_URL: z.string().url().optional(),
+  BARCODE_SERVICE_API_KEY: z.string().min(32).optional(),
+  // Mock data flags
   VITE_USE_MOCK_DASHBOARD: z.string().optional(),
   VITE_USE_MOCK_ACHIEVEMENTS: z.string().optional(),
+  VITE_USE_MOCK_BARCODE: z.string().optional(),
+  VITE_SIMULATE_SCANNER_OFFLINE: z.string().optional(),
 });
 
 export type Env = z.infer<typeof envSchema>;
