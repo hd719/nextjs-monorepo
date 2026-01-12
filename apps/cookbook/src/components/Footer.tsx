@@ -55,7 +55,7 @@ const Footer: React.FC<FooterProps> = ({ className = "" }) => {
           <div className="lg:max-w-[320px]">
             <div className="mb-3 lg:mb-4">
               <h3 className="text-2xl font-bold tracking-[-0.41px] text-appAccent lg:text-3xl">
-                Payal's Cookbook
+                Payal&apos;s Cookbook
               </h3>
             </div>
             <p className="text-xs font-medium leading-normal tracking-[-0.41px] text-appGray-500 lg:text-base">
@@ -95,7 +95,7 @@ const Footer: React.FC<FooterProps> = ({ className = "" }) => {
             <span>Built with ❤️</span>
           </div>
           <div className="text-xs lg:text-base lg:leading-none">
-            &copy; {currentYear} Payal's Cookbook. All rights reserved.
+            &copy; {currentYear} Payal&apos;s Cookbook. All rights reserved.
           </div>
         </div>
       </div>

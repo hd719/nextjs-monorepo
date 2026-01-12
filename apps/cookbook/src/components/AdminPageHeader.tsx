@@ -12,7 +12,7 @@ export function AdminPageHeader({
   children,
 }: AdminPageHeaderProps) {
   return (
-    <div className="border-b border-primary-200 pb-6">
+    <div className="border-primary-200 border-b pb-6">
       <div className="flex items-center justify-between">
         <div className="flex-1">
           <h1 className="text-3xl font-bold text-neutral-900">{title}</h1>

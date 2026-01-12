@@ -82,10 +82,10 @@ export function FastingWarningDialog({
             <AlertTriangle className="fasting-warning-dialog-icon" />
           </div>
           <DialogTitle className="fasting-warning-dialog-title">
-            You're Currently Fasting
+            You&apos;re Currently Fasting
           </DialogTitle>
           <DialogDescription className="fasting-warning-dialog-description">
-            Adding food to your diary means you're ending your eating window.
+            Adding food to your diary means you&apos;re ending your eating window.
           </DialogDescription>
         </DialogHeader>
 

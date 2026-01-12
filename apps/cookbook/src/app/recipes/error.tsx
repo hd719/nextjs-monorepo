@@ -29,7 +29,7 @@ export default function RecipesError({
             Recipe Not Available
           </h1>
           <p className="text-neutral-600">
-            We're having trouble loading this recipe right now. This might be a
+            We&apos;re having trouble loading this recipe right now. This might be a
             temporary issue with our kitchen servers!
           </p>
         </div>

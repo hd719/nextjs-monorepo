@@ -220,18 +220,18 @@ export function LogSleepDialog({
       form.setFieldValue("quality", initialData.quality);
       form.setFieldValue("notes", initialData.notes);
     }
-  }, [open, initialData]);
+  }, [open, initialData, form]);
 
-  // Get current form values for hours display
-  const formValues = form.state.values;
-  const hoursSlept = calculateHoursFrom12h(
-    formValues.bedtimeHour,
-    formValues.bedtimeMinute,
-    formValues.bedtimePeriod,
-    formValues.wakeTimeHour,
-    formValues.wakeTimeMinute,
-    formValues.wakeTimePeriod
-  );
+  // Helper to calculate hours from form values
+  const getHoursFromValues = (values: SleepFormData) =>
+    calculateHoursFrom12h(
+      values.bedtimeHour,
+      values.bedtimeMinute,
+      values.bedtimePeriod,
+      values.wakeTimeHour,
+      values.wakeTimeMinute,
+      values.wakeTimePeriod
+    );
 
   const getQualityLabel = (q: number) => {
     switch (q) {
@@ -274,7 +274,11 @@ export function LogSleepDialog({
       ) : (
         <DialogTrigger asChild>{defaultTrigger}</DialogTrigger>
       )}
-      <DialogContent className="sleep-dialog">
+      <DialogContent
+        className="sleep-dialog"
+        closeOnOutsideClick={true}
+        onClose={() => setOpen(false)}
+      >
         <DialogHeader>
           <DialogTitle className="sleep-dialog-title">
             <Moon className="w-5 h-5 text-indigo-400" />
@@ -429,11 +433,19 @@ export function LogSleepDialog({
             </div>
           </div>
 
-          {/* Hours Display */}
-          <div className="sleep-hours-display">
-            <span className="sleep-hours-value">{hoursSlept.toFixed(1)}</span>
-            <span className="sleep-hours-label">hours of sleep</span>
-          </div>
+          <form.Subscribe selector={(state) => state.values}>
+            {(values) => {
+              const hoursSlept = getHoursFromValues(values);
+              return (
+                <div className="sleep-hours-display">
+                  <span className="sleep-hours-value">
+                    {hoursSlept.toFixed(1)}
+                  </span>
+                  <span className="sleep-hours-label">hours of sleep</span>
+                </div>
+              );
+            }}
+          </form.Subscribe>
 
           {/* Quality Rating */}
           <form.Field name="quality">

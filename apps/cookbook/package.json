@@ -6,7 +6,9 @@
     "dev": "next dev",
     "dev-css": "NEXT_PUBLIC_DEBUG=true next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

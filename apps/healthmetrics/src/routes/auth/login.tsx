@@ -148,7 +148,7 @@ function LoginPage() {
             </div>
             <div>
               <span className="auth-form-link-text">
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
               </span>
               <Link to={ROUTES.AUTH.SIGNUP} className="auth-form-link">
                 Sign up

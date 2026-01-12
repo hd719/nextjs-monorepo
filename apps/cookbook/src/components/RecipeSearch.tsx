@@ -144,7 +144,7 @@ const RecipeSearch: React.FC<RecipeSearchProps> = ({
             ))
           ) : (
             <div className="flex bg-white px-4 py-3 text-sm font-medium leading-none tracking-[-0.41px] text-appGray-500">
-              No recipes found for "{currentSearchValue}"
+              No recipes found for &quot;{currentSearchValue}&quot;
             </div>
           )}
         </div>

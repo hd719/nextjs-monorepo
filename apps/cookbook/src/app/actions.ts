@@ -4,7 +4,6 @@ import { createClient } from "@/app/utils/supabase/server";
 import { encodedRedirect } from "@/app/utils/utils";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { z } from "zod";
 
 export const signUpAction = async (
   prevState: { message: string; type?: "success" | "error" },

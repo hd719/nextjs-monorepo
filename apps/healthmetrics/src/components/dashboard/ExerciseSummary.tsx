@@ -44,7 +44,7 @@ export function ExerciseSummary({ data, isLoading }: ExerciseSummaryProps) {
   if (!data || data.exercisesCompleted === 0) {
     return (
       <section className="dashboard-exercise-section">
-        <h2 className="dashboard-exercise-heading">Today's Exercise</h2>
+        <h2 className="dashboard-exercise-heading">Today&apos;s Exercise</h2>
         <EmptyState
           icon={Dumbbell}
           title="No exercises logged today"
@@ -61,7 +61,7 @@ export function ExerciseSummary({ data, isLoading }: ExerciseSummaryProps) {
 
   return (
     <section className="dashboard-exercise-section">
-      <h2 className="dashboard-exercise-heading">Today's Exercise</h2>
+      <h2 className="dashboard-exercise-heading">Today&apos;s Exercise</h2>
       <Card variant="supporting" className="dashboard-card-stretch">
         <CardHeader>
           <CardTitle className="dashboard-exercise-title">

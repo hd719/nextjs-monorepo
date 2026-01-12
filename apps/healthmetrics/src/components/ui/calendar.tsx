@@ -89,7 +89,7 @@ function Calendar({
             orientation === "left" ? ChevronLeftIcon : ChevronRightIcon;
           return <Icon className="h-4 w-4" />;
         },
-        DayButton: ({ day, modifiers, className, ...props }) => {
+        DayButton: ({ modifiers, className, ...props }) => {
           const isToday = modifiers.today;
           const isSelected = modifiers.selected;
 

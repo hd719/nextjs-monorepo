@@ -5,7 +5,8 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "lint": "eslint . --max-warnings 0",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
     "start": "next start"
   },
   "dependencies": {

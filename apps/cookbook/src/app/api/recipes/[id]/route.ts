@@ -122,7 +122,8 @@ export async function PATCH(
 
     const updateData = validationResult.data;
     // Remove id from updates object (we use route param id instead)
-    const { id: _, ...updates } = updateData;
+    const { id: _id, ...updates } = updateData;
+    void _id; // Explicitly mark as intentionally unused
 
     // Handle slug updates if title changed
     if (updates.title && updates.slug) {

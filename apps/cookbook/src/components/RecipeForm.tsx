@@ -443,7 +443,7 @@ export function RecipeForm({
               <div className="space-y-3">
                 {ingredientFields.length === 0 && (
                   <p className="text-sm text-gray-500">
-                    No ingredients added yet. Click "Add Ingredient" to add.
+                    No ingredients added yet. Click &quot;Add Ingredient&quot; to add.
                   </p>
                 )}
                 {ingredientFields.map((field, index) => (
@@ -511,7 +511,7 @@ export function RecipeForm({
               <div className="space-y-3">
                 {stepFields.length === 0 && (
                   <p className="text-sm text-gray-500">
-                    No steps added yet. Click "Add Steps" to add.
+                    No steps added yet. Click &quot;Add Steps&quot; to add.
                   </p>
                 )}
                 {stepFields.map((field, index) => (
@@ -583,7 +583,7 @@ export function RecipeForm({
               <div className="space-y-3">
                 {imageFields.length === 0 && (
                   <p className="text-sm text-gray-500">
-                    No images added yet. Click "Add Image URL" to add.
+                    No images added yet. Click &quot;Add Image URL&quot; to add.
                   </p>
                 )}
                 {imageFields.map((field, index) => (
@@ -641,10 +641,8 @@ export function RecipeForm({
                       (data) => handleSubmit(data, false),
                       (errors) => {
                         Object.keys(errors).forEach((key) => {
-                          form.setError(
-                            key as any,
-                            errors[key as keyof typeof errors] as any
-                          );
+                          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                          form.setError(key as any, errors[key as keyof typeof errors]!);
                         });
                       }
                     )}
@@ -658,13 +656,10 @@ export function RecipeForm({
                     onClick={form.handleSubmit(
                       (data) => handleSubmit(data, true),
                       (errors) => {
-                        // Log validation errors for debugging
                         // Force form to show validation errors
                         Object.keys(errors).forEach((key) => {
-                          form.setError(
-                            key as any,
-                            errors[key as keyof typeof errors] as any
-                          );
+                          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                          form.setError(key as any, errors[key as keyof typeof errors]!);
                         });
                       }
                     )}

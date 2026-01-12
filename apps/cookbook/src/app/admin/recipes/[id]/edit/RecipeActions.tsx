@@ -177,9 +177,9 @@ export function RecipeActions({ recipe, recipeId }: RecipeActionsProps) {
             <AlertDialogHeader>
               <AlertDialogTitle>Delete Recipe</AlertDialogTitle>
               <AlertDialogDescription>
-                Are you sure you want to delete "{optimisticRecipe.title}
-                "? This action cannot be undone and will permanently remove the
-                recipe from your cookbook.
+                Are you sure you want to delete &quot;{optimisticRecipe.title}
+                &quot;? This action cannot be undone and will permanently remove
+                the recipe from your cookbook.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>

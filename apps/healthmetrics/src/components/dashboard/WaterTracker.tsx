@@ -14,8 +14,10 @@ export interface WaterTrackerProps {
 export function WaterTracker({ data, onUpdate, isLoading }: WaterTrackerProps) {
   const [current, setCurrent] = useState(data.current);
 
+  // Sync local state when prop changes
   useEffect(() => {
     setCurrent(data.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only reacting to data.current changes
   }, [data.current]);
 
   const handleGlassClick = (index: number) => {
@@ -91,7 +93,7 @@ export function WaterTracker({ data, onUpdate, isLoading }: WaterTrackerProps) {
                   Great job! You&apos;ve reached your daily goal!
                 </span>
               ) : percentage >= 50 ? (
-                <span>You're {percentage}% there! Keep going!</span>
+                <span>You&apos;re {percentage}% there! Keep going!</span>
               ) : (
                 <span>
                   {data.goal - current} more{" "}

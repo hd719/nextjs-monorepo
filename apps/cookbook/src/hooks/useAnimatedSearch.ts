@@ -122,9 +122,10 @@ export const useAnimatedSearch = ({
    * Cleanup animation timeout on unmount
    */
   useEffect(() => {
+    const timeoutRef = animationTimeoutRef.current;
     return () => {
-      if (animationTimeoutRef.current) {
-        clearTimeout(animationTimeoutRef.current);
+      if (timeoutRef) {
+        clearTimeout(timeoutRef);
       }
     };
   }, []);

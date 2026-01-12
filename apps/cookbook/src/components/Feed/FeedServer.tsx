@@ -56,7 +56,7 @@ async function DynamicFeed(): Promise<React.JSX.Element> {
     return (
       <div className="flex flex-col items-center justify-center py-12">
         <p className="text-lg text-gray-600">
-          Sorry, we couldn't load the recipes right now.
+          Sorry, we couldn&apos;t load the recipes right now.
         </p>
         <p className="mt-2 text-sm text-gray-500">Please try again later.</p>
       </div>
@@ -73,7 +73,7 @@ async function DynamicFeed(): Promise<React.JSX.Element> {
           No recipes yet
         </h3>
         <p className="max-w-md text-center text-gray-600">
-          Payal hasn't published any recipes yet. Check back soon for delicious
+          Payal hasn&apos;t published any recipes yet. Check back soon for delicious
           recipes and cooking inspiration!
         </p>
       </div>

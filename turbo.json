@@ -18,7 +18,11 @@
         "CONTACT_EMAIL",
         "NEXT_PUBLIC_CONTACT_PHONE",
         "NEXT_PUBLIC_CONTACT_EMAIL",
-        "NODE_ENV"
+        "NODE_ENV",
+        "BETTER_AUTH_URL",
+        "APP_URL",
+        "LOG_LEVEL",
+        "DATABASE_URL"
       ]
     },
     "test": {
