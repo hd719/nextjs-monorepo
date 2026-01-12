@@ -15,6 +15,8 @@ const envSchema = z.object({
     .optional(),
   VITE_USE_MOCK_DASHBOARD: z.string().optional(),
   VITE_USE_MOCK_ACHIEVEMENTS: z.string().optional(),
+  VITE_USE_MOCK_BARCODE: z.string().optional(),
+  VITE_SIMULATE_SCANNER_OFFLINE: z.string().optional(),
 });
 
 export type Env = z.infer<typeof envSchema>;

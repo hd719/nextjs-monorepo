@@ -22,7 +22,9 @@
         "BETTER_AUTH_URL",
         "APP_URL",
         "LOG_LEVEL",
-        "DATABASE_URL"
+        "DATABASE_URL",
+        "BARCODE_SERVICE_URL",
+        "VITE_USE_MOCK_BARCODE"
       ]
     },
     "test": {

@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { format, parse, subDays } from "date-fns";
-import { Calendar as CalendarIcon, Plus, Copy } from "lucide-react";
+import {
+  Calendar as CalendarIcon,
+  Plus,
+  Copy,
+  ScanBarcode,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -16,6 +21,7 @@ import { useToast, ToastContainer } from "@/components/ui/toast";
 import { DiaryEntryList } from "./DiaryEntryList";
 import { AddFoodDialog } from "./AddFoodDialog";
 import { FastingWarningBanner } from "./FastingWarningBanner";
+import { ScannerDialog } from "@/components/scanner";
 import {
   useDiaryDay,
   useDiaryTotals,
@@ -36,6 +42,7 @@ export function DiaryDayView({
   onDateChange,
 }: DiaryDayViewProps) {
   const [isAddFoodOpen, setIsAddFoodOpen] = useState(false);
+  const [isScannerOpen, setIsScannerOpen] = useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const { toasts, toast, removeToast } = useToast();
   const { data: entries = [], isLoading: isEntriesLoading } = useDiaryDay(
@@ -59,6 +66,10 @@ export function DiaryDayView({
 
   const handleEntryCreated = () => {
     setIsAddFoodOpen(false);
+  };
+
+  const handleScanSuccess = () => {
+    setIsScannerOpen(false);
   };
 
   // Copy yesterday's meals to today
@@ -175,6 +186,10 @@ export function DiaryDayView({
             <Copy className="diary-day-add-icon" />
             {copyDiaryMutation.isPending ? "Copying..." : "Copy Yesterday"}
           </Button>
+          <Button variant="outline" onClick={() => setIsScannerOpen(true)}>
+            <ScanBarcode className="diary-day-add-icon" />
+            Scan Barcode
+          </Button>
           <Button onClick={() => setIsAddFoodOpen(true)}>
             <Plus className="diary-day-add-icon" />
             Add Food
@@ -197,6 +212,15 @@ export function DiaryDayView({
         date={date}
         onSuccess={handleEntryCreated}
         activeFast={activeFast}
+      />
+
+      {/* Barcode Scanner Dialog */}
+      <ScannerDialog
+        open={isScannerOpen}
+        onOpenChange={setIsScannerOpen}
+        userId={userId}
+        date={date}
+        onSuccess={handleScanSuccess}
       />
 
       {/* Toast notifications */}

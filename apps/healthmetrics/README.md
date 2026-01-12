@@ -71,9 +71,19 @@ The app will be available at `http://localhost:3003`.
 ### Environment Variables
 
 ```env
+# Required
 DATABASE_URL="postgresql://..."
 BETTER_AUTH_SECRET="your-secret-key"
 BETTER_AUTH_URL="http://localhost:3003"
+
+# Optional - Barcode Scanner
+BARCODE_SERVICE_URL="http://localhost:8080"  # Go microservice URL
+
+# Optional - Mock Data Flags (for development/testing)
+VITE_USE_MOCK_DASHBOARD="true"      # Use mock dashboard data
+VITE_USE_MOCK_ACHIEVEMENTS="true"   # Use mock achievements data
+VITE_USE_MOCK_BARCODE="true"           # Use mock barcode data (skip Go service)
+VITE_SIMULATE_SCANNER_OFFLINE="true"   # Simulate offline for scanner only (test queue)
 ```
 
 ## Project Structure
