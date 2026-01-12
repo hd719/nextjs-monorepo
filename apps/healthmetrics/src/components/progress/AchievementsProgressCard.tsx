@@ -184,7 +184,7 @@ export function AchievementsProgressCard({
                 className="progress-achievements-motivation-icon"
                 aria-hidden="true"
               />
-              <span>You're making great progress! Keep it up.</span>
+              <span>You&apos;re making great progress! Keep it up.</span>
             </div>
             <button className="progress-achievements-new-goal-btn">
               <Plus

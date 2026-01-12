@@ -65,7 +65,7 @@ export function SleepCard({ data, isLoading }: SleepCardProps) {
   if (!data || !data.hasEntry) {
     return (
       <section className="dashboard-sleep-section">
-        <h2 className="dashboard-sleep-heading">Last Night's Sleep</h2>
+        <h2 className="dashboard-sleep-heading">Last Night&apos;s Sleep</h2>
         <EmptyState
           icon={Moon}
           title="No sleep logged"
@@ -82,7 +82,7 @@ export function SleepCard({ data, isLoading }: SleepCardProps) {
 
   return (
     <section className="dashboard-sleep-section">
-      <h2 className="dashboard-sleep-heading">Last Night's Sleep</h2>
+      <h2 className="dashboard-sleep-heading">Last Night&apos;s Sleep</h2>
       <Card variant="supporting" className="dashboard-card-stretch">
         <CardHeader>
           <CardTitle className="dashboard-sleep-title">Sleep Summary</CardTitle>

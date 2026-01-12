@@ -41,7 +41,7 @@ export function WelcomeStep({
           Welcome{userName ? `, ${userName}` : ""}!
         </h1>
         <p className="onboarding-step-subtitle">
-          Let's personalize your experience. What's your main goal?
+          Let&apos;s personalize your experience. What&apos;s your main goal?
         </p>
       </div>
 

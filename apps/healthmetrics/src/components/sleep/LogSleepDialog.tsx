@@ -220,7 +220,7 @@ export function LogSleepDialog({
       form.setFieldValue("quality", initialData.quality);
       form.setFieldValue("notes", initialData.notes);
     }
-  }, [open, initialData]);
+  }, [open, initialData, form]);
 
   // Get current form values for hours display
   const formValues = form.state.values;

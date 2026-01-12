@@ -165,8 +165,8 @@ export function WorkoutReview({
       <Alert>
         <AlertCircle className="exercise-review-alert-icon" />
         <AlertDescription>
-          Calorie estimates require your weight. If you haven't logged your
-          weight, calories will show as "N/A".{" "}
+          Calorie estimates require your weight. If you haven&apos;t logged your
+          weight, calories will show as &quot;N/A&quot;.{" "}
           <Link
             to="/profile"
             className="exercise-review-link"
@@ -217,7 +217,7 @@ export function WorkoutReview({
                       </div>
                       {detail.notes && (
                         <p className="exercise-review-details-note">
-                          "{detail.notes}"
+                          &quot;{detail.notes}&quot;
                         </p>
                       )}
                     </div>

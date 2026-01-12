@@ -51,10 +51,10 @@ export function CompleteStep({
       {/* Header */}
       <div className="onboarding-step-header">
         <h1 className="onboarding-step-title flex items-center justify-center gap-2">
-          You're All Set! <PartyPopper className="w-7 h-7" />
+          You&apos;re All Set! <PartyPopper className="w-7 h-7" />
         </h1>
         <p className="onboarding-step-subtitle">
-          Your personalized plan is ready. Let's start your journey!
+          Your personalized plan is ready. Let&apos;s start your journey!
         </p>
       </div>
 
