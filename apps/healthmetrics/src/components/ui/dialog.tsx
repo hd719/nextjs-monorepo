@@ -12,7 +12,9 @@ const DialogTrigger = AlertDialogPrimitive.Trigger;
 
 const DialogPortal = AlertDialogPrimitive.Portal;
 
-export type DialogOverlayProps = React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Overlay>;
+export type DialogOverlayProps = React.ComponentPropsWithoutRef<
+  typeof AlertDialogPrimitive.Overlay
+>;
 
 const DialogOverlay = forwardRef<
   React.ComponentRef<typeof AlertDialogPrimitive.Overlay>,
@@ -44,7 +46,7 @@ const DialogContent = forwardRef<
   const contentProps = {
     ref,
     className: cn(
-      "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border border-border bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg",
+      "dialog-content fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border border-border p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg",
       className
     ),
     ...props,
@@ -90,7 +92,9 @@ const DialogFooter = ({ className, ...props }: DialogFooterProps) => (
 );
 DialogFooter.displayName = "DialogFooter";
 
-export type DialogTitleProps = React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Title>;
+export type DialogTitleProps = React.ComponentPropsWithoutRef<
+  typeof AlertDialogPrimitive.Title
+>;
 
 const DialogTitle = forwardRef<
   React.ComponentRef<typeof AlertDialogPrimitive.Title>,
@@ -104,7 +108,9 @@ const DialogTitle = forwardRef<
 ));
 DialogTitle.displayName = AlertDialogPrimitive.Title.displayName;
 
-export type DialogDescriptionProps = React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Description>;
+export type DialogDescriptionProps = React.ComponentPropsWithoutRef<
+  typeof AlertDialogPrimitive.Description
+>;
 
 const DialogDescription = forwardRef<
   React.ComponentRef<typeof AlertDialogPrimitive.Description>,
@@ -118,7 +124,9 @@ const DialogDescription = forwardRef<
 ));
 DialogDescription.displayName = AlertDialogPrimitive.Description.displayName;
 
-export type DialogActionProps = React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action>;
+export type DialogActionProps = React.ComponentPropsWithoutRef<
+  typeof AlertDialogPrimitive.Action
+>;
 
 const DialogAction = forwardRef<
   React.ComponentRef<typeof AlertDialogPrimitive.Action>,
@@ -135,7 +143,9 @@ const DialogAction = forwardRef<
 ));
 DialogAction.displayName = AlertDialogPrimitive.Action.displayName;
 
-export type DialogCancelProps = React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Cancel>;
+export type DialogCancelProps = React.ComponentPropsWithoutRef<
+  typeof AlertDialogPrimitive.Cancel
+>;
 
 const DialogCancel = forwardRef<
   React.ComponentRef<typeof AlertDialogPrimitive.Cancel>,
