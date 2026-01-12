@@ -153,6 +153,7 @@
 
   .dashboard-water-glass-button {
     @apply flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-300;
+    cursor: pointer;
   }
 
   .dashboard-water-glass-button:hover {
@@ -474,6 +475,7 @@
   .dashboard-exercise-weight-link {
     @apply mt-1 flex items-center justify-center gap-1 text-xs hover:underline;
     color: var(--primary);
+    cursor: pointer;
   }
 
   .dashboard-exercise-weight-link-icon {
@@ -954,6 +956,7 @@
   .dashboard-progress-view-all {
     @apply flex items-center gap-1 text-xs font-medium transition-colors;
     color: var(--muted-foreground);
+    cursor: pointer;
   }
 
   .dashboard-progress-view-all:hover {
@@ -1400,6 +1403,7 @@
   .dashboard-profile-completion {
     @apply flex items-center justify-center gap-2 py-3 px-4 text-sm rounded-md transition-colors;
     color: var(--muted-foreground);
+    cursor: pointer;
   }
 
   .dashboard-profile-completion:hover {

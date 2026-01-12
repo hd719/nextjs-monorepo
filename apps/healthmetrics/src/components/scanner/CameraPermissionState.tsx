@@ -127,7 +127,6 @@ function PlatformInstructions() {
     /iPad|iPhone|iPod/.test(navigator.userAgent);
   const isAndroid =
     typeof navigator !== "undefined" && /Android/.test(navigator.userAgent);
-  const isMobile = isIOS || isAndroid;
 
   if (isIOS) {
     return (

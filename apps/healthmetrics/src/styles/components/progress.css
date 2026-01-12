@@ -455,6 +455,7 @@
   .progress-view-more-btn {
     @apply w-full flex items-center justify-center gap-1 py-2 mt-2 text-sm rounded-lg transition-colors;
     color: var(--muted-foreground);
+    cursor: pointer;
   }
 
   .progress-view-more-btn:hover {
@@ -935,6 +936,7 @@
     background-color: var(--muted);
     color: var(--foreground);
     border: 1px dashed var(--border);
+    cursor: pointer;
   }
 
   .progress-achievements-new-goal-btn:hover {
@@ -1024,6 +1026,7 @@
   .progress-date-range-btn {
     @apply px-3 py-1.5 text-xs font-medium transition-colors;
     color: var(--muted-foreground);
+    cursor: pointer;
   }
 
   .progress-date-range-btn:hover {

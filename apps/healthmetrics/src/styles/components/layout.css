@@ -150,6 +150,7 @@
 
   .header-mobile-search-button {
     @apply lg:hidden;
+    cursor: pointer;
   }
 
   .header-icon {
@@ -254,6 +255,7 @@
   .sidebar-nav-link {
     @apply flex items-center gap-3 px-4 py-3 rounded-lg transition-colors;
     color: var(--muted-foreground);
+    cursor: pointer;
   }
 
   .sidebar-nav-link:hover {
@@ -265,6 +267,7 @@
     @apply flex items-center gap-3 px-4 py-3 rounded-lg transition-colors;
     background-color: var(--accent);
     color: var(--accent-foreground);
+    cursor: pointer;
   }
 
   .sidebar-icon {
@@ -302,6 +305,7 @@
   .bottom-nav-link {
     @apply flex flex-col items-center justify-center flex-1 h-full transition-colors;
     color: var(--muted-foreground);
+    cursor: pointer;
   }
 
   .bottom-nav-link:hover {
@@ -311,6 +315,7 @@
   .bottom-nav-link-active {
     @apply flex flex-col items-center justify-center flex-1 h-full transition-colors;
     color: var(--accent);
+    cursor: pointer;
   }
 
   .bottom-nav-icon {

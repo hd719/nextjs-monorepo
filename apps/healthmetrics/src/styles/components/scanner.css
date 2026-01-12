@@ -24,6 +24,7 @@
 
   .scanner-header-btn {
     @apply text-white hover:bg-white/20;
+    cursor: pointer;
   }
 
   .scanner-header-icon {
@@ -432,6 +433,7 @@
     color: var(--foreground);
     border: 1px solid var(--border);
     transition: all 0.2s ease;
+    cursor: pointer;
   }
 
   .scanner-servings-btn:hover:not(:disabled) {
@@ -580,6 +582,7 @@
     @apply absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full;
     color: var(--muted-foreground);
     transition: color 0.15s;
+    cursor: pointer;
   }
 
   .scanner-manual-input-clear:hover {
@@ -706,6 +709,7 @@
   .recently-scanned-clear-btn {
     @apply text-xs;
     color: var(--muted-foreground);
+    cursor: pointer;
   }
 
   .recently-scanned-grid {
@@ -722,6 +726,7 @@
   .recently-scanned-card-content {
     @apply flex flex-col items-center gap-2 p-3 w-full text-left;
     transition: background-color 0.15s ease;
+    cursor: pointer;
   }
 
   .recently-scanned-card-content:hover {
@@ -773,6 +778,7 @@
     color: var(--muted-foreground);
     opacity: 0;
     transition: opacity 0.15s ease;
+    cursor: pointer;
   }
 
   .recently-scanned-card:hover .recently-scanned-card-remove {
