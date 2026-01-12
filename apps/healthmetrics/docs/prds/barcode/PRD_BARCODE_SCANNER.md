@@ -3,7 +3,7 @@
 > **Status:** Not Started
 > **Priority:** High
 > **Effort:** Medium (3-5 days)
-> **Dependencies:** Camera API, Food Database API
+> **Dependencies:** Camera API, Barcode Lookup API (Go service)
 
 ---
 
@@ -25,7 +25,7 @@ Manually entering food nutrition data is tedious and error-prone. Users must sea
 ### Must Have
 
 - [ ] Scan barcodes using device camera
-- [ ] Fetch nutrition data from OpenFoodFacts API
+- [ ] Fetch nutrition data from the barcode lookup API
 - [ ] Display product details before adding to diary
 - [ ] Handle "product not found" gracefully
 - [ ] Work on both mobile and desktop (webcam)
@@ -48,6 +48,7 @@ Manually entering food nutrition data is tedious and error-prone. Users must sea
 - Building our own food database
 - Barcode generation
 - Inventory management
+- Backend service implementation or database schema (covered in `PRD_GO_BARCODE_LOOKUP_SERVICE.md`)
 
 ---
 
@@ -74,79 +75,15 @@ Manually entering food nutrition data is tedious and error-prone. Users must sea
 | Component | Technology | Reasoning |
 |-----------|------------|-----------|
 | Barcode Detection | `@aspect-ratio/barcode-scanner` or `html5-qrcode` | Lightweight, no native dependencies |
-| Food Database | OpenFoodFacts API | Free, open-source, 2M+ products |
-| Fallback Database | USDA FoodData Central | US government database, reliable |
+| Barcode Lookup API | Go barcode lookup service | Centralized normalization and caching |
 | Camera Access | MediaDevices API | Native browser API |
 
-### API Integration
+### Frontend Integration
 
-**OpenFoodFacts API:**
-
-```
-GET https://world.openfoodfacts.org/api/v0/product/{barcode}.json
-```
-
-**Response Structure:**
-
-```typescript
-interface OpenFoodFactsProduct {
-  code: string;                    // Barcode
-  product_name: string;
-  brands: string;
-  serving_size: string;            // "30g", "1 cup"
-  nutriments: {
-    energy_kcal_100g: number;
-    proteins_100g: number;
-    carbohydrates_100g: number;
-    fat_100g: number;
-    fiber_100g?: number;
-    sodium_100g?: number;
-    sugars_100g?: number;
-  };
-  image_url?: string;
-  categories_tags?: string[];
-}
-```
-
-### Database Schema
-
-```prisma
-model ScannedProduct {
-  id            String   @id @default(cuid())
-  barcode       String   @unique
-  name          String
-  brand         String?
-  servingSizeG  Decimal
-  calories100g  Decimal
-  protein100g   Decimal
-  carbs100g     Decimal
-  fat100g       Decimal
-  fiber100g     Decimal?
-  sugar100g     Decimal?
-  sodium100g    Decimal?
-  imageUrl      String?
-  source        String   // "openfoodfacts", "usda", "user"
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  // Track user scans for "recently scanned"
-  scans         ProductScan[]
-
-  @@map("scanned_product")
-}
-
-model ProductScan {
-  id        String   @id @default(cuid())
-  userId    String
-  productId String
-  scannedAt DateTime @default(now())
-
-  user      BetterAuthUser  @relation(fields: [userId], references: [id])
-  product   ScannedProduct  @relation(fields: [productId], references: [id])
-
-  @@map("product_scan")
-}
-```
+This PRD only covers the client UI and camera flow. Treat the barcode lookup
+service as a dependency with a defined API contract (see
+`PRD_GO_BARCODE_LOOKUP_SERVICE.md`) and avoid direct calls to external food
+databases from the client.
 
 ---
 
@@ -184,42 +121,13 @@ interface BarcodeScannerProps {
 - "Add to Diary" button
 - Serving size adjustment
 
-### Phase 2: API Integration (Day 2-3)
+### Phase 2: Frontend Integration (Day 2-3)
 
-#### 2.1 Server Functions
+#### 2.1 Client Lookup Flow
 
-**File:** `src/server/scanner.ts`
-
-```typescript
-// Fetch product from external APIs
-export async function lookupBarcode(barcode: string): Promise<ScannedProduct | null>
-
-// Check local cache first
-export async function getProductByBarcode(barcode: string): Promise<ScannedProduct | null>
-
-// Add to diary from scanned product
-export async function addScannedTooDiary(data: {
-  barcode: string;
-  mealType: MealType;
-  servings: number;
-  date: Date;
-}): Promise<DiaryEntry>
-
-// Get recently scanned products
-export async function getRecentlyScanned(userId: string, limit?: number): Promise<ScannedProduct[]>
-```
-
-#### 2.2 API Fallback Chain
-
-```
-1. Check local database (ScannedProduct)
-   ↓ not found
-2. Query OpenFoodFacts API
-   ↓ not found
-3. Query USDA FoodData Central
-   ↓ not found
-4. Show "Product Not Found" UI
-```
+- Call the barcode lookup API with the scanned/typed barcode.
+- Handle loading, not-found, and error states in the UI.
+- Keep the client logic focused on UX; fallback chains live in the backend.
 
 ### Phase 3: User Experience (Day 3-4)
 
@@ -328,8 +236,6 @@ src/
 │       ├── RecentlyScanned.tsx     # History grid
 │       ├── ManualBarcodeInput.tsx  # Fallback input
 │       └── index.ts
-├── server/
-│   └── scanner.ts                  # Server functions
 ├── hooks/
 │   ├── useBarcodeLookup.ts         # API query hook
 │   └── useRecentlyScanned.ts       # History hook
@@ -370,7 +276,6 @@ src/
 
 - [ ] Camera initializes in < 1 second
 - [ ] Barcode detection in < 500ms
-- [ ] API response cached for 24 hours
 - [ ] Offline queue syncs automatically
 
 ### Accessibility
@@ -414,7 +319,6 @@ src/
 
 ## References
 
-- [OpenFoodFacts API](https://world.openfoodfacts.org/data)
-- [USDA FoodData Central](https://fdc.nal.usda.gov/api-guide.html)
+- Go barcode lookup service PRD: `apps/healthmetrics/docs/prds/barcode/PRD_GO_BARCODE_LOOKUP_SERVICE.md`
 - [html5-qrcode Library](https://github.com/mebjas/html5-qrcode)
 - [MediaDevices API](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices)
