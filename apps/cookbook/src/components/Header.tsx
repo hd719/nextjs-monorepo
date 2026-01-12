@@ -70,7 +70,7 @@ const Header: React.FC<HeaderProps> = ({ userEmail, recipes = [] }) => {
                   aria-label="Home page"
                 >
                   <div className="text-lg font-semibold text-white md:text-xl">
-                    Payal's Cookbook
+                    Payal&apos;s Cookbook
                   </div>
                 </Link>
                 {/* Primary nav link for desktop */}

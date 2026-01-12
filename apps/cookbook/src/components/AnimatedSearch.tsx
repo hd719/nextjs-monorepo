@@ -192,7 +192,7 @@ const AnimatedSearch: React.FC<AnimatedSearchProps> = ({
                         No recipes found
                       </div>
                       <div className="mt-1 text-xs text-appGray-500">
-                        Try searching for "{currentSearchValue}" with different
+                        Try searching for &quot;{currentSearchValue}&quot; with different
                         keywords
                       </div>
                     </div>

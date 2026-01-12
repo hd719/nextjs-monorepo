@@ -10,7 +10,7 @@ export default function RecipeNotFound() {
             Recipe Not Found
           </h2>
           <p className="text-gray-600">
-            Sorry, we couldn't find the recipe you're looking for. It might have
+            Sorry, we couldn&apos;t find the recipe you&apos;re looking for. It might have
             been removed or the link might be incorrect.
           </p>
         </div>

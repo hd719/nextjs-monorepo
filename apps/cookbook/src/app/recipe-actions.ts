@@ -20,7 +20,7 @@ import {
   UpdateRecipeInput,
 } from "@/types/recipe";
 
-export interface RecipeActionResult<T = any> {
+export interface RecipeActionResult<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;
