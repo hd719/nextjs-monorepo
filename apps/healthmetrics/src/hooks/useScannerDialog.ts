@@ -10,6 +10,7 @@ import {
 } from "react";
 import {
   useBarcodeLookup,
+  usePrimeBarcodeCache,
   useCreateDiaryEntryFromScan,
   useRecentlyScanned,
   useCameraPermission,
@@ -28,6 +29,9 @@ import type { RecentlyScannedItem, CameraPermissionStatus } from "@/hooks";
 
 // Extended state to include "queued" for offline scans
 export type ExtendedScannerState = ScannerState | "queued";
+
+// Debounce time to prevent rapid duplicate scans (ms)
+const SCAN_DEBOUNCE_MS = 1500;
 
 interface UseScannerDialogOptions {
   open: boolean;
@@ -100,6 +104,10 @@ export function useScannerDialog({
   // Track open transitions
   const prevOpenRef = useRef(open);
 
+  // Request deduplication - prevent rapid duplicate scans
+  const lastScannedBarcodeRef = useRef<string | null>(null);
+  const lastScanTimeRef = useRef<number>(0);
+
   // Network status
   const { isOffline } = useNetworkStatus();
 
@@ -123,6 +131,7 @@ export function useScannerDialog({
   // Mutations & Recently Scanned
   const barcodeMutation = useBarcodeLookup();
   const createEntryMutation = useCreateDiaryEntryFromScan();
+  const primeBarcodeCache = usePrimeBarcodeCache();
   const {
     items: recentlyScanned,
     addItem: addRecentItem,
@@ -197,9 +206,18 @@ export function useScannerDialog({
         setSelectedRecentProduct(null);
         setQueuedScan(null);
       });
+      // Reset deduplication refs on dialog open
+      lastScannedBarcodeRef.current = null;
+      lastScanTimeRef.current = 0;
       resetLookup();
+
+      // Prime the barcode cache with recently scanned products
+      // This allows instant lookups if user re-scans the same barcode
+      if (recentlyScanned.length > 0) {
+        primeBarcodeCache(recentlyScanned.map((item) => item.product));
+      }
     }
-  }, [open, resetLookup]);
+  }, [open, resetLookup, recentlyScanned, primeBarcodeCache]);
 
   // Queue a scan when offline
   const handleQueueScan = useCallback(
@@ -214,6 +232,20 @@ export function useScannerDialog({
   const handleScan = useCallback(
     (barcode: string) => {
       if (showManualInput) return;
+
+      // Request deduplication - prevent rapid duplicate scans from camera
+      const now = Date.now();
+      if (
+        lastScannedBarcodeRef.current === barcode &&
+        now - lastScanTimeRef.current < SCAN_DEBOUNCE_MS
+      ) {
+        // Same barcode scanned within debounce window, ignore
+        return;
+      }
+
+      // Update deduplication refs
+      lastScannedBarcodeRef.current = barcode;
+      lastScanTimeRef.current = now;
 
       // If offline, queue the scan instead of looking up
       if (isOffline) {
@@ -243,6 +275,9 @@ export function useScannerDialog({
       setSelectedRecentProduct(null);
       setQueuedScan(null);
     });
+    // Reset deduplication refs so user can re-scan same barcode
+    lastScannedBarcodeRef.current = null;
+    lastScanTimeRef.current = 0;
     resetLookup();
   }, [resetLookup]);
 

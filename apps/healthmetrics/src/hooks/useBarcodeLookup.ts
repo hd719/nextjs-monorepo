@@ -1,73 +1,149 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { lookupBarcode } from "@/server";
 import type { ScannedProduct, ScannerError } from "@/types";
 
 const LOOKUP_TIMEOUT_MS = 10000; // 10 second timeout
 
+// Cache configuration
+const BARCODE_CACHE_STALE_TIME_MS = 5 * 60 * 1000; // 5 minutes - consider cached data fresh
+const BARCODE_CACHE_GC_TIME_MS = 30 * 60 * 1000; // 30 minutes - keep in memory
+
+// Query key factory for barcode lookups
+export const barcodeQueryKeys = {
+  all: ["barcode"] as const,
+  lookup: (barcode: string) => ["barcode", barcode] as const,
+};
+
+/**
+ * Fetch function for barcode lookup - shared between mutation and direct calls
+ */
+async function fetchBarcode(barcode: string): Promise<ScannedProduct | null> {
+  // Validate barcode format
+  if (!barcode || barcode.length < 8) {
+    throw {
+      type: "invalid_barcode",
+      message: "Invalid barcode format. Please try scanning again.",
+    } as ScannerError;
+  }
+
+  // Check if offline
+  if (typeof navigator !== "undefined" && !navigator.onLine) {
+    throw {
+      type: "network_offline",
+      message: "You appear to be offline. Please check your connection.",
+    } as ScannerError;
+  }
+
+  // Call server function with timeout
+  // Server handles mock vs real based on VITE_USE_MOCK_BARCODE env var
+  try {
+    const result = await Promise.race([
+      lookupBarcode({ data: { barcode } }),
+      new Promise<never>((_, reject) =>
+        setTimeout(
+          () =>
+            reject({
+              type: "api_error",
+              message: "Request timed out. Please try again.",
+            } as ScannerError),
+          LOOKUP_TIMEOUT_MS
+        )
+      ),
+    ]);
+
+    if (!result) return null;
+
+    // Map BarcodeProduct to ScannedProduct
+    return {
+      id: result.id,
+      barcode: result.barcode,
+      name: result.name,
+      brand: result.brand,
+      caloriesPer100g: result.caloriesPer100g,
+      proteinG: result.proteinG,
+      carbsG: result.carbsG,
+      fatG: result.fatG,
+      fiberG: result.fiberG,
+      sugarG: result.sugarG,
+      sodiumMg: result.sodiumMg,
+      servingSizeG: result.servingSizeG,
+      imageUrl: null,
+      source: result.source as ScannedProduct["source"],
+      verified: result.verified,
+    };
+  } catch (error) {
+    // Transform server errors to ScannerError format
+    throw {
+      type: "api_error",
+      message:
+        error instanceof Error ? error.message : "Failed to lookup barcode",
+    } as ScannerError;
+  }
+}
+
+/**
+ * Hook for barcode lookup with React Query caching
+ *
+ * Uses a mutation pattern for triggering lookups (user-initiated action),
+ * but leverages the query cache for storing results. This means:
+ * - Same barcode scanned twice = instant (uses cached result)
+ * - Cache survives component remounts
+ * - Works with React Query devtools for debugging
+ */
 export function useBarcodeLookup() {
+  const queryClient = useQueryClient();
+
   return useMutation<ScannedProduct | null, ScannerError, string>({
     mutationFn: async (barcode: string) => {
-      // Validate barcode format
-      if (!barcode || barcode.length < 8) {
-        throw {
-          type: "invalid_barcode",
-          message: "Invalid barcode format. Please try scanning again.",
-        } as ScannerError;
+      // Check cache first - return immediately if we have fresh data
+      const cachedData = queryClient.getQueryData<ScannedProduct | null>(
+        barcodeQueryKeys.lookup(barcode)
+      );
+
+      const queryState = queryClient.getQueryState(
+        barcodeQueryKeys.lookup(barcode)
+      );
+
+      // If we have cached data and it's still fresh, return it immediately
+      if (cachedData !== undefined && queryState?.dataUpdatedAt) {
+        const age = Date.now() - queryState.dataUpdatedAt;
+        if (age < BARCODE_CACHE_STALE_TIME_MS) {
+          return cachedData;
+        }
       }
 
-      // Check if offline
-      if (typeof navigator !== "undefined" && !navigator.onLine) {
-        throw {
-          type: "network_offline",
-          message: "You appear to be offline. Please check your connection.",
-        } as ScannerError;
-      }
+      // No cache or stale - fetch fresh data
+      const result = await fetchBarcode(barcode);
 
-      // Call server function with timeout
-      // Server handles mock vs real based on VITE_USE_MOCK_BARCODE env var
-      try {
-        const result = await Promise.race([
-          lookupBarcode({ data: { barcode } }),
-          new Promise<never>((_, reject) =>
-            setTimeout(
-              () =>
-                reject({
-                  type: "api_error",
-                  message: "Request timed out. Please try again.",
-                } as ScannerError),
-              LOOKUP_TIMEOUT_MS
-            )
-          ),
-        ]);
+      // Store in query cache for future lookups
+      queryClient.setQueryData(barcodeQueryKeys.lookup(barcode), result, {
+        updatedAt: Date.now(),
+      });
 
-        if (!result) return null;
+      // Set garbage collection time
+      queryClient.setQueryDefaults(barcodeQueryKeys.lookup(barcode), {
+        gcTime: BARCODE_CACHE_GC_TIME_MS,
+      });
 
-        // Map BarcodeProduct to ScannedProduct
-        return {
-          id: result.id,
-          barcode: result.barcode,
-          name: result.name,
-          brand: result.brand,
-          caloriesPer100g: result.caloriesPer100g,
-          proteinG: result.proteinG,
-          carbsG: result.carbsG,
-          fatG: result.fatG,
-          fiberG: result.fiberG,
-          sugarG: result.sugarG,
-          sodiumMg: result.sodiumMg,
-          servingSizeG: result.servingSizeG,
-          imageUrl: null,
-          source: result.source as ScannedProduct["source"],
-          verified: result.verified,
-        };
-      } catch (error) {
-        // Transform server errors to ScannerError format
-        throw {
-          type: "api_error",
-          message:
-            error instanceof Error ? error.message : "Failed to lookup barcode",
-        } as ScannerError;
-      }
+      return result;
     },
   });
+}
+
+/**
+ * Prime the barcode cache with product data (e.g., from recently scanned items)
+ * This allows instant lookups for products we already know about
+ */
+export function usePrimeBarcodeCache() {
+  const queryClient = useQueryClient();
+
+  return (products: ScannedProduct[]) => {
+    products.forEach((product) => {
+      queryClient.setQueryData(
+        barcodeQueryKeys.lookup(product.barcode),
+        product,
+        { updatedAt: Date.now() }
+      );
+    });
+  };
 }

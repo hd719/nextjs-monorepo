@@ -16,6 +16,9 @@ const STORAGE_KEY = "barcode-offline-queue";
 const MAX_QUEUE_SIZE = 50;
 const FAILED_RETENTION_DAYS = 7;
 
+// Process up to 3 scans in parallel for better throughput
+const SYNC_CONCURRENCY_LIMIT = 3;
+
 const log = createLogger("hooks:offline-barcode-queue");
 
 export function useOfflineBarcodeQueue(userId: string) {
@@ -121,26 +124,12 @@ export function useOfflineBarcodeQueue(userId: string) {
     setQueue([]);
   }, []);
 
-  // Sync all pending items
-  const syncQueue = useCallback(async (): Promise<QueueSyncSummary> => {
-    if (syncInProgressRef.current) {
-      return { total: 0, succeeded: 0, failed: 0, results: [] };
-    }
-
-    syncInProgressRef.current = true;
-    setIsSyncing(true);
-
-    const pendingScans = queue.filter((s) => s.status === "pending");
-    const results: QueueSyncResult[] = [];
-
-    // Mark all as syncing
-    setQueue((prev) =>
-      prev.map((s) =>
-        s.status === "pending" ? { ...s, status: "syncing" as const } : s
-      )
-    );
-
-    for (const scan of pendingScans) {
+  /**
+   * Process a single scan - lookup product and add to diary
+   * Returns the result for this scan
+   */
+  const processSingleScan = useCallback(
+    async (scan: QueuedBarcodeScan): Promise<QueueSyncResult> => {
       try {
         // Look up the barcode using server function
         const product = await lookupBarcode({
@@ -193,82 +182,129 @@ export function useOfflineBarcodeQueue(userId: string) {
             },
           });
 
-          // Remove from queue on success
-          setQueue((prev) => prev.filter((s) => s.id !== scan.id));
-
-          results.push({
+          return {
             id: scan.id,
             barcode: scan.barcode,
             success: true,
             productName: product.name,
-          });
+          };
         } else {
           // Product not found
-          setQueue((prev) =>
-            prev.map((s) =>
-              s.id === scan.id
-                ? {
-                    ...s,
-                    status: "failed" as const,
-                    errorMessage: "Product not found",
-                  }
-                : s
-            )
-          );
-
-          results.push({
+          return {
             id: scan.id,
             barcode: scan.barcode,
             success: false,
             errorMessage: "Product not found",
-          });
+            shouldMarkFailed: true,
+          };
         }
       } catch (error) {
-        // Network or API error - keep as pending for retry
+        // Network or API error - determine if we should retry or mark as failed
         const isNetworkError =
           error instanceof Error &&
           (error.message.includes("network") ||
             error.message.includes("fetch") ||
             error.message.includes("offline"));
 
-        if (isNetworkError) {
-          // Revert to pending for retry
-          setQueue((prev) =>
-            prev.map((s) =>
-              s.id === scan.id ? { ...s, status: "pending" as const } : s
-            )
-          );
-        } else {
-          // Mark as failed
-          setQueue((prev) =>
-            prev.map((s) =>
-              s.id === scan.id
-                ? {
-                    ...s,
-                    status: "failed" as const,
-                    errorMessage:
-                      error instanceof Error ? error.message : "Unknown error",
-                  }
-                : s
-            )
-          );
-        }
-
-        results.push({
+        return {
           id: scan.id,
           barcode: scan.barcode,
           success: false,
           errorMessage:
             error instanceof Error ? error.message : "Unknown error",
-        });
+          // Network errors should be retried, other errors marked as failed
+          shouldRetry: isNetworkError,
+          shouldMarkFailed: !isNetworkError,
+        };
       }
+    },
+    [userId]
+  );
+
+  // Sync all pending items with parallel processing
+  const syncQueue = useCallback(async (): Promise<QueueSyncSummary> => {
+    if (syncInProgressRef.current) {
+      return { total: 0, succeeded: 0, failed: 0, results: [] };
+    }
+
+    syncInProgressRef.current = true;
+    setIsSyncing(true);
+
+    const pendingScans = queue.filter((s) => s.status === "pending");
+    const allResults: QueueSyncResult[] = [];
+
+    // Mark all as syncing
+    setQueue((prev) =>
+      prev.map((s) =>
+        s.status === "pending" ? { ...s, status: "syncing" as const } : s
+      )
+    );
+
+    // Process scans in batches with concurrency limit for better throughput
+    for (let i = 0; i < pendingScans.length; i += SYNC_CONCURRENCY_LIMIT) {
+      const batch = pendingScans.slice(i, i + SYNC_CONCURRENCY_LIMIT);
+
+      // Process batch in parallel
+      const batchResults = await Promise.all(
+        batch.map((scan) => processSingleScan(scan))
+      );
+
+      // Update queue state based on results
+      const successIds = batchResults.filter((r) => r.success).map((r) => r.id);
+      const failedIds = batchResults
+        .filter(
+          (r) =>
+            !r.success && (r as { shouldMarkFailed?: boolean }).shouldMarkFailed
+        )
+        .map((r) => r.id);
+      const retryIds = batchResults
+        .filter(
+          (r) => !r.success && (r as { shouldRetry?: boolean }).shouldRetry
+        )
+        .map((r) => r.id);
+
+      // Batch update queue state
+      setQueue((prev) => {
+        let updated = prev;
+
+        // Remove successful scans
+        if (successIds.length > 0) {
+          updated = updated.filter((s) => !successIds.includes(s.id));
+        }
+
+        // Mark failed scans
+        if (failedIds.length > 0) {
+          updated = updated.map((s) => {
+            if (failedIds.includes(s.id)) {
+              const result = batchResults.find((r) => r.id === s.id);
+              return {
+                ...s,
+                status: "failed" as const,
+                errorMessage: result?.errorMessage || "Unknown error",
+              };
+            }
+            return s;
+          });
+        }
+
+        // Revert retry scans to pending
+        if (retryIds.length > 0) {
+          updated = updated.map((s) =>
+            retryIds.includes(s.id) ? { ...s, status: "pending" as const } : s
+          );
+        }
+
+        return updated;
+      });
+
+      allResults.push(...batchResults);
     }
 
     const summary: QueueSyncSummary = {
       total: pendingScans.length,
-      succeeded: results.filter((r) => r.success).length,
-      failed: results.filter((r) => !r.success).length,
-      results,
+      succeeded: allResults.filter((r) => r.success).length,
+      failed: allResults.filter((r) => !r.success).length,
+      results: allResults,
     };
 
     setLastSyncResult(summary);
@@ -276,7 +312,7 @@ export function useOfflineBarcodeQueue(userId: string) {
     syncInProgressRef.current = false;
 
     return summary;
-  }, [queue, userId]);
+  }, [queue, processSingleScan]);
 
   // Computed values
   const pendingCount = queue.filter((s) => s.status === "pending").length;

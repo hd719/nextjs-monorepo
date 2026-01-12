@@ -363,9 +363,16 @@ export const createDiaryEntry = createServerFn({ method: "POST" })
     }
   });
 
+// When Go service is enabled, it owns the food_items domain
+// In mock mode, we still create food items here for development
+const GO_SERVICE_OWNS_FOOD_ITEMS = !process.env.VITE_USE_MOCK_BARCODE;
+
 /**
  * Create a diary entry from a scanned barcode product
- * First creates/finds the food item, then creates the diary entry
+ *
+ * Domain ownership:
+ * - When Go service is enabled: food_items are created by Go service, we only read here
+ * - When using mock data: we create food_items here for development convenience
  */
 export const createDiaryEntryFromScan = createServerFn({ method: "POST" })
   .inputValidator((data: CreateDiaryEntryFromScanInput) => {
@@ -375,36 +382,71 @@ export const createDiaryEntryFromScan = createServerFn({ method: "POST" })
     try {
       const { product, ...entryData } = data;
 
-      // Find or create the food item by barcode
+      // Find the food item by barcode
       let foodItem = await prisma.foodItem.findFirst({
         where: { barcode: product.barcode },
       });
 
       if (!foodItem) {
-        // Create the food item from scanned product data
-        foodItem = await prisma.foodItem.create({
-          data: {
-            barcode: product.barcode,
-            name: product.name,
-            brand: product.brand,
-            caloriesPer100g: toDecimal(product.caloriesPer100g),
-            proteinG: toDecimal(product.proteinG),
-            carbsG: toDecimal(product.carbsG),
-            fatG: toDecimal(product.fatG),
-            fiberG: product.fiberG ? toDecimal(product.fiberG) : null,
-            sugarG: product.sugarG ? toDecimal(product.sugarG) : null,
-            sodiumMg: product.sodiumMg ? toDecimal(product.sodiumMg) : null,
-            servingSizeG: toDecimal(product.servingSizeG),
-            servingSizeUnit: "g",
-            source: product.source,
-            verified: product.verified,
-          },
-        });
+        if (GO_SERVICE_OWNS_FOOD_ITEMS) {
+          // Go service should have created this food item during lookup
+          // If it doesn't exist, something went wrong in the flow
+          log.warn(
+            { barcode: product.barcode },
+            "Food item not found - Go service should have created it during lookup"
+          );
 
-        log.info(
-          { barcode: product.barcode, foodItemId: foodItem.id },
-          "Created new food item from barcode scan"
-        );
+          // Create it anyway to not break the user flow, but log for investigation
+          // This handles edge cases like race conditions or Go service not yet deployed
+          foodItem = await prisma.foodItem.create({
+            data: {
+              barcode: product.barcode,
+              name: product.name,
+              brand: product.brand,
+              caloriesPer100g: toDecimal(product.caloriesPer100g),
+              proteinG: toDecimal(product.proteinG),
+              carbsG: toDecimal(product.carbsG),
+              fatG: toDecimal(product.fatG),
+              fiberG: product.fiberG ? toDecimal(product.fiberG) : null,
+              sugarG: product.sugarG ? toDecimal(product.sugarG) : null,
+              sodiumMg: product.sodiumMg ? toDecimal(product.sodiumMg) : null,
+              servingSizeG: toDecimal(product.servingSizeG),
+              servingSizeUnit: "g",
+              source: product.source,
+              verified: product.verified,
+            },
+          });
+
+          log.info(
+            { barcode: product.barcode, foodItemId: foodItem.id },
+            "Created food item as fallback (Go service should own this)"
+          );
+        } else {
+          // Mock mode: create the food item from scanned product data
+          foodItem = await prisma.foodItem.create({
+            data: {
+              barcode: product.barcode,
+              name: product.name,
+              brand: product.brand,
+              caloriesPer100g: toDecimal(product.caloriesPer100g),
+              proteinG: toDecimal(product.proteinG),
+              carbsG: toDecimal(product.carbsG),
+              fatG: toDecimal(product.fatG),
+              fiberG: product.fiberG ? toDecimal(product.fiberG) : null,
+              sugarG: product.sugarG ? toDecimal(product.sugarG) : null,
+              sodiumMg: product.sodiumMg ? toDecimal(product.sodiumMg) : null,
+              servingSizeG: toDecimal(product.servingSizeG),
+              servingSizeUnit: "g",
+              source: product.source,
+              verified: product.verified,
+            },
+          });
+
+          log.info(
+            { barcode: product.barcode, foodItemId: foodItem.id },
+            "Created new food item from barcode scan (mock mode)"
+          );
+        }
       }
 
       // Parse date string to Date object

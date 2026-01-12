@@ -140,6 +140,9 @@ export interface QueueSyncResult {
   success: boolean;
   productName?: string;
   errorMessage?: string;
+  // Used internally to determine how to handle failed syncs
+  shouldRetry?: boolean; // Network error - keep as pending for retry
+  shouldMarkFailed?: boolean; // Other error - mark as failed
 }
 
 // Summary of sync operation

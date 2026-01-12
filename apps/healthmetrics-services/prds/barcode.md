@@ -178,6 +178,50 @@ Key fields to align with:
 - If a barcode exists but is stale, refresh from upstream and upsert
   the record in-place (same barcode).
 
+### Cache-First Lookup Flow
+
+The Go service uses a **cache-first pattern** to minimize external API calls
+and reduce latency for repeat scans:
+
+```
+┌──────────────┐
+│ Validate     │
+│ barcode      │
+└──────┬───────┘
+       │
+       ▼
+┌──────────────┐     ┌─────────────────────────────────┐
+│ Query        │────▶│ Found & fresh? Return cached    │
+│ food_items   │     │ data immediately (skip OFF)     │
+└──────┬───────┘     └─────────────────────────────────┘
+       │ miss or stale
+       ▼
+┌──────────────┐
+│ Call         │
+│ OpenFood-    │
+│ Facts API    │
+└──────┬───────┘
+       │
+       ▼
+┌──────────────┐
+│ Upsert to    │
+│ food_items   │
+└──────┬───────┘
+       │
+       ▼
+┌──────────────────────────────────────────────────────┐
+│ Return FoodItem directly from the same response      │
+│ (no separate DB query — data is already in memory)   │
+└──────────────────────────────────────────────────────┘
+```
+
+**Key points:**
+- The Go service returns the `FoodItem` data directly in its HTTP response.
+- The TS server function does NOT query `food_items` separately — the Go service
+  already has the data (either from cache or freshly fetched).
+- This avoids an unnecessary round-trip and keeps latency low.
+- Cache hits should respond in < 100ms; cache misses depend on OpenFoodFacts latency.
+
 ---
 
 ## Validation Rules

@@ -85,7 +85,11 @@ export {
 } from "./useFasting";
 
 // Scanner hooks
-export { useBarcodeLookup } from "./useBarcodeLookup";
+export {
+  useBarcodeLookup,
+  usePrimeBarcodeCache,
+  barcodeQueryKeys,
+} from "./useBarcodeLookup";
 export { useScannerDialog } from "./useScannerDialog";
 export { useRecentlyScanned } from "./useRecentlyScanned";
 export type { RecentlyScannedItem } from "./useRecentlyScanned";
