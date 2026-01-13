@@ -123,6 +123,80 @@ See `PRD_GO_BARCODE_LOOKUP_SERVICE.md` for Go service details.
 
 ---
 
+## Authentication & Security
+
+### Overview
+
+The barcode scanner communicates with a standalone Go microservice (`healthmetrics-services`) for barcode lookups. Since this is a separate service, we implement a layered authentication approach:
+
+| Layer | Header | Purpose |
+|-------|--------|---------|
+| **Service Auth** | `X-API-Key` | Proves request originates from the HealthMetrics app |
+| **User Identity** | `Cookie` (session JWT) | Go service verifies JWT to identify the user |
+| **User Context** | `X-User-ID` | Auditing and logging (derived from verified session) |
+| **Tracing** | `X-Request-ID` | Correlate logs across TS and Go services |
+
+### Authentication Flow
+
+```
+┌─────────────┐    ┌──────────────────┐    ┌──────────────┐
+│  Frontend   │ →  │ TS Server Fn     │ →  │ Go Service   │
+│ (TanStack)  │    │ (lookupBarcode)  │    │ (validates)  │
+└─────────────┘    └──────────────────┘    └──────────────┘
+                           │                      │
+                           │ Sends:               │ Validates:
+                           │ • X-API-Key          │ • API key matches
+                           │ • Cookie (JWT)       │ • JWT signature valid
+                           │ • X-User-ID          │ • User authorized
+                           │ • X-Request-ID       │
+                           │                      │
+```
+
+### Implementation Details
+
+#### Server Function (`src/server/barcode.ts`)
+
+The `lookupBarcode` server function:
+
+1. **Verifies user session** - Rejects unauthenticated requests before calling Go
+2. **Generates request ID** - For distributed tracing across services
+3. **Sends authentication headers**:
+   - `X-API-Key`: Service-to-service secret (from `BARCODE_SERVICE_API_KEY`)
+   - `Cookie`: Forwards the session cookie so Go can verify the JWT
+   - `X-User-ID`: User ID for auditing (already verified by Better Auth)
+   - `X-Request-ID`: Unique ID for log correlation
+
+4. **Handles auth errors** - 401/403 responses from Go are logged and surfaced
+
+#### Go Service Responsibilities
+
+The Go service (documented in `PRD_GO_BARCODE_LOOKUP_SERVICE.md`) validates:
+
+1. **API Key** - Rejects requests without valid `X-API-Key` (401)
+2. **JWT Signature** - Verifies the session cookie using shared `BETTER_AUTH_SECRET`
+3. **User Authorization** - Can implement per-user rate limiting using `X-User-ID`
+
+### Security Considerations
+
+| Concern | Mitigation |
+|---------|------------|
+| API key leaked | Rotate via env vars, use secrets manager in prod |
+| JWT replay | Short TTL (5 min cache), validate signature on each request |
+| Network exposure | Go service is internal-only (not public-facing) |
+| CORS bypass | CORS is browser-only; real security is API key + JWT |
+
+### Environment Variables
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `BARCODE_SERVICE_URL` | Yes (prod) | Go microservice URL (e.g., `http://localhost:8080`) |
+| `BARCODE_SERVICE_API_KEY` | Yes (prod) | Shared secret for service-to-service auth (min 32 chars) |
+| `BETTER_AUTH_SECRET` | Yes | Shared with Go service for JWT verification |
+
+**Note:** In development with `VITE_USE_MOCK_BARCODE=true`, authentication is bypassed as no Go service is called.
+
+---
+
 ## Implementation Plan
 
 ### Phase 1: Core Scanner (Day 1-2)
@@ -531,6 +605,8 @@ src/
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `BARCODE_SERVICE_URL` | Go microservice URL | `http://localhost:8080` |
+| `BARCODE_SERVICE_API_KEY` | API key for Go service auth (min 32 chars) | Required in prod |
+| `BETTER_AUTH_SECRET` | Shared secret for JWT verification | Required |
 | `VITE_USE_MOCK_BARCODE` | Use mock data instead of Go service | `false` |
 | `VITE_SIMULATE_SCANNER_OFFLINE` | Simulate offline mode for testing | `false` |
 

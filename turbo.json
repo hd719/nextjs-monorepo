@@ -20,10 +20,12 @@
         "NEXT_PUBLIC_CONTACT_EMAIL",
         "NODE_ENV",
         "BETTER_AUTH_URL",
+        "BETTER_AUTH_SECRET",
         "APP_URL",
         "LOG_LEVEL",
         "DATABASE_URL",
         "BARCODE_SERVICE_URL",
+        "BARCODE_SERVICE_API_KEY",
         "VITE_USE_MOCK_BARCODE"
       ]
     },

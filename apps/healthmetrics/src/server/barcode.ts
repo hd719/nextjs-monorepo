@@ -1,6 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
+import { getRequestHeaders } from "@tanstack/react-start/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
+import { auth } from "@/lib/auth-config";
 import { createLogger } from "@/lib/logger";
 import { mockBarcodeLookup } from "@/data";
 
@@ -12,6 +14,9 @@ const log = createLogger("server:barcode");
 
 // Go barcode service URL - defaults to local dev
 const BARCODE_SERVICE_URL = process.env.BARCODE_SERVICE_URL;
+
+// API key for service-to-service authentication with Go service
+const BARCODE_SERVICE_API_KEY = process.env.BARCODE_SERVICE_API_KEY;
 
 // Use mock data instead of calling Go service (for development/testing)
 const USE_MOCK_BARCODE = process.env.VITE_USE_MOCK_BARCODE;
@@ -105,6 +110,16 @@ interface GoServiceError {
 // ============================================================================
 
 /**
+ * Generate a unique request ID for tracing/debugging
+ * Format: req_{timestamp}_{random}
+ */
+function generateRequestId(): string {
+  const timestamp = Date.now().toString(36);
+  const random = Math.random().toString(36).substring(2, 10);
+  return `req_${timestamp}_${random}`;
+}
+
+/**
  * Parse serving size string to grams (e.g., "240ml" -> 240, "100g" -> 100)
  */
 function parseServingSizeG(servingSize: string): number {
@@ -148,6 +163,12 @@ function transformGoResponse(data: GoServiceResponse): BarcodeProduct {
  * - OpenFoodFacts API call
  * - Persistence to food_items table
  *
+ * Authentication:
+ * - API Key: Sent via X-API-Key header to prove request is from this app
+ * - JWT: Forwarded via Authorization header so Go can verify user identity
+ * - User ID: Sent via X-User-ID header for auditing/logging
+ * - Request ID: Sent via X-Request-ID header for tracing
+ *
  * Returns the product if found, null if not found
  */
 export const lookupBarcode = createServerFn({ method: "GET" })
@@ -155,17 +176,20 @@ export const lookupBarcode = createServerFn({ method: "GET" })
     return lookupBarcodeSchema.parse(data);
   })
   .handler(async ({ data: { barcode } }): Promise<BarcodeProduct | null> => {
+    // Generate request ID for tracing across services
+    const requestId = generateRequestId();
+
     if (USE_MOCK_BARCODE) {
-      log.info({ barcode }, "Using mock barcode lookup");
+      log.info({ barcode, requestId }, "Using mock barcode lookup");
       const mockProduct = await mockBarcodeLookup(barcode);
 
       if (!mockProduct) {
-        log.info({ barcode }, "Product not found in mock data");
+        log.info({ barcode, requestId }, "Product not found in mock data");
         return null;
       }
 
       log.info(
-        { barcode, productName: mockProduct.name },
+        { barcode, requestId, productName: mockProduct.name },
         "Product found in mock data"
       );
 
@@ -187,22 +211,81 @@ export const lookupBarcode = createServerFn({ method: "GET" })
       };
     }
 
+    // Get the user session for authentication
+    const headers = getRequestHeaders();
+    const session = await auth.api.getSession({ headers });
+
+    // User must be authenticated to call the barcode service
+    if (!session) {
+      log.warn(
+        { barcode, requestId },
+        "Unauthenticated barcode lookup attempt"
+      );
+      throw new Error("Authentication required");
+    }
+
+    const userId = session.user.id;
+    // Get the session token (JWT) from the cookie header for forwarding
+    // Better Auth stores the token in the session cookie
+    const cookieHeader = headers.get("cookie") || "";
+
     // Call Go service for real data
     const url = `${BARCODE_SERVICE_URL}/v1/barcodes/${barcode}`;
 
     try {
-      log.info({ barcode, url }, "Calling Go barcode service");
+      log.info(
+        { barcode, requestId, userId, url },
+        "Calling Go barcode service"
+      );
+
+      // Build authentication headers for Go service
+      const serviceHeaders: Record<string, string> = {
+        Accept: "application/json",
+        "X-Request-ID": requestId,
+        "X-User-ID": userId,
+      };
+
+      // Add API key if configured (required for production)
+      if (BARCODE_SERVICE_API_KEY) {
+        serviceHeaders["X-API-Key"] = BARCODE_SERVICE_API_KEY;
+      } else {
+        log.warn(
+          { requestId },
+          "BARCODE_SERVICE_API_KEY not configured - service-to-service auth disabled"
+        );
+      }
+
+      // Forward cookie header so Go service can validate the session JWT
+      // The Go service will verify the JWT signature using the shared secret
+      if (cookieHeader) {
+        serviceHeaders["Cookie"] = cookieHeader;
+      }
 
       const response = await fetch(url, {
         method: "GET",
-        headers: {
-          Accept: "application/json",
-        },
+        headers: serviceHeaders,
       });
+
+      // Authentication/authorization errors from Go service
+      if (response.status === 401) {
+        log.warn(
+          { barcode, requestId, userId },
+          "Go service rejected authentication"
+        );
+        throw new Error("Authentication failed");
+      }
+
+      if (response.status === 403) {
+        log.warn(
+          { barcode, requestId, userId },
+          "Go service rejected authorization"
+        );
+        throw new Error("Not authorized to access this resource");
+      }
 
       // Product not found
       if (response.status === 404) {
-        log.info({ barcode }, "Product not found in Go service");
+        log.info({ barcode, requestId }, "Product not found in Go service");
         return null;
       }
 
@@ -210,7 +293,7 @@ export const lookupBarcode = createServerFn({ method: "GET" })
       if (response.status === 400) {
         const errorData = (await response.json()) as GoServiceError;
         log.warn(
-          { barcode, error: errorData.error },
+          { barcode, requestId, error: errorData.error },
           "Invalid barcode rejected by Go service"
         );
         throw new Error(errorData.error.message);
@@ -220,7 +303,7 @@ export const lookupBarcode = createServerFn({ method: "GET" })
       if (response.status === 502) {
         const errorData = (await response.json()) as GoServiceError;
         log.error(
-          { barcode, error: errorData.error },
+          { barcode, requestId, error: errorData.error },
           "Go service upstream error"
         );
         throw new Error("Unable to lookup product. Please try again later.");
@@ -229,7 +312,7 @@ export const lookupBarcode = createServerFn({ method: "GET" })
       // Other errors
       if (!response.ok) {
         log.error(
-          { barcode, status: response.status },
+          { barcode, requestId, status: response.status },
           "Unexpected error from Go service"
         );
         throw new Error("Failed to lookup barcode");
@@ -240,7 +323,7 @@ export const lookupBarcode = createServerFn({ method: "GET" })
       const product = transformGoResponse(data);
 
       log.info(
-        { barcode, productName: product.name },
+        { barcode, requestId, productName: product.name },
         "Product found via Go service"
       );
 
@@ -251,7 +334,10 @@ export const lookupBarcode = createServerFn({ method: "GET" })
         throw error;
       }
 
-      log.error({ err: error, barcode }, "Failed to call Go barcode service");
+      log.error(
+        { err: error, barcode, requestId },
+        "Failed to call Go barcode service"
+      );
       throw new Error("Failed to lookup barcode");
     }
   });
