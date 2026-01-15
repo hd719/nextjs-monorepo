@@ -1,9 +1,11 @@
 package main
 
 import (
-	"errors"
-	"fmt"
-	"regexp"
+	"healthmetrics-services/internal/barcode"
+	"healthmetrics-services/ratelimiter"
+	"os"
+	"strconv"
+	"sync"
 	"time"
 
 	"github.com/gin-contrib/requestid"
@@ -11,69 +13,143 @@ import (
 	"github.com/openfoodfacts/openfoodfacts-go"
 )
 
-type FoodItemNutrients struct {
-	CaloriesKcal float64 `json:"calories_kcal"`
-	ProteinG     float64 `json:"protein_g"`
-	CarbsG       float64 `json:"carbs_g"`
-	FatG         float64 `json:"fat_g"`
-	FiberG       float64 `json:"fiber_g"`
-	SugarG       float64 `json:"sugar_g"`
-	SodiumG      float64 `json:"sodium_g"`
+type limiterEntry struct {
+	bucket   *ratelimiter.TokenBucket // the per-user token bucket
+	lastSeen time.Time                // last time we saw a request from this user
 }
 
-type FoodItem struct {
-	ID          string            `json:"id"`
-	Barcode     string            `json:"barcode"`
-	Name        string            `json:"name"`
-	Brand       string            `json:"brand"`
-	ServingSize string            `json:"serving_size"`
-	Nutrients   FoodItemNutrients `json:"nutrients"`
-	ImageUrl    string            `json:"image_url"`
+type limiterStore struct {
+	// Buckets keyed by user ID:
+	// {"user_123": {bucket: {capacity: 10_000_000, tokens: 9_000_000, refillRate: 1, lastRefill: 2024-01-01T00:00:00Z}, lastSeen: 2024-01-01T00:05:00Z}}
+	mu      sync.Mutex
+	buckets map[string]*limiterEntry // one bucket per user for fair rate limiting
 }
 
-func supportsChecksum(length int) bool {
-	switch length {
-	case 8, 12, 13, 14:
-		return true
-	default:
-		return false
+func newLimiterStore() *limiterStore {
+	// Initializes the in-memory map for user buckets.
+	return &limiterStore{
+		buckets: make(map[string]*limiterEntry),
 	}
 }
 
-func isValidChecksum(code string) bool {
-	sum := 0
-	// UPC/EAN checksum: alternate weights 3 and 1 from the right, excluding the check digit.
-	weight := 3
+func (s *limiterStore) Get(userID string, capacity, refillRate float64) *ratelimiter.TokenBucket {
+	// Lock while reading/writing the map to avoid concurrent map writes.
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	now := time.Now() // capture the current time once for this request
 
-	// Steps:
-	// len(code) - 2 to 0 (right to left, excluding check digit which is last digit).
-	// The rightmost non-check digit (second-to-last overall) is position 1 (odd) by definition.
-	for i := len(code) - 2; i >= 0; i-- {
-		// a string is a slice of bytes in Go
-		// code[i] is a byte (ASCII) not value. Example: '5'(53) - '0'(48) = 5.
-		digit := int(code[i] - '0')
-		sum += digit * weight
-		if weight == 3 {
-			weight = 1
-		} else {
-			weight = 3
+	// If we already have a bucket for this user, reuse it and update lastSeen.
+	if entry, ok := s.buckets[userID]; ok {
+		entry.lastSeen = now // mark user as active
+		return entry.bucket  // reuse the existing bucket
+	}
+
+	// New user seen: create a bucket with the current rate-limit settings.
+	bucket := ratelimiter.NewTokenBucket(capacity, refillRate) // create a fresh bucket
+	s.buckets[userID] = &limiterEntry{                         // store it in the map
+		bucket:   bucket, // bucket instance for this user
+		lastSeen: now,    // mark as active now
+	}
+
+	return bucket
+}
+
+func authMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		// Placeholder auth middleware so rate limiting runs after auth.
+		// TODO: validate X-API-Key + JWT + X-User-ID per PRD. (we can check the database for this)
+		c.Next()
+	}
+}
+
+func getRateLimitConfig() (float64, float64) {
+	// Defaults: capacity=10 burst, refillRate=1 token/sec (~60/min).
+	capacity := 10.0
+	refillRate := 1.0
+
+	if value := os.Getenv("RATE_LIMIT_CAPACITY"); value != "" {
+		if parsed, err := strconv.ParseFloat(value, 64); err == nil && parsed > 0 {
+			capacity = parsed
 		}
 	}
 
-	// sum is the total across all digits except the check digit
-	// sum = 44 → 44 % 10 = 4 → 10 - 4 = 6 → 6 % 10 = 6
-	// sum = 50 → 50 % 10 = 0 → 10 - 0 = 10 → 10 % 10 = 0
-	checkDigit := (10 - (sum % 10)) % 10
-	return checkDigit == int(code[len(code)-1]-'0')
+	if value := os.Getenv("RATE_LIMIT_REFILL_RATE"); value != "" {
+		if parsed, err := strconv.ParseFloat(value, 64); err == nil && parsed > 0 {
+			refillRate = parsed
+		}
+	}
+
+	return capacity, refillRate
+}
+
+func (s *limiterStore) Cleanup(ttl time.Duration) {
+	s.mu.Lock()         // lock the map while we iterate/delete
+	defer s.mu.Unlock() // unlock when we're done
+
+	// Users inactive before this time are removed
+	cutoff := time.Now().Add(-ttl) // Passing a negative duration is the standard way to subtract time in Go
+
+	for userID, entry := range s.buckets { // scan all buckets
+		if entry.lastSeen.Before(cutoff) { // if user is idle beyond TTL
+			delete(s.buckets, userID) // remove to avoid unbounded growth
+		}
+	}
 }
 
 func main() {
 	router := gin.Default()
-	router.Use(requestid.New())
-	router.Use(func(c *gin.Context) {
-		if requestID := requestid.Get(c); requestID != "" {
-			c.Header("X-Request-Id", requestID)
+	// Rate limiting store shared across requests (one bucket per user).
+	store := newLimiterStore()
+
+	go func() { // run cleanup in the background
+		ticker := time.NewTicker(5 * time.Minute) // cleanup interval
+		defer ticker.Stop()                       // stop ticker on shutdown
+
+		for range ticker.C { // wait for each tick
+			store.Cleanup(30 * time.Minute) // remove users idle for 30 minutes
 		}
+	}()
+
+	capacity, refillRate := getRateLimitConfig()
+	router.Use(requestid.New())
+	// Auth should run before rate limiting so only verified users are limited.
+	router.Use(authMiddleware())
+	router.Use(func(c *gin.Context) {
+		// Rate limiting middleware: reject if X-User-ID is missing, then check bucket.
+		// Skip health check
+		if c.Request.URL.Path == "/healthz" {
+			c.Next()
+			return
+		}
+
+		// Key by user ID provided by the TS server.
+		userID := c.GetHeader("X-User-ID")
+		if userID == "" {
+			c.JSON(401, gin.H{"error": map[string]interface{}{
+				"code":    "UNAUTHORIZED",
+				"message": "Missing X-User-ID",
+			}})
+			c.Abort() // stop processing and do not call handlers
+			return
+		}
+
+		// capacity/refillRate are configurable via env.
+		// Each user gets their own bucket from the store.
+		// This is in-memory per service instance (not shared across replicas).
+		bucket := store.Get(userID, capacity, refillRate)
+		// Allow() consumes 1 token; false means the user is rate-limited.
+		if !bucket.Allow() {
+			// Retry-After tells the client when to try again (seconds).
+			c.Header("Retry-After", "1")
+			c.JSON(429, gin.H{"error": map[string]interface{}{
+				"code":    "RATE_LIMITED",
+				"message": "Too many requests",
+			}})
+			c.Abort()
+			return
+		}
+
+		// Request is allowed, continue to the handler.
 		c.Next()
 	})
 	api := openfoodfacts.NewClient("world", "", "")
@@ -87,65 +163,6 @@ func main() {
 	})
 
 	// This comes from the frontend when the user scans a barcode
-	router.GET("/v1/barcodes/:code", func(c *gin.Context) {
-		barcode := c.Param("code")
-		isDigitOnly := regexp.MustCompile("^[0-9]+$").MatchString
-		isBarCodeValid := len(barcode) >= 8 && len(barcode) <= 14 && isDigitOnly(barcode)
-
-		if !isBarCodeValid {
-			c.JSON(400, gin.H{"error": map[string]interface{}{
-				"code":    "INVALID_BARCODE",
-				"message": "Barcode must be 8-14 digits",
-			}})
-			return
-		}
-		if supportsChecksum(len(barcode)) && !isValidChecksum(barcode) {
-			c.JSON(400, gin.H{"error": map[string]interface{}{
-				"code":    "INVALID_BARCODE",
-				"message": "Invalid barcode checksum",
-			}})
-			return
-		}
-
-		// Make external API call to OpenFoodFacts
-		product, err := api.Product(barcode)
-		if err != nil {
-			// ErrNoProduct is a sentinel error value (errors.New), so use errors.Is to detect it even if the library wraps the error.
-			// ErrNoProduct is an error returned by Client.Product when the product could not be retrieved successfully.
-			if errors.Is(err, openfoodfacts.ErrNoProduct) {
-				c.JSON(404, gin.H{"error": map[string]interface{}{
-					"code":    "NOT_FOUND",
-					"message": "Product not found",
-				}})
-				return
-			}
-			c.JSON(502, gin.H{"error": map[string]interface{}{
-				"code":    "UPSTREAM_ERROR",
-				"message": fmt.Sprintf("Failed to fetch product from OpenFoodFacts: %v", err),
-			}})
-			return
-		}
-
-		// Need to transform the OpenFoodFacts response into the FoodItem struct
-		foodItem := FoodItem{
-			ID:          product.Id,
-			Barcode:     product.Code,
-			Name:        product.ProductName,
-			Brand:       product.Brands,
-			ServingSize: product.ServingSize,
-			Nutrients: FoodItemNutrients{
-				CaloriesKcal: product.Nutriments.Energy100G,
-				ProteinG:     product.Nutriments.Proteins100G,
-				CarbsG:       product.Nutriments.Carbohydrates100G,
-				FatG:         product.Nutriments.Fat100G,
-				FiberG:       product.Nutriments.Fiber100G,
-				SugarG:       product.Nutriments.Sugars100G,
-				SodiumG:      product.Nutriments.Sodium100G,
-			},
-			ImageUrl: product.ImageURL.String(),
-		}
-
-		c.JSON(200, foodItem)
-	})
+	router.GET("/v1/barcodes/:code", barcode.NewHandler(&api))
 	router.Run() // listens on 0.0.0.0:8080 by default
 }

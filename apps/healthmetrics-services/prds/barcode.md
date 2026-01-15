@@ -311,6 +311,7 @@ The Go service must validate incoming requests:
 - Upstream API (OpenFoodFacts) called server-side only
 - Service should only be reachable server-to-server (private network/service mesh)
 - Rate limiting per user ID (using `X-User-ID` header)
+- Rate limiter is in-memory per service instance; inactive user buckets are evicted (TTL 30m, sweep every 5m)
 
 ### Public Exposure Checklist (if ever needed)
 
@@ -362,6 +363,11 @@ Required environment variables:
 ### Observability
 
 - `LOG_LEVEL` (default `info`)
+
+### Rate Limiting
+
+- `RATE_LIMIT_CAPACITY` (default 10)
+- `RATE_LIMIT_REFILL_RATE` (default 1 token/sec)
 
 ---
 
