@@ -359,6 +359,7 @@ export type FoodItemWhereInput = {
   creator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   diaryEntries?: Prisma.DiaryEntryListRelationFilter
   mealPlans?: Prisma.MealPlanListRelationFilter
+  barcodeScans?: Prisma.BarcodeScanListRelationFilter
 }
 
 export type FoodItemOrderByWithRelationInput = {
@@ -384,6 +385,7 @@ export type FoodItemOrderByWithRelationInput = {
   creator?: Prisma.UserOrderByWithRelationInput
   diaryEntries?: Prisma.DiaryEntryOrderByRelationAggregateInput
   mealPlans?: Prisma.MealPlanOrderByRelationAggregateInput
+  barcodeScans?: Prisma.BarcodeScanOrderByRelationAggregateInput
 }
 
 export type FoodItemWhereUniqueInput = Prisma.AtLeast<{
@@ -412,6 +414,7 @@ export type FoodItemWhereUniqueInput = Prisma.AtLeast<{
   creator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   diaryEntries?: Prisma.DiaryEntryListRelationFilter
   mealPlans?: Prisma.MealPlanListRelationFilter
+  barcodeScans?: Prisma.BarcodeScanListRelationFilter
 }, "id" | "barcode">
 
 export type FoodItemOrderByWithAggregationInput = {
@@ -488,6 +491,7 @@ export type FoodItemCreateInput = {
   creator?: Prisma.UserCreateNestedOneWithoutCreatedFoodItemsInput
   diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutFoodItemInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutFoodItemInput
+  barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutFoodItemInput
 }
 
 export type FoodItemUncheckedCreateInput = {
@@ -512,6 +516,7 @@ export type FoodItemUncheckedCreateInput = {
   updatedAt?: Date | string
   diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutFoodItemInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutFoodItemInput
+  barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutFoodItemInput
 }
 
 export type FoodItemUpdateInput = {
@@ -536,6 +541,7 @@ export type FoodItemUpdateInput = {
   creator?: Prisma.UserUpdateOneWithoutCreatedFoodItemsNestedInput
   diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutFoodItemNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutFoodItemNestedInput
+  barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutFoodItemNestedInput
 }
 
 export type FoodItemUncheckedUpdateInput = {
@@ -560,6 +566,7 @@ export type FoodItemUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutFoodItemNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutFoodItemNestedInput
+  barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutFoodItemNestedInput
 }
 
 export type FoodItemCreateManyInput = {
@@ -819,6 +826,22 @@ export type FoodItemUpdateOneWithoutMealPlansNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.FoodItemUpdateToOneWithWhereWithoutMealPlansInput, Prisma.FoodItemUpdateWithoutMealPlansInput>, Prisma.FoodItemUncheckedUpdateWithoutMealPlansInput>
 }
 
+export type FoodItemCreateNestedOneWithoutBarcodeScansInput = {
+  create?: Prisma.XOR<Prisma.FoodItemCreateWithoutBarcodeScansInput, Prisma.FoodItemUncheckedCreateWithoutBarcodeScansInput>
+  connectOrCreate?: Prisma.FoodItemCreateOrConnectWithoutBarcodeScansInput
+  connect?: Prisma.FoodItemWhereUniqueInput
+}
+
+export type FoodItemUpdateOneWithoutBarcodeScansNestedInput = {
+  create?: Prisma.XOR<Prisma.FoodItemCreateWithoutBarcodeScansInput, Prisma.FoodItemUncheckedCreateWithoutBarcodeScansInput>
+  connectOrCreate?: Prisma.FoodItemCreateOrConnectWithoutBarcodeScansInput
+  upsert?: Prisma.FoodItemUpsertWithoutBarcodeScansInput
+  disconnect?: Prisma.FoodItemWhereInput | boolean
+  delete?: Prisma.FoodItemWhereInput | boolean
+  connect?: Prisma.FoodItemWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FoodItemUpdateToOneWithWhereWithoutBarcodeScansInput, Prisma.FoodItemUpdateWithoutBarcodeScansInput>, Prisma.FoodItemUncheckedUpdateWithoutBarcodeScansInput>
+}
+
 export type FoodItemCreateWithoutCreatorInput = {
   id?: string
   name: string
@@ -840,6 +863,7 @@ export type FoodItemCreateWithoutCreatorInput = {
   updatedAt?: Date | string
   diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutFoodItemInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutFoodItemInput
+  barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutFoodItemInput
 }
 
 export type FoodItemUncheckedCreateWithoutCreatorInput = {
@@ -863,6 +887,7 @@ export type FoodItemUncheckedCreateWithoutCreatorInput = {
   updatedAt?: Date | string
   diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutFoodItemInput
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutFoodItemInput
+  barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutFoodItemInput
 }
 
 export type FoodItemCreateOrConnectWithoutCreatorInput = {
@@ -937,6 +962,7 @@ export type FoodItemCreateWithoutDiaryEntriesInput = {
   updatedAt?: Date | string
   creator?: Prisma.UserCreateNestedOneWithoutCreatedFoodItemsInput
   mealPlans?: Prisma.MealPlanCreateNestedManyWithoutFoodItemInput
+  barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutFoodItemInput
 }
 
 export type FoodItemUncheckedCreateWithoutDiaryEntriesInput = {
@@ -960,6 +986,7 @@ export type FoodItemUncheckedCreateWithoutDiaryEntriesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutFoodItemInput
+  barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutFoodItemInput
 }
 
 export type FoodItemCreateOrConnectWithoutDiaryEntriesInput = {
@@ -999,6 +1026,7 @@ export type FoodItemUpdateWithoutDiaryEntriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creator?: Prisma.UserUpdateOneWithoutCreatedFoodItemsNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutFoodItemNestedInput
+  barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutFoodItemNestedInput
 }
 
 export type FoodItemUncheckedUpdateWithoutDiaryEntriesInput = {
@@ -1022,6 +1050,7 @@ export type FoodItemUncheckedUpdateWithoutDiaryEntriesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutFoodItemNestedInput
+  barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutFoodItemNestedInput
 }
 
 export type FoodItemCreateWithoutMealPlansInput = {
@@ -1045,6 +1074,7 @@ export type FoodItemCreateWithoutMealPlansInput = {
   updatedAt?: Date | string
   creator?: Prisma.UserCreateNestedOneWithoutCreatedFoodItemsInput
   diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutFoodItemInput
+  barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutFoodItemInput
 }
 
 export type FoodItemUncheckedCreateWithoutMealPlansInput = {
@@ -1068,6 +1098,7 @@ export type FoodItemUncheckedCreateWithoutMealPlansInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutFoodItemInput
+  barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutFoodItemInput
 }
 
 export type FoodItemCreateOrConnectWithoutMealPlansInput = {
@@ -1107,6 +1138,7 @@ export type FoodItemUpdateWithoutMealPlansInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creator?: Prisma.UserUpdateOneWithoutCreatedFoodItemsNestedInput
   diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutFoodItemNestedInput
+  barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutFoodItemNestedInput
 }
 
 export type FoodItemUncheckedUpdateWithoutMealPlansInput = {
@@ -1130,6 +1162,119 @@ export type FoodItemUncheckedUpdateWithoutMealPlansInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutFoodItemNestedInput
+  barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutFoodItemNestedInput
+}
+
+export type FoodItemCreateWithoutBarcodeScansInput = {
+  id?: string
+  name: string
+  brand?: string | null
+  barcode?: string | null
+  servingSizeG: runtime.Decimal | runtime.DecimalJsLike | number | string
+  servingSizeUnit?: string | null
+  caloriesPer100g: runtime.Decimal | runtime.DecimalJsLike | number | string
+  proteinG: runtime.Decimal | runtime.DecimalJsLike | number | string
+  carbsG: runtime.Decimal | runtime.DecimalJsLike | number | string
+  fatG: runtime.Decimal | runtime.DecimalJsLike | number | string
+  fiberG?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sugarG?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sodiumMg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  source: $Enums.FoodSource
+  sourceId?: string | null
+  verified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  creator?: Prisma.UserCreateNestedOneWithoutCreatedFoodItemsInput
+  diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutFoodItemInput
+  mealPlans?: Prisma.MealPlanCreateNestedManyWithoutFoodItemInput
+}
+
+export type FoodItemUncheckedCreateWithoutBarcodeScansInput = {
+  id?: string
+  name: string
+  brand?: string | null
+  barcode?: string | null
+  servingSizeG: runtime.Decimal | runtime.DecimalJsLike | number | string
+  servingSizeUnit?: string | null
+  caloriesPer100g: runtime.Decimal | runtime.DecimalJsLike | number | string
+  proteinG: runtime.Decimal | runtime.DecimalJsLike | number | string
+  carbsG: runtime.Decimal | runtime.DecimalJsLike | number | string
+  fatG: runtime.Decimal | runtime.DecimalJsLike | number | string
+  fiberG?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sugarG?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sodiumMg?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  source: $Enums.FoodSource
+  sourceId?: string | null
+  verified?: boolean
+  createdBy?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutFoodItemInput
+  mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutFoodItemInput
+}
+
+export type FoodItemCreateOrConnectWithoutBarcodeScansInput = {
+  where: Prisma.FoodItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.FoodItemCreateWithoutBarcodeScansInput, Prisma.FoodItemUncheckedCreateWithoutBarcodeScansInput>
+}
+
+export type FoodItemUpsertWithoutBarcodeScansInput = {
+  update: Prisma.XOR<Prisma.FoodItemUpdateWithoutBarcodeScansInput, Prisma.FoodItemUncheckedUpdateWithoutBarcodeScansInput>
+  create: Prisma.XOR<Prisma.FoodItemCreateWithoutBarcodeScansInput, Prisma.FoodItemUncheckedCreateWithoutBarcodeScansInput>
+  where?: Prisma.FoodItemWhereInput
+}
+
+export type FoodItemUpdateToOneWithWhereWithoutBarcodeScansInput = {
+  where?: Prisma.FoodItemWhereInput
+  data: Prisma.XOR<Prisma.FoodItemUpdateWithoutBarcodeScansInput, Prisma.FoodItemUncheckedUpdateWithoutBarcodeScansInput>
+}
+
+export type FoodItemUpdateWithoutBarcodeScansInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  servingSizeG?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  servingSizeUnit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caloriesPer100g?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  proteinG?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  carbsG?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  fatG?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  fiberG?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sugarG?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sodiumMg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  source?: Prisma.EnumFoodSourceFieldUpdateOperationsInput | $Enums.FoodSource
+  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneWithoutCreatedFoodItemsNestedInput
+  diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutFoodItemNestedInput
+  mealPlans?: Prisma.MealPlanUpdateManyWithoutFoodItemNestedInput
+}
+
+export type FoodItemUncheckedUpdateWithoutBarcodeScansInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  servingSizeG?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  servingSizeUnit?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caloriesPer100g?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  proteinG?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  carbsG?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  fatG?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  fiberG?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sugarG?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sodiumMg?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  source?: Prisma.EnumFoodSourceFieldUpdateOperationsInput | $Enums.FoodSource
+  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutFoodItemNestedInput
+  mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutFoodItemNestedInput
 }
 
 export type FoodItemCreateManyCreatorInput = {
@@ -1174,6 +1319,7 @@ export type FoodItemUpdateWithoutCreatorInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutFoodItemNestedInput
   mealPlans?: Prisma.MealPlanUpdateManyWithoutFoodItemNestedInput
+  barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutFoodItemNestedInput
 }
 
 export type FoodItemUncheckedUpdateWithoutCreatorInput = {
@@ -1197,6 +1343,7 @@ export type FoodItemUncheckedUpdateWithoutCreatorInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutFoodItemNestedInput
   mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutFoodItemNestedInput
+  barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutFoodItemNestedInput
 }
 
 export type FoodItemUncheckedUpdateManyWithoutCreatorInput = {
@@ -1228,11 +1375,13 @@ export type FoodItemUncheckedUpdateManyWithoutCreatorInput = {
 export type FoodItemCountOutputType = {
   diaryEntries: number
   mealPlans: number
+  barcodeScans: number
 }
 
 export type FoodItemCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   diaryEntries?: boolean | FoodItemCountOutputTypeCountDiaryEntriesArgs
   mealPlans?: boolean | FoodItemCountOutputTypeCountMealPlansArgs
+  barcodeScans?: boolean | FoodItemCountOutputTypeCountBarcodeScansArgs
 }
 
 /**
@@ -1259,6 +1408,13 @@ export type FoodItemCountOutputTypeCountMealPlansArgs<ExtArgs extends runtime.Ty
   where?: Prisma.MealPlanWhereInput
 }
 
+/**
+ * FoodItemCountOutputType without action
+ */
+export type FoodItemCountOutputTypeCountBarcodeScansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BarcodeScanWhereInput
+}
+
 
 export type FoodItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1283,6 +1439,7 @@ export type FoodItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   creator?: boolean | Prisma.FoodItem$creatorArgs<ExtArgs>
   diaryEntries?: boolean | Prisma.FoodItem$diaryEntriesArgs<ExtArgs>
   mealPlans?: boolean | Prisma.FoodItem$mealPlansArgs<ExtArgs>
+  barcodeScans?: boolean | Prisma.FoodItem$barcodeScansArgs<ExtArgs>
   _count?: boolean | Prisma.FoodItemCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["foodItem"]>
 
@@ -1359,6 +1516,7 @@ export type FoodItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   creator?: boolean | Prisma.FoodItem$creatorArgs<ExtArgs>
   diaryEntries?: boolean | Prisma.FoodItem$diaryEntriesArgs<ExtArgs>
   mealPlans?: boolean | Prisma.FoodItem$mealPlansArgs<ExtArgs>
+  barcodeScans?: boolean | Prisma.FoodItem$barcodeScansArgs<ExtArgs>
   _count?: boolean | Prisma.FoodItemCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FoodItemIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1374,6 +1532,7 @@ export type $FoodItemPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     creator: Prisma.$UserPayload<ExtArgs> | null
     diaryEntries: Prisma.$DiaryEntryPayload<ExtArgs>[]
     mealPlans: Prisma.$MealPlanPayload<ExtArgs>[]
+    barcodeScans: Prisma.$BarcodeScanPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1792,6 +1951,7 @@ export interface Prisma__FoodItemClient<T, Null = never, ExtArgs extends runtime
   creator<T extends Prisma.FoodItem$creatorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FoodItem$creatorArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   diaryEntries<T extends Prisma.FoodItem$diaryEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FoodItem$diaryEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DiaryEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   mealPlans<T extends Prisma.FoodItem$mealPlansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FoodItem$mealPlansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MealPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  barcodeScans<T extends Prisma.FoodItem$barcodeScansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FoodItem$barcodeScansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BarcodeScanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2300,6 +2460,30 @@ export type FoodItem$mealPlansArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.MealPlanScalarFieldEnum | Prisma.MealPlanScalarFieldEnum[]
+}
+
+/**
+ * FoodItem.barcodeScans
+ */
+export type FoodItem$barcodeScansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BarcodeScan
+   */
+  select?: Prisma.BarcodeScanSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BarcodeScan
+   */
+  omit?: Prisma.BarcodeScanOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BarcodeScanInclude<ExtArgs> | null
+  where?: Prisma.BarcodeScanWhereInput
+  orderBy?: Prisma.BarcodeScanOrderByWithRelationInput | Prisma.BarcodeScanOrderByWithRelationInput[]
+  cursor?: Prisma.BarcodeScanWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BarcodeScanScalarFieldEnum | Prisma.BarcodeScanScalarFieldEnum[]
 }
 
 /**

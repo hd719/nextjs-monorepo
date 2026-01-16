@@ -76,7 +76,8 @@ export const ModelName = {
   Achievement: 'Achievement',
   UserAchievement: 'UserAchievement',
   FastingProtocol: 'FastingProtocol',
-  FastingSession: 'FastingSession'
+  FastingSession: 'FastingSession',
+  BarcodeScan: 'BarcodeScan'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -541,6 +542,17 @@ export const FastingSessionScalarFieldEnum = {
 } as const
 
 export type FastingSessionScalarFieldEnum = (typeof FastingSessionScalarFieldEnum)[keyof typeof FastingSessionScalarFieldEnum]
+
+
+export const BarcodeScanScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  barcode: 'barcode',
+  foodItemId: 'foodItemId',
+  scannedAt: 'scannedAt'
+} as const
+
+export type BarcodeScanScalarFieldEnum = (typeof BarcodeScanScalarFieldEnum)[keyof typeof BarcodeScanScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -37,6 +37,7 @@ export {
   useDiaryTotals,
   useFoodSearch,
   useCreateDiaryEntry,
+  useCreateDiaryEntryFromScan,
   useCopyDiaryDay,
 } from "./useDiary";
 
@@ -82,3 +83,18 @@ export {
   useCreateCustomProtocol,
   useDeleteCustomProtocol,
 } from "./useFasting";
+
+// Scanner hooks
+export {
+  useBarcodeLookup,
+  usePrimeBarcodeCache,
+  barcodeQueryKeys,
+} from "./useBarcodeLookup";
+export { useScannerDialog } from "./useScannerDialog";
+export { useRecentlyScanned } from "./useRecentlyScanned";
+export type { RecentlyScannedItem } from "./useRecentlyScanned";
+export { useCameraPermission } from "./useCameraPermission";
+export type { CameraPermissionStatus } from "./useCameraPermission";
+export { useScreenReaderAnnounce } from "./useScreenReaderAnnounce";
+export { useNetworkStatus } from "./useNetworkStatus";
+export { useOfflineBarcodeQueue } from "./useOfflineBarcodeQueue";

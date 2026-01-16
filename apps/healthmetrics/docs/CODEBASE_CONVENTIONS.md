@@ -23,11 +23,13 @@ src/
 │   ├── dev/             # Developer tools (DevTools)
 │   ├── diary/           # Food diary components
 │   ├── exercise/        # Exercise/workout components
+│   ├── fasting/         # Fasting timer components
 │   ├── landing/         # Landing page components
 │   ├── layout/          # App shell (Header, Sidebar, BottomNav)
 │   ├── onboarding/      # Onboarding wizard & steps
 │   ├── profile/         # Profile form & avatar
 │   ├── progress/        # Analytics charts & insights
+│   ├── scanner/         # Barcode scanner components
 │   ├── sleep/           # Sleep tracking components
 │   └── ui/              # Reusable UI primitives (shadcn/ui)
 ├── constants/           # App-wide constants & config
@@ -156,9 +158,11 @@ One file per domain in `src/server/`:
 ```
 server/
 ├── auth.ts          # Authentication
+├── barcode.ts       # Barcode lookup (calls Go service)
 ├── profile.ts       # User profile
 ├── diary.ts         # Food diary
 ├── exercise.ts      # Workouts
+├── fasting.ts       # Fasting sessions
 ├── sleep.ts         # Sleep tracking
 ├── streaks.ts       # Streak tracking
 ├── achievements.ts  # Achievements
@@ -189,7 +193,9 @@ One file per domain in `src/types/`:
 ```
 types/
 ├── auth.ts
+├── fasting.ts
 ├── profile.ts
+├── scanner.ts
 ├── sleep.ts
 ├── streaks.ts
 ├── achievements.ts
@@ -233,6 +239,8 @@ styles/
 ├── motion.css           # Animation keyframes
 └── components/
     ├── dashboard.css
+    ├── fasting.css
+    ├── scanner.css
     ├── sleep.css
     ├── achievements.css
     ├── ui.css           # UI primitives (slider, etc.)
@@ -278,11 +286,19 @@ Always use CSS variables from `colors.css`:
 
 ### Environment Variables
 
-Use `VITE_USE_MOCK_*` pattern:
+Use `VITE_USE_MOCK_*` pattern for mock data:
 
 ```typescript
 const useMockDashboard = import.meta.env.VITE_USE_MOCK_DASHBOARD === "true";
 const useMockAchievements = import.meta.env.VITE_USE_MOCK_ACHIEVEMENTS === "true";
+const useMockBarcode = import.meta.env.VITE_USE_MOCK_BARCODE === "true";
+```
+
+Use `VITE_SIMULATE_*` pattern for feature-specific simulation:
+
+```typescript
+// Simulates offline mode for scanner only (rest of app still works)
+const simulateScannerOffline = import.meta.env.VITE_SIMULATE_SCANNER_OFFLINE === "true";
 ```
 
 ### Mock Data Files
@@ -338,5 +354,6 @@ When adding a new feature, verify:
 | `@/data/mockData` | `@/data` |
 | Hardcoded colors | CSS variables |
 | `USE_MOCK_DATA = true` | `import.meta.env.VITE_USE_MOCK_*` |
+| `SIMULATE_OFFLINE = true` | `import.meta.env.VITE_SIMULATE_*` |
 | Duplicate component names | Suffixed names (`Card` vs `ProgressCard`) |
 | Inline route guards | `requireAuthAndOnboarding` |

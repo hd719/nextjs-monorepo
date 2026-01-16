@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   createDiaryEntry,
+  createDiaryEntryFromScan,
   copyDiaryDay,
   getDailyTotals,
   getDiaryDay,
@@ -9,6 +10,7 @@ import {
 import { queryKeys } from "@/utils/query-keys";
 import type {
   CreateDiaryEntryInput,
+  CreateDiaryEntryFromScanInput,
   SearchFoodItemsInput,
 } from "@/utils/validation";
 
@@ -66,6 +68,23 @@ export function useCreateDiaryEntry() {
 
   return useMutation({
     mutationFn: (data: CreateDiaryEntryInput) => createDiaryEntry({ data }),
+    onSuccess: (_result, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.diaryDay(variables.userId, variables.date),
+      });
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.diaryTotals(variables.userId, variables.date),
+      });
+    },
+  });
+}
+
+export function useCreateDiaryEntryFromScan() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (data: CreateDiaryEntryFromScanInput) =>
+      createDiaryEntryFromScan({ data }),
     onSuccess: (_result, variables) => {
       queryClient.invalidateQueries({
         queryKey: queryKeys.diaryDay(variables.userId, variables.date),
