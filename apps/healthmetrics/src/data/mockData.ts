@@ -8,6 +8,7 @@ import type {
   SleepCardData,
   UserStreaks,
   AchievementSummary,
+  ScannedProduct,
 } from "@/types";
 
 // Static date for consistent SSR/client rendering
@@ -232,3 +233,199 @@ export const mockAchievementSummary: AchievementSummary = {
     },
   ],
 };
+
+// Mock barcode products database
+// IDs must be valid UUIDs to work with the diary entry API
+export const mockBarcodeProducts: Record<string, ScannedProduct> = {
+  // Coca-Cola Classic 330ml
+  "5449000000996": {
+    id: "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+    barcode: "5449000000996",
+    name: "Coca-Cola Classic",
+    brand: "Coca-Cola",
+    caloriesPer100g: 42,
+    proteinG: 0,
+    carbsG: 10.6,
+    fatG: 0,
+    fiberG: 0,
+    sugarG: 10.6,
+    sodiumMg: 4,
+    servingSizeG: 330,
+    imageUrl: null,
+    source: "user",
+    verified: true,
+  },
+  // Cheerios Original
+  "0016000275287": {
+    id: "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e",
+    barcode: "0016000275287",
+    name: "Cheerios Original",
+    brand: "General Mills",
+    caloriesPer100g: 372,
+    proteinG: 12.1,
+    carbsG: 73.2,
+    fatG: 6.7,
+    fiberG: 10.1,
+    sugarG: 4.6,
+    sodiumMg: 497,
+    servingSizeG: 28,
+    imageUrl: null,
+    source: "user",
+    verified: true,
+  },
+  // Chobani Greek Yogurt
+  "0894700010045": {
+    id: "c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f",
+    barcode: "0894700010045",
+    name: "Greek Yogurt Plain Non-Fat",
+    brand: "Chobani",
+    caloriesPer100g: 59,
+    proteinG: 10.3,
+    carbsG: 3.6,
+    fatG: 0.7,
+    fiberG: 0,
+    sugarG: 3.2,
+    sodiumMg: 36,
+    servingSizeG: 170,
+    imageUrl: null,
+    source: "user",
+    verified: true,
+  },
+  // Nature Valley Granola Bar
+  "0016000439894": {
+    id: "d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a",
+    barcode: "0016000439894",
+    name: "Crunchy Granola Bars Oats 'n Honey",
+    brand: "Nature Valley",
+    caloriesPer100g: 471,
+    proteinG: 7.1,
+    carbsG: 64.7,
+    fatG: 20,
+    fiberG: 3.5,
+    sugarG: 28.2,
+    sodiumMg: 353,
+    servingSizeG: 42,
+    imageUrl: null,
+    source: "user",
+    verified: true,
+  },
+  // Silk Almond Milk Original
+  "0025293001053": {
+    id: "e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b",
+    barcode: "0025293001053",
+    name: "Almond Milk Original",
+    brand: "Silk",
+    caloriesPer100g: 25,
+    proteinG: 0.4,
+    carbsG: 3.3,
+    fatG: 1,
+    fiberG: 0.4,
+    sugarG: 2.9,
+    sodiumMg: 63,
+    servingSizeG: 240,
+    imageUrl: null,
+    source: "user",
+    verified: true,
+  },
+  // KIND Bar Dark Chocolate Nuts
+  "0602652177514": {
+    id: "f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c",
+    barcode: "0602652177514",
+    name: "Dark Chocolate Nuts & Sea Salt",
+    brand: "KIND",
+    caloriesPer100g: 475,
+    proteinG: 15,
+    carbsG: 40,
+    fatG: 32.5,
+    fiberG: 7.5,
+    sugarG: 12.5,
+    sodiumMg: 313,
+    servingSizeG: 40,
+    imageUrl: null,
+    source: "user",
+    verified: true,
+  },
+  // Lay's Classic Chips
+  "0028400064057": {
+    id: "a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d",
+    barcode: "0028400064057",
+    name: "Classic Potato Chips",
+    brand: "Lay's",
+    caloriesPer100g: 536,
+    proteinG: 7.1,
+    carbsG: 53.6,
+    fatG: 32.1,
+    fiberG: 3.6,
+    sugarG: 1.8,
+    sodiumMg: 536,
+    servingSizeG: 28,
+    imageUrl: null,
+    source: "user",
+    verified: true,
+  },
+  // Clif Bar Chocolate Chip
+  "0722252100900": {
+    id: "b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e",
+    barcode: "0722252100900",
+    name: "Energy Bar Chocolate Chip",
+    brand: "Clif Bar",
+    caloriesPer100g: 379,
+    proteinG: 14.7,
+    carbsG: 64.7,
+    fatG: 7.4,
+    fiberG: 5.9,
+    sugarG: 30.9,
+    sodiumMg: 368,
+    servingSizeG: 68,
+    imageUrl: null,
+    source: "user",
+    verified: true,
+  },
+  // Heinz Tomato Ketchup
+  "0013000006408": {
+    id: "c9d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3f",
+    barcode: "0013000006408",
+    name: "Tomato Ketchup",
+    brand: "Heinz",
+    caloriesPer100g: 101,
+    proteinG: 1.2,
+    carbsG: 27.4,
+    fatG: 0,
+    fiberG: 0,
+    sugarG: 22.8,
+    sodiumMg: 907,
+    servingSizeG: 17,
+    imageUrl: null,
+    source: "user",
+    verified: true,
+  },
+  // Skippy Peanut Butter
+  "0037600105651": {
+    id: "d0e1f2a3-b4c5-4d6e-7f8a-9b0c1d2e3f4a",
+    barcode: "0037600105651",
+    name: "Creamy Peanut Butter",
+    brand: "Skippy",
+    caloriesPer100g: 588,
+    proteinG: 25,
+    carbsG: 21.9,
+    fatG: 50,
+    fiberG: 6.3,
+    sugarG: 9.4,
+    sodiumMg: 469,
+    servingSizeG: 32,
+    imageUrl: null,
+    source: "user",
+    verified: true,
+  },
+};
+
+// Simulate barcode lookup with delay
+export async function mockBarcodeLookup(
+  barcode: string
+): Promise<ScannedProduct | null> {
+  await new Promise((resolve) =>
+    setTimeout(resolve, 300 + Math.random() * 500)
+  );
+
+  return mockBarcodeProducts[barcode] ?? null;
+}

@@ -19,6 +19,15 @@ export const MEAL_TYPES = [
 ] as const;
 export type MealType = (typeof MEAL_TYPES)[number];
 
+// Human-readable labels for meal types
+export const MEAL_TYPE_LABELS: Record<MealType, string> = {
+  breakfast: "Breakfast",
+  lunch: "Lunch",
+  dinner: "Dinner",
+  snack: "Snack",
+  other: "Other",
+};
+
 // Profile defaults
 export const DEFAULT_TIMEZONE = "UTC";
 export const DEFAULT_UNITS_PREFERENCE = "metric" as const;

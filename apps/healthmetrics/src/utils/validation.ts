@@ -63,6 +63,41 @@ export const createDiaryEntrySchema = z.object({
 
 export type CreateDiaryEntryInput = z.infer<typeof createDiaryEntrySchema>;
 
+// Diary entry from scanned barcode validation schema
+export const createDiaryEntryFromScanSchema = z.object({
+  userId: z.string().min(1, "User ID is required"),
+  date: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format"),
+  mealType: z.enum(["breakfast", "lunch", "dinner", "snack", "other"], {
+    message: "Invalid meal type",
+  }),
+  quantityG: z
+    .number()
+    .min(0, "Quantity must be positive")
+    .max(10000, "Quantity too large"),
+  servings: z.number().min(0).max(100).optional(),
+  product: z.object({
+    barcode: z.string().min(8, "Invalid barcode"),
+    name: z.string().min(1, "Name is required"),
+    brand: z.string().nullable(),
+    caloriesPer100g: z.number().min(0),
+    proteinG: z.number().min(0),
+    carbsG: z.number().min(0),
+    fatG: z.number().min(0),
+    fiberG: z.number().min(0).nullable(),
+    sugarG: z.number().min(0).nullable(),
+    sodiumMg: z.number().min(0).nullable(),
+    servingSizeG: z.number().min(0),
+    source: z.enum(["open_food_facts", "usda", "user", "edamam", "cookbook"]),
+    verified: z.boolean(),
+  }),
+});
+
+export type CreateDiaryEntryFromScanInput = z.infer<
+  typeof createDiaryEntryFromScanSchema
+>;
+
 // Food item search validation
 export const searchFoodItemsSchema = z.object({
   query: z.string().min(1, "Search query is required").max(100),

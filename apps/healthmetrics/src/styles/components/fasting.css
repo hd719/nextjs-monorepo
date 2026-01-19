@@ -551,6 +551,7 @@
   .protocol-back-btn {
     @apply absolute left-4 top-4 p-2 rounded-full transition-colors;
     color: var(--muted-foreground);
+    cursor: pointer;
   }
 
   .protocol-back-btn:hover {
@@ -564,6 +565,7 @@
     @apply border-2 border-dashed transition-all;
     border-color: var(--border);
     color: var(--muted-foreground);
+    cursor: pointer;
   }
 
   .protocol-create-btn:hover {
@@ -580,6 +582,7 @@
   .protocol-card-delete {
     @apply absolute top-2 right-2 p-1.5 rounded-full opacity-0 transition-all;
     color: var(--muted-foreground);
+    cursor: pointer;
   }
 
   .protocol-card-delete:hover {

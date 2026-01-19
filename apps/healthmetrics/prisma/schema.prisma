@@ -245,6 +245,7 @@ model User {
   userAchievements        UserAchievement[]
   fastingProtocols        FastingProtocol[]
   fastingSessions         FastingSession[]
+  barcodeScans            BarcodeScan[]
 
   @@map("users")
 }
@@ -273,9 +274,10 @@ model FoodItem {
   updatedAt       DateTime   @updatedAt @map("updated_at")
 
   // Relations
-  creator      User?        @relation("CreatedFoodItems", fields: [createdBy], references: [id], onDelete: SetNull)
+  creator      User?         @relation("CreatedFoodItems", fields: [createdBy], references: [id], onDelete: SetNull)
   diaryEntries DiaryEntry[]
   mealPlans    MealPlan[]
+  barcodeScans BarcodeScan[]
 
   @@index([name])
   @@index([barcode])
@@ -783,4 +785,27 @@ model FastingSession {
   @@index([userId, status])
   @@index([userId, startTime])
   @@map("fasting_sessions")
+}
+
+// ============================================================================
+// BARCODE SCANNING
+// ============================================================================
+
+// Barcode scans - tracks barcode scan history for analytics and quick re-access
+
+model BarcodeScan {
+  id         String   @id @default(uuid())
+  userId     String   @map("user_id")
+  barcode    String
+  foodItemId String?  @map("food_item_id")
+  scannedAt  DateTime @default(now()) @map("scanned_at")
+
+  // Relations
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  foodItem FoodItem? @relation(fields: [foodItemId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([barcode])
+  @@index([userId, scannedAt])
+  @@map("barcode_scans")
 }

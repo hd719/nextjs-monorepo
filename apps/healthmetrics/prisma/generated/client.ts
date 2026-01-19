@@ -169,3 +169,8 @@ export type FastingProtocol = Prisma.FastingProtocolModel
  * 
  */
 export type FastingSession = Prisma.FastingSessionModel
+/**
+ * Model BarcodeScan
+ * 
+ */
+export type BarcodeScan = Prisma.BarcodeScanModel

@@ -122,3 +122,23 @@ export type {
   FastingTimerState,
   FastingTimerDisplay,
 } from "./fasting";
+
+// Scanner types
+export type {
+  BarcodeFormat,
+  ScannedProduct,
+  ScannerState,
+  ScannerError,
+  BarcodeScannerProps,
+  ScannerDialogProps,
+  ProductCardProps,
+  ProductNotFoundProps,
+  ManualBarcodeInputProps,
+  RecentlyScannedItem,
+  UseRecentlyScannedResult,
+  CreateDiaryEntryFromScanInput,
+  QueuedScanStatus,
+  QueuedBarcodeScan,
+  QueueSyncResult,
+  QueueSyncSummary,
+} from "./scanner";

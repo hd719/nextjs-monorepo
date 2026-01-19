@@ -96,4 +96,11 @@ export const queryKeys = {
   fastingCalendar: (userId: string, month: string) =>
     ["fasting", "calendar", userId, month] as const,
   fastingBase: () => ["fasting"] as const,
+
+  // Barcode Scanner
+  barcodeProduct: (barcode: string) => ["barcode", "product", barcode] as const,
+  recentScans: (userId: string, limit?: number) =>
+    ["barcode", "recent", userId, limit] as const,
+  recentScansBase: () => ["barcode", "recent"] as const,
+  barcodeBase: () => ["barcode"] as const,
 };

@@ -79,6 +79,7 @@
   .exercise-stat-hint-link {
     @apply mt-1 flex items-center gap-1 text-xs hover:underline;
     color: var(--primary);
+    cursor: pointer;
   }
 
   .exercise-stat-hint-icon {
@@ -90,6 +91,7 @@
      ========================================================================== */
 
   .exercise-card {
+    cursor: pointer;
     transition:
       transform var(--duration-fast) var(--ease-out-soft),
       border-color var(--duration-fast) var(--ease-out-soft),
@@ -213,6 +215,7 @@
     @apply flex flex-col items-center rounded-lg border-2 p-8 text-center;
     background-color: var(--card);
     border-color: var(--border);
+    cursor: pointer;
     transition:
       transform var(--duration-fast) var(--ease-out-soft),
       border-color var(--duration-fast) var(--ease-out-soft),
@@ -383,6 +386,7 @@
 
   .exercise-search-selected-remove {
     @apply hover:opacity-80;
+    cursor: pointer;
   }
 
   .exercise-search-remove-icon {

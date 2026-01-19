@@ -8,6 +8,8 @@ export {
   mockSleepCardData,
   mockStreaks,
   mockAchievementSummary,
+  mockBarcodeProducts,
+  mockBarcodeLookup,
 } from "./mockData";
 
 export {
