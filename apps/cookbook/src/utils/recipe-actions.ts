@@ -31,14 +31,14 @@ export function createRecipeActions(config: RecipeActionsConfig) {
       try {
         const result = await publishRecipeAction(id);
 
-        if (result.success) {
+        if (result.success && result.data) {
           // Update local state with server response
           setRecipes((prev) =>
             prev.map((recipe) =>
               recipe.id === id ? { ...recipe, ...result.data } : recipe
             )
           );
-        } else {
+        } else if (!result.success) {
           console.error("Failed to publish recipe:", result.error);
           // Revert optimistic update on error
           setRecipes((prev) => [...prev]);
@@ -57,14 +57,14 @@ export function createRecipeActions(config: RecipeActionsConfig) {
       try {
         const result = await unpublishRecipeAction(id);
 
-        if (result.success) {
+        if (result.success && result.data) {
           // Update local state with server response
           setRecipes((prev) =>
             prev.map((recipe) =>
               recipe.id === id ? { ...recipe, ...result.data } : recipe
             )
           );
-        } else {
+        } else if (!result.success) {
           console.error("Failed to unpublish recipe:", result.error);
           // Revert optimistic update on error
           setRecipes((prev) => [...prev]);

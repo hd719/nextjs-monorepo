@@ -641,8 +641,10 @@ export function RecipeForm({
                       (data) => handleSubmit(data, false),
                       (errors) => {
                         Object.keys(errors).forEach((key) => {
-                          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                          form.setError(key as any, errors[key as keyof typeof errors]!);
+                          const error = errors[key as keyof typeof errors];
+                          if (error?.message) {
+                            form.setError(key as keyof RecipeFormData, { message: error.message });
+                          }
                         });
                       }
                     )}
@@ -658,8 +660,10 @@ export function RecipeForm({
                       (errors) => {
                         // Force form to show validation errors
                         Object.keys(errors).forEach((key) => {
-                          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                          form.setError(key as any, errors[key as keyof typeof errors]!);
+                          const error = errors[key as keyof typeof errors];
+                          if (error?.message) {
+                            form.setError(key as keyof RecipeFormData, { message: error.message });
+                          }
                         });
                       }
                     )}

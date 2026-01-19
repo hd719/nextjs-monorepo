@@ -1,31 +1,17 @@
 @import "tailwindcss";
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/* Tailwind CSS v4 - Typography plugin */
+@plugin "@tailwindcss/typography";
+
+/* Tailwind CSS v4 - Custom theme colors */
+@theme {
+  --color-vanilla: #fbf7e5;
+  --color-default: #323232;
+  --color-muted: #6b7280;
+  --color-muted-foreground: #6b7280;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: #d6dbdc;
-  background: linear-gradient(to bottom, transparent, #ffffff);
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #000000;
-    background: linear-gradient(to bottom, transparent, #000000);
-  }
-}
+/* Body inherits text-default from Tailwind class in layout.tsx */
 
 @layer utilities {
   .text-balance {

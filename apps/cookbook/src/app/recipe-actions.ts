@@ -16,20 +16,21 @@ import {
 } from "@/schemas/recipe";
 import {
   CreateRecipeInput,
+  Recipe,
   RecipeFormInput,
   UpdateRecipeInput,
 } from "@/types/recipe";
 
 export interface RecipeActionResult<T = unknown> {
   success: boolean;
-  data?: T;
+  data?: T | null;
   error?: string;
   validationErrors?: Array<{ field: string; message: string }>;
 }
 
 export async function createRecipeAction(
   input: RecipeFormInput
-): Promise<RecipeActionResult> {
+): Promise<RecipeActionResult<Recipe>> {
   try {
     const supabase = await createClient();
     const {
@@ -99,7 +100,7 @@ export async function createRecipeAction(
 export async function updateRecipeAction(
   id: string,
   input: RecipeFormInput
-): Promise<RecipeActionResult> {
+): Promise<RecipeActionResult<Recipe>> {
   try {
     const supabase = await createClient();
     const {
@@ -159,7 +160,7 @@ export async function updateRecipeAction(
 
 export async function publishRecipeAction(
   id: string
-): Promise<RecipeActionResult> {
+): Promise<RecipeActionResult<Recipe>> {
   try {
     const supabase = await createClient();
     const {
@@ -239,7 +240,7 @@ export async function publishRecipeAction(
 
 export async function unpublishRecipeAction(
   id: string
-): Promise<RecipeActionResult> {
+): Promise<RecipeActionResult<Recipe>> {
   try {
     // Check authentication
     const supabase = await createClient();

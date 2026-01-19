@@ -1,9 +1,9 @@
+/* Import our custom color palette - must be before @tailwind */
+@import "../styles/colors.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import our custom color palette */
-@import "../styles/colors.css";
 
 @layer base {
   :root {

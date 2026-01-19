@@ -34,7 +34,7 @@ export default function Page() {
                   "grow text-3xl font-bold tracking-tighter sm:text-5xl",
                   process.env.NEXT_PUBLIC_DEBUG && "border-2 border-blue-600"
                 )}
-                yOffset={-8}
+                // yOffset={-8} // not being used atm
               >
                 <span>{`Hey there, I'm ${firstName}!`}</span>
               </Animate>
@@ -44,14 +44,14 @@ export default function Page() {
                   process.env.NEXT_PUBLIC_DEBUG && "border-2 border-blue-600"
                 )}
                 delay={BLUR_FADE_DELAY}
-                yOffset={-8} // not being used atm
+                // yOffset={-8} // not being used atm
               >
                 <span>{DATA.description}</span>
               </Animate>
             </div>
             <Animate
               delay={BLUR_FADE_DELAY}
-              yOffset={-8} // not being used atm
+              // yOffset={-8} // not being used atm
             >
               <Avatar.Root
                 className={cn(

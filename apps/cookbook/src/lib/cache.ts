@@ -23,7 +23,7 @@ export function revalidateRecipePages(recipeSlug?: string) {
  */
 export function revalidateAllRecipePages() {
   // Revalidate all recipe pages using tag-based revalidation
-  revalidateTag("recipes");
+  revalidateTag("recipes", { expire: 0 });
 
   // Revalidate key pages
   revalidatePath("/");
