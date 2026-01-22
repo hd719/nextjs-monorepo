@@ -1,6 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
 import { prisma } from "@/lib/prisma";
 import { createLogger } from "@/lib/logger";
+import { signCdnUrl } from "@/lib/cdn";
+import { deleteFile } from "@/lib/storage";
 import {
   updateUserProfileSchema,
   type UpdateUserProfileInput,
@@ -39,12 +41,20 @@ export const getUserProfile = createServerFn({ method: "GET" })
 
       // Get latest weight entry
       const latestWeight = await getLatestWeight({ data: { userId } });
+      let signedAvatarUrl: string | null = null;
+      if (user.avatarKey) {
+        try {
+          signedAvatarUrl = signCdnUrl(user.avatarKey);
+        } catch (error) {
+          log.error({ err: error, userId }, "Failed to sign avatar URL");
+        }
+      }
 
       return {
         id: user.id,
         email: user.authUser?.email || null,
         displayName: user.displayName,
-        avatarUrl: user.avatarUrl,
+        avatarUrl: signedAvatarUrl,
         dateOfBirth: user.dateOfBirth,
         gender: user.gender,
         heightCm: user.heightCm ? Number(user.heightCm) : null,
@@ -103,7 +113,7 @@ export const updateUserProfile = createServerFn({ method: "POST" })
 
       const fieldMapping: Partial<Record<UpdateKey, FieldConfig>> = {
         displayName: { dbField: "displayName" },
-        avatarUrl: { dbField: "avatarUrl" },
+        avatarKey: { dbField: "avatarKey" },
         timezone: { dbField: "timezone" },
         dailyCalorieGoal: { dbField: "dailyCalorieGoal" },
         dailyProteinGoalG: { dbField: "dailyProteinGoalG" },
@@ -146,6 +156,23 @@ export const updateUserProfile = createServerFn({ method: "POST" })
         }
       }
 
+      // If avatar key is being updated, delete old avatar object
+      if (updates.avatarKey) {
+        const existing = await prisma.user.findUnique({
+          where: { id: userId },
+          select: { avatarKey: true },
+        });
+
+        if (existing?.avatarKey && existing.avatarKey !== updates.avatarKey) {
+          try {
+            await deleteFile(existing.avatarKey);
+          } catch (error) {
+            log.warn({ err: error, userId }, "Failed to delete old avatar");
+          }
+        }
+
+      }
+
       // Handle current weight separately - create WeightEntry
       if (updates.currentWeightLbs !== undefined) {
         await saveWeightEntry({
@@ -172,12 +199,20 @@ export const updateUserProfile = createServerFn({ method: "POST" })
 
       // Get latest weight after update
       const latestWeight = await getLatestWeight({ data: { userId } });
+      let signedAvatarUrl: string | null = null;
+      if (user.avatarKey) {
+        try {
+          signedAvatarUrl = signCdnUrl(user.avatarKey);
+        } catch (error) {
+          log.error({ err: error, userId }, "Failed to sign avatar URL");
+        }
+      }
 
       return {
         id: user.id,
         email: user.authUser?.email || null,
         displayName: user.displayName,
-        avatarUrl: user.avatarUrl,
+        avatarUrl: signedAvatarUrl,
         dateOfBirth: user.dateOfBirth,
         gender: user.gender,
         heightCm: user.heightCm ? Number(user.heightCm) : null,

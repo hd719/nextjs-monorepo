@@ -155,7 +155,7 @@ export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[k
 export const UserScalarFieldEnum = {
   id: 'id',
   displayName: 'displayName',
-  avatarUrl: 'avatarUrl',
+  avatarKey: 'avatarKey',
   dateOfBirth: 'dateOfBirth',
   gender: 'gender',
   heightCm: 'heightCm',

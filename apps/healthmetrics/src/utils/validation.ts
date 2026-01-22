@@ -109,7 +109,7 @@ export type SearchFoodItemsInput = z.infer<typeof searchFoodItemsSchema>;
 // User profile validation schema
 export const updateUserProfileSchema = z.object({
   displayName: z.string().min(1).max(100).optional(),
-  avatarUrl: z.string().url().optional().or(z.literal("")),
+  avatarKey: z.string().min(1).optional(),
   timezone: z.string().optional(),
   dailyCalorieGoal: z.number().min(500).max(10000).optional(),
   dailyProteinGoalG: z.number().min(0).max(500).optional(),

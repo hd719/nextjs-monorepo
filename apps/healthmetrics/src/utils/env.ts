@@ -13,6 +13,18 @@ const envSchema = z.object({
   LOG_LEVEL: z
     .enum(["fatal", "error", "warn", "info", "debug", "trace"])
     .optional(),
+  // AWS (optional in dev, required in prod for email/storage)
+  AWS_ACCESS_KEY_ID: z.string().min(1).optional(),
+  AWS_SECRET_ACCESS_KEY: z.string().min(1).optional(),
+  AWS_REGION: z.string().min(1).optional(),
+  S3_BUCKET_NAME: z.string().min(1).optional(),
+  CLOUDFRONT_URL: z.string().url().optional(),
+  CLOUDFRONT_KEY_PAIR_ID: z.string().min(1).optional(),
+  CLOUDFRONT_PRIVATE_KEY: z.string().min(1).optional(),
+  SES_REGION: z.string().min(1).optional(),
+  SES_FROM_EMAIL: z.string().email().optional(),
+  SES_CONFIGURATION_SET: z.string().min(1).optional(),
+  EMAIL_DELIVERY_MODE: z.enum(["log", "ses"]).optional(),
   // Barcode service configuration
   BARCODE_SERVICE_URL: z.string().url().optional(),
   BARCODE_SERVICE_API_KEY: z.string().min(32).optional(),
@@ -47,6 +59,30 @@ export function validateEnv(): Env {
     throw new Error(
       `Environment validation failed. Check your .env file.\n${errors}`
     );
+  }
+
+  if (result.data.NODE_ENV === "production") {
+    const required = [
+      "AWS_ACCESS_KEY_ID",
+      "AWS_SECRET_ACCESS_KEY",
+      "AWS_REGION",
+      "S3_BUCKET_NAME",
+      "CLOUDFRONT_URL",
+      "CLOUDFRONT_KEY_PAIR_ID",
+      "CLOUDFRONT_PRIVATE_KEY",
+      "SES_REGION",
+      "SES_FROM_EMAIL",
+    ] as const;
+
+    const missing = required.filter(
+      (key) => !result.data[key as keyof Env]
+    );
+
+    if (missing.length > 0) {
+      throw new Error(
+        `Environment validation failed. Missing: ${missing.join(", ")}`
+      );
+    }
   }
 
   return result.data;

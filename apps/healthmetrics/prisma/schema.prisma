@@ -196,7 +196,7 @@ model Verification {
 model User {
   id                       String         @id
   displayName              String?        @map("display_name")
-  avatarUrl                String?        @map("avatar_url")
+  avatarKey                String?        @map("avatar_key")
   dateOfBirth              DateTime?      @map("date_of_birth") @db.Date
   gender                   Gender?
   heightCm                 Decimal?       @map("height_cm") @db.Decimal(5, 2)

@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.12.0/.schema/devbox.schema.json",
-  "packages": ["bun@latest", "supabase-cli@latest"],
+  "packages": [],
   "env": {
     "GIT_SSH_COMMAND": "ssh -o LogLevel=ERROR"
   },

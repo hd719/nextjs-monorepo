@@ -50,6 +50,7 @@ export {
 
 // Profile hooks
 export { useProfile, useUpdateProfile } from "./useProfile";
+export { useAvatarUpload } from "./useAvatarUpload";
 
 // Weight hooks
 export { useLatestWeight, useSaveWeight, useWeightTrend } from "./useWeight";

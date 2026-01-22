@@ -12,9 +12,14 @@
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
     "prisma:seed": "bun prisma/seed.ts",
-    "prisma:backfill-users": "bun prisma/backfill-user-profiles.ts"
+    "prisma:backfill-users": "bun prisma/backfill-user-profiles.ts",
+    "cleanup:avatars": "bun src/jobs/cleanup-orphaned-avatars.ts"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.888.0",
+    "@aws-sdk/client-ses": "^3.888.0",
+    "@aws-sdk/cloudfront-signer": "^3.888.0",
+    "@aws-sdk/s3-presigned-post": "^3.888.0",
     "@prisma/adapter-pg": "^7.2.0",
     "@prisma/client": "^7.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.15",

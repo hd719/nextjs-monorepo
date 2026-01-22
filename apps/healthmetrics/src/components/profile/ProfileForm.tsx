@@ -15,15 +15,13 @@ import { Label } from "@/components/ui/label";
 import { useToast, ToastContainer } from "@/components/ui/toast";
 import { cn } from "@/utils";
 import type { UserProfile } from "@/types";
-import { useUpdateProfile } from "@/hooks";
+import { useAvatarUpload, useUpdateProfile } from "@/hooks";
 import { ProfileAvatar } from "./ProfileAvatar";
 import { FastingPreferences } from "./FastingPreferences";
 import {
   formatDate,
   getDefaultFormValues,
   buildProfileUpdates,
-  validateAvatarFile,
-  fileToBase64,
   calculateMacroBreakdown,
   displayNameValidator,
   calorieGoalValidator,
@@ -46,10 +44,11 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
   // Determine if user prefers metric or imperial
   const isMetric = initialData.unitsPreference === "metric";
 
-  const [avatarUrl, setAvatarUrl] = useState(initialData.avatarUrl || "");
-  const [avatarPreview, setAvatarPreview] = useState(
-    initialData.avatarUrl || ""
-  );
+  const { avatarPreview, avatarKey, avatarError, handleAvatarChange } =
+    useAvatarUpload({
+      userId,
+      initialPreview: initialData.avatarUrl || "",
+    });
 
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -65,7 +64,7 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
         // Build updates object with proper transformations
         const updates = buildProfileUpdates(
           value,
-          avatarUrl,
+          avatarKey,
           initialData.unitsPreference
         );
 
@@ -91,27 +90,7 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
     },
   });
 
-  // Handle avatar file upload
-  const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    // Validate the file
-    const validationError = validateAvatarFile(file);
-    if (validationError) {
-      setErrorMessage(validationError);
-      return;
-    }
-
-    // Convert to base64 for preview
-    try {
-      const base64 = await fileToBase64(file);
-      setAvatarPreview(base64);
-      setAvatarUrl(base64);
-    } catch {
-      setErrorMessage("Failed to process avatar image");
-    }
-  };
+  const displayError = errorMessage ?? avatarError;
 
   return (
     <form
@@ -130,9 +109,9 @@ export function ProfileForm({ userId, initialData }: ProfileFormProps) {
       )}
 
       {/* Error Message */}
-      {errorMessage && (
+      {displayError && (
         <div className="profile-form-error-message">
-          <p className="profile-form-error-text">{errorMessage}</p>
+          <p className="profile-form-error-text">{displayError}</p>
         </div>
       )}
 

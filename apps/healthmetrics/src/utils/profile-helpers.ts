@@ -131,7 +131,7 @@ export function getDefaultFormValues(initialData: UserProfile) {
 
 export function buildProfileUpdates(
   formValues: ReturnType<typeof getDefaultFormValues>,
-  avatarUrl: string,
+  avatarKey: string | null,
   unitsPreference: string = "imperial"
 ): UpdateUserProfileInput {
   const toEnumValue = <T extends string>(
@@ -183,7 +183,7 @@ export function buildProfileUpdates(
 
   return {
     displayName: formValues.displayName || undefined,
-    avatarUrl: avatarUrl || undefined,
+    avatarKey: avatarKey || undefined,
     timezone: formValues.timezone || undefined,
     dateOfBirth: formValues.dateOfBirth || undefined,
     gender: toEnumValue(formValues.gender, [
@@ -221,8 +221,8 @@ export function validateAvatarFile(file: File): string | null {
     return "Avatar image must be less than 2MB";
   }
 
-  if (!file.type.startsWith("image/")) {
-    return "Avatar must be an image file";
+  if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+    return "Avatar must be a JPG, PNG, or WebP image";
   }
 
   return null;

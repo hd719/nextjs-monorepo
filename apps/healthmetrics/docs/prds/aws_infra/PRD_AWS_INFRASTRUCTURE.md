@@ -35,6 +35,21 @@ Currently, both are mocked in development. Production requires real infrastructu
 
 ---
 
+## Decisions (v0)
+
+- **Domain**: `healthmetricsapp.com` (DNS hosted at Porkbun)
+- **Region**: `us-east-1`
+- **Storage**: single S3 bucket with prefixes (`avatars/`, `progress/`, `food/`)
+- **Access**: private S3 + CloudFront with **signed URLs**
+- **Upload method**: **presigned POST** with size/type enforcement
+- **Lifecycle**: abort multipart (7 days); noncurrent → STANDARD_IA (30 days); noncurrent delete (90 days)
+- **Logging**: CloudTrail on; CloudFront/S3 access logs off for v0
+- **Email**: SES API; DMARC starts at `p=none`; metrics only (no SNS yet)
+- **CDN domain**: custom `cdn.healthmetricsapp.com` (ACM in us-east-1 + CNAME in Porkbun)
+- **Hosting**: TBD (EC2/ECS/Netlify; decide later)
+
+---
+
 ## Architecture
 
 ```
@@ -62,14 +77,14 @@ Currently, both are mocked in development. Production requires real infrastructu
 │  │                                                                      │    │
 │  │   ┌──────────────┐      ┌──────────────┐      ┌──────────────┐      │    │
 │  │   │  App Server  │ ---> │     SES      │ ---> │  User Inbox  │      │    │
-│  │   │  (send)      │      │   (SMTP)     │      │              │      │    │
+│  │   │  (send)      │      │   (API)      │      │              │      │    │
 │  │   └──────────────┘      └──────────────┘      └──────────────┘      │    │
 │  │                                │                                     │    │
 │  │                                │ verification                        │    │
 │  │                                ▼                                     │    │
 │  │                         ┌──────────────┐                             │    │
-│  │                         │  Route 53    │                             │    │
-│  │                         │  (DNS)       │                             │    │
+│  │                         │     DNS      │                             │    │
+│  │                         │  (Porkbun)   │                             │    │
 │  │                         └──────────────┘                             │    │
 │  └─────────────────────────────────────────────────────────────────────┘    │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -82,18 +97,24 @@ Currently, both are mocked in development. Production requires real infrastructu
 ### Project Structure
 
 ```
-infrastructure/
-├── terraform/
-│   ├── main.tf              # Provider configuration
-│   ├── variables.tf         # Input variables
-│   ├── outputs.tf           # Output values
-│   ├── s3.tf                # S3 bucket + policies
-│   ├── cloudfront.tf        # CloudFront distribution
-│   ├── ses.tf               # SES configuration
-│   ├── iam.tf               # IAM users and policies
-│   └── terraform.tfvars     # Variable values (gitignored)
-├── .gitignore
-└── README.md
+apps/
+└── healthmetrics-infra/
+    ├── terraform/
+    │   ├── main.tf              # Provider configuration
+    │   ├── variables.tf         # Input variables
+    │   ├── outputs.tf           # Output values
+    │   ├── s3.tf                # S3 bucket + policies
+    │   ├── cloudfront.tf        # CloudFront distribution
+    │   ├── acm.tf               # ACM cert for custom CDN domain
+    │   ├── ses.tf               # SES configuration
+    │   ├── iam.tf               # IAM users and policies
+    │   ├── keys/                # CloudFront public key only (private key stored securely)
+    │   └── terraform.tfvars     # Variable values (gitignored)
+    ├── bootstrap/               # One-time state backend (optional)
+    │   ├── main.tf
+    │   └── outputs.tf
+    ├── .gitignore
+    └── README.md
 ```
 
 ---
@@ -117,9 +138,10 @@ terraform {
 
   # Recommended: Store state remotely
   # backend "s3" {
-  #   bucket = "healthmetrics-terraform-state"
+  #   bucket = "healthmetricsapp-terraform-state"
   #   key    = "prod/terraform.tfstate"
   #   region = "us-east-1"
+  #   dynamodb_table = "healthmetricsapp-terraform-locks"
   # }
 }
 
@@ -168,17 +190,23 @@ variable "app_name" {
 variable "domain_name" {
   description = "Primary domain name"
   type        = string
-  default     = "healthmetrics.com"
+  default     = "healthmetricsapp.com"
+}
+
+variable "cdn_domain_name" {
+  description = "Custom CDN domain name"
+  type        = string
+  default     = "cdn.healthmetricsapp.com"
 }
 
 variable "cors_allowed_origins" {
   description = "Allowed origins for CORS"
   type        = list(string)
-  default     = ["https://healthmetrics.com", "https://www.healthmetrics.com"]
+  default     = ["https://healthmetricsapp.com", "https://www.healthmetricsapp.com"]
 }
 
 # For development, add localhost
-# default = ["https://healthmetrics.com", "http://localhost:3003"]
+# default = ["https://healthmetricsapp.com", "http://localhost:3003"]
 ```
 
 ### 3. S3 Bucket (`s3.tf`)
@@ -186,7 +214,7 @@ variable "cors_allowed_origins" {
 ```hcl
 # s3.tf
 
-# Main uploads bucket
+# Main uploads bucket (single bucket + prefixes: avatars/, progress/, food/)
 resource "aws_s3_bucket" "uploads" {
   bucket = "${var.app_name}-uploads-${var.environment}"
 
@@ -310,6 +338,18 @@ resource "aws_cloudfront_origin_access_control" "uploads" {
   signing_protocol                  = "sigv4"
 }
 
+# CloudFront signed URLs (key group)
+# Generate a key pair locally and store the private key outside Terraform.
+resource "aws_cloudfront_public_key" "uploads" {
+  name        = "${var.app_name}-uploads-public-key"
+  encoded_key = file("${path.module}/keys/cloudfront_public_key.pem")
+}
+
+resource "aws_cloudfront_key_group" "uploads" {
+  name  = "${var.app_name}-uploads-key-group"
+  items = [aws_cloudfront_public_key.uploads.id]
+}
+
 # CloudFront distribution
 resource "aws_cloudfront_distribution" "uploads" {
   enabled             = true
@@ -328,6 +368,7 @@ resource "aws_cloudfront_distribution" "uploads" {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = "S3-${aws_s3_bucket.uploads.id}"
+    trusted_key_groups = [aws_cloudfront_key_group.uploads.id]
 
     forwarded_values {
       query_string = false
@@ -350,6 +391,7 @@ resource "aws_cloudfront_distribution" "uploads" {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = "S3-${aws_s3_bucket.uploads.id}"
+    trusted_key_groups = [aws_cloudfront_key_group.uploads.id]
 
     forwarded_values {
       query_string = false
@@ -373,16 +415,40 @@ resource "aws_cloudfront_distribution" "uploads" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
-    # For custom domain, use ACM certificate:
-    # acm_certificate_arn      = aws_acm_certificate.cdn.arn
-    # ssl_support_method       = "sni-only"
-    # minimum_protocol_version = "TLSv1.2_2021"
+    # Custom domain requires ACM certificate in us-east-1
+    acm_certificate_arn      = aws_acm_certificate.cdn.arn
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2021"
   }
+
+  aliases = [var.cdn_domain_name]
 
   tags = {
     Name = "Uploads CDN"
   }
+}
+```
+
+### ACM Certificate (CloudFront)
+
+```hcl
+# acm.tf
+
+resource "aws_acm_certificate" "cdn" {
+  provider          = aws.us_east_1
+  domain_name       = var.cdn_domain_name
+  validation_method = "DNS"
+}
+
+locals {
+  acm_validation = tolist(aws_acm_certificate.cdn.domain_validation_options)[0]
+}
+
+# Add validation CNAME in Porkbun DNS
+resource "aws_acm_certificate_validation" "cdn" {
+  provider                = aws.us_east_1
+  certificate_arn         = aws_acm_certificate.cdn.arn
+  validation_record_fqdns = [local.acm_validation.resource_record_name]
 }
 ```
 
@@ -399,8 +465,6 @@ resource "aws_ses_domain_identity" "main" {
 # Domain verification
 resource "aws_ses_domain_identity_verification" "main" {
   domain = aws_ses_domain_identity.main.id
-
-  depends_on = [aws_route53_record.ses_verification]
 }
 
 # DKIM for email authentication
@@ -414,59 +478,9 @@ resource "aws_ses_domain_mail_from" "main" {
   mail_from_domain = "mail.${var.domain_name}"
 }
 
-# DNS Records (if using Route 53)
-# If using external DNS, output these values and add manually
-
-data "aws_route53_zone" "main" {
-  name         = var.domain_name
-  private_zone = false
-}
-
-# SES verification TXT record
-resource "aws_route53_record" "ses_verification" {
-  zone_id = data.aws_route53_zone.main.zone_id
-  name    = "_amazonses.${var.domain_name}"
-  type    = "TXT"
-  ttl     = 600
-  records = [aws_ses_domain_identity.main.verification_token]
-}
-
-# DKIM records
-resource "aws_route53_record" "ses_dkim" {
-  count   = 3
-  zone_id = data.aws_route53_zone.main.zone_id
-  name    = "${aws_ses_domain_dkim.main.dkim_tokens[count.index]}._domainkey.${var.domain_name}"
-  type    = "CNAME"
-  ttl     = 600
-  records = ["${aws_ses_domain_dkim.main.dkim_tokens[count.index]}.dkim.amazonses.com"]
-}
-
-# SPF record for Mail FROM
-resource "aws_route53_record" "ses_spf" {
-  zone_id = data.aws_route53_zone.main.zone_id
-  name    = "mail.${var.domain_name}"
-  type    = "TXT"
-  ttl     = 600
-  records = ["v=spf1 include:amazonses.com ~all"]
-}
-
-# MX record for Mail FROM
-resource "aws_route53_record" "ses_mx" {
-  zone_id = data.aws_route53_zone.main.zone_id
-  name    = "mail.${var.domain_name}"
-  type    = "MX"
-  ttl     = 600
-  records = ["10 feedback-smtp.${var.aws_region}.amazonses.com"]
-}
-
-# DMARC record (recommended for deliverability)
-resource "aws_route53_record" "dmarc" {
-  zone_id = data.aws_route53_zone.main.zone_id
-  name    = "_dmarc.${var.domain_name}"
-  type    = "TXT"
-  ttl     = 600
-  records = ["v=DMARC1; p=quarantine; rua=mailto:dmarc@${var.domain_name}"]
-}
+# DNS Records (Porkbun)
+# Add the SES verification, DKIM, SPF, MX, DMARC, and ACM validation records manually in Porkbun.
+# Also add a CNAME for the CDN domain pointing to the CloudFront distribution domain.
 
 # Configuration set for tracking
 resource "aws_ses_configuration_set" "main" {
@@ -637,7 +651,7 @@ output "cloudfront_domain_name" {
 
 output "cloudfront_url" {
   description = "Full URL for CloudFront distribution"
-  value       = "https://${aws_cloudfront_distribution.uploads.domain_name}"
+  value       = "https://${var.cdn_domain_name}"
 }
 
 # SES Outputs
@@ -646,9 +660,71 @@ output "ses_domain_identity_arn" {
   value       = aws_ses_domain_identity.main.arn
 }
 
-output "ses_verification_status" {
-  description = "SES domain verification status"
-  value       = aws_ses_domain_identity.main.verification_status
+# DNS Outputs (for Porkbun)
+output "cdn_cname" {
+  description = "CDN CNAME record (Porkbun)"
+  value = {
+    name  = var.cdn_domain_name
+    type  = "CNAME"
+    value = aws_cloudfront_distribution.uploads.domain_name
+  }
+}
+
+output "acm_validation_cname" {
+  description = "ACM validation CNAME record (Porkbun)"
+  value = {
+    name  = local.acm_validation.resource_record_name
+    type  = local.acm_validation.resource_record_type
+    value = local.acm_validation.resource_record_value
+  }
+}
+
+# DNS Outputs (for Porkbun)
+output "ses_verification_txt" {
+  description = "SES verification TXT record"
+  value = {
+    name  = "_amazonses.${var.domain_name}"
+    type  = "TXT"
+    value = aws_ses_domain_identity.main.verification_token
+  }
+}
+
+output "ses_dkim_cnames" {
+  description = "SES DKIM CNAME records"
+  value = [
+    for token in aws_ses_domain_dkim.main.dkim_tokens : {
+      name  = "${token}._domainkey.${var.domain_name}"
+      type  = "CNAME"
+      value = "${token}.dkim.amazonses.com"
+    }
+  ]
+}
+
+output "ses_mail_from_spf" {
+  description = "SES SPF TXT record for mail-from"
+  value = {
+    name  = "mail.${var.domain_name}"
+    type  = "TXT"
+    value = "v=spf1 include:amazonses.com ~all"
+  }
+}
+
+output "ses_mail_from_mx" {
+  description = "SES MX record for mail-from"
+  value = {
+    name  = "mail.${var.domain_name}"
+    type  = "MX"
+    value = "10 feedback-smtp.${var.aws_region}.amazonses.com"
+  }
+}
+
+output "ses_dmarc" {
+  description = "DMARC record (start with p=none)"
+  value = {
+    name  = "_dmarc.${var.domain_name}"
+    type  = "TXT"
+    value = "v=DMARC1; p=none; rua=mailto:dmarc@${var.domain_name}"
+  }
 }
 
 # IAM Outputs (Sensitive)
@@ -674,7 +750,9 @@ output "environment_variables" {
     AWS_SECRET_ACCESS_KEY=<run: terraform output -raw app_secret_access_key>
     AWS_REGION=${var.aws_region}
     S3_BUCKET_NAME=${aws_s3_bucket.uploads.id}
-    CLOUDFRONT_URL=https://${aws_cloudfront_distribution.uploads.domain_name}
+    CLOUDFRONT_URL=https://${var.cdn_domain_name}
+    CLOUDFRONT_KEY_PAIR_ID=${aws_cloudfront_public_key.uploads.id}
+    CLOUDFRONT_PRIVATE_KEY=<securely stored PEM>
     SES_FROM_EMAIL=noreply@${var.domain_name}
     SES_REGION=${var.aws_region}
   EOT
@@ -686,17 +764,20 @@ output "environment_variables" {
 
 ## Application Integration
 
-### S3 Presigned URL Generation
+### S3 Presigned POST Generation
+
+Constraints:
+- Avatars: max 2MB; allowed types `image/jpeg`, `image/png`, `image/webp`
+- Progress/Food: max 10MB; allowed types `image/*`
 
 ```typescript
 // src/lib/storage.ts
 
 import {
   S3Client,
-  PutObjectCommand,
   DeleteObjectCommand,
 } from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { createPresignedPost } from "@aws-sdk/s3-presigned-post";
 
 const s3Client = new S3Client({
   region: process.env.AWS_REGION!,
@@ -710,33 +791,48 @@ const BUCKET = process.env.S3_BUCKET_NAME!;
 const CDN_URL = process.env.CLOUDFRONT_URL!;
 
 /**
- * Generate a presigned URL for uploading a file
+ * Generate a presigned POST for uploading a file
+ * Enforces size/type and a safe key prefix.
  */
-export async function getUploadUrl(
+export async function getUploadPost(
   userId: string,
   fileName: string,
-  contentType: string
-): Promise<{ uploadUrl: string; publicUrl: string; key: string }> {
-  const ext = fileName.split(".").pop() || "jpg";
-  const key = `avatars/${userId}/${Date.now()}.${ext}`;
+  contentType: string,
+  kind: "avatar" | "progress" | "food"
+): Promise<{ url: string; fields: Record<string, string>; assetUrl: string; key: string }> {
+  if (kind === "avatar") {
+    const allowed = ["image/jpeg", "image/png", "image/webp"];
+    if (!allowed.includes(contentType)) {
+      throw new Error("Avatar must be JPEG, PNG, or WebP");
+    }
+  }
 
-  const command = new PutObjectCommand({
+  const ext = fileName.split(".").pop() || "jpg";
+  const prefix = kind === "avatar" ? "avatars" : kind === "progress" ? "progress" : "food";
+  const key = `${prefix}/${userId}/${Date.now()}.${ext}`;
+
+  const maxSizeBytes = kind === "avatar" ? 2 * 1024 * 1024 : 10 * 1024 * 1024;
+
+  const { url, fields } = await createPresignedPost(s3Client, {
     Bucket: BUCKET,
     Key: key,
-    ContentType: contentType,
-    // Metadata for tracking
-    Metadata: {
-      "user-id": userId,
-      "original-name": fileName,
+    Expires: 300, // 5 minutes
+    Conditions: [
+      ["content-length-range", 1, maxSizeBytes],
+      ["starts-with", "$Content-Type", "image/"],
+    ],
+    Fields: {
+      "Content-Type": contentType,
+      "x-amz-meta-user-id": userId,
+      "x-amz-meta-original-name": fileName,
     },
   });
 
-  // URL expires in 5 minutes
-  const uploadUrl = await getSignedUrl(s3Client, command, { expiresIn: 300 });
-
   return {
-    uploadUrl,
-    publicUrl: `${CDN_URL}/${key}`,
+    url,
+    fields,
+    // Asset URL must be signed before being served to clients
+    assetUrl: `${CDN_URL}/${key}`,
     key,
   };
 }
@@ -751,6 +847,30 @@ export async function deleteFile(key: string): Promise<void> {
   });
 
   await s3Client.send(command);
+}
+```
+
+### CloudFront Signed URL Generation
+
+```typescript
+// src/lib/cdn.ts
+
+import { getSignedUrl } from "@aws-sdk/cloudfront-signer";
+
+const CDN_URL = process.env.CLOUDFRONT_URL!;
+const CLOUDFRONT_KEY_PAIR_ID = process.env.CLOUDFRONT_KEY_PAIR_ID!;
+const CLOUDFRONT_PRIVATE_KEY = process.env.CLOUDFRONT_PRIVATE_KEY!; // stored securely
+
+export function signCdnUrl(path: string, expiresInSeconds = 60 * 5): string {
+  const url = `${CDN_URL}/${path}`;
+  const expires = new Date(Date.now() + expiresInSeconds * 1000).toISOString();
+
+  return getSignedUrl({
+    url,
+    dateLessThan: expires,
+    keyPairId: CLOUDFRONT_KEY_PAIR_ID,
+    privateKey: CLOUDFRONT_PRIVATE_KEY,
+  });
 }
 ```
 
@@ -899,7 +1019,7 @@ export const auth = betterAuth({
 | Create AWS account if needed | 30m | 🔲 |
 | Set up IAM admin user | 30m | 🔲 |
 | Install Terraform | 15m | 🔲 |
-| Create infrastructure folder | 15m | 🔲 |
+| Create `apps/healthmetrics-infra` folder | 15m | 🔲 |
 | Write Terraform configuration | 2h | 🔲 |
 | Test `terraform plan` | 30m | 🔲 |
 
@@ -910,7 +1030,7 @@ export const auth = betterAuth({
 | Run `terraform apply` | 30m | 🔲 |
 | Verify S3 bucket created | 15m | 🔲 |
 | Verify CloudFront distribution | 15m | 🔲 |
-| Add DNS records for SES | 1h | 🔲 |
+| Add DNS records for SES + ACM/CDN in Porkbun | 1h | 🔲 |
 | Wait for SES domain verification | 24-48h | 🔲 |
 | Request SES production access | 24-48h | 🔲 |
 
@@ -943,7 +1063,12 @@ export const auth = betterAuth({
 
 ```bash
 # Navigate to infrastructure folder
-cd infrastructure/terraform
+cd apps/healthmetrics-infra/terraform
+
+# (Optional) Bootstrap remote state
+# cd ../bootstrap
+# terraform init
+# terraform apply
 
 # Initialize Terraform
 terraform init
@@ -963,6 +1088,130 @@ terraform output -raw app_secret_access_key
 # Destroy infrastructure (careful!)
 terraform destroy
 ```
+
+---
+
+## Porkbun DNS Checklist
+
+After `terraform apply`, add the following records in Porkbun DNS. Use `terraform output` to copy values.
+
+1) **ACM validation (CNAME)**
+   - Output: `acm_validation_cname`
+
+2) **CDN CNAME**
+   - Output: `cdn_cname` (points `cdn.healthmetricsapp.com` → CloudFront domain)
+
+3) **SES verification (TXT)**
+   - Output: `ses_verification_txt`
+
+4) **SES DKIM (3x CNAME)**
+   - Output: `ses_dkim_cnames`
+
+5) **SES Mail‑From SPF (TXT)**
+   - Output: `ses_mail_from_spf`
+
+6) **SES Mail‑From MX**
+   - Output: `ses_mail_from_mx`
+
+7) **DMARC (TXT)**
+   - Output: `ses_dmarc` (starts with `p=none`)
+
+---
+
+## Porkbun DNS Example Values (Fill From Terraform Output)
+
+Use this as a template in Porkbun. Replace `<...>` with the values from `terraform output`.
+
+ACM validation:
+- Type: CNAME
+- Host: `<acm_validation_cname.name>`
+- Answer: `<acm_validation_cname.value>`
+
+CDN:
+- Type: CNAME
+- Host: `cdn`
+- Answer: `<cdn_cname.value>`
+
+SES verification:
+- Type: TXT
+- Host: `<ses_verification_txt.name>`
+- Answer: `<ses_verification_txt.value>`
+
+SES DKIM (3 records):
+- Type: CNAME
+- Host: `<ses_dkim_cnames[0].name>`
+- Answer: `<ses_dkim_cnames[0].value>`
+- Type: CNAME
+- Host: `<ses_dkim_cnames[1].name>`
+- Answer: `<ses_dkim_cnames[1].value>`
+- Type: CNAME
+- Host: `<ses_dkim_cnames[2].name>`
+- Answer: `<ses_dkim_cnames[2].value>`
+
+SES mail-from:
+- Type: TXT
+- Host: `<ses_mail_from_spf.name>`
+- Answer: `<ses_mail_from_spf.value>`
+- Type: MX
+- Host: `<ses_mail_from_mx.name>`
+- Answer: `<ses_mail_from_mx.value>`
+
+DMARC:
+- Type: TXT
+- Host: `<ses_dmarc.name>`
+- Answer: `<ses_dmarc.value>`
+
+---
+
+## Implementation Checklist (Step-by-Step)
+
+1) **AWS account + IAM**
+   - Create AWS account (if needed)
+   - Create an IAM admin user and enable MFA
+
+2) **Bootstrap Terraform state (recommended)**
+   - Create `apps/healthmetrics-infra/bootstrap` (S3 state bucket + DynamoDB lock)
+   - Apply bootstrap stack
+   - Enable backend in `apps/healthmetrics-infra/terraform/main.tf`
+
+3) **Create CloudFront signing keys**
+   - Generate a CloudFront key pair locally
+   - Store the **private key** securely (not in repo)
+   - Store the **public key** at `apps/healthmetrics-infra/terraform/keys/cloudfront_public_key.pem`
+
+4) **Apply Terraform**
+   - `cd apps/healthmetrics-infra/terraform`
+   - `terraform init`
+   - `terraform plan`
+   - `terraform apply`
+
+5) **Porkbun DNS**
+   - Add ACM validation CNAME
+   - Add CDN CNAME (`cdn.healthmetricsapp.com`)
+   - Add SES TXT + DKIM CNAMEs + SPF + MX + DMARC
+   - Wait for ACM + SES to validate
+
+6) **SES production access**
+   - Request removal from SES sandbox
+   - Wait for approval
+
+7) **App env vars**
+   - Set `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`
+   - Set `AWS_REGION`, `S3_BUCKET_NAME`
+   - Set `CLOUDFRONT_URL`, `CLOUDFRONT_KEY_PAIR_ID`, `CLOUDFRONT_PRIVATE_KEY`
+   - Set `SES_FROM_EMAIL`, `SES_REGION`
+
+8) **App integration**
+   - Implement presigned POST uploads (avatars/progress/food)
+   - Enforce avatar limits (2MB, JPEG/PNG/WebP)
+   - Store only object keys in DB
+   - Use CloudFront signed URLs for asset delivery
+   - Send emails via SES API
+
+9) **Verification**
+   - Upload avatar end‑to‑end
+   - Verify signed URL access
+   - Send test verification + password reset emails
 
 ---
 
@@ -1038,12 +1287,16 @@ resource "aws_cloudwatch_metric_alarm" "ses_bounce_rate" {
 }
 ```
 
+### CloudTrail (Recommended)
+
+Enable CloudTrail for the account (management events at minimum). For v0, we can use the default event history in AWS, and add an org trail later if needed.
+
 ---
 
 ## Acceptance Criteria
 
 - [ ] S3 bucket created with proper encryption and CORS
-- [ ] CloudFront distribution serves files via HTTPS
+- [ ] CloudFront distribution serves files via HTTPS (signed URLs required)
 - [ ] SES domain verified and out of sandbox
 - [ ] IAM user has minimal required permissions
 - [ ] Avatar uploads work end-to-end
@@ -1051,3 +1304,4 @@ resource "aws_cloudwatch_metric_alarm" "ses_bounce_rate" {
 - [ ] Password reset emails delivered to inbox
 - [ ] All credentials stored securely (not in code)
 - [ ] Terraform state managed properly
+- [ ] DNS records added in Porkbun for SES + ACM validation + CDN CNAME

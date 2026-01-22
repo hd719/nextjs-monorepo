@@ -124,15 +124,15 @@ export interface FileRoutesByFullPath {
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/signup': typeof AuthSignupRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
-  '/achievements': typeof AchievementsIndexRoute
-  '/dashboard': typeof DashboardIndexRoute
-  '/diary': typeof DiaryIndexRoute
-  '/exercise': typeof ExerciseIndexRoute
-  '/fasting': typeof FastingIndexRoute
-  '/onboarding': typeof OnboardingIndexRoute
-  '/profile': typeof ProfileIndexRoute
-  '/progress': typeof ProgressIndexRoute
-  '/sleep': typeof SleepIndexRoute
+  '/achievements/': typeof AchievementsIndexRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/diary/': typeof DiaryIndexRoute
+  '/exercise/': typeof ExerciseIndexRoute
+  '/fasting/': typeof FastingIndexRoute
+  '/onboarding/': typeof OnboardingIndexRoute
+  '/profile/': typeof ProfileIndexRoute
+  '/progress/': typeof ProgressIndexRoute
+  '/sleep/': typeof SleepIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
@@ -181,15 +181,15 @@ export interface FileRouteTypes {
     | '/auth/reset-password'
     | '/auth/signup'
     | '/auth/verify-email'
-    | '/achievements'
-    | '/dashboard'
-    | '/diary'
-    | '/exercise'
-    | '/fasting'
-    | '/onboarding'
-    | '/profile'
-    | '/progress'
-    | '/sleep'
+    | '/achievements/'
+    | '/dashboard/'
+    | '/diary/'
+    | '/exercise/'
+    | '/fasting/'
+    | '/onboarding/'
+    | '/profile/'
+    | '/progress/'
+    | '/sleep/'
     | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -260,63 +260,63 @@ declare module '@tanstack/react-router' {
     '/sleep/': {
       id: '/sleep/'
       path: '/sleep'
-      fullPath: '/sleep'
+      fullPath: '/sleep/'
       preLoaderRoute: typeof SleepIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/progress/': {
       id: '/progress/'
       path: '/progress'
-      fullPath: '/progress'
+      fullPath: '/progress/'
       preLoaderRoute: typeof ProgressIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/profile/': {
       id: '/profile/'
       path: '/profile'
-      fullPath: '/profile'
+      fullPath: '/profile/'
       preLoaderRoute: typeof ProfileIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/onboarding/': {
       id: '/onboarding/'
       path: '/onboarding'
-      fullPath: '/onboarding'
+      fullPath: '/onboarding/'
       preLoaderRoute: typeof OnboardingIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fasting/': {
       id: '/fasting/'
       path: '/fasting'
-      fullPath: '/fasting'
+      fullPath: '/fasting/'
       preLoaderRoute: typeof FastingIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/exercise/': {
       id: '/exercise/'
       path: '/exercise'
-      fullPath: '/exercise'
+      fullPath: '/exercise/'
       preLoaderRoute: typeof ExerciseIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/diary/': {
       id: '/diary/'
       path: '/diary'
-      fullPath: '/diary'
+      fullPath: '/diary/'
       preLoaderRoute: typeof DiaryIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard/': {
       id: '/dashboard/'
       path: '/dashboard'
-      fullPath: '/dashboard'
+      fullPath: '/dashboard/'
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/achievements/': {
       id: '/achievements/'
       path: '/achievements'
-      fullPath: '/achievements'
+      fullPath: '/achievements/'
       preLoaderRoute: typeof AchievementsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
