@@ -44,6 +44,7 @@ export {
 // Exercise hooks
 export {
   useExerciseSummary,
+  useExerciseActivity,
   useCreateWorkoutSession,
   useExerciseSearch,
 } from "./useExercise";

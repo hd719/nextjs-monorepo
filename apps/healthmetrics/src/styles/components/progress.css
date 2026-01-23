@@ -154,6 +154,27 @@
     @apply flex items-center gap-2;
   }
 
+  .progress-source-badge {
+    @apply text-xs font-semibold uppercase tracking-wide px-2.5 py-1 rounded-full;
+    background: color-mix(in srgb, var(--accent) 20%, transparent);
+    color: var(--accent);
+  }
+
+  .progress-source-badge--whoop {
+    background: color-mix(in srgb, var(--accent) 20%, transparent);
+    color: var(--accent);
+  }
+
+  .progress-source-badge--manual {
+    background: color-mix(in srgb, var(--border) 60%, transparent);
+    color: var(--muted-foreground);
+  }
+
+  .progress-source-badge--loading {
+    background: color-mix(in srgb, var(--muted-foreground) 18%, transparent);
+    color: var(--muted-foreground);
+  }
+
   .progress-chart-container {
     @apply w-full;
     min-height: 250px;
@@ -298,6 +319,25 @@
 
   .progress-sleep-chart {
     @apply relative flex items-end justify-between gap-1 h-16;
+  }
+
+  .progress-sleep-chart-empty {
+    opacity: 0.6;
+  }
+
+  .progress-sleep-empty {
+    @apply flex flex-col gap-1 rounded-xl border px-3 py-2;
+    border-color: color-mix(in srgb, var(--border) 70%, transparent);
+    background: color-mix(in srgb, var(--muted) 45%, transparent);
+  }
+
+  .progress-sleep-empty-title {
+    @apply text-sm font-semibold;
+  }
+
+  .progress-sleep-empty-subtitle {
+    @apply text-xs;
+    color: var(--muted-foreground);
   }
 
   .progress-sleep-bar-col {

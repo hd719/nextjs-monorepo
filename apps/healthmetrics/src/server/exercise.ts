@@ -10,6 +10,7 @@ import {
   deleteWorkoutLogSchema,
   getWorkoutDaySchema,
   getTodayExerciseSummarySchema,
+  getExerciseActivitySchema,
   copyPreviousWorkoutSchema,
   type SearchExercisesInput,
   type CreateWorkoutSessionInput,
@@ -19,6 +20,7 @@ import {
   type DeleteWorkoutLogInput,
   type GetWorkoutDayInput,
   type GetTodayExerciseSummaryInput,
+  type GetExerciseActivityInput,
   type CopyPreviousWorkoutInput,
 } from "@/utils/validation";
 import {
@@ -39,7 +41,7 @@ const log = createLogger("server:exercise");
  */
 export const searchExercises = createServerFn({ method: "GET" })
   .inputValidator((data: SearchExercisesInput) =>
-    searchExercisesSchema.parse(data)
+    searchExercisesSchema.parse(data),
   )
   .handler(async ({ data }) => {
     try {
@@ -87,7 +89,7 @@ export const searchExercises = createServerFn({ method: "GET" })
     } catch (error) {
       log.error(
         { err: error, query: data.query, category: data.category },
-        "Failed to search exercises"
+        "Failed to search exercises",
       );
       throw new Error("Failed to search exercises");
     }
@@ -101,11 +103,12 @@ export const getWorkoutDay = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     try {
       const { userId, date } = data;
+      const targetDate = new Date(`${date}T00:00:00.000Z`);
 
       const sessions = await prisma.workoutSession.findMany({
         where: {
           userId,
-          date: new Date(date),
+          date: targetDate,
         },
         include: {
           workoutLogs: {
@@ -143,7 +146,7 @@ export const getWorkoutDay = createServerFn({ method: "GET" })
     } catch (error) {
       log.error(
         { err: error, userId: data.userId, date: data.date },
-        "Failed to fetch workout day"
+        "Failed to fetch workout day",
       );
       throw new Error("Failed to fetch workout day");
     }
@@ -155,16 +158,17 @@ export const getWorkoutDay = createServerFn({ method: "GET" })
  */
 export const getTodayExerciseSummary = createServerFn({ method: "GET" })
   .inputValidator((data: GetTodayExerciseSummaryInput) =>
-    getTodayExerciseSummarySchema.parse(data)
+    getTodayExerciseSummarySchema.parse(data),
   )
   .handler(async ({ data }) => {
     try {
       const { userId, date } = data;
+      const targetDate = new Date(`${date}T00:00:00.000Z`);
 
       const sessions = await prisma.workoutSession.findMany({
         where: {
           userId,
-          date: new Date(date),
+          date: targetDate,
         },
         include: {
           workoutLogs: {
@@ -179,42 +183,34 @@ export const getTodayExerciseSummary = createServerFn({ method: "GET" })
         },
       });
 
-      if (sessions.length === 0) {
-        return {
-          totalMinutes: 0,
-          caloriesBurned: 0,
-          exercisesCompleted: 0,
-        };
-      }
-
       const totalMinutes = sessions.reduce(
         (sum, session) => sum + session.totalMinutes,
-        0
+        0,
       );
 
       // Get user's current weight for dynamic calculation (in lbs)
       const userWeightLbs = await getUserWeightLbs(prisma, userId);
 
       // Calculate total calories - recalculate if null and weight is available
-      let totalCalories = 0;
-      let hasCalculatedCalories = false;
+      let manualCalories = 0;
+      let hasManualCalories = false;
 
       for (const session of sessions) {
         for (const log of session.workoutLogs) {
           // Use stored calories if available, otherwise calculate dynamically
           if (log.caloriesBurned !== null) {
-            totalCalories += log.caloriesBurned;
-            hasCalculatedCalories = true;
+            manualCalories += log.caloriesBurned;
+            hasManualCalories = true;
           } else if (userWeightLbs) {
             // Dynamically calculate calories using current weight (in lbs)
             const calculatedCalories = calculateCalories(
               Number(log.exercise.metValue),
               userWeightLbs,
-              log.durationMinutes
+              log.durationMinutes,
             );
             if (calculatedCalories) {
-              totalCalories += calculatedCalories;
-              hasCalculatedCalories = true;
+              manualCalories += calculatedCalories;
+              hasManualCalories = true;
             }
           }
         }
@@ -222,20 +218,168 @@ export const getTodayExerciseSummary = createServerFn({ method: "GET" })
 
       const exercisesCompleted = sessions.reduce(
         (sum, session) => sum + session.workoutLogs.length,
-        0
+        0,
+      );
+
+      const integration = await prisma.integration.findUnique({
+        where: {
+          userId_provider: {
+            userId,
+            provider: "whoop",
+          },
+        },
+        select: {
+          id: true,
+        },
+      });
+
+      const whoopWorkouts = integration
+        ? await prisma.integrationWorkout.findMany({
+            where: {
+              integrationId: integration.id,
+              localDate: targetDate,
+            },
+          })
+        : [];
+
+      const whoopMinutes = whoopWorkouts.reduce((sum, workout) => {
+        if (!workout.startAt || !workout.endAt) return sum;
+        const diffMinutes = Math.round(
+          (workout.endAt.getTime() - workout.startAt.getTime()) / 60000,
+        );
+        return sum + Math.max(0, diffMinutes);
+      }, 0);
+
+      const whoopCalories = whoopWorkouts.reduce(
+        (sum, workout) => sum + (workout.caloriesKcal ?? 0),
+        0,
       );
 
       return {
-        totalMinutes,
-        caloriesBurned: hasCalculatedCalories ? totalCalories : 0,
-        exercisesCompleted,
+        totalMinutes: totalMinutes + whoopMinutes,
+        caloriesBurned:
+          hasManualCalories || whoopCalories > 0
+            ? Math.round(manualCalories + whoopCalories)
+            : 0,
+        exercisesCompleted: exercisesCompleted + whoopWorkouts.length,
       };
     } catch (error) {
       log.error(
         { err: error, userId: data.userId, date: data.date },
-        "Failed to fetch exercise summary"
+        "Failed to fetch exercise summary",
       );
       throw new Error("Failed to fetch exercise summary");
+    }
+  });
+
+/**
+ * Get merged exercise activity (manual workouts + wearable workouts) for a day
+ */
+export const getExerciseActivity = createServerFn({ method: "GET" })
+  .inputValidator((data: GetExerciseActivityInput) =>
+    getExerciseActivitySchema.parse(data),
+  )
+  .handler(async ({ data }) => {
+    try {
+      const { userId, date } = data;
+      const targetDate = new Date(date);
+
+      const sessions = await prisma.workoutSession.findMany({
+        where: {
+          userId,
+          date: targetDate,
+        },
+        include: {
+          workoutLogs: {
+            select: {
+              id: true,
+            },
+          },
+        },
+        orderBy: { createdAt: "desc" },
+      });
+
+      const integration = await prisma.integration.findUnique({
+        where: {
+          userId_provider: {
+            userId,
+            provider: "whoop",
+          },
+        },
+        select: {
+          id: true,
+          status: true,
+        },
+      });
+
+      const whoopWorkouts = integration
+        ? await prisma.integrationWorkout.findMany({
+            where: {
+              integrationId: integration.id,
+              localDate: targetDate,
+            },
+            orderBy: { startAt: "desc" },
+          })
+        : [];
+
+      const manualItems = sessions.map((session) => ({
+        id: session.id,
+        source: "manual" as const,
+        title: session.sessionType === "quick" ? "Quick workout" : "Workout",
+        subtitle: `${session.workoutLogs.length} ${
+          session.workoutLogs.length === 1 ? "exercise" : "exercises"
+        }`,
+        startAt: session.createdAt.toISOString(),
+        endAt: null as string | null,
+        durationMinutes: session.totalMinutes,
+        caloriesBurned: session.totalCalories ?? null,
+        strain: null as number | null,
+        sportName: null as string | null,
+        readOnly: false,
+      }));
+
+      const whoopItems = whoopWorkouts.map((workout) => {
+        const startAt = workout.startAt;
+        const endAt = workout.endAt;
+        const durationMinutes =
+          startAt && endAt
+            ? Math.max(
+                0,
+                Math.round((endAt.getTime() - startAt.getTime()) / 60000),
+              )
+            : null;
+
+        return {
+          id: workout.id,
+          source: "whoop" as const,
+          title: workout.sportName ? workout.sportName : "WHOOP workout",
+          subtitle: "Imported from WHOOP",
+          startAt: workout.startAt.toISOString(),
+          endAt: workout.endAt.toISOString(),
+          durationMinutes,
+          caloriesBurned: workout.caloriesKcal
+            ? Math.round(workout.caloriesKcal)
+            : null,
+          strain: workout.strain ?? null,
+          sportName: workout.sportName ?? null,
+          readOnly: true,
+        };
+      });
+
+      const items = [...manualItems, ...whoopItems].sort((a, b) =>
+        b.startAt.localeCompare(a.startAt),
+      );
+
+      return {
+        items,
+        whoopStatus: integration?.status ?? "disconnected",
+      };
+    } catch (error) {
+      log.error(
+        { err: error, userId: data.userId, date: data.date },
+        "Failed to fetch exercise activity",
+      );
+      throw new Error("Failed to fetch exercise activity");
     }
   });
 
@@ -244,7 +388,7 @@ export const getTodayExerciseSummary = createServerFn({ method: "GET" })
  */
 export const copyPreviousWorkout = createServerFn({ method: "POST" })
   .inputValidator((data: CopyPreviousWorkoutInput) =>
-    copyPreviousWorkoutSchema.parse(data)
+    copyPreviousWorkoutSchema.parse(data),
   )
   .handler(async ({ data }) => {
     try {
@@ -293,7 +437,7 @@ export const copyPreviousWorkout = createServerFn({ method: "POST" })
     } catch (error) {
       log.error(
         { err: error, userId: data.userId, targetDate: data.targetDate },
-        "Failed to copy previous workout"
+        "Failed to copy previous workout",
       );
       // Preserve validation error messages
       if (error instanceof Error) {
@@ -312,7 +456,7 @@ export const copyPreviousWorkout = createServerFn({ method: "POST" })
  */
 export const createWorkoutSession = createServerFn({ method: "POST" })
   .inputValidator((data: CreateWorkoutSessionInput) =>
-    createWorkoutSessionSchema.parse(data)
+    createWorkoutSessionSchema.parse(data),
   )
   .handler(async ({ data }) => {
     try {
@@ -324,7 +468,7 @@ export const createWorkoutSession = createServerFn({ method: "POST" })
           ex.category,
           ex.durationMinutes,
           ex.sets,
-          ex.reps
+          ex.reps,
         );
         if (validationError) {
           throw new Error(validationError);
@@ -371,7 +515,7 @@ export const createWorkoutSession = createServerFn({ method: "POST" })
         const caloriesBurned = calculateCalories(
           Number(exerciseDetail.metValue),
           userWeightLbs,
-          durationMinutes
+          durationMinutes,
         );
 
         return {
@@ -389,7 +533,7 @@ export const createWorkoutSession = createServerFn({ method: "POST" })
       // Calculate session totals
       const totalMinutes = processedExercises.reduce(
         (sum, ex) => sum + ex.durationMinutes,
-        0
+        0,
       );
 
       const totalCalories = processedExercises.reduce((sum, ex) => {
@@ -438,12 +582,12 @@ export const createWorkoutSession = createServerFn({ method: "POST" })
     } catch (error) {
       log.error(
         { err: error, userId: data.userId },
-        "Failed to create workout session"
+        "Failed to create workout session",
       );
       throw new Error(
         error instanceof Error
           ? error.message
-          : "Failed to create workout session"
+          : "Failed to create workout session",
       );
     }
   });
@@ -453,7 +597,7 @@ export const createWorkoutSession = createServerFn({ method: "POST" })
  */
 export const updateWorkoutSession = createServerFn({ method: "POST" })
   .inputValidator((data: UpdateWorkoutSessionInput) =>
-    updateWorkoutSessionSchema.parse(data)
+    updateWorkoutSessionSchema.parse(data),
   )
   .handler(async ({ data }) => {
     try {
@@ -507,7 +651,7 @@ export const updateWorkoutSession = createServerFn({ method: "POST" })
           const caloriesBurned = calculateCalories(
             Number(exerciseDetail.metValue),
             userWeightLbs,
-            durationMinutes
+            durationMinutes,
           );
 
           return {
@@ -524,12 +668,12 @@ export const updateWorkoutSession = createServerFn({ method: "POST" })
 
         const totalMinutes = processedExercises.reduce(
           (sum, ex) => sum + ex.durationMinutes,
-          0
+          0,
         );
 
         const totalCalories = processedExercises.reduce(
           (sum, ex) => sum + (ex.caloriesBurned ?? 0),
-          0
+          0,
         );
 
         // Update session and replace all logs
@@ -586,12 +730,12 @@ export const updateWorkoutSession = createServerFn({ method: "POST" })
     } catch (error) {
       log.error(
         { err: error, sessionId: data.sessionId },
-        "Failed to update workout session"
+        "Failed to update workout session",
       );
       throw new Error(
         error instanceof Error
           ? error.message
-          : "Failed to update workout session"
+          : "Failed to update workout session",
       );
     }
   });
@@ -601,7 +745,7 @@ export const updateWorkoutSession = createServerFn({ method: "POST" })
  */
 export const updateWorkoutLog = createServerFn({ method: "POST" })
   .inputValidator((data: UpdateWorkoutLogInput) =>
-    updateWorkoutLogSchema.parse(data)
+    updateWorkoutLogSchema.parse(data),
   )
   .handler(async ({ data }) => {
     try {
@@ -646,14 +790,14 @@ export const updateWorkoutLog = createServerFn({ method: "POST" })
         ) {
           durationMinutes = estimateStrengthDuration(
             updates.sets,
-            updates.reps
+            updates.reps,
           );
         }
 
         caloriesBurned = calculateCalories(
           Number(exercise.metValue),
           userWeightLbs,
-          durationMinutes
+          durationMinutes,
         );
       }
 
@@ -680,12 +824,12 @@ export const updateWorkoutLog = createServerFn({ method: "POST" })
 
       const totalMinutes = sessionLogs.reduce(
         (sum, log) => sum + log.durationMinutes,
-        0
+        0,
       );
 
       const totalCalories = sessionLogs.reduce(
         (sum, log) => sum + (log.caloriesBurned ?? 0),
-        0
+        0,
       );
 
       await prisma.workoutSession.update({
@@ -701,10 +845,10 @@ export const updateWorkoutLog = createServerFn({ method: "POST" })
     } catch (error) {
       log.error(
         { err: error, logId: data.logId },
-        "Failed to update workout log"
+        "Failed to update workout log",
       );
       throw new Error(
-        error instanceof Error ? error.message : "Failed to update workout log"
+        error instanceof Error ? error.message : "Failed to update workout log",
       );
     }
   });
@@ -714,7 +858,7 @@ export const updateWorkoutLog = createServerFn({ method: "POST" })
  */
 export const deleteWorkoutSession = createServerFn({ method: "POST" })
   .inputValidator((data: DeleteWorkoutSessionInput) =>
-    deleteWorkoutSessionSchema.parse(data)
+    deleteWorkoutSessionSchema.parse(data),
   )
   .handler(async ({ data }) => {
     try {
@@ -738,7 +882,7 @@ export const deleteWorkoutSession = createServerFn({ method: "POST" })
     } catch (error) {
       log.error(
         { err: error, sessionId: data.sessionId },
-        "Failed to delete workout session"
+        "Failed to delete workout session",
       );
       // Preserve validation error messages
       if (error instanceof Error) {
@@ -753,7 +897,7 @@ export const deleteWorkoutSession = createServerFn({ method: "POST" })
  */
 export const deleteWorkoutLog = createServerFn({ method: "POST" })
   .inputValidator((data: DeleteWorkoutLogInput) =>
-    deleteWorkoutLogSchema.parse(data)
+    deleteWorkoutLogSchema.parse(data),
   )
   .handler(async ({ data }) => {
     try {
@@ -789,12 +933,12 @@ export const deleteWorkoutLog = createServerFn({ method: "POST" })
         // Update session totals
         const totalMinutes = remainingLogs.reduce(
           (sum, log) => sum + log.durationMinutes,
-          0
+          0,
         );
 
         const totalCalories = remainingLogs.reduce(
           (sum, log) => sum + (log.caloriesBurned ?? 0),
-          0
+          0,
         );
 
         await prisma.workoutSession.update({
@@ -811,7 +955,7 @@ export const deleteWorkoutLog = createServerFn({ method: "POST" })
     } catch (error) {
       log.error(
         { err: error, logId: data.logId },
-        "Failed to delete workout log"
+        "Failed to delete workout log",
       );
       // Preserve validation error messages
       if (error instanceof Error) {

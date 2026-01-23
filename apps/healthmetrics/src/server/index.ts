@@ -17,6 +17,7 @@ export {
 // Exercise server functions
 export {
   searchExercises,
+  getExerciseActivity,
   getWorkoutDay,
   getTodayExerciseSummary,
   createWorkoutSession,
@@ -32,6 +33,15 @@ export { getUserProfile, updateUserProfile } from "./profile";
 
 // Storage server functions
 export { createUploadPostForUser } from "./storage";
+
+// Integrations server functions
+export {
+  startWhoopOAuth,
+  completeWhoopOAuth,
+  getWhoopIntegrationStatus,
+  triggerWhoopSync,
+  disconnectWhoop,
+} from "./integrations";
 
 // Water server functions
 export { getWaterIntake, updateWaterIntake, updateWaterGoal } from "./water";

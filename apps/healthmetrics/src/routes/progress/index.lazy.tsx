@@ -16,8 +16,9 @@
  * - AI-powered insights
  */
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { createLazyFileRoute } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { AppLayout } from "@/components/layout";
 import { mockProgressData, filterByDateRange } from "@/data";
 import type { DateRange } from "@/types";
@@ -35,6 +36,9 @@ import {
   SleepProgressCard,
   FastingProgressCard,
 } from "@/components/progress";
+import { useSleepAverage, useSleepHistory } from "@/hooks";
+import { DEFAULT_SLEEP_GOAL } from "@/types/sleep";
+import { getWhoopIntegrationStatus } from "@/server/integrations";
 
 export const Route = createLazyFileRoute("/progress/")({
   component: ProgressPage,
@@ -43,6 +47,13 @@ export const Route = createLazyFileRoute("/progress/")({
 function ProgressPage() {
   const { user } = Route.useRouteContext();
   const [dateRange, setDateRange] = useState<DateRange>("30d");
+  const { data: sleepHistory = [] } = useSleepHistory(user.id, 7);
+  const { data: sleepAverage } = useSleepAverage(user.id, 7);
+  const useMockProgress = import.meta.env.VITE_USE_MOCK_DASHBOARD === "true";
+  const whoopStatusQuery = useQuery({
+    queryKey: ["whoop-integration-status"],
+    queryFn: async () => getWhoopIntegrationStatus(),
+  });
 
   // In production, these would be fetched based on dateRange
   // For now, use mock data with filtering
@@ -54,6 +65,89 @@ function ProgressPage() {
     mockProgressData.calorieHistory,
     dateRange
   );
+
+  const { sleepData, sleepIsEmpty } = useMemo(() => {
+    if (useMockProgress) {
+      return { sleepData: mockProgressData.sleepData, sleepIsEmpty: false };
+    }
+
+    if (!sleepHistory.length) {
+      const today = new Date();
+      const startDate = new Date(today);
+      startDate.setDate(today.getDate() - 6);
+      startDate.setHours(0, 0, 0, 0);
+
+      const weeklyData = Array.from({ length: 7 }, (_, index) => {
+        const date = new Date(startDate);
+        date.setDate(startDate.getDate() + index);
+        return {
+          day: date.toLocaleDateString("en-US", { weekday: "short" }),
+          hours: 0,
+        };
+      });
+
+      return {
+        sleepData: {
+          avgHours: 0,
+          goalHours: DEFAULT_SLEEP_GOAL,
+          quality: 0,
+          weeklyData,
+        },
+        sleepIsEmpty: true,
+      };
+    }
+
+    const today = new Date();
+    const startDate = new Date(today);
+    startDate.setDate(today.getDate() - 6);
+    startDate.setHours(0, 0, 0, 0);
+
+    const entriesByDate = new Map(
+      sleepHistory.map((entry) => [entry.date, entry])
+    );
+
+    const weeklyData = Array.from({ length: 7 }, (_, index) => {
+      const date = new Date(startDate);
+      date.setDate(startDate.getDate() + index);
+      const key = date.toISOString().split("T")[0];
+      const entry = entriesByDate.get(key);
+      const hours = entry ? entry.hoursSlept : 0;
+      return {
+        day: date.toLocaleDateString("en-US", { weekday: "short" }),
+        hours: Number(hours.toFixed(1)),
+      };
+    });
+
+    const avgHours =
+      sleepAverage?.averageHours ??
+      weeklyData.reduce((sum, day) => sum + day.hours, 0) / weeklyData.length;
+    const avgQuality = sleepAverage?.averageQuality ?? null;
+    const qualityPercent = avgQuality
+      ? Math.round((avgQuality / 5) * 100)
+      : 0;
+
+    return {
+      sleepIsEmpty: false,
+      sleepData: {
+        avgHours: Number(avgHours.toFixed(1)),
+        goalHours: DEFAULT_SLEEP_GOAL,
+        quality: qualityPercent,
+        weeklyData,
+      },
+    };
+  }, [sleepHistory, sleepAverage, useMockProgress]);
+
+  const whoopStatus = whoopStatusQuery.data?.status;
+  const sleepSourceTone = whoopStatusQuery.isLoading
+    ? "loading"
+    : whoopStatus === "connected"
+      ? "whoop"
+      : "manual";
+  const sleepSourceLabel = whoopStatusQuery.isLoading
+    ? "Checking..."
+    : whoopStatus === "connected"
+      ? "WHOOP"
+      : "Manual";
 
   return (
     <AppLayout>
@@ -81,7 +175,12 @@ function ProgressPage() {
         <div className="progress-charts-grid animate-fade-slide-in animate-stagger-2">
           <div className="progress-left-column-stack">
             <MacroBreakdown data={mockProgressData.macroAverages} />
-            <SleepProgressCard data={mockProgressData.sleepData} />
+            <SleepProgressCard
+              data={sleepData}
+              sourceLabel={sleepSourceLabel}
+              sourceTone={sleepSourceTone}
+              isEmpty={sleepIsEmpty}
+            />
           </div>
           <WeeklyComparison data={mockProgressData.comparison} />
         </div>

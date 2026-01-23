@@ -16,6 +16,8 @@ import (
 	"syscall"
 	"time"
 
+	"healthmetrics-services/internal/whoop"
+
 	"github.com/gin-contrib/requestid"
 	"github.com/gin-gonic/gin"
 	"github.com/openfoodfacts/openfoodfacts-go"
@@ -226,6 +228,47 @@ func main() {
 		}
 	}()
 
+	whoopStore := whoop.NewStore(pool)
+	whoopMetrics := whoop.NewMetrics()
+	whoopService := &whoop.Service{
+		DB:           whoopStore,
+		HTTPClient:   &http.Client{Timeout: 10 * time.Second},
+		Logger:       log.New(os.Stdout, "", log.LstdFlags),
+		Metrics:      whoopMetrics,
+		ClientID:     os.Getenv("WHOOP_CLIENT_ID"),
+		ClientSecret: os.Getenv("WHOOP_CLIENT_SECRET"),
+		TokenURL:     os.Getenv("WHOOP_TOKEN_URL"),
+		RedirectURL:  os.Getenv("WHOOP_REDIRECT_URL"),
+	}
+	log.Printf("startup_config whoop_key_set=%t", os.Getenv("WHOOP_TOKEN_ENCRYPTION_KEY") != "")
+
+	// Scheduled WHOOP sync (2x/day). Manual sync still available via API.
+	// This reuses the same SyncIntegration flow as the manual "Sync now" button.
+	go func() { // goroutine: runs this scheduler loop in the background without blocking the HTTP server
+		ticker := time.NewTicker(12 * time.Hour) // run twice per day
+		defer ticker.Stop()
+
+		for range ticker.C {
+			// Give the batch a reasonable window to finish before timing out.
+			ctx, cancel := context.WithTimeout(context.Background(), 30*time.Minute)
+
+			integrations, err := whoopStore.ListConnectedIntegrations(ctx, "whoop")
+			if err != nil {
+				log.Printf("whoop scheduler list error: %v", err)
+				cancel()
+				continue
+			}
+
+			for _, integration := range integrations {
+				if err := whoopService.SyncIntegration(ctx, integration.UserID, integration.ID); err != nil {
+					log.Printf("whoop scheduler sync error user=%s integration=%s err=%v", integration.UserID, integration.ID, err)
+				}
+			}
+
+			cancel()
+		}
+	}()
+
 	capacity, refillRate := getRateLimitConfig() // read rate-limit settings (or defaults)
 	cacheTTL := getCacheTTL()                    // read cache TTL (days -> duration)
 	// Store DB in Gin context so handlers can use it later.
@@ -344,6 +387,39 @@ func main() {
 
 	// This comes from the frontend when the user scans a barcode
 	router.GET("/v1/barcodes/:code", barcode.NewHandler(&api, retryCfg, cacheTTL))
+
+	// This comes from the frontend when the user completes the WHOOP OAuth flow
+	router.POST("/internal/whoop/oauth/exchange", func(c *gin.Context) {
+		whoopService.ExchangeHandler(c.Writer, c.Request)
+	})
+
+	// This comes from the frontend when the user wants to sync their WHOOP data
+	router.POST("/internal/whoop/sync", func(c *gin.Context) {
+		whoopService.SyncHandler(c.Writer, c.Request)
+	})
+
+	// This comes from the frontend when the user wants to disconnect their WHOOP data
+	router.POST("/internal/whoop/disconnect", func(c *gin.Context) {
+		whoopService.DisconnectHandler(c.Writer, c.Request)
+	})
+
+	// Lightweight in-memory metrics for WHOOP observability.
+	router.GET("/internal/whoop/metrics", func(c *gin.Context) {
+		// Restrict metrics to internal callers that know the service API key.
+		if authCfg.APIKey == "" || c.GetHeader("X-API-Key") != authCfg.APIKey {
+			c.JSON(403, gin.H{"error": map[string]interface{}{
+				"code":    "FORBIDDEN",
+				"message": "Metrics access denied",
+			}})
+			return
+		}
+
+		if whoopService.Metrics == nil {
+			c.JSON(200, gin.H{})
+			return
+		}
+		c.JSON(200, whoopService.Metrics.Snapshot())
+	})
 
 	// Print a safe config summary after we compute all config values.
 	logStartupSummary(authCfg, capacity, refillRate, timeout, userAgent, retryCfg, baseURL)

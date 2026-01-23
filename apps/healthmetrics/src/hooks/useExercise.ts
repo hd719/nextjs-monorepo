@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   createWorkoutSession,
+  getExerciseActivity,
   getTodayExerciseSummary,
   searchExercises,
 } from "@/server/exercise";
@@ -24,6 +25,25 @@ export function useExerciseSummary(userId?: string, date?: string) {
     queryKey,
     queryFn: () =>
       getTodayExerciseSummary({ data: { userId: userId!, date: date! } }),
+    enabled,
+    placeholderData: (previousData) => previousData,
+    staleTime: 60 * 1000,
+  });
+}
+
+/**
+ * Hook to fetch merged exercise activity (manual + wearable workouts)
+ */
+export function useExerciseActivity(userId?: string, date?: string) {
+  const enabled = Boolean(userId && date);
+  const queryKey = enabled
+    ? queryKeys.exerciseActivity(userId!, date!)
+    : queryKeys.exerciseActivityBase();
+
+  return useQuery({
+    queryKey,
+    queryFn: () =>
+      getExerciseActivity({ data: { userId: userId!, date: date! } }),
     enabled,
     placeholderData: (previousData) => previousData,
     staleTime: 60 * 1000,

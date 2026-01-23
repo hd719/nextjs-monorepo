@@ -161,7 +161,7 @@ LOG_LEVEL="error"
 # ============================================
 # BARCODE SERVICE (if deployed)
 # ============================================
-BARCODE_SERVICE_URL="https://barcode.healthmetrics.com"
+GO_SERVICE_URL="https://barcode.healthmetrics.com"
 BARCODE_SERVICE_API_KEY="your-32-char-api-key"
 
 # ============================================

@@ -12,8 +12,8 @@ const log = createLogger("server:barcode");
 // CONFIGURATION
 // ============================================================================
 
-// Go barcode service URL - defaults to local dev
-const BARCODE_SERVICE_URL = process.env.BARCODE_SERVICE_URL;
+// Go service URL (barcode + integrations).
+const GO_SERVICE_URL = process.env.GO_SERVICE_URL;
 
 // API key for service-to-service authentication with Go service
 const BARCODE_SERVICE_API_KEY = process.env.BARCODE_SERVICE_API_KEY;
@@ -233,7 +233,11 @@ export const lookupBarcode = createServerFn({ method: "GET" })
     const cookieHeader = headers.get("cookie") || "";
 
     // Call Go service for real data
-    const url = `${BARCODE_SERVICE_URL}/v1/barcodes/${barcode}`;
+    if (!GO_SERVICE_URL) {
+      throw new Error("GO_SERVICE_URL is required for barcode lookups");
+    }
+
+    const url = `${GO_SERVICE_URL}/v1/barcodes/${barcode}`;
 
     try {
       log.info(

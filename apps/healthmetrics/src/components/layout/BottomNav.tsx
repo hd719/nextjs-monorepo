@@ -8,6 +8,7 @@ import {
   User,
   Moon,
   Trophy,
+  Plug,
 } from "lucide-react";
 
 interface NavItem {
@@ -25,6 +26,7 @@ const navItems: NavItem[] = [
   { icon: Trophy, label: "Achievements", href: "/achievements" },
   { icon: TrendingUp, label: "Progress", href: "/progress" },
   { icon: User, label: "Profile", href: "/profile" },
+  { icon: Plug, label: "Integrations", href: "/integrations" },
 ];
 
 export function BottomNav() {

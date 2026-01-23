@@ -38,6 +38,97 @@
   }
 
   /* ==========================================================================
+     Exercise Activity List
+     ========================================================================== */
+
+  .exercise-activity-card {
+    @apply border;
+    background-color: var(--card);
+    border-color: var(--border);
+  }
+
+  .exercise-activity-content {
+    @apply p-5;
+  }
+
+  .exercise-activity-empty {
+    @apply rounded-lg border p-5 text-center;
+    border-color: var(--border);
+    background-color: color-mix(in srgb, var(--card) 90%, transparent);
+  }
+
+  .exercise-activity-empty-title {
+    @apply text-sm font-semibold;
+  }
+
+  .exercise-activity-empty-subtitle {
+    @apply mt-1 text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .exercise-activity-list {
+    @apply flex flex-col gap-3;
+  }
+
+  .exercise-activity-item {
+    @apply flex flex-col gap-3 rounded-lg border p-4 md:flex-row md:items-center md:justify-between;
+    border-color: var(--border);
+    background-color: color-mix(in srgb, var(--card) 94%, transparent);
+  }
+
+  .exercise-activity-main {
+    @apply flex flex-col gap-1;
+  }
+
+  .exercise-activity-title-row {
+    @apply flex flex-wrap items-center gap-2;
+  }
+
+  .exercise-activity-title {
+    @apply text-sm font-semibold capitalize;
+  }
+
+  .exercise-activity-subtitle {
+    @apply text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .exercise-activity-badge {
+    @apply rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide;
+  }
+
+  .exercise-activity-badge-whoop {
+    background-color: color-mix(in srgb, var(--primary) 15%, transparent);
+    color: var(--primary);
+  }
+
+  .exercise-activity-badge-manual {
+    background-color: color-mix(in srgb, var(--foreground) 8%, transparent);
+    color: var(--muted-foreground);
+  }
+
+  .exercise-activity-meta {
+    @apply flex flex-wrap items-center gap-3 text-xs;
+    color: var(--muted-foreground);
+  }
+
+  .exercise-activity-time {
+    @apply font-medium;
+    color: var(--foreground);
+  }
+
+  .exercise-activity-stat {
+    @apply rounded-full border px-2 py-0.5;
+    border-color: var(--border);
+  }
+
+  .exercise-activity-readonly {
+    @apply rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide;
+    border-color: color-mix(in srgb, var(--primary) 30%, transparent);
+    color: var(--primary);
+  }
+
+  /* ==========================================================================
      SummaryStatCard
      ========================================================================== */
 

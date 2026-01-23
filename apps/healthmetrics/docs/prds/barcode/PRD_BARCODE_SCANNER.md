@@ -189,7 +189,7 @@ The Go service (documented in `PRD_GO_BARCODE_LOOKUP_SERVICE.md`) validates:
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `BARCODE_SERVICE_URL` | Yes (prod) | Go microservice URL (e.g., `http://localhost:8080`) |
+| `GO_SERVICE_URL` | Yes (prod) | Go microservice URL (e.g., `http://localhost:8080`) |
 | `BARCODE_SERVICE_API_KEY` | Yes (prod) | Shared secret for service-to-service auth (min 32 chars) |
 | `BETTER_AUTH_SECRET` | Yes | Shared with Go service for JWT verification |
 
@@ -604,7 +604,7 @@ src/
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `BARCODE_SERVICE_URL` | Go microservice URL | `http://localhost:8080` |
+| `GO_SERVICE_URL` | Go microservice URL | `http://localhost:8080` |
 | `BARCODE_SERVICE_API_KEY` | API key for Go service auth (min 32 chars) | Required in prod |
 | `BETTER_AUTH_SECRET` | Shared secret for JWT verification | Required |
 | `VITE_USE_MOCK_BARCODE` | Use mock data instead of Go service | `false` |
@@ -704,7 +704,7 @@ src/
 - [x] Accessibility features (screen reader, keyboard nav)
 - [x] Error handling for all edge cases
 - [ ] Go microservice deployed (required for production)
-- [ ] `BARCODE_SERVICE_URL` configured in production
+- [ ] `GO_SERVICE_URL` configured in production
 
 ---
 

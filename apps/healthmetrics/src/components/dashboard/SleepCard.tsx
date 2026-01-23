@@ -9,6 +9,8 @@ import type { SleepCardData } from "@/types";
 export interface SleepCardProps {
   data: SleepCardData | null;
   isLoading?: boolean;
+  sourceLabel?: string;
+  sourceTone?: "whoop" | "manual" | "loading";
 }
 
 function formatTime(time: string): string {
@@ -35,7 +37,12 @@ function QualityStars({ quality }: { quality: number }) {
   );
 }
 
-export function SleepCard({ data, isLoading }: SleepCardProps) {
+export function SleepCard({
+  data,
+  isLoading,
+  sourceLabel,
+  sourceTone,
+}: SleepCardProps) {
   const navigate = useNavigate();
 
   if (isLoading) {
@@ -65,7 +72,16 @@ export function SleepCard({ data, isLoading }: SleepCardProps) {
   if (!data || !data.hasEntry) {
     return (
       <section className="dashboard-sleep-section">
-        <h2 className="dashboard-sleep-heading">Last Night&apos;s Sleep</h2>
+        <div className="dashboard-sleep-heading-row">
+          <h2 className="dashboard-sleep-heading">Last Night&apos;s Sleep</h2>
+          {sourceLabel ? (
+            <span
+              className={`dashboard-sleep-source dashboard-sleep-source--${sourceTone ?? "manual"}`}
+            >
+              {sourceLabel}
+            </span>
+          ) : null}
+        </div>
         <EmptyState
           icon={Moon}
           title="No sleep logged"
@@ -82,7 +98,16 @@ export function SleepCard({ data, isLoading }: SleepCardProps) {
 
   return (
     <section className="dashboard-sleep-section">
-      <h2 className="dashboard-sleep-heading">Last Night&apos;s Sleep</h2>
+      <div className="dashboard-sleep-heading-row">
+        <h2 className="dashboard-sleep-heading">Last Night&apos;s Sleep</h2>
+        {sourceLabel ? (
+          <span
+            className={`dashboard-sleep-source dashboard-sleep-source--${sourceTone ?? "manual"}`}
+          >
+            {sourceLabel}
+          </span>
+        ) : null}
+      </div>
       <Card variant="supporting" className="dashboard-card-stretch">
         <CardHeader>
           <CardTitle className="dashboard-sleep-title">Sleep Summary</CardTitle>

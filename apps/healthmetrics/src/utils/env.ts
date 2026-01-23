@@ -25,8 +25,11 @@ const envSchema = z.object({
   SES_FROM_EMAIL: z.string().email().optional(),
   SES_CONFIGURATION_SET: z.string().min(1).optional(),
   EMAIL_DELIVERY_MODE: z.enum(["log", "ses"]).optional(),
-  // Barcode service configuration
-  BARCODE_SERVICE_URL: z.string().url().optional(),
+  // WHOOP integration
+  WHOOP_CLIENT_ID: z.string().min(1).optional(),
+  WHOOP_REDIRECT_URL: z.string().url().optional(),
+  // Go service configuration (barcode + integrations)
+  GO_SERVICE_URL: z.string().url().optional(),
   BARCODE_SERVICE_API_KEY: z.string().min(32).optional(),
   // Mock data flags
   VITE_USE_MOCK_DASHBOARD: z.string().optional(),
@@ -57,7 +60,7 @@ export function validateEnv(): Env {
     console.error("Environment validation failed:\n" + errors);
 
     throw new Error(
-      `Environment validation failed. Check your .env file.\n${errors}`
+      `Environment validation failed. Check your .env file.\n${errors}`,
     );
   }
 
@@ -74,13 +77,11 @@ export function validateEnv(): Env {
       "SES_FROM_EMAIL",
     ] as const;
 
-    const missing = required.filter(
-      (key) => !result.data[key as keyof Env]
-    );
+    const missing = required.filter((key) => !result.data[key as keyof Env]);
 
     if (missing.length > 0) {
       throw new Error(
-        `Environment validation failed. Missing: ${missing.join(", ")}`
+        `Environment validation failed. Missing: ${missing.join(", ")}`,
       );
     }
   }

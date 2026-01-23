@@ -516,8 +516,33 @@
     @apply flex flex-col gap-4 h-full;
   }
 
+  .dashboard-sleep-heading-row {
+    @apply flex items-center justify-between gap-3 flex-wrap;
+  }
+
   .dashboard-sleep-heading {
     @apply text-2xl font-bold;
+  }
+
+  .dashboard-sleep-source {
+    @apply text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full;
+    background: color-mix(in srgb, var(--accent) 20%, transparent);
+    color: var(--accent);
+  }
+
+  .dashboard-sleep-source--whoop {
+    background: color-mix(in srgb, var(--accent) 20%, transparent);
+    color: var(--accent);
+  }
+
+  .dashboard-sleep-source--manual {
+    background: color-mix(in srgb, var(--border) 60%, transparent);
+    color: var(--muted-foreground);
+  }
+
+  .dashboard-sleep-source--loading {
+    background: color-mix(in srgb, var(--muted-foreground) 18%, transparent);
+    color: var(--muted-foreground);
   }
 
   .dashboard-sleep-title {

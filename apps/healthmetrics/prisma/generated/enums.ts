@@ -140,3 +140,19 @@ export const FastingStatus = {
 } as const
 
 export type FastingStatus = (typeof FastingStatus)[keyof typeof FastingStatus]
+
+
+export const IntegrationProvider = {
+  whoop: 'whoop'
+} as const
+
+export type IntegrationProvider = (typeof IntegrationProvider)[keyof typeof IntegrationProvider]
+
+
+export const IntegrationStatus = {
+  connected: 'connected',
+  disconnected: 'disconnected',
+  error: 'error'
+} as const
+
+export type IntegrationStatus = (typeof IntegrationStatus)[keyof typeof IntegrationStatus]

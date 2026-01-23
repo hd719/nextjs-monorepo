@@ -5,6 +5,67 @@ import type { SleepData, SleepHistoryEntry } from "@/types/sleep";
 
 const log = createLogger("server:sleep");
 
+const WHOOP_PROVIDER = "whoop";
+
+type WhoopSleepRow = {
+  startAt: Date;
+  endAt: Date;
+  durationSeconds: number;
+  sleepScore: number | null;
+  sourceTzOffsetMinutes: number;
+};
+
+async function getConnectedWhoopIntegrationId(
+  userId: string
+): Promise<string | null> {
+  const integration = await prisma.integration.findUnique({
+    where: {
+      userId_provider: { userId, provider: WHOOP_PROVIDER },
+    },
+    select: {
+      id: true,
+      status: true,
+    },
+  });
+
+  if (!integration || integration.status !== "connected") {
+    return null;
+  }
+
+  return integration.id;
+}
+
+function formatTimeFromOffset(date: Date, offsetMinutes: number): string {
+  const local = new Date(date.getTime() + offsetMinutes * 60 * 1000);
+  const hours = local.getUTCHours().toString().padStart(2, "0");
+  const minutes = local.getUTCMinutes().toString().padStart(2, "0");
+  return `${hours}:${minutes}`;
+}
+
+function mapWhoopScoreToQuality(score: number | null): number | null {
+  if (score === null || Number.isNaN(score)) {
+    return null;
+  }
+  // Map 0-100 to 1-5 (best effort for UI parity).
+  return Math.min(5, Math.max(1, Math.round((score / 100) * 4 + 1)));
+}
+
+function toSleepDataFromWhoop(
+  row: WhoopSleepRow,
+  date: string
+): SleepData {
+  const hoursSlept = row.durationSeconds / 3600;
+  const quality = mapWhoopScoreToQuality(row.sleepScore);
+  return {
+    hoursSlept,
+    quality,
+    bedtime: formatTimeFromOffset(row.startAt, row.sourceTzOffsetMinutes),
+    wakeTime: formatTimeFromOffset(row.endAt, row.sourceTzOffsetMinutes),
+    date,
+    hasEntry: true,
+  };
+}
+
 // ============================================================================
 // QUERY FUNCTIONS
 // ============================================================================
@@ -18,6 +79,40 @@ export const getSleepEntry = createServerFn({ method: "GET" })
   .handler(async ({ data: { userId, date } }): Promise<SleepData> => {
     try {
       const dateObj = new Date(date + "T00:00:00.000Z");
+
+      const whoopIntegrationId = await getConnectedWhoopIntegrationId(userId);
+      if (whoopIntegrationId) {
+        const whoopSleep = await prisma.integrationSleep.findFirst({
+          where: {
+            integrationId: whoopIntegrationId,
+            localDate: dateObj,
+            isPrimary: true,
+          },
+          orderBy: {
+            durationSeconds: "desc",
+          },
+          select: {
+            startAt: true,
+            endAt: true,
+            durationSeconds: true,
+            sleepScore: true,
+            sourceTzOffsetMinutes: true,
+          },
+        });
+
+        if (whoopSleep) {
+          return toSleepDataFromWhoop(
+            {
+              startAt: whoopSleep.startAt,
+              endAt: whoopSleep.endAt,
+              durationSeconds: whoopSleep.durationSeconds,
+              sleepScore: whoopSleep.sleepScore ?? null,
+              sourceTzOffsetMinutes: whoopSleep.sourceTzOffsetMinutes,
+            },
+            date
+          );
+        }
+      }
 
       const sleepEntry = await prisma.sleepEntry.findUnique({
         where: {
@@ -76,6 +171,40 @@ export const getSleepHistory = createServerFn({ method: "GET" })
       startDate.setDate(startDate.getDate() - days);
       startDate.setHours(0, 0, 0, 0);
 
+      const whoopIntegrationId = await getConnectedWhoopIntegrationId(userId);
+      if (whoopIntegrationId) {
+        const entries = await prisma.integrationSleep.findMany({
+          where: {
+            integrationId: whoopIntegrationId,
+            localDate: { gte: startDate },
+            isPrimary: true,
+          },
+          orderBy: { localDate: "desc" },
+          select: {
+            localDate: true,
+            startAt: true,
+            endAt: true,
+            durationSeconds: true,
+            sleepScore: true,
+            sourceTzOffsetMinutes: true,
+          },
+        });
+
+        return entries.map((entry) => ({
+          date: entry.localDate.toISOString().split("T")[0],
+          hoursSlept: entry.durationSeconds / 3600,
+          quality: mapWhoopScoreToQuality(entry.sleepScore ?? null) ?? 0,
+          bedtime: formatTimeFromOffset(
+            entry.startAt,
+            entry.sourceTzOffsetMinutes
+          ),
+          wakeTime: formatTimeFromOffset(
+            entry.endAt,
+            entry.sourceTzOffsetMinutes
+          ),
+        }));
+      }
+
       const entries = await prisma.sleepEntry.findMany({
         where: {
           userId,
@@ -118,6 +247,45 @@ export const getSleepAverage = createServerFn({ method: "GET" })
         const startDate = new Date();
         startDate.setDate(startDate.getDate() - days);
         startDate.setHours(0, 0, 0, 0);
+
+        const whoopIntegrationId = await getConnectedWhoopIntegrationId(userId);
+        if (whoopIntegrationId) {
+          const entries = await prisma.integrationSleep.findMany({
+            where: {
+              integrationId: whoopIntegrationId,
+              localDate: { gte: startDate },
+              isPrimary: true,
+            },
+            select: {
+              durationSeconds: true,
+              sleepScore: true,
+            },
+          });
+
+          if (entries.length === 0) {
+            return { averageHours: 0, averageQuality: null };
+          }
+
+          const totalHours = entries.reduce(
+            (sum, entry) => sum + entry.durationSeconds / 3600,
+            0
+          );
+          const qualities = entries
+            .map((entry) => mapWhoopScoreToQuality(entry.sleepScore ?? null))
+            .filter((quality): quality is number => quality !== null);
+          const avgQuality =
+            qualities.length > 0
+              ? qualities.reduce((sum, value) => sum + value, 0) /
+                qualities.length
+              : null;
+
+          return {
+            averageHours: totalHours / entries.length,
+            averageQuality: avgQuality
+              ? Math.round(avgQuality * 10) / 10
+              : null,
+          };
+        }
 
         const result = await prisma.sleepEntry.aggregate({
           where: {

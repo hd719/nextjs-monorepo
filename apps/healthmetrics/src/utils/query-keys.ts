@@ -26,6 +26,9 @@ export const queryKeys = {
   exerciseSummary: (userId: string, date: string) =>
     ["exercise", "summary", userId, date] as const,
   exerciseSummaryBase: () => ["exercise"] as const,
+  exerciseActivity: (userId: string, date: string) =>
+    ["exercise", "activity", userId, date] as const,
+  exerciseActivityBase: () => ["exercise", "activity"] as const,
   workoutDay: (userId: string, date: string) =>
     ["exercise", "workout", userId, date] as const,
   workoutDayBase: () => ["exercise"] as const,

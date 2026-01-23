@@ -443,6 +443,8 @@ export type UserWhereInput = {
   fastingProtocols?: Prisma.FastingProtocolListRelationFilter
   fastingSessions?: Prisma.FastingSessionListRelationFilter
   barcodeScans?: Prisma.BarcodeScanListRelationFilter
+  integrations?: Prisma.IntegrationListRelationFilter
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -495,6 +497,8 @@ export type UserOrderByWithRelationInput = {
   fastingProtocols?: Prisma.FastingProtocolOrderByRelationAggregateInput
   fastingSessions?: Prisma.FastingSessionOrderByRelationAggregateInput
   barcodeScans?: Prisma.BarcodeScanOrderByRelationAggregateInput
+  integrations?: Prisma.IntegrationOrderByRelationAggregateInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -550,6 +554,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   fastingProtocols?: Prisma.FastingProtocolListRelationFilter
   fastingSessions?: Prisma.FastingSessionListRelationFilter
   barcodeScans?: Prisma.BarcodeScanListRelationFilter
+  integrations?: Prisma.IntegrationListRelationFilter
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateListRelationFilter
 }, "id">
 
 export type UserOrderByWithAggregationInput = {
@@ -667,6 +673,8 @@ export type UserCreateInput = {
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -718,6 +726,8 @@ export type UserUncheckedCreateInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -769,6 +779,8 @@ export type UserUpdateInput = {
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -820,6 +832,8 @@ export type UserUncheckedUpdateInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -1101,6 +1115,34 @@ export type IntFieldUpdateOperationsInput = {
 
 export type EnumUnitsFieldUpdateOperationsInput = {
   set?: $Enums.Units
+}
+
+export type UserCreateNestedOneWithoutIntegrationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIntegrationsInput, Prisma.UserUncheckedCreateWithoutIntegrationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIntegrationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutIntegrationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIntegrationsInput, Prisma.UserUncheckedCreateWithoutIntegrationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIntegrationsInput
+  upsert?: Prisma.UserUpsertWithoutIntegrationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutIntegrationsInput, Prisma.UserUpdateWithoutIntegrationsInput>, Prisma.UserUncheckedUpdateWithoutIntegrationsInput>
+}
+
+export type UserCreateNestedOneWithoutIntegrationOAuthStatesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIntegrationOAuthStatesInput, Prisma.UserUncheckedCreateWithoutIntegrationOAuthStatesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIntegrationOAuthStatesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutIntegrationOAuthStatesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIntegrationOAuthStatesInput, Prisma.UserUncheckedCreateWithoutIntegrationOAuthStatesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIntegrationOAuthStatesInput
+  upsert?: Prisma.UserUpsertWithoutIntegrationOAuthStatesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutIntegrationOAuthStatesInput, Prisma.UserUpdateWithoutIntegrationOAuthStatesInput>, Prisma.UserUncheckedUpdateWithoutIntegrationOAuthStatesInput>
 }
 
 export type UserCreateNestedOneWithoutCreatedFoodItemsInput = {
@@ -1465,6 +1507,8 @@ export type UserCreateWithoutAuthUserInput = {
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAuthUserInput = {
@@ -1515,6 +1559,8 @@ export type UserUncheckedCreateWithoutAuthUserInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAuthUserInput = {
@@ -1581,6 +1627,8 @@ export type UserUpdateWithoutAuthUserInput = {
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuthUserInput = {
@@ -1631,6 +1679,456 @@ export type UserUncheckedUpdateWithoutAuthUserInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutIntegrationsInput = {
+  displayName?: string | null
+  avatarKey?: string | null
+  dateOfBirth?: Date | string | null
+  gender?: $Enums.Gender | null
+  heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: $Enums.ActivityLevel | null
+  goalType?: $Enums.GoalType | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: number | null
+  dailyProteinGoalG?: number | null
+  dailyCarbGoalG?: number | null
+  dailyFatGoalG?: number | null
+  dailyWaterGoal?: number
+  dailyStepGoal?: number
+  unitsPreference?: $Enums.Units
+  timezone?: string
+  isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
+  createdFoodItems?: Prisma.FoodItemCreateNestedManyWithoutCreatorInput
+  createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
+  diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
+  workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
+  waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
+  stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
+  mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
+  goals?: Prisma.GoalCreateNestedManyWithoutUserInput
+  sentFriendships?: Prisma.FriendshipCreateNestedManyWithoutUserInput
+  receivedFriendships?: Prisma.FriendshipCreateNestedManyWithoutFriendInput
+  requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
+  createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
+  challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
+  barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutIntegrationsInput = {
+  id: string
+  displayName?: string | null
+  avatarKey?: string | null
+  dateOfBirth?: Date | string | null
+  gender?: $Enums.Gender | null
+  heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: $Enums.ActivityLevel | null
+  goalType?: $Enums.GoalType | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: number | null
+  dailyProteinGoalG?: number | null
+  dailyCarbGoalG?: number | null
+  dailyFatGoalG?: number | null
+  dailyWaterGoal?: number
+  dailyStepGoal?: number
+  unitsPreference?: $Enums.Units
+  timezone?: string
+  isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
+  createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
+  diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
+  workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
+  waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
+  stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
+  mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
+  goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
+  sentFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUserInput
+  receivedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutFriendInput
+  requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
+  createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
+  challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
+  barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutIntegrationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutIntegrationsInput, Prisma.UserUncheckedCreateWithoutIntegrationsInput>
+}
+
+export type UserUpsertWithoutIntegrationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutIntegrationsInput, Prisma.UserUncheckedUpdateWithoutIntegrationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutIntegrationsInput, Prisma.UserUncheckedCreateWithoutIntegrationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutIntegrationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutIntegrationsInput, Prisma.UserUncheckedUpdateWithoutIntegrationsInput>
+}
+
+export type UserUpdateWithoutIntegrationsInput = {
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyFatGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyWaterGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  dailyStepGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
+  createdFoodItems?: Prisma.FoodItemUpdateManyWithoutCreatorNestedInput
+  createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
+  diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
+  workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
+  waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
+  stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
+  mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
+  goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
+  sentFriendships?: Prisma.FriendshipUpdateManyWithoutUserNestedInput
+  receivedFriendships?: Prisma.FriendshipUpdateManyWithoutFriendNestedInput
+  requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
+  createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
+  challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
+  barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutIntegrationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyFatGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyWaterGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  dailyStepGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
+  createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
+  diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
+  workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
+  waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
+  stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
+  mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
+  goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
+  sentFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutUserNestedInput
+  receivedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutFriendNestedInput
+  requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
+  createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
+  challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
+  barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutIntegrationOAuthStatesInput = {
+  displayName?: string | null
+  avatarKey?: string | null
+  dateOfBirth?: Date | string | null
+  gender?: $Enums.Gender | null
+  heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: $Enums.ActivityLevel | null
+  goalType?: $Enums.GoalType | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: number | null
+  dailyProteinGoalG?: number | null
+  dailyCarbGoalG?: number | null
+  dailyFatGoalG?: number | null
+  dailyWaterGoal?: number
+  dailyStepGoal?: number
+  unitsPreference?: $Enums.Units
+  timezone?: string
+  isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  authUser?: Prisma.BetterAuthUserCreateNestedOneWithoutUserProfileInput
+  createdFoodItems?: Prisma.FoodItemCreateNestedManyWithoutCreatorInput
+  createdExercises?: Prisma.ExerciseCreateNestedManyWithoutCreatorInput
+  diaryEntries?: Prisma.DiaryEntryCreateNestedManyWithoutUserInput
+  workoutLogs?: Prisma.WorkoutLogCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryCreateNestedManyWithoutUserInput
+  waterEntries?: Prisma.WaterEntryCreateNestedManyWithoutUserInput
+  stepEntries?: Prisma.StepEntryCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryCreateNestedManyWithoutUserInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateCreateNestedManyWithoutUserInput
+  mealPlans?: Prisma.MealPlanCreateNestedManyWithoutUserInput
+  goals?: Prisma.GoalCreateNestedManyWithoutUserInput
+  sentFriendships?: Prisma.FriendshipCreateNestedManyWithoutUserInput
+  receivedFriendships?: Prisma.FriendshipCreateNestedManyWithoutFriendInput
+  requestedFriendships?: Prisma.FriendshipCreateNestedManyWithoutRequestedByUserInput
+  createdChallenges?: Prisma.ChallengeCreateNestedManyWithoutCreatorInput
+  challengeParticipations?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
+  barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutIntegrationOAuthStatesInput = {
+  id: string
+  displayName?: string | null
+  avatarKey?: string | null
+  dateOfBirth?: Date | string | null
+  gender?: $Enums.Gender | null
+  heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: $Enums.ActivityLevel | null
+  goalType?: $Enums.GoalType | null
+  targetWeightLbs?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: number | null
+  dailyProteinGoalG?: number | null
+  dailyCarbGoalG?: number | null
+  dailyFatGoalG?: number | null
+  dailyWaterGoal?: number
+  dailyStepGoal?: number
+  unitsPreference?: $Enums.Units
+  timezone?: string
+  isAdmin?: boolean
+  onboardingCompleted?: boolean
+  onboardingStep?: number
+  onboardingSkippedAt?: Date | string | null
+  onboardingCompletedAt?: Date | string | null
+  defaultFastingProtocolId?: string | null
+  fastingGoalPerWeek?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdFoodItems?: Prisma.FoodItemUncheckedCreateNestedManyWithoutCreatorInput
+  createdExercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutCreatorInput
+  diaryEntries?: Prisma.DiaryEntryUncheckedCreateNestedManyWithoutUserInput
+  workoutLogs?: Prisma.WorkoutLogUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
+  weightEntries?: Prisma.WeightEntryUncheckedCreateNestedManyWithoutUserInput
+  waterEntries?: Prisma.WaterEntryUncheckedCreateNestedManyWithoutUserInput
+  stepEntries?: Prisma.StepEntryUncheckedCreateNestedManyWithoutUserInput
+  sleepEntries?: Prisma.SleepEntryUncheckedCreateNestedManyWithoutUserInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedCreateNestedManyWithoutUserInput
+  mealPlans?: Prisma.MealPlanUncheckedCreateNestedManyWithoutUserInput
+  goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
+  sentFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUserInput
+  receivedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutFriendInput
+  requestedFriendships?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequestedByUserInput
+  createdChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutCreatorInput
+  challengeParticipations?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  streak?: Prisma.UserStreakUncheckedCreateNestedOneWithoutUserInput
+  userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
+  fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
+  barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutIntegrationOAuthStatesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutIntegrationOAuthStatesInput, Prisma.UserUncheckedCreateWithoutIntegrationOAuthStatesInput>
+}
+
+export type UserUpsertWithoutIntegrationOAuthStatesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutIntegrationOAuthStatesInput, Prisma.UserUncheckedUpdateWithoutIntegrationOAuthStatesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutIntegrationOAuthStatesInput, Prisma.UserUncheckedCreateWithoutIntegrationOAuthStatesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutIntegrationOAuthStatesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutIntegrationOAuthStatesInput, Prisma.UserUncheckedUpdateWithoutIntegrationOAuthStatesInput>
+}
+
+export type UserUpdateWithoutIntegrationOAuthStatesInput = {
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyFatGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyWaterGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  dailyStepGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authUser?: Prisma.BetterAuthUserUpdateOneWithoutUserProfileNestedInput
+  createdFoodItems?: Prisma.FoodItemUpdateManyWithoutCreatorNestedInput
+  createdExercises?: Prisma.ExerciseUpdateManyWithoutCreatorNestedInput
+  diaryEntries?: Prisma.DiaryEntryUpdateManyWithoutUserNestedInput
+  workoutLogs?: Prisma.WorkoutLogUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUpdateManyWithoutUserNestedInput
+  waterEntries?: Prisma.WaterEntryUpdateManyWithoutUserNestedInput
+  stepEntries?: Prisma.StepEntryUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUpdateManyWithoutUserNestedInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUpdateManyWithoutUserNestedInput
+  mealPlans?: Prisma.MealPlanUpdateManyWithoutUserNestedInput
+  goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
+  sentFriendships?: Prisma.FriendshipUpdateManyWithoutUserNestedInput
+  receivedFriendships?: Prisma.FriendshipUpdateManyWithoutFriendNestedInput
+  requestedFriendships?: Prisma.FriendshipUpdateManyWithoutRequestedByUserNestedInput
+  createdChallenges?: Prisma.ChallengeUpdateManyWithoutCreatorNestedInput
+  challengeParticipations?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
+  barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutIntegrationOAuthStatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  activityLevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  goalType?: Prisma.NullableEnumGoalTypeFieldUpdateOperationsInput | $Enums.GoalType | null
+  targetWeightLbs?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  dailyCalorieGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyProteinGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyCarbGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyFatGoalG?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dailyWaterGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  dailyStepGoal?: Prisma.IntFieldUpdateOperationsInput | number
+  unitsPreference?: Prisma.EnumUnitsFieldUpdateOperationsInput | $Enums.Units
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingSkippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  defaultFastingProtocolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fastingGoalPerWeek?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdFoodItems?: Prisma.FoodItemUncheckedUpdateManyWithoutCreatorNestedInput
+  createdExercises?: Prisma.ExerciseUncheckedUpdateManyWithoutCreatorNestedInput
+  diaryEntries?: Prisma.DiaryEntryUncheckedUpdateManyWithoutUserNestedInput
+  workoutLogs?: Prisma.WorkoutLogUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
+  weightEntries?: Prisma.WeightEntryUncheckedUpdateManyWithoutUserNestedInput
+  waterEntries?: Prisma.WaterEntryUncheckedUpdateManyWithoutUserNestedInput
+  stepEntries?: Prisma.StepEntryUncheckedUpdateManyWithoutUserNestedInput
+  sleepEntries?: Prisma.SleepEntryUncheckedUpdateManyWithoutUserNestedInput
+  mealPlanTemplates?: Prisma.MealPlanTemplateUncheckedUpdateManyWithoutUserNestedInput
+  mealPlans?: Prisma.MealPlanUncheckedUpdateManyWithoutUserNestedInput
+  goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
+  sentFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutUserNestedInput
+  receivedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutFriendNestedInput
+  requestedFriendships?: Prisma.FriendshipUncheckedUpdateManyWithoutRequestedByUserNestedInput
+  createdChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
+  challengeParticipations?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  streak?: Prisma.UserStreakUncheckedUpdateOneWithoutUserNestedInput
+  userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
+  fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
+  barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreatedFoodItemsInput = {
@@ -1681,6 +2179,8 @@ export type UserCreateWithoutCreatedFoodItemsInput = {
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreatedFoodItemsInput = {
@@ -1731,6 +2231,8 @@ export type UserUncheckedCreateWithoutCreatedFoodItemsInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreatedFoodItemsInput = {
@@ -1797,6 +2299,8 @@ export type UserUpdateWithoutCreatedFoodItemsInput = {
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedFoodItemsInput = {
@@ -1847,6 +2351,8 @@ export type UserUncheckedUpdateWithoutCreatedFoodItemsInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreatedExercisesInput = {
@@ -1897,6 +2403,8 @@ export type UserCreateWithoutCreatedExercisesInput = {
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreatedExercisesInput = {
@@ -1947,6 +2455,8 @@ export type UserUncheckedCreateWithoutCreatedExercisesInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreatedExercisesInput = {
@@ -2013,6 +2523,8 @@ export type UserUpdateWithoutCreatedExercisesInput = {
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedExercisesInput = {
@@ -2063,6 +2575,8 @@ export type UserUncheckedUpdateWithoutCreatedExercisesInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDiaryEntriesInput = {
@@ -2113,6 +2627,8 @@ export type UserCreateWithoutDiaryEntriesInput = {
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDiaryEntriesInput = {
@@ -2163,6 +2679,8 @@ export type UserUncheckedCreateWithoutDiaryEntriesInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDiaryEntriesInput = {
@@ -2229,6 +2747,8 @@ export type UserUpdateWithoutDiaryEntriesInput = {
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDiaryEntriesInput = {
@@ -2279,6 +2799,8 @@ export type UserUncheckedUpdateWithoutDiaryEntriesInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutWorkoutSessionsInput = {
@@ -2329,6 +2851,8 @@ export type UserCreateWithoutWorkoutSessionsInput = {
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWorkoutSessionsInput = {
@@ -2379,6 +2903,8 @@ export type UserUncheckedCreateWithoutWorkoutSessionsInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWorkoutSessionsInput = {
@@ -2445,6 +2971,8 @@ export type UserUpdateWithoutWorkoutSessionsInput = {
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWorkoutSessionsInput = {
@@ -2495,6 +3023,8 @@ export type UserUncheckedUpdateWithoutWorkoutSessionsInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutWorkoutLogsInput = {
@@ -2545,6 +3075,8 @@ export type UserCreateWithoutWorkoutLogsInput = {
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWorkoutLogsInput = {
@@ -2595,6 +3127,8 @@ export type UserUncheckedCreateWithoutWorkoutLogsInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWorkoutLogsInput = {
@@ -2661,6 +3195,8 @@ export type UserUpdateWithoutWorkoutLogsInput = {
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWorkoutLogsInput = {
@@ -2711,6 +3247,8 @@ export type UserUncheckedUpdateWithoutWorkoutLogsInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutWeightEntriesInput = {
@@ -2761,6 +3299,8 @@ export type UserCreateWithoutWeightEntriesInput = {
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWeightEntriesInput = {
@@ -2811,6 +3351,8 @@ export type UserUncheckedCreateWithoutWeightEntriesInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWeightEntriesInput = {
@@ -2877,6 +3419,8 @@ export type UserUpdateWithoutWeightEntriesInput = {
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWeightEntriesInput = {
@@ -2927,6 +3471,8 @@ export type UserUncheckedUpdateWithoutWeightEntriesInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutWaterEntriesInput = {
@@ -2977,6 +3523,8 @@ export type UserCreateWithoutWaterEntriesInput = {
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWaterEntriesInput = {
@@ -3027,6 +3575,8 @@ export type UserUncheckedCreateWithoutWaterEntriesInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWaterEntriesInput = {
@@ -3093,6 +3643,8 @@ export type UserUpdateWithoutWaterEntriesInput = {
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWaterEntriesInput = {
@@ -3143,6 +3695,8 @@ export type UserUncheckedUpdateWithoutWaterEntriesInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutStepEntriesInput = {
@@ -3193,6 +3747,8 @@ export type UserCreateWithoutStepEntriesInput = {
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutStepEntriesInput = {
@@ -3243,6 +3799,8 @@ export type UserUncheckedCreateWithoutStepEntriesInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutStepEntriesInput = {
@@ -3309,6 +3867,8 @@ export type UserUpdateWithoutStepEntriesInput = {
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStepEntriesInput = {
@@ -3359,6 +3919,8 @@ export type UserUncheckedUpdateWithoutStepEntriesInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSleepEntriesInput = {
@@ -3409,6 +3971,8 @@ export type UserCreateWithoutSleepEntriesInput = {
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSleepEntriesInput = {
@@ -3459,6 +4023,8 @@ export type UserUncheckedCreateWithoutSleepEntriesInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSleepEntriesInput = {
@@ -3525,6 +4091,8 @@ export type UserUpdateWithoutSleepEntriesInput = {
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSleepEntriesInput = {
@@ -3575,6 +4143,8 @@ export type UserUncheckedUpdateWithoutSleepEntriesInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMealPlanTemplatesInput = {
@@ -3625,6 +4195,8 @@ export type UserCreateWithoutMealPlanTemplatesInput = {
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMealPlanTemplatesInput = {
@@ -3675,6 +4247,8 @@ export type UserUncheckedCreateWithoutMealPlanTemplatesInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMealPlanTemplatesInput = {
@@ -3741,6 +4315,8 @@ export type UserUpdateWithoutMealPlanTemplatesInput = {
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMealPlanTemplatesInput = {
@@ -3791,6 +4367,8 @@ export type UserUncheckedUpdateWithoutMealPlanTemplatesInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMealPlansInput = {
@@ -3841,6 +4419,8 @@ export type UserCreateWithoutMealPlansInput = {
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMealPlansInput = {
@@ -3891,6 +4471,8 @@ export type UserUncheckedCreateWithoutMealPlansInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMealPlansInput = {
@@ -3957,6 +4539,8 @@ export type UserUpdateWithoutMealPlansInput = {
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMealPlansInput = {
@@ -4007,6 +4591,8 @@ export type UserUncheckedUpdateWithoutMealPlansInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutGoalsInput = {
@@ -4057,6 +4643,8 @@ export type UserCreateWithoutGoalsInput = {
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutGoalsInput = {
@@ -4107,6 +4695,8 @@ export type UserUncheckedCreateWithoutGoalsInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutGoalsInput = {
@@ -4173,6 +4763,8 @@ export type UserUpdateWithoutGoalsInput = {
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutGoalsInput = {
@@ -4223,6 +4815,8 @@ export type UserUncheckedUpdateWithoutGoalsInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSentFriendshipsInput = {
@@ -4273,6 +4867,8 @@ export type UserCreateWithoutSentFriendshipsInput = {
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSentFriendshipsInput = {
@@ -4323,6 +4919,8 @@ export type UserUncheckedCreateWithoutSentFriendshipsInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSentFriendshipsInput = {
@@ -4378,6 +4976,8 @@ export type UserCreateWithoutReceivedFriendshipsInput = {
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReceivedFriendshipsInput = {
@@ -4428,6 +5028,8 @@ export type UserUncheckedCreateWithoutReceivedFriendshipsInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReceivedFriendshipsInput = {
@@ -4483,6 +5085,8 @@ export type UserCreateWithoutRequestedFriendshipsInput = {
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRequestedFriendshipsInput = {
@@ -4533,6 +5137,8 @@ export type UserUncheckedCreateWithoutRequestedFriendshipsInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRequestedFriendshipsInput = {
@@ -4599,6 +5205,8 @@ export type UserUpdateWithoutSentFriendshipsInput = {
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSentFriendshipsInput = {
@@ -4649,6 +5257,8 @@ export type UserUncheckedUpdateWithoutSentFriendshipsInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutReceivedFriendshipsInput = {
@@ -4710,6 +5320,8 @@ export type UserUpdateWithoutReceivedFriendshipsInput = {
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReceivedFriendshipsInput = {
@@ -4760,6 +5372,8 @@ export type UserUncheckedUpdateWithoutReceivedFriendshipsInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutRequestedFriendshipsInput = {
@@ -4821,6 +5435,8 @@ export type UserUpdateWithoutRequestedFriendshipsInput = {
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRequestedFriendshipsInput = {
@@ -4871,6 +5487,8 @@ export type UserUncheckedUpdateWithoutRequestedFriendshipsInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreatedChallengesInput = {
@@ -4921,6 +5539,8 @@ export type UserCreateWithoutCreatedChallengesInput = {
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreatedChallengesInput = {
@@ -4971,6 +5591,8 @@ export type UserUncheckedCreateWithoutCreatedChallengesInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreatedChallengesInput = {
@@ -5037,6 +5659,8 @@ export type UserUpdateWithoutCreatedChallengesInput = {
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedChallengesInput = {
@@ -5087,6 +5711,8 @@ export type UserUncheckedUpdateWithoutCreatedChallengesInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutChallengeParticipationsInput = {
@@ -5137,6 +5763,8 @@ export type UserCreateWithoutChallengeParticipationsInput = {
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutChallengeParticipationsInput = {
@@ -5187,6 +5815,8 @@ export type UserUncheckedCreateWithoutChallengeParticipationsInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutChallengeParticipationsInput = {
@@ -5253,6 +5883,8 @@ export type UserUpdateWithoutChallengeParticipationsInput = {
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutChallengeParticipationsInput = {
@@ -5303,6 +5935,8 @@ export type UserUncheckedUpdateWithoutChallengeParticipationsInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutStreakInput = {
@@ -5353,6 +5987,8 @@ export type UserCreateWithoutStreakInput = {
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutStreakInput = {
@@ -5403,6 +6039,8 @@ export type UserUncheckedCreateWithoutStreakInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutStreakInput = {
@@ -5469,6 +6107,8 @@ export type UserUpdateWithoutStreakInput = {
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStreakInput = {
@@ -5519,6 +6159,8 @@ export type UserUncheckedUpdateWithoutStreakInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUserAchievementsInput = {
@@ -5569,6 +6211,8 @@ export type UserCreateWithoutUserAchievementsInput = {
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUserAchievementsInput = {
@@ -5619,6 +6263,8 @@ export type UserUncheckedCreateWithoutUserAchievementsInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUserAchievementsInput = {
@@ -5685,6 +6331,8 @@ export type UserUpdateWithoutUserAchievementsInput = {
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserAchievementsInput = {
@@ -5735,6 +6383,8 @@ export type UserUncheckedUpdateWithoutUserAchievementsInput = {
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFastingProtocolsInput = {
@@ -5785,6 +6435,8 @@ export type UserCreateWithoutFastingProtocolsInput = {
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFastingProtocolsInput = {
@@ -5835,6 +6487,8 @@ export type UserUncheckedCreateWithoutFastingProtocolsInput = {
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFastingProtocolsInput = {
@@ -5901,6 +6555,8 @@ export type UserUpdateWithoutFastingProtocolsInput = {
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFastingProtocolsInput = {
@@ -5951,6 +6607,8 @@ export type UserUncheckedUpdateWithoutFastingProtocolsInput = {
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFastingSessionsInput = {
@@ -6001,6 +6659,8 @@ export type UserCreateWithoutFastingSessionsInput = {
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFastingSessionsInput = {
@@ -6051,6 +6711,8 @@ export type UserUncheckedCreateWithoutFastingSessionsInput = {
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   barcodeScans?: Prisma.BarcodeScanUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFastingSessionsInput = {
@@ -6117,6 +6779,8 @@ export type UserUpdateWithoutFastingSessionsInput = {
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFastingSessionsInput = {
@@ -6167,6 +6831,8 @@ export type UserUncheckedUpdateWithoutFastingSessionsInput = {
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   barcodeScans?: Prisma.BarcodeScanUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBarcodeScansInput = {
@@ -6217,6 +6883,8 @@ export type UserCreateWithoutBarcodeScansInput = {
   userAchievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
   fastingProtocols?: Prisma.FastingProtocolCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBarcodeScansInput = {
@@ -6267,6 +6935,8 @@ export type UserUncheckedCreateWithoutBarcodeScansInput = {
   userAchievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
   fastingProtocols?: Prisma.FastingProtocolUncheckedCreateNestedManyWithoutUserInput
   fastingSessions?: Prisma.FastingSessionUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBarcodeScansInput = {
@@ -6333,6 +7003,8 @@ export type UserUpdateWithoutBarcodeScansInput = {
   userAchievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
   fastingProtocols?: Prisma.FastingProtocolUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBarcodeScansInput = {
@@ -6383,6 +7055,8 @@ export type UserUncheckedUpdateWithoutBarcodeScansInput = {
   userAchievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
   fastingProtocols?: Prisma.FastingProtocolUncheckedUpdateManyWithoutUserNestedInput
   fastingSessions?: Prisma.FastingSessionUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  integrationOAuthStates?: Prisma.IntegrationOAuthStateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -6412,6 +7086,8 @@ export type UserCountOutputType = {
   fastingProtocols: number
   fastingSessions: number
   barcodeScans: number
+  integrations: number
+  integrationOAuthStates: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6436,6 +7112,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   fastingProtocols?: boolean | UserCountOutputTypeCountFastingProtocolsArgs
   fastingSessions?: boolean | UserCountOutputTypeCountFastingSessionsArgs
   barcodeScans?: boolean | UserCountOutputTypeCountBarcodeScansArgs
+  integrations?: boolean | UserCountOutputTypeCountIntegrationsArgs
+  integrationOAuthStates?: boolean | UserCountOutputTypeCountIntegrationOAuthStatesArgs
 }
 
 /**
@@ -6595,6 +7273,20 @@ export type UserCountOutputTypeCountBarcodeScansArgs<ExtArgs extends runtime.Typ
   where?: Prisma.BarcodeScanWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountIntegrationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.IntegrationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountIntegrationOAuthStatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.IntegrationOAuthStateWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -6646,6 +7338,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   fastingProtocols?: boolean | Prisma.User$fastingProtocolsArgs<ExtArgs>
   fastingSessions?: boolean | Prisma.User$fastingSessionsArgs<ExtArgs>
   barcodeScans?: boolean | Prisma.User$barcodeScansArgs<ExtArgs>
+  integrations?: boolean | Prisma.User$integrationsArgs<ExtArgs>
+  integrationOAuthStates?: boolean | Prisma.User$integrationOAuthStatesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -6763,6 +7457,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   fastingProtocols?: boolean | Prisma.User$fastingProtocolsArgs<ExtArgs>
   fastingSessions?: boolean | Prisma.User$fastingSessionsArgs<ExtArgs>
   barcodeScans?: boolean | Prisma.User$barcodeScansArgs<ExtArgs>
+  integrations?: boolean | Prisma.User$integrationsArgs<ExtArgs>
+  integrationOAuthStates?: boolean | Prisma.User$integrationOAuthStatesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6798,6 +7494,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     fastingProtocols: Prisma.$FastingProtocolPayload<ExtArgs>[]
     fastingSessions: Prisma.$FastingSessionPayload<ExtArgs>[]
     barcodeScans: Prisma.$BarcodeScanPayload<ExtArgs>[]
+    integrations: Prisma.$IntegrationPayload<ExtArgs>[]
+    integrationOAuthStates: Prisma.$IntegrationOAuthStatePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -7243,6 +7941,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   fastingProtocols<T extends Prisma.User$fastingProtocolsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$fastingProtocolsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FastingProtocolPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   fastingSessions<T extends Prisma.User$fastingSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$fastingSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FastingSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   barcodeScans<T extends Prisma.User$barcodeScansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$barcodeScansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BarcodeScanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  integrations<T extends Prisma.User$integrationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$integrationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IntegrationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  integrationOAuthStates<T extends Prisma.User$integrationOAuthStatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$integrationOAuthStatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IntegrationOAuthStatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8233,6 +8933,54 @@ export type User$barcodeScansArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.BarcodeScanScalarFieldEnum | Prisma.BarcodeScanScalarFieldEnum[]
+}
+
+/**
+ * User.integrations
+ */
+export type User$integrationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Integration
+   */
+  select?: Prisma.IntegrationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Integration
+   */
+  omit?: Prisma.IntegrationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IntegrationInclude<ExtArgs> | null
+  where?: Prisma.IntegrationWhereInput
+  orderBy?: Prisma.IntegrationOrderByWithRelationInput | Prisma.IntegrationOrderByWithRelationInput[]
+  cursor?: Prisma.IntegrationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.IntegrationScalarFieldEnum | Prisma.IntegrationScalarFieldEnum[]
+}
+
+/**
+ * User.integrationOAuthStates
+ */
+export type User$integrationOAuthStatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the IntegrationOAuthState
+   */
+  select?: Prisma.IntegrationOAuthStateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the IntegrationOAuthState
+   */
+  omit?: Prisma.IntegrationOAuthStateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IntegrationOAuthStateInclude<ExtArgs> | null
+  where?: Prisma.IntegrationOAuthStateWhereInput
+  orderBy?: Prisma.IntegrationOAuthStateOrderByWithRelationInput | Prisma.IntegrationOAuthStateOrderByWithRelationInput[]
+  cursor?: Prisma.IntegrationOAuthStateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.IntegrationOAuthStateScalarFieldEnum | Prisma.IntegrationOAuthStateScalarFieldEnum[]
 }
 
 /**
