@@ -8,6 +8,7 @@ import {
   User,
   Moon,
   Trophy,
+  Plug,
 } from "lucide-react";
 
 interface NavItem {
@@ -25,37 +26,43 @@ const navItems: NavItem[] = [
   { icon: Trophy, label: "Achievements", href: "/achievements" },
   { icon: TrendingUp, label: "Progress", href: "/progress" },
   { icon: User, label: "Profile", href: "/profile" },
+  { icon: Plug, label: "Integrations", href: "/integrations" },
 ];
+
+const showWhoopIntegration =
+  import.meta.env.VITE_FEATURE_WHOOP_INTEGRATION === "true";
 
 export function Sidebar() {
   return (
     <aside className="sidebar-container">
-      {/* Logo */}
       <div className="sidebar-logo">
         <h1 className="sidebar-logo-text">
           <span className="sidebar-logo-accent">Health</span>Metrics
         </h1>
       </div>
 
-      {/* Navigation */}
       <nav className="sidebar-nav">
-        {navItems.map((item) => {
-          const Icon = item.icon;
+        {navItems
+          .filter(
+            (item) => item.href !== "/integrations" || showWhoopIntegration,
+          )
+          .map((item) => {
+            const Icon = item.icon;
 
-          return (
-            <Link
-              key={item.href}
-              to={item.href}
-              className="sidebar-nav-link"
-              activeProps={{
-                className: "sidebar-nav-link-active",
-              }}
-            >
-              <Icon className="sidebar-icon" />
-              <span className="sidebar-label">{item.label}</span>
-            </Link>
-          );
-        })}
+            return (
+              <Link
+                key={item.href}
+                to={item.href}
+                className="sidebar-nav-link"
+                activeProps={{
+                  className: "sidebar-nav-link-active",
+                }}
+              >
+                <Icon className="sidebar-icon" />
+                <span className="sidebar-label">{item.label}</span>
+              </Link>
+            );
+          })}
       </nav>
     </aside>
   );

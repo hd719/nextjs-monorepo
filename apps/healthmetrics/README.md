@@ -92,6 +92,13 @@ SES_CONFIGURATION_SET="healthmetrics-prod"
 # Email delivery control (log = no send, ses = send)
 EMAIL_DELIVERY_MODE="log"
 
+# WHOOP Integration (feature-flagged)
+FEATURE_WHOOP_INTEGRATION="false"        # Server-side guard
+VITE_FEATURE_WHOOP_INTEGRATION="false"   # Client-side nav visibility
+WHOOP_CLIENT_ID="..."
+WHOOP_REDIRECT_URL="https://localhost:3003/integrations/whoop/callback"
+# Note: WHOOP client secret lives in the Go service env, not the frontend app.
+
 # Barcode Scanner - Go Service Integration
 BARCODE_SERVICE_URL="http://localhost:8080"       # Go microservice URL (required in prod)
 BARCODE_SERVICE_API_KEY="your-api-key-min-32-chars"  # Service-to-service auth (required in prod)

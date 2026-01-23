@@ -1,0 +1,86 @@
+/* ==========================================================================
+   Integrations Page Styles
+   ========================================================================== */
+
+@layer components {
+  .integrations-page-layout {
+    @apply flex flex-col gap-6;
+  }
+
+  .integrations-page-header {
+    @apply flex items-center justify-between flex-wrap gap-4;
+  }
+
+  .integrations-page-title {
+    @apply text-2xl font-bold;
+  }
+
+  .integrations-page-subtitle {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .integrations-card {
+    @apply border;
+    background-color: var(--card);
+    border-color: color-mix(in srgb, var(--border) 60%, transparent);
+  }
+
+  .integrations-card-header {
+    @apply pb-2;
+  }
+
+  .integrations-card-title-row {
+    @apply flex items-center justify-between gap-4 flex-wrap;
+  }
+
+  .integrations-card-brand {
+    @apply flex items-center gap-4;
+  }
+
+  .integrations-card-icon {
+    @apply h-12 w-12 rounded-xl flex items-center justify-center;
+    background: color-mix(in srgb, var(--accent) 18%, transparent);
+    color: var(--accent);
+  }
+
+  .integrations-card-icon-svg {
+    @apply h-6 w-6;
+  }
+
+  .integrations-card-subtitle {
+    @apply text-sm;
+    color: var(--muted-foreground);
+  }
+
+  .integrations-card-status {
+    @apply text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full;
+    background: color-mix(in srgb, var(--accent) 20%, transparent);
+    color: var(--accent);
+  }
+
+  .integrations-card-content {
+    @apply pt-0 flex flex-col gap-6;
+  }
+
+  .integrations-card-meta {
+    @apply grid gap-4 sm:grid-cols-2;
+  }
+
+  .integrations-card-label {
+    @apply text-xs uppercase tracking-wide;
+    color: var(--muted-foreground);
+  }
+
+  .integrations-card-value {
+    @apply text-base font-semibold;
+  }
+
+  .integrations-card-actions {
+    @apply flex flex-wrap gap-3;
+  }
+
+  .integrations-card-button {
+    @apply shadow-sm;
+  }
+}

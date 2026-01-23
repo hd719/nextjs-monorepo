@@ -14,6 +14,7 @@ import { Route as SleepIndexRouteImport } from './routes/sleep/index'
 import { Route as ProgressIndexRouteImport } from './routes/progress/index'
 import { Route as ProfileIndexRouteImport } from './routes/profile/index'
 import { Route as OnboardingIndexRouteImport } from './routes/onboarding/index'
+import { Route as IntegrationsIndexRouteImport } from './routes/integrations/index'
 import { Route as FastingIndexRouteImport } from './routes/fasting/index'
 import { Route as ExerciseIndexRouteImport } from './routes/exercise/index'
 import { Route as DiaryIndexRouteImport } from './routes/diary/index'
@@ -54,6 +55,13 @@ const OnboardingIndexRoute = OnboardingIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() =>
   import('./routes/onboarding/index.lazy').then((d) => d.Route),
+)
+const IntegrationsIndexRoute = IntegrationsIndexRouteImport.update({
+  id: '/integrations/',
+  path: '/integrations/',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./routes/integrations/index.lazy').then((d) => d.Route),
 )
 const FastingIndexRoute = FastingIndexRouteImport.update({
   id: '/fasting/',
@@ -129,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/diary/': typeof DiaryIndexRoute
   '/exercise/': typeof ExerciseIndexRoute
   '/fasting/': typeof FastingIndexRoute
+  '/integrations/': typeof IntegrationsIndexRoute
   '/onboarding/': typeof OnboardingIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/progress/': typeof ProgressIndexRoute
@@ -147,6 +156,7 @@ export interface FileRoutesByTo {
   '/diary': typeof DiaryIndexRoute
   '/exercise': typeof ExerciseIndexRoute
   '/fasting': typeof FastingIndexRoute
+  '/integrations': typeof IntegrationsIndexRoute
   '/onboarding': typeof OnboardingIndexRoute
   '/profile': typeof ProfileIndexRoute
   '/progress': typeof ProgressIndexRoute
@@ -166,6 +176,7 @@ export interface FileRoutesById {
   '/diary/': typeof DiaryIndexRoute
   '/exercise/': typeof ExerciseIndexRoute
   '/fasting/': typeof FastingIndexRoute
+  '/integrations/': typeof IntegrationsIndexRoute
   '/onboarding/': typeof OnboardingIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/progress/': typeof ProgressIndexRoute
@@ -186,6 +197,7 @@ export interface FileRouteTypes {
     | '/diary/'
     | '/exercise/'
     | '/fasting/'
+    | '/integrations/'
     | '/onboarding/'
     | '/profile/'
     | '/progress/'
@@ -204,6 +216,7 @@ export interface FileRouteTypes {
     | '/diary'
     | '/exercise'
     | '/fasting'
+    | '/integrations'
     | '/onboarding'
     | '/profile'
     | '/progress'
@@ -222,6 +235,7 @@ export interface FileRouteTypes {
     | '/diary/'
     | '/exercise/'
     | '/fasting/'
+    | '/integrations/'
     | '/onboarding/'
     | '/profile/'
     | '/progress/'
@@ -241,6 +255,7 @@ export interface RootRouteChildren {
   DiaryIndexRoute: typeof DiaryIndexRoute
   ExerciseIndexRoute: typeof ExerciseIndexRoute
   FastingIndexRoute: typeof FastingIndexRoute
+  IntegrationsIndexRoute: typeof IntegrationsIndexRoute
   OnboardingIndexRoute: typeof OnboardingIndexRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
   ProgressIndexRoute: typeof ProgressIndexRoute
@@ -283,6 +298,13 @@ declare module '@tanstack/react-router' {
       path: '/onboarding'
       fullPath: '/onboarding/'
       preLoaderRoute: typeof OnboardingIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/integrations/': {
+      id: '/integrations/'
+      path: '/integrations'
+      fullPath: '/integrations/'
+      preLoaderRoute: typeof IntegrationsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fasting/': {
@@ -377,6 +399,7 @@ const rootRouteChildren: RootRouteChildren = {
   DiaryIndexRoute: DiaryIndexRoute,
   ExerciseIndexRoute: ExerciseIndexRoute,
   FastingIndexRoute: FastingIndexRoute,
+  IntegrationsIndexRoute: IntegrationsIndexRoute,
   OnboardingIndexRoute: OnboardingIndexRoute,
   ProfileIndexRoute: ProfileIndexRoute,
   ProgressIndexRoute: ProgressIndexRoute,

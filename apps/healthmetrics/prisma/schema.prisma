@@ -111,6 +111,16 @@ enum FastingStatus {
   cancelled
 }
 
+enum IntegrationProvider {
+  whoop
+}
+
+enum IntegrationStatus {
+  connected
+  disconnected
+  error
+}
+
 // ============================================================================
 // BETTER-AUTH MODELS
 // ============================================================================
@@ -247,7 +257,95 @@ model User {
   fastingSessions         FastingSession[]
   barcodeScans            BarcodeScan[]
 
+  // Integrations
+  integrations Integration[]
+  integrationOAuthStates IntegrationOAuthState[]
+
   @@map("users")
+}
+
+// ========================================================================
+// INTEGRATIONS
+// ========================================================================
+
+model Integration {
+  id         String              @id @default(uuid())
+  userId     String              @map("user_id")
+  provider   IntegrationProvider
+  status     IntegrationStatus   @default(disconnected)
+  lastSyncAt DateTime?           @map("last_sync_at")
+  createdAt  DateTime            @default(now()) @map("created_at")
+  updatedAt  DateTime            @updatedAt @map("updated_at")
+
+  user          User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokens        IntegrationToken[]
+  connection    IntegrationConnection?
+  rawEvents     IntegrationRawEvent[]
+
+  @@unique([userId, provider])
+  @@index([userId])
+  @@index([provider])
+  @@map("integration")
+}
+
+model IntegrationToken {
+  id                  String      @id @default(uuid())
+  integrationId       String      @map("integration_id")
+  accessTokenEncrypted  String     @map("access_token_encrypted")
+  refreshTokenEncrypted String?    @map("refresh_token_encrypted")
+  expiresAt           DateTime?   @map("expires_at")
+  scopes              String[]
+  createdAt           DateTime    @default(now()) @map("created_at")
+  updatedAt           DateTime    @updatedAt @map("updated_at")
+
+  integration Integration @relation(fields: [integrationId], references: [id], onDelete: Cascade)
+
+  @@index([integrationId])
+  @@map("integration_token")
+}
+
+model IntegrationConnection {
+  id            String      @id @default(uuid())
+  integrationId String      @unique @map("integration_id")
+  providerUserId String?    @map("provider_user_id")
+  connectedAt   DateTime    @default(now()) @map("connected_at")
+  lastError     String?     @map("last_error")
+
+  integration Integration @relation(fields: [integrationId], references: [id], onDelete: Cascade)
+
+  @@map("integration_connection")
+}
+
+model IntegrationRawEvent {
+  id            String    @id @default(uuid())
+  integrationId String    @map("integration_id")
+  resourceType  String    @map("resource_type")
+  payload       Json      @map("payload")
+  sourceId      String    @map("source_id")
+  createdAt     DateTime  @default(now()) @map("created_at")
+
+  integration Integration @relation(fields: [integrationId], references: [id], onDelete: Cascade)
+
+  @@index([integrationId])
+  @@index([resourceType])
+  @@unique([integrationId, sourceId, resourceType])
+  @@map("integration_raw_event")
+}
+
+model IntegrationOAuthState {
+  id        String              @id @default(uuid())
+  userId    String              @map("user_id")
+  provider  IntegrationProvider
+  stateHash String              @map("state_hash")
+  expiresAt DateTime            @map("expires_at")
+  createdAt DateTime            @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([provider])
+  @@unique([stateHash])
+  @@map("integration_oauth_state")
 }
 
 // Food items database - shared nutrition database

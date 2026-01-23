@@ -43,6 +43,31 @@ export type Verification = Prisma.VerificationModel
  */
 export type User = Prisma.UserModel
 /**
+ * Model Integration
+ * 
+ */
+export type Integration = Prisma.IntegrationModel
+/**
+ * Model IntegrationToken
+ * 
+ */
+export type IntegrationToken = Prisma.IntegrationTokenModel
+/**
+ * Model IntegrationConnection
+ * 
+ */
+export type IntegrationConnection = Prisma.IntegrationConnectionModel
+/**
+ * Model IntegrationRawEvent
+ * 
+ */
+export type IntegrationRawEvent = Prisma.IntegrationRawEventModel
+/**
+ * Model IntegrationOAuthState
+ * 
+ */
+export type IntegrationOAuthState = Prisma.IntegrationOAuthStateModel
+/**
  * Model FoodItem
  * 
  */

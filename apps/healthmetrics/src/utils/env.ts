@@ -25,6 +25,10 @@ const envSchema = z.object({
   SES_FROM_EMAIL: z.string().email().optional(),
   SES_CONFIGURATION_SET: z.string().min(1).optional(),
   EMAIL_DELIVERY_MODE: z.enum(["log", "ses"]).optional(),
+  // WHOOP integration
+  FEATURE_WHOOP_INTEGRATION: z.enum(["true", "false"]).optional(),
+  WHOOP_CLIENT_ID: z.string().min(1).optional(),
+  WHOOP_REDIRECT_URL: z.string().url().optional(),
   // Barcode service configuration
   BARCODE_SERVICE_URL: z.string().url().optional(),
   BARCODE_SERVICE_API_KEY: z.string().min(32).optional(),
@@ -33,6 +37,7 @@ const envSchema = z.object({
   VITE_USE_MOCK_ACHIEVEMENTS: z.string().optional(),
   VITE_USE_MOCK_BARCODE: z.string().optional(),
   VITE_SIMULATE_SCANNER_OFFLINE: z.string().optional(),
+  VITE_FEATURE_WHOOP_INTEGRATION: z.enum(["true", "false"]).optional(),
 });
 
 export type Env = z.infer<typeof envSchema>;
@@ -57,7 +62,7 @@ export function validateEnv(): Env {
     console.error("Environment validation failed:\n" + errors);
 
     throw new Error(
-      `Environment validation failed. Check your .env file.\n${errors}`
+      `Environment validation failed. Check your .env file.\n${errors}`,
     );
   }
 
@@ -74,13 +79,11 @@ export function validateEnv(): Env {
       "SES_FROM_EMAIL",
     ] as const;
 
-    const missing = required.filter(
-      (key) => !result.data[key as keyof Env]
-    );
+    const missing = required.filter((key) => !result.data[key as keyof Env]);
 
     if (missing.length > 0) {
       throw new Error(
-        `Environment validation failed. Missing: ${missing.join(", ")}`
+        `Environment validation failed. Missing: ${missing.join(", ")}`,
       );
     }
   }
@@ -122,4 +125,17 @@ export function isDevelopment(): boolean {
  */
 export function isTest(): boolean {
   return getEnv().NODE_ENV === "test";
+}
+
+/**
+ * Feature flags
+ */
+export function isWhoopIntegrationEnabled(): boolean {
+  if (!import.meta.env.SSR) {
+    // Check to see if we're in the browser if true, return the value of the VITE_FEATURE_WHOOP_INTEGRATION environment variable, otherwise return the value of the FEATURE_WHOOP_INTEGRATION environment variable
+    return import.meta.env.VITE_FEATURE_WHOOP_INTEGRATION === "true";
+  }
+
+  const env = getEnv();
+  return env.FEATURE_WHOOP_INTEGRATION === "true";
 }
