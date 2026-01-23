@@ -35,11 +35,11 @@ export function ProfileAvatar({
         <Input
           id="avatar-upload"
           type="file"
-          accept="image/*"
+          accept="image/jpeg,image/png,image/webp"
           onChange={onAvatarChange}
           className="profile-avatar-input"
         />
-        <p className="profile-avatar-help">Max 2MB. JPG, PNG, or GIF</p>
+        <p className="profile-avatar-help">Max 2MB. JPG, PNG, or WebP</p>
       </div>
     </div>
   );

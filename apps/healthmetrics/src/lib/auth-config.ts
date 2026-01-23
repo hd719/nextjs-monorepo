@@ -18,6 +18,12 @@ import { tanstackStartCookies } from "better-auth/tanstack-start";
 import { prisma } from "@/lib/prisma";
 import { DEFAULT_DEV_URL } from "@/constants";
 import { validateEnv } from "@/utils/env";
+import {
+  getEmailDeliveryMode,
+  logDevEmail,
+  sendPasswordResetEmail,
+  sendVerificationEmail,
+} from "@/lib/email";
 
 // Validate environment variables at startup
 // This fails fast if required vars (DATABASE_URL, BETTER_AUTH_SECRET) are missing
@@ -73,13 +79,12 @@ export const auth = betterAuth({
     sendResetPassword: async ({ user, token }) => {
       const appUrl = process.env.APP_URL || DEFAULT_DEV_URL;
       const resetPasswordUrl = `${appUrl}/auth/reset-password?token=${token}`;
-      console.log("=".repeat(80));
-      console.log("PASSWORD RESET EMAIL");
-      console.log("To:", user.email);
-      console.log("Link:", resetPasswordUrl);
-      console.log("Token:", token);
-      console.log("Token expires in: 1 hour (default)");
-      console.log("=".repeat(80));
+      if (getEmailDeliveryMode() === "log") {
+        logDevEmail("password reset email", user.email, resetPasswordUrl, token);
+        return;
+      }
+
+      await sendPasswordResetEmail(user.email, token);
     },
     // Callback after successful password reset
     onPasswordReset: async ({ user }) => {
@@ -92,11 +97,12 @@ export const auth = betterAuth({
   emailVerification: {
     sendVerificationEmail: async ({ user, token }) => {
       const url = `${process.env.APP_URL || DEFAULT_DEV_URL}/auth/verify-email?token=${token}`;
-      console.log("=".repeat(80));
-      console.log("VERIFICATION EMAIL");
-      console.log("To:", user.email);
-      console.log("Link:", url);
-      console.log("=".repeat(80));
+      if (getEmailDeliveryMode() === "log") {
+        logDevEmail("verification email", user.email, url, token);
+        return;
+      }
+
+      await sendVerificationEmail(user.email, token);
     },
   },
   // Enable experimental joins for performance (as per docs)

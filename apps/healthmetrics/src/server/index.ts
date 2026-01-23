@@ -30,6 +30,9 @@ export {
 // Profile server functions
 export { getUserProfile, updateUserProfile } from "./profile";
 
+// Storage server functions
+export { createUploadPostForUser } from "./storage";
+
 // Water server functions
 export { getWaterIntake, updateWaterIntake, updateWaterGoal } from "./water";
 

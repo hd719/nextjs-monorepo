@@ -75,6 +75,22 @@ The app will be available at `http://localhost:3003`.
 DATABASE_URL="postgresql://..."
 BETTER_AUTH_SECRET="your-secret-key-min-32-chars"  # Also used by Go service for JWT verification
 BETTER_AUTH_URL="http://localhost:3003"
+APP_URL="http://localhost:3003"
+
+# AWS (required in production for uploads + email)
+AWS_ACCESS_KEY_ID="..."
+AWS_SECRET_ACCESS_KEY="..."
+AWS_REGION="us-east-1"
+S3_BUCKET_NAME="healthmetrics-uploads-prod"
+CLOUDFRONT_URL="https://cdn.healthmetricsapp.com"
+CLOUDFRONT_KEY_PAIR_ID="..."
+CLOUDFRONT_PRIVATE_KEY="... (PEM or base64)"
+SES_FROM_EMAIL="noreply@healthmetricsapp.com"
+SES_REGION="us-east-1"
+# Optional: SES configuration set name if you want metrics
+SES_CONFIGURATION_SET="healthmetrics-prod"
+# Email delivery control (log = no send, ses = send)
+EMAIL_DELIVERY_MODE="log"
 
 # Barcode Scanner - Go Service Integration
 BARCODE_SERVICE_URL="http://localhost:8080"       # Go microservice URL (required in prod)
@@ -86,6 +102,8 @@ VITE_USE_MOCK_ACHIEVEMENTS="true"      # Use mock achievements data
 VITE_USE_MOCK_BARCODE="true"           # Use mock barcode data (skip Go service)
 VITE_SIMULATE_SCANNER_OFFLINE="true"   # Simulate offline for scanner only (test queue)
 ```
+
+**Note:** For local browser uploads to S3, the bucket CORS must allow `http://localhost:3003`.
 
 #### Barcode Service Authentication
 
@@ -176,6 +194,14 @@ Protected routes use code splitting:
 | `bun tsc --noEmit` | Type check |
 
 ## Development
+
+### Avatar cleanup (orphaned uploads)
+
+Remove S3 avatar objects that are not referenced by any user.
+
+```bash
+AVATAR_CLEANUP_DRY_RUN=false AVATAR_ORPHAN_MAX_AGE_DAYS=7 bun run cleanup:avatars
+```
 
 ### Mock Data
 

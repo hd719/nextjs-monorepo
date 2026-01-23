@@ -1,0 +1,7 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+keys/cloudfront_private_key.pem
+!keys/cloudfront_public_key.pem
+.terraform.lock.hcl

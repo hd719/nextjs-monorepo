@@ -55,7 +55,7 @@ export type UserSumAggregateOutputType = {
 export type UserMinAggregateOutputType = {
   id: string | null
   displayName: string | null
-  avatarUrl: string | null
+  avatarKey: string | null
   dateOfBirth: Date | null
   gender: $Enums.Gender | null
   heightCm: runtime.Decimal | null
@@ -84,7 +84,7 @@ export type UserMinAggregateOutputType = {
 export type UserMaxAggregateOutputType = {
   id: string | null
   displayName: string | null
-  avatarUrl: string | null
+  avatarKey: string | null
   dateOfBirth: Date | null
   gender: $Enums.Gender | null
   heightCm: runtime.Decimal | null
@@ -113,7 +113,7 @@ export type UserMaxAggregateOutputType = {
 export type UserCountAggregateOutputType = {
   id: number
   displayName: number
-  avatarUrl: number
+  avatarKey: number
   dateOfBirth: number
   gender: number
   heightCm: number
@@ -170,7 +170,7 @@ export type UserSumAggregateInputType = {
 export type UserMinAggregateInputType = {
   id?: true
   displayName?: true
-  avatarUrl?: true
+  avatarKey?: true
   dateOfBirth?: true
   gender?: true
   heightCm?: true
@@ -199,7 +199,7 @@ export type UserMinAggregateInputType = {
 export type UserMaxAggregateInputType = {
   id?: true
   displayName?: true
-  avatarUrl?: true
+  avatarKey?: true
   dateOfBirth?: true
   gender?: true
   heightCm?: true
@@ -228,7 +228,7 @@ export type UserMaxAggregateInputType = {
 export type UserCountAggregateInputType = {
   id?: true
   displayName?: true
-  avatarUrl?: true
+  avatarKey?: true
   dateOfBirth?: true
   gender?: true
   heightCm?: true
@@ -344,7 +344,7 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type UserGroupByOutputType = {
   id: string
   displayName: string | null
-  avatarUrl: string | null
+  avatarKey: string | null
   dateOfBirth: Date | null
   gender: $Enums.Gender | null
   heightCm: runtime.Decimal | null
@@ -396,7 +396,7 @@ export type UserWhereInput = {
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   id?: Prisma.StringFilter<"User"> | string
   displayName?: Prisma.StringNullableFilter<"User"> | string | null
-  avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
+  avatarKey?: Prisma.StringNullableFilter<"User"> | string | null
   dateOfBirth?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   gender?: Prisma.EnumGenderNullableFilter<"User"> | $Enums.Gender | null
   heightCm?: Prisma.DecimalNullableFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -448,7 +448,7 @@ export type UserWhereInput = {
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   displayName?: Prisma.SortOrderInput | Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  avatarKey?: Prisma.SortOrderInput | Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrderInput | Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
   heightCm?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -503,7 +503,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   displayName?: Prisma.StringNullableFilter<"User"> | string | null
-  avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
+  avatarKey?: Prisma.StringNullableFilter<"User"> | string | null
   dateOfBirth?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   gender?: Prisma.EnumGenderNullableFilter<"User"> | $Enums.Gender | null
   heightCm?: Prisma.DecimalNullableFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -555,7 +555,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   displayName?: Prisma.SortOrderInput | Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  avatarKey?: Prisma.SortOrderInput | Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrderInput | Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
   heightCm?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -592,7 +592,7 @@ export type UserScalarWhereWithAggregatesInput = {
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
   displayName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  avatarUrl?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  avatarKey?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   dateOfBirth?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   gender?: Prisma.EnumGenderNullableWithAggregatesFilter<"User"> | $Enums.Gender | null
   heightCm?: Prisma.DecimalNullableWithAggregatesFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -620,7 +620,7 @@ export type UserScalarWhereWithAggregatesInput = {
 
 export type UserCreateInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -672,7 +672,7 @@ export type UserCreateInput = {
 export type UserUncheckedCreateInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -722,7 +722,7 @@ export type UserUncheckedCreateInput = {
 
 export type UserUpdateInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -774,7 +774,7 @@ export type UserUpdateInput = {
 export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -825,7 +825,7 @@ export type UserUncheckedUpdateInput = {
 export type UserCreateManyInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -853,7 +853,7 @@ export type UserCreateManyInput = {
 
 export type UserUpdateManyMutationInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -882,7 +882,7 @@ export type UserUpdateManyMutationInput = {
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -916,7 +916,7 @@ export type UserNullableScalarRelationFilter = {
 export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrder
+  avatarKey?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   heightCm?: Prisma.SortOrder
@@ -958,7 +958,7 @@ export type UserAvgOrderByAggregateInput = {
 export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrder
+  avatarKey?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   heightCm?: Prisma.SortOrder
@@ -987,7 +987,7 @@ export type UserMaxOrderByAggregateInput = {
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrder
+  avatarKey?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   heightCm?: Prisma.SortOrder
@@ -1419,7 +1419,7 @@ export type UserUpdateOneRequiredWithoutBarcodeScansNestedInput = {
 
 export type UserCreateWithoutAuthUserInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1469,7 +1469,7 @@ export type UserCreateWithoutAuthUserInput = {
 
 export type UserUncheckedCreateWithoutAuthUserInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1535,7 +1535,7 @@ export type UserUpdateToOneWithWhereWithoutAuthUserInput = {
 
 export type UserUpdateWithoutAuthUserInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1585,7 +1585,7 @@ export type UserUpdateWithoutAuthUserInput = {
 
 export type UserUncheckedUpdateWithoutAuthUserInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1635,7 +1635,7 @@ export type UserUncheckedUpdateWithoutAuthUserInput = {
 
 export type UserCreateWithoutCreatedFoodItemsInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1686,7 +1686,7 @@ export type UserCreateWithoutCreatedFoodItemsInput = {
 export type UserUncheckedCreateWithoutCreatedFoodItemsInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1751,7 +1751,7 @@ export type UserUpdateToOneWithWhereWithoutCreatedFoodItemsInput = {
 
 export type UserUpdateWithoutCreatedFoodItemsInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1802,7 +1802,7 @@ export type UserUpdateWithoutCreatedFoodItemsInput = {
 export type UserUncheckedUpdateWithoutCreatedFoodItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1851,7 +1851,7 @@ export type UserUncheckedUpdateWithoutCreatedFoodItemsInput = {
 
 export type UserCreateWithoutCreatedExercisesInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1902,7 +1902,7 @@ export type UserCreateWithoutCreatedExercisesInput = {
 export type UserUncheckedCreateWithoutCreatedExercisesInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1967,7 +1967,7 @@ export type UserUpdateToOneWithWhereWithoutCreatedExercisesInput = {
 
 export type UserUpdateWithoutCreatedExercisesInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2018,7 +2018,7 @@ export type UserUpdateWithoutCreatedExercisesInput = {
 export type UserUncheckedUpdateWithoutCreatedExercisesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2067,7 +2067,7 @@ export type UserUncheckedUpdateWithoutCreatedExercisesInput = {
 
 export type UserCreateWithoutDiaryEntriesInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2118,7 +2118,7 @@ export type UserCreateWithoutDiaryEntriesInput = {
 export type UserUncheckedCreateWithoutDiaryEntriesInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2183,7 +2183,7 @@ export type UserUpdateToOneWithWhereWithoutDiaryEntriesInput = {
 
 export type UserUpdateWithoutDiaryEntriesInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2234,7 +2234,7 @@ export type UserUpdateWithoutDiaryEntriesInput = {
 export type UserUncheckedUpdateWithoutDiaryEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2283,7 +2283,7 @@ export type UserUncheckedUpdateWithoutDiaryEntriesInput = {
 
 export type UserCreateWithoutWorkoutSessionsInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2334,7 +2334,7 @@ export type UserCreateWithoutWorkoutSessionsInput = {
 export type UserUncheckedCreateWithoutWorkoutSessionsInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2399,7 +2399,7 @@ export type UserUpdateToOneWithWhereWithoutWorkoutSessionsInput = {
 
 export type UserUpdateWithoutWorkoutSessionsInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2450,7 +2450,7 @@ export type UserUpdateWithoutWorkoutSessionsInput = {
 export type UserUncheckedUpdateWithoutWorkoutSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2499,7 +2499,7 @@ export type UserUncheckedUpdateWithoutWorkoutSessionsInput = {
 
 export type UserCreateWithoutWorkoutLogsInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2550,7 +2550,7 @@ export type UserCreateWithoutWorkoutLogsInput = {
 export type UserUncheckedCreateWithoutWorkoutLogsInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2615,7 +2615,7 @@ export type UserUpdateToOneWithWhereWithoutWorkoutLogsInput = {
 
 export type UserUpdateWithoutWorkoutLogsInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2666,7 +2666,7 @@ export type UserUpdateWithoutWorkoutLogsInput = {
 export type UserUncheckedUpdateWithoutWorkoutLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2715,7 +2715,7 @@ export type UserUncheckedUpdateWithoutWorkoutLogsInput = {
 
 export type UserCreateWithoutWeightEntriesInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2766,7 +2766,7 @@ export type UserCreateWithoutWeightEntriesInput = {
 export type UserUncheckedCreateWithoutWeightEntriesInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2831,7 +2831,7 @@ export type UserUpdateToOneWithWhereWithoutWeightEntriesInput = {
 
 export type UserUpdateWithoutWeightEntriesInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2882,7 +2882,7 @@ export type UserUpdateWithoutWeightEntriesInput = {
 export type UserUncheckedUpdateWithoutWeightEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2931,7 +2931,7 @@ export type UserUncheckedUpdateWithoutWeightEntriesInput = {
 
 export type UserCreateWithoutWaterEntriesInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2982,7 +2982,7 @@ export type UserCreateWithoutWaterEntriesInput = {
 export type UserUncheckedCreateWithoutWaterEntriesInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3047,7 +3047,7 @@ export type UserUpdateToOneWithWhereWithoutWaterEntriesInput = {
 
 export type UserUpdateWithoutWaterEntriesInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3098,7 +3098,7 @@ export type UserUpdateWithoutWaterEntriesInput = {
 export type UserUncheckedUpdateWithoutWaterEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3147,7 +3147,7 @@ export type UserUncheckedUpdateWithoutWaterEntriesInput = {
 
 export type UserCreateWithoutStepEntriesInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3198,7 +3198,7 @@ export type UserCreateWithoutStepEntriesInput = {
 export type UserUncheckedCreateWithoutStepEntriesInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3263,7 +3263,7 @@ export type UserUpdateToOneWithWhereWithoutStepEntriesInput = {
 
 export type UserUpdateWithoutStepEntriesInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3314,7 +3314,7 @@ export type UserUpdateWithoutStepEntriesInput = {
 export type UserUncheckedUpdateWithoutStepEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3363,7 +3363,7 @@ export type UserUncheckedUpdateWithoutStepEntriesInput = {
 
 export type UserCreateWithoutSleepEntriesInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3414,7 +3414,7 @@ export type UserCreateWithoutSleepEntriesInput = {
 export type UserUncheckedCreateWithoutSleepEntriesInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3479,7 +3479,7 @@ export type UserUpdateToOneWithWhereWithoutSleepEntriesInput = {
 
 export type UserUpdateWithoutSleepEntriesInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3530,7 +3530,7 @@ export type UserUpdateWithoutSleepEntriesInput = {
 export type UserUncheckedUpdateWithoutSleepEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3579,7 +3579,7 @@ export type UserUncheckedUpdateWithoutSleepEntriesInput = {
 
 export type UserCreateWithoutMealPlanTemplatesInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3630,7 +3630,7 @@ export type UserCreateWithoutMealPlanTemplatesInput = {
 export type UserUncheckedCreateWithoutMealPlanTemplatesInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3695,7 +3695,7 @@ export type UserUpdateToOneWithWhereWithoutMealPlanTemplatesInput = {
 
 export type UserUpdateWithoutMealPlanTemplatesInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3746,7 +3746,7 @@ export type UserUpdateWithoutMealPlanTemplatesInput = {
 export type UserUncheckedUpdateWithoutMealPlanTemplatesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3795,7 +3795,7 @@ export type UserUncheckedUpdateWithoutMealPlanTemplatesInput = {
 
 export type UserCreateWithoutMealPlansInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3846,7 +3846,7 @@ export type UserCreateWithoutMealPlansInput = {
 export type UserUncheckedCreateWithoutMealPlansInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3911,7 +3911,7 @@ export type UserUpdateToOneWithWhereWithoutMealPlansInput = {
 
 export type UserUpdateWithoutMealPlansInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3962,7 +3962,7 @@ export type UserUpdateWithoutMealPlansInput = {
 export type UserUncheckedUpdateWithoutMealPlansInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4011,7 +4011,7 @@ export type UserUncheckedUpdateWithoutMealPlansInput = {
 
 export type UserCreateWithoutGoalsInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4062,7 +4062,7 @@ export type UserCreateWithoutGoalsInput = {
 export type UserUncheckedCreateWithoutGoalsInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4127,7 +4127,7 @@ export type UserUpdateToOneWithWhereWithoutGoalsInput = {
 
 export type UserUpdateWithoutGoalsInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4178,7 +4178,7 @@ export type UserUpdateWithoutGoalsInput = {
 export type UserUncheckedUpdateWithoutGoalsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4227,7 +4227,7 @@ export type UserUncheckedUpdateWithoutGoalsInput = {
 
 export type UserCreateWithoutSentFriendshipsInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4278,7 +4278,7 @@ export type UserCreateWithoutSentFriendshipsInput = {
 export type UserUncheckedCreateWithoutSentFriendshipsInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4332,7 +4332,7 @@ export type UserCreateOrConnectWithoutSentFriendshipsInput = {
 
 export type UserCreateWithoutReceivedFriendshipsInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4383,7 +4383,7 @@ export type UserCreateWithoutReceivedFriendshipsInput = {
 export type UserUncheckedCreateWithoutReceivedFriendshipsInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4437,7 +4437,7 @@ export type UserCreateOrConnectWithoutReceivedFriendshipsInput = {
 
 export type UserCreateWithoutRequestedFriendshipsInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4488,7 +4488,7 @@ export type UserCreateWithoutRequestedFriendshipsInput = {
 export type UserUncheckedCreateWithoutRequestedFriendshipsInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4553,7 +4553,7 @@ export type UserUpdateToOneWithWhereWithoutSentFriendshipsInput = {
 
 export type UserUpdateWithoutSentFriendshipsInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4604,7 +4604,7 @@ export type UserUpdateWithoutSentFriendshipsInput = {
 export type UserUncheckedUpdateWithoutSentFriendshipsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4664,7 +4664,7 @@ export type UserUpdateToOneWithWhereWithoutReceivedFriendshipsInput = {
 
 export type UserUpdateWithoutReceivedFriendshipsInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4715,7 +4715,7 @@ export type UserUpdateWithoutReceivedFriendshipsInput = {
 export type UserUncheckedUpdateWithoutReceivedFriendshipsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4775,7 +4775,7 @@ export type UserUpdateToOneWithWhereWithoutRequestedFriendshipsInput = {
 
 export type UserUpdateWithoutRequestedFriendshipsInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4826,7 +4826,7 @@ export type UserUpdateWithoutRequestedFriendshipsInput = {
 export type UserUncheckedUpdateWithoutRequestedFriendshipsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4875,7 +4875,7 @@ export type UserUncheckedUpdateWithoutRequestedFriendshipsInput = {
 
 export type UserCreateWithoutCreatedChallengesInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4926,7 +4926,7 @@ export type UserCreateWithoutCreatedChallengesInput = {
 export type UserUncheckedCreateWithoutCreatedChallengesInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4991,7 +4991,7 @@ export type UserUpdateToOneWithWhereWithoutCreatedChallengesInput = {
 
 export type UserUpdateWithoutCreatedChallengesInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5042,7 +5042,7 @@ export type UserUpdateWithoutCreatedChallengesInput = {
 export type UserUncheckedUpdateWithoutCreatedChallengesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5091,7 +5091,7 @@ export type UserUncheckedUpdateWithoutCreatedChallengesInput = {
 
 export type UserCreateWithoutChallengeParticipationsInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5142,7 +5142,7 @@ export type UserCreateWithoutChallengeParticipationsInput = {
 export type UserUncheckedCreateWithoutChallengeParticipationsInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5207,7 +5207,7 @@ export type UserUpdateToOneWithWhereWithoutChallengeParticipationsInput = {
 
 export type UserUpdateWithoutChallengeParticipationsInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5258,7 +5258,7 @@ export type UserUpdateWithoutChallengeParticipationsInput = {
 export type UserUncheckedUpdateWithoutChallengeParticipationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5307,7 +5307,7 @@ export type UserUncheckedUpdateWithoutChallengeParticipationsInput = {
 
 export type UserCreateWithoutStreakInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5358,7 +5358,7 @@ export type UserCreateWithoutStreakInput = {
 export type UserUncheckedCreateWithoutStreakInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5423,7 +5423,7 @@ export type UserUpdateToOneWithWhereWithoutStreakInput = {
 
 export type UserUpdateWithoutStreakInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5474,7 +5474,7 @@ export type UserUpdateWithoutStreakInput = {
 export type UserUncheckedUpdateWithoutStreakInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5523,7 +5523,7 @@ export type UserUncheckedUpdateWithoutStreakInput = {
 
 export type UserCreateWithoutUserAchievementsInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5574,7 +5574,7 @@ export type UserCreateWithoutUserAchievementsInput = {
 export type UserUncheckedCreateWithoutUserAchievementsInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5639,7 +5639,7 @@ export type UserUpdateToOneWithWhereWithoutUserAchievementsInput = {
 
 export type UserUpdateWithoutUserAchievementsInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5690,7 +5690,7 @@ export type UserUpdateWithoutUserAchievementsInput = {
 export type UserUncheckedUpdateWithoutUserAchievementsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5739,7 +5739,7 @@ export type UserUncheckedUpdateWithoutUserAchievementsInput = {
 
 export type UserCreateWithoutFastingProtocolsInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5790,7 +5790,7 @@ export type UserCreateWithoutFastingProtocolsInput = {
 export type UserUncheckedCreateWithoutFastingProtocolsInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5855,7 +5855,7 @@ export type UserUpdateToOneWithWhereWithoutFastingProtocolsInput = {
 
 export type UserUpdateWithoutFastingProtocolsInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5906,7 +5906,7 @@ export type UserUpdateWithoutFastingProtocolsInput = {
 export type UserUncheckedUpdateWithoutFastingProtocolsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5955,7 +5955,7 @@ export type UserUncheckedUpdateWithoutFastingProtocolsInput = {
 
 export type UserCreateWithoutFastingSessionsInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6006,7 +6006,7 @@ export type UserCreateWithoutFastingSessionsInput = {
 export type UserUncheckedCreateWithoutFastingSessionsInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6071,7 +6071,7 @@ export type UserUpdateToOneWithWhereWithoutFastingSessionsInput = {
 
 export type UserUpdateWithoutFastingSessionsInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6122,7 +6122,7 @@ export type UserUpdateWithoutFastingSessionsInput = {
 export type UserUncheckedUpdateWithoutFastingSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6171,7 +6171,7 @@ export type UserUncheckedUpdateWithoutFastingSessionsInput = {
 
 export type UserCreateWithoutBarcodeScansInput = {
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6222,7 +6222,7 @@ export type UserCreateWithoutBarcodeScansInput = {
 export type UserUncheckedCreateWithoutBarcodeScansInput = {
   id: string
   displayName?: string | null
-  avatarUrl?: string | null
+  avatarKey?: string | null
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   heightCm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6287,7 +6287,7 @@ export type UserUpdateToOneWithWhereWithoutBarcodeScansInput = {
 
 export type UserUpdateWithoutBarcodeScansInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6338,7 +6338,7 @@ export type UserUpdateWithoutBarcodeScansInput = {
 export type UserUncheckedUpdateWithoutBarcodeScansInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   heightCm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6599,7 +6599,7 @@ export type UserCountOutputTypeCountBarcodeScansArgs<ExtArgs extends runtime.Typ
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   displayName?: boolean
-  avatarUrl?: boolean
+  avatarKey?: boolean
   dateOfBirth?: boolean
   gender?: boolean
   heightCm?: boolean
@@ -6652,7 +6652,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   displayName?: boolean
-  avatarUrl?: boolean
+  avatarKey?: boolean
   dateOfBirth?: boolean
   gender?: boolean
   heightCm?: boolean
@@ -6682,7 +6682,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   displayName?: boolean
-  avatarUrl?: boolean
+  avatarKey?: boolean
   dateOfBirth?: boolean
   gender?: boolean
   heightCm?: boolean
@@ -6712,7 +6712,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 export type UserSelectScalar = {
   id?: boolean
   displayName?: boolean
-  avatarUrl?: boolean
+  avatarKey?: boolean
   dateOfBirth?: boolean
   gender?: boolean
   heightCm?: boolean
@@ -6738,7 +6738,7 @@ export type UserSelectScalar = {
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "displayName" | "avatarUrl" | "dateOfBirth" | "gender" | "heightCm" | "activityLevel" | "goalType" | "targetWeightLbs" | "dailyCalorieGoal" | "dailyProteinGoalG" | "dailyCarbGoalG" | "dailyFatGoalG" | "dailyWaterGoal" | "dailyStepGoal" | "unitsPreference" | "timezone" | "isAdmin" | "onboardingCompleted" | "onboardingStep" | "onboardingSkippedAt" | "onboardingCompletedAt" | "defaultFastingProtocolId" | "fastingGoalPerWeek" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "displayName" | "avatarKey" | "dateOfBirth" | "gender" | "heightCm" | "activityLevel" | "goalType" | "targetWeightLbs" | "dailyCalorieGoal" | "dailyProteinGoalG" | "dailyCarbGoalG" | "dailyFatGoalG" | "dailyWaterGoal" | "dailyStepGoal" | "unitsPreference" | "timezone" | "isAdmin" | "onboardingCompleted" | "onboardingStep" | "onboardingSkippedAt" | "onboardingCompletedAt" | "defaultFastingProtocolId" | "fastingGoalPerWeek" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   authUser?: boolean | Prisma.User$authUserArgs<ExtArgs>
   createdFoodItems?: boolean | Prisma.User$createdFoodItemsArgs<ExtArgs>
@@ -6802,7 +6802,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     displayName: string | null
-    avatarUrl: string | null
+    avatarKey: string | null
     dateOfBirth: Date | null
     gender: $Enums.Gender | null
     heightCm: runtime.Decimal | null
@@ -7274,7 +7274,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
   readonly displayName: Prisma.FieldRef<"User", 'String'>
-  readonly avatarUrl: Prisma.FieldRef<"User", 'String'>
+  readonly avatarKey: Prisma.FieldRef<"User", 'String'>
   readonly dateOfBirth: Prisma.FieldRef<"User", 'DateTime'>
   readonly gender: Prisma.FieldRef<"User", 'Gender'>
   readonly heightCm: Prisma.FieldRef<"User", 'Decimal'>
