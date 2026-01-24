@@ -25,6 +25,7 @@ import { Route as AuthSignupRouteImport } from './routes/auth/signup'
 import { Route as AuthResetPasswordRouteImport } from './routes/auth/reset-password'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
 import { Route as AuthForgotPasswordRouteImport } from './routes/auth/forgot-password'
+import { Route as IntegrationsWhoopCallbackRouteImport } from './routes/integrations/whoop/callback'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
 const IndexRoute = IndexRouteImport.update({
@@ -119,6 +120,12 @@ const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
   path: '/auth/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IntegrationsWhoopCallbackRoute =
+  IntegrationsWhoopCallbackRouteImport.update({
+    id: '/integrations/whoop/callback',
+    path: '/integrations/whoop/callback',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -143,6 +150,7 @@ export interface FileRoutesByFullPath {
   '/progress/': typeof ProgressIndexRoute
   '/sleep/': typeof SleepIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/integrations/whoop/callback': typeof IntegrationsWhoopCallbackRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -162,6 +170,7 @@ export interface FileRoutesByTo {
   '/progress': typeof ProgressIndexRoute
   '/sleep': typeof SleepIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/integrations/whoop/callback': typeof IntegrationsWhoopCallbackRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -182,6 +191,7 @@ export interface FileRoutesById {
   '/progress/': typeof ProgressIndexRoute
   '/sleep/': typeof SleepIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/integrations/whoop/callback': typeof IntegrationsWhoopCallbackRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -203,6 +213,7 @@ export interface FileRouteTypes {
     | '/progress/'
     | '/sleep/'
     | '/api/auth/$'
+    | '/integrations/whoop/callback'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -222,6 +233,7 @@ export interface FileRouteTypes {
     | '/progress'
     | '/sleep'
     | '/api/auth/$'
+    | '/integrations/whoop/callback'
   id:
     | '__root__'
     | '/'
@@ -241,6 +253,7 @@ export interface FileRouteTypes {
     | '/progress/'
     | '/sleep/'
     | '/api/auth/$'
+    | '/integrations/whoop/callback'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -261,6 +274,7 @@ export interface RootRouteChildren {
   ProgressIndexRoute: typeof ProgressIndexRoute
   SleepIndexRoute: typeof SleepIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  IntegrationsWhoopCallbackRoute: typeof IntegrationsWhoopCallbackRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -377,6 +391,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/integrations/whoop/callback': {
+      id: '/integrations/whoop/callback'
+      path: '/integrations/whoop/callback'
+      fullPath: '/integrations/whoop/callback'
+      preLoaderRoute: typeof IntegrationsWhoopCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -405,6 +426,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProgressIndexRoute: ProgressIndexRoute,
   SleepIndexRoute: SleepIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  IntegrationsWhoopCallbackRoute: IntegrationsWhoopCallbackRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
