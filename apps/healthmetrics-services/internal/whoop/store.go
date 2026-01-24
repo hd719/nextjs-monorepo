@@ -22,7 +22,7 @@ func (s *Store) UpsertIntegration(ctx context.Context, userID, provider string) 
 	// $2::integration_provider means take the second parameter and cast it to the integration_provider enum type 'whoop'::integration_provider (enum type is a list of allowed values)
 	const query = `
 		INSERT INTO integration (user_id, provider, status)
-		VALUES ($1, $2::integration_provider, 'disconnected')
+		VALUES ($1, $2::"IntegrationProvider", 'disconnected')
 		ON CONFLICT (user_id, provider) DO UPDATE
 		SET updated_at = now()
 		RETURNING id

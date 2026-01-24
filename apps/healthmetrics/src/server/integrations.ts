@@ -205,3 +205,36 @@ export const completeWhoopOAuth = createServerFn({ method: "POST" })
 
     return { status: "ok" };
   });
+
+export const getWhoopIntegrationStatus = createServerFn({ method: "GET" }).handler(
+  async () => {
+    if (!isWhoopIntegrationEnabled()) {
+      throw new Error("WHOOP integration is disabled");
+    }
+
+    const headers = getRequestHeaders();
+    const session = await auth.api.getSession({ headers });
+
+    if (!session) {
+      throw new Error("Authentication required");
+    }
+
+    const integration = await prisma.integration.findUnique({
+      where: {
+        userId_provider: {
+          userId: session.user.id,
+          provider: "whoop",
+        },
+      },
+      select: {
+        status: true,
+        lastSyncAt: true,
+      },
+    });
+
+    return {
+      status: integration?.status ?? "disconnected",
+      lastSyncAt: integration?.lastSyncAt ?? null,
+    };
+  }
+);

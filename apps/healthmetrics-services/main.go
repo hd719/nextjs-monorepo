@@ -238,6 +238,7 @@ func main() {
 		TokenURL:     os.Getenv("WHOOP_TOKEN_URL"),
 		RedirectURL:  os.Getenv("WHOOP_REDIRECT_URL"),
 	}
+	log.Printf("startup_config whoop_key_set=%t", os.Getenv("WHOOP_TOKEN_ENCRYPTION_KEY") != "")
 
 	capacity, refillRate := getRateLimitConfig() // read rate-limit settings (or defaults)
 	cacheTTL := getCacheTTL()                    // read cache TTL (days -> duration)

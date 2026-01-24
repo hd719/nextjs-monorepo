@@ -1,22 +1,37 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { Activity, RefreshCw } from "lucide-react";
 import { AppLayout } from "@/components/layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { startWhoopOAuth } from "@/server/integrations";
+import {
+  startWhoopOAuth,
+  getWhoopIntegrationStatus,
+} from "@/server/integrations";
+import { formatDate } from "@/utils";
 
 export const Route = createLazyFileRoute("/integrations/")({
   component: IntegrationsPage,
 });
 
 function IntegrationsPage() {
+  const statusQuery = useQuery({
+    queryKey: ["whoop-integration-status"],
+    queryFn: async () => getWhoopIntegrationStatus(),
+  });
+
   const startWhoopMutation = useMutation({
     mutationFn: async () => startWhoopOAuth(),
     onSuccess: ({ url }) => {
       window.location.href = url;
     },
   });
+
+  const status = statusQuery.data?.status ?? "disconnected";
+  const isConnected = status === "connected";
+  const lastSyncLabel = statusQuery.data?.lastSyncAt
+    ? formatDate(statusQuery.data.lastSyncAt)
+    : "—";
 
   return (
     <AppLayout>
@@ -44,7 +59,13 @@ function IntegrationsPage() {
                   </p>
                 </div>
               </div>
-              <span className="integrations-card-status">Not connected</span>
+              <span className="integrations-card-status">
+                {statusQuery.isLoading
+                  ? "Loading..."
+                  : isConnected
+                    ? "Connected"
+                    : "Not connected"}
+              </span>
             </div>
           </CardHeader>
 
@@ -52,7 +73,9 @@ function IntegrationsPage() {
             <div className="integrations-card-meta">
               <div>
                 <p className="integrations-card-label">Last sync</p>
-                <p className="integrations-card-value">—</p>
+                <p className="integrations-card-value">
+                  {statusQuery.isLoading ? "—" : lastSyncLabel}
+                </p>
               </div>
               <div>
                 <p className="integrations-card-label">Next sync</p>
@@ -63,10 +86,15 @@ function IntegrationsPage() {
             <div className="integrations-card-actions">
               <Button
                 className="integrations-card-button"
+                variant={isConnected ? "outline" : "default"}
                 onClick={() => startWhoopMutation.mutate()}
-                disabled={startWhoopMutation.isPending}
+                disabled={
+                  startWhoopMutation.isPending ||
+                  statusQuery.isLoading ||
+                  isConnected
+                }
               >
-                Connect WHOOP
+                {isConnected ? "Disconnect" : "Connect WHOOP"}
               </Button>
               <Button variant="outline" disabled>
                 <RefreshCw className="mr-2 h-4 w-4" />

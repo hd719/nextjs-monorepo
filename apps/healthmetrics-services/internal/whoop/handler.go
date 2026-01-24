@@ -119,6 +119,7 @@ func (s *Service) ExchangeHandler(w http.ResponseWriter, r *http.Request) {
 	// Upsert integration + store tokens
 	integrationID, err := s.DB.UpsertIntegration(ctx, req.UserID, "whoop")
 	if err != nil {
+		log.Printf("whoop db error (upsert integration): %v", err)
 		http.Error(w, "db error", http.StatusInternalServerError)
 		return
 	}
@@ -126,6 +127,7 @@ func (s *Service) ExchangeHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Add the encrypted tokens to the database
 	if err := s.DB.UpsertIntegrationToken(ctx, integrationID, accessEnc, refreshEnc, expiresAt, strings.Fields(token.Scope)); err != nil {
+		log.Printf("whoop db error (upsert token): %v", err)
 		http.Error(w, "db error", http.StatusInternalServerError)
 		return
 	}
@@ -133,6 +135,7 @@ func (s *Service) ExchangeHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Mark the integration as connected
 	if err := s.DB.MarkIntegrationConnected(ctx, integrationID); err != nil {
+		log.Printf("whoop db error (mark connected): %v", err)
 		http.Error(w, "db error", http.StatusInternalServerError)
 		return
 	}

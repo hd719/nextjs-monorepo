@@ -34,7 +34,11 @@ export { getUserProfile, updateUserProfile } from "./profile";
 export { createUploadPostForUser } from "./storage";
 
 // Integrations server functions
-export { startWhoopOAuth, completeWhoopOAuth } from "./integrations";
+export {
+  startWhoopOAuth,
+  completeWhoopOAuth,
+  getWhoopIntegrationStatus,
+} from "./integrations";
 
 // Water server functions
 export { getWaterIntake, updateWaterIntake, updateWaterGoal } from "./water";
