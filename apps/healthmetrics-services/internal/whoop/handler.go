@@ -17,6 +17,10 @@ type ExchangeRequest struct {
 	RedirectURI string `json:"redirectUri"`
 }
 
+type SyncRequest struct {
+	UserID string `json:"userId"`
+}
+
 type TokenResponse struct {
 	AccessToken  string `json:"access_token"`
 	RefreshToken string `json:"refresh_token,omitempty"`
@@ -45,6 +49,9 @@ type DB interface {
 	UpsertIntegration(ctx context.Context, userID, provider string) (integrationID string, err error)
 	UpsertIntegrationToken(ctx context.Context, integrationID string, accessEnc string, refreshEnc *string, expiresAt time.Time, scopes []string) error
 	MarkIntegrationConnected(ctx context.Context, integrationID string) error
+	GetIntegration(ctx context.Context, userID, provider string) (IntegrationRecord, error)
+	HasIntegrationToken(ctx context.Context, integrationID string) (bool, error)
+	UpdateIntegrationLastSync(ctx context.Context, integrationID string, syncedAt time.Time) error
 }
 
 func (s *Service) ExchangeHandler(w http.ResponseWriter, r *http.Request) {
@@ -141,6 +148,65 @@ func (s *Service) ExchangeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// TODO: enqueue initial sync job
+
+	w.WriteHeader(http.StatusOK)
+	_ = json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
+}
+
+func (s *Service) SyncHandler(w http.ResponseWriter, r *http.Request) {
+	// This handler:
+	// 1) validates input
+	// 2) checks integration + token presence
+	// 3) (TODO) fetches WHOOP data
+	// 4) updates last_sync_at
+	var req SyncRequest
+
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "invalid json", http.StatusBadRequest)
+		return
+	}
+
+	if req.UserID == "" {
+		http.Error(w, "missing fields", http.StatusBadRequest)
+		return
+	}
+
+	ctx := r.Context()
+
+	integration, err := s.DB.GetIntegration(ctx, req.UserID, "whoop")
+	if err != nil {
+		if errors.Is(err, ErrNotFound) {
+			http.Error(w, "integration not found", http.StatusNotFound)
+			return
+		}
+		log.Printf("whoop db error (get integration): %v", err)
+		http.Error(w, "db error", http.StatusInternalServerError)
+		return
+	}
+
+	if integration.Status != "connected" {
+		http.Error(w, "integration not connected", http.StatusConflict)
+		return
+	}
+
+	hasToken, err := s.DB.HasIntegrationToken(ctx, integration.ID)
+	if err != nil {
+		log.Printf("whoop db error (check token): %v", err)
+		http.Error(w, "db error", http.StatusInternalServerError)
+		return
+	}
+	if !hasToken {
+		http.Error(w, "missing token", http.StatusBadRequest)
+		return
+	}
+
+	// TODO: fetch WHOOP data and persist records
+
+	if err := s.DB.UpdateIntegrationLastSync(ctx, integration.ID, time.Now()); err != nil {
+		log.Printf("whoop db error (update last sync): %v", err)
+		http.Error(w, "db error", http.StatusInternalServerError)
+		return
+	}
 
 	w.WriteHeader(http.StatusOK)
 	_ = json.NewEncoder(w).Encode(map[string]string{"status": "ok"})

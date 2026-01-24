@@ -38,6 +38,7 @@ export {
   startWhoopOAuth,
   completeWhoopOAuth,
   getWhoopIntegrationStatus,
+  triggerWhoopSync,
 } from "./integrations";
 
 // Water server functions

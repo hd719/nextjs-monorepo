@@ -364,6 +364,11 @@ func main() {
 		whoopService.ExchangeHandler(c.Writer, c.Request)
 	})
 
+	// This comes from the frontend when the user wants to sync their WHOOP data
+	router.POST("/internal/whoop/sync", func(c *gin.Context) {
+		whoopService.SyncHandler(c.Writer, c.Request)
+	})
+
 	// Print a safe config summary after we compute all config values.
 	logStartupSummary(authCfg, capacity, refillRate, timeout, userAgent, retryCfg, baseURL)
 

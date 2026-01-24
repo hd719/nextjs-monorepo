@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import {
   startWhoopOAuth,
   getWhoopIntegrationStatus,
+  triggerWhoopSync,
 } from "@/server/integrations";
 import { formatDate } from "@/utils";
 
@@ -27,8 +28,18 @@ function IntegrationsPage() {
     },
   });
 
+  const syncWhoopMutation = useMutation({
+    mutationFn: async () => triggerWhoopSync(),
+    onSuccess: () => {
+      setTimeout(() => {
+        statusQuery.refetch();
+      }, 2000);
+    },
+  });
+
   const status = statusQuery.data?.status ?? "disconnected";
   const isConnected = status === "connected";
+  const isSyncing = syncWhoopMutation.isPending;
   const lastSyncLabel = statusQuery.data?.lastSyncAt
     ? formatDate(statusQuery.data.lastSyncAt)
     : "—";
@@ -96,9 +107,13 @@ function IntegrationsPage() {
               >
                 {isConnected ? "Disconnect" : "Connect WHOOP"}
               </Button>
-              <Button variant="outline" disabled>
+              <Button
+                variant="outline"
+                onClick={() => syncWhoopMutation.mutate()}
+                disabled={!isConnected || statusQuery.isLoading || isSyncing}
+              >
                 <RefreshCw className="mr-2 h-4 w-4" />
-                Sync now
+                {isSyncing ? "Syncing..." : "Sync now"}
               </Button>
             </div>
           </CardContent>

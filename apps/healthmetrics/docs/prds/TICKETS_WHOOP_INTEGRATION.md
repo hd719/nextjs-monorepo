@@ -5,6 +5,7 @@ These tickets break down the WHOOP OAuth + sync integration into implementable t
 ---
 
 ## WHOOP-01: Add feature flag + env config
+**Status:** Done ✅
 **Goal:** Gate WHOOP integration behind a flag and validate envs.
 
 **Scope**
@@ -22,6 +23,7 @@ These tickets break down the WHOOP OAuth + sync integration into implementable t
 ---
 
 ## WHOOP-02: Integrations page + WHOOP card UI
+**Status:** Done ✅
 **Goal:** Add `/integrations` page with WHOOP card.
 
 **Scope**
@@ -35,6 +37,7 @@ These tickets break down the WHOOP OAuth + sync integration into implementable t
 ---
 
 ## WHOOP-03: OAuth start (server action)
+**Status:** Done ✅
 **Goal:** Start OAuth flow with CSRF state.
 
 **Scope**
@@ -47,6 +50,7 @@ These tickets break down the WHOOP OAuth + sync integration into implementable t
 ---
 
 ## WHOOP-04: OAuth callback route
+**Status:** Done ✅
 **Goal:** Handle callback and hand off code to Go service.
 
 **Scope**
@@ -61,6 +65,7 @@ These tickets break down the WHOOP OAuth + sync integration into implementable t
 ---
 
 ## WHOOP-05: DB schema for integrations (generic) (Do first)
+**Status:** Done ✅
 **Goal:** Add generic integration tables.
 
 **Scope**
@@ -77,6 +82,7 @@ These tickets break down the WHOOP OAuth + sync integration into implementable t
 ---
 
 ## WHOOP-06: Go service OAuth exchange
+**Status:** Done ✅
 **Goal:** Exchange auth code for tokens server‑to‑server.
 
 **Scope**
@@ -92,6 +98,7 @@ These tickets break down the WHOOP OAuth + sync integration into implementable t
 ---
 
 ## WHOOP-07: Token encryption
+**Status:** Done ✅
 **Goal:** Encrypt access/refresh tokens at rest.
 
 **Scope**
@@ -105,6 +112,7 @@ These tickets break down the WHOOP OAuth + sync integration into implementable t
 ---
 
 ## WHOOP-08: Initial sync job (Go)
+**Status:** Next ⏭️
 **Goal:** Fetch WHOOP profile, sleep, recovery, workout, cycles, body measurements.
 
 **Scope**
@@ -119,18 +127,22 @@ These tickets break down the WHOOP OAuth + sync integration into implementable t
 ---
 
 ## WHOOP-09: Scheduled sync (2x/day)
+**Status:** Not started
 **Goal:** Run background sync on schedule.
 
 **Scope**
 - Cron in Go service (2x/day, timezone TBD).
 - Respect rate limits (100 req/min, 10k/day).
+- Populate “Next sync” in UI once scheduler exists (currently leave blank/manual).
 
 **Acceptance Criteria**
 - Sync runs on schedule without exceeding limits.
+- UI shows the next scheduled sync time after cron is live.
 
 ---
 
 ## WHOOP-10: Manual “Sync now”
+**Status:** Done ✅ (stub sync; data ingestion pending WHOOP-08)
 **Goal:** Allow users to trigger sync from UI.
 
 **Scope**
@@ -143,6 +155,7 @@ These tickets break down the WHOOP OAuth + sync integration into implementable t
 ---
 
 ## WHOOP-11: Disconnect flow
+**Status:** Not started
 **Goal:** Disconnect WHOOP without deleting data.
 
 **Scope**
@@ -157,6 +170,7 @@ These tickets break down the WHOOP OAuth + sync integration into implementable t
 ---
 
 ## WHOOP-12: Observability + metrics
+**Status:** Not started
 **Goal:** Add metrics and structured logs.
 
 **Scope**
@@ -169,6 +183,7 @@ These tickets break down the WHOOP OAuth + sync integration into implementable t
 ---
 
 ## WHOOP-13: QA checklist + test fixtures
+**Status:** Not started
 **Goal:** Add QA scenarios and test scaffolding.
 
 **Scope**
