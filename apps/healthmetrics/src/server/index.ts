@@ -39,6 +39,7 @@ export {
   completeWhoopOAuth,
   getWhoopIntegrationStatus,
   triggerWhoopSync,
+  disconnectWhoop,
 } from "./integrations";
 
 // Water server functions

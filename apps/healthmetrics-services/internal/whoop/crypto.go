@@ -62,6 +62,48 @@ func Encrypt(plaintext string) (string, error) {
 	return base64.StdEncoding.EncodeToString(payload), nil
 }
 
+// Decrypt reverses Encrypt: base64 decode, split nonce/ciphertext, and open with AES‑GCM.
+func Decrypt(ciphertext string) (string, error) {
+	if ciphertext == "" {
+		return "", errors.New("ciphertext is empty")
+	}
+
+	key, err := loadEncryptionKey()
+	if err != nil {
+		return "", err
+	}
+
+	raw, err := base64.StdEncoding.DecodeString(ciphertext)
+	if err != nil {
+		return "", errors.New("ciphertext must be base64")
+	}
+
+	block, err := aes.NewCipher(key)
+	if err != nil {
+		return "", err
+	}
+
+	gcm, err := cipher.NewGCM(block)
+	if err != nil {
+		return "", err
+	}
+
+	nonceSize := gcm.NonceSize()
+	if len(raw) < nonceSize {
+		return "", errors.New("ciphertext too short")
+	}
+
+	nonce := raw[:nonceSize]
+	encrypted := raw[nonceSize:]
+
+	plaintext, err := gcm.Open(nil, nonce, encrypted, nil)
+	if err != nil {
+		return "", err
+	}
+
+	return string(plaintext), nil
+}
+
 // loadEncryptionKey reads WHOOP_TOKEN_ENCRYPTION_KEY from env.
 // The key must be base64-encoded 32 bytes (AES-256)
 func loadEncryptionKey() ([]byte, error) {

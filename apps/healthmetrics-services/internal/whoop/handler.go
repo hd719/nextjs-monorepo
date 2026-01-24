@@ -21,6 +21,10 @@ type SyncRequest struct {
 	UserID string `json:"userId"`
 }
 
+type DisconnectRequest struct {
+	UserID string `json:"userId"`
+}
+
 type TokenResponse struct {
 	AccessToken  string `json:"access_token"`
 	RefreshToken string `json:"refresh_token,omitempty"`
@@ -52,6 +56,11 @@ type DB interface {
 	GetIntegration(ctx context.Context, userID, provider string) (IntegrationRecord, error)
 	HasIntegrationToken(ctx context.Context, integrationID string) (bool, error)
 	UpdateIntegrationLastSync(ctx context.Context, integrationID string, syncedAt time.Time) error
+	GetIntegrationToken(ctx context.Context, integrationID string) (IntegrationTokenRecord, error)
+	UpsertIntegrationRawEvent(ctx context.Context, integrationID, resourceType, sourceID string, payload []byte) error
+	UpsertIntegrationConnection(ctx context.Context, integrationID, providerUserID string) error
+	DeleteIntegrationTokens(ctx context.Context, integrationID string) error
+	MarkIntegrationDisconnected(ctx context.Context, integrationID string) error
 }
 
 func (s *Service) ExchangeHandler(w http.ResponseWriter, r *http.Request) {
@@ -200,7 +209,83 @@ func (s *Service) SyncHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// TODO: fetch WHOOP data and persist records
+	tokenRecord, err := s.DB.GetIntegrationToken(ctx, integration.ID)
+	if err != nil {
+		if errors.Is(err, ErrNotFound) {
+			http.Error(w, "missing token", http.StatusBadRequest)
+			return
+		}
+		log.Printf("whoop db error (get token): %v", err)
+		http.Error(w, "db error", http.StatusInternalServerError)
+		return
+	}
+
+	accessToken, err := Decrypt(tokenRecord.AccessTokenEncrypted)
+	if err != nil {
+		log.Printf("whoop token decrypt failed (access): %v", err)
+		http.Error(w, "decrypt failed", http.StatusInternalServerError)
+		return
+	}
+
+	var refreshToken string
+	if tokenRecord.RefreshTokenEncrypted != nil {
+		refreshToken, err = Decrypt(*tokenRecord.RefreshTokenEncrypted)
+		if err != nil {
+			log.Printf("whoop token decrypt failed (refresh): %v", err)
+			http.Error(w, "decrypt failed", http.StatusInternalServerError)
+			return
+		}
+	}
+
+	if tokenRecord.ExpiresAt != nil && tokenRecord.ExpiresAt.Before(time.Now().Add(1*time.Minute)) {
+		if refreshToken == "" {
+			http.Error(w, "refresh token missing", http.StatusBadRequest)
+			return
+		}
+
+		refreshed, err := s.refreshToken(ctx, refreshToken)
+		if err != nil {
+			log.Printf("whoop token refresh failed: %v", err)
+			http.Error(w, "token refresh failed", http.StatusBadGateway)
+			return
+		}
+
+		accessEnc, err := Encrypt(refreshed.AccessToken)
+		if err != nil {
+			log.Printf("whoop token encrypt failed (access): %v", err)
+			http.Error(w, "encrypt failed", http.StatusInternalServerError)
+			return
+		}
+
+		var refreshEnc *string
+		if refreshed.RefreshToken != "" {
+			enc, err := Encrypt(refreshed.RefreshToken)
+			if err != nil {
+				log.Printf("whoop token encrypt failed (refresh): %v", err)
+				http.Error(w, "encrypt failed", http.StatusInternalServerError)
+				return
+			}
+			refreshEnc = &enc
+		}
+
+		expiresAt := time.Now().Add(time.Duration(refreshed.ExpiresIn) * time.Second)
+		if err := s.DB.UpsertIntegrationToken(ctx, integration.ID, accessEnc, refreshEnc, expiresAt, strings.Fields(refreshed.Scope)); err != nil {
+			log.Printf("whoop db error (upsert token refresh): %v", err)
+			http.Error(w, "db error", http.StatusInternalServerError)
+			return
+		}
+
+		accessToken = refreshed.AccessToken
+		if refreshed.RefreshToken != "" {
+			refreshToken = refreshed.RefreshToken
+		}
+	}
+
+	if err := s.fetchAndStoreWhoopData(ctx, integration.ID, accessToken); err != nil {
+		log.Printf("whoop sync failed: %v", err)
+		http.Error(w, "sync failed", http.StatusBadGateway)
+		return
+	}
 
 	if err := s.DB.UpdateIntegrationLastSync(ctx, integration.ID, time.Now()); err != nil {
 		log.Printf("whoop db error (update last sync): %v", err)
@@ -251,5 +336,78 @@ func (s *Service) exchangeToken(ctx context.Context, code, redirectURI string) (
 	if err := json.NewDecoder(resp.Body).Decode(&token); err != nil {
 		return nil, err
 	}
+	return &token, nil
+}
+
+func (s *Service) DisconnectHandler(w http.ResponseWriter, r *http.Request) {
+	var req DisconnectRequest
+
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "invalid json", http.StatusBadRequest)
+		return
+	}
+
+	if req.UserID == "" {
+		http.Error(w, "missing fields", http.StatusBadRequest)
+		return
+	}
+
+	ctx := r.Context()
+
+	integration, err := s.DB.GetIntegration(ctx, req.UserID, "whoop")
+	if err != nil {
+		if errors.Is(err, ErrNotFound) {
+			http.Error(w, "integration not found", http.StatusNotFound)
+			return
+		}
+		log.Printf("whoop db error (get integration): %v", err)
+		http.Error(w, "db error", http.StatusInternalServerError)
+		return
+	}
+
+	if err := s.DB.DeleteIntegrationTokens(ctx, integration.ID); err != nil {
+		log.Printf("whoop db error (delete tokens): %v", err)
+		http.Error(w, "db error", http.StatusInternalServerError)
+		return
+	}
+
+	if err := s.DB.MarkIntegrationDisconnected(ctx, integration.ID); err != nil {
+		log.Printf("whoop db error (mark disconnected): %v", err)
+		http.Error(w, "db error", http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	_ = json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
+}
+
+func (s *Service) refreshToken(ctx context.Context, refreshToken string) (*TokenResponse, error) {
+	form := url.Values{}
+	form.Set("grant_type", "refresh_token")
+	form.Set("refresh_token", refreshToken)
+	form.Set("client_id", s.ClientID)
+	form.Set("client_secret", s.ClientSecret)
+
+	req, err := http.NewRequestWithContext(ctx, "POST", s.TokenURL, strings.NewReader(form.Encode()))
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+
+	resp, err := s.HTTPClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode >= 400 {
+		return nil, errors.New("whoops server error: refresh token endpoint returned error")
+	}
+
+	var token TokenResponse
+	if err := json.NewDecoder(resp.Body).Decode(&token); err != nil {
+		return nil, err
+	}
+
 	return &token, nil
 }

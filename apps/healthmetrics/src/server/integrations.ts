@@ -101,9 +101,9 @@ export const completeWhoopOAuth = createServerFn({ method: "POST" })
       throw new Error("WHOOP_REDIRECT_URL is required");
     }
 
-    const serviceUrl = env.BARCODE_SERVICE_URL;
+    const serviceUrl = env.GO_SERVICE_URL;
     if (!serviceUrl) {
-      throw new Error("BARCODE_SERVICE_URL is required for WHOOP integration");
+      throw new Error("GO_SERVICE_URL is required for WHOOP integration");
     }
 
     const headers = getRequestHeaders();
@@ -247,9 +247,9 @@ export const triggerWhoopSync = createServerFn({ method: "POST" }).handler(
       throw new Error("WHOOP integration is disabled");
     }
 
-    const serviceUrl = env.BARCODE_SERVICE_URL;
+    const serviceUrl = env.GO_SERVICE_URL;
     if (!serviceUrl) {
-      throw new Error("BARCODE_SERVICE_URL is required for WHOOP sync");
+      throw new Error("GO_SERVICE_URL is required for WHOOP sync");
     }
 
     const headers = getRequestHeaders();
@@ -316,6 +316,89 @@ export const triggerWhoopSync = createServerFn({ method: "POST" }).handler(
     log.info(
       { requestId, userId: session.user.id },
       "WHOOP sync triggered"
+    );
+
+    return { status: "ok" };
+  }
+);
+
+export const disconnectWhoop = createServerFn({ method: "POST" }).handler(
+  async () => {
+    const env = getEnv();
+
+    if (!isWhoopIntegrationEnabled()) {
+      throw new Error("WHOOP integration is disabled");
+    }
+
+    const serviceUrl = env.GO_SERVICE_URL;
+    if (!serviceUrl) {
+      throw new Error("GO_SERVICE_URL is required for WHOOP disconnect");
+    }
+
+    const headers = getRequestHeaders();
+    const session = await auth.api.getSession({ headers });
+
+    if (!session) {
+      throw new Error("Authentication required");
+    }
+
+    const requestId = generateRequestId();
+    const cookieHeader = headers.get("cookie") || "";
+
+    const serviceHeaders: Record<string, string> = {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "X-Request-ID": requestId,
+      "X-User-ID": session.user.id,
+    };
+
+    if (env.BARCODE_SERVICE_API_KEY) {
+      serviceHeaders["X-API-Key"] = env.BARCODE_SERVICE_API_KEY;
+    } else {
+      log.warn(
+        { requestId },
+        "BARCODE_SERVICE_API_KEY not configured - service auth disabled"
+      );
+    }
+
+    if (cookieHeader) {
+      serviceHeaders["Cookie"] = cookieHeader;
+    }
+
+    const response = await fetch(`${serviceUrl}/internal/whoop/disconnect`, {
+      method: "POST",
+      headers: serviceHeaders,
+      body: JSON.stringify({ userId: session.user.id }),
+    });
+
+    if (response.status === 401) {
+      log.warn(
+        { requestId, userId: session.user.id },
+        "WHOOP disconnect rejected authentication"
+      );
+      throw new Error("Authentication failed");
+    }
+
+    if (response.status === 403) {
+      log.warn(
+        { requestId, userId: session.user.id },
+        "WHOOP disconnect rejected authorization"
+      );
+      throw new Error("Not authorized to disconnect WHOOP");
+    }
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      log.error(
+        { requestId, status: response.status, error: errorText },
+        "WHOOP disconnect failed"
+      );
+      throw new Error("Failed to disconnect WHOOP. Please try again.");
+    }
+
+    log.info(
+      { requestId, userId: session.user.id },
+      "WHOOP disconnected"
     );
 
     return { status: "ok" };

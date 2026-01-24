@@ -369,6 +369,11 @@ func main() {
 		whoopService.SyncHandler(c.Writer, c.Request)
 	})
 
+	// This comes from the frontend when the user wants to disconnect their WHOOP data
+	router.POST("/internal/whoop/disconnect", func(c *gin.Context) {
+		whoopService.DisconnectHandler(c.Writer, c.Request)
+	})
+
 	// Print a safe config summary after we compute all config values.
 	logStartupSummary(authCfg, capacity, refillRate, timeout, userAgent, retryCfg, baseURL)
 

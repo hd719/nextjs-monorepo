@@ -29,8 +29,8 @@ const envSchema = z.object({
   FEATURE_WHOOP_INTEGRATION: z.enum(["true", "false"]).optional(),
   WHOOP_CLIENT_ID: z.string().min(1).optional(),
   WHOOP_REDIRECT_URL: z.string().url().optional(),
-  // Barcode service configuration
-  BARCODE_SERVICE_URL: z.string().url().optional(),
+  // Go service configuration (barcode + integrations)
+  GO_SERVICE_URL: z.string().url().optional(),
   BARCODE_SERVICE_API_KEY: z.string().min(32).optional(),
   // Mock data flags
   VITE_USE_MOCK_DASHBOARD: z.string().optional(),

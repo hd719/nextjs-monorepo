@@ -112,7 +112,7 @@ These tickets break down the WHOOP OAuth + sync integration into implementable t
 ---
 
 ## WHOOP-08: Initial sync job (Go)
-**Status:** Next ⏭️
+**Status:** Done ✅
 **Goal:** Fetch WHOOP profile, sleep, recovery, workout, cycles, body measurements.
 
 **Scope**
@@ -142,7 +142,7 @@ These tickets break down the WHOOP OAuth + sync integration into implementable t
 ---
 
 ## WHOOP-10: Manual “Sync now”
-**Status:** Done ✅ (stub sync; data ingestion pending WHOOP-08)
+**Status:** Done ✅ (wired to Go sync + last_sync_at updates)
 **Goal:** Allow users to trigger sync from UI.
 
 **Scope**
@@ -155,7 +155,7 @@ These tickets break down the WHOOP OAuth + sync integration into implementable t
 ---
 
 ## WHOOP-11: Disconnect flow
-**Status:** Not started
+**Status:** Done ✅
 **Goal:** Disconnect WHOOP without deleting data.
 
 **Scope**
@@ -166,6 +166,12 @@ These tickets break down the WHOOP OAuth + sync integration into implementable t
 **Acceptance Criteria**
 - User sees disconnected state.
 - Historical data remains.
+
+---
+
+## Next Recommended Ticket
+**WHOOP-09: Scheduled sync (2x/day)**  
+Now that OAuth + manual sync + disconnect are done, the next step is to add a cron/scheduler in the Go service and populate the “Next sync” UI field.
 
 ---
 

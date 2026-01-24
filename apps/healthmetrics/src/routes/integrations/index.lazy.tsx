@@ -8,6 +8,7 @@ import {
   startWhoopOAuth,
   getWhoopIntegrationStatus,
   triggerWhoopSync,
+  disconnectWhoop,
 } from "@/server/integrations";
 import { formatDate } from "@/utils";
 
@@ -28,6 +29,13 @@ function IntegrationsPage() {
     },
   });
 
+  const disconnectMutation = useMutation({
+    mutationFn: async () => disconnectWhoop(),
+    onSuccess: () => {
+      statusQuery.refetch();
+    },
+  });
+
   const syncWhoopMutation = useMutation({
     mutationFn: async () => triggerWhoopSync(),
     onSuccess: () => {
@@ -39,10 +47,22 @@ function IntegrationsPage() {
 
   const status = statusQuery.data?.status ?? "disconnected";
   const isConnected = status === "connected";
+  const isDisconnecting = disconnectMutation.isPending;
   const isSyncing = syncWhoopMutation.isPending;
   const lastSyncLabel = statusQuery.data?.lastSyncAt
     ? formatDate(statusQuery.data.lastSyncAt)
     : "—";
+  const nextSyncLabel =
+    isConnected && statusQuery.data?.lastSyncAt
+      ? new Date(
+          new Date(statusQuery.data.lastSyncAt).getTime() + 12 * 60 * 60 * 1000
+        ).toLocaleString("en-US", {
+          month: "short",
+          day: "numeric",
+          hour: "numeric",
+          minute: "2-digit",
+        })
+      : "Manual";
 
   return (
     <AppLayout>
@@ -90,7 +110,9 @@ function IntegrationsPage() {
               </div>
               <div>
                 <p className="integrations-card-label">Next sync</p>
-                <p className="integrations-card-value">—</p>
+                <p className="integrations-card-value">
+                  {statusQuery.isLoading ? "—" : nextSyncLabel}
+                </p>
               </div>
             </div>
 
@@ -98,14 +120,22 @@ function IntegrationsPage() {
               <Button
                 className="integrations-card-button"
                 variant={isConnected ? "outline" : "default"}
-                onClick={() => startWhoopMutation.mutate()}
+                onClick={() =>
+                  isConnected
+                    ? disconnectMutation.mutate()
+                    : startWhoopMutation.mutate()
+                }
                 disabled={
                   startWhoopMutation.isPending ||
                   statusQuery.isLoading ||
-                  isConnected
+                  isDisconnecting
                 }
               >
-                {isConnected ? "Disconnect" : "Connect WHOOP"}
+                {isConnected
+                  ? isDisconnecting
+                    ? "Disconnecting..."
+                    : "Disconnect"
+                  : "Connect WHOOP"}
               </Button>
               <Button
                 variant="outline"

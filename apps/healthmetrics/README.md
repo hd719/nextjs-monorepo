@@ -100,7 +100,7 @@ WHOOP_REDIRECT_URL="https://localhost:3003/integrations/whoop/callback"
 # Note: WHOOP client secret lives in the Go service env, not the frontend app.
 
 # Barcode Scanner - Go Service Integration
-BARCODE_SERVICE_URL="http://localhost:8080"       # Go microservice URL (required in prod)
+GO_SERVICE_URL="http://localhost:8080"       # Go microservice URL (required in prod)
 BARCODE_SERVICE_API_KEY="your-api-key-min-32-chars"  # Service-to-service auth (required in prod)
 
 # Optional - Mock Data Flags (for development/testing)

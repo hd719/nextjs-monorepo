@@ -17,6 +17,13 @@ type IntegrationRecord struct {
 	Status string
 }
 
+type IntegrationTokenRecord struct {
+	AccessTokenEncrypted  string
+	RefreshTokenEncrypted *string
+	ExpiresAt             *time.Time
+	Scopes                []string
+}
+
 // Store implements the whoop.DB interface using pgxpool.
 type Store struct {
 	pool *pgxpool.Pool
@@ -145,6 +152,92 @@ func (s *Store) UpdateIntegrationLastSync(ctx context.Context, integrationID str
 	`
 	if _, err := s.pool.Exec(ctx, query, integrationID, syncedAt); err != nil {
 		return fmt.Errorf("update last sync: %w", err)
+	}
+	return nil
+}
+
+// GetIntegrationToken loads the encrypted tokens for an integration.
+func (s *Store) GetIntegrationToken(ctx context.Context, integrationID string) (IntegrationTokenRecord, error) {
+	const query = `
+		SELECT access_token_encrypted, refresh_token_encrypted, expires_at, scopes
+		FROM integration_token
+		WHERE integration_id = $1
+		LIMIT 1
+	`
+
+	var record IntegrationTokenRecord
+	err := s.pool.QueryRow(ctx, query, integrationID).Scan(
+		&record.AccessTokenEncrypted,
+		&record.RefreshTokenEncrypted,
+		&record.ExpiresAt,
+		&record.Scopes,
+	)
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return IntegrationTokenRecord{}, ErrNotFound
+		}
+		return IntegrationTokenRecord{}, fmt.Errorf("get integration token: %w", err)
+	}
+	return record, nil
+}
+
+// UpsertIntegrationRawEvent stores raw WHOOP payloads by resource type + source id.
+func (s *Store) UpsertIntegrationRawEvent(ctx context.Context, integrationID, resourceType, sourceID string, payload []byte) error {
+	const query = `
+		INSERT INTO integration_raw_event (
+			integration_id,
+			resource_type,
+			payload,
+			source_id
+		) VALUES ($1, $2, $3, $4)
+		ON CONFLICT (integration_id, source_id, resource_type) DO UPDATE
+		SET payload = EXCLUDED.payload
+	`
+
+	if _, err := s.pool.Exec(ctx, query, integrationID, resourceType, payload, sourceID); err != nil {
+		return fmt.Errorf("upsert raw event: %w", err)
+	}
+	return nil
+}
+
+// UpsertIntegrationConnection stores provider user id when available.
+func (s *Store) UpsertIntegrationConnection(ctx context.Context, integrationID, providerUserID string) error {
+	const query = `
+		INSERT INTO integration_connection (
+			integration_id,
+			provider_user_id
+		) VALUES ($1, $2)
+		ON CONFLICT (integration_id) DO UPDATE
+		SET provider_user_id = EXCLUDED.provider_user_id
+	`
+
+	if _, err := s.pool.Exec(ctx, query, integrationID, providerUserID); err != nil {
+		return fmt.Errorf("upsert integration connection: %w", err)
+	}
+	return nil
+}
+
+// DeleteIntegrationTokens removes stored tokens on disconnect.
+func (s *Store) DeleteIntegrationTokens(ctx context.Context, integrationID string) error {
+	const query = `
+		DELETE FROM integration_token
+		WHERE integration_id = $1
+	`
+	if _, err := s.pool.Exec(ctx, query, integrationID); err != nil {
+		return fmt.Errorf("delete integration tokens: %w", err)
+	}
+	return nil
+}
+
+// MarkIntegrationDisconnected updates the integration status.
+func (s *Store) MarkIntegrationDisconnected(ctx context.Context, integrationID string) error {
+	const query = `
+		UPDATE integration
+		SET status = 'disconnected', updated_at = now()
+		WHERE id = $1
+	`
+	if _, err := s.pool.Exec(ctx, query, integrationID); err != nil {
+		return fmt.Errorf("mark integration disconnected: %w", err)
 	}
 	return nil
 }
