@@ -301,6 +301,7 @@ model IntegrationToken {
   integration Integration @relation(fields: [integrationId], references: [id], onDelete: Cascade)
 
   @@index([integrationId])
+  @@unique([integrationId])
   @@map("integration_token")
 }
 

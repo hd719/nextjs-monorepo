@@ -219,10 +219,10 @@ export type IntegrationTokenOrderByWithRelationInput = {
 
 export type IntegrationTokenWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  integrationId?: string
   AND?: Prisma.IntegrationTokenWhereInput | Prisma.IntegrationTokenWhereInput[]
   OR?: Prisma.IntegrationTokenWhereInput[]
   NOT?: Prisma.IntegrationTokenWhereInput | Prisma.IntegrationTokenWhereInput[]
-  integrationId?: Prisma.StringFilter<"IntegrationToken"> | string
   accessTokenEncrypted?: Prisma.StringFilter<"IntegrationToken"> | string
   refreshTokenEncrypted?: Prisma.StringNullableFilter<"IntegrationToken"> | string | null
   expiresAt?: Prisma.DateTimeNullableFilter<"IntegrationToken"> | Date | string | null
@@ -230,7 +230,7 @@ export type IntegrationTokenWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"IntegrationToken"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"IntegrationToken"> | Date | string
   integration?: Prisma.XOR<Prisma.IntegrationScalarRelationFilter, Prisma.IntegrationWhereInput>
-}, "id">
+}, "id" | "integrationId">
 
 export type IntegrationTokenOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

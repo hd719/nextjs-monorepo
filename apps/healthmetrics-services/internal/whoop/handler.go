@@ -122,12 +122,14 @@ func (s *Service) ExchangeHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "db error", http.StatusInternalServerError)
 		return
 	}
+	log.Printf("integration created for user: %s, %s", req.UserID, integrationID)
 
 	// Add the encrypted tokens to the database
 	if err := s.DB.UpsertIntegrationToken(ctx, integrationID, accessEnc, refreshEnc, expiresAt, strings.Fields(token.Scope)); err != nil {
 		http.Error(w, "db error", http.StatusInternalServerError)
 		return
 	}
+	log.Printf("integration tokens stored for user: %s, %s", req.UserID, integrationID)
 
 	// Mark the integration as connected
 	if err := s.DB.MarkIntegrationConnected(ctx, integrationID); err != nil {

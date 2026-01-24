@@ -16,6 +16,8 @@ import (
 	"syscall"
 	"time"
 
+	"healthmetrics-services/internal/whoop"
+
 	"github.com/gin-contrib/requestid"
 	"github.com/gin-gonic/gin"
 	"github.com/openfoodfacts/openfoodfacts-go"
@@ -226,6 +228,17 @@ func main() {
 		}
 	}()
 
+	whoopStore := whoop.NewStore(pool)
+	whoopService := &whoop.Service{
+		DB:           whoopStore,
+		HTTPClient:   &http.Client{Timeout: 10 * time.Second},
+		Logger:       log.New(os.Stdout, "", log.LstdFlags),
+		ClientID:     os.Getenv("WHOOP_CLIENT_ID"),
+		ClientSecret: os.Getenv("WHOOP_CLIENT_SECRET"),
+		TokenURL:     os.Getenv("WHOOP_TOKEN_URL"),
+		RedirectURL:  os.Getenv("WHOOP_REDIRECT_URL"),
+	}
+
 	capacity, refillRate := getRateLimitConfig() // read rate-limit settings (or defaults)
 	cacheTTL := getCacheTTL()                    // read cache TTL (days -> duration)
 	// Store DB in Gin context so handlers can use it later.
@@ -344,6 +357,11 @@ func main() {
 
 	// This comes from the frontend when the user scans a barcode
 	router.GET("/v1/barcodes/:code", barcode.NewHandler(&api, retryCfg, cacheTTL))
+
+	// This comes from the frontend when the user completes the WHOOP OAuth flow
+	router.POST("/internal/whoop/oauth/exchange", func(c *gin.Context) {
+		whoopService.ExchangeHandler(c.Writer, c.Request)
+	})
 
 	// Print a safe config summary after we compute all config values.
 	logStartupSummary(authCfg, capacity, refillRate, timeout, userAgent, retryCfg, baseURL)
