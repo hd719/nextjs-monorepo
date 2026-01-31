@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bun --help:*)",
+      "Bash(bun update --help:*)",
+      "Bash(bun outdated --help:*)",
+      "Bash(bun outdated:*)",
+      "Bash(bun update:*)",
+      "Bash(docker-compose build:*)"
+    ]
+  }
+}

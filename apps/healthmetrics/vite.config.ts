@@ -28,9 +28,17 @@ const config = defineConfig({
     // Exclude Prisma from dependency optimization (handled by TanStack Start)
     exclude: ["@prisma/client", ".prisma/client"],
   },
+  build: {
+    rollupOptions: {
+      // Externalize Prisma runtime modules (WASM query compiler, etc.)
+      // Prisma 7.x generates dynamic imports for WASM even with engineType="binary"
+      external: [/@prisma\/client\/runtime\/.*/],
+    },
+  },
   ssr: {
     // Mark Prisma as external for SSR (required at runtime, not bundled)
-    external: ["@prisma/client", ".prisma/client"],
+    // Includes runtime modules (WASM query compiler) for Prisma 7.x
+    external: ["@prisma/client", ".prisma/client", /@prisma\/client\/runtime\/.*/],
   },
 });
 
