@@ -27,8 +27,13 @@ import {
   useDiaryTotals,
   useCopyDiaryDay,
   useActiveFast,
+  useExerciseSummary,
 } from "@/hooks";
 import { DEFAULT_NUTRITION_GOALS } from "@/constants/defaults";
+import { Card, CardContent } from "@/components/ui/card";
+import { formatDuration } from "@/utils/time-helpers";
+import { ROUTES } from "@/constants/routes";
+import { Link } from "@tanstack/react-router";
 
 export interface DiaryDayViewProps {
   userId: string;
@@ -53,6 +58,8 @@ export function DiaryDayView({
     userId,
     date
   );
+  const { data: exerciseSummary, isLoading: isExerciseLoading } =
+    useExerciseSummary(userId, date);
   const { data: activeFast } = useActiveFast(userId);
   const copyDiaryMutation = useCopyDiaryDay();
 
@@ -165,6 +172,55 @@ export function DiaryDayView({
         isLoading={isPending}
         headerAction={DatePicker}
       />
+
+      <section className="diary-exercise-section">
+        <div className="diary-exercise-header">
+          <h2 className="diary-exercise-title">Exercise</h2>
+          <Link to={ROUTES.EXERCISE} className="diary-exercise-link">
+            View workouts
+          </Link>
+        </div>
+        <Card variant="supporting" className="diary-exercise-card">
+          <CardContent className="diary-exercise-content">
+            {isExerciseLoading ? (
+              <div className="diary-exercise-loading">Loading exercise…</div>
+            ) : !exerciseSummary ||
+                (exerciseSummary.exercisesCompleted === 0 &&
+                  exerciseSummary.totalMinutes === 0 &&
+                  exerciseSummary.caloriesBurned === 0) ? (
+              <div className="diary-exercise-empty">
+                <p className="diary-exercise-empty-title">
+                  No workouts logged
+                </p>
+                <p className="diary-exercise-empty-subtitle">
+                  Log a workout or connect WHOOP to import activity.
+                </p>
+              </div>
+            ) : (
+              <div className="diary-exercise-grid">
+                <div className="diary-exercise-stat">
+                  <div className="diary-exercise-stat-value">
+                    {exerciseSummary.exercisesCompleted}
+                  </div>
+                  <div className="diary-exercise-stat-label">workouts</div>
+                </div>
+                <div className="diary-exercise-stat">
+                  <div className="diary-exercise-stat-value">
+                    {formatDuration(exerciseSummary.totalMinutes)}
+                  </div>
+                  <div className="diary-exercise-stat-label">duration</div>
+                </div>
+                <div className="diary-exercise-stat">
+                  <div className="diary-exercise-stat-value">
+                    {exerciseSummary.caloriesBurned}
+                  </div>
+                  <div className="diary-exercise-stat-label">calories</div>
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </section>
 
       {/* Entry count info */}
       {totals && totals.entryCount > 0 && (

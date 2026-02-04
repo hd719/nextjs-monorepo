@@ -56,6 +56,15 @@ export const ModelName = {
   BetterAuthAccount: 'BetterAuthAccount',
   Verification: 'Verification',
   User: 'User',
+  Integration: 'Integration',
+  IntegrationToken: 'IntegrationToken',
+  IntegrationConnection: 'IntegrationConnection',
+  IntegrationRawEvent: 'IntegrationRawEvent',
+  IntegrationSleep: 'IntegrationSleep',
+  IntegrationRecovery: 'IntegrationRecovery',
+  IntegrationWorkout: 'IntegrationWorkout',
+  IntegrationCycle: 'IntegrationCycle',
+  IntegrationOAuthState: 'IntegrationOAuthState',
   FoodItem: 'FoodItem',
   Exercise: 'Exercise',
   DiaryEntry: 'DiaryEntry',
@@ -86,12 +95,12 @@ export type ModelName = (typeof ModelName)[keyof typeof ModelName]
  * Enums
  */
 
-export const TransactionIsolationLevel = {
+export const TransactionIsolationLevel = runtime.makeStrictEnum({
   ReadUncommitted: 'ReadUncommitted',
   ReadCommitted: 'ReadCommitted',
   RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
-} as const
+} as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
@@ -182,6 +191,146 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const IntegrationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  provider: 'provider',
+  status: 'status',
+  lastSyncAt: 'lastSyncAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IntegrationScalarFieldEnum = (typeof IntegrationScalarFieldEnum)[keyof typeof IntegrationScalarFieldEnum]
+
+
+export const IntegrationTokenScalarFieldEnum = {
+  id: 'id',
+  integrationId: 'integrationId',
+  accessTokenEncrypted: 'accessTokenEncrypted',
+  refreshTokenEncrypted: 'refreshTokenEncrypted',
+  expiresAt: 'expiresAt',
+  scopes: 'scopes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IntegrationTokenScalarFieldEnum = (typeof IntegrationTokenScalarFieldEnum)[keyof typeof IntegrationTokenScalarFieldEnum]
+
+
+export const IntegrationConnectionScalarFieldEnum = {
+  id: 'id',
+  integrationId: 'integrationId',
+  providerUserId: 'providerUserId',
+  connectedAt: 'connectedAt',
+  lastError: 'lastError'
+} as const
+
+export type IntegrationConnectionScalarFieldEnum = (typeof IntegrationConnectionScalarFieldEnum)[keyof typeof IntegrationConnectionScalarFieldEnum]
+
+
+export const IntegrationRawEventScalarFieldEnum = {
+  id: 'id',
+  integrationId: 'integrationId',
+  resourceType: 'resourceType',
+  payload: 'payload',
+  sourceId: 'sourceId',
+  createdAt: 'createdAt'
+} as const
+
+export type IntegrationRawEventScalarFieldEnum = (typeof IntegrationRawEventScalarFieldEnum)[keyof typeof IntegrationRawEventScalarFieldEnum]
+
+
+export const IntegrationSleepScalarFieldEnum = {
+  id: 'id',
+  integrationId: 'integrationId',
+  externalId: 'externalId',
+  startAt: 'startAt',
+  endAt: 'endAt',
+  localDate: 'localDate',
+  sourceTzOffsetMinutes: 'sourceTzOffsetMinutes',
+  durationSeconds: 'durationSeconds',
+  sleepScore: 'sleepScore',
+  isNap: 'isNap',
+  isPrimary: 'isPrimary',
+  extras: 'extras',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IntegrationSleepScalarFieldEnum = (typeof IntegrationSleepScalarFieldEnum)[keyof typeof IntegrationSleepScalarFieldEnum]
+
+
+export const IntegrationRecoveryScalarFieldEnum = {
+  id: 'id',
+  integrationId: 'integrationId',
+  externalId: 'externalId',
+  localDate: 'localDate',
+  sourceTzOffsetMinutes: 'sourceTzOffsetMinutes',
+  recoveryScore: 'recoveryScore',
+  hrvRmssdMs: 'hrvRmssdMs',
+  restingHrBpm: 'restingHrBpm',
+  spo2Pct: 'spo2Pct',
+  extras: 'extras',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IntegrationRecoveryScalarFieldEnum = (typeof IntegrationRecoveryScalarFieldEnum)[keyof typeof IntegrationRecoveryScalarFieldEnum]
+
+
+export const IntegrationWorkoutScalarFieldEnum = {
+  id: 'id',
+  integrationId: 'integrationId',
+  externalId: 'externalId',
+  startAt: 'startAt',
+  endAt: 'endAt',
+  localDate: 'localDate',
+  sourceTzOffsetMinutes: 'sourceTzOffsetMinutes',
+  sportName: 'sportName',
+  strain: 'strain',
+  caloriesKcal: 'caloriesKcal',
+  distanceKm: 'distanceKm',
+  extras: 'extras',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IntegrationWorkoutScalarFieldEnum = (typeof IntegrationWorkoutScalarFieldEnum)[keyof typeof IntegrationWorkoutScalarFieldEnum]
+
+
+export const IntegrationCycleScalarFieldEnum = {
+  id: 'id',
+  integrationId: 'integrationId',
+  externalId: 'externalId',
+  startAt: 'startAt',
+  endAt: 'endAt',
+  localDate: 'localDate',
+  sourceTzOffsetMinutes: 'sourceTzOffsetMinutes',
+  dayStrain: 'dayStrain',
+  kilojoules: 'kilojoules',
+  avgHrBpm: 'avgHrBpm',
+  maxHrBpm: 'maxHrBpm',
+  extras: 'extras',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IntegrationCycleScalarFieldEnum = (typeof IntegrationCycleScalarFieldEnum)[keyof typeof IntegrationCycleScalarFieldEnum]
+
+
+export const IntegrationOAuthStateScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  provider: 'provider',
+  stateHash: 'stateHash',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type IntegrationOAuthStateScalarFieldEnum = (typeof IntegrationOAuthStateScalarFieldEnum)[keyof typeof IntegrationOAuthStateScalarFieldEnum]
 
 
 export const FoodItemScalarFieldEnum = {
@@ -563,19 +712,19 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
-export const NullableJsonNullValueInput = {
-  DbNull: 'DbNull',
-  JsonNull: 'JsonNull'
-} as const
-
-export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
-
-
 export const JsonNullValueInput = {
-  JsonNull: 'JsonNull'
+  JsonNull: JsonNull
 } as const
 
 export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {
@@ -595,9 +744,9 @@ export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 export const JsonNullValueFilter = {
-  DbNull: 'DbNull',
-  JsonNull: 'JsonNull',
-  AnyNull: 'AnyNull'
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
 } as const
 
 export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]

@@ -75,7 +75,12 @@ export { requireAuthAndOnboarding, requireAuth } from "./route-guards";
 export { toSleepCardData } from "./sleep-helpers";
 
 // Time utilities
-export { formatDuration, formatDurationLong } from "./time-helpers";
+export {
+  formatDuration,
+  formatDurationLong,
+  resolveTimezone,
+  formatDateKey,
+} from "./time-helpers";
 
 // Validation schemas and types (Zod)
 export {
@@ -94,6 +99,7 @@ export {
   deleteWorkoutLogSchema,
   getWorkoutDaySchema,
   getTodayExerciseSummarySchema,
+  getExerciseActivitySchema,
   copyPreviousWorkoutSchema,
   type LoginFormData,
   type SignupFormData,
@@ -110,5 +116,6 @@ export {
   type DeleteWorkoutLogInput,
   type GetWorkoutDayInput,
   type GetTodayExerciseSummaryInput,
+  type GetExerciseActivityInput,
   type CopyPreviousWorkoutInput,
 } from "./validation";

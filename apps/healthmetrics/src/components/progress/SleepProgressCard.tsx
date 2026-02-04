@@ -22,9 +22,17 @@ interface SleepData {
 
 interface SleepProgressCardProps {
   data: SleepData;
+  sourceLabel?: string;
+  sourceTone?: "whoop" | "manual" | "loading";
+  isEmpty?: boolean;
 }
 
-export function SleepProgressCard({ data }: SleepProgressCardProps) {
+export function SleepProgressCard({
+  data,
+  sourceLabel,
+  sourceTone,
+  isEmpty = false,
+}: SleepProgressCardProps) {
   const { avgHours, goalHours, quality, weeklyData } = data;
 
   // Calculate best and worst days
@@ -42,7 +50,16 @@ export function SleepProgressCard({ data }: SleepProgressCardProps) {
             />
             Sleep
           </h3>
-          <div className="progress-text-subtitle">This Week</div>
+          <div className="progress-chart-controls">
+            {sourceLabel ? (
+              <span
+                className={`progress-source-badge progress-source-badge--${sourceTone ?? "manual"}`}
+              >
+                {sourceLabel}
+              </span>
+            ) : null}
+            <div className="progress-text-subtitle">This Week</div>
+          </div>
         </div>
 
         {/* Stats row */}
@@ -61,9 +78,18 @@ export function SleepProgressCard({ data }: SleepProgressCardProps) {
           </div>
         </div>
 
+        {isEmpty ? (
+          <div className="progress-sleep-empty">
+            <span className="progress-sleep-empty-title">No sleep data yet</span>
+            <span className="progress-sleep-empty-subtitle">
+              Connect WHOOP or log sleep to see progress
+            </span>
+          </div>
+        ) : null}
+
         {/* Weekly sleep bars */}
         <div
-          className="progress-sleep-chart"
+          className={`progress-sleep-chart ${isEmpty ? "progress-sleep-chart-empty" : ""}`}
           role="img"
           aria-label={`Weekly sleep chart: averaging ${avgHours} hours per night. Best day: ${bestDay.day} with ${bestDay.hours} hours.`}
         >

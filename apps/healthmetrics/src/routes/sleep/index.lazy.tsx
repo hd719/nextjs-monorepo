@@ -11,6 +11,7 @@
  */
 
 import { createLazyFileRoute } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { AppLayout } from "@/components/layout";
 import {
   SleepLogTable,
@@ -18,6 +19,7 @@ import {
   SleepInsights,
   LogSleepDialog,
 } from "@/components/sleep";
+import { getWhoopIntegrationStatus } from "@/server/integrations";
 
 export const Route = createLazyFileRoute("/sleep/")({
   component: SleepPage,
@@ -25,6 +27,12 @@ export const Route = createLazyFileRoute("/sleep/")({
 
 function SleepPage() {
   const { user } = Route.useRouteContext();
+  const statusQuery = useQuery({
+    queryKey: ["whoop-integration-status"],
+    queryFn: async () => getWhoopIntegrationStatus(),
+  });
+
+  const isWhoopConnected = statusQuery.data?.status === "connected";
 
   return (
     <AppLayout>
@@ -36,6 +44,21 @@ function SleepPage() {
             <p className="sleep-page-subtitle">
               Track your sleep patterns and improve your rest
             </p>
+            <div className="sleep-page-source">
+              {statusQuery.isLoading ? (
+                <span className="sleep-source-badge sleep-source-badge--loading">
+                  Checking source…
+                </span>
+              ) : isWhoopConnected ? (
+                <span className="sleep-source-badge sleep-source-badge--whoop">
+                  WHOOP Connected • Using wearable data
+                </span>
+              ) : (
+                <span className="sleep-source-badge sleep-source-badge--manual">
+                  Manual sleep tracking
+                </span>
+              )}
+            </div>
           </div>
           <LogSleepDialog userId={user.id} />
         </div>

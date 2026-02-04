@@ -1,4 +1,5 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { AppLayout } from "@/components/layout";
 import {
   AchievementsCard,
@@ -38,7 +39,8 @@ import {
   mockStreaks,
   mockAchievementSummary,
 } from "@/data";
-import { toSleepCardData } from "@/utils";
+import { formatDateKey, resolveTimezone, toSleepCardData } from "@/utils";
+import { getWhoopIntegrationStatus } from "@/server/integrations";
 
 export const Route = createLazyFileRoute("/dashboard/")({
   component: DashboardPage,
@@ -48,10 +50,8 @@ function DashboardPage() {
   const { user } = Route.useRouteContext();
   const { toasts, toast, removeToast } = useToast();
   const { data: profile } = useProfile(user.id);
-  const timezone = profile?.timezone || "UTC";
-  const today = new Date().toLocaleDateString("en-CA", {
-    timeZone: timezone,
-  });
+  const timezone = resolveTimezone(profile?.timezone);
+  const today = formatDateKey(new Date(), timezone);
   const displayDate = new Date().toLocaleDateString("en-US", {
     weekday: "short",
     month: "short",
@@ -81,6 +81,8 @@ function DashboardPage() {
   );
   const { data: activities = [], isLoading: isActivitiesLoading } =
     useRecentActivity(user.id, 10);
+  // Mock data toggle for development/testing
+  const useMockDashboard = import.meta.env.VITE_USE_MOCK_DASHBOARD === "true";
 
   // Sleep, streaks, and achievements data
   const { data: sleepEntry, isLoading: isSleepLoading } = useSleepEntry(
@@ -90,6 +92,11 @@ function DashboardPage() {
   const { data: streaks, isLoading: isStreaksLoading } = useStreaks(user.id);
   const { data: achievementSummary, isLoading: isAchievementsLoading } =
     useAchievementSummary(user.id);
+  const whoopStatusQuery = useQuery({
+    queryKey: ["whoop-integration-status"],
+    queryFn: async () => getWhoopIntegrationStatus(),
+    enabled: !useMockDashboard,
+  });
 
   // Handler for water intake updates with toast feedback
   const handleWaterUpdate = (glasses: number) => {
@@ -105,9 +112,6 @@ function DashboardPage() {
       }
     );
   };
-
-  // Mock data toggle for development/testing
-  const useMockDashboard = import.meta.env.VITE_USE_MOCK_DASHBOARD === "true";
 
   // Resolve data sources based on mock toggle
   const waterData = useMockDashboard
@@ -133,6 +137,19 @@ function DashboardPage() {
   const streaksLoading = useMockDashboard ? false : isStreaksLoading;
   const achievementsLoading = useMockDashboard ? false : isAchievementsLoading;
   const waterUpdateHandler = useMockDashboard ? undefined : handleWaterUpdate;
+
+  const whoopStatus = whoopStatusQuery.data?.status;
+  const sleepSourceTone = whoopStatusQuery.isLoading
+    ? "loading"
+    : whoopStatus === "connected"
+      ? "whoop"
+      : "manual";
+  const sleepSourceLabel = whoopStatusQuery.isLoading
+    ? "Checking..."
+    : whoopStatus === "connected"
+      ? "WHOOP"
+      : "Manual";
+  const showSleepSource = !useMockDashboard;
 
   // Use user's goals from profile, or fall back to defaults
   const goals = {
@@ -197,7 +214,12 @@ function DashboardPage() {
 
         {/* Row 2: Sleep | Fasting | Streaks | Achievements */}
         <div className="dashboard-grid-row-4 animate-fade-slide-in animate-stagger-2">
-          <SleepCard data={sleepData} isLoading={sleepLoading} />
+          <SleepCard
+            data={sleepData}
+            isLoading={sleepLoading}
+            sourceLabel={showSleepSource ? sleepSourceLabel : undefined}
+            sourceTone={showSleepSource ? sleepSourceTone : undefined}
+          />
           <FastingCard userId={user.id} />
           <StreaksCard data={streaksData ?? null} isLoading={streaksLoading} />
           <AchievementsCard

@@ -360,6 +360,18 @@ export type GetTodayExerciseSummaryInput = z.infer<
   typeof getTodayExerciseSummarySchema
 >;
 
+// Get exercise activity (manual + wearable) validation
+export const getExerciseActivitySchema = z.object({
+  userId: z.string().min(1, "User ID is required"),
+  date: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format"),
+});
+
+export type GetExerciseActivityInput = z.infer<
+  typeof getExerciseActivitySchema
+>;
+
 // Copy previous workout validation
 export const copyPreviousWorkoutSchema = z.object({
   userId: z.string().min(1, "User ID is required"),

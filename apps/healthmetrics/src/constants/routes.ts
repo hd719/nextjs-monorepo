@@ -24,6 +24,7 @@ export const ROUTES = {
   ACHIEVEMENTS: "/achievements",
   PROGRESS: "/progress",
   PROFILE: "/profile",
+  INTEGRATIONS: "/integrations",
 } as const;
 
 export function buildDiaryRoute(date?: string) {
