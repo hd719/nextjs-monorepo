@@ -1,599 +1,390 @@
-/* ==========================================================================
-   Landing Page Component Styles
-   Electric Mint Theme - Fresh, Modern, Energetic
+/* ========================================================================== 
+   HealthMetrics Landing Page - Noir Athletic (Electric Mint)
    ========================================================================== */
 
 @layer components {
-  /* Container */
   .landing-container {
-    @apply min-h-screen flex flex-col;
-    background-color: var(--background);
-  }
+    --landing-display: "Syne", "Spline Sans", system-ui, sans-serif;
+    --landing-body: "Spline Sans", system-ui, sans-serif;
+    --landing-ink: color-mix(in srgb, var(--foreground) 88%, transparent);
+    --landing-muted: color-mix(in srgb, var(--foreground) 55%, transparent);
+    --landing-line: color-mix(in srgb, var(--border) 55%, transparent);
+    --landing-surface: color-mix(in srgb, var(--card) 92%, transparent);
+    --landing-glow: color-mix(in srgb, var(--accent) 35%, transparent);
+    --landing-glow-strong: color-mix(in srgb, var(--accent) 55%, transparent);
 
-  /* ==========================================================================
-     Header
-     ========================================================================== */
+    font-family: var(--landing-body);
+    color: var(--foreground);
+    background-color: var(--background);
+    min-height: 100vh;
+  }
 
   .landing-header {
-    @apply sticky top-0 z-50 backdrop-blur-md;
-    border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
-    background-color: color-mix(in srgb, var(--background) 80%, transparent);
-  }
-
-  .landing-header-content {
-    @apply max-w-7xl mx-auto px-4 py-4;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: blur(16px);
+    background: color-mix(in srgb, var(--background) 82%, transparent);
+    border-bottom: 1px solid var(--landing-line);
   }
 
   .landing-header-inner {
-    @apply flex items-center justify-between;
+    @apply max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-6;
   }
 
   .landing-logo-link {
-    @apply flex items-center gap-2 transition-all duration-300;
+    @apply flex items-center gap-3;
+    font-weight: 700;
+    letter-spacing: -0.02em;
   }
 
-  .landing-logo-link:hover {
-    transform: scale(1.02);
+  .landing-logo-mark {
+    @apply w-10 h-10 rounded-2xl flex items-center justify-center;
+    background: linear-gradient(140deg, var(--accent), var(--accent-light));
+    box-shadow: 0 0 20px var(--landing-glow);
   }
 
   .landing-logo-icon {
-    @apply w-10 h-10 rounded-xl flex items-center justify-center;
-    background: linear-gradient(135deg, var(--accent), var(--accent-light));
-    box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 30%, transparent);
-  }
-
-  .landing-logo-icon-svg {
-    @apply w-6 h-6 text-white;
+    width: 22px;
+    height: 22px;
+    color: #fff;
   }
 
   .landing-logo-text {
-    @apply text-xl font-bold;
+    font-family: var(--landing-display);
+    font-size: 1.15rem;
+  }
+
+  .landing-nav {
+    @apply hidden lg:flex items-center gap-6 text-sm;
+  }
+
+  .landing-nav-link {
+    color: var(--landing-muted);
+    transition: color var(--duration-fast) var(--ease-out-soft);
+  }
+
+  .landing-nav-link:hover {
+    color: var(--foreground);
   }
 
   .landing-header-actions {
     @apply flex items-center gap-3;
   }
 
-  /* Main Content */
-  .landing-main {
-    @apply flex-1;
+  .landing-link {
+    @apply text-sm;
+    color: var(--landing-muted);
   }
 
-  /* ==========================================================================
-     Hero Section - The Star of the Show
-     ========================================================================== */
-
-  .landing-hero-wrapper {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(
-      135deg,
-      var(--gradient-start) 0%,
-      var(--background) 40%,
-      var(--gradient-end) 100%
-    );
+  .landing-link:hover {
+    color: var(--foreground);
   }
 
-  /* Animated floating orbs */
-  .landing-hero-wrapper::before,
-  .landing-hero-wrapper::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    pointer-events: none;
-  }
-
-  .landing-hero-wrapper::before {
-    width: 600px;
-    height: 600px;
-    background: var(--accent);
-    top: -200px;
-    right: -100px;
-    opacity: 0.12;
-    animation: float-slow 25s ease-in-out infinite;
-  }
-
-  .landing-hero-wrapper::after {
-    width: 400px;
-    height: 400px;
-    background: var(--accent-light);
-    bottom: -100px;
-    left: -100px;
-    opacity: 0.08;
-    animation: float-slow 20s ease-in-out infinite reverse;
-  }
-
-  /* Third orb for extra depth */
-  .landing-hero-orb {
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-light));
-    border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.06;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: pulse-glow 8s ease-in-out infinite;
-  }
-
-  @keyframes float-slow {
-    0%,
-    100% {
-      transform: translate(0, 0) rotate(0deg);
-    }
-    25% {
-      transform: translate(40px, -40px) rotate(5deg);
-    }
-    50% {
-      transform: translate(-30px, 30px) rotate(-5deg);
-    }
-    75% {
-      transform: translate(20px, -20px) rotate(3deg);
-    }
-  }
-
-  @keyframes pulse-glow {
-    0%,
-    100% {
-      opacity: 0.06;
-      transform: translate(-50%, -50%) scale(1);
-    }
-    50% {
-      opacity: 0.1;
-      transform: translate(-50%, -50%) scale(1.2);
-    }
-  }
-
-  .landing-hero-section {
-    @apply max-w-7xl mx-auto px-4 py-20 lg:py-32;
-    position: relative;
-    z-index: 1;
-  }
-
-  /*
-   * Split Layout for Hero
-   * On desktop: text left, mockup right
-   * On mobile: stacked with text on top
-   */
-  .landing-hero-split {
-    @apply flex flex-col lg:flex-row items-center gap-12 lg:gap-16;
-  }
-
-  .landing-hero-content {
-    @apply flex-1 text-center lg:text-left space-y-8;
-  }
-
-  .landing-hero-mockup {
-    @apply flex-1 flex justify-center;
-    /* On mobile, limit the mockup size */
-    max-width: 450px;
-    /* Allow floating icons to overflow */
-    overflow: visible;
-  }
-
-  @media (min-width: 1024px) {
-    .landing-hero-mockup {
-      max-width: 500px;
-    }
-  }
-
-  .landing-hero-title {
-    @apply text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight;
-    line-height: 1.1;
-  }
-
-  /* Gradient accent text */
-  .landing-hero-accent {
-    background: linear-gradient(
-      135deg,
-      var(--accent) 0%,
-      var(--accent-light) 50%,
-      #a78bfa 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    display: inline-block;
-  }
-
-  .landing-hero-description {
-    @apply text-lg sm:text-xl max-w-2xl mx-auto;
-    color: var(--muted-foreground);
-  }
-
-  .landing-hero-actions {
-    @apply flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4;
-  }
-
-  /* Primary CTA with glow effect */
   .landing-cta-primary {
-    @apply relative px-8 py-3 rounded-xl font-semibold text-white transition-all duration-300;
+    @apply inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold;
     background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-    box-shadow: 0 4px 20px color-mix(in srgb, var(--accent) 40%, transparent);
+    color: #fff;
+    box-shadow:
+      0 12px 30px color-mix(in srgb, var(--accent) 35%, transparent),
+      0 0 0 1px color-mix(in srgb, var(--accent) 25%, transparent);
+    transition:
+      transform var(--duration-normal) var(--ease-out-soft),
+      box-shadow var(--duration-normal) var(--ease-out-soft);
   }
 
   .landing-cta-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px color-mix(in srgb, var(--accent) 50%, transparent);
+    box-shadow:
+      0 18px 40px color-mix(in srgb, var(--accent) 45%, transparent),
+      0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent);
   }
 
-  .landing-cta-primary:active {
+  .landing-cta-ghost {
+    @apply inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold;
+    color: var(--foreground);
+    border: 1px solid var(--landing-line);
+    background: color-mix(in srgb, var(--background) 80%, transparent);
+    transition:
+      border-color var(--duration-fast) var(--ease-out-soft),
+      color var(--duration-fast) var(--ease-out-soft),
+      transform var(--duration-fast) var(--ease-out-soft);
+  }
+
+  .landing-cta-ghost:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  .landing-main {
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+  }
+
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 600ms ease,
+      transform 700ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  [data-reveal].is-visible {
+    opacity: 1;
     transform: translateY(0);
   }
 
-  /* Secondary CTA */
-  .landing-cta-secondary {
-    @apply px-8 py-3 rounded-xl font-semibold transition-all duration-300;
-    border: 2px solid var(--border);
-    color: var(--foreground);
+  .landing-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 6rem 0 5rem;
+    background:
+      radial-gradient(
+        circle at 20% 20%,
+        color-mix(in srgb, var(--accent) 18%, transparent),
+        transparent 55%
+      ),
+      radial-gradient(
+        circle at 85% 10%,
+        color-mix(in srgb, var(--accent-light) 16%, transparent),
+        transparent 50%
+      ),
+      linear-gradient(
+        160deg,
+        color-mix(in srgb, var(--background) 90%, transparent) 0%,
+        color-mix(in srgb, var(--background) 98%, transparent) 50%,
+        color-mix(in srgb, var(--accent-dark) 10%, transparent) 100%
+      );
   }
 
-  .landing-cta-secondary:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 5%, transparent);
-  }
-
-  /* ==========================================================================
-     Stats Banner - Social Proof
-     ========================================================================== */
-
-  .landing-stats-section {
-    @apply py-12 border-y;
-    border-color: var(--border);
-    background: color-mix(in srgb, var(--muted) 30%, transparent);
-  }
-
-  .landing-stats-content {
-    @apply max-w-7xl mx-auto px-4;
-  }
-
-  .landing-stats-grid {
-    @apply grid grid-cols-2 md:grid-cols-4 gap-8;
-  }
-
-  .landing-stat-item {
-    @apply text-center;
-  }
-
-  .landing-stat-value {
-    @apply text-3xl sm:text-4xl font-bold;
-    background: linear-gradient(135deg, var(--accent), var(--accent-light));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .landing-stat-label {
-    @apply text-sm mt-1;
-    color: var(--muted-foreground);
-  }
-
-  /* ==========================================================================
-     Features Section
-     ========================================================================== */
-
-  .landing-features-section {
-    @apply relative overflow-hidden;
-    background: linear-gradient(
-      180deg,
-      var(--background) 0%,
-      var(--gradient-start) 100%
-    );
-  }
-
-  .landing-features-content {
-    @apply max-w-7xl mx-auto px-4 py-20;
-  }
-
-  .landing-features-inner {
-    @apply max-w-5xl mx-auto;
-  }
-
-  .landing-features-header {
-    @apply text-center mb-16;
-  }
-
-  .landing-features-title {
-    @apply text-3xl sm:text-4xl font-bold mb-4;
-  }
-
-  .landing-features-subtitle {
-    @apply text-lg max-w-2xl mx-auto;
-    color: var(--muted-foreground);
-  }
-
-  .landing-features-grid {
-    @apply grid grid-cols-1 md:grid-cols-3 gap-6;
-  }
-
-  /* Feature cards with hover effects */
-  .landing-feature-card {
-    @apply relative p-6 rounded-2xl transition-all duration-300;
-    background: var(--card);
-    border: 1px solid var(--border);
-  }
-
-  .landing-feature-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--accent);
-    box-shadow:
-      0 20px 40px -15px color-mix(in srgb, var(--accent) 15%, transparent),
-      0 0 0 1px var(--accent);
-  }
-
-  /* Gradient border effect on hover */
-  .landing-feature-card::before {
+  .landing-hero::after {
     content: "";
     position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-light));
-    -webkit-mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    inset: 0;
+    background-image:
+      linear-gradient(
+        to right,
+        color-mix(in srgb, var(--border) 20%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--border) 20%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 120px 120px;
+    opacity: 0.35;
+    mask-image: radial-gradient(circle at 30% 20%, #000 0%, transparent 65%);
+    pointer-events: none;
   }
 
-  .landing-feature-card:hover::before {
-    opacity: 1;
-  }
-
-  .landing-feature-card-header {
-    @apply text-center space-y-4;
-  }
-
-  .landing-feature-icon {
-    @apply w-14 h-14 rounded-xl flex items-center justify-center mx-auto;
-    background: linear-gradient(135deg, var(--accent), var(--accent-light));
-    box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 25%, transparent);
-  }
-
-  .landing-feature-icon-svg {
-    @apply w-7 h-7 text-white;
-  }
-
-  .landing-feature-title {
-    @apply text-xl font-semibold;
-  }
-
-  .landing-feature-description {
-    @apply mt-2;
-    color: var(--muted-foreground);
-  }
-
-  /* ==========================================================================
-     App Preview Section - Show, Don't Just Tell
-     ========================================================================== */
-
-  .landing-preview-section {
-    @apply py-20;
-    background: var(--background);
-  }
-
-  .landing-preview-content {
-    @apply max-w-7xl mx-auto px-4;
-  }
-
-  .landing-preview-header {
-    @apply text-center mb-12;
-  }
-
-  .landing-preview-title {
-    @apply text-3xl sm:text-4xl font-bold mb-4;
-  }
-
-  .landing-preview-mockup {
-    @apply relative max-w-4xl mx-auto;
-  }
-
-  .landing-preview-frame {
-    @apply rounded-2xl overflow-hidden;
-    border: 1px solid var(--border);
-    box-shadow:
-      0 25px 50px -12px rgba(0, 0, 0, 0.15),
-      0 0 0 1px var(--border);
-  }
-
-  .landing-preview-image {
-    @apply w-full;
-  }
-
-  /* Floating badges around the mockup */
-  .landing-preview-badge {
-    @apply absolute px-4 py-2 rounded-full text-sm font-medium;
-    background: var(--card);
-    border: 1px solid var(--border);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    animation: float-badge 6s ease-in-out infinite;
-  }
-
-  .landing-preview-badge-1 {
-    top: 10%;
-    left: -5%;
-    animation-delay: 0s;
-  }
-
-  .landing-preview-badge-2 {
-    top: 30%;
-    right: -8%;
-    animation-delay: -2s;
-  }
-
-  .landing-preview-badge-3 {
-    bottom: 20%;
-    left: -8%;
-    animation-delay: -4s;
-  }
-
-  @keyframes float-badge {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-
-  /* ==========================================================================
-     CTA Section
-     ========================================================================== */
-
-  .landing-cta-section {
-    @apply relative overflow-hidden;
-    background: linear-gradient(
-      135deg,
-      var(--gradient-start) 0%,
-      var(--gradient-accent) 50%,
-      var(--gradient-end) 100%
-    );
-  }
-
-  .landing-cta-section::before {
-    content: "";
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    background: var(--accent);
-    border-radius: 50%;
-    filter: blur(150px);
-    opacity: 0.1;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .landing-cta-content {
-    @apply max-w-7xl mx-auto px-4 py-20;
+  .landing-hero-grid {
+    @apply max-w-7xl mx-auto px-6 grid gap-12 items-center;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
     position: relative;
     z-index: 1;
   }
 
-  .landing-cta-inner {
-    @apply max-w-3xl mx-auto text-center space-y-8;
+  .landing-hero-copy {
+    grid-column: span 6;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
-  .landing-cta-title {
-    @apply text-3xl sm:text-4xl font-bold;
-  }
-
-  .landing-cta-description {
-    @apply text-lg;
-    color: var(--muted-foreground);
-  }
-
-  /* ==========================================================================
-     Footer
-     ========================================================================== */
-
-  .landing-footer {
-    border-top: 1px solid var(--border);
-    background: var(--background);
-  }
-
-  .landing-footer-content {
-    @apply max-w-7xl mx-auto px-4 py-8;
-  }
-
-  .landing-footer-inner {
-    @apply flex flex-col md:flex-row justify-between items-center gap-4 text-sm;
-    color: var(--muted-foreground);
-  }
-
-  .landing-footer-branding {
-    @apply flex items-center gap-2;
-  }
-
-  .landing-footer-icon {
-    @apply w-4 h-4;
-  }
-
-  .landing-footer-links {
-    @apply flex gap-6;
-  }
-
-  .landing-footer-link {
-    @apply transition-colors;
-  }
-
-  .landing-footer-link:hover {
+  .landing-eyebrow {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.28em;
     color: var(--accent);
   }
 
-  /* ==========================================================================
-     HERO MOCKUP SECTION
+  .landing-hero-title {
+    font-family: var(--landing-display);
+    font-size: clamp(2.5rem, 3.5vw + 1rem, 4.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
 
-     This is the animated dashboard preview that showcases the app.
-     It includes:
-     - A phone-like frame with the dashboard inside
-     - Floating fitness icons around the mockup
-     - Animated progress rings, bars, and counting numbers
+  .landing-hero-description {
+    font-size: 1.1rem;
+    max-width: 32rem;
+    color: var(--landing-muted);
+  }
+
+  .landing-hero-actions {
+    @apply flex flex-wrap items-center gap-4;
+  }
+
+  .landing-hero-meta {
+    @apply grid gap-3;
+  }
+
+  .landing-hero-meta-item {
+    @apply flex flex-col gap-1 rounded-2xl px-4 py-3;
+    border: 1px solid var(--landing-line);
+    background: var(--landing-surface);
+  }
+
+  .landing-hero-meta-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--landing-muted);
+  }
+
+  .landing-hero-meta-value {
+    font-size: 0.95rem;
+    color: var(--landing-ink);
+  }
+
+  .landing-hero-visual {
+    grid-column: span 6;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 420px;
+  }
+
+  .landing-hero-visual-frame {
+    position: absolute;
+    width: min(520px, 90vw);
+    height: min(520px, 80vw);
+    border-radius: 36px;
+    border: 1px solid var(--landing-line);
+    background:
+      radial-gradient(
+        circle at 20% 20%,
+        color-mix(in srgb, var(--accent) 12%, transparent),
+        transparent 55%
+      ),
+      radial-gradient(
+        circle at 80% 10%,
+        color-mix(in srgb, var(--accent-light) 15%, transparent),
+        transparent 45%
+      ),
+      color-mix(in srgb, var(--background) 85%, transparent);
+    box-shadow:
+      inset 0 0 70px color-mix(in srgb, var(--accent) 8%, transparent),
+      0 35px 90px color-mix(in srgb, var(--foreground) 12%, transparent);
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .landing-hero-visual-orbit {
+    position: absolute;
+    inset: 12%;
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    box-shadow: 0 0 40px color-mix(in srgb, var(--accent) 20%, transparent);
+    animation: orbit 14s linear infinite;
+  }
+
+  .landing-hero-visual-wire {
+    position: absolute;
+    inset: 18%;
+    border-radius: 50%;
+    background:
+      repeating-conic-gradient(
+        from 0deg,
+        color-mix(in srgb, var(--accent) 20%, transparent) 0deg,
+        transparent 12deg 24deg
+      ),
+      radial-gradient(
+        circle,
+        transparent 58%,
+        color-mix(in srgb, var(--accent) 20%, transparent) 59%,
+        transparent 62%
+      );
+    opacity: 0.6;
+    animation: orbit-reverse 18s linear infinite;
+  }
+
+  .landing-hero-mockup {
+    position: relative;
+    z-index: 2;
+    width: min(420px, 85vw);
+  }
+
+  .landing-hero-panel {
+    position: absolute;
+    bottom: -24px;
+    right: 8%;
+    background: var(--landing-surface);
+    border: 1px solid var(--landing-line);
+    border-radius: 20px;
+    padding: 1.25rem 1.5rem;
+    box-shadow:
+      0 30px 60px color-mix(in srgb, var(--foreground) 15%, transparent),
+      0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent);
+    backdrop-filter: blur(12px);
+    z-index: 4;
+  }
+
+  .landing-hero-pill {
+    position: absolute;
+    top: 18%;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    background: color-mix(in srgb, var(--background) 90%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    box-shadow: 0 10px 20px
+      color-mix(in srgb, var(--foreground) 8%, transparent);
+    z-index: 3;
+  }
+
+  .landing-hero-pill-left {
+    left: 0;
+    transform: translate(-20%, -20%);
+  }
+
+  .landing-hero-pill-right {
+    right: 0;
+    transform: translate(20%, 20%);
+  }
+
+  /* ==========================================================================
+     HERO MOCKUP (PHONE + FLOATING ICONS)
      ========================================================================== */
 
-  /* Container - positions everything relative to this */
   .hero-mockup-container {
     @apply relative;
-    /* Give enough space for floating icons to be visible */
     padding: 4rem 3rem;
-    /* Ensure icons aren't clipped */
     overflow: visible;
   }
 
-  /* ============================================
-     FLOATING ICONS
-
-     These icons float around the mockup to add visual interest.
-     Each icon has:
-     - A circular background with gradient
-     - A gentle floating animation
-     - Box shadow for depth
-     ============================================ */
-
   .hero-floating-icons {
     @apply absolute pointer-events-none;
-    /* Extend beyond the container to ensure icons are visible */
     top: -20px;
     left: -20px;
     right: -20px;
     bottom: -20px;
-    /* z-index above the glow but can be behind or in front of mockup */
     z-index: 3;
   }
 
   .hero-floating-icon {
     @apply absolute flex items-center justify-center rounded-full;
-    width: 60px;
-    height: 60px;
-    /* Gradient background matching our theme */
+    width: 58px;
+    height: 58px;
     background: linear-gradient(135deg, var(--accent), var(--accent-light));
-    /* Stronger shadow for better visibility */
     box-shadow:
-      0 10px 40px color-mix(in srgb, var(--accent) 40%, transparent),
+      0 10px 40px color-mix(in srgb, var(--accent) 35%, transparent),
       0 4px 12px rgba(0, 0, 0, 0.15);
-    /* The floating animation */
     animation: icon-float 6s ease-in-out infinite;
   }
 
   .hero-floating-icon-svg {
-    @apply w-7 h-7 text-white;
+    @apply w-6 h-6 text-white;
   }
 
-  /*
-   * Icon Positions
-   * Placed around the mockup in a scattered pattern
-   * Positioned to be clearly visible outside the phone frame
-   */
   .hero-float-pos-1 {
     top: 0;
     left: 15%;
@@ -624,11 +415,6 @@
     left: -10px;
   }
 
-  /*
-   * Floating Animation
-   * Creates a gentle up-and-down bobbing motion
-   * The transform includes slight X movement for natural feel
-   */
   @keyframes icon-float {
     0%,
     100% {
@@ -645,42 +431,29 @@
     }
   }
 
-  /* ============================================
-     PHONE/APP FRAME
-
-     The main container that looks like a phone screen.
-     Contains the animated dashboard content.
-     ============================================ */
-
   .hero-mockup-frame {
     @apply relative mx-auto overflow-hidden rounded-3xl;
-    /* Size constraints - wider for better visibility */
     width: 100%;
     max-width: 380px;
-    /* Frosted glass effect */
     background: color-mix(in srgb, var(--card) 95%, transparent);
     backdrop-filter: blur(20px);
-    /* Border and shadow for depth */
     border: 1px solid var(--border);
     box-shadow:
       0 25px 50px -12px rgba(0, 0, 0, 0.15),
       0 12px 24px -8px rgba(0, 0, 0, 0.1),
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    /* Stack above floating icons */
     z-index: 2;
   }
 
-  /* Top bar (mimics mobile app header) */
   .hero-mockup-header {
     @apply flex items-center justify-between px-4 py-3;
     background: linear-gradient(180deg, var(--accent), var(--accent-dark));
     color: white;
   }
 
-  /* Status indicator dot */
   .hero-mockup-header-dot {
     @apply w-2 h-2 rounded-full;
-    background: #4ade80; /* Green = online/healthy */
+    background: #4ade80;
   }
 
   .hero-mockup-header-title {
@@ -699,38 +472,22 @@
     @apply w-4 h-4;
   }
 
-  /* Main content area inside the "phone" */
   .hero-mockup-content {
     @apply p-4 space-y-5;
   }
-
-  /* ============================================
-     CIRCULAR PROGRESS RING
-
-     The main calorie tracker visualization.
-     Uses SVG for smooth, scalable rendering.
-     ============================================ */
 
   .hero-mockup-main-stat {
     @apply relative flex items-center justify-center;
   }
 
-  /* SVG ring styling */
   .hero-mockup-ring {
-    /* Ensure it doesn't block clicks */
     pointer-events: none;
   }
 
-  /*
-   * The progress portion of the ring
-   * Animates from empty to filled using stroke-dashoffset
-   */
   .hero-mockup-ring-progress {
-    /* Smooth transition when percentage changes */
     transition: stroke-dashoffset 2s ease-out;
   }
 
-  /* Center content (number + label) */
   .hero-mockup-main-stat-inner {
     @apply absolute inset-0 flex flex-col items-center justify-center;
   }
@@ -744,13 +501,6 @@
     @apply text-xs uppercase tracking-wider;
     color: var(--muted-foreground);
   }
-
-  /* ============================================
-     MACRO PROGRESS BARS
-
-     Horizontal bars showing protein, carbs, fat progress.
-     Each has a different color for visual distinction.
-     ============================================ */
 
   .hero-mockup-macros {
     @apply space-y-3;
@@ -770,38 +520,27 @@
     color: var(--foreground);
   }
 
-  /* The track (background) of the progress bar */
   .hero-mockup-macro-bar {
     @apply h-2 rounded-full overflow-hidden;
     background: var(--muted);
   }
 
-  /* The filled portion of the progress bar */
   .hero-mockup-macro-fill {
     @apply h-full rounded-full;
-    /* Animate the width change */
     transition: width 1.5s ease-out;
   }
 
-  /* Color variations for each macro */
   .hero-mockup-macro-fill-protein {
-    background: linear-gradient(90deg, #3b82f6, #60a5fa); /* Blue */
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
   }
 
   .hero-mockup-macro-fill-carbs {
-    background: linear-gradient(90deg, #f59e0b, #fbbf24); /* Amber */
+    background: linear-gradient(90deg, #f59e0b, #fbbf24);
   }
 
   .hero-mockup-macro-fill-fat {
-    background: linear-gradient(90deg, #ec4899, #f472b6); /* Pink */
+    background: linear-gradient(90deg, #ec4899, #f472b6);
   }
-
-  /* ============================================
-     WATER INTAKE VISUALIZATION
-
-     Shows glasses of water, filled ones are highlighted.
-     Simple but effective visual feedback.
-     ============================================ */
 
   .hero-mockup-water {
     @apply pt-2;
@@ -821,22 +560,18 @@
     @apply flex gap-2 justify-between;
   }
 
-  /* Individual water glass */
   .hero-mockup-water-glass {
     @apply flex-1 h-8 rounded-md;
     background: var(--muted);
     border: 1px solid var(--border);
-    /* Animate the fill */
     transition:
       background 0.3s ease,
       border-color 0.3s ease;
   }
 
-  /* Filled glass state */
   .hero-mockup-water-glass-filled {
     background: linear-gradient(180deg, var(--accent-light), var(--accent));
     border-color: var(--accent);
-    /* Staggered fill animation */
     animation: glass-fill 0.5s ease-out forwards;
   }
 
@@ -851,59 +586,900 @@
     }
   }
 
-  /* ============================================
-     GLOW EFFECT
-
-     Subtle gradient glow behind the mockup
-     Adds depth and draws attention to the mockup
-     ============================================ */
-
   .hero-mockup-glow {
     @apply absolute rounded-full pointer-events-none;
-    /* Center behind the mockup */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
-    height: 400px;
-    /* Gradient glow */
+    width: 380px;
+    height: 380px;
     background: radial-gradient(
       circle,
-      color-mix(in srgb, var(--accent) 20%, transparent) 0%,
+      color-mix(in srgb, var(--accent) 18%, transparent) 0%,
       transparent 70%
     );
-    /* Behind everything */
     z-index: 0;
-    /* Gentle pulse animation */
-    animation: glow-pulse 4s ease-in-out infinite;
+    animation: pulse 4s ease-in-out infinite;
   }
 
-  @keyframes glow-pulse {
+  .landing-hero-panel-header {
+    @apply flex items-center justify-between gap-4 mb-4 text-xs uppercase tracking-[0.2em];
+    color: var(--landing-muted);
+  }
+
+  .landing-hero-panel-pill {
+    @apply rounded-full px-3 py-1 text-[0.6rem];
+    background: color-mix(in srgb, var(--accent) 20%, transparent);
+    color: var(--accent);
+  }
+
+  .landing-hero-panel-grid {
+    @apply grid gap-3;
+  }
+
+  .landing-hero-panel-item {
+    @apply flex items-center justify-between gap-6;
+    font-size: 0.9rem;
+  }
+
+  .landing-hero-panel-label {
+    color: var(--landing-muted);
+  }
+
+  .landing-hero-panel-value {
+    font-weight: 600;
+    color: var(--landing-ink);
+  }
+
+  .landing-section-header {
+    @apply max-w-4xl mx-auto px-6 text-center flex flex-col gap-3;
+  }
+
+  .landing-section-header h2 {
+    font-family: var(--landing-display);
+    font-size: clamp(2rem, 2.3vw + 1rem, 3rem);
+    letter-spacing: -0.02em;
+  }
+
+  .landing-section-header p {
+    color: var(--landing-muted);
+  }
+
+  .landing-integrations {
+    @apply py-12;
+    border-top: 1px solid var(--landing-line);
+    border-bottom: 1px solid var(--landing-line);
+    background: color-mix(in srgb, var(--background) 85%, transparent);
+  }
+
+  .integration-stream-layout {
+    @apply max-w-6xl mx-auto mt-12 grid gap-10 items-center px-6;
+    grid-template-columns: minmax(320px, 1.1fr) minmax(80px, 0.2fr) minmax(
+        320px,
+        0.9fr
+      );
+    align-items: stretch;
+    --integration-card-height: 300px;
+  }
+
+  .integration-stream {
+    @apply rounded-3xl p-6 grid gap-4;
+    border: 1px solid var(--landing-line);
+    background: var(--landing-surface);
+    box-shadow:
+      0 24px 50px color-mix(in srgb, var(--foreground) 10%, transparent),
+      inset 0 0 30px color-mix(in srgb, var(--accent) 8%, transparent);
+    height: var(--integration-card-height);
+  }
+
+  .stream-header {
+    @apply flex items-center justify-between text-xs uppercase tracking-[0.2em];
+    color: var(--landing-muted);
+  }
+
+  .stream-pill {
+    @apply rounded-full px-3 py-1 text-[0.6rem];
+    background: color-mix(in srgb, var(--accent) 18%, transparent);
+    color: var(--accent);
+  }
+
+  .stream-track {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stream-row {
+    display: flex;
+    gap: 1.2rem;
+    width: max-content;
+    animation: stream-move 20s linear infinite;
+  }
+
+  .stream-group {
+    display: flex;
+    gap: 1.2rem;
+  }
+
+  .stream-card {
+    @apply rounded-full px-4 py-2 text-sm;
+    border: 1px solid var(--landing-line);
+    background: color-mix(in srgb, var(--background) 90%, transparent);
+    color: var(--landing-ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    white-space: nowrap;
+    box-shadow: 0 10px 20px
+      color-mix(in srgb, var(--foreground) 6%, transparent);
+  }
+
+  .stream-card.is-live {
+    border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    color: var(--accent);
+  }
+
+  .stream-status {
+    @apply rounded-full px-2 py-0.5 text-[0.6rem] uppercase tracking-[0.16em];
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+
+  .stream-status.is-soon {
+    color: var(--landing-muted);
+    border-color: var(--landing-line);
+  }
+
+  .stream-footer {
+    font-size: 0.85rem;
+    color: var(--landing-muted);
+  }
+
+  .integration-arrow {
+    position: relative;
+    width: 140px;
+    height: 24px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    opacity: 0.75;
+  }
+
+  .integration-arrow::before {
+    content: "";
+    width: 100%;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--accent) 70%, transparent),
+      transparent
+    );
+    box-shadow: 0 0 16px color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+
+  .integration-arrow::after {
+    content: "";
+    position: absolute;
+    right: 6px;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transform: rotate(45deg);
+  }
+
+  .integration-merge {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    height: var(--integration-card-height);
+  }
+
+  .merge-card {
+    @apply rounded-3xl p-6 text-center;
+    border: 1px solid var(--landing-line);
+    background: var(--landing-surface);
+    box-shadow:
+      0 24px 50px color-mix(in srgb, var(--foreground) 10%, transparent),
+      inset 0 0 30px color-mix(in srgb, var(--accent) 8%, transparent);
+    width: min(360px, 100%);
+    height: 100%;
+  }
+
+  .merge-card-header h3 {
+    font-family: var(--landing-display);
+    font-size: 1.6rem;
+    margin: 0.4rem 0 0.3rem;
+  }
+
+  .merge-card-header p {
+    color: var(--landing-muted);
+  }
+
+  .merge-pill {
+    @apply inline-flex rounded-full px-3 py-1 text-[0.65rem] uppercase tracking-[0.18em];
+    background: color-mix(in srgb, var(--accent) 18%, transparent);
+    color: var(--accent);
+  }
+
+  .merge-metrics {
+    @apply grid gap-3 mt-6;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .merge-metrics div {
+    @apply rounded-2xl px-3 py-3;
+    border: 1px solid var(--landing-line);
+    background: color-mix(in srgb, var(--background) 88%, transparent);
+    min-height: 86px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+  }
+
+  .merge-metrics span {
+    display: block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--landing-muted);
+  }
+
+  .merge-metrics strong {
+    display: block;
+    margin-top: 0.4rem;
+    font-weight: 600;
+  }
+
+  .merge-chart {
+    margin-top: 1.5rem;
+    height: 10px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--border) 35%, transparent);
+    overflow: hidden;
+  }
+
+  .merge-chart span {
+    display: block;
+    height: 100%;
+    width: 70%;
+    background: linear-gradient(90deg, var(--accent-light), var(--accent));
+  }
+
+  .landing-integration-group {
+    @apply flex flex-col gap-3;
+  }
+
+  .landing-group-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--landing-muted);
+  }
+
+  .landing-chip-row {
+    @apply flex flex-wrap gap-3;
+  }
+
+  .landing-chip {
+    @apply rounded-full px-4 py-2 text-sm;
+    border: 1px solid var(--landing-line);
+    background: var(--landing-surface);
+    color: var(--landing-ink);
+    transition:
+      transform var(--duration-fast) var(--ease-out-soft),
+      border-color var(--duration-fast) var(--ease-out-soft);
+  }
+
+  .landing-chip:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+  }
+
+  .landing-chip-soon {
+    color: var(--landing-muted);
+  }
+
+  .landing-features {
+    @apply py-8;
+  }
+
+  .landing-feature-grid {
+    @apply max-w-6xl mx-auto px-6 mt-12 grid gap-6;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+
+  .landing-feature-card {
+    @apply rounded-3xl p-6 flex flex-col gap-4;
+    background: var(--landing-surface);
+    border: 1px solid var(--landing-line);
+    box-shadow: 0 25px 50px
+      color-mix(in srgb, var(--foreground) 10%, transparent);
+    transition:
+      transform var(--duration-normal) var(--ease-out-soft),
+      border-color var(--duration-normal) var(--ease-out-soft);
+  }
+
+  .landing-feature-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent);
+  }
+
+  .landing-feature-card h3 {
+    font-family: var(--landing-display);
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+  }
+
+  .landing-feature-card p {
+    color: var(--landing-muted);
+  }
+
+  .landing-feature-icon {
+    @apply w-12 h-12 rounded-2xl flex items-center justify-center;
+    background: color-mix(in srgb, var(--accent) 15%, transparent);
+    color: var(--accent);
+  }
+
+  .landing-feature-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .landing-feature-list {
+    @apply flex flex-col gap-2 text-sm;
+    color: var(--landing-muted);
+  }
+
+  .landing-how {
+    @apply py-10;
+  }
+
+  .landing-how-body {
+    @apply max-w-6xl mx-auto px-6 mt-12 grid gap-10 items-center;
+  }
+
+  .landing-how-body .landing-steps {
+    margin-top: 0;
+  }
+
+  .landing-barbell-band {
+    padding: 3rem 0 4rem;
+    border-top: 1px solid var(--landing-line);
+    border-bottom: 1px solid var(--landing-line);
+    background: linear-gradient(
+      140deg,
+      color-mix(in srgb, var(--background) 92%, transparent) 0%,
+      color-mix(in srgb, var(--accent) 12%, transparent) 100%
+    );
+  }
+
+  .landing-barbell-content {
+    @apply max-w-6xl mx-auto px-6 grid gap-10 items-center;
+    grid-template-columns: minmax(220px, 1fr) minmax(320px, 1.4fr) minmax(
+        220px,
+        0.95fr
+      );
+    align-items: center;
+  }
+
+  .landing-barbell-heart {
+    position: relative;
+    width: min(240px, 70vw);
+    height: min(240px, 70vw);
+    margin-inline: auto;
+    border-radius: 24px;
+    background:
+      radial-gradient(
+        circle at 50% 35%,
+        color-mix(in srgb, var(--accent) 18%, transparent),
+        transparent 60%
+      ),
+      color-mix(in srgb, var(--background) 90%, transparent);
+    border: 1px solid var(--landing-line);
+    box-shadow:
+      inset 0 0 40px color-mix(in srgb, var(--accent) 8%, transparent),
+      0 20px 40px color-mix(in srgb, var(--foreground) 10%, transparent);
+    display: grid;
+    place-items: center;
+  }
+
+  .cardio-heart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 140px;
+    height: 140px;
+    fill: #0b1220;
+    filter: drop-shadow(
+        0 0 24px color-mix(in srgb, var(--accent) 35%, transparent)
+      )
+      drop-shadow(0 10px 24px rgba(0, 0, 0, 0.16));
+    animation: cardio-pulse 3.6s ease-in-out infinite;
+    transform: translate(-50%, -50%) scale(0.96);
+  }
+
+  .cardio-orbit {
+    position: absolute;
+    inset: 14%;
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, var(--accent-light) 35%, transparent);
+    box-shadow: 0 0 30px color-mix(in srgb, var(--accent) 20%, transparent);
+    animation: orbit 14s linear infinite;
+  }
+
+  .cardio-dots span {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 45%, transparent);
+    animation: drift 5s ease-in-out infinite;
+  }
+
+  .cardio-dots span:nth-child(1) {
+    top: 18%;
+    left: 26%;
+  }
+
+  .cardio-dots span:nth-child(2) {
+    top: 24%;
+    right: 20%;
+    animation-delay: 1s;
+  }
+
+  .cardio-dots span:nth-child(3) {
+    bottom: 24%;
+    left: 30%;
+    animation-delay: 2s;
+  }
+
+  .cardio-dots span:nth-child(4) {
+    bottom: 18%;
+    right: 24%;
+    animation-delay: 3s;
+  }
+  .landing-barbell-copy h2 {
+    font-family: var(--landing-display);
+    font-size: clamp(1.8rem, 2vw + 1rem, 2.6rem);
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .landing-barbell-copy p {
+    color: var(--landing-muted);
+    text-align: center;
+  }
+
+  .landing-barbell-tags {
+    @apply flex flex-wrap gap-3 mt-6 text-sm;
+    justify-content: center;
+  }
+
+  .landing-barbell-tags span {
+    @apply rounded-full px-4 py-2;
+    border: 1px solid var(--landing-line);
+    background: var(--landing-surface);
+  }
+
+  .landing-barbell-visual {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .ekg {
+    width: min(360px, 76vw);
+    height: 140px;
+    border-radius: 28px;
+    border: 1px solid var(--landing-line);
+    background:
+      linear-gradient(
+        90deg,
+        transparent 0%,
+        color-mix(in srgb, var(--accent) 10%, transparent) 50%,
+        transparent 100%
+      ),
+      color-mix(in srgb, var(--background) 92%, transparent);
+    box-shadow:
+      inset 0 0 30px color-mix(in srgb, var(--accent) 8%, transparent),
+      0 20px 40px color-mix(in srgb, var(--foreground) 10%, transparent);
+    display: grid;
+    place-items: center;
+  }
+
+  .ekg-line {
+    width: 88%;
+    height: auto;
+  }
+
+  .ekg-line path {
+    fill: none;
+    stroke: color-mix(in srgb, var(--accent) 85%, #0ea5e9 15%);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+    animation: ekg-draw 3.2s ease-in-out infinite;
+    filter: drop-shadow(
+      0 0 12px color-mix(in srgb, var(--accent) 45%, transparent)
+    );
+  }
+
+  .barbell-metrics {
+    @apply grid gap-3;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: 0 1rem;
+    width: min(360px, 90%);
+  }
+
+  .barbell-metrics div {
+    @apply rounded-2xl px-4 py-3;
+    border: 1px solid var(--landing-line);
+    background: var(--landing-surface);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    min-height: 112px;
+  }
+
+  .barbell-metrics span {
+    display: block;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--landing-muted);
+    min-height: 2.6em;
+    line-height: 1.15;
+    max-width: 7rem;
+    text-wrap: balance;
+  }
+
+  .barbell-metrics strong {
+    display: block;
+    margin-top: 0.1rem;
+    font-size: 1.1rem;
+    color: var(--landing-ink);
+  }
+
+  .landing-steps {
+    @apply max-w-6xl mx-auto px-6 mt-12 grid gap-6;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .landing-step {
+    @apply rounded-3xl p-6 flex flex-col gap-3;
+    border: 1px solid var(--landing-line);
+    background: color-mix(in srgb, var(--background) 88%, transparent);
+  }
+
+  .landing-step-number {
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .landing-step h3 {
+    font-family: var(--landing-display);
+    font-size: 1.2rem;
+  }
+
+  .landing-step p {
+    color: var(--landing-muted);
+  }
+
+  .landing-values {
+    @apply max-w-6xl mx-auto px-6 grid gap-4;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+
+  .landing-value-card {
+    @apply rounded-3xl p-6 flex gap-4;
+    border: 1px solid var(--landing-line);
+    background: var(--landing-surface);
+  }
+
+  .landing-value-icon {
+    @apply w-12 h-12 rounded-2xl flex items-center justify-center;
+    background: color-mix(in srgb, var(--accent) 18%, transparent);
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .landing-value-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .landing-value-card h3 {
+    font-family: var(--landing-display);
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .landing-value-card p {
+    color: var(--landing-muted);
+  }
+
+  .landing-cta {
+    padding: 5rem 0 6rem;
+    background:
+      radial-gradient(
+        circle at 20% 50%,
+        color-mix(in srgb, var(--accent) 20%, transparent),
+        transparent 60%
+      ),
+      linear-gradient(
+        140deg,
+        color-mix(in srgb, var(--background) 90%, transparent) 0%,
+        color-mix(in srgb, var(--accent-dark) 12%, transparent) 100%
+      );
+    border-top: 1px solid var(--landing-line);
+  }
+
+  .landing-cta-inner {
+    @apply max-w-3xl mx-auto px-6 text-center flex flex-col gap-6 items-center;
+  }
+
+  .landing-cta-inner h2 {
+    font-family: var(--landing-display);
+    font-size: clamp(2.1rem, 2.6vw + 1rem, 3.2rem);
+  }
+
+  .landing-cta-inner p {
+    color: var(--landing-muted);
+  }
+
+  .landing-footer {
+    border-top: 1px solid var(--landing-line);
+    padding: 2.5rem 0;
+  }
+
+  .landing-footer-inner {
+    @apply max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm;
+    color: var(--landing-muted);
+  }
+
+  .landing-footer-brand {
+    @apply flex items-center gap-2;
+  }
+
+  .landing-footer-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .landing-footer-links {
+    @apply flex gap-5;
+  }
+
+  .landing-footer-links a:hover {
+    color: var(--foreground);
+  }
+
+  @keyframes orbit {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes orbit-reverse {
+    from {
+      transform: rotate(360deg);
+    }
+    to {
+      transform: rotate(0deg);
+    }
+  }
+
+  @keyframes pulse {
     0%,
     100% {
+      transform: scale(1);
       opacity: 0.6;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.9;
+    }
+  }
+
+  @keyframes cardio-pulse {
+    0%,
+    100% {
       transform: translate(-50%, -50%) scale(1);
     }
     50% {
-      opacity: 0.8;
-      transform: translate(-50%, -50%) scale(1.1);
+      transform: translate(-50%, -50%) scale(1.06);
     }
   }
 
-  /* ============================================
-     RESPONSIVE ADJUSTMENTS
+  @keyframes ekg-draw {
+    0% {
+      stroke-dashoffset: 600;
+      opacity: 0.4;
+    }
+    40% {
+      opacity: 1;
+    }
+    60% {
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+    100% {
+      stroke-dashoffset: -600;
+      opacity: 0.4;
+    }
+  }
 
-     Hide or simplify elements on smaller screens
-     ============================================ */
+  @keyframes stream-move {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 
-  @media (max-width: 768px) {
-    /* Hide some floating icons on mobile to reduce clutter */
-    .hero-float-pos-3,
-    .hero-float-pos-6 {
+
+  @keyframes drift {
+    0%,
+    100% {
+      transform: translateY(0) translateX(0);
+      opacity: 0.7;
+    }
+    50% {
+      transform: translateY(-10px) translateX(6px);
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .landing-hero-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .landing-hero-copy,
+    .landing-hero-visual {
+      grid-column: span 1;
+    }
+
+    .landing-hero-panel {
+      position: static;
+      margin-top: 1.5rem;
+      width: min(420px, 90vw);
+    }
+
+    .landing-hero-visual {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .landing-hero-pill {
       display: none;
     }
 
-    /* Reduce floating icon size */
+    .landing-barbell-band {
+      text-align: center;
+    }
+
+    .landing-barbell-copy {
+      text-align: center;
+    }
+
+    .landing-barbell-tags {
+      justify-content: center;
+    }
+
+    .integration-stream-layout {
+      grid-template-columns: 1fr;
+      --integration-card-height: auto;
+      gap: 3.5rem;
+    }
+
+    .integration-arrow {
+      width: 90px;
+      height: 28px;
+      transform: rotate(90deg);
+      margin: 0 auto;
+    }
+
+    .integration-stream {
+      padding: 1.25rem;
+      height: auto;
+    }
+
+    .stream-track {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 0.4rem;
+    }
+
+    .stream-group {
+      gap: 0.8rem;
+    }
+
+    .stream-card {
+      font-size: 0.85rem;
+      padding: 0.45rem 0.85rem;
+    }
+
+    .merge-card {
+      width: 100%;
+      height: auto;
+    }
+
+    .merge-metrics {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .stream-row {
+      animation: none;
+    }
+
+    .merge-metrics {
+      grid-template-columns: 1fr;
+    }
+
+    .stream-header {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .landing-barbell-content {
+      grid-template-columns: 1fr;
+    }
+
+    .landing-barbell-heart {
+      width: min(200px, 70vw);
+      height: min(200px, 70vw);
+    }
+
+    .cardio-heart {
+      width: 110px;
+      height: 110px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .landing-header-inner {
+      flex-wrap: wrap;
+    }
+
+    .landing-header-actions {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .landing-hero {
+      padding-top: 5rem;
+    }
+
+    .landing-hero-visual-frame {
+      height: min(420px, 80vw);
+    }
+
     .hero-floating-icon {
       width: 48px;
       height: 48px;
@@ -913,41 +1489,37 @@
       @apply w-5 h-5;
     }
 
-    /* Smaller glow on mobile */
+    .hero-mockup-container {
+      padding: 3rem 2rem;
+    }
+
     .hero-mockup-glow {
       width: 300px;
       height: 300px;
     }
 
-    /* Adjust mockup container padding on mobile */
-    .hero-mockup-container {
-      padding: 3rem 2rem;
+    .hero-float-pos-3,
+    .hero-float-pos-6 {
+      display: none;
     }
   }
 
-  /* ==========================================================================
-     Reduced Motion Support
-     ========================================================================== */
-
   @media (prefers-reduced-motion: reduce) {
-    .landing-hero-wrapper::before,
-    .landing-hero-wrapper::after,
-    .landing-hero-orb,
-    .landing-preview-badge,
+    .landing-hero-visual-orbit,
+    .landing-hero-visual-wire,
     .hero-floating-icon,
-    .hero-mockup-glow {
+    .hero-mockup-glow,
+    .cardio-heart,
+    .cardio-orbit,
+    .cardio-dots span,
+    .ekg-line path,
+    .stream-row {
       animation: none;
     }
 
-    .landing-feature-card:hover,
-    .landing-cta-primary:hover {
-      transform: none;
-    }
-
-    /* Disable transitions for users who prefer reduced motion */
-    .hero-mockup-ring-progress,
-    .hero-mockup-macro-fill,
-    .hero-mockup-water-glass {
+    .landing-cta-primary,
+    .landing-chip,
+    .landing-feature-card {
       transition: none;
     }
   }

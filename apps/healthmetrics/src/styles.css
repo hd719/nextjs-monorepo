@@ -1,6 +1,9 @@
 /* Import Tailwind CSS FIRST - required for @layer and @apply to work */
 @import "tailwindcss";
 
+/* Landing page display/body fonts */
+@import url("https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap");
+
 /* Import centralized color system - single source of truth for all colors */
 @import "./styles/colors.css";
 
