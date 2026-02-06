@@ -965,13 +965,14 @@
         220px,
         0.95fr
       );
-    align-items: center;
+    align-items: stretch;
+    --barbell-column-height: clamp(320px, 30vw, 380px);
   }
 
-  .landing-barbell-heart {
+  .coach-decision-card {
     position: relative;
-    width: min(240px, 70vw);
-    height: min(240px, 70vw);
+    width: min(260px, 72vw);
+    min-height: var(--barbell-column-height);
     margin-inline: auto;
     border-radius: 24px;
     background:
@@ -985,71 +986,344 @@
     box-shadow:
       inset 0 0 40px color-mix(in srgb, var(--accent) 8%, transparent),
       0 20px 40px color-mix(in srgb, var(--foreground) 10%, transparent);
+    display: flex;
+    flex-direction: column;
+    gap: 0.58rem;
+    padding: 0.9rem;
+    overflow: hidden;
+    transform: perspective(800px) rotateX(var(--coach-tilt-x, 0deg))
+      rotateY(var(--coach-tilt-y, 0deg));
+    transition:
+      transform 220ms var(--ease-out-soft),
+      box-shadow 220ms var(--ease-out-soft);
+  }
+
+  .coach-decision-card::before {
+    content: "";
+    position: absolute;
+    inset: 14% 18%;
+    border-radius: 999px;
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--accent) 14%, transparent),
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  .coach-decision-card::after {
+    content: "";
+    position: absolute;
+    top: -45%;
+    left: -35%;
+    width: 48%;
+    height: 190%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--accent-light) 22%, transparent),
+      transparent
+    );
+    transform: rotate(14deg);
+    animation: coach-scan 5.4s linear infinite;
+    pointer-events: none;
+  }
+
+  .coach-decision-card:hover {
+    box-shadow:
+      inset 0 0 50px color-mix(in srgb, var(--accent) 11%, transparent),
+      0 28px 52px color-mix(in srgb, var(--foreground) 12%, transparent);
+  }
+
+  .coach-decision-card[data-tone="recover"] {
+    border-color: color-mix(in srgb, var(--accent) 42%, var(--landing-line) 58%);
+  }
+
+  .coach-decision-card[data-tone="push"] {
+    border-color: color-mix(in srgb, var(--accent-light) 60%, var(--landing-line) 40%);
+  }
+
+  .coach-decision-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--landing-muted);
+    z-index: 1;
+  }
+
+  .coach-decision-live {
+    border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+    color: var(--accent-dark);
+    border-radius: 999px;
+    padding: 0.2rem 0.48rem;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    font-weight: 600;
+    animation: coach-live-breathe 2.2s ease-in-out infinite;
+  }
+
+  .coach-decision-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-height: 108px;
+    z-index: 1;
+  }
+
+  .coach-decision-tabs {
+    display: flex;
+    gap: 0.32rem;
+  }
+
+  .coach-tab {
+    border: 1px solid var(--landing-line);
+    background: color-mix(in srgb, var(--background) 95%, transparent);
+    color: var(--landing-muted);
+    border-radius: 999px;
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.2rem 0.46rem;
+    transition:
+      border-color var(--duration-fast) var(--ease-out-soft),
+      color var(--duration-fast) var(--ease-out-soft),
+      background var(--duration-fast) var(--ease-out-soft);
+  }
+
+  .coach-tab.is-active {
+    border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+    color: var(--accent-dark);
+    background: color-mix(in srgb, var(--accent) 14%, transparent);
+  }
+
+  .coach-state-panel {
+    border: 1px solid var(--landing-line);
+    border-radius: 16px;
+    padding: 0.64rem 0.68rem;
+    background: color-mix(in srgb, var(--background) 94%, transparent);
+    transition:
+      border-color var(--duration-fast) var(--ease-out-soft),
+      transform var(--duration-fast) var(--ease-out-soft);
+  }
+
+  .coach-state-panel:hover {
+    transform: translateY(-1px);
+  }
+
+  .coach-state-panel h4 {
+    font-family: var(--landing-display);
+    font-size: 1rem;
+    line-height: 1.1;
+    margin-bottom: 0.24rem;
+  }
+
+  .coach-state-panel p {
+    color: var(--landing-muted);
+    font-size: 0.7rem;
+    line-height: 1.28;
+    min-height: 2.6em;
+  }
+
+  .coach-confidence-bar {
+    display: block;
+    margin-top: 0.34rem;
+    width: 100%;
+    height: 4px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--landing-line) 78%, transparent);
+    overflow: hidden;
+  }
+
+  .coach-confidence-bar span {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent-light), var(--accent));
+    box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 30%, transparent);
+    animation: coach-bar-breathe 2.8s ease-in-out infinite;
+  }
+
+  .coach-input-grid {
     display: grid;
-    place-items: center;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+    z-index: 1;
   }
 
-  .cardio-heart {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 140px;
-    height: 140px;
-    fill: #0b1220;
-    filter: drop-shadow(
-        0 0 24px color-mix(in srgb, var(--accent) 35%, transparent)
-      )
-      drop-shadow(0 10px 24px rgba(0, 0, 0, 0.16));
-    animation: cardio-pulse 3.6s ease-in-out infinite;
-    transform: translate(-50%, -50%) scale(0.96);
+  .coach-input {
+    border: 1px solid var(--landing-line);
+    border-radius: 12px;
+    padding: 0.42rem 0.48rem;
+    background: color-mix(in srgb, var(--background) 93%, transparent);
   }
 
-  .cardio-orbit {
-    position: absolute;
-    inset: 14%;
-    border-radius: 50%;
-    border: 1px solid color-mix(in srgb, var(--accent-light) 35%, transparent);
-    box-shadow: 0 0 30px color-mix(in srgb, var(--accent) 20%, transparent);
-    animation: orbit 14s linear infinite;
+  .coach-input-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.35rem;
+    margin-bottom: 0.25rem;
   }
 
-  .cardio-dots span {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--accent-light);
-    box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 45%, transparent);
-    animation: drift 5s ease-in-out infinite;
+  .coach-input-row span {
+    color: var(--landing-muted);
+    font-size: 0.54rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
 
-  .cardio-dots span:nth-child(1) {
-    top: 18%;
-    left: 26%;
+  .coach-input-row strong {
+    color: var(--landing-ink);
+    font-size: 0.72rem;
+    line-height: 1;
   }
 
-  .cardio-dots span:nth-child(2) {
-    top: 24%;
-    right: 20%;
-    animation-delay: 1s;
+  .coach-input-track {
+    display: block;
+    width: 100%;
+    height: 4px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--landing-line) 78%, transparent);
+    overflow: hidden;
   }
 
-  .cardio-dots span:nth-child(3) {
-    bottom: 24%;
-    left: 30%;
-    animation-delay: 2s;
+  .coach-input-bar {
+    display: block;
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent-light), var(--accent));
+    box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 26%, transparent);
+    animation: coach-bar-flow 3s ease-in-out infinite;
   }
 
-  .cardio-dots span:nth-child(4) {
-    bottom: 18%;
-    right: 24%;
-    animation-delay: 3s;
+  .coach-footer {
+    z-index: 1;
+    margin-top: 0.1rem;
+    border: 1px solid var(--landing-line);
+    border-radius: 14px;
+    padding: 0.52rem 0.52rem 0.56rem;
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--accent) 8%, transparent),
+        transparent 42%
+      ),
+      color-mix(in srgb, var(--background) 95%, transparent);
+    display: flex;
+    flex-direction: column;
+    gap: 0.42rem;
+    flex: 1;
+    min-height: 108px;
+    justify-content: space-between;
+  }
+
+  .coach-footer-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--landing-muted);
+    font-size: 0.54rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .coach-trend {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    align-items: end;
+    gap: 0.26rem;
+    height: 40px;
+  }
+
+  .coach-trend-bar {
+    appearance: none;
+    border: 0;
+    border-radius: 999px;
+    width: 100%;
+    background: color-mix(in srgb, var(--landing-line) 78%, transparent);
+    padding: 0;
+    transition:
+      filter var(--duration-fast) var(--ease-out-soft),
+      transform var(--duration-fast) var(--ease-out-soft),
+      background var(--duration-fast) var(--ease-out-soft);
+  }
+
+  .coach-trend-bar.is-active {
+    background: linear-gradient(180deg, var(--accent), var(--accent-light));
+    box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 38%, transparent);
+    filter: saturate(1.1);
+    transform: translateY(-1px);
+    animation: coach-trend-pulse 1.4s ease-in-out infinite;
+  }
+
+  .coach-trend-bar:hover {
+    filter: saturate(1.2);
+  }
+
+  .coach-focus-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  .coach-focus-chip {
+    appearance: none;
+    border: 1px solid var(--landing-line);
+    background: color-mix(in srgb, var(--background) 95%, transparent);
+    color: var(--landing-muted);
+    border-radius: 999px;
+    font-size: 0.52rem;
+    text-transform: uppercase;
+    letter-spacing: 0.11em;
+    line-height: 1;
+    padding: 0.24rem 0.45rem;
+    transition:
+      border-color var(--duration-fast) var(--ease-out-soft),
+      color var(--duration-fast) var(--ease-out-soft),
+      transform var(--duration-fast) var(--ease-out-soft),
+      background var(--duration-fast) var(--ease-out-soft);
+  }
+
+  .coach-focus-chip.is-active {
+    border-color: color-mix(in srgb, var(--accent) 36%, transparent);
+    color: var(--accent-dark);
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+  }
+
+  .coach-focus-chip:hover {
+    transform: translateY(-1px);
+  }
+
+  .coach-footer-action {
+    margin: 0;
+    color: var(--landing-muted);
+    font-size: 0.62rem;
+    line-height: 1.35;
+    min-height: 2.6em;
+  }
+
+  .coach-trend-bar:focus-visible,
+  .coach-focus-chip:focus-visible,
+  .coach-tab:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--accent) 70%, transparent);
+    outline-offset: 1px;
   }
   .landing-barbell-copy h2 {
     font-family: var(--landing-display);
     font-size: clamp(1.8rem, 2vw + 1rem, 2.6rem);
     margin-bottom: 0.5rem;
     text-align: center;
+  }
+
+  .landing-barbell-copy {
+    min-height: var(--barbell-column-height);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .landing-barbell-copy p {
@@ -1070,15 +1344,18 @@
 
   .landing-barbell-visual {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     flex-direction: column;
     gap: 1.5rem;
     align-items: center;
+    width: 100%;
+    min-height: var(--barbell-column-height);
   }
 
   .ekg {
-    width: min(360px, 76vw);
-    height: 140px;
+    width: min(360px, 100%);
+    max-width: 100%;
+    height: clamp(108px, 16vw, 140px);
     border-radius: 28px;
     border: 1px solid var(--landing-line);
     background:
@@ -1097,7 +1374,7 @@
   }
 
   .ekg-line {
-    width: 88%;
+    width: 90%;
     height: auto;
   }
 
@@ -1117,13 +1394,14 @@
 
   .barbell-metrics {
     @apply grid gap-3;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    padding: 0 1rem;
-    width: min(360px, 90%);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 0 0.5rem;
+    width: min(520px, 100%);
+    max-width: 100%;
   }
 
   .barbell-metrics div {
-    @apply rounded-2xl px-4 py-3;
+    @apply rounded-2xl px-3 py-3;
     border: 1px solid var(--landing-line);
     background: var(--landing-surface);
     text-align: center;
@@ -1132,18 +1410,21 @@
     align-items: center;
     justify-content: center;
     gap: 0.35rem;
-    min-height: 112px;
+    min-height: clamp(86px, 11vw, 108px);
+    overflow: hidden;
   }
 
   .barbell-metrics span {
     display: block;
-    font-size: 0.68rem;
+    font-size: clamp(0.56rem, 0.35vw + 0.45rem, 0.68rem);
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em;
     color: var(--landing-muted);
     min-height: 2.6em;
     line-height: 1.15;
-    max-width: 7rem;
+    max-width: 100%;
+    text-align: center;
+    width: 100%;
     text-wrap: balance;
   }
 
@@ -1155,7 +1436,7 @@
   }
 
   .landing-steps {
-    @apply max-w-6xl mx-auto px-6 mt-12 grid gap-6;
+    @apply mt-12 grid gap-6;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   }
 
@@ -1182,8 +1463,44 @@
   }
 
   .landing-values {
-    @apply max-w-6xl mx-auto px-6 grid gap-4;
+    @apply max-w-6xl mx-auto px-6;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .landing-values-grid {
+    @apply grid gap-4;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+
+  .carousel-indicators {
+    display: none;
+    justify-content: center;
+    gap: 0.45rem;
+  }
+
+  .carousel-indicators button {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--landing-line) 80%, transparent);
+    padding: 0;
+    background: transparent;
+    opacity: 0.5;
+    transition:
+      transform var(--duration-fast) var(--ease-out-soft),
+      background var(--duration-fast) var(--ease-out-soft),
+      border-color var(--duration-fast) var(--ease-out-soft),
+      opacity var(--duration-fast) var(--ease-out-soft);
+  }
+
+  .carousel-indicators button.is-active,
+  .carousel-indicators button[aria-current="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    opacity: 1;
+    transform: scale(1.35);
+    box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 45%, transparent);
   }
 
   .landing-value-card {
@@ -1300,13 +1617,64 @@
     }
   }
 
-  @keyframes cardio-pulse {
+  @keyframes coach-scan {
+    0% {
+      transform: translateX(-120%) rotate(14deg);
+      opacity: 0;
+    }
+    16% {
+      opacity: 0.6;
+    }
+    35% {
+      transform: translateX(210%) rotate(14deg);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(210%) rotate(14deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes coach-live-breathe {
     0%,
     100% {
-      transform: translate(-50%, -50%) scale(1);
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent);
     }
     50% {
-      transform: translate(-50%, -50%) scale(1.06);
+      box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 0%, transparent),
+        0 0 20px color-mix(in srgb, var(--accent) 30%, transparent);
+    }
+  }
+
+  @keyframes coach-bar-flow {
+    0%,
+    100% {
+      filter: saturate(1);
+      transform: translateX(0);
+    }
+    50% {
+      filter: saturate(1.2);
+      transform: translateX(1px);
+    }
+  }
+
+  @keyframes coach-bar-breathe {
+    0%,
+    100% {
+      opacity: 0.9;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes coach-trend-pulse {
+    0%,
+    100% {
+      opacity: 0.88;
+    }
+    50% {
+      opacity: 1;
     }
   }
 
@@ -1336,20 +1704,6 @@
       transform: translateX(-50%);
     }
   }
-
-
-  @keyframes drift {
-    0%,
-    100% {
-      transform: translateY(0) translateX(0);
-      opacity: 0.7;
-    }
-    50% {
-      transform: translateY(-10px) translateX(6px);
-      opacity: 1;
-    }
-  }
-
   @media (max-width: 1024px) {
     .landing-hero-grid {
       grid-template-columns: 1fr;
@@ -1435,6 +1789,11 @@
       animation: none;
     }
 
+    .barbell-metrics {
+      grid-template-columns: 1fr;
+      width: min(320px, 100%);
+    }
+
     .merge-metrics {
       grid-template-columns: 1fr;
     }
@@ -1449,16 +1808,38 @@
   @media (max-width: 900px) {
     .landing-barbell-content {
       grid-template-columns: 1fr;
+      --barbell-column-height: auto;
+      align-items: center;
     }
 
-    .landing-barbell-heart {
-      width: min(200px, 70vw);
-      height: min(200px, 70vw);
+    .coach-decision-card {
+      width: min(280px, 82vw);
+      height: auto;
+      min-height: 320px;
     }
 
-    .cardio-heart {
-      width: 110px;
-      height: 110px;
+    .landing-barbell-copy,
+    .landing-barbell-visual {
+      min-height: auto;
+    }
+
+    .coach-input-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .coach-footer {
+      min-height: 126px;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .ekg {
+      width: min(320px, 100%);
+    }
+
+    .barbell-metrics span {
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
     }
   }
 
@@ -1502,6 +1883,46 @@
     .hero-float-pos-6 {
       display: none;
     }
+
+    .landing-steps,
+    .landing-values-grid {
+      grid-template-columns: none;
+      grid-auto-flow: column;
+      grid-auto-columns: 100%;
+      gap: 1.25rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-padding-left: 1.5rem;
+      padding-bottom: 0.75rem;
+      margin-inline: -1.5rem;
+      padding-inline: 1.5rem;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .landing-steps::-webkit-scrollbar,
+    .landing-values-grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .landing-step,
+    .landing-value-card {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    .landing-step {
+      min-height: 220px;
+    }
+
+    .landing-value-card {
+      min-height: 210px;
+      align-items: flex-start;
+    }
+
+    .carousel-indicators {
+      display: flex;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -1509,12 +1930,19 @@
     .landing-hero-visual-wire,
     .hero-floating-icon,
     .hero-mockup-glow,
-    .cardio-heart,
-    .cardio-orbit,
-    .cardio-dots span,
+    .coach-decision-card::after,
+    .coach-decision-live,
+    .coach-confidence-bar span,
+    .coach-input-bar,
+    .coach-trend-bar.is-active,
     .ekg-line path,
     .stream-row {
       animation: none;
+    }
+
+    .coach-decision-card {
+      transform: none;
+      transition: none;
     }
 
     .landing-cta-primary,
