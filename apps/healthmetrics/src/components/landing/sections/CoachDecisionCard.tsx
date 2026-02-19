@@ -69,17 +69,51 @@ export function CoachDecisionCard() {
   const [activeIndex, setActiveIndex] = useState(1);
   const [activeFocus, setActiveFocus] = useState(0);
   const [activeTrend, setActiveTrend] = useState(0);
+  const [isInView, setIsInView] = useState(true);
+  const [isDocumentVisible, setIsDocumentVisible] = useState(true);
   const cardRef = useRef<HTMLDivElement | null>(null);
   const pauseAutoUntilRef = useRef(0);
 
   useEffect(() => {
+    const onVisibilityChange = () => {
+      setIsDocumentVisible(document.visibilityState === "visible");
+    };
+
+    onVisibilityChange();
+    document.addEventListener("visibilitychange", onVisibilityChange);
+
+    return () =>
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+  }, []);
+
+  useEffect(() => {
+    const node = cardRef.current;
+    if (!node || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        setIsInView(entries[0]?.isIntersecting ?? false);
+      },
+      { threshold: 0.35 }
+    );
+
+    observer.observe(node);
+
+    return () => observer.disconnect();
+  }, []);
+
+  const shouldAnimate = isDocumentVisible && isInView;
+
+  useEffect(() => {
+    if (!shouldAnimate) return;
+
     const interval = window.setInterval(() => {
       if (Date.now() < pauseAutoUntilRef.current) return;
       setActiveIndex((prev) => (prev + 1) % COACH_STATES.length);
     }, 4200);
 
     return () => window.clearInterval(interval);
-  }, []);
+  }, [shouldAnimate]);
 
   const activeState = COACH_STATES[activeIndex];
 
@@ -89,6 +123,8 @@ export function CoachDecisionCard() {
   }, [activeIndex]);
 
   useEffect(() => {
+    if (!shouldAnimate) return;
+
     const interval = window.setInterval(() => {
       if (Date.now() < pauseAutoUntilRef.current) return;
       setActiveFocus((prev) => (prev + 1) % activeState.focus.length);
@@ -96,7 +132,7 @@ export function CoachDecisionCard() {
     }, 1800);
 
     return () => window.clearInterval(interval);
-  }, [activeState.focus.length, activeState.trend.length]);
+  }, [activeState.focus.length, activeState.trend.length, shouldAnimate]);
 
   const pauseAutoCycle = () => {
     pauseAutoUntilRef.current = Date.now() + 8000;
@@ -129,6 +165,7 @@ export function CoachDecisionCard() {
     <div
       className="coach-decision-card"
       data-tone={activeState.id}
+      data-running={shouldAnimate ? "true" : "false"}
       ref={cardRef}
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}

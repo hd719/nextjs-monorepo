@@ -1035,6 +1035,17 @@
       0 28px 52px color-mix(in srgb, var(--foreground) 12%, transparent);
   }
 
+  .coach-decision-card[data-running="false"]::after {
+    animation-play-state: paused;
+  }
+
+  .coach-decision-card[data-running="false"] .coach-decision-live,
+  .coach-decision-card[data-running="false"] .coach-confidence-bar span,
+  .coach-decision-card[data-running="false"] .coach-input-bar,
+  .coach-decision-card[data-running="false"] .coach-trend-bar.is-active {
+    animation-play-state: paused;
+  }
+
   .coach-decision-card[data-tone="recover"] {
     border-color: color-mix(in srgb, var(--accent) 42%, var(--landing-line) 58%);
   }
@@ -1558,6 +1569,38 @@
 
   .landing-cta-inner p {
     color: var(--landing-muted);
+  }
+
+  @supports (content-visibility: auto) {
+    .landing-integrations {
+      content-visibility: auto;
+      contain-intrinsic-size: 820px;
+    }
+
+    .landing-features {
+      content-visibility: auto;
+      contain-intrinsic-size: 900px;
+    }
+
+    .landing-barbell-band {
+      content-visibility: auto;
+      contain-intrinsic-size: 760px;
+    }
+
+    .landing-how {
+      content-visibility: auto;
+      contain-intrinsic-size: 860px;
+    }
+
+    .landing-values {
+      content-visibility: auto;
+      contain-intrinsic-size: 560px;
+    }
+
+    .landing-cta {
+      content-visibility: auto;
+      contain-intrinsic-size: 420px;
+    }
   }
 
   .landing-footer {
