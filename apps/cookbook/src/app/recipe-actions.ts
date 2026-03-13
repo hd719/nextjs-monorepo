@@ -65,7 +65,7 @@ export async function createRecipeAction(
       return {
         success: false,
         error: "Invalid recipe data",
-        validationErrors: validationResult.error.errors.map((err) => ({
+        validationErrors: validationResult.error.issues.map((err) => ({
           field: err.path.join("."),
           message: err.message,
         })),
@@ -126,7 +126,7 @@ export async function updateRecipeAction(
       return {
         success: false,
         error: "Invalid recipe data",
-        validationErrors: validationResult.error.errors.map((err) => ({
+        validationErrors: validationResult.error.issues.map((err) => ({
           field: err.path.join("."),
           message: err.message,
         })),
@@ -197,7 +197,7 @@ export async function publishRecipeAction(
       return {
         success: false,
         error: "Recipe is not ready for publishing",
-        validationErrors: validationResult.error.errors.map((err) => ({
+        validationErrors: validationResult.error.issues.map((err) => ({
           field: err.path.join("."),
           message: err.message,
         })),

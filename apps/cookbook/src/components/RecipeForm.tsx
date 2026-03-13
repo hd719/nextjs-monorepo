@@ -24,7 +24,7 @@ import { useRouter } from "next/navigation";
 import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 
-type RecipeFormData = z.infer<typeof RecipeFormArraySchema>;
+type RecipeFormData = z.input<typeof RecipeFormArraySchema>;
 
 interface RecipeFormProps {
   recipe?: Recipe;
@@ -128,7 +128,7 @@ export function RecipeForm({
           ),
           steps: data.steps.filter((step) => step.trim() !== ""),
           // Filter out empty image URLs
-          images: data.images.filter((image) => image.trim() !== ""),
+          images: (data.images ?? []).filter((image) => image.trim() !== ""),
         };
 
         let result;

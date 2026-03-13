@@ -51,7 +51,7 @@ const LetsTalk: React.FC<LetsTalkProps> = ({
 
       if (!result.success) {
         // Set form errors
-        result.error.errors.forEach((error) => {
+        result.error.issues.forEach((error) => {
           form.setError(error.path[0] as keyof ContactFormData, {
             message: error.message,
           });

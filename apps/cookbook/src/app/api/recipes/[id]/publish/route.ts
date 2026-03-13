@@ -62,7 +62,7 @@ export async function POST(
         {
           error: "Recipe is not ready for publishing",
           details: "Recipe must have a title, ingredients, and cooking steps",
-          validation_errors: validationResult.error.errors.map((err) => ({
+          validation_errors: validationResult.error.issues.map((err) => ({
             field: err.path.join("."),
             message: err.message,
           })),
