@@ -272,7 +272,7 @@ export function transformFormToCreateInput(
 export function formatZodError(error: z.ZodError) {
   const formattedErrors: Record<string, string[]> = {};
 
-  error.errors.forEach((err) => {
+  error.issues.forEach((err) => {
     const path = err.path.join(".");
     if (!formattedErrors[path]) {
       formattedErrors[path] = [];

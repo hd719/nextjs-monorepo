@@ -42,8 +42,8 @@ describe("Recipe Schemas", () => {
       const result = CreateRecipeSchema.safeParse(invalidRecipe);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.errors.some(e => e.path.includes("title"))).toBe(true);
-        expect(result.error.errors.some(e => e.path.includes("slug"))).toBe(true);
+        expect(result.error.issues.some(e => e.path.includes("title"))).toBe(true);
+        expect(result.error.issues.some(e => e.path.includes("slug"))).toBe(true);
       }
     });
 
